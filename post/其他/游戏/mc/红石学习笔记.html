@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2024-11-23 Sat 19:03 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>红石学习笔记</title>
+<meta name="author" content="QwQ 不要在意我的头像QwQ" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
+<h1 class="title">红石学习笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org594b1a5">1. 基础知识</a>
+<ul>
+<li><a href="#org626baec">1.1. 时间单位</a></li>
+<li><a href="#org02791ab">1.2. 红石组件(部分内容来自MC百科)</a>
+<ul>
+<li><a href="#org55ffcfa">1.2.1. 红石中继器</a></li>
+<li><a href="#orge07b122">1.2.2. 红石比较器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6d3233f">2. Singal Clock</a>
+<ul>
+<li><a href="#org8c77dbb">2.1. Time table</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org594b1a5" class="outline-2">
+<h2 id="org594b1a5"><span class="section-number-2">1.</span> 基础知识</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org626baec" class="outline-3">
+<h3 id="org626baec"><span class="section-number-3">1.1.</span> 时间单位</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>gt = game time (tick) (游戏时间)</li>
+<li>rt = redstone tick (红石刻)</li>
+<li>1s = 10rt = 20gt
+1rt = 1gt</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org02791ab" class="outline-3">
+<h3 id="org02791ab"><span class="section-number-3">1.2.</span> 红石组件(部分内容来自MC百科)</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org55ffcfa" class="outline-4">
+<h4 id="org55ffcfa"><span class="section-number-4">1.2.1.</span> 红石中继器</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-text">&#32418;&#30707;&#20013;&#32487;&#22120;&#65288;Redstone Repeater&#65289;&#22312;&#32418;&#30707;&#30005;&#36335;&#20013;&#26159;&#29992;&#20110;&#8220;&#20013;&#32487;&#8221;&#24182;&#25918;&#22823;&#32418;&#30707;&#20449;&#21495;&#12289;&#8220;&#38145;&#23384;&#8221;&#20449;&#21495;&#29366;&#24577;&#25110;&#32773;&#38459;&#27490;&#20449;&#21495;&#20498;&#27969;&#30340;&#26041;&#22359;&#12290;
+</pre>
+</div>
+<p>
+有1~4rt的延迟
+</p>
+</div>
+</div>
+<div id="outline-container-orge07b122" class="outline-4">
+<h4 id="orge07b122"><span class="section-number-4">1.2.2.</span> 红石比较器</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<div class="org-src-container">
+<pre class="src src-text">&#32418;&#30707;&#27604;&#36739;&#22120;&#65288;Redstone Comparator&#65289;&#26159;&#33021;&#20351;&#32418;&#30707;&#20449;&#21495;&#20445;&#25345;&#12289;&#27604;&#36739;&#12289;&#20316;&#24046;&#25110;&#26816;&#27979;&#29305;&#23450;&#25968;&#25454;&#20540;&#65288;&#20027;&#35201;&#26159;&#23481;&#22120;&#35013;&#36733;&#37327;&#65289;&#30340;&#32418;&#30707;&#20803;&#20214;&#26041;&#22359;&#12290;
+</pre>
+</div>
+<p>
+红石比较器具有两个模式:比较模式和减法模式。默认情况下是比较模式，当输出向火把亮
+起时则为减法模式，具体工作情况如下:
+</p>
+
+<ul class="org-ul">
+<li>比较模式:将正面输入与两旁的输入信号强度相比较（两边同时有输入时强度哪边大选哪
+边进行运算），倘若正面输入比侧面的大，则有输出（强度为正面输入时的强度），否则
+无。</li>
+<li>减法模式:将正面输入减去侧面输入的信号强度作为最终信号强度的输出</li>
+</ul>
+
+<p>
+无论在哪个模式下，红石比较器都能够检测容器内的物品数量并输出不等的信号强度
+</p>
+
+<p>
+有1rt的延迟
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6d3233f" class="outline-2">
+<h2 id="org6d3233f"><span class="section-number-2">2.</span> Singal Clock</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org8c77dbb" class="outline-3">
+<h3 id="org8c77dbb"><span class="section-number-3">2.1.</span> Time table</h3>
+<div class="outline-text-3" id="text-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">rt</th>
+<th scope="col" class="org-left">event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">1rt</td>
+<td class="org-left">toogle</td>
+</tr>
+
+<tr>
+<td class="org-left">1rt</td>
+<td class="org-left">fire light</td>
+</tr>
+
+<tr>
+<td class="org-left">4rt</td>
+<td class="org-left">wait</td>
+</tr>
+
+<tr>
+<td class="org-left">1rt</td>
+<td class="org-left">fire off</td>
+</tr>
+
+<tr>
+<td class="org-left">4rt</td>
+<td class="org-left">wiat</td>
+</tr>
+
+<tr>
+<td class="org-left">1rt</td>
+<td class="org-left">fire light</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;</td>
+<td class="org-left">&#x2026;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2024-11-23 Sat 18:58</p>
+<p class="author">Author: QwQ 不要在意我的头像QwQ</p>
+<p class="date">Created: 2024-11-23 Sat 19:03</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

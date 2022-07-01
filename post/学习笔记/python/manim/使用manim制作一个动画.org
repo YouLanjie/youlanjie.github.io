@@ -1,0 +1,123 @@
+#+TITLE: 使用manim制作一个完整的动画
+#+DATE: <2023-11-24 四 22:00>
+#+description: 记使用manim制作一个动画的经验或过程
+
+#+SETUPFILE: ../../../../setup.setup
+
+* 制作经验
+** 一般经验
+实际上很多复杂的动画都是简单的动画的组合，学习将你要表达的内容拆分成一步一步执行
+的动画是非常重要的一步
+
+其次，阅读源代码是必不可少的，通过对源代码的观察和生成动画的对比分析，就能学到不
+少东西（例如说新的动画方法之类的）
+
+要勇敢去尝试实践，在实践中遇到的困难想想办法，总能够解决的
+
+简单了解下Python的语法，这对于简化某些复杂的操作非常的有用（Manim制作动画最大的
+优势）
+** 方法建议
+*** 自定义图形
+当你想要制作某一类东西需要大量用到重复的形状时，就可以尝试去编写一种方法去构建它。
+例如物理的电路图，其中的电源，开关，用电器，电阻，滑动变阻器等等，他们都拥有固定
+的形状，所以我们可以构建一种新的东西去方便我们创建它们
+
+就以刚刚的物理制作电路图作为例子，我们可以尝试绘制一个电源:
+
+#+begin_src python
+  from manim import *
+  class shape(Scene):
+      def construct(self):
+          number_plane = NumberPlane()
+          line_left = Line([-0.15, 0.25, 0], [-0.15, -0.25, 0])
+          line_right = Line([0.15, 0.5, 0], [0.15, -0.5, 0])
+          power_source = VGroup(line_left, line_right)
+          self.add(number_plane, power_source)
+#+end_src
+在上面的例子中，我们创建了两条竖直的左短右长的线段作为电源，并且将其添加到了一个
+虚拟组里面，我们便得到了一个可用的电源，并且可以通过控制虚拟组控制它。
+
+但是，这样一来，我们要添加一个电源就需要写两行代码，容易出错且不易读。怎么办呢?
+我们有一个绝佳的办法:定义函数
+
+#+begin_src python
+  from manim import *
+
+  def PowerSource():
+      line_left = Line([-0.15, 0.25, 0], [-0.15, -0.25, 0])
+      line_right = Line([0.15, 0.5, 0], [0.15, -0.5, 0])
+      power_source = VGroup(line_left, line_right)
+      return power_source
+
+  class shape(Scene):
+      def construct(self):
+          number_plane = NumberPlane()
+          power_source = PowerSource()
+          self.add(number_plane, power_source)
+#+end_src
+在上面的例子中，我们将电源的创建定义为一个函数，使得我们能够非常方便地创建复杂的
+相同的图形。可是这样还有一个缺点，倘若我们需要让图案中的某一部分做某一固定的特定
+动作时，我们需要使用 =power_source[n]= 这样的方式，这样显然时很不方便且容易出错
+的。那么，怎么办呢?我们有一个更好的办法:自定义图形
+
+#+begin_quote
+下面的内容可能需要一些关于Python类的知识才能看懂，建议自搜自学
+#+end_quote
+
+#+begin_src python
+  from manim import *
+  class Power_source(VGroup):
+      def __init__(self):
+          VGroup.__init__(self)
+          # center
+          self.add(Line([-0.15, 0, 0], [0.15, 0, 0]).set_color(BLACK))
+          self.add(VGroup())
+          # short
+          self[1].add(Line([-0.15, 0.25, 0], [-0.15, -0.25, 0]))
+          # long
+          self[1].add(Line([0.15, 0.5, 0], [0.15, -0.5, 0]))
+      def state_normal(self):
+          self[0].set_stroke(BLACK)
+          self[1].set_stroke(WHITE)
+      def state_work(self):
+          self[1].set_stroke(GREEN)
+      def state_error(self):
+          self[1].set_stroke(RED)
+      def body(self):
+          return self[1]
+#+end_src
+在上面的例子中，我们通过继承 =VGroup= 类，自定义了一种全新的复合图形，并且这个图
+形拥有它自己特有的方法以执行某种动作，这极大地方便了我们进行动画的制作。
+*** 分割场景
+当你的设备比较差，渲染时间很长的时候，你可以尝试将整一个视频的内容分割成一小段一
+小段的内容，再在construct方法中集中起来渲染，例如:
+#+begin_src python
+  from manim import *
+  class shape(Scene):
+      def scene_1(self):
+          pass
+      def scene_2(self):
+          pass
+      def scene_3(self):
+          pass
+      def scene_4(self):
+          pass
+      # ......
+      def construct(self):
+          self.scene_1()
+          self.scene_2()
+          self.scene_3()
+          self.scene_4()
+          # ......
+  class debug(shape):
+      def construct(self):
+          self.scene_3()
+#+end_src
+在例子中，可以在测试时使用继承了shape的debug类渲染，或者修改shape类的construct方
+法，渲染时再使用shape类渲染所有的镜头，以期在测试时减少渲染时间，加快调试速度。
+当然也可以配合其他手段例如调试时使用低分辨率，渲染时使用最高的分辨率和帧率
+** 过程参考
+在纸上（或者其他载体）拟写好你想要表达的内容，确定顺序，确定大致的构图或表达方式，
+再投入到实践中。在工程量较大的情况下这可以有效地节约你的时间。（至少你知道且清楚
+你自己到底在干嘛）
+

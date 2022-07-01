@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2024-10-01 Tue 10:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>用github.io建立自己的博客</title>
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="分别使用Hexo、Hugo、Emacs Org建立自己的博客。" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
+<h1 class="title">用github.io建立自己的博客</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1cc4a85">1. 前言</a></li>
+<li><a href="#org8058ef9">2. Hexo使用</a>
+<ul>
+<li><a href="#orge7f765a">2.1. 开始</a></li>
+<li><a href="#orgeb6b307">2.2. 使用主题</a></li>
+<li><a href="#orgc6dcb65">2.3. 一些优劣/我选择它的原因</a></li>
+<li><a href="#org51b9c3e">2.4. 成果展示</a></li>
+</ul>
+</li>
+<li><a href="#orgc46842b">3. Hugo</a>
+<ul>
+<li><a href="#orgd005514">3.1. 简介</a></li>
+<li><a href="#org657725f">3.2. 安装</a></li>
+<li><a href="#orga83bbf5">3.3. 使用</a></li>
+</ul>
+</li>
+<li><a href="#orgaf74492">4. Emacs Org</a>
+<ul>
+<li><a href="#org79305dd">4.1. 简介</a></li>
+<li><a href="#org0406886">4.2. 使用</a></li>
+<li><a href="#org046684f">4.3. 本地预览</a></li>
+<li><a href="#orgc76e332">4.4. 上传到Github</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1cc4a85" class="outline-2">
+<h2 id="org1cc4a85"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+22年8月那会我写了一篇博客介绍了自己是如何使用Jekyll引擎搭建自己的博客的，但是半
+年多过去了，我的博客网站早就“翻天覆地”了，基本上和过去没有什么关系了。所以，我
+打算将我折腾博客的一些内容写出来。
+</p>
+
+<p>
+还有，使用github.io建立博客需要拥有一个Github账户，这里为了方便简单假设您已经有
+了Github账户，并且熟悉git仓库和基本的github操作。就让我们开始吧。
+</p>
+</div>
+</div>
+<div id="outline-container-org8058ef9" class="outline-2">
+<h2 id="org8058ef9"><span class="section-number-2">2.</span> Hexo使用</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orge7f765a" class="outline-3">
+<h3 id="orge7f765a"><span class="section-number-3">2.1.</span> 开始</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Hexo使用Node.js编写，是一个博客引擎。安装方法参考<a href="https://hexo.io/zh-cn/index.html">官网</a>：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ npm install hexo-cli -g
+</pre>
+</div>
+<p>
+安装后可以在终端执行命令
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ hexo init blog
+</pre>
+</div>
+<p>
+在名为 <i>blog</i> 的文件夹中创建默认的博客主题网站。现在则可以执行以下命令安装主题需
+要的nodejs包
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ npm install
+</pre>
+</div>
+<p>
+最后使用以下命令开始博客预览
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ hexo server
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb6b307" class="outline-3">
+<h3 id="orgeb6b307"><span class="section-number-3">2.2.</span> 使用主题</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+网上有众多主题，到底应该怎么使用呢？
+</p>
+
+<p>
+最基本的，当我们找到一个主题之后应当在它的Github项目页面查看README文件了解这方面
+的内容，不过大都脱离不开这样的一个流程：
+</p>
+
+<ol class="org-ol">
+<li>克隆仓库到本地</li>
+<li>将克隆出来的仓库放到博客根目录下的 <code>theme</code> 目录下。</li>
+<li>编辑主题和博客的配置文件。
+这一步通常较为繁琐，一般要看主题提供了什么功能和什么注释。</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc6dcb65" class="outline-3">
+<h3 id="orgc6dcb65"><span class="section-number-3">2.3.</span> 一些优劣/我选择它的原因</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li>速度快
+它使用nodejs构建，解释速度快（相较于Jekyll）</li>
+<li>主题丰富（不知道算不算一个优势）</li>
+<li>安装部署方便
+他可以将博客一键布置到github上</li>
+<li>配置相对麻烦
+这似乎是个通病，只要换一个主题，就少不了大批量重新配置的需要，因为主题里面也
+需要更改配置。</li>
+<li>原生不支持Org文件写博客
+这点可以算是打油的，这只是我的个人需求，实际上Markdown的功能也足够丰富了</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org51b9c3e" class="outline-3">
+<h3 id="org51b9c3e"><span class="section-number-3">2.4.</span> 成果展示</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<div id="orgc8e0fe8" class="figure">
+<p><img src="./blog/hexo.png" alt="hexo.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>我过去使用hexo构建的博客图片</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc46842b" class="outline-2">
+<h2 id="orgc46842b"><span class="section-number-2">3.</span> Hugo</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgd005514" class="outline-3">
+<h3 id="orgd005514"><span class="section-number-3">3.1.</span> 简介</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Hugo是一个用Go语言编写的静态博客引擎。而相较于Hexo，它所拥有的为数不多的优势是原
+生支持Org文档解析，但因为前段时间它生成博客出错，才让我抛弃它。它的主题相对会较
+少，请酌情选择。
+</p>
+</div>
+</div>
+<div id="outline-container-org657725f" class="outline-3">
+<h3 id="org657725f"><span class="section-number-3">3.2.</span> 安装</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+由于我是Arch Linux环境，所以我这里只提Arch的安装办法，其他的请参考官网，理论上各
+大发行版是拥有hugo软件包的。
+</p>
+</div>
+</div>
+<div id="outline-container-orga83bbf5" class="outline-3">
+<h3 id="orga83bbf5"><span class="section-number-3">3.3.</span> 使用</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+这里参考官网的教程，操作基本没有坑，除了选主题有点麻烦之外，这里便不过多赘述。
+（实际上是我比较懒，不想写）
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaf74492" class="outline-2">
+<h2 id="orgaf74492"><span class="section-number-2">4.</span> Emacs Org</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org79305dd" class="outline-3">
+<h3 id="org79305dd"><span class="section-number-3">4.1.</span> 简介</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+这是我自己命名的一套方案，不一定好用，是我现用的方案（2023-04）
+</p>
+
+<p>
+具体内容就是使用Emacs Org-mode的导出功能构建出一套博客网页。以我自己为例，网站的
+Index首页索引界面和404 Not Found界面均为使用Org文档搭配html主题后生成的文件。而
+首页则为纯手动管理，相对麻烦，也许什么时候我能弄上一个，脚本去管理它，而不用手动
+管理链接。
+</p>
+</div>
+</div>
+<div id="outline-container-org0406886" class="outline-3">
+<h3 id="org0406886"><span class="section-number-3">4.2.</span> 使用</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+从网上下载你想要使用的主题需要的css文件和js文件到博客下的任意一个目录，然后创建
+一个setup文件，像是该文章所引用的setup file：
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #75715E;"># -*- mode: org; -*-</span>
+
+<span style="color: #75715E;">#+AUTHOR:</span> <span style="color: #F8F8F2;">&#19981;&#35201;&#22312;&#24847;&#25105;&#30340;&#22836;&#20687;QwQ</span>
+
+<span style="color: #75715E;">#+HTML_LINK_HOME: /</span>
+<span style="color: #75715E;">#+LANGUAGE: zh</span>
+
+<span style="color: #75715E;">#+OPTIONS: html-style:nil</span>
+<span style="color: #75715E;">#+HTML_HEAD: &lt;link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/&gt;</span>
+<span style="color: #75715E;">#+HTML_HEAD: &lt;script type="text/javascript" src="/theme/org-html-theme-dull.js" defer&gt;&lt;/script&gt;</span>
+<span style="color: #75715E;">#+HTML_HEAD: &lt;link rel="shortcut icon" href="/img/icon.jpg"&gt;</span>
+
+<span style="color: #75715E;">#+LATEX_COMPILER: xelatex</span>
+<span style="color: #75715E;">#+LATEX_HEADER: \usepackage[UTF8]{ctex}</span>
+</pre>
+</div>
+<p>
+在这里，文件第一行用于指定编辑模式，然后依次设置了用户名、主页链接、显示语言、主
+题需要的选项共三行，并设置了网站的图标，最后的两行是给Latex导出为Pdf而设置的。在
+编写好文件后，就可以在每篇文章里面添加这样一行内容进行引用。
+</p>
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #75715E;">#+SETUPFILE: ../path/to/file.setup</span>
+</pre>
+</div>
+<p>
+值得注意的是，如果是要原封不动地导出到html的链接则可以使用“绝对路径”，但是如果
+是要给Emacs使用的链接需要相对链接，因为在网页中可以使用 <code>/</code> 表示网站的根目录（即
+只有域名的url）
+</p>
+</div>
+</div>
+<div id="outline-container-org046684f" class="outline-3">
+<h3 id="org046684f"><span class="section-number-3">4.3.</span> 本地预览</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+我会采用两种方式进行本地预览：nginx和http-server
+</p>
+
+<p>
+nginx的学习与配置或许可以参考其他的文章或者我未来写一篇nginx的教程。
+</p>
+
+<p>
+而http-server办法相对简单的多。首先在终端用root权限运行（请确保你安装了nodejs）
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">npm install http-server -g</span>
+</pre>
+</div>
+<p>
+确认安装成功和就可以在博客根目录下使用命令 <code>http-server</code> 启动一个http服务器，默
+认端口是8080，终端会有服务的地址显示的。顺带一提，它在访问没有 <code>index.html</code> 的目
+录时且没有 <code>404.html</code> 文件时会自动生成返回当前目录下的所有文件与文件夹。可以当做
+局域网的文件单向传输器。
+</p>
+</div>
+</div>
+<div id="outline-container-orgc76e332" class="outline-3">
+<h3 id="orgc76e332"><span class="section-number-3">4.4.</span> 上传到Github</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+你可以选择连带着org文件一齐上传，而我则选择了另外一种办法：也整一个public文件夹，
+专门用于上传，而本地则维持着有点差异的文件系统，方便维护。并建立一个脚本方便快速
+更新，内容如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;">#</span><span style="color: #75715E;">!/usr/bin/</span><span style="color: #F92672;">zsh</span>
+
+<span style="color: #75715E;">#</span><span style="color: #75715E;">================================================================</span>
+<span style="color: #75715E;">#   </span><span style="color: #75715E;">Copyright (C) 2023 YouLanjie</span>
+<span style="color: #75715E;">#</span>
+<span style="color: #75715E;">#   </span><span style="color: #75715E;">&#25991;&#20214;&#21517;&#31216;&#65306;build.sh</span>
+<span style="color: #75715E;">#   </span><span style="color: #75715E;">&#21019; &#24314; &#32773;&#65306;youlanjie</span>
+<span style="color: #75715E;">#   </span><span style="color: #75715E;">&#21019;&#24314;&#26085;&#26399;&#65306;2023&#24180;04&#26376;02&#26085;</span>
+<span style="color: #75715E;">#   </span><span style="color: #75715E;">&#25551;    &#36848;&#65306;&#26500;&#24314;&#21338;&#23458;</span>
+<span style="color: #75715E;">#</span>
+<span style="color: #75715E;">#</span><span style="color: #75715E;">================================================================</span>
+
+<span style="color: #FD971F;">app_name</span>=<span style="color: #E6DB74;">"${0##*/}"</span>
+
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Show an INFO message</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">$1: message string</span>
+<span style="color: #A6E22E;">_msg_info</span>() {
+    <span style="color: #F92672;">local</span> <span style="color: #FD971F;">_msg</span>=<span style="color: #E6DB74;">"${1}"</span>
+    [[ <span style="color: #E6DB74;">"${quiet}"</span> == <span style="color: #E6DB74;">"y"</span> ]] || printf <span style="color: #E6DB74;">'[%s] INFO: %s\n'</span> <span style="color: #E6DB74;">"${app_name}"</span> <span style="color: #E6DB74;">"${_msg}"</span>
+}
+
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Show a WARNING message</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">$1: message string</span>
+<span style="color: #A6E22E;">_msg_warning</span>() {
+    <span style="color: #F92672;">local</span> <span style="color: #FD971F;">_msg</span>=<span style="color: #E6DB74;">"${1}"</span>
+    printf <span style="color: #E6DB74;">'[%s] WARNING: %s\n'</span> <span style="color: #E6DB74;">"${app_name}"</span> <span style="color: #E6DB74;">"${_msg}"</span> &gt;&amp;2
+}
+
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Show an ERROR message then exit with status</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">$1: message string</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">$2: exit code number (with 0 does not exit)</span>
+<span style="color: #A6E22E;">_msg_error</span>() {
+    <span style="color: #F92672;">local</span> <span style="color: #FD971F;">_msg</span>=<span style="color: #E6DB74;">"${1}"</span>
+    <span style="color: #F92672;">local</span> <span style="color: #FD971F;">_error</span>=${<span style="color: #FD971F;">2</span>}
+    printf <span style="color: #E6DB74;">'[%s] ERROR: %s\n'</span> <span style="color: #E6DB74;">"${app_name}"</span> <span style="color: #E6DB74;">"${_msg}"</span> &gt;&amp;2
+    <span style="color: #F92672;">if</span> (( _error &gt; 0 )); <span style="color: #F92672;">then</span>
+        <span style="color: #F92672;">exit</span> <span style="color: #E6DB74;">"${_error}"</span>
+    <span style="color: #F92672;">fi</span>
+}
+
+<span style="color: #A6E22E;">usage</span>() {
+        <span style="color: #FD971F;">usagetext</span>=<span style="color: #E6DB74;">"\</span>
+<span style="color: #E6DB74;">usage: build.sh [options]</span>
+<span style="color: #E6DB74;">  options:</span>
+<span style="color: #E6DB74;">     -m &#21019;&#24314;&#21338;&#23458;&#21040;public&#30446;&#24405;&#19979;&#65288;&#19981;&#24314;&#35758;&#20351;&#29992;&#65289;</span>
+<span style="color: #E6DB74;">     -b &#26500;&#24314;&#21338;&#23458;&#21015;&#34920;&#19982;&#39318;&#39029;</span>
+<span style="color: #E6DB74;">     -u &#23548;&#20986;&#26410;&#26356;&#26032;&#30340;org&#20026;html&#39029;&#38754;</span>
+<span style="color: #E6DB74;">     -U &#24378;&#21046;&#26356;&#26032;&#25152;&#26377;&#30340;html&#39029;&#38754;</span>
+<span style="color: #E6DB74;">     -h &#24110;&#21161;&#20449;&#24687;"</span>
+        <span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">usagetext</span>
+        <span style="color: #F92672;">exit</span> $<span style="color: #FD971F;">1</span>
+}
+
+<span style="color: #A6E22E;">mk_public</span>() {
+        _msg_info <span style="color: #E6DB74;">"&#26816;&#27979;&#26159;&#21542;&#23384;&#22312;public&#25991;&#20214;&#22841;..."</span>
+        <span style="color: #F92672;">if</span> [[ <span style="color: #E6DB74; font-weight: bold;">!</span> -d public ]] {
+                <span style="color: #F92672;">if</span> [[ -f public ]] {
+                        _msg_error <span style="color: #E6DB74;">"&#25991;&#20214;\`public\`&#24050;&#23384;&#22312;&#19988;&#38750;&#25991;&#20214;&#22841;"</span> 1
+                }
+                _msg_warning <span style="color: #E6DB74;">"&#25991;&#20214;&#22841;\`public\`&#19981;&#23384;&#22312;"</span>
+                _msg_info <span style="color: #E6DB74;">"&#23558;&#21019;&#24314;public&#25991;&#20214;&#22841;"</span>
+                <span style="color: #F92672;">if</span> [[ <span style="color: #E6DB74; font-weight: bold;">!</span> -d public ]] {
+                        _msg_error <span style="color: #E6DB74;">"&#26080;&#27861;&#21019;&#24314;"</span> 1
+                }
+        } <span style="color: #F92672;">else</span> {
+                _msg_info <span style="color: #E6DB74;">"&#32467;&#26524;&#20026;&#30495;&#65292;&#23558;&#36827;&#34892;&#26500;&#24314;&#25805;&#20316;"</span>
+        }
+        _msg_info <span style="color: #E6DB74;">"&#28165;&#38500;public&#30446;&#24405;"</span>
+        find public |grep -v <span style="color: #E6DB74;">"\.git"</span>|sed -n <span style="color: #E6DB74;">"s/public\//.\/public\//p"</span>|sort -r|sed <span style="color: #E6DB74;">"s/^/rm -d '/"</span>|sed <span style="color: #E6DB74;">"s/$/'/"</span>|zsh
+        _msg_info <span style="color: #E6DB74;">"&#21019;&#24314;&#30446;&#24405;&#26641;"</span>
+        find post -type d|sed -n <span style="color: #E6DB74;">"s/post\//.\/public\/post\//p"</span>|sed <span style="color: #E6DB74;">"s/^/mkdir -p '/"</span>|sed <span style="color: #E6DB74;">"s/$/'/"</span>|zsh
+        _msg_info <span style="color: #E6DB74;">"&#22797;&#21046;&#25991;&#20214;"</span>
+        find post -type f|grep -v <span style="color: #E6DB74;">"\.org"</span>|sed <span style="color: #E6DB74;">"s/^/cp -r '/"</span>|sed <span style="color: #E6DB74;">"s/ 'post\/\(.*\)$/ 'post\/\1' 'public\/post\/\1'/"</span>|zsh
+        _msg_info <span style="color: #E6DB74;">"&#22797;&#21046;&#39318;&#39029;"</span>
+        cp index.html public/
+        _msg_info <span style="color: #E6DB74;">"&#22797;&#21046;404&#39029;"</span>
+        cp 404.html public/
+        _msg_info <span style="color: #E6DB74;">"&#22797;&#21046;&#20027;&#39064;&#19982;&#22270;&#29255;"</span>
+        cp -r theme/ public/
+        cp -r img/ public/
+        _msg_info <span style="color: #E6DB74;">"Done!"</span>
+}
+
+<span style="color: #A6E22E;">update_file</span>() {
+        emacs -Q -nw ./src/fastsetup.el <span style="color: #E6DB74;">"$1"</span> --eval <span style="color: #E6DB74;">"(eval-buffer \"fastsetup.el\")"</span>
+}
+
+<span style="color: #A6E22E;">update</span>() {
+        <span style="color: #75715E;">#</span><span style="color: #75715E;">update_file index.org</span>
+        <span style="color: #75715E;">#</span><span style="color: #75715E;">echo $file_list</span>
+        <span style="color: #F92672;">for</span> name (post/**/*.org) {
+                <span style="color: #FD971F;">out</span>=$(<span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">name</span>|sed <span style="color: #E6DB74;">"s/\\.org$/.html/"</span>)
+                <span style="color: #F92672;">if</span> [[ (<span style="color: #E6DB74; font-weight: bold;">!</span> -f $<span style="color: #FD971F;">out</span>) || ($<span style="color: #FD971F;">name</span> -nt $<span style="color: #FD971F;">out</span>) ]] {
+                        _msg_info <span style="color: #E6DB74;">"Export '$name' ..."</span>
+                        update_file $<span style="color: #FD971F;">name</span>
+                }
+        }
+}
+
+<span style="color: #A6E22E;">build</span>() {
+        _msg_info <span style="color: #E6DB74;">"&#28165;&#31354;&#28304;&#25991;&#20214;"</span>
+        cat /dev/null &gt; src/post2.org
+        _msg_info <span style="color: #E6DB74;">"&#26500;&#24314;&#21015;&#34920;&#20013;"</span>
+        _msg_info <span style="color: #E6DB74;">"&#33719;&#21462;&#25991;&#20214;&#22836;&#24182;&#22788;&#29702;&#20013;"</span>
+        <span style="color: #FD971F;">file_list</span>=(post/**/*.org)
+        <span style="color: #FD971F;">line_max</span>=$(<span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">file_list</span>|wc -l)
+        <span style="color: #F92672;">for</span> name ($<span style="color: #FD971F;">file_list</span>) {
+                <span style="color: #FD971F;">title</span>=$(head -n 5 $<span style="color: #FD971F;">name</span> |grep -i <span style="color: #E6DB74;">'#+title: '</span>)
+                <span style="color: #F92672;">declare</span> -l <span style="color: #FD971F;">title</span>=<span style="color: #E6DB74;">"$title"</span>
+                <span style="color: #FD971F;">title</span>=$(<span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">title</span>|sed <span style="color: #E6DB74;">'s/^#+title:[ ]*//'</span>)
+
+                <span style="color: #FD971F;">date</span>=$(head -n 5 $<span style="color: #FD971F;">name</span> |grep -i <span style="color: #E6DB74;">'#+date: '</span>)
+                <span style="color: #F92672;">declare</span> -l <span style="color: #FD971F;">date</span>=<span style="color: #E6DB74;">"$date"</span>
+                <span style="color: #FD971F;">date</span>=$(<span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">date</span>|sed <span style="color: #E6DB74;">'s/^#+date:[ ]*//;s/&lt;\(.*\)&gt;/\1/;s/\([^ ]*\) [&#19968;|&#20108;|&#19977;|&#22235;|&#20116;|&#20845;|&#26085;] /\1 /'</span>)
+                <span style="color: #F92672;">if</span> [[ $<span style="color: #FD971F;">date</span> == <span style="color: #E6DB74;">""</span> ]] {
+                        <span style="color: #F92672;">continue</span>
+                }
+
+                <span style="color: #FD971F;">desc</span>=$(head -n 5 $<span style="color: #FD971F;">name</span> |grep -i <span style="color: #E6DB74;">'#+description: '</span>)
+                <span style="color: #FD971F;">name</span>=$(<span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">name</span>|sed <span style="color: #E6DB74;">'s/^/..\//'</span>)
+                <span style="color: #F92672;">if</span> [[ $<span style="color: #FD971F;">desc</span> != <span style="color: #E6DB74;">""</span> ]] {
+                        <span style="color: #F92672;">declare</span> -l <span style="color: #FD971F;">desc</span>=<span style="color: #E6DB74;">"$desc"</span>
+                        <span style="color: #FD971F;">desc</span>=$(<span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">desc</span>|sed <span style="color: #E6DB74;">'s/^#+description:[ ]*//'</span>)
+                        printf <span style="color: #E6DB74;">'- /%s/ [[%s][%s]]\\\\\\\\\\n  %s\n'</span> <span style="color: #E6DB74;">"$date"</span> <span style="color: #E6DB74;">"$name"</span> <span style="color: #E6DB74;">"$title"</span> <span style="color: #E6DB74;">"$desc"</span> &gt;&gt; src/post2.org
+                } <span style="color: #F92672;">else</span> {
+                        printf <span style="color: #E6DB74;">"- /%s/ [[%s][%s]]\n"</span> <span style="color: #E6DB74;">"$date"</span> <span style="color: #E6DB74;">"$name"</span> <span style="color: #E6DB74;">"$title"</span> &gt;&gt; src/post2.org
+                }
+        }
+        <span style="color: #FD971F;">list</span>=$(cat src/post2.org|sort -r)
+        <span style="color: #F92672;">echo</span> $<span style="color: #FD971F;">list</span> &gt; src/post2.org
+        _msg_info <span style="color: #E6DB74;">"&#21015;&#34920;&#36755;&#20986;&#23436;&#25104;"</span>
+
+        _msg_info <span style="color: #E6DB74;">"&#23548;&#20986;&#39318;&#39029;&#20013;..."</span>
+        <span style="color: #75715E;"># </span><span style="color: #75715E;">emacs index.org -nw --eval "(progn (org-html-export-to-html) (kill-emacs))"</span>
+        update_file index.org
+        _msg_info <span style="color: #E6DB74;">"Done!"</span>
+}
+
+<span style="color: #F92672;">while</span> {<span style="color: #F92672;">getopts</span> <span style="color: #E6DB74;">'mbuh?'</span> arg} {
+        <span style="color: #F92672;">case</span> $<span style="color: #FD971F;">arg</span> {
+                m) mk_public ;;
+                b) build ;;
+                u) update ;;
+                h|?) usage 0;;
+                *) usage 1;;
+        }
+        <span style="color: #F92672;">exit</span> 0
+}
+
+<span style="color: #F92672;">if</span> [[ $<span style="color: #FD971F;">@</span> == <span style="color: #E6DB74;">""</span> ]] {
+        _msg_error <span style="color: #E6DB74;">"No options!"</span>
+        usage 1
+} <span style="color: #F92672;">else</span> {
+        _msg_error <span style="color: #E6DB74;">"Bad options!"</span>
+        usage 1
+}
+
+</pre>
+</div>
+<p>
+<del>该脚本除了org外的将会依照原有目录树将所有源文件复制到public目录下。然后就可以使</del>
+<del>用public目录进行最后的预览。最后使用public推送到github上。</del>
+</p>
+
+<p>
+该脚本现在的用法是半自动更新首页与半自动更新（导出）文章的功能。脚本的链接在<a href="http:/build.sh">这里</a>。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-04-29 08:55</p>
+<p class="author">Author: 不要在意我的头像QwQ</p>
+<p class="date">Created: 2024-10-01 Tue 10:36</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

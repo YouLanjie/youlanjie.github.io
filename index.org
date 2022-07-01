@@ -1,0 +1,12 @@
+#+TITLE: 我的个人博客
+# #+OPTIONS: toc:nil
+# #+OPTIONS: num:nil
+
+#+setupfile: ./setup.setup
+
+* Welcome
+欢迎来到我的个人博客。
+
+点击 =TimeLine= 查看按时间排序的文章列表界面。
+* 我的文章（按内容分类）
+#+include: "./src/post.org" :lines "3-"

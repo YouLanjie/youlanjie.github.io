@@ -1,0 +1,21 @@
+# -*- mode: org; -*-
+
+#+PROPERTY: comments yes
+#+PROPERTY: header-args :exports both :eval never-export
+#+OPTIONS: H:2
+#+BEAMER_THEME: CambridgeUS
+#+BEAMER_COLOR_THEME: default
+
+# We can't just +BEAMER_INNER_THEME: default because that picks the theme default.
+# Override per https://tex.stackexchange.com/questions/11168/change-bullet-style-formatting-in-beamer
+#+BEAMER_INNER_THEME: default
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+BEAMER_HEADER: \definecolor{links}{HTML}{0000A0}
+#+BEAMER_HEADER: \hypersetup{colorlinks=,linkcolor=,urlcolor=links}
+#+BEAMER_HEADER: \setbeamertemplate{itemize items}[default]
+#+BEAMER_HEADER: \setbeamertemplate{enumerate items}[default]
+#+BEAMER_HEADER: \setbeamertemplate{items}[default]
+#+BEAMER_HEADER: \setbeamercolor*{local structure}{fg=darkred}
+#+BEAMER_HEADER: \setbeamercolor{section in toc}{fg=darkred}
+#+BEAMER_HEADER: \setlength{\parskip}{\smallskipamount}
+

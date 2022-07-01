@@ -1,0 +1,9 @@
+#+TITLE: 404
+
+# +OPTIONS: toc:nil
+#+OPTIONS: num:nil
+
+#+setupfile: ./setup.setup
+
+* 404
+您访问的链接不存在，点击[[http:/][这里]]返回主页

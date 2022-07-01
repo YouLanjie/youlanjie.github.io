@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2023-07-07 五 19:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>用github.io+jekyll建立一个自己的博客网站</title>
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="使用github.io+jekyll建立自己的博客网站" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
+<h1 class="title">用github.io+jekyll建立一个自己的博客网站</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6d3f0f0">1. 用github.io+jekyll建立一个自己的博客网站</a>
+<ul>
+<li><a href="#org0a712cf">1.1. 写在前面</a></li>
+<li><a href="#org8ef905e">1.2. 准备</a></li>
+<li><a href="#org6586930">1.3. 使用Jekyll主题</a>
+<ul>
+<li><a href="#orgd1954eb">1.3.1. 使用Github自带的Jekyll主题</a></li>
+<li><a href="#orgccb7d9b">1.3.2. 自定义Jekyll主题</a></li>
+</ul>
+</li>
+<li><a href="#org6974c85">1.4. 编写发布博客</a>
+<ul>
+<li><a href="#org7ca4c0f">1.4.1. 博客命名</a></li>
+<li><a href="#org77d162c">1.4.2. 格式要求</a></li>
+</ul>
+</li>
+<li><a href="#org281933d">1.5. 预览你的博客网站——搭建Jekyll运行环境</a>
+<ul>
+<li><a href="#orge050ba7">1.5.1. 安装Ruby</a></li>
+<li><a href="#org8b09a65">1.5.2. 安装Jekyll</a></li>
+<li><a href="#org9023f15">1.5.3. 安装主题的依赖包</a></li>
+<li><a href="#org8661df0">1.5.4. 预览博客</a></li>
+</ul>
+</li>
+<li><a href="#orgcfc1cab">1.6. 推送你的博客文章到Github上</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6d3f0f0" class="outline-2">
+<h2 id="org6d3f0f0"><span class="section-number-2">1.</span> 用github.io+jekyll建立一个自己的博客网站</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org0a712cf" class="outline-3">
+<h3 id="org0a712cf"><span class="section-number-3">1.1.</span> 写在前面</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+这篇blog主要记录我是怎么（使用Jekyll）创建出个人博客网站。或许会不专业、严谨、讲
+不清楚，也会有错误，且它面向Linux用户，操作与windows用户可能略有不同.
+</p>
+
+<blockquote>
+<p>
+本篇的效果并非现在的博客样式，当时使用jekyll搭建，现在使用emacs to http手动搭建
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org8ef905e" class="outline-3">
+<h3 id="org8ef905e"><span class="section-number-3">1.2.</span> 准备</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+要用github.io建立自己的博客网站，首先需要你有一个github账户。（假设你已经有了一
+个github账户）
+</p>
+
+<p>
+在github主页点击绿色的 <b>New</b> 按钮新建一个储存库。
+</p>
+
+
+<div id="org65a8a41" class="figure">
+<p><img src="./2022-08-04_01/2022-07-02_01-01.png" alt="2022-07-02_01-01.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>创建仓库</p>
+</div>
+
+<p>
+对于储存库的名字格式应为 <code>你的账户名称.github.io</code>
+</p>
+
+
+<div id="orgbc65f4d" class="figure">
+<p><img src="./2022-08-04_01/2022-07-02_01-02.png" alt="2022-07-02_01-02.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>仓库名称</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6586930" class="outline-3">
+<h3 id="org6586930"><span class="section-number-3">1.3.</span> 使用Jekyll主题</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-orgd1954eb" class="outline-4">
+<h4 id="orgd1954eb"><span class="section-number-4">1.3.1.</span> 使用Github自带的Jekyll主题</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+在仓库创建后你可以在仓库界面的 <i>菜单 -&gt; Settings -&gt; Pages</i> 界面中点击按钮
+<b>Choose a theme</b>
+</p>
+
+
+<div id="org20e9b9c" class="figure">
+<p><img src="./2022-08-04_01/2022-07-02_01-03.png" alt="2022-07-02_01-03.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>界面位置</p>
+</div>
+
+<p>
+并选择一个Jekyll主题并提交更改形成一个初始的界面
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgccb7d9b" class="outline-4">
+<h4 id="orgccb7d9b"><span class="section-number-4">1.3.2.</span> 自定义Jekyll主题</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+先使用git克隆仓库到本地（git的用法自行百度）
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git clone https://github.com/&#20320;&#30340;&#29992;&#25143;&#21517;/&#20320;&#30340;&#20179;&#24211;&#21517;
+</pre>
+</div>
+
+<p>
+后再自定义主题。我使用的<a href="https://github.com/huxpro/huxpro.github.io">主题模板</a>使用方法（参考<a href="https://keysaim.github.io/post/blog/2017-08-15-how-to-setup-your-github-io-blog/">这篇文章</a>）
+</p>
+
+<p>
+要先克隆你想要的主题模板仓库到本地,例如:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git clone git@github.com:sighingnow/jekyll-gitbook.git
+</pre>
+</div>
+
+<p>
+克隆后将里面的文件及文件夹（除了.git外）替换(复制到)你的仓库里，并作出一些必要的修改
+（修改\<sub>config.yml</sub>、index.html等，具体的文件规范可以看<a href="http://jekyllcn.com/docs/structure/">官方文档</a>）
+<i>（就像是抄作业不抄名字）</i> 成为你的博客网站（这可能需要一定的html开发知识）
+</p>
+
+<p>
+其他的主题可以在<a href="http://jekyllthemes.org/">这个网站上</a>查找
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6974c85" class="outline-3">
+<h3 id="org6974c85"><span class="section-number-3">1.4.</span> 编写发布博客</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org7ca4c0f" class="outline-4">
+<h4 id="org7ca4c0f"><span class="section-number-4">1.4.1.</span> 博客命名</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+根据Jekyll官方文档的要求，博客文件应当放置在 <b>仓库根目录/\<sub>posts</sub>/</b> 文件夹下,以
+<code>YEAR-MONTH-DAY-title.MARKUP</code> 的格式对文件进行命名。推荐使用markdown编写blog。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org77d162c" class="outline-4">
+<h4 id="org77d162c"><span class="section-number-4">1.4.2.</span> 格式要求</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<blockquote>
+<p>
+我个人建议使用Markdown编写博客，最好搭配markdown预览功能使用。
+</p>
+</blockquote>
+
+<p>
+下面的内容均使用Markdown编写博客，其他的请自行查找教程
+</p>
+
+<p>
+博客的头部应该有以下内容：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-markdown"><span style="color: #75715E;">---</span>
+<span style="color: #FD971F;">title</span><span style="color: #75715E;">: </span><span style="color: #E6DB74;">&#36825;&#37324;&#22635;&#20889;&#25991;&#31456;&#30340;&#26631;&#39064;&#65292;&#22635;&#20102;&#23601;&#19981;&#29992;&#20889;&#19968;&#32423;&#26631;&#39064;&#20102;</span>
+<span style="color: #FD971F;">author</span><span style="color: #75715E;">: </span><span style="color: #E6DB74;">&#29992;&#25143;&#65292;&#25105;&#19981;&#22826;&#28165;&#26970;&#23427;&#26377;&#20160;&#20040;&#29992;</span>
+<span style="color: #FD971F;">date</span><span style="color: #75715E;">: </span><span style="color: #E6DB74;">&#21338;&#23458;&#30340;&#32534;&#20889;&#26102;&#38388;&#65288;YYYY-MM-DD&#65289;&#65292;&#22635;&#20889;&#20102;&#26102;&#38388;&#23601;&#20250;&#23433;&#35013;&#25991;&#20214;&#20869;&#37096;&#30340;&#26102;&#38388;&#26469;&#29983;&#25104;&#32593;&#39029;&#65288;&#32780;&#38750;&#25991;&#20214;&#21517;&#65289;</span>
+<span style="color: #FD971F;">category</span><span style="color: #75715E;">: </span><span style="color: #E6DB74;">Jekyll       &#65288;&#25105;&#19981;&#30693;&#36947;&#23427;&#26377;&#20160;&#20040;&#29992;&#65289;</span>
+<span style="color: #FD971F;">layout</span><span style="color: #75715E;">: </span><span style="color: #E6DB74;">post           &#65288;&#24517;&#19981;&#21487;&#23569;&#30340;&#20869;&#23481;&#65292;&#26631;&#35782;&#25991;&#20214;&#30340;&#31867;&#22411;&#20026;&#21338;&#23458;&#65292;&#21542;&#21017;&#26412;&#22320;&#39044;&#35272;&#26102;&#19968;&#33324;&#20250;&#20986;&#29616;&#38382;&#39064;&#65306;&#27809;&#26377;&#24212;&#29992;&#20027;&#39064;&#65289;</span>
+<span style="color: #FD971F;">cover</span><span style="color: #75715E;">: </span><span style="color: #E6DB74;">&#26631;&#35782;&#25991;&#31456;&#30340;&#23553;&#38754;&#22270;&#20687;</span>
+<span style="color: #75715E;">---</span>
+</pre>
+</div>
+
+<p>
+其中， <code>layout: post</code> 十分重要，如果文章里没有它，那么（本地预览）打开文章时不会
+应用主题到上面去（至少我测试时是这样的）
+</p>
+
+<p>
+而 <code>date: YYYY-MM-DD</code> 日期也不止是可以这样，你还可以写成 <code>date: YYYY-MM-DD
+HH-MM-SS +8000</code> 的形式。即包括时间及时区（+8000是时区）。如果当前日期时间在文章
+标注的时间前是不会构建文章的内容为html的
+</p>
+
+<p>
+封面有无图像效果对比：
+</p>
+<div class="org-center">
+
+<div id="org1a98198" class="figure">
+<p><img src="./2022-08-04_01/2022-08-05_01-04.png" alt="2022-08-05_01-04.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>无封面</p>
+</div>
+
+<div id="org6798583" class="figure">
+<p><img src="./2022-08-04_01/2022-08-05_01-05.png" alt="2022-08-05_01-05.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>有封面</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org281933d" class="outline-3">
+<h3 id="org281933d"><span class="section-number-3">1.5.</span> 预览你的博客网站——搭建Jekyll运行环境</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+由于博客网站推送到远程再进行构建会有一定的延迟，有时甚至不会更新，
+因此在本地搭建Jekyll的运行环境是有必要的
+</p>
+</div>
+<div id="outline-container-orge050ba7" class="outline-4">
+<h4 id="orge050ba7"><span class="section-number-4">1.5.1.</span> 安装Ruby</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+在ArchLinux安装：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo pacman -S ruby
+</pre>
+</div>
+
+<p>
+在Debian/Ubuntu
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">sudo apt install ruby
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8b09a65" class="outline-4">
+<h4 id="org8b09a65"><span class="section-number-4">1.5.2.</span> 安装Jekyll</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<div class="org-src-container">
+<pre class="src src-bash">gem install jekyll
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9023f15" class="outline-4">
+<h4 id="org9023f15"><span class="section-number-4">1.5.3.</span> 安装主题的依赖包</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+因为不同的主题会使用到不同的包，会有不同的依赖，具体的可以查看项目目录下的
+=Gemfile=，里面会有一些类似于下面的内容
+</p>
+
+<div class="org-src-container">
+<pre class="src src-gemfile">gem "jekyll"
+gem 'jekyll-feed'
+gem 'jekyll-readme-index'
+gem 'jemoji'
+gem 'webrick'
+</pre>
+</div>
+
+<p>
+基本上安装文件中的引号中的包（名）就不会报错
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">gem install xxx          <span style="color: #75715E;">#</span><span style="color: #75715E;">xxx&#20026;&#21253;&#21517;&#65292;&#38656;&#33258;&#34892;&#26367;&#25442;</span>
+</pre>
+</div>
+
+<blockquote>
+<p>
+不知道为什么，我运行jekyll预览时会报错，含有 <code>webrick</code> 等字样
+查了半天才找到了<a href="https://blog.csdn.net/qq_43655096/article/details/120397848">解决办法</a>：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">bundle add webrick
+</pre>
+</div>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org8661df0" class="outline-4">
+<h4 id="org8661df0"><span class="section-number-4">1.5.4.</span> 预览博客</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+在终端执行命令：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">jekyll serve
+</pre>
+</div>
+
+<blockquote>
+<p>
+顺带一提，想要在本地创建一个默认的jekyll博客项目，就在终端执行：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">jekyll new &#20320;&#30340;&#39033;&#30446;&#21517;&#31216;&#65288;&#25991;&#20214;&#22841;&#65289;
+</pre>
+</div>
+
+<p>
+不过这样可能会有一些慢
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcfc1cab" class="outline-3">
+<h3 id="orgcfc1cab"><span class="section-number-3">1.6.</span> 推送你的博客文章到Github上</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+在一篇blog写完后就可以执行
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">git add --all                                  <span style="color: #75715E;">#</span><span style="color: #75715E;">&#28155;&#21152;&#25152;&#26377;&#25991;&#20214;</span>
+git commit -m <span style="color: #E6DB74;">"&#20320;&#24819;&#35201;&#32473;&#36825;&#19968;&#27425;&#25552;&#20132;&#20570;&#30340;&#27880;&#37322;"</span>     <span style="color: #75715E;">#</span><span style="color: #75715E;">&#36827;&#34892;&#25552;&#20132;</span>
+git push                                       <span style="color: #75715E;">#</span><span style="color: #75715E;">&#25512;&#36865;&#26356;&#26032;&#21040;Github&#19978;</span>
+</pre>
+</div>
+
+<p>
+将更新推送到github上，等待一会之后你的博客网页
+（应为你的仓库名，如<a href="https://your_user_name.github.io">https://your_user_name.github.io</a>）就应会刷新
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-08-04 11:00</p>
+<p class="author">Author: 不要在意我的头像QwQ</p>
+<p class="date">Created: 2023-07-07 五 19:54</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

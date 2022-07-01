@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2023-07-30 日 15:59 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>C语言入门</title>
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="自己尝试写的C语言教程（未完成）" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
+<h1 class="title">C语言入门</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org53c1dc3">1. 配置开发环境</a>
+<ul>
+<li><a href="#org88055f1">1.1. Windows</a></li>
+<li><a href="#org3a80121">1.2. Linux</a></li>
+</ul>
+</li>
+<li><a href="#orgf971b3b">2. 正式学习前的准备</a>
+<ul>
+<li><a href="#orgc194ca5">2.1. 第一个C语言程序</a></li>
+<li><a href="#orge7f05bd">2.2. 算法</a></li>
+</ul>
+</li>
+<li><a href="#orgd095feb">3. 基本语法</a>
+<ul>
+<li><a href="#org8506ba8">3.1. 关键字</a></li>
+<li><a href="#org229750b">3.2. 变量</a>
+<ul>
+<li><a href="#orge36ea04">3.2.1. 变量的定义与声明</a></li>
+<li><a href="#org9197aa6">3.2.2. 变量的一些修饰词</a></li>
+<li><a href="#orgbe655af">3.2.3. 整型</a></li>
+<li><a href="#org172c787">3.2.4. 浮点型</a></li>
+<li><a href="#orgf03a858">3.2.5. 字符型</a></li>
+<li><a href="#org813b194">3.2.6. 数组</a></li>
+<li><a href="#org9befc7c">3.2.7. 指针</a></li>
+<li><a href="#org05894d7">3.2.8. 结构体</a></li>
+</ul>
+</li>
+<li><a href="#org67cd5e7">3.3. 输入与输出</a>
+<ul>
+<li><a href="#orge5233a0">3.3.1. 输出</a></li>
+<li><a href="#org790f223">3.3.2. 输入</a></li>
+</ul>
+</li>
+<li><a href="#orge72f359">3.4. 函数</a>
+<ul>
+<li><a href="#org1fee291">3.4.1. 函数的定义与声明</a></li>
+<li><a href="#org561b8ab">3.4.2. 函数的调用</a></li>
+<li><a href="#org64424ab">3.4.3. 函数指针</a></li>
+<li><a href="#org3a5af80">3.4.4. 更多功能函数</a></li>
+</ul>
+</li>
+<li><a href="#orgb610fe9">3.5. 文件</a>
+<ul>
+<li><a href="#orge91b38d">3.5.1. 文件的打开与关闭</a></li>
+<li><a href="#org2feac78">3.5.2. 读取与写入</a></li>
+<li><a href="#org461af5c">3.5.3. 位置控制</a></li>
+</ul>
+</li>
+<li><a href="#orgcddae02">3.6. 内存管理</a>
+<ul>
+<li><a href="#orgdfe7689">3.6.1. 内存的基本概念</a></li>
+<li><a href="#org71e2176">3.6.2. 内存的申请</a></li>
+<li><a href="#org1fd0b51">3.6.3. 内存的释放</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org53c1dc3" class="outline-2">
+<h2 id="org53c1dc3"><span class="section-number-2">1.</span> 配置开发环境</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+C语言是一门古老的语言，用它编写的程序要使用编译器编译后才能够执行。所以我们需要
+做的事情就应该是：配置开发环境。要运行C语言程序，我们需要一个编译器。而且不只是
+需要编译器，我们还需要一个编辑器。基于不同系统的情况，配置开发环境的内容将会分为
+几段内容。
+</p>
+</div>
+<div id="outline-container-org88055f1" class="outline-3">
+<h3 id="org88055f1"><span class="section-number-3">1.1.</span> Windows</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+在Windows下，重量级的开发环境有<a href="https://visualstudio.microsoft.com/zh-hans/#vs-section">Visual Studio</a>
+系列中的Visual Studio 2022，而其中的 Visual Studio code则相对轻量，体积较小。我
+个人推荐使用VScode作为编辑器，毕竟如果 使用Visual Studio 2022作为IDE的话，安装太
+慢了（而且我也不会用）。而VScode作为一 个编辑器已经是足够了的。
+</p>
+
+<p>
+编译器我推荐使用GCC，而Windows平台的GCC就是<a href="https://sourceforge.net/projects/mingwbuilds/">mingw</a>。安装教程建议看看<a href="https://zhuanlan.zhihu.com/p/76613134">这篇文章</a>。
+</p>
+
+<p>
+注意：下载链接为我给出的mingw链接，mingw的官网样式有修改，链接有点难找。
+</p>
+</div>
+</div>
+<div id="outline-container-org3a80121" class="outline-3">
+<h3 id="org3a80121"><span class="section-number-3">1.2.</span> Linux</h3>
+<div class="outline-text-3" id="text-1-2">
+<blockquote>
+<p>
+在Linux下的开发效率理论上是要比windows高的，但是也没有必要为了开发直接装Linux，
+新手盲入坑会多到数不过来。建议使用虚拟机，Linux发行版新手建议使用Ubuntu，好上手
+</p>
+</blockquote>
+<p>
+相较于Windows平台下，Linux下的配置就简单多了。大多数Linux发行版的包管理器都提供
+GCC的安装。以Debian及其衍生发行版和Arch为例：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">Debian:</span>
+sudo apt install gcc
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">Arch:</span>
+sudo pacman -S gcc
+</pre>
+</div>
+
+<p>
+在安装了GCC后，可以使用 <code>gcc 输入文件.c -o 输出文件</code> 为格式运行gcc（Windows下的
+命令格式相同）
+</p>
+
+<p>
+<code>gcc --help</code> 命令结果：
+</p>
+<details>
+  <summary>GCC帮助文档</summary>
+<div class="org-src-container">
+<pre class="src src-text">&#29992;&#27861;&#65306;gcc [&#36873;&#39033;] &#25991;&#20214;...
+&#36873;&#39033;&#65306;
+  -pass-exit-codes         &#22312;&#26576;&#19968;&#38454;&#27573;&#36864;&#20986;&#26102;&#36820;&#22238;&#20854;&#20013;&#26368;&#39640;&#30340;&#38169;&#35823;&#30721;&#12290;
+  --help                   &#26174;&#31034;&#27492;&#24110;&#21161;&#35828;&#26126;&#12290;
+  --target-help            Display target specific command line options (including assembler and linker options).
+  --help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]&#12290;
+                           &#26174;&#31034;&#29305;&#23450;&#31867;&#22411;&#30340;&#21629;&#20196;&#34892;&#36873;&#39033;&#12290;
+ &#65288;&#20351;&#29992;&#8216;-v --help&#8217;&#26174;&#31034;&#23376;&#36827;&#31243;&#30340;&#21629;&#20196;&#34892;&#21442;&#25968;&#65289;&#12290;
+  --version                &#26174;&#31034;&#32534;&#35793;&#22120;&#29256;&#26412;&#20449;&#24687;&#12290;
+  -dumpspecs               &#26174;&#31034;&#25152;&#26377;&#20869;&#24314; spec &#23383;&#31526;&#20018;&#12290;
+  -dumpversion             &#26174;&#31034;&#32534;&#35793;&#22120;&#30340;&#29256;&#26412;&#21495;&#12290;
+  -dumpmachine             &#26174;&#31034;&#32534;&#35793;&#22120;&#30340;&#30446;&#26631;&#22788;&#29702;&#22120;&#12290;
+  -foffload=&lt;targets&gt;      Specify offloading targets.
+  -print-search-dirs       &#26174;&#31034;&#32534;&#35793;&#22120;&#30340;&#25628;&#32034;&#36335;&#24452;&#12290;
+  -print-libgcc-file-name  &#26174;&#31034;&#32534;&#35793;&#22120;&#20276;&#38543;&#24211;&#30340;&#21517;&#31216;&#12290;
+  -print-file-name=&lt;&#24211;&gt;    &#26174;&#31034; &lt;&#24211;&gt; &#30340;&#23436;&#25972;&#36335;&#24452;&#12290;
+  -print-prog-name=&lt;&#31243;&#24207;&gt;  &#26174;&#31034;&#32534;&#35793;&#22120;&#32452;&#20214; &lt;&#31243;&#24207;&gt; &#30340;&#23436;&#25972;&#36335;&#24452;&#12290;
+  -print-multiarch         &#26174;&#31034;&#30446;&#26631;&#30340;&#26631;&#20934; GNU &#19977;&#20803;&#32452;&#65288;&#34987;&#29992;&#20110;&#24211;&#36335;&#24452;&#30340;&#19968;&#37096;&#20998;&#65289;&#12290;
+  -print-multi-directory   &#26174;&#31034;&#19981;&#21516;&#29256;&#26412; libgcc &#30340;&#26681;&#30446;&#24405;&#12290;
+  -print-multi-lib         &#26174;&#31034;&#21629;&#20196;&#34892;&#36873;&#39033;&#21644;&#22810;&#20010;&#29256;&#26412;&#24211;&#25628;&#32034;&#36335;&#24452;&#38388;&#30340;&#26144;&#23556;&#12290;
+  -print-multi-os-directory &#26174;&#31034;&#25805;&#20316;&#31995;&#32479;&#24211;&#30340;&#30456;&#23545;&#36335;&#24452;&#12290;
+  -print-sysroot           &#26174;&#31034;&#30446;&#26631;&#24211;&#30446;&#24405;&#12290;
+  -print-sysroot-headers-suffix &#26174;&#31034;&#29992;&#20110;&#23547;&#25214;&#22836;&#25991;&#20214;&#30340; sysroot &#21518;&#32512;&#12290;
+  -Wa,&lt;&#36873;&#39033;&gt;               &#23558;&#36887;&#21495;&#20998;&#38548;&#30340; &lt;&#36873;&#39033;&gt; &#20256;&#36882;&#32473;&#27719;&#32534;&#22120;&#12290;
+  -Wp,&lt;&#36873;&#39033;&gt;               &#23558;&#36887;&#21495;&#20998;&#38548;&#30340; &lt;&#36873;&#39033;&gt; &#20256;&#36882;&#32473;&#39044;&#22788;&#29702;&#22120;&#12290;
+  -Wl,&lt;&#36873;&#39033;&gt;               &#23558;&#36887;&#21495;&#20998;&#38548;&#30340; &lt;&#36873;&#39033;&gt; &#20256;&#36882;&#32473;&#38142;&#25509;&#22120;&#12290;
+  -Xassembler &lt;&#21442;&#25968;&gt;       &#23558; &lt;&#21442;&#25968;&gt; &#20256;&#36882;&#32473;&#27719;&#32534;&#22120;&#12290;
+  -Xpreprocessor &lt;&#21442;&#25968;&gt;    &#23558; &lt;&#21442;&#25968;&gt; &#20256;&#36882;&#32473;&#39044;&#22788;&#29702;&#22120;&#12290;
+  -Xlinker &lt;&#21442;&#25968;&gt;          &#23558; &lt;&#21442;&#25968;&gt; &#20256;&#36882;&#32473;&#38142;&#25509;&#22120;&#12290;
+  -save-temps              &#19981;&#21024;&#38500;&#20013;&#38388;&#25991;&#20214;&#12290;
+  -save-temps=&lt;&#21442;&#25968;&gt;       &#19981;&#21024;&#38500;&#20013;&#38388;&#25991;&#20214;&#12290;
+  -no-canonical-prefixes   &#29983;&#25104;&#20854;&#20182; gcc &#32452;&#20214;&#30340;&#30456;&#23545;&#36335;&#24452;&#26102;&#19981;&#29983;&#25104;&#35268;&#33539;&#21270;&#30340;
+                           &#21069;&#32512;&#12290;
+  -pipe                    &#20351;&#29992;&#31649;&#36947;&#20195;&#26367;&#20020;&#26102;&#25991;&#20214;&#12290;
+  -time                    &#20026;&#27599;&#20010;&#23376;&#36827;&#31243;&#35745;&#26102;&#12290;
+  -specs=&lt;&#25991;&#20214;&gt;            &#29992; &lt;&#25991;&#20214;&gt; &#30340;&#20869;&#23481;&#35206;&#30422;&#20869;&#24314;&#30340; specs &#25991;&#20214;&#12290;
+  -std=&lt;&#26631;&#20934;&gt;              &#20551;&#23450;&#36755;&#20837;&#28304;&#25991;&#20214;&#36981;&#24490;&#32473;&#23450;&#30340;&#26631;&#20934;&#12290;
+  --sysroot=&lt;&#30446;&#24405;&gt;         &#23558; &lt;&#30446;&#24405;&gt; &#20316;&#20026;&#22836;&#25991;&#20214;&#21644;&#24211;&#25991;&#20214;&#30340;&#26681;&#30446;&#24405;&#12290;
+  -B &lt;&#30446;&#24405;&gt;                &#23558; &lt;&#30446;&#24405;&gt; &#28155;&#21152;&#21040;&#32534;&#35793;&#22120;&#30340;&#25628;&#32034;&#36335;&#24452;&#20013;&#12290;
+  -v                       &#26174;&#31034;&#32534;&#35793;&#22120;&#35843;&#29992;&#30340;&#31243;&#24207;&#12290;
+  -###                     &#19982; -v &#31867;&#20284;&#65292;&#20294;&#36873;&#39033;&#34987;&#24341;&#21495;&#25324;&#20303;&#65292;&#24182;&#19988;&#19981;&#25191;&#34892;&#21629;&#20196;&#12290;
+  -E                       &#20165;&#20316;&#39044;&#22788;&#29702;&#65292;&#19981;&#36827;&#34892;&#32534;&#35793;&#12289;&#27719;&#32534;&#25110;&#38142;&#25509;&#12290;
+  -S                       &#32534;&#35793;&#21040;&#27719;&#32534;&#35821;&#35328;&#65292;&#19981;&#36827;&#34892;&#27719;&#32534;&#21644;&#38142;&#25509;&#65292;
+  -c                       &#32534;&#35793;&#12289;&#27719;&#32534;&#21040;&#30446;&#26631;&#20195;&#30721;&#65292;&#19981;&#36827;&#34892;&#38142;&#25509;&#12290;
+  -o &lt;&#25991;&#20214;&gt;                &#36755;&#20986;&#21040; &lt;&#25991;&#20214;&gt;&#12290;
+  -pie                     &#29983;&#25104;&#21160;&#24577;&#38142;&#25509;&#30340;&#20301;&#32622;&#26080;&#20851;&#21487;&#25191;&#34892;&#25991;&#20214;&#12290;
+  -shared                  &#29983;&#25104;&#19968;&#20010;&#20849;&#20139;&#24211;&#12290;
+  -x &lt;&#35821;&#35328;&gt;                &#25351;&#23450;&#20854;&#21518;&#36755;&#20837;&#25991;&#20214;&#30340;&#35821;&#35328;&#12290;
+                           &#20801;&#35768;&#30340;&#35821;&#35328;&#21253;&#25324;&#65306;c&#12289;c++&#12289;assembler&#12289;none
+                           &#8216;none&#8217;&#24847;&#21619;&#30528;&#24674;&#22797;&#40664;&#35748;&#34892;&#20026;&#65292;&#21363;&#26681;&#25454;&#25991;&#20214;&#30340;&#25193;&#23637;&#21517;&#29468;&#27979;
+                           &#28304;&#25991;&#20214;&#30340;&#35821;&#35328;&#12290;
+
+&#20197; -g&#12289;-f&#12289;-m&#12289;-O&#12289;-W &#25110; --param &#24320;&#22836;&#30340;&#36873;&#39033;&#23558;&#30001; gcc &#33258;&#21160;&#20256;&#36882;&#32473;&#20854;&#35843;&#29992;&#30340;
+ &#19981;&#21516;&#23376;&#36827;&#31243;&#12290;&#33509;&#35201;&#21521;&#36825;&#20123;&#36827;&#31243;&#20256;&#36882;&#20854;&#20182;&#36873;&#39033;&#65292;&#24517;&#39035;&#20351;&#29992; -W&lt;&#23383;&#27597;&gt; &#36873;&#39033;&#12290;
+
+&#25253;&#21578;&#31243;&#24207;&#32570;&#38519;&#30340;&#27493;&#39588;&#35831;&#21442;&#35265;&#65306;
+<a href="https://bugs.archlinux.org/">&lt;https://bugs.archlinux.org/&gt;</a>.
+</pre>
+</div>
+</details>
+
+<p>
+除了编译器，我们还需要一个编辑器。这里我推荐使用VScode，因为它拥有非常强大的自动
+补全系统，并且支持Linux。
+</p>
+
+<p>
+Debian系的用户可以使用官网提供的deb包安装。下载页面链接如上面windows部分的链接相
+同，请自行回去找。
+</p>
+
+<p>
+而Arch的用户则需要使用AUR的 <code>visual-studio-code-bin</code> 包，使用一个AUR管理器下载安
+装。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf971b3b" class="outline-2">
+<h2 id="orgf971b3b"><span class="section-number-2">2.</span> 正式学习前的准备</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc194ca5" class="outline-3">
+<h3 id="orgc194ca5"><span class="section-number-3">2.1.</span> 第一个C语言程序</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+作为示范程序，自然就却不了编程界中的名梗 <code>Hello World</code> 。即编写程序打印"Hello
+World"。<br />
+示例代码如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #E6DB74;">/**</span>
+<span style="color: #E6DB74;"> * </span><span style="color: #AE81FF;">@FileName</span><span style="color: #E6DB74;">:Example.c</span>
+<span style="color: #E6DB74;"> * </span><span style="color: #AE81FF;">@Author</span><span style="color: #E6DB74;">:Chglish</span>
+<span style="color: #E6DB74;"> * </span><span style="color: #AE81FF;">@Description</span><span style="color: #E6DB74;">:&#36825;&#37324;&#26159;&#22810;&#34892;&#27880;&#37322;</span>
+<span style="color: #E6DB74;"> */</span>
+
+<span style="color: #75715E;">/* </span><span style="color: #75715E;">&#24341;&#20837;&#22836;&#25991;&#20214;</span><span style="color: #75715E;"> */</span>
+<span style="color: #F92672;">#include</span> <span style="color: #E6DB74;">&lt;stdio.h&gt;</span>
+
+<span style="color: #75715E;">/* </span><span style="color: #75715E;">&#20989;&#25968;&#23450;&#20041;</span><span style="color: #75715E;"> */</span>
+<span style="color: #66D9EF;">int</span> <span style="color: #A6E22E;">main</span>(<span style="color: #66D9EF;">int</span> <span style="color: #FD971F;">argc</span>, <span style="color: #66D9EF;">char</span> *<span style="color: #FD971F;">argv</span>[])
+{
+        printf(<span style="color: #E6DB74;">"Hello World\n"</span>);    <span style="color: #75715E;">// </span><span style="color: #75715E;">&#25171;&#21360; Hello World</span>
+        <span style="color: #F92672;">return</span> 0;
+}
+</pre>
+</div>
+<p>
+在这个粒子中，我们能够接触到一些C语言的基本要素，我们一个个分析
+</p>
+<ul class="org-ul">
+<li><p>
+注释
+在源代码中被 <code>/**/</code> 包裹和一行内 <code>//</code> 以右的内容均为注释（代码高亮为灰色）。
+在编程中，由于可能要面临与他人沟通的情况，所以需要在代码内添加注释作为解释内容
+方便理解。在编译过程中，编译器会忽略掉全部的注释信息，因此也可以将一行代码注释
+掉代替删除该行代码。C语言中，注释又有两种，一种即为将一部分区间注释掉的 <code>/**/</code>
+注释，另一种即为将一行中往右注释掉的 <code>//</code> 注释。
+</p>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #75715E;">/* </span><span style="color: #75715E;">&#36825;&#31181;&#21306;&#38388;&#27880;&#37322;&#21487;&#20197;&#22312;&#19968;&#34892;&#20869;&#20351;&#29992;</span><span style="color: #75715E;"> */</span>
+
+<span style="color: #75715E;">/*</span>
+<span style="color: #75715E;"> * &#20063;&#21487;&#20197;&#20687;&#36825;&#26679;&#23376;&#22810;&#34892;&#27880;&#37322;</span>
+<span style="color: #75715E;"> */</span>
+
+<span style="color: #75715E;">// </span><span style="color: #75715E;">&#32780;&#21333;&#34892;&#27880;&#37322;&#21482;&#26377;&#22312;&#27880;&#37322;&#31526;&#20197;&#21491;&#30340;&#20301;&#32622;&#26377;&#29992;</span>
+
+<span style="color: #75715E;">/*</span>
+<span style="color: #75715E;">   // &#20004;&#31181;&#27880;&#37322;&#21487;&#20197;&#23884;&#22871;&#20351;&#29992;</span>
+<span style="color: #75715E;">*/</span>
+
+<span style="color: #75715E;">/*  </span><span style="color: #75715E;">/* &#20294;&#26159;&#36825;&#31181;&#27880;&#37322;&#19981;&#33021;&#22815;&#23884;&#22871;&#20351;&#29992;&#65292;&#21542;&#21017;&#23601;&#20687;&#21491;&#36793;&#30340;&#25910;&#27880;&#37322;&#31526;&#65292;&#24182;&#19981;&#23646;&#20110;&#27880;&#37322;&#30340;&#33539;&#22260;&#20869;</span><span style="color: #75715E;"> */</span>  */
+</pre>
+</div></li>
+<li><p>
+引入头文件
+代码中的 <code>#include</code> 属于C语言中的 <code>预处理</code> ，其效果等同于将其后方跟着的文件内
+容复制粘贴进入到当前文件，类似于嵌套文件。 <code>#include</code> 也并不只有一种，而是有两
+种，举个例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-C"><span style="color: #F92672;">#include</span> <span style="color: #E6DB74;">&lt;xxx.h&gt;</span>
+<span style="color: #F92672;">#include</span> <span style="color: #E6DB74;">"xxx.h"</span>
+</pre>
+</div>
+<p>
+上面的两行都是符合要求的例子，使用 <code>&lt;&gt;</code> 和使用 <code>""</code> 的区别在于，使用 <code>&lt;&gt;</code> 时，
+编译器只会在（默认）指定的目录下寻找文件，而 <code>""</code> 则会让编译器搜寻本地目录的文
+件，用于引入自己编辑的头文件，如果找不到，再去指定目录搜寻。被括起来的 <code>xxx.h</code>
+即为文件名，而 <code>.h</code> 就是C语言头文件的后缀名。
+</p></li>
+<li>main函数
+执行程序一定得有开头，而在C语言里，这个开头就是main函数。约等于是程序的功能是
+从main函数内开始一步步执行。对新手来说，只需要做到将程序语句放置在main函数的花
+括号 <code>{}</code> 内部， <code>return</code> 语句前即可</li>
+<li>输出
+倘若我们想在我们的程序输出一些内容该怎么办呢？ <code>printf</code> ，stdio.h里的函数，是C
+语言中最基础的输出方式。在 <code>printf("xxx")</code> 中，它会将引号中的 <code>xxx</code> 打印出来到
+终端，实现最基础的输出功能</li>
+<li>返回
+在函数的最后有一个返回语句 <code>return</code> 。可以这样理解，一个程序是要有始有终的，而
+这个“终”就相当于是给出了计算的结果。虽然在程序中，我们通过 <code>printf</code> 实现了输
+出，但实际上计算机是不知道结果的。所以我们需要 <code>return</code> 语句，以退出函数并给出
+一个结果值，而这个结果值由函数名称前的类型决定（我们暂且按下不表）。</li>
+</ul>
+<p>
+可见，一个普通的C语言程序可以由几部分构成：注释，引入头文件，main函数（必须），
+及其他部分。
+</p>
+</div>
+</div>
+<div id="outline-container-orge7f05bd" class="outline-3">
+<h3 id="orge7f05bd"><span class="section-number-3">2.2.</span> 算法</h3>
+</div>
+</div>
+<div id="outline-container-orgd095feb" class="outline-2">
+<h2 id="orgd095feb"><span class="section-number-2">3.</span> 基本语法</h2>
+<div class="outline-text-2" id="text-3">
+<blockquote>
+<p>
+注：由于C语言的知识体系是一个有机整体，而基于作者文学水平，以下内容以分类作编排，
+所以可能需要反复跳转查阅，请见谅
+</p>
+</blockquote>
+</div>
+<div id="outline-container-org8506ba8" class="outline-3">
+<h3 id="org8506ba8"><span class="section-number-3">3.1.</span> 关键字</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+在C语言内，有预留有一部分的单词作为关键词，用于在编译时将C语言代码转为机器能够理
+解的二进制代码，下面便是一个表格，其中列出了大部分的C语言关键字，并列出了他们功
+能的简易介绍。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">名称</th>
+<th scope="col" class="org-left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>if</code></td>
+<td class="org-left">如果，判断</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>else</code></td>
+<td class="org-left">（接上）就，判断</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>while</code></td>
+<td class="org-left">循环</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>for</code></td>
+<td class="org-left">循环</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org229750b" class="outline-3">
+<h3 id="org229750b"><span class="section-number-3">3.2.</span> 变量</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-orge36ea04" class="outline-4">
+<h4 id="orge36ea04"><span class="section-number-4">3.2.1.</span> 变量的定义与声明</h4>
+</div>
+<div id="outline-container-org9197aa6" class="outline-4">
+<h4 id="org9197aa6"><span class="section-number-4">3.2.2.</span> 变量的一些修饰词</h4>
+<div class="outline-text-4" id="text-3-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org56e9bdf"></a>常量<br /></li>
+<li><a id="org9ae8f4c"></a>修饰词之间位置的关系<br /></li>
+</ol>
+</div>
+<div id="outline-container-orgbe655af" class="outline-4">
+<h4 id="orgbe655af"><span class="section-number-4">3.2.3.</span> 整型</h4>
+</div>
+<div id="outline-container-org172c787" class="outline-4">
+<h4 id="org172c787"><span class="section-number-4">3.2.4.</span> 浮点型</h4>
+</div>
+<div id="outline-container-orgf03a858" class="outline-4">
+<h4 id="orgf03a858"><span class="section-number-4">3.2.5.</span> 字符型</h4>
+</div>
+<div id="outline-container-org813b194" class="outline-4">
+<h4 id="org813b194"><span class="section-number-4">3.2.6.</span> 数组</h4>
+</div>
+<div id="outline-container-org9befc7c" class="outline-4">
+<h4 id="org9befc7c"><span class="section-number-4">3.2.7.</span> 指针</h4>
+</div>
+<div id="outline-container-org05894d7" class="outline-4">
+<h4 id="org05894d7"><span class="section-number-4">3.2.8.</span> 结构体</h4>
+<div class="outline-text-4" id="text-3-2-8">
+</div>
+<ol class="org-ol">
+<li><a id="org33f4d89"></a>链表<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org67cd5e7" class="outline-3">
+<h3 id="org67cd5e7"><span class="section-number-3">3.3.</span> 输入与输出</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-orge5233a0" class="outline-4">
+<h4 id="orge5233a0"><span class="section-number-4">3.3.1.</span> 输出</h4>
+<div class="outline-text-4" id="text-3-3-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgb74fd82"></a>printf<br /></li>
+<li><a id="org18bd980"></a>puts<br /></li>
+<li><a id="orgd6e626d"></a>putc<br /></li>
+</ol>
+</div>
+<div id="outline-container-org790f223" class="outline-4">
+<h4 id="org790f223"><span class="section-number-4">3.3.2.</span> 输入</h4>
+<div class="outline-text-4" id="text-3-3-2">
+</div>
+<ol class="org-ol">
+<li><a id="org7555a6b"></a>scanf<br /></li>
+<li><a id="org3f24267"></a>getc<br /></li>
+<li><a id="orgad37e80"></a>getchar<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge72f359" class="outline-3">
+<h3 id="orge72f359"><span class="section-number-3">3.4.</span> 函数</h3>
+<div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-org1fee291" class="outline-4">
+<h4 id="org1fee291"><span class="section-number-4">3.4.1.</span> 函数的定义与声明</h4>
+</div>
+<div id="outline-container-org561b8ab" class="outline-4">
+<h4 id="org561b8ab"><span class="section-number-4">3.4.2.</span> 函数的调用</h4>
+</div>
+<div id="outline-container-org64424ab" class="outline-4">
+<h4 id="org64424ab"><span class="section-number-4">3.4.3.</span> 函数指针</h4>
+</div>
+<div id="outline-container-org3a5af80" class="outline-4">
+<h4 id="org3a5af80"><span class="section-number-4">3.4.4.</span> 更多功能函数</h4>
+<div class="outline-text-4" id="text-3-4-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgaaed49f"></a>字符串处理<br /></li>
+<li><a id="org89f1240"></a>Socket套接字<br /></li>
+<li><a id="org03a13e3"></a>Ncurses打印<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb610fe9" class="outline-3">
+<h3 id="orgb610fe9"><span class="section-number-3">3.5.</span> 文件</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<div id="outline-container-orge91b38d" class="outline-4">
+<h4 id="orge91b38d"><span class="section-number-4">3.5.1.</span> 文件的打开与关闭</h4>
+</div>
+<div id="outline-container-org2feac78" class="outline-4">
+<h4 id="org2feac78"><span class="section-number-4">3.5.2.</span> 读取与写入</h4>
+<div class="outline-text-4" id="text-3-5-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgc2c0f2d"></a>读取<br />
+<ol class="org-ol">
+<li><a id="orgfa1777b"></a>fscanf<br /></li>
+<li><a id="org2875097"></a>fgets<br /></li>
+<li><a id="org61b1fb7"></a>fgetc<br /></li>
+<li><a id="org75aed51"></a>fread<br /></li>
+</ol>
+</li>
+<li><a id="org4205852"></a>写入<br />
+<ol class="org-ol">
+<li><a id="org8f70869"></a>fprintf<br /></li>
+<li><a id="org10d8f7b"></a>fputs<br /></li>
+<li><a id="orge841b90"></a>fputc<br /></li>
+<li><a id="org3916d84"></a>fwrite<br /></li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-org461af5c" class="outline-4">
+<h4 id="org461af5c"><span class="section-number-4">3.5.3.</span> 位置控制</h4>
+</div>
+</div>
+<div id="outline-container-orgcddae02" class="outline-3">
+<h3 id="orgcddae02"><span class="section-number-3">3.6.</span> 内存管理</h3>
+<div class="outline-text-3" id="text-3-6">
+</div>
+<div id="outline-container-orgdfe7689" class="outline-4">
+<h4 id="orgdfe7689"><span class="section-number-4">3.6.1.</span> 内存的基本概念</h4>
+</div>
+<div id="outline-container-org71e2176" class="outline-4">
+<h4 id="org71e2176"><span class="section-number-4">3.6.2.</span> 内存的申请</h4>
+</div>
+<div id="outline-container-org1fd0b51" class="outline-4">
+<h4 id="org1fd0b51"><span class="section-number-4">3.6.3.</span> 内存的释放</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-05-26 五 14:28</p>
+<p class="author">Author: 不要在意我的头像QwQ</p>
+<p class="date">Created: 2023-07-30 日 15:59</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

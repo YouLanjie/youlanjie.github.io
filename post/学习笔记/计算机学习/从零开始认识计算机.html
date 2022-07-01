@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2023-10-22 Sun 07:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>从零开始认识计算机</title>
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
+<h1 class="title">从零开始认识计算机</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org632754a">1. 认识MOSFET</a>
+<ul>
+<li><a href="#org84495d2">1.1. 物质结构</a></li>
+<li><a href="#org5fb47a8">1.2. 电</a>
+<ul>
+<li><a href="#org8ba823e">1.2.1. 电流</a></li>
+<li><a href="#org7349204">1.2.2. PN结</a></li>
+<li><a href="#org6d28a52">1.2.3. MOSFET</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<style type="text/css" media="screen">
+  pre { font-family: Noto Sans Mono CJK, Droid Sans Mono, Monaco, Consolas, "Lucida Console", monospace; }
+</style>
+
+<div id="outline-container-org632754a" class="outline-2">
+<h2 id="org632754a"><span class="section-number-2">1.</span> 认识MOSFET</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org84495d2" class="outline-3">
+<h3 id="org84495d2"><span class="section-number-3">1.1.</span> 物质结构</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>分子组成物质</li>
+<li>原子组成分子</li>
+<li>原子由 <span class="underline">电子</span> <span class="underline">质子</span> <span class="underline">中子</span> 组成</li>
+<li>电子带负电，质子带正电</li>
+<li>电子围绕原子核活动，但轨迹不确定，因而使用电子云描述运动范围</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5fb47a8" class="outline-3">
+<h3 id="org5fb47a8"><span class="section-number-3">1.2.</span> 电</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+缺失电子的原子显正电性，多出的显负电性
+</p>
+</div>
+<div id="outline-container-org8ba823e" class="outline-4">
+<h4 id="org8ba823e"><span class="section-number-4">1.2.1.</span> 电流</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+电流需要导体传播。根据导电性，材料可以被分为 <span class="underline">导体</span> <span class="underline">绝缘体</span> 和 <span class="underline">半导体</span> 三种
+材料
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="orgda8877b"></a>导体<br />
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+以铜为例，其最外围的电子不稳定，易摆脱束缚。
+</p>
+
+<p>
+将铜做成导线，连接电源、用电器构成回路。此时电源的电压驱使铜线上的电子定向移动，
+形成电流
+</p>
+
+<p>
+注意！电子带的负电，但电流规定的是正电荷的流动方向。所以电流方向与电子移动方向相
+反。（电子从电源负极移动到正极，电流则相反）
+</p>
+</div>
+</li>
+<li><a id="orgd11d735"></a>半导体<br />
+<div class="outline-text-5" id="text-1-2-1-2">
+<p>
+外界条件变换是，可以在导体与绝缘体之间转换
+</p>
+
+<p>
+以硅为例。纯硅类绝缘体，
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org5da0a4c"></a>N型掺杂<br />
+<div class="outline-text-6" id="text-1-2-1-2-1">
+<p>
+在硅中，掺杂磷元素，可增加电子（显中性）
+</p>
+
+<p>
+其中，电荷的载体（载流子）是电子
+</p>
+</div>
+</li>
+<li><a id="org81c9914"></a>P型掺杂<br />
+<div class="outline-text-6" id="text-1-2-1-2-2">
+<p>
+在硅中，掺杂硼元素，可减少电子（增加空穴），形成空穴（显中性）
+</p>
+
+<p>
+其中，载流子是空穴
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-org7349204" class="outline-4">
+<h4 id="org7349204"><span class="section-number-4">1.2.2.</span> PN结</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+在同一块硅晶体中进行N型与P型掺杂就形成了PN结，该材料内部具有扩散作用，电子会从N
+区扩散到P区和空穴结合，在扩散后，N区显正电性，P区显负电性，形成从正电性指向负电
+性区域的电场（从N指向P区），会驱使电子移动（移动方向与电场指向相反）。
+</p>
+
+<p>
+当该电场形成的作用力与材料本身的扩散作用相等时，达成平衡。而两者交界处缺乏载流子、
+存在内电场的区域被称为耗尽层（耗尽层可以理解为绝缘区域，电子不能进入或者离开，是
+扩散作用和内建电场平衡后的结果）。
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org878e6ee"></a>特性<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+若让PN结接入回路，若电源正极接P区，负极接N区，其提供的电场方向是从P区到N区的（正
+极指向负极），将抵消掉内建电场，并使电流畅通。
+</p>
+<div class="org-src-container">
+<pre class="src src-text">,----------------------.
+| &#21487;&#20197;&#23548;&#30005;&#26102;&#30340;&#31034;&#24847;&#22270;&#65306; |
+`----------------------'
+
+               PN&#32467;  ---.
+                        |
+                        V
+
+         +--------------+--------------+
+      -  | N&#21306; &#27491;&#30005;&#24615;+  | P&#21306; &#36127;&#30005;&#24615;-  |  +
+      -  | --&#20869;&#24314;&#30005;&#22330;-&gt; | &lt;-&#30005;&#23376;--     |  +
+,---- -  |              |              |  + ----.
+|     -  |       &lt;-&#30005;&#27744;&#25552;&#20379;&#30005;&#22330;--      |  +     |
+|     -  |              |              |  +     |
+|        +--------------+--------------+        |
+|                                               |
+|                                               |
+|                                               |
+|          ,-----------.        ,---.           |
+`----------|  -  |  +  |--------| * |-----------'
+           `-----------'        `---'
+                 ^                ^
+                 |                |
+               &#30005;&#28304;             &#29992;&#30005;&#22120;
+</pre>
+</div>
+<p>
+若电源反接，则会导致内建电场加强，电子移动到N区，空穴移动到P区，耗尽层被加宽，于
+是电子几乎不可能再从P区移动到N区（不可能穿过耗尽层）。
+</p>
+<div class="org-src-container">
+<pre class="src src-text">,------------------------.
+| &#19981;&#21487;&#20197;&#23548;&#30005;&#26102;&#30340;&#31034;&#24847;&#22270;&#65306; |
+`------------------------'
+
+               PN&#32467;  ---.
+                        |
+                        V
+
+         +--------------+--------------+
+      +  | N&#21306; &#27491;&#30005;&#24615;+  | P&#21306; &#36127;&#30005;&#24615;-  |  -
+      +  | --&#20869;&#24314;&#30005;&#22330;-&gt; | &lt;-&#30005;&#23376;--     |  -
+,---- +  |              |              |  - ----.
+|     +  |       --&#30005;&#27744;&#25552;&#20379;&#30005;&#22330;-&gt;      |  -     |
+|     +  |              |              |  -     |
+|        +--------------+--------------+        |
+|                                               |
+|                                               |
+|                                               |
+|          ,-----------.        ,---.           |
+`----------|  +  |  -  |--------| * |-----------'
+           `-----------'        `---'
+                 ^                ^
+                 |                |
+               &#30005;&#28304;             &#29992;&#30005;&#22120;
+</pre>
+</div>
+<p>
+换种方式理解就是这样：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">,-----------------------------------------------------.
+|                                                     |
+|               &#20869;&#24314;&#30005;&#22330; = &#25193;&#25955;&#20316;&#29992;                   |
+|                N &lt;- P     N -&gt; P                    |
+|                                                     |
+|                        ||                           |
+|                        ||                           |
+|                        ||                           |
+|    &#20540;&#19978;&#21319;              VV       &#20540;&#20063;&#35201;&#23545;&#24212;&#22320;&#19978;&#21319;    |
+|       |                                      |      |
+|       `- &#20869;&#24314;&#30005;&#22330; + &#30005;&#27744;&#25552;&#20379;&#30005;&#22330; = &#25193;&#25955;&#20316;&#29992; -'      |
+|                                                     |
+`-----------------------------------------------------'
+</pre>
+</div>
+<p>
+由于驱使电子运动的力均上升，所以耗尽层被加宽，电子将不能通过耗尽层形成通路。（即
+内建电场不可提升，但是扩散作用可以提升，所以要打破平衡就必须要让电池提供的电场与
+内建电场相反。）
+</p>
+</div>
+</li>
+<li><a id="org594fc82"></a>总结<br />
+<div class="outline-text-5" id="text-1-2-2-2">
+<p>
+PN结实际上就是一个二极管，电流可以由P流向N，但是不能够从N流向P，实现电流单向流动
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org6d28a52" class="outline-4">
+<h4 id="org6d28a52"><span class="section-number-4">1.2.3.</span> MOSFET</h4>
+<div class="outline-text-4" id="text-1-2-3">
+</div>
+<ol class="org-ol">
+<li><a id="org2b049b0"></a>基本概念<br />
+<div class="outline-text-5" id="text-1-2-3-1">
+<p>
+先来认识一下MOSFET的基本结构。
+</p>
+<div class="org-src-container">
+<pre class="src src-text">,----------------------------------------------------------------------------.
+|       ###|                 |###            ###|                 |###       |
+|       ###|               -------&gt;        &lt;-------               |###       |
+|       ###|                 |###            ###|                 |###       |
+|       ###|       N&#22411;       |###            ###|       N&#22411;       |###       |
+|       ###|                 |###            ###|                 |###       |
+|       ###|  &#20869;&#24314;&#30005;&#22330;&#25351;&#21521; -------&gt;        &lt;------- &#20869;&#24314;&#30005;&#22330;&#25351;&#21521;  |###       |
+|       ###|   |        |    |###            ###|   |        |    |###       |
+|       ###`---|--------|----'###            ###`---|--------|----'###       |
+|       #######|#&#32791;&#23613;&#23618;#|########            #######|#&#32791;&#23613;&#23618;#|########       |
+|       #######|########|########            #######|########|########       |
+|              V        V                           V        V               |
+|                                                                            |
+|                                  P&#22411;                                       |
+|                                                                            |
+`----------------------------------------------------------------------------'
+</pre>
+</div>
+<p>
+其描述为：在一块纯硅上进行P型掺杂，在其肩膀部分进行N型掺杂。（如上画）
+</p>
+
+<p>
+倘若我们将N型掺杂的部分接上导线，连接电源和用电器，开关闭合，此时在电流由P流向N
+的区域电流导通，但是由N-&gt;P的区域电流不导通，不构成通路。
+</p>
+
+<p>
+若将电源反接，同理，电路同样不导通。
+</p>
+<div class="org-src-container">
+<pre class="src src-text">                                     &lt;---&#30005;&#27969;&#26041;&#21521;----
+,--------------------------.                             |      ,--------------------------.
+|                          |    -----                 ---+---   |                          |
+|                          |                             |      |                          |
+|                          |                                    |                          |
+|                  =================                    =================                  |
+|      ,----------------------------------------------------------------------------.      |
+|      |       ###|                 |###            ###|                 |###       |      |
+|      |       ###|               -------&gt;        &lt;-------               |###       |      |
+|      |       ###|                 |###            ###|                 |###       |      |
+|      |       ###|       N&#22411;       |###            ###|       N&#22411;       |###       |      |
+|      |       ###|                 |###            ###|                 |###       |      |
+|      |       ###|  &#20869;&#24314;&#30005;&#22330;&#25351;&#21521; -------&gt;        &lt;------- &#20869;&#24314;&#30005;&#22330;&#25351;&#21521;  |###       |      |
+|      |       ###|   |        |    |###            ###|   |        |    |###       |      |
+|      |       ###`---|--------|----'###            ###`---|--------|----'###       |      |
+|      |       #######|#&#32791;&#23613;&#23618;#|########            #######|#&#32791;&#23613;&#23618;#|########       |      |
+|      |       #######|########|########            #######|########|########       |      |
+|      |              V        V                           V        V               |      |
+|      |                                                                            |      |
+|      |                  /\              P&#22411;                  /\                   |      |
+|      |                  ||                                   ||                   |      |
+|      |                  ||                                   ||                   |      |
+|      |                  ||                                   ||                   |      |
+|      |               &#27492;&#20391;&#23548;&#36890;                            &#27492;&#20391;&#19981;&#23548;&#36890;               |      |
+|      |                                                                            |      |
+|      |                                                                            |      |
+|      `----------------------------------------------------------------------------'      |
+|                                                                                          |
+|                                                                                          |
+|                                                                                          |
+|                                ,-----------.        ,---.                                |
+`--------------------------------|  -  |  +  |--------| * |--------------------------------'
+                                 `-----------'        `---'
+                                       ^                ^
+                                       |                |
+                                     &#30005;&#28304;             &#29992;&#30005;&#22120;
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org9a62f41"></a>特性<br />
+<div class="outline-text-5" id="text-1-2-3-2">
+<p>
+这时候你就可能会问了：“欸你这东西讲了半天都还是不导通啊，有什么用啊？”
+</p>
+
+<p>
+很明显，这玩意肯定由什么特殊的作用，要不然我也不会介绍那么久。这玩意虽然在这种自
+然状态下没有办法导电，但是实际上还是有办法导电的。
+</p>
+
+<p>
+为了理解它，我先举一个例子：
+</p>
+<div class="org-src-container">
+<pre class="src src-text">                 ----&#30005;&#27969;&#26041;&#21521;--&gt;
+   ,------------------------------------------.
+   |           &lt;--&#30005;&#23376;&#36816;&#21160;&#26041;&#21521;----            |
+   |                                          |
+,-----.                                       |
+|     |                &#30005;&#23376;&#20174;&#36825;&#36716;&#31227;  ++++++   |  ++++++
+|  +  |                     ||                |             
+|     |                     ||        =================   &lt;-----------\
+|-----|                     ||        #################   &lt;-- &#32477;&#32536;&#23618;   +-- &#37329;&#23646;&#26495;
+|     |                     ||        =================   &lt;-----------/
+|  -  |                     \/                |
+|     |                   &#21040;&#36825;&#36793;     ------   |  ------
+`-----'                                       |
+   |                                          |
+   |                                          |
+   `------------------------------------------'
+</pre>
+</div>
+<p>
+以上例子中，在开关闭合的情况下，电子从上层金属板转移到下层金属板，使上层金属板显
+正电性，而下层显负电性，绝缘层中出现从上到下的指向性电场。
+</p>
+
+<p>
+若将该结构如下图般安置，
+</p>
+<div class="org-src-container">
+<pre class="src src-text">     ,------------------------------------------.
+     |                                          |
+,---/|\-----------------------.                 |                  ,-----------------------.
+|    |                        |       + ================== +       |                       |
+|    |                        |         ##################         |                       |
+|    |                        |         ######&#32477;&#32536;&#20307;######         |                       |
+|    |                ================= ################## =================               |
+|    |    ,----------------------------------------------------------------------------.   |
+|    |    |       ###|                 |###            ###|                 |###       |   |
+|  ,---.  |       ###|                 |###            ###|                 |###       |   |
+|  | + |  |       ###|                 |###            ###|                 |###       |   |
+|  |---|  |       ###|       N&#22411;       |###            ###|       N&#22411;       |###       |   |
+|  | - |  |       ###|                 |###            ###|                 |###       |   |
+|  `---'  |       ###|                 |###            ###|                 |###       |   |
+|    |    |       ###|                 |###            ###|                 |###       |   |
+|    |    |       ###`-----------------'###            ###`-----------------'###       |   |
+|    |    |       #########&#32791;&#23613;&#23618;##########            #########&#32791;&#23613;&#23618;##########       |   |
+|    |    |       #########################            #########################       |   |
+|    |    |                                                                            |   |
+|    |    |                                                                            |   |
+|    |    |                                  P&#22411;                                       |   |
+|    |    |                                                                            |   |
+|    |    |                                                                            |   |
+|    |    `----------------------------------------------------------------------------'   |
+|    |                    - ============================================ -                 |
+|    |                                           |                                         |
+|    |                                           |                                         |
+|    --------------------------------------------'                                         |
+|                                                                                          |
+|                                                                                          |
+|                                   ,-----------.        ,---.                             |
+`-----------------------------------|  -  |  +  |--------| * |-----------------------------'
+                                    `-----------'        `---'
+                                          ^                ^
+                                          |                |
+                                        &#30005;&#28304;             &#29992;&#30005;&#22120;
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-06-08 Thu 00:06</p>
+<p class="author">Author: 不要在意我的头像QwQ</p>
+<p class="date">Created: 2023-10-22 Sun 07:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
