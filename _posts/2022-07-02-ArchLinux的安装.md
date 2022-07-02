@@ -29,11 +29,11 @@ ls /sys/firmware/efi/efivars
 
 其实如果在开机时留意一下弹出过的菜单界面就能知道你的是什么引导方式。BIOS引导的长这样：
 
-![BIOS](/img/in-post/2022-07-02_02/2022-07-02_02-02.jpg)
+![BIOS](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-02.jpg)
 
 而EFI的长这样：
 
-![EFI](/img/in-post/2022-07-02_02/2022-07-02_02-01.jpg)
+![EFI](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-01.jpg)
 
 ### 联网
 
@@ -119,7 +119,7 @@ fdisk -l
 
 空白的情况下：
 
-![虚拟机——空白](/img/in-post/2022-07-02_02/2022-07-02_02-03.jpg)
+![虚拟机——空白](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-03.jpg)
 
 #### 硬盘分区
 
@@ -154,7 +154,7 @@ fdisk /dev/sdX   #sdX为目标硬盘，实际中应为sda或sdb...
 
 [也可以参考官方wiki](https://wiki.archlinux.org/title/Fdisk_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
-![fdisk](/img/in-port/2022-07-02_02/2022-07-02_02-04.jpg)
+![fdisk](https://youlanjie.github.io/img/in-port/2022-07-02_02/2022-07-02_02-04.jpg)
 
 ##### 使用cfdisk
 
@@ -162,7 +162,7 @@ cfdisk有着伪图形界面，对萌新更友好。
 
 刚进入cfdisk时如果硬盘没有分区表会询问你。上下方向键移动，回车选择。BIOS选择dos，EFI选择gpt就好。具体的操作就不细讲了。
 
-![cfdisk](/img/in-port/2022-07-02_02/2022-07-02_02-05.jpg)
+![cfdisk](https://youlanjie.github.io/img/in-port/2022-07-02_02/2022-07-02_02-05.jpg)
 
 ##### 文件系统
 
