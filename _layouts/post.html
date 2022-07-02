@@ -47,21 +47,21 @@ layout: default
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<!-- {{ content }} -->
+				{{ content }}
 
-                <!-- <hr> -->
+		<hr>
 
-                <!-- {% if site.duoshuo_share && site.duoshuo_username %} -->
+		{% if site.duoshuo_share && site.duoshuo_username %}
                 <!-- 多说 Share start -->
-                <!-- </style> -->
-                <!-- <div class="ds-share" -->
-                    <!-- style="text-align: right" -->
-                    <!-- data-thread-key="{{page.id}}" -->
-                    <!-- data-title="{{page.title}}" -->
-                    <!-- data-url="{{site.url}}{{site.baseurl}}{{page.url}}" -->
-                    <!-- data-images="{{ site.url }}{{site.baseurl}}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" -->
-                    <!-- data-content="{{ content | strip_html | truncate:80 }} | {{ site.SEOTitle }} " > -->
-                    <!-- <div class="ds-share-inline"> -->
+		</style>
+		<div class="ds-share"
+		    style="text-align: right"
+		    data-thread-key="{{page.id}}"
+		    data-title="{{page.title}}"
+		    data-url="{{site.url}}{{site.baseurl}}{{page.url}}"
+		    data-images="{{ site.url }}{{site.baseurl}}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
+		    data-content="{{ content | strip_html | truncate:80 }} | {{ site.SEOTitle }} " >
+		    <!-- <div class="ds-share-inline"> -->
                       <!-- <ul  class="ds-share-icons-16"> -->
                         <!-- <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li> -->
                         <!-- <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li> -->
@@ -71,10 +71,10 @@ layout: default
                       <!-- <div class="ds-share-icons-more"> -->
                       <!-- </div> -->
                     <!-- </div> -->
-                <!-- <hr> -->
-                <!-- </div> -->
+		<hr>
+		</div>
                 <!-- 多说 Share end-->
-                <!-- {% endif %} -->
+		{% endif %}
 
 
                 <!-- <ul class="pager"> -->
