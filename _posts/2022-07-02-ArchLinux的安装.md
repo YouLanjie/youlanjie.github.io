@@ -154,7 +154,7 @@ fdisk /dev/sdX   #sdX为目标硬盘，实际中应为sda或sdb...
 
 [也可以参考官方wiki](https://wiki.archlinux.org/title/Fdisk_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
-![fdisk](https://youlanjie.github.io/img/in-port/2022-07-02_02/2022-07-02_02-04.png)
+![fdisk](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-04.png)
 
 ##### 使用cfdisk
 
@@ -162,7 +162,7 @@ cfdisk有着伪图形界面，对萌新更友好。
 
 刚进入cfdisk时如果硬盘没有分区表会询问你。上下方向键移动，回车选择。BIOS选择dos，EFI选择gpt就好。具体的操作就不细讲了。
 
-![cfdisk](https://youlanjie.github.io/img/in-port/2022-07-02_02/2022-07-02_02-05.png)
+![cfdisk](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-05.png)
 
 ##### 文件系统
 
