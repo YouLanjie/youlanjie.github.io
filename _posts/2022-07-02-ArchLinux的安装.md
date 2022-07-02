@@ -155,6 +155,7 @@ fdisk /dev/sdX   #sdX为目标硬盘，实际中应为sda或sdb...
 [也可以参考官方wiki](https://wiki.archlinux.org/title/Fdisk_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
 ![fdisk](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-04.png)
+![fdisk-CN](https://youlanjie.github.io/img/in-post/2022-07-02_02/2022-07-02_02-06.png)
 
 ##### 使用cfdisk
 
