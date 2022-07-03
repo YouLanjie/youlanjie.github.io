@@ -399,10 +399,10 @@ pacman -S i3-gaps i3blocks i3lock i3status
 
 > i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。我个人习惯安装kde的软件并在i3wm下使用。即
 ```bash
-pacman -S i3-gaps i3blocks i3lock i3status sddm kdeconnet konsole dolphin ark qt5c picom polybar feh rofi
+pacman -S i3-gaps i3blocks i3lock i3status sddm kdeconnet konsole dolphin ark qt5ct picom polybar feh rofi
 ```
 
-> qt5c用于设置在i3-wm下kde程序的主题,配置：
+> qt5ct用于设置在i3-wm下kde程序的主题,配置：
 ```bash
 echo "QT_QPA_PLATFORMTHEME DEFAULT=qt5ct" >> ~/.pam_environment
 ```
