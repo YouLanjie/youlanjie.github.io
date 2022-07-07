@@ -485,7 +485,7 @@ client.urgent #cc241d #cc241d #ebdbb2 #282828
 
 我的polybar基于仓库[polybar-themes](https://github.com/adi1090x/polybar-themes)中的 **Cuts**修改而来
 
-![效果](htts://youlanjie.github.io/img/in-post/2022-07-03_01/2022-07-03_01-01.png)
+![效果](https://youlanjie.github.io/img/in-post/2022-07-03_01/2022-07-03_01-01.png)
 
 ### picom
 
@@ -1182,3 +1182,393 @@ configuration {
   }
 }
 ```
+
+### Vim/Neovim
+
+#### Spacevim
+
+推荐使用[Spacevim](https://spacevim.org/cn/)：
+```bash
+curl -sLf https://spacevim.org/cn/install.sh | bash
+```
+或者（我的个人方法）
+```bash
+wget https://spacevim.org/cn/install.sh
+./install.sh
+```
+
+配置：
+
+*~/.SpaceVim/init.vim*：
+```vimrc
+"=============================================================================
+" init.vim --- Entry file for neovim
+" Copyright (c) 2016-2020 Wang Shidong & Contributors
+" Author: Wang Shidong < wsdjeg@outlook.com >
+" URL: https://spacevim.org
+" License: GPLv3
+"=============================================================================
+
+execute 'source' fnamemodify(expand('<sfile>'), ':h').'/main.vim'
+
+set shiftwidth=8 " 设定 << 和 >> 命令移动时的宽度为 8
+set softtabstop=8 " 使得按退格键时可以一次删掉 8 个空格
+set tabstop=8 " 设定 tab 长度为 8
+set noexpandtab " 不要用空格代替制表符
+
+set nobackup " 覆盖文件时不备份
+set noswapfile " 不生成交换文件
+
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+
+nnoremap <silent> <F5> :call SpaceVim#plugins#runner#open('make')
+
+" ==================== Markdown =====================
+let g:mkdp_auto_start = 0
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_echo_preview_url = 0
+" 按键
+" nmap <F5> <Plug>MarkdownPreview        " 开始预览
+" nmap <F6> <Plug>MarkdownPreviewStop    " 关闭预览
+" nmap <F5> <Plug>MarkdownPreviewToggle  " 切换预览
+```
+
+*~/.SpaceVim.d/init.toml*：
+```vimrc
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2020 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg at 163.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+        # set spacevim theme. by default colorscheme layer is not loaded,
+        # if you want to use more colorscheme, please load the colorscheme
+        # layer
+        colorscheme = "one"
+        # colorscheme = "catppuccin"
+        colorscheme_bg = "dark"
+        # colorscheme_bg = ""
+        # Disable guicolors in basic mode, many terminal do not support 24bit
+        # true colors
+        enable_guicolors = true
+        # Disable statusline separator, if you want to use other value, please
+        # install nerd fonts
+        statusline_separator = "arrow"
+        statusline_iseparator = "arrow"
+        buffer_index_type = 4
+        enable_tabline_filetype_icon = true
+        enable_statusline_mode = true
+        vimcompatible = true
+        # 取消对应行号
+        # relativenumber = false
+        # 自动补全
+        autocomplete_method = "coc"
+        # 字体
+        guifont = "JetBrains Mono:h12"
+
+# Enable autocomplete layer
+[[layers]]
+        name = 'autocomplete'
+        auto_completion_return_key_behavior = "complete"
+        auto_completion_tab_key_behavior = "smart"
+[[layers]]
+        name = 'shell'
+        default_position = 'top'
+        default_height = 30
+[[layers]]
+        name = "colorscheme"
+[[layers]]
+        name = "git"
+[[layers]]
+        name = "foldsearch"
+[[layers]]
+        name = "edit"
+[[layers]]
+        name = "denite"
+[[layers]]
+        name = "core"
+[[layers]]
+        name = "chinese"
+
+# 语言
+[[layers]]
+        name = 'lang#c'
+        # enable_clang_syntax_highlight = true
+[[layers]]
+        name = "lsp"
+        filetypes = [
+                "c",
+                "cpp"
+        ]
+        [layers.override_cmd]
+                c = ["clangd"]
+[[layers]]
+        name = "format"
+[[layers]]
+        name = "lang#markdown"
+[[layers]]
+        name = "lang#html"
+[[layers]]
+        name = "lang#xml"
+[[layers]]
+        name = "lang#python"
+
+# Github
+[[custom_plugins]]
+        name = "catppuccin/nvim"
+[[custom_plugins]]
+        name = "windwp/windline.nvim"
+[[custom_plugins]]
+        name = "akinsho/toggleterm.nvim"
+```
+
+#### 裸装Vim/Neovim
+
+Vim配置（~/.vim/vimrc、~/.config/nvim/init.vim）：
+```vimrc
+set nocompatible
+" 关闭 vi 兼容模式
+syntax on
+" 自动语法高亮
+" set number
+set nu
+" 显示行号
+set rnu
+" 显示相对行号
+set ruler
+" 打开状态栏标尺
+
+set shiftwidth=8
+" 设定 << 和 >> 命令移动时的宽度为 8
+set softtabstop=8
+" 使得按退格键时可以一次删掉 8 个空格
+set tabstop=8
+" 设定 tab 长度为 8
+
+set nobackup
+" 覆盖文件时不备份
+set autochdir
+" 自动切换当前目录为当前文件所在的目录
+set backupcopy=yes
+" 设置备份时的行为为覆盖
+set noswapfile
+" 禁止生成临时文件
+
+set ignorecase smartcase
+" 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+set incsearch
+" 输入搜索内容时就显示搜索结果
+set magic
+" 设置魔术
+set hidden
+" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+set smartindent
+" 开启新行时使用智能自动缩进
+set noeb
+set noexpandtab
+" 不要用空格代替制表符
+set backspace=indent,eol,start
+set cmdheight=1
+" 设定命令行的行数为 2
+set laststatus=1
+" 显示状态栏 (默认值为 1, 无法显示状态栏)
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+" 设置在状态行显示的信息
+
+set nowrap
+"不折行
+set sidescroll=1
+"流畅扩展
+
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O
+"补全
+
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" 记忆文件上次打开位置
+command W :w
+command Q :q
+command WQ :wq
+command QW :wq
+command Wq :wq
+command Qw :wq
+
+filetype on
+"检测文件类型
+filetype plugin indent on
+" 开启插件
+
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+" ----------------------------前面-----------------------------
+" ============================教程=============================
+" 以下范例用来支持不同格式的插件安装.
+" 请将安装插件的命令放在vundle#begin和vundle#end之间.
+" Github上的插件
+" 格式为 Plugin '用户名/插件仓库名'
+" Plugin 'tpope/vim-fugitive'
+" 来自 http://vim-scripts.org/vim/scripts.html 的插件
+" Plugin '插件名称' 实际上是 Plugin 'vim-scripts/插件仓库名' 只是此处的用户名可以省略
+" Plugin 'L9'
+" 由Git支持但不再github上的插件仓库 Plugin 'git clone 后面的地址'
+" Plugin 'git://git.wincent.com/command-t.git'
+" 本地的Git仓库(例如自己的插件) Plugin 'file:///+本地插件仓库绝对路径'
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" 插件在仓库的子目录中.
+" 正确指定路径用以设置runtimepath. 以下范例插件在sparkup/vim目录下
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" 安装L9，如果已经安装过这个插件，可利用以下格式避免命名冲突
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+" ============================教程=============================
+
+" Plugin 'VundleVim/Vundle.vim'
+" Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'bling/vim-airline'
+" Plugin 'liuchengxu/space-vim-dark'
+" Plugin 'liuchengxu/vim-which-key'
+" ============================后面=============================
+"call vundle#end()            " 必须
+"filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
+" 忽视插件改变缩进,可以使用以下替代:
+"filetype plugin on
+"
+" 常用的命令
+" :PluginList       - 列出所有已配置的插件
+" :PluginInstall  	 - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
+" :PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存
+" :PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件
+"
+" 查阅 :h vundle 获取更多细节和wiki以及FAQ
+
+
+" =======================其他=======================
+" 配置多语言环境
+if has("multi_byte")
+" UTF-8 编码
+set encoding=utf-8
+set termencoding=utf-8
+set formatoptions+=mM
+set fencs=utf-8,gbk
+if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
+set ambiwidth=double
+endif
+if has("win32")
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
+endif
+else
+echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
+endif
+
+" ==================== nerdtree =====================
+let NERDTreeWinPos='right'
+"设置在 vim 右侧显示
+let NERDTreeWinSize=20
+"设置宽度为 20
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+autocmd vimenter * NERDTree
+wincmd w
+autocmd VimEnter * wincmd w
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" 设置 F2 为打开或者关闭的快捷键
+map <F2> :NERDTreeToggle<CR>
+
+" ==================== vim-airline ===================
+set laststatus=2
+let g:airline_theme="onedark"
+
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1   
+
+" 打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"设置切换Buffer快捷键"
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-s-tab> :bp<CR>
+" 关闭状态显示空白符号计数
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+" 设置consolas字体"前面已经设置过
+"set guifont=Consolas\ for\ Powerline\ FixedD:h11
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+" powerline symbols
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = ' '
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = ' '
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' :'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.dirty='⚡'
+" old vim-powerline symbols
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+
+" ==================== vim-theams ===================
+syntax enable
+colorscheme space-vim-dark
+
+" ==================== Markdown =====================
+nmap <F3> <Plug>MarkdownPreview        " 开始预览
+nmap <F4> <Plug>MarkdownPreviewStop    " 关闭预览
+" nmap <F5> <Plug>MarkdownPreviewToggle  " 切换预览
+```
+
+插件安装：
+```bash
+#下载Vim插件
+mkdir -p ~/.config/nvim/pack/github/start
+mkdir -p ~/.config/nvim/pack/github/opt
+mkdir -p ~/.vim
+#nerdtree
+git clone git@github.com:preservim/nerdtree.git ~/.config/nvim/pack/github/start/nerdtree
+#airline
+git clone git@github.com:vim-airline/vim-airline.git ~/.config/nvim/pack/github/start/vim-airline
+#space-vim-dark
+git clone git@github.com:liuchengxu/space-vim-dark.git ~/.config/nvim/pack/github/start/space-vim-dark
+#vim-airline-theme
+git clone git@github.com:vim-airline/vim-airline-themes.git ~/.config/nvim/pack/github/start/vim-airline-themes
+#vim-which-key
+git clone git@github.com:liuchengxu/vim-which-key.git ~/.config/nvim/pack/github/start/im-which-key
+#mathjax-support-for-mkdp
+git clone git@github.com:iamcco/mathjax-support-for-mkdp.git ~/.config/nvim/pack/github/start/mathjax-support-for-mkdp
+#coc.nvim
+git clone git@github.com:neoclide/coc.nvim.git ~/.config/nvim/pack/github/start/coc.nvim
+#emmet-vim
+git clone git@github.com:mattn/emmet-vim.git ~/.config/nvim/pack/github/start/emmet-vim
+#markdown-preview.nvim 因为Ubuntu下neo vim更加方便，使用nvim版本
+git clone git@github.com:iamcco/markdown-preview.nvim.git ~/.config/nvim/pack/github/start/markdown-preview.nvim
+
+ln -sf /home/$USER/.config/nvim/init.vim /home/$USER/.vim/vimrc
+ln -sf /home/$USER/.config/nvim/pack /home/$USER/.vim/pack
+```
+
+> 注意， **markdown-preview** 插件需要在仓库根目录中执行 `yarn install` 进行安装
+
