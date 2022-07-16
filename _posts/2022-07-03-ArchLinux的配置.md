@@ -125,39 +125,53 @@
 # ===========================================================
 #
 # i3wm's default are here!
+# 并不代表没有修改哦
 #
 # Set default key —— Win
 set $mod Mod4
+
 # 窗口标题字体
 font pango:monospace 8
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
-# 音频管理 Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym Mod1+F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym Mod1+F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-# 通过鼠标+$mod移动窗口 Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# exec --no-startup-id dex --autostart --environment i3
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id nm-applet
+
+# i3wm操作
+# ===========================================================
+# 加载配置文件
+bindsym $mod+Shift+c reload
+# 重启i3
+bindsym $mod+Shift+r restart
+# 退出i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# 窗口操作
+# ===========================================================
 # start a terminal
-# 默认方式
+# -----------------------------------------------------------
 # kde终端
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec konsole
 # alacritty
-bindsym $mod+Shift+Return exec alacritty -e zellij attach --index 0 --create
-bindsym $mod+Mod1+Shift+Return exec alacritty
+# bindsym $mod+Shift+Return exec alacritty -e zellij attach --index 0 --create
+bindsym $mod+Shift+Return exec alacritty
 # 浮窗
 for_window [instance="center-termux"]floating enable resize set 825 550 move scratchpad border pixel 2
 bindsym $mod+Mod1+Return exec --no-startup-id alacritty --class center-termux
-# kill focused window
-bindsym $mod+q kill
+
 # 程序启动器
 bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# kill focused window
+# -----------------------------------------------------------
+bindsym $mod+q kill
+
+# 全屏
+# -----------------------------------------------------------
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle global
+
 # 改变操作窗口
+# -----------------------------------------------------------
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -167,6 +181,9 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# 移动窗口
+# -----------------------------------------------------------
 # 移动窗口位置
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
@@ -177,23 +194,57 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+# 通过鼠标+$mod移动窗口 Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# 窗口排布方式
+# -----------------------------------------------------------
+# 垂直标签页重叠式排列窗口成组
+bindsym $mod+s layout stacking
+# 水平标签页重叠式排列窗口成组
+bindsym $mod+w layout tabbed
+# 平铺式排列窗口（会拆分窗口组）
+bindsym $mod+e layout toggle split
+# 窗口分割方式
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 垂直分割
 bindsym $mod+g split h
 # 水平分割
 bindsym $mod+v split v
-# 全屏
-bindsym $mod+f fullscreen toggle
-# 分割方式
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-# 浮窗
-bindsym $mod+Shift+space floating toggle
+
+# 浮窗有关
+# -----------------------------------------------------------
+# 开启浮窗
+bindsym $mod+space floating toggle
 # 在浮窗与窗口间移动
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Mod1+space focus mode_toggle
 # 移动焦点到主窗口
 bindsym $mod+a focus parent
+
+# 调整窗口大小
+# -----------------------------------------------------------
+mode "resize" {
+	bindsym h resize shrink width 10 px or 10 ppt
+	bindsym j resize grow height 10 px or 10 ppt
+	bindsym k resize shrink height 10 px or 10 ppt
+	bindsym l resize grow width 10 px or 10 ppt
+	# 方向键
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
+	# 回到正常模式
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
 # 工作区 Define names for default workspaces for which we configure key bindings later on.We use variables to avoid repeating the names in multiple places.
+# ===========================================================
+# 共117行
+# 普通工作区切换
+# -----------------------------------------------------------
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -245,6 +296,8 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# 工作区模式1
+# -----------------------------------------------------------
 mode "workspaces" {
 	bindsym $mod+1 workspace number $ws11
 	bindsym $mod+2 workspace number $ws12
@@ -269,11 +322,13 @@ mode "workspaces" {
 	# 回到正常模式
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
-	bindsym $mod+r mode "default"
+	bindsym $mod+F1 mode "default"
 	bindsym $mod+F2 mode "workspaces2"
 }
 bindsym $mod+F1 mode "workspaces"
 
+# 工作区模式2
+# -----------------------------------------------------------
 mode "workspaces2" {
 	bindsym $mod+1 workspace number $ws21
 	bindsym $mod+2 workspace number $ws22
@@ -298,85 +353,118 @@ mode "workspaces2" {
 	# 回到正常模式
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
-	bindsym $mod+r mode "default"
+	bindsym $mod+F2 mode "default"
 	bindsym $mod+F1 mode "workspaces"
 }
 bindsym $mod+F2 mode "workspaces2"
+# 以上内容共117行
 
-# 加载配置文件
-bindsym $mod+Shift+c reload
-# 重启i3
-bindsym $mod+Shift+r restart
-# 退出i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-# 调整窗口大小
-mode "resize" {
-	bindsym h resize shrink width 10 px or 10 ppt
-	bindsym j resize grow height 10 px or 10 ppt
-	bindsym k resize shrink height 10 px or 10 ppt
-	bindsym l resize grow width 10 px or 10 ppt
-	# 方向键
-	bindsym Left resize shrink width 10 px or 10 ppt
-	bindsym Down resize grow height 10 px or 10 ppt
-	bindsym Up resize shrink height 10 px or 10 ppt
-	bindsym Right resize grow width 10 px or 10 ppt
-	# 回到正常模式
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-	bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "resize"
+# 音频管理 Use pactl to adjust volume in PulseAudio.
+# ===========================================================
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym Mod1+F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym Mod1+F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# 开启i3status
+# ===========================================================
 # bar {
         # status_command i3status
 # }
-# 131
-# 132
-# 133
-# 134
-# 135
-# 136
-# 137
-# 138
-# 139
-# 140
-# 141
-# 142
-# 143
-# 144
-# 145
-# 146
-# 147
-# 148
+
+
+# 一些键位的展示
+# ===========================================================
+# |       键位       |                  作用                  |
+# |:----------------:|:--------------------------------------:|
+# |      $mod+f      |                  全屏                  |
+# |    $mod+Enter    |              打开一个终端              |
+# |    $mod+space    |          让窗口切换到浮窗模式          |
+# | $mod+Shift+space |             浮动窗口全局显示           |
+# |      $mod+d      |             打开程序的dmenu            |
+# |      $mod+q      |              杀死一个窗口              |
+# |     $mod+num     |            切换到第n个工作区           |
+# |      $mod+F1     |        切换到扩展工作区切换模式1       |
+# |      $mod+f1     |        切换到扩展工作区切换模式1       |
+# |     $mod+hjkl    |        切换操作窗口（逻辑同vim）       |
+# |  $mod+Shift+hjkl |        移动操作窗口（逻辑同vim）       |
+# |      $mod+g      |                垂直分割                |
+# |      $mod+v      |                水平分割                |
+# |      $mod+s      |        垂直标签页重叠式排列窗口        |
+# |      $mod+w      |        横向标签页重叠式排列窗口        |
+# |      $mod+e      | 分割式平铺窗口，会将当前的窗口组合拆开 |
+# | $mod+Mod1+space |      在浮动窗口与平铺式窗口间切换      |
+# |      $mod+a      |     移动焦点到打开其他窗口的主窗口     |
+# |      Escape      | （仅在进入其他模式时有用）返回正常模式 |
+# |   $mod+Shift+c   |              加载配置文件              |
+# |   $mod+Shift+r   |                 重启i3                 |
+# |   $mod+Shift+e   |           退出i3（会有提示）           |
+# |      $mod+r      |      进入大小模式（设置窗口大小）      |
+# |    $mod+Pause    |            进入系统电源模式            |
+# |    $mod+Mod1+l   |                  锁屏                  |
+# |      $mod+p      |                  截屏                  |
+# |    $mod+comma    |      `comma`意为`,`，上一个工作区      |
+# |    $mod+period   |      `period`意为`.`，下一个工作区     |
+# |      $mod+z      |           进入快捷键扩展模式           |
+# |      $mod+x      |                启动nvim                |
+# |     $mod+Tab     |         显示rofi的窗口选择界面         |
+# |      Mod1+F7     |               系统音量减               |
+# |      Mod1+F8     |               系统音量加               |
+# |      Mod1+F5     |        （正在播放程序）音量减1%        |
+# |      Mod1+F6     |        （正在播放程序）音量加1%        |
+# |      Mod1+F9     |         （正在播放程序）上一曲         |
+# |     Mod1+F10     |          （正在播放程序）暂停          |
+# |     Mod1+F11     |         （正在播放程序）下一曲         |
+# |      Mod1+d      |           打开fsearch快速搜索          |
+
+# 300
 # ===========================================================
 # ---------------------User's Config-------------------------
 # ===========================================================
-#
+# 
 # 用户的所有配置都在这！User's config in all are here!
-#
-# 自启动
-# 登录时自启动的软件
-#
+# 
+
+# 自启动（登录时自启动的软件）
+# ===========================================================
 # 登陆时启动polybar  (一个dock软件)
-exec_always --no-startup-id playerctld daemon
-exec_always --no-startup-id ~/.config/polybar/launch.sh --cuts
+# -----------------------------------------------------------
+exec --no-startup-id ~/.config/polybar/launch.sh --cuts
+
+# 媒体控制服务
+# -----------------------------------------------------------
+exec --no-startup-id playerctld daemon
+
 # 自动垂直树直分布
+# -----------------------------------------------------------
 exec_always --no-startup-id autotiling
 
 # 登录时 启用窗口透明
+# -----------------------------------------------------------
 # exec --no-startup-id compton -b
 # exec --no-startup-id picom -b
-exec_always --no-startup-id ~/.config/picom/launch.sh
-exec_always --no-startup-id conky -c ~/.config/conky/conky_leon
+exec --no-startup-id ~/.config/picom/launch.sh
 
+# 启动conky
+# -----------------------------------------------------------
+exec --no-startup-id conky -c ~/.config/conky/conky_leon
+
+# 其他自启动软件
+# -----------------------------------------------------------
 exec --no-startup-id fcitx
-exec --no-startup-id utools
+exec_always --no-startup-id utools
 exec --no-startup-id kdeconnect-indicator
 exec --no-startup-id klipper
 # exec --no-startup-id
+# exec --no-startup-id plasmashell
 
+# 系统的电源管理
+# ===========================================================
 # 快捷键
 set $Locker i3lock && sleep 1
-
 # 系统的电源管理
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -385,37 +473,61 @@ mode "$mode_system" {
 	bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
 	bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
-	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 bindsym $mod+Pause mode "$mode_system"
+
+# 用户的自定义快捷键
+# ===========================================================
+# 锁屏
 bindsym $mod+Mod1+l exec --no-startup-id $Locker, mode "default"
+# 截屏
 bindsym $mod+p exec --no-startup-id spectacle
+# 工作区切换
 bindsym $mod+comma workspace prev
 bindsym $mod+period workspace next
+# 快速搜索（Everthing）
+bindsym Mod1+d exec --no-startup-id fsearch
+# 启用一个空的编辑器
+bindsym $mod+x exec --no-startup-id alacritty --class editor-nvim -e nvim /tmp/tmpfile
+# 清空文件
+bindsym Mod1+x exec --no-startup-id cat /dev/null > /tmp/tmpfile
+# 展示所有的窗口
+bindsym $mod+Tab exec --no-startup-id rofi -show window
+# 浮动窗口全局显示
+bindsym $mod+Shift+space sticky toggle
 
-
-# 快捷键
+# 扩展快捷键模式（主要是因为键位比较多但又不常用）
+# -----------------------------------------------------------
 mode "$mode_app" {
+	# 启动polybar（会将前一个polybar杀死，算是重启了）
 	bindsym 1 exec --no-startup-id  ~/.config/polybar/launch.sh --cuts
+	# 使用指令让polybar重启
 	bindsym 2 exec --no-startup-id polybar-msg cmd restart
 	# 状态栏隐藏
 	bindsym h exec --no-startup-id polybar-msg cmd hide
+	# 状态栏反隐藏
 	bindsym Shift+h exec --no-startup-id polybar-msg cmd show
-	# 壁纸
-	bindsym b exec --no-startup-id feh --randomize --bg-fill /壁纸路径
-	bindsym Shift+b exec --no-startup-id feh --bg-fill /壁纸路径/壁纸.jpg
-	bindsym Mod1+b exec --no-startup-id feh --bg-fill /壁纸路径/壁纸2.jpg
+	# 壁纸选择模式
+	bindsym b mode "$mode_bg"
+	# 重启picom（因为我的picom分支有问题，要多次重启）
 	bindsym 3 exec --no-startup-id ~/.config/picom/launch.sh
+	# 启动conky
 	bindsym 4 exec --no-startup-id conky -c ~/.config/conky/conky_leon
+	# 让playerctld服务切换到下一个播放器
 	bindsym Left exec --no-startup-id playerctld shift
+	# 让playerctld服务切换到上一个播放器
 	bindsym Right exec --no-startup-id playerctld unshift
 
+	# 显示终端时钟
 	bindsym c exec --no-startup-id alacritty --class ttyclock -e tty-clock -csC 3
+	# 启动计算器No.1
 	bindsym m exec --no-startup-id alacritty --class math1 -e eva
+	# 启动计算器No.2
 	bindsym Shift+m exec --no-startup-id alacritty --class math2 -e bc
 
 	# back to normal: Enter or Escape
@@ -425,14 +537,37 @@ mode "$mode_app" {
 }
 bindsym $mod+z mode "$mode_app"
 
+# 壁纸选择模式
+# -----------------------------------------------------------
+mode "$mode_bg" {
+	# 随机壁纸
+	bindsym $mod+1 exec --no-startup-id feh --randomize --bg-fill ~/图片/其他/高清大图/.壁纸/*/*
+	# 设定原壁纸
+	bindsym $mod+2 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/86426220_p0.png
+	# 设定黑屏壁纸
+	bindsym $mod+3 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/black.png
+	# 设置其他壁纸
+	# bindsym $mod+<++> exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/<++>
+	bindsym $mod+4 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/请问您今天要来点兔子吗/a.jpg
+	bindsym $mod+5 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/请问您今天要来点兔子吗/751137.png
+	bindsym $mod+6 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/Download/88640994_p0.jpg
+	# bindsym $mod+7 exec --no-startup-id feh --bg-max ~/图片/其他/高清大图/.壁纸/Download/88640994_p0.jpg
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "$mode_app"
+	bindsym Escape mode "$mode_app"
+}
+
+# 播放器（播放多媒体的程序）的控制
+# -----------------------------------------------------------
 bindsym Mod1+F5 exec --no-startup-id playerctl volume 0.01-
 bindsym Mod1+F6 exec --no-startup-id playerctl volume 0.01+
 bindsym Mod1+F9 exec --no-startup-id playerctl previous
 bindsym Mod1+F10 exec --no-startup-id playerctl play-pause
 bindsym Mod1+F11 exec --no-startup-id playerctl next
 
-bindsym $mod+Tab exec --no-startup-id rofi -show window
-
+# 对于有特定的class的窗口的默认显示设定
+# ===========================================================
 for_window [instance="ttyclock"]floating enable
 for_window [instance="ttyclock"]resize set 550 250
 # for_window [instance="ttyclock"]border pixel 2
@@ -452,6 +587,12 @@ for_window [instance="bilibili"]floating enable
 # for_window [instance="bilibili"]move down 70px
 
 for_window [instance="utools"]floating enable
+for_window [instance="qq.exe"]floating enable
+for_window [instance="fsearch"]floating enable
+for_window [instance="editor-nvim"]floating enable
+for_window [instance="Steam"]floating enable
+for_window [instance="Terraria.bin.x86_64"]fullscreen enable
+
 
 # ===========================================================
 # -------------------Config of theme-------------------------
@@ -459,7 +600,9 @@ for_window [instance="utools"]floating enable
 #
 # 关于i3wm的外貌
 #
+
 # 默认窗口不显示标题栏
+# ===========================================================
 # new_window 1pixel
 # new_float 1pixel
 new_window none
@@ -467,14 +610,18 @@ new_float none
 hide_edge_borders both
 
 # 设置窗口间距
+# ===========================================================
 gaps inner 7
 gaps outer 3
 
 # 选择壁纸
-# exec --no-startup-id feh --randomize --bg-fill /壁纸路径/壁纸2.jp
-exec --no-startup-id feh --bg-fill /壁纸路径/壁纸.jp
-# exec --no-startup-id feh --bg-fill /壁纸路径/壁纸3.jp
+# ===========================================================
+# exec --no-startup-id feh --randomize --bg-fill ~/图片/其他/高清大图/壁纸/*
+exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/86426220_p0.png
+# exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.二次元/请问您今天要来点兔子吗/a.jpg
 
+# 选择主题
+# ===========================================================
 client.focused #689d6a #689d6a #282828 #282828
 client.focused_inactive #1d2021 #1d2021 #928374 #282828
 client.unfocused #32302f #32302f #928374 #282828
@@ -530,6 +677,7 @@ rounded-corners-exclude = [
 	# "class_g = 'Thunderbird'"
 	# "class_g = 'i3-frame'",
 	"class_g = 'Polybar'",
+	"class_g = 'plasmashell'",
 ];
 round-borders = 1;
 round-borders-exclude = [
@@ -541,8 +689,8 @@ round-borders-exclude = [
 #################################
 
 
-# Enabled client-side shadows on windows. Note desktop windows
-# (windows with '_NET_WM_WINDOW_TYPE_DESKTOP') never get shadow,
+# Enabled client-side shadows on windows. Note desktop windows 
+# (windows with '_NET_WM_WINDOW_TYPE_DESKTOP') never get shadow, 
 # unless explicitly requested using the wintypes option.
 #
 # shadow = false
@@ -568,7 +716,7 @@ round-borders-exclude = [
 #
 # no-dock-shadow = false
 
-# Don't draw shadows on drag-and-drop windows. This option is deprecated,
+# Don't draw shadows on drag-and-drop windows. This option is deprecated, 
 # you should use the *wintypes* option in your config file instead.
 #
 # no-dnd-shadow = false
@@ -582,12 +730,12 @@ round-borders-exclude = [
 # Blue color value of shadow (0.0 - 1.0, defaults to 0).
 # shadow-blue = 0
 
-# Do not paint shadows on shaped windows. Note shaped windows
-# here means windows setting its shape through X Shape extension.
-# Those using ARGB background is beyond our control.
-# Deprecated, use
+# Do not paint shadows on shaped windows. Note shaped windows 
+# here means windows setting its shape through X Shape extension. 
+# Those using ARGB background is beyond our control. 
+# Deprecated, use 
 #   shadow-exclude = 'bounding_shaped'
-# or
+# or 
 #   shadow-exclude = 'bounding_shaped && !rounded_corners'
 # instead.
 #
@@ -611,11 +759,11 @@ shadow-exclude = [
 ];
 
 # Specify a X geometry that describes the region in which shadow should not
-# be painted in, such as a dock window region. Use
+# be painted in, such as a dock window region. Use 
 #    shadow-exclude-reg = "x10+0+0"
 # for example, if the 10 pixels on the bottom of the screen should not have shadows painted on.
 #
-# shadow-exclude-reg = ""
+# shadow-exclude-reg = "" 
 
 # Crop shadow of a window fully on a particular Xinerama screen to the screen.
 # xinerama-shadow-crop = false
@@ -669,7 +817,7 @@ inactive-opacity = 0.70;
 # frame-opacity = 0.7;
 
 # Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)
-# menu-opacity = 1.0
+# menu-opacity = 1.0 
 # menu-opacity is depreciated use dropdown-menu and popup-menu instead.
 
 #If using these 2 below change their values in line 510 & 511 aswell
@@ -698,9 +846,9 @@ focus-exclude = [
 # Use fixed inactive dim value, instead of adjusting according to window opacity.
 # inactive-dim-fixed = 1.0
 
-# Specify a list of opacity rules, in the format `PERCENT:PATTERN`,
-# like `50:name *= "Firefox"`. picom-trans is recommended over this.
-# Note we don't make any guarantee about possible conflicts with other
+# Specify a list of opacity rules, in the format `PERCENT:PATTERN`, 
+# like `50:name *= "Firefox"`. picom-trans is recommended over this. 
+# Note we don't make any guarantee about possible conflicts with other 
 # programs that set '_NET_WM_WINDOW_OPACITY' on frame or client windows.
 # example:
 #    opacity-rule = [ "80:class_g = 'URxvt'" ];
@@ -713,12 +861,16 @@ opacity-rule = [
 	"100:class_g = 'bilibili' && focused",
 	"100:class_g = 'bilibili' && !focused",
 	"33:class_g = 'netease-cloud-music'",
-	"100:class_g  = 'Google-chrome' && focused",
+	"100:class_g  = 'Google-chrome'",
+	"100:class_g  = 'Microsoft-edge'",
 	"100:class_g  = 'vlc' && focused",
 	"100:class_g  = 'gwenview' && focused",
 	"100:class_g = 'VirtualBox Machine' && focused",
 	"33:class_g = 'i3lock'",
-	"100:class_g = 'GitHub Desktop'"
+	"100:class_g = 'GitHub Desktop'",
+	"70:class_g = 'gnome-terminal-server' && focused",
+	"55:class_g = 'gnome-terminal-server' && !focused",
+	"33:class_g = 'plasmashell'"
 ];
 	# 浏览器
 	# "85:name  *?= '的个人空间_哔哩哔哩_BILIBILI' && focused",
@@ -745,20 +897,20 @@ opacity-rule = [
 
 
 # Parameters for background blurring, see the *BLUR* section for more information.
-# blur-method =
+# blur-method = 
 # blur-size = 12
 #
 # blur-deviation = false
 
-# Blur background of semi-transparent / ARGB windows.
-# Bad in performance, with driver-dependent behavior.
+# Blur background of semi-transparent / ARGB windows. 
+# Bad in performance, with driver-dependent behavior. 
 # The name of the switch may change without prior notifications.
 #
 # blur-background = true;
 
-# Blur background of windows when the window frame is not opaque.
+# Blur background of windows when the window frame is not opaque. 
 # Implies:
-#    blur-background
+#    blur-background 
 # Bad in performance, with driver-dependent behavior. The name may change.
 #
 # blur-background-frame = false;
@@ -823,7 +975,7 @@ vsync = true
 # Enable remote control via D-Bus. See the *D-BUS API* section below for more details.
 # dbus = false
 
-# Try to detect WM windows (a non-override-redirect window with no
+# Try to detect WM windows (a non-override-redirect window with no 
 # child that has 'WM_STATE') and mark them as active.
 #
 # mark-wmwin-focused = false
@@ -833,7 +985,7 @@ mark-wmwin-focused = true;
 # mark-ovredir-focused = false
 mark-ovredir-focused = true;
 
-# Try to detect windows with rounded corners and don't consider them
+# Try to detect windows with rounded corners and don't consider them 
 # shaped windows. The accuracy is not very high, unfortunately.
 #
 # detect-rounded-corners = false
@@ -845,28 +997,28 @@ detect-rounded-corners = true;
 # detect-client-opacity = false
 detect-client-opacity = true;
 
-# Specify refresh rate of the screen. If not specified or 0, picom will
+# Specify refresh rate of the screen. If not specified or 0, picom will 
 # try detecting this with X RandR extension.
 #
 # refresh-rate = 60
 # refresh-rate = 0
 
-# Limit picom to repaint at most once every 1 / 'refresh_rate' second to
-# boost performance. This should not be used with
+# Limit picom to repaint at most once every 1 / 'refresh_rate' second to 
+# boost performance. This should not be used with 
 #   vsync drm/opengl/opengl-oml
-# as they essentially does sw-opti's job already,
+# as they essentially does sw-opti's job already, 
 # unless you wish to specify a lower refresh rate than the actual value.
 #
-# sw-opti =
+# sw-opti = 
 
-# Use EWMH '_NET_ACTIVE_WINDOW' to determine currently focused window,
-# rather than listening to 'FocusIn'/'FocusOut' event. Might have more accuracy,
+# Use EWMH '_NET_ACTIVE_WINDOW' to determine currently focused window, 
+# rather than listening to 'FocusIn'/'FocusOut' event. Might have more accuracy, 
 # provided that the WM supports it.
 #
 # use-ewmh-active-win = false
 
-# Unredirect all windows if a full-screen opaque window is detected,
-# to maximize performance for full-screen windows. Known to cause flickering
+# Unredirect all windows if a full-screen opaque window is detected, 
+# to maximize performance for full-screen windows. Known to cause flickering 
 # when redirecting/unredirecting windows. paint-on-overlay may make the flickering less obvious.
 #
 # unredir-if-possible = false
@@ -877,52 +1029,52 @@ detect-client-opacity = true;
 # Conditions of windows that shouldn't be considered full-screen for unredirecting screen.
 # unredir-if-possible-exclude = []
 
-# Use 'WM_TRANSIENT_FOR' to group windows, and consider windows
+# Use 'WM_TRANSIENT_FOR' to group windows, and consider windows 
 # in the same group focused at the same time.
 #
 # detect-transient = false
 detect-transient = true
 
-# Use 'WM_CLIENT_LEADER' to group windows, and consider windows in the same
-# group focused at the same time. 'WM_TRANSIENT_FOR' has higher priority if
+# Use 'WM_CLIENT_LEADER' to group windows, and consider windows in the same 
+# group focused at the same time. 'WM_TRANSIENT_FOR' has higher priority if 
 # detect-transient is enabled, too.
 #
 # detect-client-leader = false
 detect-client-leader = true
 
-# Resize damaged region by a specific number of pixels.
-# A positive value enlarges it while a negative one shrinks it.
-# If the value is positive, those additional pixels will not be actually painted
-# to screen, only used in blur calculation, and such. (Due to technical limitations,
-# with use-damage, those pixels will still be incorrectly painted to screen.)
-# Primarily used to fix the line corruption issues of blur,
-# in which case you should use the blur radius value here
-# (e.g. with a 3x3 kernel, you should use `--resize-damage 1`,
-# with a 5x5 one you use `--resize-damage 2`, and so on).
+# Resize damaged region by a specific number of pixels. 
+# A positive value enlarges it while a negative one shrinks it. 
+# If the value is positive, those additional pixels will not be actually painted 
+# to screen, only used in blur calculation, and such. (Due to technical limitations, 
+# with use-damage, those pixels will still be incorrectly painted to screen.) 
+# Primarily used to fix the line corruption issues of blur, 
+# in which case you should use the blur radius value here 
+# (e.g. with a 3x3 kernel, you should use `--resize-damage 1`, 
+# with a 5x5 one you use `--resize-damage 2`, and so on). 
 # May or may not work with *--glx-no-stencil*. Shrinking doesn't function correctly.
 #
 # resize-damage = 1
 
-# Specify a list of conditions of windows that should be painted with inverted color.
+# Specify a list of conditions of windows that should be painted with inverted color. 
 # Resource-hogging, and is not well tested.
 #
 # invert-color-include = []
 
-# GLX backend: Avoid using stencil buffer, useful if you don't have a stencil buffer.
-# Might cause incorrect opacity when rendering transparent content (but never
-# practically happened) and may not work with blur-background.
+# GLX backend: Avoid using stencil buffer, useful if you don't have a stencil buffer. 
+# Might cause incorrect opacity when rendering transparent content (but never 
+# practically happened) and may not work with blur-background. 
 # My tests show a 15% performance boost. Recommended.
 #
 # glx-no-stencil = false
 
-# GLX backend: Avoid rebinding pixmap on window damage.
-# Probably could improve performance on rapid window content changes,
+# GLX backend: Avoid rebinding pixmap on window damage. 
+# Probably could improve performance on rapid window content changes, 
 # but is known to break things on some drivers (LLVMpipe, xf86-video-intel, etc.).
 # Recommended if it works.
 #
 # glx-no-rebind-pixmap = false
 
-# Disable the use of damage information.
+# Disable the use of damage information. 
 # This cause the whole screen to be redrawn everytime, instead of the part of the screen
 # has actually changed. Potentially degrades the performance, but might fix some artifacts.
 # The opposing option is use-damage
@@ -932,31 +1084,31 @@ detect-client-leader = true
 #Changing use-damage to false fixes the problem
 use-damage = false
 
-# Use X Sync fence to sync clients' draw calls, to make sure all draw
-# calls are finished before picom starts drawing. Needed on nvidia-drivers
+# Use X Sync fence to sync clients' draw calls, to make sure all draw 
+# calls are finished before picom starts drawing. Needed on nvidia-drivers 
 # with GLX backend for some users.
 #
 # xrender-sync-fence = false
 
-# GLX backend: Use specified GLSL fragment shader for rendering window contents.
-# See `compton-default-fshader-win.glsl` and `compton-fake-transparency-fshader-win.glsl`
+# GLX backend: Use specified GLSL fragment shader for rendering window contents. 
+# See `compton-default-fshader-win.glsl` and `compton-fake-transparency-fshader-win.glsl` 
 # in the source tree for examples.
 #
 # glx-fshader-win = ''
 
-# Force all windows to be painted with blending. Useful if you
+# Force all windows to be painted with blending. Useful if you 
 # have a glx-fshader-win that could turn opaque pixels transparent.
 #
 # force-win-blend = false
 
-# Do not use EWMH to detect fullscreen windows.
+# Do not use EWMH to detect fullscreen windows. 
 # Reverts to checking if a window is fullscreen based only on its size and coordinates.
 #
 # no-ewmh-fullscreen = false
 
-# Dimming bright windows so their brightness doesn't exceed this set value.
-# Brightness of a window is estimated by averaging all pixels in the window,
-# so this could comes with a performance hit.
+# Dimming bright windows so their brightness doesn't exceed this set value. 
+# Brightness of a window is estimated by averaging all pixels in the window, 
+# so this could comes with a performance hit. 
 # Setting this to 1.0 disables this behaviour. Requires --use-damage to be disabled. (default: 1.0)
 #
 # max-brightness = 1.0
@@ -968,17 +1120,17 @@ use-damage = false
 
 # Set the log level. Possible values are:
 #  "trace", "debug", "info", "warn", "error"
-# in increasing level of importance. Case doesn't matter.
-# If using the "TRACE" log level, it's better to log into a file
+# in increasing level of importance. Case doesn't matter. 
+# If using the "TRACE" log level, it's better to log into a file 
 # using *--log-file*, since it can generate a huge stream of logs.
 #
 # log-level = "debug"
 log-level = "info";
 
 # Set the log file.
-# If *--log-file* is never specified, logs will be written to stderr.
-# Otherwise, logs will to written to the given file, though some of the early
-# logs might still be written to the stderr.
+# If *--log-file* is never specified, logs will be written to stderr. 
+# Otherwise, logs will to written to the given file, though some of the early 
+# logs might still be written to the stderr. 
 # When setting this option from the config file, it is recommended to use an absolute path.
 #
 # log-file = '/path/to/your/log/file'
@@ -990,33 +1142,33 @@ log-level = "info";
 # write-pid-path = '/path/to/your/log/file'
 
 # Window type settings
-#
-# 'WINDOW_TYPE' is one of the 15 window types defined in EWMH standard:
-#     "unknown", "desktop", "dock", "toolbar", "menu", "utility",
-#     "splash", "dialog", "normal", "dropdown_menu", "popup_menu",
+# 
+# 'WINDOW_TYPE' is one of the 15 window types defined in EWMH standard: 
+#     "unknown", "desktop", "dock", "toolbar", "menu", "utility", 
+#     "splash", "dialog", "normal", "dropdown_menu", "popup_menu", 
 #     "tooltip", "notification", "combo", and "dnd".
-#
+# 
 # Following per window-type options are available: ::
-#
+# 
 #   fade, shadow:::
 #     Controls window-type-specific shadow and fade settings.
-#
+# 
 #   opacity:::
 #     Controls default opacity of the window type.
-#
+# 
 #   focus:::
-#     Controls whether the window of this type is to be always considered focused.
+#     Controls whether the window of this type is to be always considered focused. 
 #     (By default, all window types except "normal" and "dialog" has this on.)
-#
+# 
 #   full-shadow:::
-#     Controls whether shadow is drawn under the parts of the window that you
-#     normally won't be able to see. Useful when the window has parts of it
+#     Controls whether shadow is drawn under the parts of the window that you 
+#     normally won't be able to see. Useful when the window has parts of it 
 #     transparent, and you want shadows in those areas.
-#
+# 
 #   redir-ignore:::
-#     Controls whether this type of windows should cause screen to become
+#     Controls whether this type of windows should cause screen to become 
 #     redirected again after been unredirected. If you have unredir-if-possible
-#     set, and doesn't want certain window to cause unnecessary screen redirection,
+#     set, and doesn't want certain window to cause unnecessary screen redirection, 
 #     you can set this to `true`.
 #
 wintypes:
@@ -1331,43 +1483,24 @@ let g:mkdp_echo_preview_url = 0
 #### 裸装Vim/Neovim
 
 Vim配置（~/.vim/vimrc、~/.config/nvim/init.vim）：
-```vimrc
+```vim
+" ==================================================
+" 
+" 基本设置
+" 
+" ==================================================
 set nocompatible
 " 关闭 vi 兼容模式
 syntax on
 " 自动语法高亮
-" set number
-set nu
-" 显示行号
-set rnu
-" 显示相对行号
-set ruler
-" 打开状态栏标尺
-
-set shiftwidth=8
-" 设定 << 和 >> 命令移动时的宽度为 8
-set softtabstop=8
-" 使得按退格键时可以一次删掉 8 个空格
-set tabstop=8
-" 设定 tab 长度为 8
-
-set nobackup
-" 覆盖文件时不备份
 set autochdir
 " 自动切换当前目录为当前文件所在的目录
-set backupcopy=yes
-" 设置备份时的行为为覆盖
-set noswapfile
-" 禁止生成临时文件
-
-set ignorecase smartcase
-" 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
-set incsearch
-" 输入搜索内容时就显示搜索结果
+set autoread
+" 打开文件监视。如果在编辑过程中文件发生外部改变(比如被别的编辑器编辑了)，就会发出提示
+set scrolloff=3
+" 设置光标距离顶部和底部的固定位置
 set magic
 " 设置魔术
-set hidden
-" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
 set smartindent
 " 开启新行时使用智能自动缩进
 set noeb
@@ -1375,85 +1508,85 @@ set noexpandtab
 " 不要用空格代替制表符
 set backspace=indent,eol,start
 set cmdheight=1
-" 设定命令行的行数为 2
-set laststatus=1
-" 显示状态栏 (默认值为 1, 无法显示状态栏)
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-" 设置在状态行显示的信息
-
+" 设定命令行的行数为 1
 set nowrap
 "不折行
 set sidescroll=1
 "流畅扩展
-
-inoremap ' ''<ESC>i
-inoremap " ""<ESC>i
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {<CR>}<ESC>O
-"补全
-
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-" 记忆文件上次打开位置
-command W :w
-command Q :q
-command WQ :wq
-command QW :wq
-command Wq :wq
-command Qw :wq
 
 filetype on
 "检测文件类型
 filetype plugin indent on
 " 开启插件
 
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-" ----------------------------前面-----------------------------
-" ============================教程=============================
-" 以下范例用来支持不同格式的插件安装.
-" 请将安装插件的命令放在vundle#begin和vundle#end之间.
-" Github上的插件
-" 格式为 Plugin '用户名/插件仓库名'
-" Plugin 'tpope/vim-fugitive'
-" 来自 http://vim-scripts.org/vim/scripts.html 的插件
-" Plugin '插件名称' 实际上是 Plugin 'vim-scripts/插件仓库名' 只是此处的用户名可以省略
-" Plugin 'L9'
-" 由Git支持但不再github上的插件仓库 Plugin 'git clone 后面的地址'
-" Plugin 'git://git.wincent.com/command-t.git'
-" 本地的Git仓库(例如自己的插件) Plugin 'file:///+本地插件仓库绝对路径'
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" 插件在仓库的子目录中.
-" 正确指定路径用以设置runtimepath. 以下范例插件在sparkup/vim目录下
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" 安装L9，如果已经安装过这个插件，可利用以下格式避免命名冲突
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-" ============================教程=============================
+" TAB
+" ==================================================
+set shiftwidth=8
+" 设定 << 和 >> 命令移动时的宽度为 8
+set softtabstop=8
+" 使得按退格键时可以一次删掉 8 个空格
+set tabstop=8
+" 设定 tab 长度为 8
 
-" Plugin 'VundleVim/Vundle.vim'
-" Plugin 'ycm-core/YouCompleteMe'
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'bling/vim-airline'
-" Plugin 'liuchengxu/space-vim-dark'
-" Plugin 'liuchengxu/vim-which-key'
-" ============================后面=============================
-"call vundle#end()            " 必须
-"filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
-" 忽视插件改变缩进,可以使用以下替代:
-"filetype plugin on
+" 行号
+" ==================================================
+" set number
+set nu
+" 显示行号
+set rnu
+" 显示相对行号
+
+" 搜索
+" ==================================================
+set ignorecase smartcase
+" 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+set incsearch
+" 输入搜索内容时就显示搜索结果
+
+" 状态栏
+" ==================================================
+set ruler
+" 打开状态栏标尺
+set laststatus=1
+" 显示状态栏 (默认值为 1, 无法显示状态栏)
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+" 设置在状态行显示的信息
+
+" 临时文件
+" ==================================================
+set noswapfile
+" 禁止生成临时文件
+set nobackup
+" 覆盖文件时不备份
+set backupcopy=yes
+" 设置备份时的行为为覆盖
+set hidden
+" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+
+" ==================================================
 "
-" 常用的命令
-" :PluginList       - 列出所有已配置的插件
-" :PluginInstall  	 - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
-" :PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存
-" :PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件
+" 功能脚本
 "
-" 查阅 :h vundle 获取更多细节和wiki以及FAQ
+" ==================================================
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" 记忆文件上次打开位置
 
+let s:fcitx_cmd = executable("fcitx5-remote") ? "fcitx5-remote" : "fcitx-remote"
+autocmd InsertLeave * let b:fcitx = system(s:fcitx_cmd) | call system(s:fcitx_cmd.' -c')
+autocmd InsertEnter * if exists('b:fcitx') && b:fcitx == 2 | call system(s:fcitx_cmd.' -o') | endif
+" 退出插入模式时自动切换到英文
 
-" =======================其他=======================
+if has('persistent_undo') "check if your vim version supports it 
+	set undofile "turn on the feature 
+	set undodir=$HOME/.config/nvim/undo "directory where the undo files will be stored 
+endif
+
+" ==================================================
+"
 " 配置多语言环境
+"
+" ==================================================
 if has("multi_byte")
 " UTF-8 编码
 set encoding=utf-8
@@ -1471,39 +1604,53 @@ endif
 else
 echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
+```
 
-" ==================== nerdtree =====================
-let NERDTreeWinPos='right'
-"设置在 vim 右侧显示
+更多扩展设置（文件均在 *\$USER/.config/nvim/plugin* 或者 *\$USER/.config/nvim/plugin* 目录之下）：
+
+*plugins.vim*插件设置：
+```vim
+" ==================================================
+"
+" 插件设置
+"
+" ==================================================
+" nerdtree
+" ==================================================
+let NERDTreeWinPos='left'
+"设置在 vim 左侧显示
 let NERDTreeWinSize=20
 "设置宽度为 20
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 wincmd w
 autocmd VimEnter * wincmd w
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " 设置 F2 为打开或者关闭的快捷键
-map <F2> :NERDTreeToggle<CR>
+noremap <F2> :NERDTreeToggle<CR>
+inoremap <F2> <Cmd>:NERDTreeToggle<CR>
 
-" ==================== vim-airline ===================
+
+" vim-airline
+" ==================================================
 set laststatus=2
 let g:airline_theme="onedark"
 
 "这个是安装字体后 必须设置此项" 
-let g:airline_powerline_fonts = 1   
+" let g:airline_powerline_fonts = 1
 
 " 打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 "设置切换Buffer快捷键"
-nnoremap <C-tab> :bn<CR>
-nnoremap <C-s-tab> :bp<CR>
+noremap <C-tab> :bn<CR>
+noremap <C-s-tab> :bp<CR>
 " 关闭状态显示空白符号计数
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
@@ -1513,61 +1660,324 @@ if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 " powerline symbols
-let g:airline_left_sep = ' '
-let g:airline_left_alt_sep = ' '
-let g:airline_right_sep = ' '
-let g:airline_right_alt_sep = ' '
-let g:airline_symbols.branch = ''
-let g:airline_symbols.colnr = ' :'
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ' :'
-let g:airline_symbols.maxlinenr = '☰ '
-let g:airline_symbols.dirty='⚡'
+" let g:airline_left_sep = ' '
+" let g:airline_left_alt_sep = ' '
+" let g:airline_right_sep = ' '
+" let g:airline_right_alt_sep = ' '
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.colnr = ' :'
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ' :'
+" let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.maxlinenr = 'ML '
+" let g:airline_symbols.dirty='⚡'
 " old vim-powerline symbols
-"let g:airline_left_sep = '⮀'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_right_sep = '⮂'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
+" let g:airline_left_sep = '⮀'
+" let g:airline_left_alt_sep = '⮁'
+" let g:airline_right_sep = '⮂'
+" let g:airline_right_alt_sep = '⮃'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
 
-" ==================== vim-theams ===================
+
+" vim-theams
+" ==================================================
 syntax enable
 colorscheme space-vim-dark
 
-" ==================== Markdown =====================
-nmap <F3> <Plug>MarkdownPreview        " 开始预览
-nmap <F4> <Plug>MarkdownPreviewStop    " 关闭预览
+
+" Markdown
+" ==================================================
+" nmap <F3> <Plug>MarkdownPreview        " 开始预览
+" nmap <F4> <Plug>MarkdownPreviewStop    " 关闭预览
 " nmap <F5> <Plug>MarkdownPreviewToggle  " 切换预览
+
+
+" nerdcommenter
+" ==================================================
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '// ' } }
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/*','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 ```
 
-插件安装：
+*keymap.vim*键位映射设置：
+```vim
+" ==================================================
+"
+" 自定义快捷命令
+"
+" ==================================================
+" 自定义命令(命令模式)
+" ==================================================
+command W w
+command Q q
+command WQ wq
+command QW wq
+command Wq wq
+command Qw wq
+
+" noremap(普通模式使用)
+" ==================================================
+noremap <SPACE>s :w<CR>
+noremap <SPACE>q :wq<CR>
+noremap <SPACE>Q :q!<CR>
+autocmd Filetype markdown noremap <SPACE>pp :MarkdownPreview<CR>
+autocmd Filetype markdown noremap <SPACE>pP :MarkdownPreviewStop<CR>
+autocmd Filetype markdown noremap <SPACE>ptt :TableModeToggle<CR>
+autocmd Filetype markdown noremap <SPACE>ptr :TableModeRealign<CR> 
+autocmd Filetype markdown noremap <F3> <Plug>MarkdownPreview
+" 开始预览
+autocmd Filetype markdown noremap <F4> <Plug>MarkdownPreviewStop
+" 关闭预览
+"noremap <C-[> /<++><CR>:nohlsearch<CR>c4l
+noremap <SPACE><Tab> <Cmd>bn<CR>
+noremap <Tab> <C-w>w
+autocmd Filetype c noremap <F3> <Cmd>chdir ../<CR><Cmd>set noautochdir<CR>
+autocmd Filetype c noremap <F4> <Cmd>!make;make clean<CR>
+autocmd Filetype c noremap <F5> <Cmd>terminal bin/main<CR>
+
+" inoremap(插入模式使用)
+" ==================================================
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O
+inoremap < <><ESC>i
+"inoremap 「 「」<ESC>i
+inoremap （ （）<ESC>i
+"补全
+"inoremap <C-[> <Esc>/<++><CR>:nohlsearch<CR>c4l
+
+autocmd Filetype markdown inoremap <F3> <Plug>MarkdownPreview
+" 开始预览
+autocmd Filetype markdown inoremap <F4> <Plug>MarkdownPreviewStop
+" 关闭预览
+```
+
+*markdown-quick-input.vim* markdown文件的快速输入键位映射设置：
+```vim
+" ==================================================
+"
+" 自定义markdown快捷输入命令
+"
+" ==================================================
+" 查找标记点
+" ==================================================
+autocmd Filetype markdown inoremap =f <Esc>/<++><CR>:nohlsearch<CR>c4l
+autocmd Filetype markdown inoremap == <Esc>/<++><CR>:nohlsearch<CR>c4l
+
+" 一级标题
+" ==================================================
+autocmd Filetype markdown inoremap =1 <Esc>o#<Space><Enter><Enter><++><Esc>2kA
+
+" 二级标题
+" ==================================================
+autocmd Filetype markdown inoremap =2 <Esc>o##<Space><Enter><Enter><++><Esc>2kA
+
+" 三级标题
+" ==================================================
+autocmd Filetype markdown inoremap =3 <Esc>o###<Space><Enter><Enter><++><Esc>2kA
+
+" 四级标题
+" ==================================================
+autocmd Filetype markdown inoremap =4 <Esc>o####<Space><Enter><Enter><++><Esc>2kA
+
+" 五级标题
+" ==================================================
+autocmd Filetype markdown inoremap =5 <Esc>o#####<Space><Enter><Enter><++><Esc>2kA
+
+" 六级标题
+" ==================================================
+autocmd Filetype markdown inoremap =6 <Esc>o######<Space><Enter><Enter><++><Esc>2kA
+
+" 小点
+" ==================================================
+autocmd Filetype markdown inoremap =- <Esc>o-<Space>
+autocmd Filetype markdown inoremap =. <Esc>o-<Space>
+
+" 斜体文本
+" ==================================================
+autocmd Filetype markdown inoremap =i **<++><Esc>F*i
+
+" 粗体文本
+" ==================================================
+autocmd Filetype markdown inoremap =s ****<++><Esc>F*hi
+
+" 标注
+" ==================================================
+autocmd Filetype markdown inoremap =m ``<++><Esc>F`i
+
+" 粗斜体文本
+" ==================================================
+autocmd Filetype markdown inoremap =e ******<++><Esc>F*hhi
+
+" 下划线
+" ==================================================
+autocmd Filetype markdown inoremap =d <Esc>o~~~~<++><Esc>F~hi
+
+" 高亮
+" ==================================================
+autocmd Filetype markdown inoremap =h ====<++><Esc>F=hi
+
+" 插入图片
+" ==================================================
+autocmd Filetype markdown inoremap =p ![](<++>)<++><Esc>F[a
+
+" 插入链接
+" ==================================================
+autocmd Filetype markdown inoremap =a [](<++>)<++><Esc>F[a
+
+" 插入分隔线
+" ==================================================
+autocmd Filetype markdown inoremap =n <Esc>o---<Enter><Enter>
+
+" 插入代码块
+" ==================================================
+autocmd Filetype markdown inoremap =c <Esc>o```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
+
+" 表格操作
+" ==================================================
+autocmd Filetype markdown inoremap =T <Esc>o\|\|<++>\|<Enter>\|:-:\|:-:\|<Enter>\|<++>\|<++>\|<Esc>2kI<Esc>li
+autocmd Filetype markdown inoremap =t <Esc>o\|\|<++>\|<Esc>5hi
+```
+
+*c-qi.vim*c语言快速输入键位映射设置：
+```vim
+" ==================================================
+"
+" 自定义C语言命令
+"
+" ==================================================
+" 自定义命令(命令模式)
+" ==================================================
+" command W w
+" command Q q
+" command WQ wq
+" command QW wq
+" command Wq wq
+" command Qw wq
+
+" noremap(普通模式使用)
+" ==================================================
+"noremap <C-[> /<++><CR>:nohlsearch<CR>c4l
+" autocmd Filetype c noremap <F3> <Cmd>chdir ../<CR><Cmd>set noautochdir<CR>
+" autocmd Filetype c noremap <F4> <Cmd>!make;make clean<CR>
+" autocmd Filetype c noremap <F5> <Cmd>terminal bin/main<CR>
+
+" inoremap(插入模式使用)
+" ==================================================
+" inoremap ' ''<ESC>i
+" inoremap " ""<ESC>i
+" inoremap ( ()<ESC>i
+" inoremap [ []<ESC>i
+" inoremap { {<CR>}<ESC>O
+" inoremap < <><ESC>i
+" inoremap 「 「」<ESC>i
+" inoremap （ （）<ESC>i
+" inoremap <C-[> <Esc>/<++><CR>:nohlsearch<CR>c4l
+
+autocmd Filetype c inoremap ]] <Esc>/<++><CR><Cmd>nohlsearch<CR>c4l
+autocmd Filetype c inoremap ]= <Esc>/<++><CR><Cmd>nohlsearch<CR>c4l
+
+" autocmd Filetype c inoremap ]
+autocmd Filetype c inoremap ]/ <Esc>A<Space><Space><Space><Space>/* <++> */<Esc>6hc4l
+" if
+autocmd Filetype c inoremap ]i <Esc>oif<Space>(<++>)<Space>{<Esc>o<++><Enter>}<Enter><++><Esc>3k0/<++><CR><Cmd>:nohlsearch<CR>c4l
+" switch
+autocmd Filetype c inoremap ]ss <Esc>oswitch<Space>(<++>)<Space>{<Enter>case<Space><++>:<Enter><++><Enter><Backspace>break;<Enter><Backspace>default:<Enter><++><Enter><Backspace>break;<Enter><Backspace><Backspace>}<Enter><++><Esc>8k0/<++><CR><Cmd>nohlsearch<CR>c4l
+autocmd Filetype c inoremap ]sc <Esc>/break;<CR><Cmd>nohlsearch<CR>ocase<Space><++>:<Enter><++><Enter><Backspace>break;<Esc>2k0/<++><CR><Cmd>nohlsearch<CR>c4l
+" while
+autocmd Filetype c inoremap ]w <Esc>owhile<Space>(<++>)<Space>{<Enter><++><Enter>}<Enter><++><Esc>3k0/<++><CR><Cmd>nohlsearch<CR>c4l
+" for
+autocmd Filetype c inoremap ]f <Esc>ofor<Space>(<++><Space><++>;<Space><++><Space><++><Space><++>;<Space><++>)<Space>{<Esc>o<++><Enter>}<Enter><++><Esc>3k0/<++><CR><Cmd>nohlsearch<CR>c4l
+" struct
+autocmd Filetype c inoremap ]t <Esc>ostruct<Space><++><Space>{<Enter><++><Space><++>;<Enter><Backspace>}<++>;<Enter><++><Esc>3k0/<++><CR><Cmd>nohlsearch<CR>c4l
+" functon
+autocmd Filetype c inoremap ]mm <Esc>o<++><Space><++><Space>(<++>)<Space>{<Enter><++><Enter><Backspace>return<Space><++>;<Enter><Backspace>}<Enter><Esc>5k0/<++><CR><Cmd>nohlsearch<CR>c4l
+autocmd Filetype c inoremap ]mn <Esc>/^}<CR><Cmd>nohlsearch<CR>o<Enter><++><Space><++><Space>(<++>)<Space>{<Enter><++><Enter><Backspace>return<Space><++>;<Enter><Backspace>}<Enter><Esc>5k0/<++><CR><Cmd>nohlsearch<CR>c4l
+```
+
+
+插件安装脚本：
 ```bash
 #下载Vim插件
 mkdir -p ~/.config/nvim/pack/github/start
 mkdir -p ~/.config/nvim/pack/github/opt
+mkdir -p ~/.config/nvim/undo
+mkdir -p ~/.config/nvim/plugin
 mkdir -p ~/.vim
-#nerdtree
-git clone git@github.com:preservim/nerdtree.git ~/.config/nvim/pack/github/start/nerdtree
-#airline
-git clone git@github.com:vim-airline/vim-airline.git ~/.config/nvim/pack/github/start/vim-airline
-#space-vim-dark
-git clone git@github.com:liuchengxu/space-vim-dark.git ~/.config/nvim/pack/github/start/space-vim-dark
-#vim-airline-theme
-git clone git@github.com:vim-airline/vim-airline-themes.git ~/.config/nvim/pack/github/start/vim-airline-themes
+
+#nerdtree目录树
+git clone https://github.com/preservim/nerdtree.git ~/.config/nvim/pack/github/start/nerdtree
+
+#airline状态栏
+git clone https://github.com/vim-airline/vim-airline.git ~/.config/nvim/pack/github/start/vim-airline
+
+#space-vim-dark主题
+git clone https://github.com/liuchengxu/space-vim-dark.git ~/.config/nvim/pack/github/start/space-vim-dark
+
+#vim-airline-theme状态栏主题
+git clone https://github.com/vim-airline/vim-airline-themes.git ~/.config/nvim/pack/github/start/vim-airline-themes
+
 #vim-which-key
-git clone git@github.com:liuchengxu/vim-which-key.git ~/.config/nvim/pack/github/start/im-which-key
+git clone https://github.com/liuchengxu/vim-which-key.git ~/.config/nvim/pack/github/start/im-which-key
+
 #mathjax-support-for-mkdp
-git clone git@github.com:iamcco/mathjax-support-for-mkdp.git ~/.config/nvim/pack/github/start/mathjax-support-for-mkdp
-#coc.nvim
-git clone git@github.com:neoclide/coc.nvim.git ~/.config/nvim/pack/github/start/coc.nvim
+git clone https://github.com:iamcco/mathjax-support-for-mkdp.git ~/.config/nvim/pack/github/start/mathjax-support-for-mkdp
+
+#coc.nvim自动补全
+git clone https://github.com/neoclide/coc.nvim.git ~/.config/nvim/pack/github/start/coc.nvim
+
 #emmet-vim
-git clone git@github.com:mattn/emmet-vim.git ~/.config/nvim/pack/github/start/emmet-vim
-#markdown-preview.nvim 因为Ubuntu下neo vim更加方便，使用nvim版本
-git clone git@github.com:iamcco/markdown-preview.nvim.git ~/.config/nvim/pack/github/start/markdown-preview.nvim
+git clone https://github.com/mattn/emmet-vim.git ~/.config/nvim/pack/github/start/emmet-vim
+
+#markdown-preview.nvim预览markdown文件插件
+git clone https://github.com/iamcco/markdown-preview.nvim.git ~/.config/nvim/pack/github/start/markdown-preview.nvim
+
+#vim-table-mode编辑table时自动快速对齐表格
+git clone https://github.com/dhruvasagar/vim-table-mode.git ~/.config/nvim/pack/github/start/vim-table-mode
+
+#auto-pairs成双成对，在vim中自动补全括号等，但这里设置为默认不加载，将下面的 opt 改为 start 或者移动 opt 下的目录到 start 就好了
+git clone https://github.com/jiangmiao/auto-pairs.git ~/.config/nvim/pack/github/opt/auto-pairs
+
+#nerdcommenter代码注释
+git clone https://github.com/preservim/nerdcommenter.git ~/.config/nvim/pack/github/start/nerdcommenter
+
+#vim-mundo代码注释
+git clone https://github.com/simnalamburt/vim-mundo.git ~/.config/nvim/pack/github/opt/vim-mundo
 
 ln -sf /home/$USER/.config/nvim/init.vim /home/$USER/.vim/vimrc
 ln -sf /home/$USER/.config/nvim/pack /home/$USER/.vim/pack
+ln -sf /home/$USER/.config/nvim/plugin /home/$USER/.vim/plugin
+ln -sf /home/$USER/.config/nvim/undo /home/$USER/.vim/undo
+
+cd ~/.config/nvim/pack/github/start/markdown-preview.nvim/
+yarn install
 ```
 
 > 注意， **markdown-preview** 插件需要在仓库根目录中执行 `yarn install` 进行安装
