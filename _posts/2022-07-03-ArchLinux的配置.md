@@ -1,4 +1,8 @@
-# 我的ArchLinux的配置
+---
+layout: post
+title: "我的ArchLinux的配置"
+date:   2022-07-03 22:56:29 +0800
+---
 
 ## 软件包
 
@@ -7,117 +11,120 @@
 我使用 **i3-wm + kde软件** 的组合形式。
 软件列表如下
 
-|软件|作用|
-|:-:|:-:|
-|xorg|最基本的图形界面服务|
-|sddm|登录程序|
-|i3-gaps|自带窗口空格支持|
-|i3blocks||
-|i3lock|锁屏|
-|i3status|状态栏|
-|polybar|状态栏|
-|feh|壁纸|
-|picom|X合成器|
-|rofi|应用启动器|
-|qt5ct|控制kde程序的主题|
-|dolphin|KDE文件管理器|
-|konsole|KDE终端|
-|ark|KDE解压软件|
-|spectacle|截图|
-|gwenview|图片查看|
-|kdeconnect|工具|
-|kvantum|主题使用|
-|fcitx-im|输入法|
-|fcitx-configtool|配置程序|
+|       软件       |         作用         |
+|:----------------:|:--------------------:|
+|       xorg       | 最基本的图形界面服务 |
+|       sddm       |       登录程序       |
+|      i3-gaps     |   自带窗口空格支持   |
+|     i3blocks     |                      |
+|      i3lock      |         锁屏         |
+|     i3status     |        状态栏        |
+|      polybar     |        状态栏        |
+|        feh       |         壁纸         |
+|       picom      |        X合成器       |
+|       rofi       |      应用启动器      |
+|       qt5ct      |   控制kde程序的主题  |
+|      dolphin     |     KDE文件管理器    |
+|      konsole     |        KDE终端       |
+|        ark       |      KDE解压软件     |
+|     spectacle    |         截图         |
+|     gwenview     |       图片查看       |
+|    kdeconnect    |         工具         |
+|      kvantum     |       主题使用       |
+|     fcitx-im     |        输入法        |
+| fcitx-configtool |       配置程序       |
 
 ### 我的工具
 
 我安装的工具程序：
 
-|程序|作用|
-|:-:|:-:|
-|iwd|联网|
-|dhcpcd|DNS服务|
-|zsh|日常使用的SHELL|
-|fish|备用SHELL|
-|git|开发必备工具|
-|gcc|编译器|
-|clang|编译器|
-|gdb|调试工具|
-|cmake|工具|
-|ctags||
-|nodejs|使用Spacevim|
-|npm|使用Spacevim|
-|yarn|使用Spacevim|
-|python3||
-|python2||
-|vim|编辑器|
-|neovim|编辑器|
-|tree|以树状图查看文件|
-|lsd|同ls，但是有类型图标|
-|openssh||
-|sshfs||
-|gnupg||
-|man|手册页|
-|ranger|文件查看器|
-|grub-customizer|grub配置程序|
-|gparted|分区|
-|filelight|文件大小占比查看（以扇形图表示文件大小占比）|
-|packagekit-qt5||
-|flatpak||
-|fwupd||
-|vittualbox|虚拟机|
-|neofetch|查看系统信息|
-|translate-shell|在终端的翻译程序|
-|alacritty|终端|
-|zellij|功能同tmux,终端分屏|
-|playerctl|媒体播放管理器|
-|ntfs-3g|支持挂载ntfs|
-|scanmen|终端的更改内存软件|
-|gameconqueror|基于scanmen的GUI软件|
-|adb||
-|fortune-mod||
-|eva|计算器|
-|bc|计算器|
-|utools|在archlinuxcn/aur源里，工具集|
-|lolcat|功能类似cat，但有渐变颜色|
-|cowsay||
-|conky|监视器|
-|figlet|终端用文字画出文字|
-|curl||
-|wget|下载器|
-|axel|多线程下载器|
-|aria2|多线程下载器|
-|w3m|终端的文本浏览器|
-|net-tools|网络工具集。包含ifconfig|
-|mplayer|终端媒体播放器|
-|ffmpeg|多功能媒体工具|
-|vlc|媒体播放器|
-|simplescreenrecorder|录屏|
-|gimp|编辑图片|
-|krita|编辑图片|
-|inkscape|编辑矢量图片|
-|qtqr|QRcode编辑器|
-|wqy-zenhei|中文字体|
+|         程序         |                     作用                     |
+|:--------------------:|:--------------------------------------------:|
+|          iwd         |                     联网                     |
+|        dhcpcd        |                    DNS服务                   |
+|          zsh         |                日常使用的SHELL               |
+|         fish         |                   备用SHELL                  |
+|          git         |                 开发必备工具                 |
+|          gcc         |                    编译器                    |
+|         clang        |                    编译器                    |
+|          gdb         |                   调试工具                   |
+|         cmake        |                     工具                     |
+|         ctags        |                                              |
+|        nodejs        |                 使用Spacevim                 |
+|          npm         |                 使用Spacevim                 |
+|         yarn         |                 使用Spacevim                 |
+|        python3       |                                              |
+|        python2       |                                              |
+|          vim         |                    编辑器                    |
+|        neovim        |                    编辑器                    |
+|         tree         |               以树状图查看文件               |
+|          lsd         |             同ls，但是有类型图标             |
+|        openssh       |                                              |
+|         sshfs        |                                              |
+|         gnupg        |                                              |
+|          man         |                    手册页                    |
+|        ranger        |                  文件查看器                  |
+|    grub-customizer   |                 grub配置程序                 |
+|        gparted       |                     分区                     |
+|       filelight      | 文件大小占比查看（以扇形图表示文件大小占比） |
+|    packagekit-qt5    |                                              |
+|        flatpak       |                                              |
+|         fwupd        |                                              |
+|      vittualbox      |                    虚拟机                    |
+|       neofetch       |                 查看系统信息                 |
+|    translate-shell   |               在终端的翻译程序               |
+|       alacritty      |                     终端                     |
+|        zellij        |              功能同tmux,终端分屏             |
+|       playerctl      |                媒体播放管理器                |
+|        ntfs-3g       |                 支持挂载ntfs                 |
+|        scanmen       |              终端的更改内存软件              |
+|     gameconqueror    |             基于scanmen的GUI软件             |
+|          adb         |                                              |
+|      fortune-mod     |                                              |
+|          eva         |                    计算器                    |
+|          bc          |                    计算器                    |
+|        utools        |         在archlinuxcn/aur源里，工具集        |
+|        lolcat        |           功能类似cat，但有渐变颜色          |
+|        cowsay        |                                              |
+|         conky        |                    监视器                    |
+|        figlet        |              终端用文字画出文字              |
+|         curl         |                                              |
+|         wget         |                    下载器                    |
+|         axel         |                 多线程下载器                 |
+|         aria2        |                 多线程下载器                 |
+|          w3m         |               终端的文本浏览器               |
+|       net-tools      |           网络工具集。包含ifconfig           |
+|        mplayer       |                终端媒体播放器                |
+|        ffmpeg        |                多功能媒体工具                |
+|          vlc         |                  媒体播放器                  |
+| simplescreenrecorder |                     录屏                     |
+|         gimp         |                   编辑图片                   |
+|         krita        |                   编辑图片                   |
+|       inkscape       |                 编辑矢量图片                 |
+|         qtqr         |                 QRcode编辑器                 |
+|      wqy-zenhei      |                   中文字体                   |
 
 ### AUR
 
-
-|软件包|功能|
-|:-:|:-:|
-|picom-jonaburg-git|picom的分支|
-|bat|查看文件（更好的cat）|
-|deepin-wine-qq|基于deepin-wine的QQ|
-|bilibili-bin|B站的windows客户端搬运|
-|mdcat|终端渲染markdown文件（功能有限）|
-|arch-wiki-man|本地的终端ArchWiki离线查看器|
-|autotiling|i3wm窗口自动分布|
+|       软件包       |               功能               |
+|:------------------:|:--------------------------------:|
+| picom-jonaburg-git |            picom的分支           |
+|         bat        |       查看文件（更好的cat）      |
+|   deepin-wine-qq   |        基于deepin-wine的QQ       |
+|    bilibili-bin    |      B站的windows客户端搬运      |
+|        mdcat       | 终端渲染markdown文件（功能有限） |
+|    arch-wiki-man   |   本地的终端ArchWiki离线查看器   |
+|     autotiling     |         i3wm窗口自动分布         |
 
 ## 配置
 
 ### i3
 
 我的i3-wm配置
+
+<details>
+<summary>i3配置文件config</summary>
+
 ```conf
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 # ===========================================================
@@ -628,6 +635,8 @@ client.unfocused #32302f #32302f #928374 #282828
 client.urgent #cc241d #cc241d #ebdbb2 #282828
 ```
 
+</details>
+
 ### polybar
 
 我的polybar基于仓库[polybar-themes](https://github.com/adi1090x/polybar-themes)中的 **Cuts**修改而来
@@ -637,6 +646,7 @@ client.urgent #cc241d #cc241d #ebdbb2 #282828
 ### picom
 
 启动脚本：
+
 ```bash
 #!/bin/env bash
 killall -q picom
@@ -644,6 +654,10 @@ picom -b
 ```
 
 配置：
+
+<details>
+<summary>picom配置</summary>
+
 ```conf
 #################################
 #          Animations           #
@@ -1182,7 +1196,12 @@ wintypes:
 };
 ```
 
+</details>
+
 ### rofi
+
+<details>
+<summary>rofi配置</summary>
 
 配置：
 ```conf
@@ -1335,6 +1354,8 @@ configuration {
 }
 ```
 
+</details>
+
 ### Vim/Neovim
 
 #### Spacevim
@@ -1352,6 +1373,10 @@ wget https://spacevim.org/cn/install.sh
 配置：
 
 *~/.SpaceVim/init.vim*：
+
+<details>
+<summary>spacevim的init.vim配置</summary>
+
 ```vimrc
 "=============================================================================
 " init.vim --- Entry file for neovim
@@ -1387,7 +1412,13 @@ let g:mkdp_echo_preview_url = 0
 " nmap <F5> <Plug>MarkdownPreviewToggle  " 切换预览
 ```
 
+</details>
+
 *~/.SpaceVim.d/init.toml*：
+
+<details>
+<summary>spacevim的init.toml配置</summary>
+
 ```vimrc
 #=============================================================================
 # dark_powered.toml --- dark powered configuration example for SpaceVim
@@ -1480,9 +1511,17 @@ let g:mkdp_echo_preview_url = 0
         name = "akinsho/toggleterm.nvim"
 ```
 
+</details>
+
+---
+
 #### 裸装Vim/Neovim
 
 Vim配置（~/.vim/vimrc、~/.config/nvim/init.vim）：
+
+<details>
+<summary>纯vim的init.toml配置</summary>
+
 ```vim
 " ==================================================
 " 
@@ -1606,9 +1645,17 @@ echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
 ```
 
+</details>
+
+---
+
 更多扩展设置（文件均在 *\$USER/.config/nvim/plugin* 或者 *\$USER/.config/nvim/plugin* 目录之下）：
 
 *plugins.vim*插件设置：
+
+<details>
+<summary>plugins.vim</summary>
+
 ```vim
 " ==================================================
 "
@@ -1724,7 +1771,15 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 ```
 
+</details>
+
+---
+
 *keymap.vim*键位映射设置：
+
+<details>
+<summary>keymap.vim</summary>
+
 ```vim
 " ==================================================
 "
@@ -1779,7 +1834,15 @@ autocmd Filetype markdown inoremap <F4> <Plug>MarkdownPreviewStop
 " 关闭预览
 ```
 
+</details>
+
+---
+
 *markdown-quick-input.vim* markdown文件的快速输入键位映射设置：
+
+<details>
+<summary>markdown-quick-input.vim</summary>
+
 ```vim
 " ==================================================
 "
@@ -1866,7 +1929,15 @@ autocmd Filetype markdown inoremap =T <Esc>o\|\|<++>\|<Enter>\|:-:\|:-:\|<Enter>
 autocmd Filetype markdown inoremap =t <Esc>o\|\|<++>\|<Esc>5hi
 ```
 
+</details>
+
+---
+
 *c-qi.vim*c语言快速输入键位映射设置：
+
+<details>
+<summary>c-qi.vim</summary>
+
 ```vim
 " ==================================================
 "
@@ -1922,8 +1993,15 @@ autocmd Filetype c inoremap ]mm <Esc>o<++><Space><++><Space>(<++>)<Space>{<Enter
 autocmd Filetype c inoremap ]mn <Esc>/^}<CR><Cmd>nohlsearch<CR>o<Enter><++><Space><++><Space>(<++>)<Space>{<Enter><++><Enter><Backspace>return<Space><++>;<Enter><Backspace>}<Enter><Esc>5k0/<++><CR><Cmd>nohlsearch<CR>c4l
 ```
 
+</details>
+
+---
 
 插件安装脚本：
+
+<details>
+<summary>安装脚本</summary>
+
 ```bash
 #下载Vim插件
 mkdir -p ~/.config/nvim/pack/github/start
@@ -1981,4 +2059,6 @@ yarn install
 ```
 
 > 注意， **markdown-preview** 插件需要在仓库根目录中执行 `yarn install` 进行安装
+
+</details>
 
