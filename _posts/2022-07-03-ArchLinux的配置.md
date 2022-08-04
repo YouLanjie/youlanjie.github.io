@@ -641,7 +641,7 @@ client.urgent #cc241d #cc241d #ebdbb2 #282828
 
 我的polybar基于仓库[polybar-themes](https://github.com/adi1090x/polybar-themes)中的 **Cuts**修改而来
 
-![效果](https://youlanjie.github.io/img/in-post/2022-07-03_01/2022-07-03_01-01.png)
+![效果](/img/in-post/2022-07-03_01/2022-07-03_01-01.png)
 
 ### picom
 
