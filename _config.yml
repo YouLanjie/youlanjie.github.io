@@ -1,100 +1,60 @@
-# Site settings
-title: Welcome to my Blog
-SEOTitle: 我的博客 | My Blog
-header-img: img/home-bg.jpg
-# email: huxpro@gmail.com
-description: ""
-keyword: ""
-url: "http://youlanjie.github.io/"              # your host, for absolute URL
-# baseurl: "/huxblog-boilerplate"         # for example, '/blog' if your blog hosted on 'host/blog'
+# Configurations
+title:            微不足道的博客
+longtitle:        微不足道的博客
+author:           Lanjie You
+email:            
+description: >
+  我的个人博客，使用GitBook样式主题构建。
 
+version:          1.0
+gitbook_version:  3.2.3
 
+url:              'https://youlanjie.github.io'
+baseurl:          ''
+rss:              RSS
 
-# SNS settings
-RSS: false
-# weibo_username:     huxpro
-# zhihu_username:     huxpro
-# github_username:    huxpro
-#twitter_username:  huxpro
-# facebook_username:  huxpro
+# bootstrap: use the remote theme for the site itself
+# remote_theme: sighingnow/jekyll-gitbook
 
+toc:
+  enabled: true
+  h_min: 1
+  h_max: 3
 
-
-# Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
-highlighter: rouge
-permalink: pretty
-paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
-
-
-# Gems
-# from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
-
-
-
-# Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
-markdown: kramdown
+# markdown render engine.
+markdown:         kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  auto_ids:               true
+  input:                  GFM
+  math_engine:            mathjax
+  smart_quotes:           lsquo,rsquo,ldquo,rdquo
+  toc_levels:             1..6
+  syntax_highlighter:     rouge
+  syntax_highlighter_opts:
+    guess_lang:           true
 
+syntax_highlighter_style: colorful
 
+markdown_ext:     markdown,mkdown,mkdn,mkd,md
 
-# Disqus settings
-#disqus_username: _your_disqus_short_name_
+# Permalinks
+permalink:        /:categories/:year-:month-:day-:title:output_ext
 
-# Duoshuo settings
-# duoshuo_username: huxblog
-# Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+exclude:
+  - _drafts
 
+collections:
+  pages:
+    output: true
+    permalink: /:collection/:path/
 
+page_width: 800px
 
+destination:      ./_site
+incremental:      false
+regenerate:       true
 
-# Analytics settings
-# Baidu Analytics
-ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
-# Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
-
-
-
-# Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-# sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
-# sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
-
-# Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-
-
-# Friends
-friends: [
-    {
-        title: "Hux Blog",
-        href: "http://huangxuan.me"
-    },{
-        title: "Foo",
-        href: "#"
-    },{
-        title: "Bar",
-        href: "#"
-    },{
-        title: "Example Friends",
-        href: "#"
-    },{
-        title: "It helps SEO",
-        href: "#"
-    }
-]
+plugins:
+  - jekyll-feed
+  - jekyll-readme-index
+  - jemoji
