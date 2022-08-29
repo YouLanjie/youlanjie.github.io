@@ -308,6 +308,9 @@
     
 
     <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这篇blog主要记录我是怎么创建出个人博客网站。或许会不专业、严谨、讲不清楚，也会有错误，且它面向Linux用户，操作与windows用户可能略有不同.</p>
+<blockquote>
+<p>本篇的效果并非现在的博客样式，当时使用jekyll搭建，现在使用hexo搭建</p>
+</blockquote>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>要用github.io建立自己的博客网站，首先需要你有一个github账户。（假设你已经有了一个github账户）</p>
 <p>在github主页点击绿色的 <strong>New</strong> 按钮新建一个储存库。</p>
 <p><img src="/img/in-post/2022-08-04_01/2022-07-02_01-01.png" alt="创建仓库"></p>
@@ -553,7 +556,7 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
 
     <!-- Gitalk -->
     <script>
-        const data = '{"clientID":"761f5861324f23d7dff3","clientSecret":"c736194022cb48cbccc4bc56a449e6945f744e2c","repo":"gitalk-comments","owner":"youlanjie","admin":"youlanjie"}'
+        const data = '{"clientID":"761f5861324f23d7dff3","clientSecret":"c736194022cb48cbccc4bc56a449e6945f744e2c","repo":"youlanjie.github.io","owner":"youlanjie","admin":"youlanjie"}'
         const gitalk = new Gitalk({
             ...JSON.parse( data),
             id:location.pathname,
