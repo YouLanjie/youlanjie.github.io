@@ -59,7 +59,7 @@ web_analytics:
 gitalk:
   clientID: 761f5861324f23d7dff3 # （需要替换）GitHub Application Client ID.
   clientSecret: c736194022cb48cbccc4bc56a449e6945f744e2c #（需要替换）GitHub Application Client Secret.
-  repo: youlanjie.github.io #（需要替换）GitHub repository.
+  repo: gitalk-comments #（需要替换）GitHub repository.
   owner: youlanjie #（需要替换）GitHub repository 所有者，可以是个人或者组织。
   admin: ['youlanjie'] #（需要替换）GitHub repository 的所有者和合作者 (对这个 repository 有写权限的用户)。
 
