@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>ArchLinux的安装-没什么</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="archlinux,arch,linux,">
+<meta name="description" content="">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.initHighlightingOnLoad();</script>
+
+	<meta name="generator" content="Hexo 6.2.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/logo.png" alt="Quiet">
+				</a>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										HOME
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										ARCHIVE
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										CATEGORIES
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										TAGS
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										ABOUT
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>Lanjie You</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">HOME</a>
+        </li>
+        
+        <li>
+            <a href="/archives">ARCHIVE</a>
+        </li>
+        
+        <li>
+            <a href="/categories">CATEGORIES</a>
+        </li>
+        
+        <li>
+            <a href="/tags">TAGS</a>
+        </li>
+        
+        <li>
+            <a href="/about">ABOUT</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+            <img src="/image/logo2.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 0;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815)
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					width: "66%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					width: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    style="background: url('/img/background.jpg')" 
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+            
+            <li><a href="/tags/archlinux">archlinux</a></li>
+            
+            <li><a href="/tags/arch">arch</a></li>
+            
+            <li><a href="/tags/linux">linux</a></li>
+            
+            
+        </ul>
+        
+        <h1>ArchLinux的安装</h1>
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                    
+                <span class="post-header-info-author-text"> <a href="../../about">Lanjie You</a></span>
+                <div class="post-header-info-author-categories">
+                    
+                         <a href="../../categories/linux/" target="_blank" >linux</a>
+                    
+                </div>
+                <p>2022-07-02 22:56:29</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+
+    <h2 id="写在前边"><a href="#写在前边" class="headerlink" title="写在前边"></a>写在前边</h2><p>本blog用于记录我安装ArchLinux的方法，更专业的教程请查阅<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方Wiki</a></p>
+<h2 id="安装前的准备-–-从U盘安装"><a href="#安装前的准备-–-从U盘安装" class="headerlink" title="安装前的准备 – 从U盘安装"></a>安装前的准备 – 从U盘安装</h2><ol>
+<li><p>从<a target="_blank" rel="noopener" href="https://archlinux.org/download/">官网</a>上下载ArchLinux的安装镜像<br>  （以格式一般为<em>archlinux-YYYY.MM.DD-x86_64.iso</em>）<br>  （下滑找到 <strong>China</strong> 分栏有国内镜像服务器源，速度会快很多，推荐<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">清华云tuna.tsinghua.edu.cn</a><br>  与<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/archlinux/iso/latest/">阿里云aliyun.com</a>）</p>
+</li>
+<li><p>windows下则使用任意一款U盘拷录软件（自行百度）拷录镜像文件到U盘（注意，被拷录的U盘的所有数据都会丢失，请备份好资料后再执行操作）。<br>而Linux下则可以（使用root权限）使用命令<code>dd if=你的镜像文件名称 of=/dev/sdX bs=512    #sdX为要拷录的U盘设备，实际中应为sda或sdb...</code>拷录镜像文件到U盘上（Linux的磁盘管理机制请自行百度）（<strong>除非你能够同时查看教程则直接重启，否则建议先记下下面的安装过程较好</strong>）</p>
+</li>
+<li><p>重启电脑，更改启动顺序或（一般情况下）按下F12选择启动项，进入Arch的安装镜像系统。倘若屏幕上出现 <em>FALT</em> 报错请自行搜索解决</p>
+</li>
+</ol>
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="确认引导类型"><a href="#确认引导类型" class="headerlink" title="确认引导类型"></a>确认引导类型</h3><p>首先我们需要确认你的电脑是 <strong>EFI引导+GPT分区表</strong> 还是 <strong>BIOS(LEGACY)引导+MBR分区表</strong> 的引导方式。请在终端中执行命令：</p>
+<pre><code class="bash">ls /sys/firmware/efi/efivars
+</code></pre>
+<p>倘若屏幕提示 <strong>No such file or directory</strong> 则你的电脑是BIOS引导，反则是EFI引导</p>
+<blockquote>
+<p>个人办法：其实如果在开机时留意一下弹出过的菜单界面就能知道你的是什么引导方式。<br>BIOS引导的长这样：<br><img src="/img/in-post/2022-07-02_02/2022-07-02_02-02.png" alt="BIOS"><br>而EFI的长这样：<br><img src="/img/in-post/2022-07-02_02/2022-07-02_02-01.png" alt="EFI"></p>
+</blockquote>
+<h3 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h3><p>有线网络的联网教程请自行百度，这里主要讲无线网络的连接。</p>
+<p>无线网络联网，你可以使用 <code>wifi-menu</code> 工具联网，而我个人更倾向于使用 <code>iwd</code> 工具进行联网。在终端输入</p>
+<pre><code class="bash">iwctl
+</code></pre>
+<p>打开iwd的设置界面,一下为一些常用命令列表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">device list</td>
+<td align="center">列出可用的网络设备</td>
+</tr>
+<tr>
+<td align="center">station 设备名称 scan</td>
+<td align="center">启用指定的设备</td>
+</tr>
+<tr>
+<td align="center">station 设备名称 get-networks</td>
+<td align="center">获取网络列表</td>
+</tr>
+<tr>
+<td align="center">station 设备名称 connet 网络名称</td>
+<td align="center">连接指定的网络，有密码的会要求输入密码，连接成功后网络列表前会出现 <strong>&gt;</strong> 号</td>
+</tr>
+<tr>
+<td align="center">exit</td>
+<td align="center">退出</td>
+</tr>
+<tr>
+<td align="center">quit</td>
+<td align="center">退出</td>
+</tr>
+<tr>
+<td align="center">Tab制表键</td>
+<td align="center">补全或者显示出可用的命令</td>
+</tr>
+<tr>
+<td align="center">方向上下键</td>
+<td align="center">查找上一条&#x2F;下一条历史命令</td>
+</tr>
+</tbody></table>
+<p>操作演示图片：<br><img src="/img/in-post/2022-07-02_02/2022-07-02_02-07.png" alt="操作演示"></p>
+<p>最后使用</p>
+<pre><code class="bash">ping www.baidu.com
+</code></pre>
+<p>判断能否正常上网（使用Ctrl-C退出）</p>
+<h3 id="软件包"><a href="#软件包" class="headerlink" title="软件包"></a>软件包</h3><blockquote>
+<p>提示：这里需要你会使用编辑器Vim。如果不会，可以使用简单一些的nano。教程均自行百度。</p>
+</blockquote>
+<p>执行命令调用vim以编辑文件 <em>&#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist</em></p>
+<pre><code class="bash">vim /etc/pacman.d/mirrorlist
+</code></pre>
+<blockquote>
+<p>提示：输入路径时可以使用Tab补全</p>
+</blockquote>
+<p>按下 <strong>&#x2F;</strong> 并输入 <strong>China</strong> 并回车，跳转到中国服务器的镜像源列表。在列表上方一列输入 <code>dgg</code> 删除列表上面的内容，<br>在列表下方一列输入 <code>dG</code> 移除列表以下内容，建议将清华、阿里云的源以 <code>dd</code> 删除一行，再 <code>p</code> 粘贴的操作放在文件最前面几列，<br>最后输入 <code>:w</code> 回车保存 <code>:q</code> 回车退出。（可以合起来为 <code>:wq</code> 再回车直接保存与退出）。操作过程演示：</p>
+<iframe src="/img/in-post/2022-07-02_02/2022-07-02_02-08.webm" width="512px" height="384px"></iframe>
+
+<p>最终的成果示例：</p>
+<pre><code class="conf">## China
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch
+Server = http://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = http://mirrors.aliyun.com/archlinux/$repo/os/$arch
+Server = http://mirrors.163.com/archlinux/$repo/os/$arch
+</code></pre>
+<blockquote>
+<p>注：我这个是把其他的源都删除了的</p>
+</blockquote>
+<blockquote>
+<p>其实可以直接运行命令</p>
+<pre><code class="bash">reflector -c China -a 10 --sort rate --save /etc/pacman.d/mirrorlist
+</code></pre>
+<p>依照速度进行自动排序，根本不用管</p>
+</blockquote>
+<blockquote>
+<p>编辑 <em>&#x2F;etc&#x2F;pacman.conf</em> 找到 <code>#ParallelDownloads = 5</code> 项，把前面的 <strong>#</strong> 号移除可以实现同时下载多个文件，后面的5是最大的同时下载数量</p>
+<p>在 <em>&#x2F;etc&#x2F;pacman.conf</em> 文件末尾加入</p>
+<pre><code class="conf">[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+</code></pre>
+<p>可以启用 <strong>archlinuxcn</strong> 源，里面有一些国内的常用软件的Linux版本</p>
+</blockquote>
+<h3 id="更新系统时间"><a href="#更新系统时间" class="headerlink" title="更新系统时间"></a>更新系统时间</h3><p>执行</p>
+<pre><code class="bash">timedatectl set-ntp true
+</code></pre>
+<blockquote>
+<p>正常情况下是没有输出的</p>
+</blockquote>
+<h3 id="为系统分区"><a href="#为系统分区" class="headerlink" title="为系统分区"></a>为系统分区</h3><blockquote>
+<p>注意！这个步骤要格外小心，命令回车前要确认命令无误，且要知道自己在做什么，重要的硬盘数据应提前备份好，避免带来数据的丢失</p>
+</blockquote>
+<p>执行命令</p>
+<pre><code class="bash">fdisk -l
+</code></pre>
+<p>查看目前的分区情况</p>
+<p>空白的情况下：</p>
+<p><img src="/img/in-post/2022-07-02_02/2022-07-02_02-03.png" alt="虚拟机——空白"></p>
+<h4 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h4><h5 id="使用fdisk"><a href="#使用fdisk" class="headerlink" title="使用fdisk"></a>使用fdisk</h5><p>使用命令开始为硬盘分区</p>
+<pre><code class="bash">fdisk /dev/sdX   #sdX为目标硬盘，实际中应为sda或sdb...
+</code></pre>
+<p>关于fdisk的命令教程:</p>
+<ul>
+<li>m 查看命令作用</li>
+<li>g 使用GTP分区表</li>
+<li>o 使用MBR分区表</li>
+<li>p 打印分区表（若p命令后中Disklable type:后为dos则为MBR分区表，gpt则为gpt分区表）</li>
+<li>n 新建分区<ul>
+<li>MBR分区表<ul>
+<li>1.确认分区类型<ul>
+<li>p 主分区（最多四个，编号1~4）</li>
+<li>e 扩展分区（占用主分区数量，最多一个，有了则不显示，编号同主分区）</li>
+<li>l 逻辑分区（不限量，前提是得有一个扩展分区，无则不显示，最大大小为扩展分区大小，即包容在扩展分区内，编号5~?）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GPT分区表<ul>
+<li>1.无需确认分区类型，无分区类型之分</li>
+</ul>
+</li>
+<li>共同步骤<ul>
+<li>2.确认分区编号</li>
+<li>3.分区起始扇区（一般不管）</li>
+<li>4.分区结束扇区（+单位 表示多大， -单位 表示剩余多大空间）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>d 移除分区，输入编号即可</li>
+<li>t 更改指定分区的分区类型（作用）</li>
+<li>w 保存退出</li>
+<li>q 不保存直接退出</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Fdisk_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">也可以参考官方wiki</a></p>
+<p>fdisk在安装镜像的帮助截图：</p>
+<p><img src="/img/in-post/2022-07-02_02/2022-07-02_02-04.png" alt="fdisk"></p>
+<p>fdisk在我现有系统的中文帮助截图：</p>
+<p><img src="/img/in-post/2022-07-02_02/2022-07-02_02-06.png" alt="fdisk-CN"></p>
+<h5 id="使用cfdisk"><a href="#使用cfdisk" class="headerlink" title="使用cfdisk"></a>使用cfdisk</h5><p>cfdisk有着伪图形界面，对萌新更友好。</p>
+<p>刚进入cfdisk时如果硬盘没有分区表会询问你。上下方向键移动，回车选择。BIOS选择dos，EFI选择gpt就好。具体的操作就不细讲了。</p>
+<p><img src="/img/in-post/2022-07-02_02/2022-07-02_02-05.png" alt="cfdisk"></p>
+<h5 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h5><p>使用</p>
+<pre><code class="bash">mkfs.filesystemtype /dev/sdXn    #filesystemtype为对应的文件系统类型（ext3,ext4,vfat...），sdXn为硬盘上的第n个分区，n为分区编号
+</code></pre>
+<p>格式化分区，对应的看下面<br><a href="/2022/07/02/ArchLinux%E7%9A%84%E5%AE%89%E8%A3%85/#%E5%88%86%E5%8C%BA%E5%BB%BA%E8%AE%AE">分区建议</a><br>表格</p>
+<h5 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h5><p>使用mount,格式：</p>
+<pre><code class="bash">mount /dev/sdXn /dir
+</code></pre>
+<p>关于挂载分区的具体内容请查看<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/File_systems_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">ArchWiki官方教程</a></p>
+<blockquote>
+<p>sdXn为硬盘分区，&#x2F;dir 为挂载目标目录，详见下表，<br>但是在挂载硬盘时时不能直接按照下表挂载，&#x2F;根目录一般挂载在USB系统的 <em>&#x2F;mnt</em> 目录下，<br>其他的磁盘挂载点跟着变化就行了，但一定要先挂载根目录再依文件夹的关系一个个挂载，<br>没有的文件夹使用 <code>mkdir -p</code> 创建就好（例如：&#x2F;boot&#x2F;efi -&gt; &#x2F;mnt&#x2F;boot&#x2F;efi)</p>
+</blockquote>
+<h4 id="分区建议"><a href="#分区建议" class="headerlink" title="分区建议"></a>分区建议</h4><ul>
+<li>BIOS</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">分区</th>
+<th align="center">大小</th>
+<th align="center">类型</th>
+<th align="center">文件系统</th>
+<th align="center">挂载点</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BOOT</td>
+<td align="center">200~500M</td>
+<td align="center">Linux &#x2F; BIOS BOOT</td>
+<td align="center">ext4</td>
+<td align="center">&#x2F;boot</td>
+<td align="center">作为启动分区</td>
+</tr>
+<tr>
+<td align="center">&#x2F;</td>
+<td align="center">&gt;&#x3D;20G(建议，不是太低也行)</td>
+<td align="center">Linux</td>
+<td align="center">ext4</td>
+<td align="center">&#x2F;</td>
+<td align="center">作为根目录</td>
+</tr>
+<tr>
+<td align="center">*home</td>
+<td align="center"></td>
+<td align="center">Linux</td>
+<td align="center">ext4</td>
+<td align="center">&#x2F;home</td>
+<td align="center">作为用户家目录，利于数据保护、重装系统，可分可不分</td>
+</tr>
+<tr>
+<td align="center">*SWAP</td>
+<td align="center"></td>
+<td align="center">Linux Swap</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">可选，用作交换分区，可当替补的内存理解</td>
+</tr>
+</tbody></table>
+<ul>
+<li>EFI引导</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">分区</th>
+<th align="center">大小</th>
+<th align="center">类型</th>
+<th align="center">文件系统</th>
+<th align="center">挂载点</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">EFI</td>
+<td align="center">100~500M</td>
+<td align="center">EFI System</td>
+<td align="center">vfat</td>
+<td align="center">&#x2F;boot&#x2F;efi</td>
+<td align="center">作为启动引导分区</td>
+</tr>
+<tr>
+<td align="center">&#x2F;</td>
+<td align="center">&gt;&#x3D;20G(建议，不是太低也行)</td>
+<td align="center">Linux</td>
+<td align="center">ext4</td>
+<td align="center">&#x2F;</td>
+<td align="center">作为根目录</td>
+</tr>
+<tr>
+<td align="center">*BOOT</td>
+<td align="center">200~500M</td>
+<td align="center">Linux &#x2F; BIOS BOOT</td>
+<td align="center">ext4</td>
+<td align="center">&#x2F;boot</td>
+<td align="center">可选</td>
+</tr>
+<tr>
+<td align="center">*home</td>
+<td align="center"></td>
+<td align="center">Linux</td>
+<td align="center">ext4</td>
+<td align="center">&#x2F;home</td>
+<td align="center">作为用户家目录，利于数据保护、重装系统，可分可不分</td>
+</tr>
+<tr>
+<td align="center">*SWAP</td>
+<td align="center"></td>
+<td align="center">Linux Swap</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">可选，用作交换分区，可当替补的内存理解</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><p>在硬盘全部挂载后，我们就可以开始安装系统了</p>
+<p>安装基本系统：</p>
+<pre><code class="bash">pacstrap -i /mnt/ base base-devel linux linux-firmware
+</code></pre>
+<blockquote>
+<p>命令中的 <em>&#x2F;mnt&#x2F;</em> 要替换成你所挂载根目录分区的目录名，忘记了可以使用 <code>df -h</code> 或者 <code>lsblk</code> 查看</p>
+</blockquote>
+<blockquote>
+<p>你还可以在安装完基本系统后安装额外的软件方便使用，使用</p>
+<pre><code class="bash">passtrap -i /mnt/ 软件包名
+</code></pre>
+<p>安装软件包。建议装上 <strong>dhcpcd</strong>（DNS服务） <strong>iwd</strong>（联网） <strong>vim</strong> （文件编辑） <strong>fish</strong> （一种shell，默认就有强大的自动补全配置）</p>
+</blockquote>
+<blockquote>
+<p>倘若在前面的软件包设置里启用了archlinuxcn源，其实你可以额外安装内核软件包 <strong>linux-lily</strong> 在tty界面它原装支持显示中文</p>
+</blockquote>
+<p>配置分区表：</p>
+<pre><code class="bash">genfstab -U /mnt/ &gt;&gt; /mnt/etc/fstab
+</code></pre>
+<blockquote>
+<p>这里的 <em>&#x2F;mnt&#x2F;</em> 同理。-U 为使用UUID标识的意思</p>
+</blockquote>
+<p>进入新安装的系统：</p>
+<pre><code class="bash">arch-chroot /mnt/ /bin/bash
+</code></pre>
+<blockquote>
+<p>若前面你安装了 <strong>fish</strong> 就可以使用命令</p>
+<pre><code class="bash">arch-chroot /mnt/ /bin/fish
+</code></pre>
+<p>进入新的系统</p>
+</blockquote>
+<h4 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h4><p>设置中文:</p>
+<pre><code class="bash">vim /etc/locale.gen
+</code></pre>
+<p>输入 <strong>&#x2F;</strong> 搜索zh_CN.UTF-8与en_US.UTF-8,分别去除前面的 <strong>#</strong> 号，并将其放到文件头部。如下：</p>
+<pre><code class="conf">zh_CN.UTF-8 UTF-8
+zh_CN.GBK GBK
+en_US.UTF-8 UTF-8
+......
+</code></pre>
+<p>并执行</p>
+<pre><code class="bash">locale-gen
+</code></pre>
+<p>以及</p>
+<pre><code class="bash">echo &quot;LANG=zh_CN.UTF-8&quot; &gt;&gt; /etc/locale.conf
+export LANG=zh_CN.UTF-8
+</code></pre>
+<p>设置时区为上海：</p>
+<pre><code class="bash">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre>
+<p>设置硬件时钟：</p>
+<pre><code class="bash">hwclock --systohc --utc
+</code></pre>
+<h4 id="安装GRUB引导"><a href="#安装GRUB引导" class="headerlink" title="安装GRUB引导"></a>安装GRUB引导</h4><p>安装grub软件包：</p>
+<pre><code class="bash">pacman -S grub efibootmgr os-prober
+</code></pre>
+<blockquote>
+<p><strong>os-prober</strong> 可以用于自动识别电脑上的其他硬盘装的其他系统</p>
+</blockquote>
+<p>安装grub引导：</p>
+<h5 id="BIOS引导模式下"><a href="#BIOS引导模式下" class="headerlink" title="BIOS引导模式下"></a>BIOS引导模式下</h5><p>将grub引导安装在硬盘sdX的第n个分区</p>
+<pre><code class="bash">grub-install /dev/sdXn
+</code></pre>
+<blockquote>
+<p>&#x2F;dev&#x2F;sdXn为硬盘上的第n个分区，也是你的BOOT分区（挂载到 *&#x2F;boot&#x2F;*）</p>
+</blockquote>
+<h5 id="EFI引导模式下"><a href="#EFI引导模式下" class="headerlink" title="EFI引导模式下"></a>EFI引导模式下</h5><pre><code class="bash">grub-install
+</code></pre>
+<h5 id="生成菜单、配置文件"><a href="#生成菜单、配置文件" class="headerlink" title="生成菜单、配置文件"></a>生成菜单、配置文件</h5><p>（生成&#x2F;更新）配置:</p>
+<pre><code class="bash">grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
+<blockquote>
+<p>如果使用多系统，可以编辑 <em>&#x2F;etc&#x2F;default&#x2F;grub</em> ，找到 <strong>GRUB_DISABLE_OS_PROBER</strong><br>并将后面的 <strong>“true”</strong> 改为 <strong>“false”</strong> 并重新执行更新配命令</p>
+</blockquote>
+<h4 id="用户设置"><a href="#用户设置" class="headerlink" title="用户设置"></a>用户设置</h4><p>为root用户设置密码（否则无法登录）：</p>
+<pre><code class="bash">paswwd root
+</code></pre>
+<blockquote>
+<p><strong>root</strong> 可以省略，前提是你在用root用户操作</p>
+</blockquote>
+<p>创建用户：</p>
+<pre><code class="bash">useradd -m USERNAME -s /bin/SHELL
+</code></pre>
+<blockquote>
+<p><strong>USERNAME</strong> 为你的用户名,SHELL为你想用的shell名称，默认为bash，可以省略</p>
+</blockquote>
+<p>添加组&#x2F;启用sudo：</p>
+<pre><code class="bash">usermod USERNAME -aG sudo
+</code></pre>
+<blockquote>
+<p>将用户添加进 <strong>sudo</strong> 组</p>
+</blockquote>
+<p>为新用户创建密码（否则无法登录）：</p>
+<pre><code class="bash">passwd USERNAME
+</code></pre>
+<h4 id="最后的配置"><a href="#最后的配置" class="headerlink" title="最后的配置"></a>最后的配置</h4><p>启用dhcpcd服务（未安装的使用 <code>pacman -S dhcpcd</code> 安装）：</p>
+<pre><code class="bash">systemctl enable dhcpcd
+</code></pre>
+<blockquote>
+<p>同理，可以启用iwd服务，启用后普通用户也可以使用iwctl了（未开启时必须使用root）</p>
+</blockquote>
+<p>sudo启用sudo组内用户的支持：</p>
+<pre><code class="bash">vim /etc/sudoers
+</code></pre>
+<p>找到 <code>#%sudo ALL=(ALL:ALL) ALL</code> ，移除 <strong>#</strong> 号取消注释<br>（按下 <code>i</code> 进入插入模式再按下 <code>Esc</code> 退回普通模式。或者直接在行首按下 <code>dw</code>）， <code>:w!</code> 强制保存后退出</p>
+<p>退出重启：</p>
+<pre><code class="bash">exit
+reboot
+</code></pre>
+<hr>
+<h3 id="扩展——配置系统"><a href="#扩展——配置系统" class="headerlink" title="扩展——配置系统"></a>扩展——配置系统</h3><h4 id="使用图形界面"><a href="#使用图形界面" class="headerlink" title="使用图形界面"></a>使用图形界面</h4><blockquote>
+<p>以下操作均在root权限下执行，请自行 <code>su root</code> 或者在命令前加上 <code>sudo</code></p>
+</blockquote>
+<p>安装最基本的X服务</p>
+<pre><code class="bash">pacman -S xorg
+</code></pre>
+<blockquote>
+<p>输入法（使用fcitx）</p>
+</blockquote>
+<pre><code class="bash">pacman -S fcitx fcitx-configtool
+echo &quot;GTK_IM_MODULE    DEFAULT=fcitx&quot; &gt;&gt; ~/.pam_environment
+echo &quot;QT_IM_MODULE     DEFAULT=fcitx&quot; &gt;&gt; ~/.pam_environment
+echo &quot;XMODIFIERS       DEFAULT=\@im=fcitx&quot; &gt;&gt; ~/.pam_environment
+</code></pre>
+<ul>
+<li>gnome</li>
+</ul>
+<pre><code class="bash">pacman -S alacarte gnome networkmanager
+systemctl enable gdm
+</code></pre>
+<blockquote>
+<p>gdm为gnome的图形界面登录系统</p>
+</blockquote>
+<ul>
+<li>xfce</li>
+</ul>
+<pre><code class="bash">pacman -S xfce
+systemctl enable xfce
+</code></pre>
+<ul>
+<li>kde</li>
+</ul>
+<pre><code class="bash">pacman -S plassma konsole dolphin sddm
+pacman -S kdeconnet ark
+systemctl enable sddm
+</code></pre>
+<ul>
+<li>i3-wm</li>
+</ul>
+<pre><code class="bash">pacman -S i3-gaps i3blocks i3lock i3status
+</code></pre>
+<blockquote>
+<p>i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。我个人习惯安装kde的软件并在i3wm下使用。即</p>
+<pre><code class="bash">pacman -S i3-gaps i3blocks i3lock i3status sddm kdeconnet konsole dolphin\
+ark qt5ct picom polybar feh rofi
+</code></pre>
+</blockquote>
+<blockquote>
+<p>qt5ct用于设置在i3-wm下kde程序的主题,配置：</p>
+<pre><code class="bash">echo &quot;QT_QPA_PLATFORMTHEME DEFAULT=qt5ct&quot; &gt;&gt; ~/.pam_environment
+</code></pre>
+<p>picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁纸。rofi用于启动应用</p>
+</blockquote>
+<h4 id="中文字体"><a href="#中文字体" class="headerlink" title="中文字体"></a>中文字体</h4><pre><code class="bash">pacamn -S wqy-zenhei
+</code></pre>
+<blockquote>
+<p>其他我安装的字体：</p>
+</blockquote>
+<pre><code class="bash">pacamn -S ttf-liberation ttf-fira-code ttf-fira-mono ttf-nerd-fonts-symbols-mono
+</code></pre>
+<h4 id="使用AUR"><a href="#使用AUR" class="headerlink" title="使用AUR"></a>使用AUR</h4><p>使用AUR助手yay:</p>
+<pre><code class="bash">git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+</code></pre>
+<blockquote>
+<p>如果启用了archlinuxcn源可以直接执行<br><code>pacman -S yay</code><br>安装yay</p>
+</blockquote>
+<p>我使用AUR安装的软件:</p>
+<pre><code class="bash">yay -S google-chrome picom-jonaburg-git bat siji-git ttf-unifont autotiling\
+netease-cloud-music utools
+</code></pre>
+<blockquote>
+<p><strong>netease-cloud-music</strong> 与 <strong>utools</strong> 实际上已经被包含在archlinuxcn库里了</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">软件包名</th>
+<th align="center">软件作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">google-chrome</td>
+<td align="center">浏览器</td>
+</tr>
+<tr>
+<td align="center">picom-jonaburg-git</td>
+<td align="center">picom合成器的分支，支持动画，与原版picom有冲突</td>
+</tr>
+<tr>
+<td align="center">bat</td>
+<td align="center">文本查看器</td>
+</tr>
+<tr>
+<td align="center">siji-git&#x2F;ttf-unifont</td>
+<td align="center">字体</td>
+</tr>
+<tr>
+<td align="center">autotiling</td>
+<td align="center">自通垂直&#x2F;横向排列窗口</td>
+</tr>
+<tr>
+<td align="center">netease-cloud-music</td>
+<td align="center">网易云音乐</td>
+</tr>
+<tr>
+<td align="center">utools</td>
+<td align="center">强大的工具箱</td>
+</tr>
+</tbody></table>
+
+  </div>
+  <div id="gitalk-container"></div>
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2022/07/03/ArchLinux%E7%9A%84%E9%85%8D%E7%BD%AE/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>我的ArchLinux的配置</p>
+        </div>
+    </a>
+    
+
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2022 By Lanjie You. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			target="_blank" rel="noopener" href="https://github.com/qiaobug/hexo-theme-quiet">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+			<img src="/image/logo2.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: rgba(18, 24, 58, 0.06);
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"761f5861324f23d7dff3","clientSecret":"c736194022cb48cbccc4bc56a449e6945f744e2c","repo":"gitalk-comments","owner":"youlanjie","admin":"youlanjie"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        gitalk.render('gitalk-container')
+    </script>
+
+<script>
+	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/QiaoBug/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+</script>
+	</body>
+</html>
+
