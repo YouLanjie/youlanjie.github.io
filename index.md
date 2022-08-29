@@ -1,8 +1,0 @@
----
-layout: home
-title: 欢迎来到我的博客
-cover: /img/background.jpg
-permalink: /
----
-
-博客列表在左边的侧边栏
