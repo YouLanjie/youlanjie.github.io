@@ -1,6 +1,6 @@
 ---
-title: 文章分类
+title: categories
 date: 2020-11-02
-type: categories
-layout: categories
+type: "categories"
+layout: "categories"
 ---
