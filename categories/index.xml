@@ -6,7 +6,25 @@
     <description>Recent content in Categories on noIdea的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 02 Dec 2022 18:42:40 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Jan 2023 12:30:19 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>emacs</title>
+      <link>http://youlanjie.github.io/categories/emacs/</link>
+      <pubDate>Mon, 16 Jan 2023 12:30:19 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/categories/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>学习</title>
+      <link>http://youlanjie.github.io/categories/%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sun, 08 Jan 2023 08:17:15 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/categories/%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>linux</title>
       <link>http://youlanjie.github.io/categories/linux/</link>
