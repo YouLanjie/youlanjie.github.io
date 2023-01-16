@@ -5,7 +5,7 @@ tags:
   - linux
 categories: linux
 layout: post
-date:   2022-08-12 04:04:29 +0800
+date:   2022-11-26 22:47:40 +0800
 ---
 
 ## Archiso是什么？
@@ -46,7 +46,6 @@ date:   2022-08-12 04:04:29 +0800
 > $ sudo cp -r /usr/share/archiso/configs/releng/ archlive
 > ```
 > 
-`
 
 　　其中，*archlive* 为复制出的目录名字。为了方便讲解，你可以在终端使用以下命令定义一个变量，将其作为路径的开头，以代替绝对路径，防止出现错误。其中， *archlive* 为变量名，而其值为当前工作目录的绝对路径。
 
@@ -97,7 +96,6 @@ Server = file:///path/to/customrepo
 > 示例：repo-add /path/to/repo.db.tar.gz pacman-3.0.0-1-i686.pkg.tar.gz
 > ```
 >
-`
 
 #### 向镜像内添加文件
 
