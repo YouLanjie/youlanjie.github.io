@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on noIdea的个人博客</title>
+    <link>http://youlanjie.github.io/tags/</link>
+    <description>Recent content in Tags on noIdea的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 02 Dec 2022 18:42:40 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux</title>
+      <link>http://youlanjie.github.io/tags/linux/</link>
+      <pubDate>Fri, 02 Dec 2022 18:42:40 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>http://youlanjie.github.io/tags/tools/</link>
+      <pubDate>Fri, 02 Dec 2022 18:42:40 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>archlinux</title>
+      <link>http://youlanjie.github.io/tags/archlinux/</link>
+      <pubDate>Sat, 26 Nov 2022 22:47:40 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/archlinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>http://youlanjie.github.io/tags/blog/</link>
+      <pubDate>Thu, 04 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github.io</title>
+      <link>http://youlanjie.github.io/tags/github.io/</link>
+      <pubDate>Thu, 04 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/github.io/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jekyll</title>
+      <link>http://youlanjie.github.io/tags/jekyll/</link>
+      <pubDate>Thu, 04 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/jekyll/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>neovim</title>
+      <link>http://youlanjie.github.io/tags/neovim/</link>
+      <pubDate>Fri, 08 Jul 2022 22:56:29 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/neovim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>http://youlanjie.github.io/tags/vim/</link>
+      <pubDate>Fri, 08 Jul 2022 22:56:29 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

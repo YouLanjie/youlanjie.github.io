@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on noIdea的个人博客</title>
+    <link>http://youlanjie.github.io/tags/vim/</link>
+    <description>Recent content in vim on noIdea的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 08 Jul 2022 22:56:29 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Vim/Neovim</title>
+      <link>http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/</link>
+      <pubDate>Fri, 08 Jul 2022 22:56:29 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/</guid>
+      <description>&lt;p&gt;关于我个人是怎么理解使用Vim的&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

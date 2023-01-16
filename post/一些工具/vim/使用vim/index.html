@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用Vim/Neovim - noIdea的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="youlanjie" /><meta name="description" content="关于我个人是怎么理解使用Vim的
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="使用Vim/Neovim" />
+<meta property="og:description" content="关于我个人是怎么理解使用Vim的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-08T22:56:29+08:00" />
+<meta property="article:modified_time" content="2022-07-08T22:56:29+08:00" />
+<meta itemprop="name" content="使用Vim/Neovim">
+<meta itemprop="description" content="关于我个人是怎么理解使用Vim的"><meta itemprop="datePublished" content="2022-07-08T22:56:29+08:00" />
+<meta itemprop="dateModified" content="2022-07-08T22:56:29+08:00" />
+<meta itemprop="wordCount" content="6148">
+<meta itemprop="keywords" content="vim,neovim," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Vim/Neovim"/>
+<meta name="twitter:description" content="关于我个人是怎么理解使用Vim的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">noidea</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">noidea</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用Vim/Neovim</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-07-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%BC%80%E5%8F%91/"> 开发 </a>
+            </div>
+          <span class="more-meta"> 约 6148 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#操作">操作</a>
+          <ul>
+            <li><a href="#模式介绍">模式介绍</a></li>
+            <li><a href="#正常模式">正常模式</a></li>
+            <li><a href="#命令模式">命令模式</a></li>
+            <li><a href="#插入模式">插入模式</a></li>
+            <li><a href="#替换模式">替换模式</a></li>
+            <li><a href="#可视模式">可视模式</a></li>
+          </ul>
+        </li>
+        <li><a href="#配置">配置</a>
+          <ul>
+            <li><a href="#vim">vim</a></li>
+            <li><a href="#neovim">neovim</a></li>
+            <li><a href="#配置目录结构">配置目录结构</a></li>
+            <li><a href="#配置语法">配置语法</a></li>
+          </ul>
+        </li>
+        <li><a href="#我的配置">我的配置</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2022-07-08T22:56:29" title="July 8, 2022">July 8, 2022</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>关于我个人是怎么理解使用Vim的</p>
+<h2 id="操作">操作</h2>
+<blockquote>
+<p>Vim官方已经有了一份中文的教程了，只需要在终端执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vimtutor
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即可查看</p>
+</blockquote>
+<h3 id="模式介绍">模式介绍</h3>
+<p>Vim分为多个模式，正常情况下Vim处于 <strong>正常模式</strong> 。在其他模式下按下 <strong>ESC</strong> 键可以返回正常模式。在正常模式下，可以通过各种按键进入其他模式或者执行什么文件的编辑功能。列表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">进入方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">正常模式</td>
+<td style="text-align:center">vim的默认模式，其他模式的入口</td>
+<td style="text-align:center">按下ESC返回</td>
+</tr>
+<tr>
+<td style="text-align:center">命令模式</td>
+<td style="text-align:center">可以执行命令、保存文件、退出程序等操作</td>
+<td style="text-align:center">在正常模式输入<code>:</code>进入，可以输入命令回车执行</td>
+</tr>
+<tr>
+<td style="text-align:center">插入模式</td>
+<td style="text-align:center">用于插入文本到文件中</td>
+<td style="text-align:center">按下<code>i</code> <code>I</code> <code>a</code> <code>A</code> <code>s</code> <code>S</code> <code>c</code> <code>o</code> <code>O</code>等</td>
+</tr>
+<tr>
+<td style="text-align:center">替换模式</td>
+<td style="text-align:center">用于输入新的字符并将源字符替换</td>
+<td style="text-align:center">按下<code>R</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:center">可视模式</td>
+<td style="text-align:center">选择文本</td>
+<td style="text-align:center">按下<code>v</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:center">可视 块模式</td>
+<td style="text-align:center">选择文本，但是可以以方块状的模式剪贴</td>
+<td style="text-align:center">按下<code>Ctrl-v</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:center">可视 行模式</td>
+<td style="text-align:center">选择文本，但是直接选择整行（未发现有什么用）</td>
+<td style="text-align:center">按下<code>Shift-v</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:center">选择模式</td>
+<td style="text-align:center">选择文本，按下字符替换掉选择的字符，并进入插入模式</td>
+<td style="text-align:center">按下<code>v</code>进入（任意）可视模式后再按下<code>Ctrl-g</code>进入选择模式，也有块、行模式的区分，基于进入的是什么可视模式进入</td>
+</tr>
+</tbody>
+</table>
+<h3 id="正常模式">正常模式</h3>
+<p>移动（官方教程原文）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">             ^
+</span></span><span class="line"><span class="cl">             k              提示： h 的键位于左边，每次按下就会向左移动。
+</span></span><span class="line"><span class="cl">       &lt; h       l &gt;               l 的键位于右边，每次按下就会向右移动。
+</span></span><span class="line"><span class="cl">             j                     j 键看起来很象一支尖端方向朝下的箭头。
+</span></span><span class="line"><span class="cl">             v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>此操作只能够在正常模式下</p>
+</blockquote>
+<p>操作表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">按键</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td style="text-align:center">进入插入模式，插入光标向右移动一字符，在光标左边插入</td>
+</tr>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">进入插入模式，插入光标移动到行末，在光标左边插入</td>
+</tr>
+<tr>
+<td style="text-align:center">cw</td>
+<td style="text-align:center">移除一个字符从光标处到单词末（进入插入模式）</td>
+</tr>
+<tr>
+<td style="text-align:center">ce</td>
+<td style="text-align:center">移除字符到行末（进入插入模式）</td>
+</tr>
+<tr>
+<td style="text-align:center">d[n]d</td>
+<td style="text-align:center">移除n行，不指定n则为一行</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]dd</td>
+<td style="text-align:center">移除n行，不指定n则为一行</td>
+</tr>
+<tr>
+<td style="text-align:center">dw</td>
+<td style="text-align:center">移除一个单词</td>
+</tr>
+<tr>
+<td style="text-align:center">e</td>
+<td style="text-align:center">移动到（下一个）词末</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]gg</td>
+<td style="text-align:center">移动到第n行，不指定n则移动到文件首</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]G</td>
+<td style="text-align:center">移动到第n行，不指定n则移动到文件末</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl-g</td>
+<td style="text-align:center">显示文件信息</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]h</td>
+<td style="text-align:center">向左移动n个字符，n默认（不指定时）为1</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">进入插入模式，插入光标不动，在光标左边插入</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td style="text-align:center">进入插入模式，插入光标移动到行首，在光标左边插入</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]j</td>
+<td style="text-align:center">向下移动n行，n默认（不指定时）为1</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]k</td>
+<td style="text-align:center">向上移动n行，n默认（不指定时）为1</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]l</td>
+<td style="text-align:center">向右移动n个字符，n默认（不指定时）为1</td>
+</tr>
+<tr>
+<td style="text-align:center">n</td>
+<td style="text-align:center">搜索事的下一个搜索目标</td>
+</tr>
+<tr>
+<td style="text-align:center">N</td>
+<td style="text-align:center">搜索事的上一个搜索目标</td>
+</tr>
+<tr>
+<td style="text-align:center">o</td>
+<td style="text-align:center">向下新建一行并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:center">O</td>
+<td style="text-align:center">向上新建一行并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:center">p</td>
+<td style="text-align:center">在光标的右侧粘贴vim缓存的内容，可以通过<code>c</code> <code>d</code> <code>y</code>等方式向缓存区写入内容（独立于系统的剪贴板）</td>
+</tr>
+<tr>
+<td style="text-align:center">P</td>
+<td style="text-align:center">效果同<code>p</code>但是内容在光标左边粘贴内容</td>
+</tr>
+<tr>
+<td style="text-align:center">r</td>
+<td style="text-align:center">替换一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">R</td>
+<td style="text-align:center">进入替换模式，输入的字符将会替换文件原有内容</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl-r</td>
+<td style="text-align:center">撤销<em>undo</em>操作（即撤销撤销操作）</td>
+</tr>
+<tr>
+<td style="text-align:center">s</td>
+<td style="text-align:center">基本等同于<code>c</code></td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center"><em>undo</em>即撤销之前的操作</td>
+</tr>
+<tr>
+<td style="text-align:center">v</td>
+<td style="text-align:center">进入<strong>可视模式</strong>选择文本（选择好后可以键入 <code>:w filename</code> 将选择的内容保存在文件 <em>filename</em> 中）</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl-v</td>
+<td style="text-align:center">进入<strong>可视 块</strong>模式选择文本，可以以方块状选择文本</td>
+</tr>
+<tr>
+<td style="text-align:center">Shift-v</td>
+<td style="text-align:center">进入<strong>可视 行</strong>模式选择文本，不过是直接一行行地选择文本</td>
+</tr>
+<tr>
+<td style="text-align:center">[Ctrl/Shift]+v+Ctrl+g</td>
+<td style="text-align:center">选择文本，按下字符替换掉选择的字符，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:center">w</td>
+<td style="text-align:center">移动到（下一个）词首，也可以作为worlds单位供其他动作使用</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]x</td>
+<td style="text-align:center">移除光标所处位置的（n个字符，默认为1个）字符，但不会进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">复制选中的内容到缓存区</td>
+</tr>
+<tr>
+<td style="text-align:center">yy</td>
+<td style="text-align:center">复制光标所在行的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">搜索文件内容，后接内容（从文件首向文件末排列搜索目标）</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">搜索文件内容时反过来搜索（从文件末向文件首排列搜索目标）</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">移动光标到符合匹配的一对字符（括号类、引号类）的另一个，如由开括号跳转到收括号</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">跳转到行末</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">跳转到行首</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">跳转到行首</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">在文件中查找光标所在位置的单词</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">同 <strong>#</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">F1</td>
+<td style="text-align:center">打开一个Vim的帮助窗口（教程纯英文）</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]Ctrl+a</td>
+<td style="text-align:center">在遇到数字时会自动将数字自增n（不指定时n默认为1）</td>
+</tr>
+<tr>
+<td style="text-align:center">[n]Ctrl+x</td>
+<td style="text-align:center">在遇到数字时会自动将数字自减n（不指定时n默认为1）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="命令模式">命令模式</h3>
+<p>较为常用的命令表：</p>
+<blockquote>
+<p>在命令后添加 <strong>!</strong> 意思为强制执行</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:w</td>
+<td style="text-align:center">保存</td>
+</tr>
+<tr>
+<td style="text-align:center">:w!</td>
+<td style="text-align:center">强制保存</td>
+</tr>
+<tr>
+<td style="text-align:center">:q</td>
+<td style="text-align:center">退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:q!</td>
+<td style="text-align:center">强制（不保存）退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq</td>
+<td style="text-align:center">保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:a</td>
+<td style="text-align:center">在文件的末尾追加回车后输入的字符，按下 <strong>Esc</strong> 返回</td>
+</tr>
+<tr>
+<td style="text-align:center">:r filename</td>
+<td style="text-align:center">读取文件 <em>filename</em> 的内容并追加到文件中</td>
+</tr>
+<tr>
+<td style="text-align:center">: s/a/b/g</td>
+<td style="text-align:center">替换光标所在行中的所有 <strong>a</strong> 为 <strong>b</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">:%s/a/b/g</td>
+<td style="text-align:center">替换文件中的所有 <strong>a</strong> 为 <strong>b</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">:%s/a/b</td>
+<td style="text-align:center">替换文件中的每行的第一个 <strong>a</strong> 为 <strong>b</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">:#,#s/a/b</td>
+<td style="text-align:center">替换文件中第 <strong>#</strong> 行到第 <strong>#</strong> 行的每行的第一个 <strong>a</strong> 为 <strong>b</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">:#,#s/a/b/g</td>
+<td style="text-align:center">替换文件中第 <strong>#</strong> 行到第 <strong>#</strong> 行的所有 <strong>a</strong> 为 <strong>b</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">:sp</td>
+<td style="text-align:center">横向分割出一个新窗口（并打开命令后面指定的文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">:vsp</td>
+<td style="text-align:center">纵向分割出一个新窗口（并打开命令后面指定的文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">:tabnew</td>
+<td style="text-align:center">新建标签页（并打开命令后面指定的文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">:tabNext</td>
+<td style="text-align:center">下一个标签页</td>
+</tr>
+<tr>
+<td style="text-align:center">:set [setting]</td>
+<td style="text-align:center">设置编辑器设置的setting项，如 <code>set wrap</code> 设置打开文件自动折行</td>
+</tr>
+<tr>
+<td style="text-align:center">:setfiletype type</td>
+<td style="text-align:center">设置文件类型为指定的 <strong>type</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">:!command</td>
+<td style="text-align:center">调用shell执行外部命令 <em>command</em></td>
+</tr>
+<tr>
+<td style="text-align:center">:bn</td>
+<td style="text-align:center">切换窗口到下一个buffer（Vim打开文件若只关闭窗口文件还会以Buffer形式在后台打开</td>
+</tr>
+</tbody>
+</table>
+<h3 id="插入模式">插入模式</h3>
+<p>只不过是简单地输入文本并插入到文件中罢了</p>
+<h3 id="替换模式">替换模式</h3>
+<p>同插入模式，只不过内容会被直接替换</p>
+<h3 id="可视模式">可视模式</h3>
+<p>从原光标处起移动光标选定区域，选定的内容可以直接输入 <code>y</code> 复制，也可以直接输入  <code>:w</code> 保存内容到指定的文件中
+（实际上显示的真正命令应该为 <code>:'\&lt;,'\&gt;w</code> ）
+<img src="/img/2022-07-08_01/2022-07-08_01-01.png" alt="配图"></p>
+<h2 id="配置">配置</h2>
+<h3 id="vim">vim</h3>
+<p>Vim的主配置文件可以是 <em>~/.vimrc</em> 也可以是 <em>~/.vim/vimrc</em> 。</p>
+<h3 id="neovim">neovim</h3>
+<p>Neovim的主配置文件是 <em>~/.config/nvim/init.vim</em> 。</p>
+<h3 id="配置目录结构">配置目录结构</h3>
+<p>Vim/Neovim的配置文件夹结构基本一致。基本结构如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">$ tree2 -L 4 .config/nvim
+</span></span><span class="line"><span class="cl">.config/nvim
+</span></span><span class="line"><span class="cl">├── init.vim
+</span></span><span class="line"><span class="cl">├── pack
+</span></span><span class="line"><span class="cl">│   └── github
+</span></span><span class="line"><span class="cl">│       ├── opt
+</span></span><span class="line"><span class="cl">│       └── start
+</span></span><span class="line"><span class="cl">├── plugin
+</span></span><span class="line"><span class="cl">└── undo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">18 directories, 14 files
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中pack文件夹下新建一个任意名字的文件夹，里面新建 <em>opt</em> 与 <em>start</em> 两个文件夹。<em>pack/dir/start</em>存放vim启动就要加载的插件（仓库），而<em>pack/dir/opt</em>存放的是vim启动不自动加载的插件</p>
+<p>undo文件夹是个人建立的，用于使用vim功能 <strong>撤销（修改）记录永久化</strong> ，即在退出vim后仍然保存着修改的历史记录</p>
+<p>plugin文件夹也用于存放配置文件，名称格式为<code>任意前缀.vim</code>，可以将配置文件分块存储</p>
+<h3 id="配置语法">配置语法</h3>
+<h4 id="映射">映射</h4>
+<h5 id="command">command</h5>
+<p>command的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="nx">command</span> <span class="nx">mp</span> <span class="nx">MarkdownPreview</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在本例子中，mp被映射为<code>MarkdownPreview</code>，所以在普通模式中输入<code>:</code>后再输入<code>mp</code>就能够实现与输入<code>MarkdownPreview</code>同样的效果</p>
+<h5 id="noremap">noremap</h5>
+<p>noremap的用法（狭义）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="nx">noremap</span> <span class="nx">z</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">bn</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在本例子中，倘若vim处于正常模式，键入<code>z</code>则会以命令行模式执行<code>bn</code>命令</p>
+<p>其实它还可以这么表达：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="nx">noremap</span> <span class="nx">z</span> :<span class="nx">bn</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>很明显，noremap的键位映射就是在按下那个按键后模拟用户的输入执行什么操作，即进入命令行模式输入<code>bn</code>并回车，而不能够直接表达的字符则用<code>&lt;&gt;</code>表示</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">表示符号</th>
+<th style="text-align:center">实际含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&lt;C-&gt;</td>
+<td style="text-align:center">Ctrl + 按键</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;M-&gt;</td>
+<td style="text-align:center">Alt + 按键</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;Esc&gt;</td>
+<td style="text-align:center">Esc键</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;SPACE&gt;</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;TAB&gt;</td>
+<td style="text-align:center">Tab键</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;Fn&gt;</td>
+<td style="text-align:center">Fn键，n为数字</td>
+</tr>
+</tbody>
+</table>
+<h5 id="inoremap">inoremap</h5>
+<p>inoremap的用法同noremap，只不过使用的模式是插入模式。也就是说插入模式下也可以有快捷键。如果想要输入原本的字符，就只需要等待一两秒即可。也就是说我们可以使用以下代码实现简单的括号补全：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="nx">inoremap</span> <span class="s1">&#39; &#39;</span>&#39;<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="s2">&#34; &#34;</span>&#34;<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="p">(</span> <span class="p">()&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> [ []<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> { {<span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">O</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="p">&lt;</span> <span class="p">&lt;&gt;&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;inoremap 「 「」&lt;ESC&gt;i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> （ （）<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="其他十分有用的功能">其他（十分有用的）功能</h4>
+<p>实现文件退出后保存浏览进度：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="nx">au</span> <span class="nx">BufReadPost</span> * <span class="k">if</span> <span class="nx">line</span><span class="p">(</span><span class="s2">&#34;&#39;\&#34;&#34;</span><span class="p">)</span> <span class="p">&gt;</span> <span class="m">1</span> &amp;&amp; <span class="nx">line</span><span class="p">(</span><span class="s2">&#34;&#39;\&#34;&#34;</span><span class="p">)</span> <span class="p">&lt;=</span> <span class="nx">line</span><span class="p">(</span><span class="s2">&#34;$&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nx">exe</span> <span class="s2">&#34;normal! g&#39;\&#34;&#34;</span> <span class="p">|</span> <span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 记忆文件上次打开位置</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>实现fcitx输入法在退出插入模式时自动切换英文：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="k">let</span> <span class="nx">s</span>:<span class="nx">fcitx_cmd</span> <span class="p">=</span> <span class="nx">executable</span><span class="p">(</span><span class="s2">&#34;fcitx5-remote&#34;</span><span class="p">)</span> ? <span class="s2">&#34;fcitx5-remote&#34;</span> : <span class="s2">&#34;fcitx-remote&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">InsertLeave</span> * <span class="k">let</span> <span class="nx">b</span>:<span class="nx">fcitx</span> <span class="p">=</span> <span class="nx">system</span><span class="p">(</span><span class="nx">s</span>:<span class="nx">fcitx_cmd</span><span class="p">)</span> <span class="p">|</span> <span class="nx">call</span> <span class="nx">system</span><span class="p">(</span><span class="nx">s</span>:<span class="nx">fcitx_cmd</span>.<span class="s1">&#39; -c&#39;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">InsertEnter</span> * <span class="k">if</span> <span class="nx">exists</span><span class="p">(</span><span class="s1">&#39;b:fcitx&#39;</span><span class="p">)</span> &amp;&amp; <span class="nx">b</span>:<span class="nx">fcitx</span> <span class="p">==</span> <span class="m">2</span> <span class="p">|</span> <span class="nx">call</span> <span class="nx">system</span><span class="p">(</span><span class="nx">s</span>:<span class="nx">fcitx_cmd</span>.<span class="s1">&#39; -o&#39;</span><span class="p">)</span> <span class="p">|</span> <span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 退出插入模式时自动切换到英文</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>实现撤销记录持久化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">has</span><span class="p">(</span><span class="s1">&#39;persistent_undo&#39;</span><span class="p">)</span> <span class="c">&#34;check if your vim version supports it </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>	<span class="nx">set</span> <span class="nx">undofile</span> <span class="c">&#34;turn on the feature </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>	<span class="nx">set</span> <span class="nx">undodir</span><span class="p">=</span>$<span class="nx">HOME</span><span class="sr">/.vim/</span><span class="nx">undo</span> <span class="c">&#34;directory where the undo files will be stored </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">endif</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>提示：里面的 <em>$HOME/.vim/undo</em> 可以替换为任意你想要的 <strong>目录</strong> ，在neovim中我会将其替换为 <em>$HOME/.config/nvim/undo</em></p>
+</blockquote>
+<h2 id="我的配置">我的配置</h2>
+<details>
+<summary>插件安装脚本</summary>
+<p>插件安装脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#下载Vim插件</span>
+</span></span><span class="line"><span class="cl">mkdir -p ~/.config/nvim/pack/github/start
+</span></span><span class="line"><span class="cl">mkdir -p ~/.config/nvim/pack/github/opt
+</span></span><span class="line"><span class="cl">mkdir -p ~/.config/nvim/undo
+</span></span><span class="line"><span class="cl">mkdir -p ~/.config/nvim/plugin
+</span></span><span class="line"><span class="cl">mkdir -p ~/.vim
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#nerdtree目录树</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/preservim/nerdtree.git ~/.config/nvim/pack/github/start/nerdtree
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#airline状态栏</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/vim-airline/vim-airline.git ~/.config/nvim/pack/github/start/vim-airline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#space-vim-dark主题</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/liuchengxu/space-vim-dark.git ~/.config/nvim/pack/github/start/space-vim-dark
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#vim-airline-theme状态栏主题</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/vim-airline/vim-airline-themes.git ~/.config/nvim/pack/github/start/vim-airline-themes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#vim-which-key</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/liuchengxu/vim-which-key.git ~/.config/nvim/pack/github/start/im-which-key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#mathjax-support-for-mkdp</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com:iamcco/mathjax-support-for-mkdp.git ~/.config/nvim/pack/github/start/mathjax-support-for-mkdp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#coc.nvim自动补全</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/neoclide/coc.nvim.git ~/.config/nvim/pack/github/start/coc.nvim
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#emmet-vim</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/mattn/emmet-vim.git ~/.config/nvim/pack/github/start/emmet-vim
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#markdown-preview.nvim预览markdown文件插件</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/iamcco/markdown-preview.nvim.git ~/.config/nvim/pack/github/start/markdown-preview.nvim
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#vim-table-mode编辑table时自动快速对齐表格</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/dhruvasagar/vim-table-mode.git ~/.config/nvim/pack/github/start/vim-table-mode
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#auto-pairs成双成对，在vim中自动补全括号等，但这里设置为默认不加载，将下面的 opt 改为 start 或者移动 opt 下的目录到 start 就好了</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/jiangmiao/auto-pairs.git ~/.config/nvim/pack/github/opt/auto-pairs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#nerdcommenter代码注释</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/preservim/nerdcommenter.git ~/.config/nvim/pack/github/start/nerdcommenter
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#vim-mundo代码注释</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/simnalamburt/vim-mundo.git ~/.config/nvim/pack/github/opt/vim-mundo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ln -sf /home/<span class="nv">$USER</span>/.config/nvim/init.vim /home/<span class="nv">$USER</span>/.vim/vimrc
+</span></span><span class="line"><span class="cl">ln -sf /home/<span class="nv">$USER</span>/.config/nvim/pack /home/<span class="nv">$USER</span>/.vim/pack
+</span></span><span class="line"><span class="cl">ln -sf /home/<span class="nv">$USER</span>/.config/nvim/plugin /home/<span class="nv">$USER</span>/.vim/plugin
+</span></span><span class="line"><span class="cl">ln -sf /home/<span class="nv">$USER</span>/.config/nvim/undo /home/<span class="nv">$USER</span>/.vim/undo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/.config/nvim/pack/github/start/markdown-preview.nvim/
+</span></span><span class="line"><span class="cl">yarn install
+</span></span></code></pre></td></tr></table>
+</div>
+</div></details>
+<details>
+<summary>Vim主配置文件</summary>
+<p><code>~/.config/nvim/init.vim</code>or<code>~/.vim/vimrc</code>or<code>~/.vimrc</code>配置文件（主配置文件，保存基本设置）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 基本设置</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">nocompatible</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 关闭 vi 兼容模式</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">syntax</span> <span class="nx">on</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 自动语法高亮</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">autochdir</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 自动切换当前目录为当前文件所在的目录</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">autoread</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 打开文件监视。如果在编辑过程中文件发生外部改变(比如被别的编辑器编辑了)，就会发出提示</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">scrolloff</span><span class="p">=</span><span class="m">3</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设置光标距离顶部和底部的固定位置</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">magic</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设置魔术</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">smartindent</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 开启新行时使用智能自动缩进</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">noeb</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">noexpandtab</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 不要用空格代替制表符</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">backspace</span><span class="p">=</span><span class="nx">indent</span><span class="p">,</span><span class="nx">eol</span><span class="p">,</span><span class="nx">start</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">cmdheight</span><span class="p">=</span><span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设定命令行的行数为 1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">nowrap</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;不折行</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">sidescroll</span><span class="p">=</span><span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;流畅扩展</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">filetype</span> <span class="nx">on</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;检测文件类型</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">filetype</span> <span class="nx">plugin</span> <span class="nx">indent</span> <span class="nx">on</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 开启插件</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; TAB</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">shiftwidth</span><span class="p">=</span><span class="m">8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设定 &lt;&lt; 和 &gt;&gt; 命令移动时的宽度为 8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">softtabstop</span><span class="p">=</span><span class="m">8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 使得按退格键时可以一次删掉 8 个空格</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">tabstop</span><span class="p">=</span><span class="m">8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设定 tab 长度为 8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 行号</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; set number</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">nu</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 显示行号</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">rnu</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 显示相对行号</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 搜索</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">ignorecase</span> <span class="nx">smartcase</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">incsearch</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 输入搜索内容时就显示搜索结果</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 状态栏</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">ruler</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 打开状态栏标尺</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">laststatus</span><span class="p">=</span><span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 显示状态栏 (默认值为 1, 无法显示状态栏)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">statusline</span><span class="p">=</span>%<span class="nx">F</span>%<span class="nx">m</span>%<span class="nx">r</span>%<span class="nx">h</span>%<span class="nx">w</span>\ [<span class="nx">FORMAT</span><span class="p">=</span>%{&amp;<span class="nx">ff</span>}]\ [<span class="nx">TYPE</span><span class="p">=</span>%<span class="nx">Y</span>]\ [<span class="nx">POS</span><span class="p">=</span>%<span class="nx">l</span><span class="p">,</span>%<span class="nx">v</span>][%<span class="nx">p</span>%%]\ %{<span class="nx">strftime</span><span class="p">(</span>\<span class="s2">&#34;%d/%m/%y\ -\ %H:%M\&#34;</span><span class="p">)</span>}<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">statusline</span><span class="p">=</span>[%<span class="nx">F</span>]%<span class="nx">y</span>%<span class="nx">r</span>%<span class="nx">m</span>%*%<span class="p">=</span>[<span class="nx">Line</span>:%<span class="nx">l</span>/%<span class="nx">L</span><span class="p">,</span><span class="nx">Column</span>:%<span class="nx">c</span>][%<span class="nx">p</span>%%]<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设置在状态行显示的信息</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 临时文件</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">noswapfile</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 禁止生成临时文件</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">nobackup</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 覆盖文件时不备份</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">backupcopy</span><span class="p">=</span><span class="nx">yes</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设置备份时的行为为覆盖</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">hidden</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 功能脚本</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">au</span> <span class="nx">BufReadPost</span> * <span class="k">if</span> <span class="nx">line</span><span class="p">(</span><span class="s2">&#34;&#39;\&#34;&#34;</span><span class="p">)</span> <span class="p">&gt;</span> <span class="m">1</span> &amp;&amp; <span class="nx">line</span><span class="p">(</span><span class="s2">&#34;&#39;\&#34;&#34;</span><span class="p">)</span> <span class="p">&lt;=</span> <span class="nx">line</span><span class="p">(</span><span class="s2">&#34;$&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nx">exe</span> <span class="s2">&#34;normal! g&#39;\&#34;&#34;</span> <span class="p">|</span> <span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 记忆文件上次打开位置</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">s</span>:<span class="nx">fcitx_cmd</span> <span class="p">=</span> <span class="nx">executable</span><span class="p">(</span><span class="s2">&#34;fcitx5-remote&#34;</span><span class="p">)</span> ? <span class="s2">&#34;fcitx5-remote&#34;</span> : <span class="s2">&#34;fcitx-remote&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">InsertLeave</span> * <span class="k">let</span> <span class="nx">b</span>:<span class="nx">fcitx</span> <span class="p">=</span> <span class="nx">system</span><span class="p">(</span><span class="nx">s</span>:<span class="nx">fcitx_cmd</span><span class="p">)</span> <span class="p">|</span> <span class="nx">call</span> <span class="nx">system</span><span class="p">(</span><span class="nx">s</span>:<span class="nx">fcitx_cmd</span>.<span class="s1">&#39; -c&#39;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">InsertEnter</span> * <span class="k">if</span> <span class="nx">exists</span><span class="p">(</span><span class="s1">&#39;b:fcitx&#39;</span><span class="p">)</span> &amp;&amp; <span class="nx">b</span>:<span class="nx">fcitx</span> <span class="p">==</span> <span class="m">2</span> <span class="p">|</span> <span class="nx">call</span> <span class="nx">system</span><span class="p">(</span><span class="nx">s</span>:<span class="nx">fcitx_cmd</span>.<span class="s1">&#39; -o&#39;</span><span class="p">)</span> <span class="p">|</span> <span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 退出插入模式时自动切换到英文</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">if</span> <span class="nx">has</span><span class="p">(</span><span class="s1">&#39;persistent_undo&#39;</span><span class="p">)</span> <span class="c">&#34;check if your vim version supports it </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>	<span class="nx">set</span> <span class="nx">undofile</span> <span class="c">&#34;turn on the feature </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>	<span class="nx">set</span> <span class="nx">undodir</span><span class="p">=</span>$<span class="nx">HOME</span><span class="sr">/.config/</span><span class="nx">nvim</span>/<span class="nx">undo</span> <span class="c">&#34;directory where the undo files will be stored </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 配置多语言环境</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">if</span> <span class="nx">has</span><span class="p">(</span><span class="s2">&#34;multi_byte&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; UTF-8 编码</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">encoding</span><span class="p">=</span><span class="nx">utf</span><span class="m">-8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">termencoding</span><span class="p">=</span><span class="nx">utf</span><span class="m">-8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">formatoptions</span><span class="p">+=</span><span class="nx">mM</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">fencs</span><span class="p">=</span><span class="nx">utf</span><span class="m">-8</span><span class="p">,</span><span class="nx">gbk</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">if</span> <span class="nx">v</span>:<span class="nx">lang</span> <span class="p">=~</span>? <span class="s1">&#39;^\(zh\)\|\(ja\)\|\(ko\)&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">ambiwidth</span><span class="p">=</span><span class="nx">double</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">if</span> <span class="nx">has</span><span class="p">(</span><span class="s2">&#34;win32&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">source</span> $<span class="nx">VIMRUNTIME</span>/<span class="nx">delmenu</span>.<span class="nx">vim</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">source</span> $<span class="nx">VIMRUNTIME</span>/<span class="nx">menu</span>.<span class="nx">vim</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">language</span> <span class="nx">messages</span> <span class="nx">zh_CN</span>.<span class="nx">utf</span><span class="m">-8</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">else</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">echoerr</span> <span class="s2">&#34;Sorry, this version of (g)vim was not compiled with +multi_byte&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">endif</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></details>
+<details>
+<summary>Vim辅助配置文件keymap.vim</summary>
+<p><code>plugin/keymap.vim</code>配置文件（插件设置）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 自定义快捷命令</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 自定义命令(命令模式)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">command</span> <span class="nx">W</span> <span class="nx">w</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">command</span> <span class="nx">Q</span> <span class="nx">q</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">command</span> <span class="nx">WQ</span> <span class="nx">wq</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">command</span> <span class="nx">QW</span> <span class="nx">wq</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">command</span> <span class="nx">Wq</span> <span class="nx">wq</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">command</span> <span class="nx">Qw</span> <span class="nx">wq</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; noremap(普通模式使用)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">s</span> :<span class="nx">w</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">q</span> :<span class="nx">wq</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">Q</span> :<span class="nx">q</span><span class="p">!&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">pp</span> :<span class="nx">MarkdownPreview</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">pP</span> :<span class="nx">MarkdownPreviewStop</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">ptt</span> :<span class="nx">TableModeToggle</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;</span><span class="nx">ptr</span> :<span class="nx">TableModeRealign</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span> <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">F3</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Plug</span><span class="p">&gt;</span><span class="nx">MarkdownPreview</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 开始预览</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">F4</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Plug</span><span class="p">&gt;</span><span class="nx">MarkdownPreviewStop</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 关闭预览</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;noremap &lt;C-[&gt; /&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">SPACE</span><span class="p">&gt;&lt;</span><span class="nx">Tab</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">bn</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">Tab</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">w</span><span class="p">&gt;</span><span class="nx">w</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">F3</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">chdir</span> ../<span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">set</span> <span class="nx">noautochdir</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">F4</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;!</span><span class="nx">make</span>;<span class="nx">make</span> <span class="nx">clean</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">F5</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">terminal</span> <span class="nx">bin</span>/<span class="nx">main</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; inoremap(插入模式使用)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="s1">&#39; &#39;</span>&#39;<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="s2">&#34; &#34;</span>&#34;<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="p">(</span> <span class="p">()&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> [ []<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> { {<span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">O</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="p">&lt;</span> <span class="p">&lt;&gt;&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;inoremap 「 「」&lt;ESC&gt;i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> （ （）<span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;补全</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;inoremap &lt;C-[&gt; &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">&lt;</span><span class="nx">F3</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Plug</span><span class="p">&gt;</span><span class="nx">MarkdownPreview</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 开始预览</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">&lt;</span><span class="nx">F4</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Plug</span><span class="p">&gt;</span><span class="nx">MarkdownPreviewStop</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 关闭预览</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></details>
+<details>
+<summary>Vim辅助配置文件plugins.vim</summary>
+<p><code>plugin/plugins.vim</code>配置文件（插件设置）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 插件设置</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; nerdtree</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">NERDTreeWinPos</span><span class="p">=</span><span class="s1">&#39;left&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;设置在 vim 左侧显示</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">NERDTreeWinSize</span><span class="p">=</span><span class="m">20</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;设置宽度为 20</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDTreeDirArrowExpandable</span> <span class="p">=</span> <span class="s1">&#39;▸&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDTreeDirArrowCollapsible</span> <span class="p">=</span> <span class="s1">&#39;▾&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; autocmd vimenter * NERDTree</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">wincmd</span> <span class="nx">w</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">VimEnter</span> * <span class="nx">wincmd</span> <span class="nx">w</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">StdinReadPre</span> * <span class="k">let</span> <span class="nx">s</span>:<span class="nx">std_in</span><span class="p">=</span><span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">VimEnter</span> * <span class="k">if</span> <span class="nx">argc</span><span class="p">()</span> <span class="p">==</span> <span class="m">1</span> &amp;&amp; <span class="nx">isdirectory</span><span class="p">(</span><span class="nx">argv</span><span class="p">()</span>[<span class="m">0</span>]<span class="p">)</span> &amp;&amp; <span class="p">!</span><span class="nx">exists</span><span class="p">(</span><span class="s2">&#34;s:std_in&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nx">exe</span> <span class="s1">&#39;NERDTree&#39;</span> <span class="nx">argv</span><span class="p">()</span>[<span class="m">0</span>] <span class="p">|</span> <span class="nx">wincmd</span> <span class="nx">p</span> <span class="p">|</span> <span class="nx">ene</span> <span class="p">|</span> <span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">StdinReadPre</span> * <span class="k">let</span> <span class="nx">s</span>:<span class="nx">std_in</span><span class="p">=</span><span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; autocmd VimEnter * if argc() == 0 &amp;&amp; !exists(&#34;s:std_in&#34;) | NERDTree | endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">bufenter</span> * <span class="k">if</span> <span class="p">(</span><span class="nx">winnr</span><span class="p">(</span><span class="s2">&#34;$&#34;</span><span class="p">)</span> <span class="p">==</span> <span class="m">1</span> &amp;&amp; <span class="nx">exists</span><span class="p">(</span><span class="s2">&#34;b:NERDTree&#34;</span><span class="p">)</span> &amp;&amp; <span class="nx">b</span>:<span class="nx">NERDTree</span>.<span class="nx">isTabTree</span><span class="p">())</span> <span class="p">|</span> <span class="nx">q</span> <span class="p">|</span> <span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设置 F2 为打开或者关闭的快捷键</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">F2</span><span class="p">&gt;</span> :<span class="nx">NERDTreeToggle</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">inoremap</span> <span class="p">&lt;</span><span class="nx">F2</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span>:<span class="nx">NERDTreeToggle</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; vim-airline</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">set</span> <span class="nx">laststatus</span><span class="p">=</span><span class="m">2</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline_theme</span><span class="p">=</span><span class="s2">&#34;onedark&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34;这个是安装字体后 必须设置此项&#34; </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_powerline_fonts = 1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline</span>#<span class="nx">extensions</span>#<span class="nx">tabline</span>#<span class="nx">enabled</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline</span>#<span class="nx">extensions</span>#<span class="nx">tabline</span>#<span class="nx">buffer_nr_show</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34;设置切换Buffer快捷键&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">tab</span><span class="p">&gt;</span> :<span class="nx">bn</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">noremap</span> <span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">s</span><span class="p">-</span><span class="nx">tab</span><span class="p">&gt;</span> :<span class="nx">bp</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 关闭状态显示空白符号计数</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline</span>#<span class="nx">extensions</span>#<span class="nx">whitespace</span>#<span class="nx">enabled</span> <span class="p">=</span> <span class="m">0</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline</span>#<span class="nx">extensions</span>#<span class="nx">whitespace</span>#<span class="nx">symbol</span> <span class="p">=</span> <span class="s1">&#39;!&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 设置consolas字体&#34;前面已经设置过</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;set guifont=Consolas\ for\ Powerline\ FixedD:h11</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">if</span> <span class="p">!</span><span class="nx">exists</span><span class="p">(</span><span class="s1">&#39;g:airline_symbols&#39;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>	<span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline_symbols</span> <span class="p">=</span> {}<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">endif</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; powerline symbols</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_left_sep = &#39; &#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_left_alt_sep = &#39; &#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_right_sep = &#39; &#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_right_alt_sep = &#39; &#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.branch = &#39;&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.colnr = &#39; :&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.readonly = &#39;&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.linenr = &#39; :&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.maxlinenr = &#39;☰ &#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">airline_symbols</span>.<span class="nx">maxlinenr</span> <span class="p">=</span> <span class="s1">&#39;ML &#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.dirty=&#39;⚡&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; old vim-powerline symbols</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_left_sep = &#39;⮀&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_left_alt_sep = &#39;⮁&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_right_sep = &#39;⮂&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_right_alt_sep = &#39;⮃&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.branch = &#39;⭠&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:airline_symbols.readonly = &#39;⭤&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; vim-theams</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">syntax</span> <span class="nx">enable</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">colorscheme</span> <span class="nx">space</span><span class="p">-</span><span class="nx">vim</span><span class="p">-</span><span class="nb">dark</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Markdown</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; nmap &lt;F3&gt; &lt;Plug&gt;MarkdownPreview        &#34; 开始预览</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; nmap &lt;F4&gt; &lt;Plug&gt;MarkdownPreviewStop    &#34; 关闭预览</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; nmap &lt;F5&gt; &lt;Plug&gt;MarkdownPreviewToggle  &#34; 切换预览</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; nerdcommenter</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; Create default mappings</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDCreateDefaultMappings</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Add spaces after comment delimiters by default</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDSpaceDelims</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Use compact syntax for prettified multi-line comments</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDCompactSexyComs</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Align line-wise comment delimiters flush left instead of following code indentation</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDDefaultAlign</span> <span class="p">=</span> <span class="s1">&#39;left&#39;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Set a language to use its alternate delimiters by default</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDAltDelims_java</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Add your own custom formats or override the defaults</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDCustomDelimiters</span> <span class="p">=</span> { <span class="s1">&#39;c&#39;</span>: { <span class="s1">&#39;left&#39;</span>: <span class="s1">&#39;// &#39;</span> } }<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; let g:NERDCustomDelimiters = { &#39;c&#39;: { &#39;left&#39;: &#39;/*&#39;,&#39;right&#39;: &#39;*/&#39; } }</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Allow commenting and inverting empty lines (useful when commenting a region)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDCommentEmptyLines</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Enable trimming of trailing whitespace when uncommenting</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDTrimTrailingWhitespace</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Enable NERDCommenterToggle to check all selected lines is commented or not </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">NERDToggleCheckAllLines</span> <span class="p">=</span> <span class="m">1</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></details>
+<details>
+<summary>Vim辅助配置文件markdown-quick-input.vim</summary>
+<p><code>plugin/markdown-quick-input.vim</code>配置文件（插件设置）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 自定义markdown快捷输入命令</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 查找标记点</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">f</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>/<span class="p">&lt;++&gt;&lt;</span><span class="nx">CR</span><span class="p">&gt;</span>:<span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">c4l</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">==</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>/<span class="p">&lt;++&gt;&lt;</span><span class="nx">CR</span><span class="p">&gt;</span>:<span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">c4l</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 一级标题</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="m">1</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>#<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 二级标题</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="m">2</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>##<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 三级标题</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="m">3</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>###<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 四级标题</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="m">4</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>####<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 五级标题</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="m">5</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>#####<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 六级标题</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="m">6</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>######<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 小点</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=-</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="p">-&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span>. <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="p">-&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 斜体文本</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">i</span> **<span class="p">&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span>*<span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 粗体文本</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">s</span> ****<span class="p">&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span>*<span class="nx">hi</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 标注</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">m</span> ``<span class="p">&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span>`<span class="nx">i</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 粗斜体文本</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">e</span> ******<span class="p">&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span>*<span class="nx">hhi</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 下划线</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">d</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="p">~~~~&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span><span class="p">~</span><span class="nx">hi</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 高亮</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">h</span> <span class="p">====&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span><span class="p">=</span><span class="nx">hi</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 插入图片</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">p</span> <span class="p">!</span>[]<span class="p">(&lt;++&gt;)&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span>[<span class="nx">a</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 插入链接</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">a</span> []<span class="p">(&lt;++&gt;)&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">F</span>[<span class="nx">a</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 插入分隔线</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">n</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="p">---&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 插入代码块</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">c</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>```<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>```<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">4</span>kA<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 表格操作</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">T</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>\<span class="p">|</span>\<span class="p">|&lt;++&gt;</span>\<span class="p">|&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>\<span class="p">|</span>:<span class="p">-</span>:\<span class="p">|</span>:<span class="p">-</span>:\<span class="p">|&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>\<span class="p">|&lt;++&gt;</span>\<span class="p">|&lt;++&gt;</span>\<span class="p">|&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">2</span>kI<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">li</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">markdown</span> <span class="nx">inoremap</span> <span class="p">=</span><span class="nx">t</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span>\<span class="p">|</span>\<span class="p">|&lt;++&gt;</span>\<span class="p">|&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">5</span>hi<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></details>
+<details>
+<summary>Vim辅助配置文件c-qi.vim</summary>
+<p><code>plugin/c-qi.vim</code>配置文件（c语言快速补全）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; 自定义C语言命令</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; ==================================================</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; /*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; \/\*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;\*\/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">nnoremap</span> ]] <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/\/\*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;\*\/</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">v9l</span><span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">nnoremap</span> ]<span class="p">=</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/\/\*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;\*\/</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">v9l</span><span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">cpp</span> <span class="nx">inoremap</span> ]] <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/\/\*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;\*\/</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">v9l</span><span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">cpp</span> <span class="nx">inoremap</span> ]<span class="p">=</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/\/\*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;\*\/</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">v9l</span><span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; autocmd Filetype c inoremap ]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 注释</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="sr">/ &lt;Esc&gt;A&lt;Space&gt;&lt;Space&gt;&lt;Space&gt;&lt;Space&gt;/</span>*  */<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">3</span>ha<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]. <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">O</span><span class="sr">/*  */</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">3</span>ha<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">cpp</span> <span class="nx">inoremap</span> ]<span class="sr">/ &lt;Esc&gt;A&lt;Space&gt;&lt;Space&gt;&lt;Space&gt;&lt;Space&gt;/</span>*  */<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">3</span>ha<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">cpp</span> <span class="nx">inoremap</span> ]. <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">O</span><span class="sr">/*  */</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="m">3</span>ha<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; if</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">i</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">oif</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span><span class="p">)&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; else if</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">ei</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/}&lt;CR&gt;:nohlsearch&lt;CR&gt;A else&lt;Space&gt;if&lt;Space&gt;(1&lt;Esc&gt;m1a)&lt;Space&gt;{&lt;Esc&gt;o/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*/<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">&#34; else</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">ee</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/}&lt;CR&gt;:nohlsearch&lt;CR&gt;A else&lt;Space&gt;{&lt;Esc&gt;o/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*/<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="m">9</span>h<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; switch</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">ss</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">oswitch</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span><span class="p">)&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Backspace</span><span class="p">&gt;</span><span class="nx">case</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="m">1</span>:<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="nx">break</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="nx">default</span>:<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="nx">break</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">sc</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/break;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;ocase&lt;Space&gt;1&lt;Esc&gt;m1a:&lt;Enter&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*/<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="nx">break</span>;<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>hv<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; while</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">w</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">owhile</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;(</span><span class="m">1</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span><span class="p">)&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; for</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">f</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">ofor</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;(</span><span class="nx">int</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="nx">i</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span>;<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="nx">i</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="m">1</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span>;<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="nx">i</span><span class="p">++)&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; struct</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">t</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">ostruct</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="sr">/&lt;Esc&gt;m1a*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Backspace</span><span class="p">&gt;</span>}<span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="m">9</span>l<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">cpp</span> <span class="nx">inoremap</span> ]<span class="nx">t</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">ostruct</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="sr">/&lt;Esc&gt;m1a*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Backspace</span><span class="p">&gt;</span>}<span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="m">9</span>l<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; functon</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">mm</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">o</span><span class="sr">/&lt;Esc&gt;m1a*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">(</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">)&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>{<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span><span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span><span class="nx">return</span><span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;</span><span class="sr">/*&lt;Space&gt;&lt;++&gt;&lt;Space&gt;*/</span>;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="m">9</span>l<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">mn</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/^}&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;o&lt;Enter&gt;/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/&lt;Space&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/(/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/)&lt;Enter&gt;{&lt;Enter&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/&lt;Enter&gt;return&lt;Space&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*/;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Backspace</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="m">9</span>l<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">ms</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="sr">/^}&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;o&lt;Enter&gt;static&lt;Space&gt;/</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span><span class="nx">m1a</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/&lt;Space&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/(/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/)&lt;Enter&gt;{&lt;Enter&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*<span class="sr">/&lt;Enter&gt;return&lt;Space&gt;/</span>*<span class="p">&lt;</span><span class="nx">Space</span><span class="p">&gt;&lt;++&gt;&lt;</span><span class="nx">Space</span><span class="p">&gt;</span>*/;<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Backspace</span><span class="p">&gt;</span>}<span class="p">&lt;</span><span class="nx">Enter</span><span class="p">&gt;&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span>v<span class="m">9</span>l<span class="p">&lt;</span><span class="nx">C</span><span class="p">-</span><span class="nx">g</span><span class="p">&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nx">autocmd</span> <span class="nx">Filetype</span> <span class="nx">c</span> <span class="nx">inoremap</span> ]<span class="nx">mi</span> <span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>$<span class="nx">m1</span><span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>?<span class="p">)</span>\<span class="nx">n</span>{<span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">yyG</span>?^#<span class="nx">include</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">nohlsearch</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="nx">o</span><span class="p">&lt;</span><span class="nx">ESC</span><span class="p">&gt;</span><span class="nx">pA</span>;<span class="p">&lt;</span><span class="nx">Esc</span><span class="p">&gt;</span>`<span class="m">1</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></details>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">youlanjie</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-07-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vim/">vim</a>
+          <a href="/tags/neovim/">neovim</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">用github.io&#43;jekyll建立一个自己的博客网站</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archlinux%E7%9A%84%E9%85%8D%E7%BD%AE/">
+            <span class="next-text nav-default">我的ArchLinux的配置</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/youlanjie" class="iconfont icon-github" title="github"></a>
+  <a href="http://youlanjie.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>youlanjie</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+    <script type="text/javascript" src="/lib/timeago/timeago-3.0.2.min.js"></script>
+    <script type="text/javascript" src="/lib/timeago/timeago.locales-3.0.2.min.js"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>用github.io&#43;jekyll建立一个自己的博客网站 - noIdea的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="youlanjie" /><meta name="description" content="使用github.io和jekyll建立一个自己的博客网站
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="http://youlanjie.github.io/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="用github.io&#43;jekyll建立一个自己的博客网站" />
+<meta property="og:description" content="使用github.io和jekyll建立一个自己的博客网站" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://youlanjie.github.io/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-04T11:00:00+08:00" />
+<meta property="article:modified_time" content="2022-08-04T11:00:00+08:00" />
+<meta itemprop="name" content="用github.io&#43;jekyll建立一个自己的博客网站">
+<meta itemprop="description" content="使用github.io和jekyll建立一个自己的博客网站"><meta itemprop="datePublished" content="2022-08-04T11:00:00+08:00" />
+<meta itemprop="dateModified" content="2022-08-04T11:00:00+08:00" />
+<meta itemprop="wordCount" content="1629">
+<meta itemprop="keywords" content="jekyll,blog,github.io," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用github.io&#43;jekyll建立一个自己的博客网站"/>
+<meta name="twitter:description" content="使用github.io和jekyll建立一个自己的博客网站"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">noidea</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">noidea</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">用github.io&#43;jekyll建立一个自己的博客网站</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-08-04 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%BC%80%E5%8F%91/"> 开发 </a>
+            </div>
+          <span class="more-meta"> 约 1629 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#写在前面">写在前面</a></li>
+        <li><a href="#准备">准备</a></li>
+        <li><a href="#使用jekyll主题">使用Jekyll主题</a>
+          <ul>
+            <li><a href="#使用github自带的jekyll主题">使用Github自带的Jekyll主题</a></li>
+            <li><a href="#自定义jekyll主题">自定义Jekyll主题</a></li>
+          </ul>
+        </li>
+        <li><a href="#编写发布博客">编写发布博客</a>
+          <ul>
+            <li><a href="#博客命名">博客命名</a></li>
+            <li><a href="#格式要求">格式要求</a></li>
+          </ul>
+        </li>
+        <li><a href="#预览你的博客网站搭建jekyll运行环境">预览你的博客网站——搭建Jekyll运行环境</a>
+          <ul>
+            <li><a href="#安装ruby">安装Ruby</a></li>
+            <li><a href="#安装jekyll">安装Jekyll</a></li>
+            <li><a href="#安装主题的依赖包">安装主题的依赖包</a></li>
+            <li><a href="#预览博客">预览博客</a></li>
+          </ul>
+        </li>
+        <li><a href="#推送你的博客文章到github上">推送你的博客文章到Github上</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2022-08-04T11:00:00" title="August 4, 2022">August 4, 2022</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>使用github.io和jekyll建立一个自己的博客网站</p>
+<h2 id="写在前面">写在前面</h2>
+<p>这篇blog主要记录我是怎么（使用Jekyll）创建出个人博客网站。或许会不专业、严谨、讲不清楚，也会有错误，且它面向Linux用户，操作与windows用户可能略有不同.</p>
+<blockquote>
+<p>本篇的效果并非现在的博客样式，当时使用jekyll搭建，现在使用hugo搭建</p>
+</blockquote>
+<h2 id="准备">准备</h2>
+<p>要用github.io建立自己的博客网站，首先需要你有一个github账户。（假设你已经有了一个github账户）</p>
+<p>在github主页点击绿色的 <strong>New</strong> 按钮新建一个储存库。</p>
+<p><img src="/img/2022-08-04_01/2022-07-02_01-01.png" alt="创建仓库"></p>
+<p>对于储存库的名字格式应为 <code>你的账户名称.github.io</code></p>
+<p><img src="/img/2022-08-04_01/2022-07-02_01-02.png" alt="仓库名称"></p>
+<h2 id="使用jekyll主题">使用Jekyll主题</h2>
+<h3 id="使用github自带的jekyll主题">使用Github自带的Jekyll主题</h3>
+<p>在仓库创建后你可以在仓库界面的 <em>菜单 -&gt; Settings -&gt; Pages</em> 界面中点击按钮 <strong>Choose a theme</strong></p>
+<p><img src="/img/2022-08-04_01/2022-07-02_01-03.png" alt="界面位置"></p>
+<p>并选择一个Jekyll主题并提交更改形成一个初始的界面</p>
+<h3 id="自定义jekyll主题">自定义Jekyll主题</h3>
+<p>先使用git克隆仓库到本地（git的用法自行百度）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/你的用户名/你的仓库名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后再自定义主题。我使用的<a href="https://github.com/huxpro/huxpro.github.io">主题模板</a>使用方法（参考<a href="https://keysaim.github.io/post/blog/2017-08-15-how-to-setup-your-github-io-blog/">这篇文章</a>）</p>
+<p>要先克隆你想要的主题模板仓库到本地,例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git@github.com:sighingnow/jekyll-gitbook.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>克隆后将里面的文件及文件夹（除了.git外）替换(复制到)你的仓库里，并作出一些必要的修改
+（修改_config.yml、index.html等，具体的文件规范可以看<a href="http://jekyllcn.com/docs/structure/">官方文档</a>）
+<del>（就像是抄作业不抄名字）</del> 成为你的博客网站（这可能需要一定的html开发知识）</p>
+<p>其他的主题可以在<a href="http://jekyllthemes.org/">这个网站上</a>查找</p>
+<h2 id="编写发布博客">编写发布博客</h2>
+<h3 id="博客命名">博客命名</h3>
+<p>根据Jekyll官方文档的要求，博客文件应当放置在 <em>仓库根目录/_posts/</em> 文件夹下,以 <code>YEAR-MONTH-DAY-title.MARKUP</code> 的格式对文件进行命名。推荐使用markdown编写blog。</p>
+<h3 id="格式要求">格式要求</h3>
+<blockquote>
+<p>我个人建议使用Markdown编写博客，最好搭配markdown预览功能使用。
+下面的内容均使用Markdown编写博客，其他的请自行查找教程</p>
+</blockquote>
+<p>博客的头部应该有以下内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: 这里填写文章的标题，填了就不用写一级标题了
+</span></span><span class="line"><span class="cl">author: 用户，我不太清楚它有什么用
+</span></span><span class="line"><span class="cl">date: 博客的编写时间（YYYY-MM-DD），填写了时间就会安装文件内部的时间来生成网页（而非文件名）
+</span></span><span class="line"><span class="cl">category: Jekyll       （我不知道它有什么用）
+</span></span><span class="line"><span class="cl">layout: post           （必不可少的内容，标识文件的类型为博客，否则本地预览时一般会出现问题：没有应用主题）
+</span></span><span class="line"><span class="cl">cover: 标识文章的封面图像
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中， <code>layout: post</code> 十分重要，如果文章里没有它，那么（本地预览）打开文章时不会应用主题到上面去（至少我测试时是这样的）</p>
+<p>而 <code>date: YYYY-MM-DD</code> 日期也不止是可以这样，你还可以写成 <code>date: YYYY-MM-DD HH-MM-SS +8000</code> 的形式。即包括时间及时区（+8000是时区）。
+如果当前日期时间在文章标注的时间前是不会构建文章的内容为html的</p>
+<p>封面有无图像效果对比：</p>
+<center>
+<img src="/img/2022-08-04_01/2022-08-05_01-04.png" width=350px/>
+<img src="/img/2022-08-04_01/2022-08-05_01-05.png" width=350px/>
+</center>
+<h2 id="预览你的博客网站搭建jekyll运行环境">预览你的博客网站——搭建Jekyll运行环境</h2>
+<p>由于博客网站推送到远程再进行构建会有一定的延迟，有时甚至不会更新，
+因此在本地搭建Jekyll的运行环境是有必要的</p>
+<h3 id="安装ruby">安装Ruby</h3>
+<p>在ArchLinux安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S ruby
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在Debian/Ubuntu</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install ruby
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装jekyll">安装Jekyll</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gem install jekyll
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装主题的依赖包">安装主题的依赖包</h3>
+<p>因为不同的主题会使用到不同的包，会有不同的依赖，具体的可以查看项目目录下的
+<code>Gemfile</code>
+，里面会有一些类似于下面的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gem &#34;jekyll&#34;
+</span></span><span class="line"><span class="cl">gem &#39;jekyll-feed&#39;
+</span></span><span class="line"><span class="cl">gem &#39;jekyll-readme-index&#39;
+</span></span><span class="line"><span class="cl">gem &#39;jemoji&#39;
+</span></span><span class="line"><span class="cl">gem &#39;webrick&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>基本上安装文件中的引号中的包（名）就不会报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gem install xxx          <span class="c1">#xxx为包名，需自行替换</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>不知道为什么，我运行jekyll预览时会报错，含有 <code>webrick</code> 等字样
+查了半天才找到了<a href="https://blog.csdn.net/qq_43655096/article/details/120397848">解决办法</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bundle add webrick
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<h3 id="预览博客">预览博客</h3>
+<p>在终端执行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jekyll serve
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>顺带一提，想要在本地创建一个默认的jekyll博客项目，就在终端执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jekyll new 你的项目名称（文件夹）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过这样可能会有一些慢</p>
+</blockquote>
+<h2 id="推送你的博客文章到github上">推送你的博客文章到Github上</h2>
+<p>在一篇blog写完后就可以执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add --all                                  <span class="c1">#添加所有文件</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;你想要给这一次提交做的注释&#34;</span>     <span class="c1">#进行提交</span>
+</span></span><span class="line"><span class="cl">git push                                       <span class="c1">#推送更新到Github上</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将更新推送到github上，等待一会之后你的博客网页
+（应为你的仓库名，如<a href="https://your_user_name.github.io">https://your_user_name.github.io</a> ）就应会刷新</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">youlanjie</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-08-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/jekyll/">jekyll</a>
+          <a href="/tags/blog/">blog</a>
+          <a href="/tags/github.io/">github.io</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archiso%E6%89%93%E9%80%A0%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84%E5%9C%A8u%E7%9B%98%E4%B8%8A%E7%9A%84archlinux-live%E7%B3%BB%E7%BB%9F/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Archiso——打造属于你的在U盘上的Archlinux Live系统</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/">
+            <span class="next-text nav-default">使用Vim/Neovim</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/youlanjie" class="iconfont icon-github" title="github"></a>
+  <a href="http://youlanjie.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>youlanjie</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+    <script type="text/javascript" src="/lib/timeago/timeago-3.0.2.min.js"></script>
+    <script type="text/javascript" src="/lib/timeago/timeago.locales-3.0.2.min.js"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

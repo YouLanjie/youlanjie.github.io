@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jekyll on noIdea的个人博客</title>
+    <link>http://youlanjie.github.io/tags/jekyll/</link>
+    <description>Recent content in jekyll on noIdea的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 04 Aug 2022 11:00:00 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/tags/jekyll/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用github.io&#43;jekyll建立一个自己的博客网站</title>
+      <link>http://youlanjie.github.io/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</link>
+      <pubDate>Thu, 04 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</guid>
+      <description>&lt;p&gt;使用github.io和jekyll建立一个自己的博客网站&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

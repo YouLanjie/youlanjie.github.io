@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on noIdea的个人博客</title>
+    <link>http://youlanjie.github.io/post/</link>
+    <description>Recent content in Posts on noIdea的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 02 Dec 2022 18:42:40 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一些我用的小工具盘点</title>
+      <link>http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/%E6%88%91%E7%94%A8%E7%9A%84%E5%B0%8F%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9/</link>
+      <pubDate>Fri, 02 Dec 2022 18:42:40 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/%E6%88%91%E7%94%A8%E7%9A%84%E5%B0%8F%E5%B7%A5%E5%85%B7%E7%9B%98%E7%82%B9/</guid>
+      <description>&lt;p&gt;记录一些Linux中有趣但不一定常用的软件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Archiso——打造属于你的在U盘上的Archlinux Live系统</title>
+      <link>http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archiso%E6%89%93%E9%80%A0%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84%E5%9C%A8u%E7%9B%98%E4%B8%8A%E7%9A%84archlinux-live%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 26 Nov 2022 22:47:40 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archiso%E6%89%93%E9%80%A0%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84%E5%9C%A8u%E7%9B%98%E4%B8%8A%E7%9A%84archlinux-live%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;如何使用archiso工具打造一个自定义的U盘上的临时Live系统&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用github.io&#43;jekyll建立一个自己的博客网站</title>
+      <link>http://youlanjie.github.io/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</link>
+      <pubDate>Thu, 04 Aug 2022 11:00:00 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/%E5%85%B3%E4%BA%8E%E5%BB%BA%E7%AB%99/%E7%94%A8github.io%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</guid>
+      <description>&lt;p&gt;使用github.io和jekyll建立一个自己的博客网站&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用Vim/Neovim</title>
+      <link>http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/</link>
+      <pubDate>Fri, 08 Jul 2022 22:56:29 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/vim/%E4%BD%BF%E7%94%A8vim/</guid>
+      <description>&lt;p&gt;关于我个人是怎么理解使用Vim的&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的ArchLinux的配置</title>
+      <link>http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archlinux%E7%9A%84%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 03 Jul 2022 22:56:29 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archlinux%E7%9A%84%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;记录我个人的archlinux软件配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ArchLinux的安装</title>
+      <link>http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archlinux%E7%9A%84%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sat, 02 Jul 2022 22:56:29 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archlinux%E7%9A%84%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;p&gt;记录我个人安装archlinux的过程&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
