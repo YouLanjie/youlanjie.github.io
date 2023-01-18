@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>打印字符使用特殊效果 - noIdea的个人博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="既然博客都是我的那我就皮一下" /><meta name="description" content=" 使用ANSI转义字符实现终端输出字符带有特殊效果
+" /><meta name="keywords" content="Hugo, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
+
+
+<link rel="canonical" href="http://youlanjie.github.io/post/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6%E4%BD%BF%E7%94%A8%E7%89%B9%E6%AE%8A%E6%95%88%E6%9E%9C/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="打印字符使用特殊效果" />
+<meta property="og:description" content="
+使用ANSI转义字符实现终端输出字符带有特殊效果" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://youlanjie.github.io/post/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6%E4%BD%BF%E7%94%A8%E7%89%B9%E6%AE%8A%E6%95%88%E6%9E%9C/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-01-18T18:22:48+08:00" />
+<meta property="article:modified_time" content="2023-01-19T00:48:00+08:00" />
+<meta itemprop="name" content="打印字符使用特殊效果">
+<meta itemprop="description" content="
+使用ANSI转义字符实现终端输出字符带有特殊效果"><meta itemprop="datePublished" content="2023-01-18T18:22:48+08:00" />
+<meta itemprop="dateModified" content="2023-01-19T00:48:00+08:00" />
+<meta itemprop="wordCount" content="1276">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="打印字符使用特殊效果"/>
+<meta name="twitter:description" content="
+使用ANSI转义字符实现终端输出字符带有特殊效果"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">noidea</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">noidea</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">打印字符使用特殊效果</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2023-01-18 </span>
+        
+          <span class="more-meta"> 约 1276 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">简单介绍</a>
+</li>
+<li><a href="#headline-2">m型效果 </a>
+<ul>
+<li><a href="#headline-3">颜色</a>
+<ul>
+<li><a href="#headline-4">使用普通颜色（非256色）</a>
+</li>
+<li><a href="#headline-5">使用真彩色（256色）</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-6">文字效果</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">其他类型</a>
+<ul>
+<li><a href="#headline-8">光标移动</a>
+</li>
+<li><a href="#headline-9">光标显示</a>
+</li>
+<li><a href="#headline-10">光标位置</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>
+使用ANSI转义字符实现终端输出字符带有特殊效果</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+简单介绍
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>特殊效果的支持源自ANSI标准，由于我不是很懂所以不多赘述。这里重点关注我们应该如何使用它。</p>
+<p>
+先说结论：</p>
+<p>
+要使用特殊效果，通常需要使用任意输出函数输出以 <code class="verbatim">\033[数字选项+字符选项</code> 为格式的字符串。</p>
+<p>
+其中，字符选项相当于指定了其大概的类型，只可以单独使用，并作为一串控制字符串的结束。而数字选项则是细分了其具体功能，且可以复用，只需要使用分号将其隔开。</p>
+<p>
+例子请续看下文。</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+m型效果 
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<blockquote>
+<p>做出一些提醒，以上内容都需要一个关键的字符 <code class="verbatim">m</code> ，所有的文字效果都是基于 <code class="verbatim">\033[XXm</code> 的格式，只是为了方便理解，在大部分内容都不作为重点讲述。</p>
+</blockquote>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+颜色
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+使用普通颜色（非256色）
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<p>要打印出普通的颜色，只需要使用下面的程序：</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">color_code</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span>    <span class="cm">/* 这里使用变量不是必须的，只是为了更容易看懂，实际上需要打印出对应的数字即可 */</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[%dm&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="s">&#34;在这里放你想要带特殊效果打印的东西</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="n">color_code</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<blockquote>
+<p>它运行后的输出结果是这样的：</p>
+<figure>
+<img src="/img/2023-01-18_01/out1.png" alt="/img/2023-01-18_01/out1.png" title="/img/2023-01-18_01/out1.png" /><figcaption>
+输出结果
+</figcaption>
+</figure>
+</blockquote>
+<p>
+下面是所有关于颜色控制的数字表格，左侧是字体颜色，右侧是背景颜色。</p>
+<table>
+<thead>
+<tr>
+<th class="align-right">数字</th>
+<th>字体颜色</th>
+<th class="align-right">数字</th>
+<th>背景颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="align-right">30</td>
+<td>黑色</td>
+<td class="align-right">40</td>
+<td>默认/无色</td>
+</tr>
+<tr>
+<td class="align-right">31</td>
+<td>红色</td>
+<td class="align-right">41</td>
+<td>红色</td>
+</tr>
+<tr>
+<td class="align-right">32</td>
+<td>绿色</td>
+<td class="align-right">42</td>
+<td>绿色</td>
+</tr>
+<tr>
+<td class="align-right">33</td>
+<td>黄色/橙色</td>
+<td class="align-right">43</td>
+<td>黄色/橙色</td>
+</tr>
+<tr>
+<td class="align-right">34</td>
+<td>蓝色</td>
+<td class="align-right">44</td>
+<td>蓝色</td>
+</tr>
+<tr>
+<td class="align-right">35</td>
+<td>紫色</td>
+<td class="align-right">45</td>
+<td>紫色</td>
+</tr>
+<tr>
+<td class="align-right">36</td>
+<td>青色</td>
+<td class="align-right">46</td>
+<td>青色</td>
+</tr>
+<tr>
+<td class="align-right">37</td>
+<td>白色</td>
+<td class="align-right">47</td>
+<td>白色</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>顺带一提，这些控制代码是“可堆叠的”，意思就是不通的颜色代码可以使用分号 <code class="verbatim">;</code> 隔断开来，这样就不必打上好几个 <code class="verbatim">\033[...</code> 让代码变得难以阅读。这里再举一个例子做示范。</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">color_code_bg</span> <span class="o">=</span> <span class="mi">44</span><span class="p">,</span>    <span class="cm">/* 蓝色背景 */</span>
+</span></span><span class="line"><span class="cl">            <span class="n">color_code_fg</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span>    <span class="cm">/* 红色字体 */</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* 这里的转义相当于 \033[44;31m */</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[%d;%dm&#34;</span>
+</span></span><span class="line"><span class="cl">               <span class="s">&#34;Put someting here you want to print.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="n">color_code_bg</span><span class="p">,</span> <span class="n">color_code_fg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>运行效果如下：</p>
+<figure>
+<img src="/img/2023-01-18_01/out2.png" alt="/img/2023-01-18_01/out2.png" title="/img/2023-01-18_01/out2.png" /><figcaption>
+运行结果
+</figcaption>
+</figure>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+使用真彩色（256色）
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>在这种情况下，我们可以打印出256种颜色，比普通颜色高级多了。不过我也还是不知道Vim和Emacs这些编辑器使用主题时是怎样打印任意颜色的。毕竟我取过色，发现我使用的主题有很多都不在256色的范围内，所以说挺令我困惑的。</p>
+<p>
+废话少说，先上代码示范。</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">color_code</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* 在这里将各段控制字符分开是为了方便理解，不是必须的 */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">color_code</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">color_code</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">color_code</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">color_code</span> <span class="o">&gt;=</span> <span class="mi">16</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">color_code</span> <span class="o">-</span> <span class="mi">16</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[&#34;</span>
+</span></span><span class="line"><span class="cl">                       <span class="s">&#34;48;&#34;</span>
+</span></span><span class="line"><span class="cl">                       <span class="s">&#34;5;&#34;</span>
+</span></span><span class="line"><span class="cl">                       <span class="s">&#34;%dm&#34;</span>
+</span></span><span class="line"><span class="cl">                       <span class="s">&#34;%03d&#34;</span>
+</span></span><span class="line"><span class="cl">                       <span class="s">&#34;</span><span class="se">\033</span><span class="s">[0m &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">color_code</span><span class="p">,</span> <span class="n">color_code</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<blockquote>
+<p>运行效果如下：</p>
+<figure>
+<img src="/img/2023-01-18_01/out3.png" alt="/img/2023-01-18_01/out3.png" title="/img/2023-01-18_01/out3.png" /><figcaption>
+运行结果
+</figcaption>
+</figure>
+<p>
+注：如果觉得图片不够清晰可以<a href="/img/2023-01-18_01/out3.html">访问这个地址查看终端输出</a></p>
+</blockquote>
+<p>
+下面开始讲解。</p>
+<p>
+要想使用256色的输出，你需要的是 <code class="verbatim">48;5;%dm</code> 这样一串控制符。
+其中的 <code class="verbatim">48;5;</code> 就是关键。</p>
+<p>
+在这里 <code class="verbatim">48</code> 的意思实际上应该是告诉颜色的类型是背景颜色，如果想要设置字体的颜色，只需要将其替换成 <code class="verbatim">38</code> 即可。</p>
+<p>
+接下来的 <code class="verbatim">5</code> 我就不清楚具体的作用了。我只提上一点：如果单独使用它，那么它所对应的效果实际上是 <strong>字体闪烁</strong> 。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+文字效果
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>如果你观察仔细，就应该会发现刚刚的代码里面有一些新的控制符，例如刚刚提到的 <code class="verbatim">\033[5m;</code> 也有 <code class="verbatim">\033[0m</code> 。现在，是时候列出一个效果列表了。</p>
+<table>
+<thead>
+<tr>
+<th class="align-right">控制符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="align-right">0</td>
+<td>清除所有文字效果</td>
+</tr>
+<tr>
+<td class="align-right">1</td>
+<td>加粗文字</td>
+</tr>
+<tr>
+<td class="align-right">2</td>
+<td>细化文字</td>
+</tr>
+<tr>
+<td class="align-right">3</td>
+<td>斜体</td>
+</tr>
+<tr>
+<td class="align-right">4</td>
+<td>下划线</td>
+</tr>
+<tr>
+<td class="align-right">5</td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td class="align-right">6</td>
+<td>未知</td>
+</tr>
+<tr>
+<td class="align-right">7</td>
+<td>颜色反转（字体和背景颜色互换）</td>
+</tr>
+<tr>
+<td class="align-right">8</td>
+<td>隐藏字体（或许可以尝试做一些彩蛋？）</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+其他类型
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+光标移动
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<table>
+<thead>
+<tr>
+<th>空字符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D</td>
+<td>左</td>
+</tr>
+<tr>
+<td>C</td>
+<td>右</td>
+</tr>
+<tr>
+<td>A</td>
+<td>上</td>
+</tr>
+<tr>
+<td>B</td>
+<td>下</td>
+</tr>
+</tbody>
+</table>
+<p>这种情况下，数字参数用于指定步数</p>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+光标显示
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<p>隐藏光标： <code class="verbatim">\033[?25l</code></p>
+<p>
+显示光标： <code class="verbatim">\033[?25h</code></p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+光标位置
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<p>保存： <code class="verbatim">\033[u</code></p>
+<p>
+还原： <code class="verbatim">\033[l</code></p>
+</div>
+</div>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">既然博客都是我的那我就皮一下</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2023-01-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/emacs/%E4%BB%8Evim%E8%BD%AC%E7%A7%BB%E5%88%B0emacs/">
+            <span class="next-text nav-default">从vim转移到emacs</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://github.com/youlanjie" class="iconfont icon-github" title="github"></a>
+  <a href="http://youlanjie.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022 - 
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>noIdea</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+    <script type="text/javascript" src="/lib/timeago/timeago-3.0.2.min.js"></script>
+    <script type="text/javascript" src="/lib/timeago/timeago.locales-3.0.2.min.js"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="youlanjie" /><meta name="description" content="记录我个人安装archlinux的过程
+<meta name="author" content="noIdea" /><meta name="description" content="记录我个人安装archlinux的过程
 " /><meta name="keywords" content="Hugo, blog" />
 
 
@@ -45,11 +45,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://youlanjie.github.io/post/archlinux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97/archlinux%E7%9A%84%E5%AE%89%E8%A3%85/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-07-02T22:56:29+08:00" />
-<meta property="article:modified_time" content="2022-07-02T22:56:29+08:00" />
+<meta property="article:modified_time" content="2023-01-17T00:54:00+08:00" />
 <meta itemprop="name" content="ArchLinux的安装">
 <meta itemprop="description" content="记录我个人安装archlinux的过程"><meta itemprop="datePublished" content="2022-07-02T22:56:29+08:00" />
-<meta itemprop="dateModified" content="2022-07-02T22:56:29+08:00" />
-<meta itemprop="wordCount" content="3873">
+<meta itemprop="dateModified" content="2023-01-17T00:54:00+08:00" />
+<meta itemprop="wordCount" content="4040">
 <meta itemprop="keywords" content="archlinux,linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ArchLinux的安装"/>
 <meta name="twitter:description" content="记录我个人安装archlinux的过程"/>
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/linux/"> linux </a>
             </div>
-          <span class="more-meta"> 约 3873 字 </span>
-          <span class="more-meta"> 预计阅读 8 分钟 </span>
+          <span class="more-meta"> 约 4040 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
         
       </div>
     </header>
@@ -168,11 +168,6 @@
 </nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="hint">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2022-07-02T22:56:29" title="July 2, 2022">July 2, 2022</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
       <p>记录我个人安装archlinux的过程</p>
 <h2 id="写在前边">写在前边</h2>
@@ -860,7 +855,11 @@ BIOS引导的长这样：
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;XMODIFIERS       DEFAULT=\@im=fcitx&#34;</span> &gt;&gt; ~/.pam_environment
 </span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div><blockquote>
+<p>注：通过*~/.pam_environment<em>文件设置环境变量的方法已失效，请使用其他方法设置环境变量，例如通过</em>/etc/environment<em>文件定义<br>
+还有</em><strong>XMODIFIERS</strong>变量前的&rsquo;/&lsquo;是不应存在的</p>
+</blockquote>
+<ul>
 <li>gnome</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -912,10 +911,13 @@ BIOS引导的长这样：
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -S i3-gaps i3blocks i3lock i3status
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -S i3 i3blocks i3lock i3status
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
+<p>2023-01-17更新：i3-gaps已经被并入了i3软件包了</p>
+</blockquote>
+<blockquote>
 <p>i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。我个人习惯安装kde的软件并在i3wm下使用。即</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -923,13 +925,13 @@ BIOS引导的长这样：
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -S i3-gaps i3blocks i3lock i3status sddm kdeconnet konsole dolphin<span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -S i3 i3blocks i3lock i3status sddm kdeconnet konsole dolphin<span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>ark qt5ct picom polybar feh rofi
 </span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <blockquote>
-<p>qt5ct用于设置在i3-wm下kde程序的主题,配置：</p>
+<p>qt5ct用于设置在i3-wm下kde程序的主题,配置（同上<em>pam_environment</em>已失效）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1036,12 +1038,12 @@ BIOS引导的长这样：
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">youlanjie</span>
+    <span class="item-content">noIdea</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2022-07-02
+        2023-01-17
         
     </span>
   </p>
@@ -1094,7 +1096,7 @@ BIOS引导的长这样：
   <span class="copyright-year">
     &copy; 
     2022 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>youlanjie</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>noIdea</span>
   </span>
 </div>
 
