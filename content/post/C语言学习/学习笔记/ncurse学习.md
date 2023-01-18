@@ -2,8 +2,9 @@
 title: ncurse学习
 tags: ["linux" , "c语言"]
 categories: ["开发"]
+date: 2022-09-03T12:00:00+08:00
+lastmod: 2023-01-17T00:00:00+08:00
 draft: true
-date: 2022-09-03
 ---
 
 记录我学习ncurse的过程

@@ -3,6 +3,7 @@ title: "ArchLinux的安装"
 tags: ["archlinux" , "linux"]
 categories: ["linux"]
 date:   2022-07-02 22:56:29 +0800
+lastmod:   2023-01-17 00:54:00 +0800
 ---
 
 记录我个人安装archlinux的过程
@@ -460,6 +461,9 @@ echo "QT_IM_MODULE     DEFAULT=fcitx" >> ~/.pam_environment
 echo "XMODIFIERS       DEFAULT=\@im=fcitx" >> ~/.pam_environment
 ```
 
+> 注：通过*~/.pam_environment*文件设置环境变量的方法已失效，请使用其他方法设置环境变量，例如通过*/etc/environment*文件定义  
+> 还有***XMODIFIERS**变量前的'/'是不应存在的
+
 - gnome
 
 ```bash
@@ -487,18 +491,20 @@ systemctl enable sddm
 - i3-wm
 
 ```bash
-pacman -S i3-gaps i3blocks i3lock i3status
+pacman -S i3 i3blocks i3lock i3status
 ```
+
+> 2023-01-17更新：i3-gaps已经被并入了i3软件包了
 
 > i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。我个人习惯安装kde的软件并在i3wm下使用。即
 >
 > ```bash
-> pacman -S i3-gaps i3blocks i3lock i3status sddm kdeconnet konsole dolphin\
+> pacman -S i3 i3blocks i3lock i3status sddm kdeconnet konsole dolphin\
 > ark qt5ct picom polybar feh rofi
 > ```
 >
 
-> qt5ct用于设置在i3-wm下kde程序的主题,配置：
+> qt5ct用于设置在i3-wm下kde程序的主题,配置（同上*pam_environment*已失效）：
 >
 > ```bash
 > echo "QT_QPA_PLATFORMTHEME DEFAULT=qt5ct" >> ~/.pam_environment
