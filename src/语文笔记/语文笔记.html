@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-02-04 六 18:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>语文笔记</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">语文笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfa5f099">1. 写作手法（表达技巧）</a>
+<ul>
+<li><a href="#org34837cb">1.1. 修辞手法（10个）</a>
+<ul>
+<li><a href="#org953114d">1.1.1. 比喻</a></li>
+<li><a href="#orga2a3a37">1.1.2. 拟人</a></li>
+<li><a href="#orgc56c663">1.1.3. 排比（３个以上）</a></li>
+<li><a href="#org8b207be">1.1.4. 反复（２个以上）</a></li>
+<li><a href="#orgcf821c5">1.1.5. 夸张</a></li>
+<li><a href="#org4b809e1">1.1.6. 反问</a></li>
+<li><a href="#org0783faf">1.1.7. 设问</a></li>
+<li><a href="#org5fa409e">1.1.8. 反语</a></li>
+<li><a href="#org18c9a4e">1.1.9. 对偶</a></li>
+<li><a href="#org07bfdcd">1.1.10. 引用</a></li>
+<li><a href="#org9ab86e7">1.1.11. 借代</a></li>
+<li><a href="#org37abafa">1.1.12. 互文</a></li>
+<li><a href="#orgdecfd79">1.1.13. 小结/速查表</a></li>
+</ul>
+</li>
+<li><a href="#org8c1c891">1.2. 表达方式（5个）</a>
+<ul>
+<li><a href="#orgacae1dc">1.2.1. 拆分理解</a></li>
+<li><a href="#orgea3b853">1.2.2. 种类/类型</a></li>
+<li><a href="#org1e0d9bd">1.2.3. 小结</a></li>
+</ul>
+</li>
+<li><a href="#org5a8b7e8">1.3. 表现手法（15个）</a>
+<ul>
+<li><a href="#org5200a93">1.3.1. 定义</a></li>
+<li><a href="#orgd992073">1.3.2. 做题思维</a></li>
+<li><a href="#orgd599ca2">1.3.3. 分类</a></li>
+</ul>
+</li>
+<li><a href="#org9b7aa1c">1.4. 结构手法（5个）</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+关于语文的阅读理解教学视频笔记（未完成）
+内容来源于B站UP: <a href="https://space.bilibili.com/316069678">梓墨说语文</a>
+</p>
+
+<blockquote>
+<p>
+观前提醒：该文章仍有部分未完成<br />
+由于排版原因，这里额外提供一个<a href="/src/语文笔记/语文笔记.html">Emacs直接导出的html页面链接</a>
+</p>
+</blockquote>
+
+<div id="outline-container-orgfa5f099" class="outline-2">
+<h2 id="orgfa5f099"><span class="section-number-2">1.</span> 写作手法（表达技巧）</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org34837cb" class="outline-3">
+<h3 id="org34837cb"><span class="section-number-3">1.1.</span> 修辞手法（10个）</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+一共有６３大类，７９小类
+</p>
+</div>
+<div id="outline-container-org953114d" class="outline-4">
+<h4 id="org953114d"><span class="section-number-4">1.1.1.</span> 比喻</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li><b>定义：</b> 把XX比作XX，让句子、描写的对象更加 <span class="underline"><b>生动形象</b></span> （ <b>活泼具体</b> ）</li>
+<li><b>分类：</b> 明喻、暗喻、借喻</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga2a3a37" class="outline-4">
+<h4 id="orga2a3a37"><span class="section-number-4">1.1.2.</span> 拟人</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<ul class="org-ul">
+<li><b>定义：</b> 把XX拟人化/赋予XX人类的动作、情感，让描写对象&lt;u&gt;**生动形象具体**&lt;/u&gt;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc56c663" class="outline-4">
+<h4 id="orgc56c663"><span class="section-number-4">1.1.3.</span> 排比（３个以上）</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li><b>特点：</b> 内容相关，结构相同或相近</li>
+<li><b>作用：</b> <span class="underline"><b>突出</b> 强调</span> ，韵律美</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8b207be" class="outline-4">
+<h4 id="org8b207be"><span class="section-number-4">1.1.4.</span> 反复（２个以上）</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<ul class="org-ul">
+<li><b>定义：</b> 一个句子、词语反复出现（不同于排比，但可以与排比结合来用）</li>
+<li><b>作用：</b> <span class="underline"><b>突出</b> 强调</span> ，韵律美</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf821c5" class="outline-4">
+<h4 id="orgcf821c5"><span class="section-number-4">1.1.5.</span> 夸张</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<ul class="org-ul">
+<li><b>作用：</b> <span class="underline"><b>突出</b> 、强调</span> 作用</li>
+<li><b>分类：</b> <br />
+<i>扩大夸张：</i> 对事物形状、性质、特征、作用等加以夸大（空间）<br />
+<i>缩小夸张：</i> 对事物形状、性质、特征、作用等加以缩小（空间）<br />
+<i>超前夸张：</i> 把后出现的说成先出现，反之亦然（时间）</li>
+<li><b>例句：</b> 她还没有碰酒杯，就醉了</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4b809e1" class="outline-4">
+<h4 id="org4b809e1"><span class="section-number-4">1.1.6.</span> 反问</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<ul class="org-ul">
+<li><b>定义：</b> 借助疑问句传达确定信息</li>
+<li><b>作用：</b> <b>加强语气，突出___<sub>情感</sub></b></li>
+<li><b>答题：</b> 反问可以<br />
+<span class="underline"><b>加强语气</b></span>, <span class="underline"><b>发人深思</b></span>, <span class="underline"><b>激发读者感情,</b></span>
+<span class="underline"><b>加深读者印象</b></span>, <span class="underline"><b>增强文章的气势和说服力</b></span>,  <br />
+为文章 <span class="underline"><b>奠定一种激昂的感情基调</b></span>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0783faf" class="outline-4">
+<h4 id="org0783faf"><span class="section-number-4">1.1.7.</span> 设问</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<ul class="org-ul">
+<li><b>本质：</b> 自问自答</li>
+<li><b>作用：</b> <b>引人注意，启发思考</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5fa409e" class="outline-4">
+<h4 id="org5fa409e"><span class="section-number-4">1.1.8.</span> 反语</h4>
+<div class="outline-text-4" id="text-1-1-8">
+<ul class="org-ul">
+<li><b>定义：</b> 正话反说（褒词贬用）或反话正说</li>
+<li><b>作用：</b> <b>突出</b> 语气、情感，常带有讽刺意味， <b>产生讽刺性</b> （有时比正说更有力量）</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org18c9a4e" class="outline-4">
+<h4 id="org18c9a4e"><span class="section-number-4">1.1.9.</span> 对偶</h4>
+<div class="outline-text-4" id="text-1-1-9">
+<ul class="org-ul">
+<li><b>定义：</b> 字数相等， <i>结构相同，意义对称</i> 的一对 <b>短语</b> 或 <b>句子</b> ，表达两个意思相近或相反的修辞方式</li>
+<li><b>作用：</b> 更 <span class="underline"><b>具文采</b></span> ，具有 <span class="underline"><b>韵律美</b></span></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org07bfdcd" class="outline-4">
+<h4 id="org07bfdcd"><span class="section-number-4">1.1.10.</span> 引用</h4>
+<div class="outline-text-4" id="text-1-1-10">
+<ul class="org-ul">
+<li><b>定义：</b> 说话或写作中引用现成的话</li>
+<li><b>作用：</b> 使论据确凿，增强说服力，是文章富有文采</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9ab86e7" class="outline-4">
+<h4 id="org9ab86e7"><span class="section-number-4">1.1.11.</span> 借代</h4>
+<div class="outline-text-4" id="text-1-1-11">
+<ul class="org-ul">
+<li><b>定义：</b> 用同对象相关的东西代替对象（称呼），如结构部分、颜色特征</li>
+<li><b>作用：</b> 以简代繁，语句精简</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org37abafa" class="outline-4">
+<h4 id="org37abafa"><span class="section-number-4">1.1.12.</span> 互文</h4>
+<div class="outline-text-4" id="text-1-1-12">
+<ul class="org-ul">
+<li><b>定义：</b> 属于一句（或短语）的意思写入两句话，解释时要上下句意思互补</li>
+<li><b>例句：</b> （均选自《木兰诗》）<br />
+原句：
+<span class="underline">东市买骏马，西市买鞍鞯，南市买辔头，北市买长鞭</span> <br />
+翻译：
+东南西北市买　骏马、鞍鞯、辔头、长鞭<br />
+原句：
+<span class="underline">开我东阁门，坐我西阁床，当窗理云鬓，对镜贴花黄</span> <br />
+翻译：
+开东西阁的门，坐东西阁的床，当窗对镜理云鬓、贴花黄</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdecfd79" class="outline-4">
+<h4 id="orgdecfd79"><span class="section-number-4">1.1.13.</span> 小结/速查表</h4>
+<div class="outline-text-4" id="text-1-1-13">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-center" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-center">名称</th>
+<th scope="col" class="org-left">定义/作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-center">比喻</td>
+<td class="org-left">把XX比作XX，让句子、描写的对象更加 _*生动形象*_（ <b>活泼具体</b> ）</td>
+</tr>
+
+<tr>
+<td class="org-center">拟人</td>
+<td class="org-left">把XX拟人化/赋予XX人类的动作、情感，让描写对象 <span class="underline"><b>生动形象具体</b></span></td>
+</tr>
+
+<tr>
+<td class="org-center">排比（３个以上）</td>
+<td class="org-left"><span class="underline"><b>突出</b> 强调</span> 韵律美</td>
+</tr>
+
+<tr>
+<td class="org-center">反复（２个以上）</td>
+<td class="org-left"><span class="underline"><b>突出</b> 强调</span> 韵律美</td>
+</tr>
+
+<tr>
+<td class="org-center">夸张</td>
+<td class="org-left"><span class="underline"><b>突出</b> 强调</span></td>
+</tr>
+
+<tr>
+<td class="org-center">反问</td>
+<td class="org-left"><b>加强语气，突出___<sub>情感</sub></b></td>
+</tr>
+
+<tr>
+<td class="org-center">设问</td>
+<td class="org-left"><b>引人注意，启发思考</b></td>
+</tr>
+
+<tr>
+<td class="org-center">反语</td>
+<td class="org-left"><b>突出</b> 、 <b>产生讽刺性</b></td>
+</tr>
+
+<tr>
+<td class="org-center">对偶</td>
+<td class="org-left"><span class="underline"><b>更具文采</b></span>,具有 <span class="underline"><b>韵律美</b></span></td>
+</tr>
+
+<tr>
+<td class="org-center">引用</td>
+<td class="org-left">使论据确凿，增强说服力，是文章富有文采</td>
+</tr>
+
+<tr>
+<td class="org-center">借代</td>
+<td class="org-left">以简代繁，语句精简</td>
+</tr>
+
+<tr>
+<td class="org-center">互文</td>
+<td class="org-left">属于一句（或短语）的意思写入两句话，解释时要上下句意思互补</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>通感</b></td>
+<td class="org-left">将不同的感觉交叉描写（笑（看的）~&gt;甜（闻的））</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>双关</b></td>
+<td class="org-left">一句话表示双重意思</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>顶针</b></td>
+<td class="org-left">类似词语接龙，上词末字接下词首字</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>回环</b></td>
+<td class="org-left">一句话正读反读意思一样</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>拈连</b></td>
+<td class="org-left">将甲物特征形容乙事物</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>拟物</b></td>
+<td class="org-left">人当物写</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>呼告</b></td>
+<td class="org-left">直呼文中事物</td>
+</tr>
+
+<tr>
+<td class="org-center"><b>跳脱</b></td>
+<td class="org-left">语言因特殊情景半路断开了语路</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>
+注：*名称*为斜体的为表中独有的，比较少见，所以仅在表中列出
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c1c891" class="outline-3">
+<h3 id="org8c1c891"><span class="section-number-3">1.2.</span> 表达方式（5个）</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orgacae1dc" class="outline-4">
+<h4 id="orgacae1dc"><span class="section-number-4">1.2.1.</span> 拆分理解</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li><b>表达：</b> （用文字）说话</li>
+<li><b>表达方式：</b> 用文字说话的方式</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgea3b853" class="outline-4">
+<h4 id="orgea3b853"><span class="section-number-4">1.2.2.</span> 种类/类型</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org9c62941"></a>记叙<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<ul class="org-ul">
+<li><b>代表：</b> 记叙文</li>
+<li><b>六要素：</b> 时间、地点、人物、事件（起因、经过（、高潮）、结果）</li>
+<li><b>记叙顺序</b> <br />
+<i>顺序：</i> 按照事件发展（或时间）为序             <br />
+<i>倒叙：</i> 先结果后起因经过                       <br />
+<i>插叙：</i> 叙述中途插入另一相关内容（背景类之）   <br />
+<i>补叙：</i> 叙述后（文末）补充说明相关、关键内容。</li>
+<li><b>分类</b>
+<ul class="org-ul">
+<li><span class="underline">写人：</span> <br />
+重点在写人的故事（塑造人物形象、精神特征），（重点）突出其内在特征<br />
+表达作者情感（赞美、歌颂、怀念、祝福）</li>
+<li><span class="underline">写事：</span> <br />
+叙述一件事，传达出作者要表达的情感（常为赞美、喜爱等正能量情感）</li>
+<li><span class="underline">写景：</span> <br />
+重点写景（一切景语皆情语）<br />
+<b><i>作用：</i></b> 烘托、透露、表达出作者的情感（寓情于景、借景抒情）（对大自然的喜爱、赞美，作者的心情愉悦、下定什么决心）</li>
+<li><span class="underline">状物：</span> <br />
+写一个物品，但目的是写人<br />
+<b><i>作用：</i></b> 借物喻人，象征、托物言志</li>
+</ul></li>
+<li>人称
+<ul class="org-ul">
+<li>第一人称：便于直抒胸臆，有亲切感与真实感</li>
+<li>第二人称：增强文章的抒情性和亲切感，像与读者面对面交谈，便于抒情</li>
+<li>第三人称：不收时空限制，能够从多个方面自由叙述（客观、全面）</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="orgef9f19d"></a>描写<br />
+<div class="outline-text-5" id="text-1-2-2-2">
+<ul class="org-ul">
+<li><b>代表：</b> 小说</li>
+<li><b>定义：</b> 用文字描绘、描述、描摹出某物的特征</li>
+<li>按照对象分类
+<ul class="org-ul">
+<li>人物描写<br />
+<span class="underline">口诀：</span> 外语动神心
+<ul class="org-ul">
+<li>外貌描写（肖像描写）</li>
+<li>语言描写</li>
+<li>动作描写<br />
+<i>答题：</i> 动词（用词）！ <span class="underline"><b>准确</b></span> ！生动、形象、具体</li>
+<li>神态描写<br />
+<i>例如：</i> XX的心情</li>
+<li>心理描写<br />
+<i>例如：</i> XXX的心理活动-&gt;人格</li>
+</ul></li>
+<li>环境描写（依靠是否有人为因素作为依据区分）<br />
+自然环境<br />
+社会环境</li>
+</ul></li>
+<li>按照描写角度分类
+<ul class="org-ul">
+<li>正面描写（直接描写）</li>
+<li>侧面描写（间接描写）</li>
+</ul></li>
+<li>描写方法（动静动静动动静）
+<ul class="org-ul">
+<li>动静结合</li>
+<li>化静为动</li>
+<li>化动为静</li>
+<li>以动衬静</li>
+<li>以静衬动</li>
+</ul></li>
+<li>小说三要素：人物、情节（开端、发展、高潮、结局）（讲故事）、环境
+<ul class="org-ul">
+<li>以描写、记叙为主的文体</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="orgdda4f29"></a>抒情<br />
+<div class="outline-text-5" id="text-1-2-2-3">
+<ul class="org-ul">
+<li><b>代表：</b> 散文</li>
+<li><b>定义：</b> 直接、间接（表达）抒发（自身）情感的表达方式</li>
+<li>分类
+<ul class="org-ul">
+<li>直接抒情：直接表白倾吐自己的思想情感</li>
+<li>间接抒情：不直接表露自己的情感，借助第三者来抒发自己的情感
+<ul class="org-ul">
+<li>借景抒情</li>
+<li>借物抒情</li>
+<li>融情于事：通过叙述实际抒发感情</li>
+<li>融情于理：把情感寄寓在说理之中，理中含情</li>
+</ul></li>
+</ul></li>
+<li>散文：抒发作者真情实感、写作方式灵活的 <span class="underline">记叙类</span> 文字体裁
+<ul class="org-ul">
+<li>特点
+<ul class="org-ul">
+<li>形散神不散
+<ul class="org-ul">
+<li>形散：选材广泛</li>
+<li>神不散：中心思想突出（主题明确集中）</li>
+</ul></li>
+<li>语言优美（多读散文提高写作文字的优美）</li>
+<li>意境深邃</li>
+</ul></li>
+<li>分类
+<ul class="org-ul">
+<li>叙事类散文：叙事不要求完整（鲁迅《从百草园到三味书屋》）</li>
+<li>抒情散文：抒情强烈（茅盾《白杨礼赞》）</li>
+<li>哲理散文：讲哲理</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="org1e0c3fd"></a>说明<br />
+<div class="outline-text-5" id="text-1-2-2-4">
+<ul class="org-ul">
+<li><b>代表：</b> 说明文</li>
+<li>概念：介绍与解释</li>
+<li>分类（按对象分）
+<ul class="org-ul">
+<li>事物说明文（看得见）（《苏州园林》）</li>
+<li>事理说明文（看不见）</li>
+</ul></li>
+<li>分类（按说明语言分）
+<ul class="org-ul">
+<li>生动说明文：用比较形象的手法说明事物（生动性、形象性）（《昆虫记》）
+<ul class="org-ul">
+<li>方法：修辞手法、现身说法、运用适当的叙事和描写</li>
+</ul></li>
+<li>平实说明文：直截了当，不加描写与夸张</li>
+</ul></li>
+<li>说明顺序
+<ul class="org-ul">
+<li>时间顺序：事理发展过程先后为序（适用于事物说明文）</li>
+<li>空间顺序：事物空间结构为序（同上）</li>
+<li>逻辑顺序：事物事理内在逻辑关系为序（个别到一般、具体到抽象、主要到次要、现象到本质、原因到结果）（适用性广）</li>
+</ul></li>
+<li>语言特点：
+<span class="underline"><b>准确性（基础）</b></span>
+<span class="underline"><b>严密性</b></span>
+<span class="underline"><b>生动性</b></span>
+<span class="underline"><b>平实性</b></span></li>
+<li>说明方法
+<span class="underline"><i>举例子</i></span>
+<span class="underline"><i>分类别</i></span>
+<span class="underline"><i>打比方</i></span>
+<span class="underline"><i>作比较</i></span>
+<span class="underline"><i>下定义</i></span>
+<span class="underline"><i>作诠释</i></span>
+<span class="underline"><i>作引用</i></span>
+<span class="underline"><i>画图表</i></span>
+<span class="underline"><i>列数字</i></span>
+<span class="underline"><i>摹状貌</i></span></li>
+</ul>
+</div>
+</li>
+<li><a id="org37d011a"></a>议论<br />
+<div class="outline-text-5" id="text-1-2-2-5">
+<ul class="org-ul">
+<li><b>代表：</b> 议论文</li>
+<li><b>定义：</b> 发表意见、评价、观点、讲道理、提出主张</li>
+<li><b>分类：</b>
+<ul class="org-ul">
+<li>立论文：提出观点看法并证明</li>
+<li>驳论文：反驳别人观点错误并提出证明自己观点的正确性</li>
+</ul></li>
+<li><b>议论文三要素：</b> 论点（观点）、论据（论证的根据、证据）、论证（用论据证明论点的过程、方法）</li>
+<li><b>语言特点：</b> 同说明文</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org1e0d9bd" class="outline-4">
+<h4 id="org1e0d9bd"><span class="section-number-4">1.2.3.</span> 小结</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">名字</th>
+<th scope="col" class="org-left">思维导图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">记叙（记叙文）</td>
+<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0002.jpg" alt="14_mpv-shot0002.jpg" /></td>
+</tr>
+
+<tr>
+<td class="org-left">描写（小说）</td>
+<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0003.jpg" alt="14_mpv-shot0003.jpg" /></td>
+</tr>
+
+<tr>
+<td class="org-left">抒情（散文）</td>
+<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0004.jpg" alt="14_mpv-shot0004.jpg" /></td>
+</tr>
+
+<tr>
+<td class="org-left">说明（说明文）</td>
+<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0005.jpg" alt="14_mpv-shot0005.jpg" /></td>
+</tr>
+
+<tr>
+<td class="org-left">议论（议论文）</td>
+<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0006.jpg" alt="14_mpv-shot0006.jpg" /></td>
+</tr>
+
+<tr>
+<td class="org-left">总体思维导图</td>
+<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0001.jpg" alt="14_mpv-shot0001.jpg" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org5a8b7e8" class="outline-3">
+<h3 id="org5a8b7e8"><span class="section-number-3">1.3.</span> 表现手法（15个）</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org5200a93" class="outline-4">
+<h4 id="org5200a93"><span class="section-number-4">1.3.1.</span> 定义</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ul class="org-ul">
+<li><b>广义：</b> 约等于写作手法</li>
+<li><b>狭义：</b> 让故事更加精彩的方法，即 <span class="underline">写作方法</span></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd992073" class="outline-4">
+<h4 id="orgd992073"><span class="section-number-4">1.3.2.</span> 做题思维</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+看到“ <span class="underline"><i>XXX有什么作用</i></span> ”就要联想到 <span class="underline"><b>表现手法</b></span>
+</p>
+</div>
+</div>
+<div id="outline-container-orgd599ca2" class="outline-4">
+<h4 id="orgd599ca2"><span class="section-number-4">1.3.3.</span> 分类</h4>
+<div class="outline-text-4" id="text-1-3-3">
+</div>
+<ol class="org-ol">
+<li><a id="org422d0eb"></a>对比<br />
+<div class="outline-text-5" id="text-1-3-3-1">
+<ul class="org-ul">
+<li>起突出强调作用</li>
+<li>把对立的意思或事物的两个方面放在一起作比较，让读者分清好坏、辨别是非</li>
+<li>平等的比较（无主次之分，共同突出）（以主比主）</li>
+</ul>
+</div>
+</li>
+<li><a id="orgbce6c66"></a>衬托<br />
+<div class="outline-text-5" id="text-1-3-3-2">
+<ul class="org-ul">
+<li>为了突出主要事物，用类似的次要事物或反面的、有差别的次要事物作为陪衬。（常用于描写）</li>
+<li>分为正衬（同类）（高衬高）和反衬（相反）</li>
+<li>不平等的比较（有主次之分）（以次衬主）</li>
+</ul>
+</div>
+</li>
+<li><a id="orgdd8be6d"></a>铺垫<br />
+<div class="outline-text-5" id="text-1-3-3-3">
+<ul class="org-ul">
+<li>渲染气氛，让读者产生期待、盼望的急迫心情，增强作品的吸引力</li>
+<li>为下文的人物出现做准备，为表现主要写作对象而提前做的基础性描写</li>
+<li>主要情节的基石，增加情节张力，制造悬念使情节具有合理性。（原则：引而不发、自然合理）</li>
+<li>答题参考格式：（叙述了）XXX事件，为下文XXXX做铺垫</li>
+</ul>
+</div>
+</li>
+<li><a id="org100bb69"></a>伏笔<br />
+<div class="outline-text-5" id="text-1-3-3-4">
+<ul class="org-ul">
+<li>交代含蓄，使文章&lt;u&gt;结构严密、紧凑&lt;/u&gt;，让读者看到下文时，不至于感到赌徒、疑惑。有助于&lt;u&gt;全文结构严谨、情节发展合情合理&lt;/u&gt;。</li>
+<li>上文看似无关紧要的事或物，对下文将要出现的人物或者事件预先作的&lt;u&gt;某种提示&lt;/u&gt;或&lt;u&gt;暗示&lt;/u&gt;，或者说是前文为后文情节埋伏的线索。</li>
+<li>有伏必有应，只伏不应是败笔</li>
+<li>答题参考格式：运用了伏笔，为后文高潮部分埋下了伏笔。</li>
+</ul>
+<blockquote>
+<p>
+注，我的笔记暂时只做到这里，下面的内容除了标题以外，其他内容均为空。其余内容日后再更新。
+</p>
+</blockquote>
+</div>
+</li>
+<li><a id="org8a4a3cc"></a>照应<br /></li>
+<li><a id="org7e7b4ef"></a>象征<br /></li>
+<li><a id="org8c5669f"></a>先抑后扬/欲扬先抑<br /></li>
+<li><a id="orgc1ee9d9"></a>借物抒情/托物言志<br /></li>
+<li><a id="org45c91b4"></a>设置悬念<br /></li>
+<li><a id="org9c172f4"></a>以小见大<br /></li>
+<li><a id="org30f4b0c"></a>虚实结合<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org9b7aa1c" class="outline-3">
+<h3 id="org9b7aa1c"><span class="section-number-3">1.4.</span> 结构手法（5个）</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgc12bf57"></a>线索<br /></li>
+<li><a id="org67c8b02"></a>引出下文<br /></li>
+<li><a id="org525b354"></a>承上启下<br /></li>
+<li><a id="org7827c87"></a>总结全文<br /></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-01-08 08:17:15 +0800</p>
+<p class="date">Created: 2023-02-04 六 18:13</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

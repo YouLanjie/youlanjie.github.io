@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>语文 on noIdea的个人博客</title>
+    <title>语文, on noIdea的个人博客</title>
     <link>http://youlanjie.github.io/tags/%E8%AF%AD%E6%96%87/</link>
-    <description>Recent content in 语文 on noIdea的个人博客</description>
+    <description>Recent content in 语文, on noIdea的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 08 Jan 2023 08:17:15 +0800</lastBuildDate><atom:link href="http://youlanjie.github.io/tags/%E8%AF%AD%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
@@ -13,8 +13,18 @@
       <pubDate>Sun, 08 Jan 2023 08:17:15 +0800</pubDate>
       
       <guid>http://youlanjie.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0/</guid>
-      <description>&lt;p&gt;关于语文的阅读理解教学视频笔记（未完成）&lt;/p&gt;
-&lt;p&gt;内容来源于B站UP: &lt;strong&gt;&lt;a href=&#34;https://space.bilibili.com/316069678&#34;&gt;梓墨说语文&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;
+关于语文的阅读理解教学视频笔记（未完成）
+内容来源于B站UP: &lt;a href=&#34;https://space.bilibili.com/316069678&#34;&gt;梓墨说语文&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>语文笔记（made by emacs org-mode）</title>
+      <link>http://youlanjie.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0made-by-emacs-org-mode/</link>
+      <pubDate>Sun, 08 Jan 2023 08:17:15 +0800</pubDate>
+      
+      <guid>http://youlanjie.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0made-by-emacs-org-mode/</guid>
+      <description>Table of Contents 写作手法（表达技巧） 修辞手法（10个） 比喻 拟人 排比（３个以上） 反复（２个以上） 夸张 反问 设问 反语 对偶 引用 借代 互文 小结/速查表 表达方式（5</description>
     </item>
     
   </channel>
