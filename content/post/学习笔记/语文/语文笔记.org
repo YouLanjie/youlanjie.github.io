@@ -10,7 +10,8 @@
 # more
 
 #+BEGIN_QUOTE
-由于排版原因，这里额外提供一个[[/src/语文笔记/语文笔记.html][Emacs导出的html页面链接]]、[[/src/语文笔记/语文笔记.txt][文本链接]]、[[/src/语文笔记/语文笔记.man][man手册页]]、[[/src/语文笔记/语文笔记.info][info手册页]]、[[/post/学习笔记/语文/语文笔记made-by-emacs-org-mode/][Emacs导出的markdown的页面链接]]
+由于排版原因，这里额外提供Emacs导出的[[/src/语文笔记/语文笔记.html][html页面链接]]、[[/src/语文笔记/语文笔记.txt][文本链接]]、[[/src/语文笔记/语文笔记.man][man手册页]]、[[/src/语文笔记/语文笔记.info][info手册页]]、\\
+[[/post/学习笔记/语文/语文笔记made-by-emacs-org-mode/][markdown链接]]、[[/src/语文笔记/语文笔记.pdf][PDF文件链接]]。以及转成md后经Typora转成的[[/src/语文笔记/语文笔记_typora.pdf][PDF文件链接]]
 #+END_QUOTE
 
 ** 写作手法（表达技巧）
