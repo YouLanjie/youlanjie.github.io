@@ -17,14 +17,14 @@
   
   <url>
     <loc>http://youlanjie.github.io/</loc>
-    <lastmod>2023-02-05T11:36:00+08:00</lastmod>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://youlanjie.github.io/post/</loc>
-    <lastmod>2023-02-05T11:36:00+08:00</lastmod>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -53,6 +53,20 @@
   <url>
     <loc>http://youlanjie.github.io/tags/%E8%AF%AD%E6%96%87/</loc>
     <lastmod>2023-02-05T11:36:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://youlanjie.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0%E6%89%8B%E5%8A%A8%E8%BD%AC/</loc>
+    <lastmod>2023-02-05T11:36:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://youlanjie.github.io/post/%E5%85%B6%E4%BB%96/%E5%B0%8F%E8%AF%B4/%E5%88%80%E5%89%91%E7%A5%9E%E5%9F%9F_%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2023-02-18T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
