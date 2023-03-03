@@ -1,167 +1,124 @@
 ---
 title: 语文笔记（export to md from org）
-tags: ["学习", "语文"]
+tags: ["学习", "语文", "持续更新"]
 categories: ["学习"]
 date: 2023-02-05 11:36:00 +0800
-lastmod: 2023-02-05 11:36:00 +0800
+lastmod: 2023-03-03 18:38:00 +0800
+author: 不要在意我的头像QwQ
 ---
 
 # Table of Contents
 
-1.  [写作手法（表达技巧）](#org36b071c)
-    1.  [修辞手法（10个）](#orgd86bcaf)
-        1.  [比喻](#org5c0b0ca)
-        2.  [拟人](#org0b274c8)
-        3.  [夸张](#orgcdfaf79)
-        4.  [排比（３个以上）](#org3b5a64b)
-        5.  [反复（２个以上）](#org189cb3f)
-        6.  [对偶](#orgaf3e86b)
-        7.  [反问](#orgb15308b)
-        8.  [设问](#orgd88eddb)
-        9.  [反语](#org5e6769f)
-        10. [引用](#org4e04b85)
-        11. [借代](#orgcdd8423)
-        12. [互文](#org2df4fcc)
-        13. [小结/速查表](#org8fbdf4c)
-    2.  [表达方式（5个）](#orgebeee31)
-        1.  [拆分理解](#org3dab276)
-        2.  [种类/类型](#orgf534a89)
-        3.  [小结](#org195a0e7)
-    3.  [表现手法（15个）](#org5ef436b)
-        1.  [定义](#org70eec09)
-        2.  [做题思维](#org83d259a)
-        3.  [种类](#org55f63fc)
-        4.  [总结](#org25b4962)
-    4.  [结构手法（5个）](#org01bb996)
-        1.  [种类](#orga2a0bdc)
+1.  [写作手法（表达技巧）](#org02749dc)
+    1.  [修辞手法（10个）](#org2b3d679)
+        1.  [种类/类型](#orgb032d8d)
+        2.  [小结/速查表](#orgebc48b0)
+    2.  [表达方式（5个）](#orge2df034)
+        1.  [拆分理解](#org28d729e)
+        2.  [种类/类型](#org9bc8909)
+        3.  [小结](#org4b73062)
+    3.  [表现手法（15个）](#org5e2de2a)
+        1.  [定义](#org170de75)
+        2.  [做题思维](#orgbe38295)
+        3.  [种类](#org4f7fb9a)
+        4.  [总结](#org79a10aa)
+    4.  [结构手法（5个）](#org415a021)
+        1.  [种类](#org841fad5)
 
 关于语文的阅读理解教学视频笔记,
 内容来源于B站UP: [梓墨说语文](https://space.bilibili.com/316069678)
 
-> 由于排版原因，这里额外提供一个[Emacs导出的html页面链接](/src/语文笔记/语文笔记.html)、[文本链接](file:///src/语文笔记/语文笔记.txt)、[man手册页](file:///src/语文笔记/语文笔记.man)、[info手册页](file:///src/语文笔记/语文笔记.info)、[Emacs导出的markdown的页面链接](file:///post/学习笔记/语文/语文笔记made-by-emacs-org-mode/)
 
-
-<a id="org36b071c"></a>
+<a id="org02749dc"></a>
 
 # 写作手法（表达技巧）
 
 
-<a id="orgd86bcaf"></a>
+<a id="org2b3d679"></a>
 
-## 修辞手法（10个）<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+## 修辞手法（10个）
 
 一共有６３大类，７９小类
 
 
-<a id="org5c0b0ca"></a>
+<a id="orgb032d8d"></a>
 
-### 比喻
+### 种类/类型
 
--   定义： 把XX比作XX，让句子、描写的对象更加 <span class="underline">生动形象/活泼具体</span>
--   分类： 明喻、暗喻、借喻
+1.  比喻
 
+    -   定义： 把XX比作XX，让句子、描写的对象更加 <span class="underline">生动形象/活泼具体</span>
+    -   分类： 明喻、暗喻、借喻
 
-<a id="org0b274c8"></a>
+2.  拟人
 
-### 拟人
+    -   定义： 把XX拟人化/赋予XX人类的动作、情感，让描写对象 <span class="underline">生动形象具体</span>
 
--   定义： 把XX拟人化/赋予XX人类的动作、情感，让描写对象 <span class="underline">生动形象具体</span>
+3.  夸张
 
+    -   作用： **<span class="underline">突出,强调</span> 作用**
+    -   分类：
+        -   扩大夸张： 对事物形状、性质、特征、作用等加以夸大（空间）
+        -   缩小夸张： 对事物形状、性质、特征、作用等加以缩小（空间）
+        -   超前夸张： 把后出现的说成先出现，反之亦然（时间）
+    -   例句： 她还没有碰酒杯，就醉了
 
-<a id="orgcdfaf79"></a>
+4.  排比（３个以上）
 
-### 夸张
+    -   特点： 内容相关，结构相同或相近
+    -   作用： **<span class="underline">突出,强调</span> ，韵律美**
 
--   作用： **<span class="underline">突出,强调</span> 作用**
--   分类：
-    -   扩大夸张： 对事物形状、性质、特征、作用等加以夸大（空间）
-    -   缩小夸张： 对事物形状、性质、特征、作用等加以缩小（空间）
-    -   超前夸张： 把后出现的说成先出现，反之亦然（时间）
--   例句： 她还没有碰酒杯，就醉了
+5.  反复（２个以上）
 
+    -   定义： 一个句子、词语反复出现（不同于排比，但可以与排比结合来用）
+    -   作用： **<span class="underline">突出,强调</span> ，韵律美**
 
-<a id="org3b5a64b"></a>
+6.  对偶
 
-### 排比（３个以上）
+    -   定义： 字数相等， *结构相同，意义对称* 的一对 **短语** 或 **句子** ，表达两个意思相近或相反的修辞方式
+    -   作用： 更 <span class="underline">具文采</span> ，具有 <span class="underline">韵律美</span>
 
--   特点： 内容相关，结构相同或相近
--   作用： **<span class="underline">突出,强调</span> ，韵律美**
+7.  反问
 
+    -   定义： 借助疑问句传达确定信息
+    -   作用： **加强语气，突出\_\_\_\_情感**
+    -   答题： 反问可以  
+        <span class="underline">加强语气</span> , <span class="underline">发人深思</span>, <span class="underline">激发读者感情,</span>
+        <span class="underline">加深读者印象</span>, <span class="underline">增强文章的气势和说服力</span>,    
+        为文章 <span class="underline">奠定一种激昂的感情基调</span>.
 
-<a id="org189cb3f"></a>
+8.  设问
 
-### 反复（２个以上）
+    -   本质： 自问自答
+    -   作用： **引人注意，启发思考**
 
--   定义： 一个句子、词语反复出现（不同于排比，但可以与排比结合来用）
--   作用： **<span class="underline">突出,强调</span> ，韵律美**
+9.  反语
 
+    -   定义： 正话反说（褒词贬用）或反话正说
+    -   作用： **突出** 语气、情感，常带有讽刺意味， **产生讽刺性** （有时比正说更有力量）
 
-<a id="orgaf3e86b"></a>
+10. 引用
 
-### 对偶
+    -   定义： 说话或写作中引用现成的话
+    -   作用： 使论据确凿，增强说服力，是文章富有文采
 
--   定义： 字数相等， *结构相同，意义对称* 的一对 **短语** 或 **句子** ，表达两个意思相近或相反的修辞方式
--   作用： 更 <span class="underline">具文采</span> ，具有 <span class="underline">韵律美</span>
+11. 借代
 
+    -   定义： 用同对象相关的东西代替对象（称呼），如结构部分、颜色特征
+    -   作用： 以简代繁，语句精简
 
-<a id="orgb15308b"></a>
+12. 互文
 
-### 反问
-
--   定义： 借助疑问句传达确定信息
--   作用： **加强语气，突出\_\_\_\_情感**
--   答题： 反问可以  
-    <span class="underline">加强语气</span> , <span class="underline">发人深思</span>, <span class="underline">激发读者感情,</span>
-    <span class="underline">加深读者印象</span>, <span class="underline">增强文章的气势和说服力</span>,    
-    为文章 <span class="underline">奠定一种激昂的感情基调</span>.
-
-
-<a id="orgd88eddb"></a>
-
-### 设问
-
--   本质： 自问自答
--   作用： **引人注意，启发思考**
-
-
-<a id="org5e6769f"></a>
-
-### 反语
-
--   定义： 正话反说（褒词贬用）或反话正说
--   作用： **突出** 语气、情感，常带有讽刺意味， **产生讽刺性** （有时比正说更有力量）
+    -   定义： 属于一句（或短语）的意思写入两句话，解释时要上下句意思互补
+    -   例句： （均选自《木兰诗》）
+        1.  原句： <span class="underline">东市买骏马，西市买鞍鞯，南市买辔头，北市买长鞭</span>   
+            翻译： 东南西北市买　骏马、鞍鞯、辔头、长鞭
+        
+        2.  原句： <span class="underline">开我东阁门，坐我西阁床，当窗理云鬓，对镜贴花黄</span>   
+            翻译： 开东西阁的门，坐东西阁的床，当窗对镜理云鬓、贴花黄
 
 
-<a id="org4e04b85"></a>
-
-### 引用
-
--   定义： 说话或写作中引用现成的话
--   作用： 使论据确凿，增强说服力，是文章富有文采
-
-
-<a id="orgcdd8423"></a>
-
-### 借代
-
--   定义： 用同对象相关的东西代替对象（称呼），如结构部分、颜色特征
--   作用： 以简代繁，语句精简
-
-
-<a id="org2df4fcc"></a>
-
-### 互文
-
--   定义： 属于一句（或短语）的意思写入两句话，解释时要上下句意思互补
--   例句： （均选自《木兰诗》）
-    1.  原句： <span class="underline">东市买骏马，西市买鞍鞯，南市买辔头，北市买长鞭</span>   
-        翻译： 东南西北市买　骏马、鞍鞯、辔头、长鞭
-    
-    2.  原句： <span class="underline">开我东阁门，坐我西阁床，当窗理云鬓，对镜贴花黄</span>   
-        翻译： 开东西阁的门，坐东西阁的床，当窗对镜理云鬓、贴花黄
-
-
-<a id="org8fbdf4c"></a>
+<a id="orgebc48b0"></a>
 
 ### 小结/速查表
 
@@ -305,12 +262,12 @@ lastmod: 2023-02-05 11:36:00 +0800
 > 注： *名称* 为斜体的为表中独有的，比较少见，所以仅在表中列出
 
 
-<a id="orgebeee31"></a>
+<a id="orge2df034"></a>
 
-## 表达方式（5个）<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+## 表达方式（5个）
 
 
-<a id="org3dab276"></a>
+<a id="org28d729e"></a>
 
 ### 拆分理解
 
@@ -318,7 +275,7 @@ lastmod: 2023-02-05 11:36:00 +0800
 -   表达方式： 用文字说话的方式
 
 
-<a id="orgf534a89"></a>
+<a id="org9bc8909"></a>
 
 ### 种类/类型
 
@@ -346,7 +303,7 @@ lastmod: 2023-02-05 11:36:00 +0800
     -   人称
         -   第一人称：便于直抒胸臆，有亲切感与真实感
         -   第二人称：增强文章的抒情性和亲切感，像与读者面对面交谈，便于抒情
-        -   第三人称：不收时空限制，能够从多个方面自由叙述（客观、全面）
+        -   第三人称：不受时空限制，能够从多个方面自由叙述（客观、全面）
 
 2.  描写
 
@@ -427,7 +384,7 @@ lastmod: 2023-02-05 11:36:00 +0800
     -   语言特点： 同说明文
 
 
-<a id="org195a0e7"></a>
+<a id="org4b73062"></a>
 
 ### 小结
 
@@ -449,48 +406,48 @@ lastmod: 2023-02-05 11:36:00 +0800
 <tbody>
 <tr>
 <td class="org-left">记叙（记叙文）</td>
-<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0002.jpg" alt="14_mpv-shot0002.jpg" /></td>
+<td class="org-left"><img src="file:///img/2023-01-08_01/14_mpv-shot0002.jpg" alt="14_mpv-shot0002.jpg" /></td>
 </tr>
 
 
 <tr>
 <td class="org-left">描写（小说）</td>
-<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0003.jpg" alt="14_mpv-shot0003.jpg" /></td>
+<td class="org-left"><img src="file:///img/2023-01-08_01/14_mpv-shot0003.jpg" alt="14_mpv-shot0003.jpg" /></td>
 </tr>
 
 
 <tr>
 <td class="org-left">抒情（散文）</td>
-<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0004.jpg" alt="14_mpv-shot0004.jpg" /></td>
+<td class="org-left"><img src="file:///img/2023-01-08_01/14_mpv-shot0004.jpg" alt="14_mpv-shot0004.jpg" /></td>
 </tr>
 
 
 <tr>
 <td class="org-left">说明（说明文）</td>
-<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0005.jpg" alt="14_mpv-shot0005.jpg" /></td>
+<td class="org-left"><img src="file:///img/2023-01-08_01/14_mpv-shot0005.jpg" alt="14_mpv-shot0005.jpg" /></td>
 </tr>
 
 
 <tr>
 <td class="org-left">议论（议论文）</td>
-<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0006.jpg" alt="14_mpv-shot0006.jpg" /></td>
+<td class="org-left"><img src="file:///img/2023-01-08_01/14_mpv-shot0006.jpg" alt="14_mpv-shot0006.jpg" /></td>
 </tr>
 
 
 <tr>
 <td class="org-left">总体思维导图</td>
-<td class="org-left"><img src="/img/2023-01-08_01/14_mpv-shot0001.jpg" alt="14_mpv-shot0001.jpg" /></td>
+<td class="org-left"><img src="file:///img/2023-01-08_01/14_mpv-shot0001.jpg" alt="14_mpv-shot0001.jpg" /></td>
 </tr>
 </tbody>
 </table>
 
 
-<a id="org5ef436b"></a>
+<a id="org5e2de2a"></a>
 
-## 表现手法（15个）<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
+## 表现手法（15个）
 
 
-<a id="org70eec09"></a>
+<a id="org170de75"></a>
 
 ### 定义
 
@@ -498,14 +455,14 @@ lastmod: 2023-02-05 11:36:00 +0800
 -   狭义： 让故事更加精彩的方法(写作方法)
 
 
-<a id="org83d259a"></a>
+<a id="orgbe38295"></a>
 
 ### 做题思维
 
 看到 <span class="underline">“XXX有什么作用”</span> 就要联想到 <span class="underline">表现手法</span>
 
 
-<a id="org55f63fc"></a>
+<a id="org4f7fb9a"></a>
 
 ### 种类
 
@@ -595,7 +552,7 @@ lastmod: 2023-02-05 11:36:00 +0800
     -   定义：设想（天马行空）
 
 
-<a id="org25b4962"></a>
+<a id="org79a10aa"></a>
 
 ### 总结
 
@@ -628,7 +585,7 @@ lastmod: 2023-02-05 11:36:00 +0800
 <tr>
 <td class="org-center">衬托</td>
 <td class="org-left">次一级对主角的正反面衬托</td>
-<td class="org-right">已级</td>
+<td class="org-right">异级</td>
 </tr>
 
 
@@ -733,12 +690,12 @@ lastmod: 2023-02-05 11:36:00 +0800
     -   修辞手法着眼于具体字词短语和句子，目的是让句子更具文采，更生动
 
 
-<a id="org01bb996"></a>
+<a id="org415a021"></a>
 
-## 结构手法（5个）<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>
+## 结构手法（5个）
 
 
-<a id="orga2a0bdc"></a>
+<a id="org841fad5"></a>
 
 ### 种类
 
@@ -771,16 +728,3 @@ lastmod: 2023-02-05 11:36:00 +0800
         4.  线索有时在 <span class="underline">议论或抒情中</span>
         5.  有时文章具备两条线索： <span class="underline">明线</span> 和 <span class="underline">暗线</span>
 
-
-# Footnotes
-
-<sup><a id="fn.1" href="#fnr.1">1</a></sup> 视频链接：[BV1vJ411D72k](https://www.bilibili.com/video/BV1vJ411D72k/) [BV1qJ411m7sj](https://www.bilibili.com/video/BV1qJ411m7sj/) [BV1pJ41117V8](https://www.bilibili.com/video/BV1pJ41117V8/) [BV1PJ411d7Di](https://www.bilibili.com/video/BV1PJ411d7Di/)
-
-<sup><a id="fn.2" href="#fnr.2">2</a></sup> 视频链接：[BV11J411R7wA](https://www.bilibili.com/video/BV11J411R7wA/) [BV1vJ411v7uH](https://www.bilibili.com/video/BV1vJ411v7uH/) [BV1LJ411y7ov](https://www.bilibili.com/video/BV1LJ411y7ov/) [BV11J411y7Fo](https://www.bilibili.com/video/BV11J411y7Fo/)
-[BV12J411k7pD](https://www.bilibili.com/video/BV12J411k7pD/) [BV1HJ411C7Mt](https://www.bilibili.com/video/BV1HJ411C7Mt/)
-
-<sup><a id="fn.3" href="#fnr.3">3</a></sup> 视频链接：[BV1eJ411k7Gy](https://www.bilibili.com/video/BV1eJ411k7Gy/) [BV1fJ41167Tt](https://www.bilibili.com/video/BV1fJ41167Tt/) [BV1GJ411t7s6](https://www.bilibili.com/video/BV1GJ411t7s6/) [BV1JJ411x7vM](https://www.bilibili.com/video/BV1JJ411x7vM/)
-[BV1GJ411W72Q](https://www.bilibili.com/video/BV1GJ411W72Q/) [BV1eJ411Y7B7](https://www.bilibili.com/video/BV1eJ411Y7B7/) [BV1LJ411h7fE](https://www.bilibili.com/video/BV1LJ411h7fE/) [BV1CJ411b7Xv](https://www.bilibili.com/video/BV1CJ411b7Xv/)
-[BV1zJ411p7Ru](https://www.bilibili.com/video/BV1zJ411p7Ru/) [BV1g7411i7ND](https://www.bilibili.com/video/BV1g7411i7ND/) [BV1X741167sb](https://www.bilibili.com/video/BV1X741167sb/)
-
-<sup><a id="fn.4" href="#fnr.4">4</a></sup> 视频链接：[BV157411B7yX](https://www.bilibili.com/video/BV157411B7yX/)
