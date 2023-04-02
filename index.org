@@ -1,0 +1,62 @@
+#+TITLE: 我的个人博客
+
+# +OPTIONS: toc:nil
+#+OPTIONS: num:nil
+
+#+setupfile: ./setup.setup
+
+* 文章
+- 关于建站
+  - [[./post/关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站]]
+    使用github.io和jekyll建立一个自己的博客网站
+- 其他
+  - 小说
+    - [[./post/其他/小说/刀剑神域_集合.html][刀剑神域 集合]]
+- 学习笔记
+  - 语文
+    - [[./post/学习笔记/语文/语文笔记.html][语文笔记]]
+  - C语言学习
+    - [[./post/学习笔记/C语言学习/打印字符使用特殊效果.html][打印字符使用特殊效果]]
+      使用ANSI转义字符实现终端输出字符带有特殊效果
+- 一些工具
+  - [[./post/一些工具/我用的小工具盘点.html][我用的小工具盘点]]
+    记录一些Linux中有趣但不一定常用的软件
+  - Emacs
+    - [[./post/一些工具/Emacs/从vim转移到emacs.html][从vim转移到emacs]]
+    - [[./post/一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
+  - Vim
+    - [[./post/一些工具/Vim/使用Vim.html][使用Vim]]
+- ArchLinux学习系列
+  - [[./post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
+    如何使用archiso工具打造一个自定义的U盘上的临时Live系统
+  - [[./post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
+    记录我个人安装archlinux的过程
+  - [[./post/ArchLinux学习系列/ArchLinux的配置.html][ArchLinux的配置]]
+    记录我个人的archlinux软件配置
+* 目录索引
+#+begin_src text
+post/
+├── 关于建站
+│   └── 用github.io建立一个自己的博客网站.md
+├── 其他
+│   └── 小说
+│       └── 刀剑神域_集合.org
+├── 学习笔记
+│   ├── 语文
+│   │   └── 语文笔记.org
+│   └── C语言学习
+│       └── 打印字符使用特殊效果.org
+├── 一些工具
+│   ├── 我用的小工具盘点.md
+│   ├── Emacs
+│   │   ├── 从vim转移到emacs.org
+│   │   └── Emacs学习笔记.org
+│   └── Vim
+│       └── 使用Vim.md
+└── ArchLinux学习系列
+    ├── Archiso——打造属于你的在U盘上的Archlinux Live系统.md
+    ├── ArchLinux的安装.md
+    └── ArchLinux的配置.md
+
+11 directories, 11 files
+#+end_src

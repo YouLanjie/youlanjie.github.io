@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-04-02 日 00:59 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>打印字符使用特殊效果</title>
+<meta name="author" content="既然博客都是我的那我就皮一下 [[https://youlanjie.github.io/][Chglish]]" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>
+<script src="/theme/read_the_docs/jquery.min.js"></script>
+<script src="/theme/read_the_docs/bootstrap.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">打印字符使用特殊效果</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga25962b">1. 打印字符使用特殊效果</a>
+<ul>
+<li><a href="#orge7f8924">1.1. 简单介绍</a></li>
+<li><a href="#org69c1763">1.2. m型效果</a>
+<ul>
+<li><a href="#org2fe6fce">1.2.1. 颜色</a></li>
+<li><a href="#orgc4c6bd2">1.2.2. 文字效果</a></li>
+</ul>
+</li>
+<li><a href="#orgcff6a0c">1.3. 其他类型</a>
+<ul>
+<li><a href="#org41dbdca">1.3.1. 光标移动</a></li>
+<li><a href="#orgddb212e">1.3.2. 光标显示</a></li>
+<li><a href="#org1938c14">1.3.3. 光标位置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga25962b" class="outline-2">
+<h2 id="orga25962b"><span class="section-number-2">1.</span> 打印字符使用特殊效果</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orge7f8924" class="outline-3">
+<h3 id="orge7f8924"><span class="section-number-3">1.1.</span> 简单介绍</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+特殊效果的支持源自ANSI标准，由于我不是很懂所以不多赘述。这里重点关注我们应该如何使用它。
+</p>
+
+<p>
+先说结论：
+</p>
+
+<p>
+要使用特殊效果，通常需要使用任意输出函数输出以 <code>\033[数字选项+字符选项</code> 为格式的字符串。
+</p>
+
+<p>
+其中，字符选项相当于指定了其大概的类型，只可以单独使用，并作为一串控制字符串的结束。而数字选项则是细分了其具体功能，且可以复用，只需要使用分号将其隔开。
+</p>
+
+<p>
+例子请续看下文。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org69c1763" class="outline-3">
+<h3 id="org69c1763"><span class="section-number-3">1.2.</span> m型效果</h3>
+<div class="outline-text-3" id="text-1-2">
+<blockquote>
+<p>
+做出一些提醒，以上内容都需要一个关键的字符 <code>m</code> ，所有的文字效果都是基于 <code>\033[XXm</code> 的格式，只是为了方便理解，在大部分内容都不作为重点讲述。
+</p>
+</blockquote>
+</div>
+<div id="outline-container-org2fe6fce" class="outline-4">
+<h4 id="org2fe6fce"><span class="section-number-4">1.2.1.</span> 颜色</h4>
+<div class="outline-text-4" id="text-1-2-1">
+</div>
+<ol class="org-ol">
+<li><a id="org9758e41"></a>使用普通颜色（非256色）<br />
+<div class="outline-text-5" id="text-1-2-1-1">
+<p>
+要打印出普通的颜色，只需要使用下面的程序：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+	int color_code = 31;    /* 这里使用变量不是必须的，只是为了更容易看懂，实际上需要打印出对应的数字即可 */
+	printf("\033[%dm"
+	       "在这里放你想要带特殊效果打印的东西\n",
+	       color_code);
+	return 0;
+}
+</pre>
+</div>
+
+<blockquote>
+<p>
+它运行后的输出结果是这样的：
+</p>
+
+<div id="org9ab8286" class="figure">
+<p><img src="./打印字符使用特殊效果/out1.png" alt="out1.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>输出结果</p>
+</div>
+</blockquote>
+
+<p>
+下面是所有关于颜色控制的数字表格，左侧是字体颜色，右侧是背景颜色。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">数字</th>
+<th scope="col" class="org-left">字体颜色</th>
+<th scope="col" class="org-right">数字</th>
+<th scope="col" class="org-left">背景颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">30</td>
+<td class="org-left">黑色</td>
+<td class="org-right">40</td>
+<td class="org-left">默认/无色</td>
+</tr>
+
+<tr>
+<td class="org-right">31</td>
+<td class="org-left">红色</td>
+<td class="org-right">41</td>
+<td class="org-left">红色</td>
+</tr>
+
+<tr>
+<td class="org-right">32</td>
+<td class="org-left">绿色</td>
+<td class="org-right">42</td>
+<td class="org-left">绿色</td>
+</tr>
+
+<tr>
+<td class="org-right">33</td>
+<td class="org-left">黄色/橙色</td>
+<td class="org-right">43</td>
+<td class="org-left">黄色/橙色</td>
+</tr>
+
+<tr>
+<td class="org-right">34</td>
+<td class="org-left">蓝色</td>
+<td class="org-right">44</td>
+<td class="org-left">蓝色</td>
+</tr>
+
+<tr>
+<td class="org-right">35</td>
+<td class="org-left">紫色</td>
+<td class="org-right">45</td>
+<td class="org-left">紫色</td>
+</tr>
+
+<tr>
+<td class="org-right">36</td>
+<td class="org-left">青色</td>
+<td class="org-right">46</td>
+<td class="org-left">青色</td>
+</tr>
+
+<tr>
+<td class="org-right">37</td>
+<td class="org-left">白色</td>
+<td class="org-right">47</td>
+<td class="org-left">白色</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>
+顺带一提，这些控制代码是“可堆叠的”，意思就是不通的颜色代码可以使用分号 <code>;</code> 隔断开来，这样就不必打上好几个 <code>\033[...</code> 让代码变得难以阅读。这里再举一个例子做示范。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+	int color_code_bg = 44,    /* 蓝色背景 */
+	    color_code_fg = 31;    /* 红色字体 */
+	/* 这里的转义相当于 \033[44;31m */
+	printf("\033[%d;%dm"
+	       "Put someting here you want to print.\n",
+	       color_code_bg, color_code_fg);
+	return 0;
+}
+</pre>
+</div>
+<p>
+运行效果如下：
+</p>
+
+<div id="orge58ee34" class="figure">
+<p><img src="./打印字符使用特殊效果/out2.png" alt="out2.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>运行结果</p>
+</div>
+</blockquote>
+</div>
+</li>
+
+<li><a id="org9515ea1"></a>使用真彩色（256色）<br />
+<div class="outline-text-5" id="text-1-2-1-2">
+<p>
+在这种情况下，我们可以打印出256种颜色，比普通颜色高级多了。不过我也还是不知道Vim和Emacs这些编辑器使用主题时是怎样打印任意颜色的。毕竟我取过色，发现我使用的主题有很多都不在256色的范围内，所以说挺令我困惑的。
+</p>
+
+<p>
+废话少说，先上代码示范。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+	int color_code = 0;
+	/* 在这里将各段控制字符分开是为了方便理解，不是必须的 */
+	for (color_code = 0; color_code &lt; 256; color_code++) {
+		if (color_code &gt;= 16 &amp;&amp; (color_code - 16) % 6 == 0) {
+			printf("\n");
+		}
+		printf("\033["
+		       "48;"
+		       "5;"
+		       "%dm"
+		       "%03d"
+		       "\033[0m ",
+		       color_code, color_code);
+	}
+	printf("\n");
+	return 0;
+}
+</pre>
+</div>
+<blockquote>
+<p>
+运行效果如下：
+</p>
+
+<div id="orgdbe1043" class="figure">
+<p><img src="./打印字符使用特殊效果/out3.png" alt="out3.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>运行结果</p>
+</div>
+
+<p>
+注：如果觉得图片不够清晰可以<a href="./打印字符使用特殊效果/out3.html">访问这个地址查看终端输出</a>
+</p>
+</blockquote>
+
+<p>
+下面开始讲解。
+</p>
+
+<p>
+要想使用256色的输出，你需要的是 <code>48;5;%dm</code> 这样一串控制符。
+其中的 <code>48;5;</code> 就是关键。
+</p>
+
+<p>
+在这里 <code>48</code> 的意思实际上应该是告诉颜色的类型是背景颜色，如果想要设置字体的颜色，只需要将其替换成 <code>38</code> 即可。
+</p>
+
+<p>
+接下来的 <code>5</code> 我就不清楚具体的作用了。我只提上一点：如果单独使用它，那么它所对应的效果实际上是 <b>字体闪烁</b> 。
+</p>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgc4c6bd2" class="outline-4">
+<h4 id="orgc4c6bd2"><span class="section-number-4">1.2.2.</span> 文字效果</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+如果你观察仔细，就应该会发现刚刚的代码里面有一些新的控制符，例如刚刚提到的 <code>\033[5m;</code> 也有 <code>\033[0m</code> 。现在，是时候列出一个效果列表了。
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">控制符</th>
+<th scope="col" class="org-left">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">清除所有文字效果</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">加粗文字</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">细化文字</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">斜体</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">下划线</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">闪烁</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">未知</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">颜色反转（字体和背景颜色互换）</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left">隐藏字体（或许可以尝试做一些彩蛋？）</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcff6a0c" class="outline-3">
+<h3 id="orgcff6a0c"><span class="section-number-3">1.3.</span> 其他类型</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org41dbdca" class="outline-4">
+<h4 id="org41dbdca"><span class="section-number-4">1.3.1.</span> 光标移动</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">空字符</th>
+<th scope="col" class="org-left">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">D</td>
+<td class="org-left">左</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">右</td>
+</tr>
+
+<tr>
+<td class="org-left">A</td>
+<td class="org-left">上</td>
+</tr>
+
+<tr>
+<td class="org-left">B</td>
+<td class="org-left">下</td>
+</tr>
+</tbody>
+</table>
+<p>
+这种情况下，数字参数用于指定步数
+</p>
+</div>
+</div>
+<div id="outline-container-orgddb212e" class="outline-4">
+<h4 id="orgddb212e"><span class="section-number-4">1.3.2.</span> 光标显示</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+隐藏光标： <code>\033[?25l</code>
+</p>
+
+<p>
+显示光标： <code>\033[?25h</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org1938c14" class="outline-4">
+<h4 id="org1938c14"><span class="section-number-4">1.3.3.</span> 光标位置</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+保存： <code>\033[u</code>
+</p>
+
+<p>
+还原： <code>\033[l</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-01-18 18:22</p>
+<p class="author">Author: 既然博客都是我的那我就皮一下 <a href="https://youlanjie.github.io/">Chglish</a></p>
+<p class="date">Created: 2023-04-02 日 00:59</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

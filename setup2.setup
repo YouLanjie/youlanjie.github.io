@@ -1,0 +1,8 @@
+# -*- mode: org; -*-
+
+#+AUTHOR: [[https://youlanjie.github.io/][Chglish]]
+
+#+setupfile: ./theme/read_the_docs/theme-local.setup
+
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \usepackage[UTF8]{ctex}
