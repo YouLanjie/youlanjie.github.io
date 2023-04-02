@@ -1,0 +1,3360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-04-02 日 09:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>我的ArchLinux的配置</title>
+<meta name="author" content="[[https://youlanjie.github.io/][Chglish]]" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>
+<script src="/theme/read_the_docs/jquery.min.js"></script>
+<script src="/theme/read_the_docs/bootstrap.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">我的ArchLinux的配置</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf79a31c">1. 我的ArchLinux的配置</a>
+<ul>
+<li><a href="#org31d2760">1.1. 软件包</a>
+<ul>
+<li><a href="#orgb457b5b">1.1.1. 图形界面</a></li>
+<li><a href="#org7d872b1">1.1.2. 我的工具</a></li>
+<li><a href="#org9ecf7a2">1.1.3. AUR</a></li>
+</ul>
+</li>
+<li><a href="#org7e56cb4">1.2. 配置</a>
+<ul>
+<li><a href="#org762dc29">1.2.1. i3</a></li>
+<li><a href="#orgf3d77aa">1.2.2. polybar</a></li>
+<li><a href="#orgfa4c160">1.2.3. picom</a></li>
+<li><a href="#orgcb832ab">1.2.4. rofi</a></li>
+<li><a href="#orgc731c49">1.2.5. Vim/Neovim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf79a31c" class="outline-2">
+<h2 id="orgf79a31c"><span class="section-number-2">1.</span> 我的ArchLinux的配置</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org31d2760" class="outline-3">
+<h3 id="org31d2760"><span class="section-number-3">1.1.</span> 软件包</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orgb457b5b" class="outline-4">
+<h4 id="orgb457b5b"><span class="section-number-4">1.1.1.</span> 图形界面</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<blockquote>
+<p>
+注：我现在不再使用i3wm，而是dwm，关于i3部分的内容仅供参考
+</p>
+</blockquote>
+<p>
+我使用 <b>i3-wm + kde软件</b> 的组合形式。
+软件列表如下
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">软件</th>
+<th scope="col" class="org-left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">xorg</td>
+<td class="org-left">最基本的图形界面服务</td>
+</tr>
+
+<tr>
+<td class="org-left">sddm</td>
+<td class="org-left">登录程序</td>
+</tr>
+
+<tr>
+<td class="org-left">i3-gaps</td>
+<td class="org-left">自带窗口空格支持</td>
+</tr>
+
+<tr>
+<td class="org-left">i3blocks</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">i3lock</td>
+<td class="org-left">锁屏</td>
+</tr>
+
+<tr>
+<td class="org-left">i3status</td>
+<td class="org-left">状态栏</td>
+</tr>
+
+<tr>
+<td class="org-left">polybar</td>
+<td class="org-left">状态栏</td>
+</tr>
+
+<tr>
+<td class="org-left">feh</td>
+<td class="org-left">壁纸</td>
+</tr>
+
+<tr>
+<td class="org-left">picom</td>
+<td class="org-left">X合成器</td>
+</tr>
+
+<tr>
+<td class="org-left">rofi</td>
+<td class="org-left">应用启动器</td>
+</tr>
+
+<tr>
+<td class="org-left">qt5ct</td>
+<td class="org-left">控制kde程序的主题</td>
+</tr>
+
+<tr>
+<td class="org-left">dolphin</td>
+<td class="org-left">KDE文件管理器</td>
+</tr>
+
+<tr>
+<td class="org-left">konsole</td>
+<td class="org-left">KDE终端</td>
+</tr>
+
+<tr>
+<td class="org-left">ark</td>
+<td class="org-left">KDE解压软件</td>
+</tr>
+
+<tr>
+<td class="org-left">spectacle</td>
+<td class="org-left">截图</td>
+</tr>
+
+<tr>
+<td class="org-left">gwenview</td>
+<td class="org-left">图片查看</td>
+</tr>
+
+<tr>
+<td class="org-left">kdeconnect</td>
+<td class="org-left">工具</td>
+</tr>
+
+<tr>
+<td class="org-left">kvantum</td>
+<td class="org-left">主题使用</td>
+</tr>
+
+<tr>
+<td class="org-left">fcitx-im</td>
+<td class="org-left">输入法</td>
+</tr>
+
+<tr>
+<td class="org-left">fcitx-configtool</td>
+<td class="org-left">配置程序</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org7d872b1" class="outline-4">
+<h4 id="org7d872b1"><span class="section-number-4">1.1.2.</span> 我的工具</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+我安装的工具程序：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">程序</th>
+<th scope="col" class="org-left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">iwd</td>
+<td class="org-left">联网</td>
+</tr>
+
+<tr>
+<td class="org-left">dhcpcd</td>
+<td class="org-left">DNS服务</td>
+</tr>
+
+<tr>
+<td class="org-left">zsh</td>
+<td class="org-left">日常使用的SHELL</td>
+</tr>
+
+<tr>
+<td class="org-left">fish</td>
+<td class="org-left">备用SHELL</td>
+</tr>
+
+<tr>
+<td class="org-left">git</td>
+<td class="org-left">开发必备工具</td>
+</tr>
+
+<tr>
+<td class="org-left">gcc</td>
+<td class="org-left">编译器</td>
+</tr>
+
+<tr>
+<td class="org-left">clang</td>
+<td class="org-left">编译器</td>
+</tr>
+
+<tr>
+<td class="org-left">gdb</td>
+<td class="org-left">调试工具</td>
+</tr>
+
+<tr>
+<td class="org-left">cmake</td>
+<td class="org-left">工具</td>
+</tr>
+
+<tr>
+<td class="org-left">ctags</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">nodejs</td>
+<td class="org-left">使用Spacevim</td>
+</tr>
+
+<tr>
+<td class="org-left">npm</td>
+<td class="org-left">使用Spacevim</td>
+</tr>
+
+<tr>
+<td class="org-left">yarn</td>
+<td class="org-left">使用Spacevim</td>
+</tr>
+
+<tr>
+<td class="org-left">python3</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">python2</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">vim</td>
+<td class="org-left">编辑器</td>
+</tr>
+
+<tr>
+<td class="org-left">neovim</td>
+<td class="org-left">编辑器</td>
+</tr>
+
+<tr>
+<td class="org-left">tree</td>
+<td class="org-left">以树状图查看文件</td>
+</tr>
+
+<tr>
+<td class="org-left">lsd</td>
+<td class="org-left">同ls，但是有类型图标</td>
+</tr>
+
+<tr>
+<td class="org-left">openssh</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">sshfs</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">gnupg</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">man</td>
+<td class="org-left">手册页</td>
+</tr>
+
+<tr>
+<td class="org-left">ranger</td>
+<td class="org-left">文件查看器</td>
+</tr>
+
+<tr>
+<td class="org-left">grub-customizer</td>
+<td class="org-left">grub配置程序</td>
+</tr>
+
+<tr>
+<td class="org-left">gparted</td>
+<td class="org-left">分区</td>
+</tr>
+
+<tr>
+<td class="org-left">filelight</td>
+<td class="org-left">文件大小占比查看（以扇形图表示文件大小占比）</td>
+</tr>
+
+<tr>
+<td class="org-left">packagekit-qt5</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">flatpak</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">fwupd</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">vittualbox</td>
+<td class="org-left">虚拟机</td>
+</tr>
+
+<tr>
+<td class="org-left">neofetch</td>
+<td class="org-left">查看系统信息</td>
+</tr>
+
+<tr>
+<td class="org-left">translate-shell</td>
+<td class="org-left">在终端的翻译程序</td>
+</tr>
+
+<tr>
+<td class="org-left">alacritty</td>
+<td class="org-left">终端</td>
+</tr>
+
+<tr>
+<td class="org-left">zellij</td>
+<td class="org-left">功能同tmux,终端分屏</td>
+</tr>
+
+<tr>
+<td class="org-left">playerctl</td>
+<td class="org-left">媒体播放管理器</td>
+</tr>
+
+<tr>
+<td class="org-left">ntfs-3g</td>
+<td class="org-left">支持挂载ntfs</td>
+</tr>
+
+<tr>
+<td class="org-left">scanmen</td>
+<td class="org-left">终端的更改内存软件</td>
+</tr>
+
+<tr>
+<td class="org-left">gameconqueror</td>
+<td class="org-left">基于scanmen的GUI软件</td>
+</tr>
+
+<tr>
+<td class="org-left">adb</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">fortune-mod</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">eva</td>
+<td class="org-left">计算器</td>
+</tr>
+
+<tr>
+<td class="org-left">bc</td>
+<td class="org-left">计算器</td>
+</tr>
+
+<tr>
+<td class="org-left">utools</td>
+<td class="org-left">在archlinuxcn/aur源里，工具集</td>
+</tr>
+
+<tr>
+<td class="org-left">lolcat</td>
+<td class="org-left">功能类似cat，但有渐变颜色</td>
+</tr>
+
+<tr>
+<td class="org-left">cowsay</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">conky</td>
+<td class="org-left">监视器</td>
+</tr>
+
+<tr>
+<td class="org-left">figlet</td>
+<td class="org-left">终端用文字画出文字</td>
+</tr>
+
+<tr>
+<td class="org-left">curl</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">wget</td>
+<td class="org-left">下载器</td>
+</tr>
+
+<tr>
+<td class="org-left">axel</td>
+<td class="org-left">多线程下载器</td>
+</tr>
+
+<tr>
+<td class="org-left">aria2</td>
+<td class="org-left">多线程下载器</td>
+</tr>
+
+<tr>
+<td class="org-left">w3m</td>
+<td class="org-left">终端的文本浏览器</td>
+</tr>
+
+<tr>
+<td class="org-left">net-tools</td>
+<td class="org-left">网络工具集。包含ifconfig</td>
+</tr>
+
+<tr>
+<td class="org-left">mplayer</td>
+<td class="org-left">终端媒体播放器</td>
+</tr>
+
+<tr>
+<td class="org-left">ffmpeg</td>
+<td class="org-left">多功能媒体工具</td>
+</tr>
+
+<tr>
+<td class="org-left">vlc</td>
+<td class="org-left">媒体播放器</td>
+</tr>
+
+<tr>
+<td class="org-left">simplescreenrecorder</td>
+<td class="org-left">录屏</td>
+</tr>
+
+<tr>
+<td class="org-left">gimp</td>
+<td class="org-left">编辑图片</td>
+</tr>
+
+<tr>
+<td class="org-left">krita</td>
+<td class="org-left">编辑图片</td>
+</tr>
+
+<tr>
+<td class="org-left">inkscape</td>
+<td class="org-left">编辑矢量图片</td>
+</tr>
+
+<tr>
+<td class="org-left">qtqr</td>
+<td class="org-left">QRcode编辑器</td>
+</tr>
+
+<tr>
+<td class="org-left">wqy-zenhei</td>
+<td class="org-left">中文字体</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org9ecf7a2" class="outline-4">
+<h4 id="org9ecf7a2"><span class="section-number-4">1.1.3.</span> AUR</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">软件包</th>
+<th scope="col" class="org-left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">picom-jonaburg-git</td>
+<td class="org-left">picom的分支</td>
+</tr>
+
+<tr>
+<td class="org-left">bat</td>
+<td class="org-left">查看文件（更好的cat）</td>
+</tr>
+
+<tr>
+<td class="org-left">deepin-wine-qq</td>
+<td class="org-left">基于deepin-wine的QQ</td>
+</tr>
+
+<tr>
+<td class="org-left">bilibili-bin</td>
+<td class="org-left">B站的windows客户端搬运</td>
+</tr>
+
+<tr>
+<td class="org-left">mdcat</td>
+<td class="org-left">终端渲染markdown文件（功能有限）</td>
+</tr>
+
+<tr>
+<td class="org-left">arch-wiki-man</td>
+<td class="org-left">本地的终端ArchWiki离线查看器</td>
+</tr>
+
+<tr>
+<td class="org-left">autotiling</td>
+<td class="org-left">i3wm窗口自动分布</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org7e56cb4" class="outline-3">
+<h3 id="org7e56cb4"><span class="section-number-3">1.2.</span> 配置</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org762dc29" class="outline-4">
+<h4 id="org762dc29"><span class="section-number-4">1.2.1.</span> i3</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+我的i3-wm配置
+</p>
+
+<details>
+<summary>i3配置文件config</summary>
+<div class="org-src-container">
+<pre class="src src-conf"># Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# ===========================================================
+# ---------------------Default Config------------------------
+# ===========================================================
+#
+# i3wm's default are here!
+# 并不代表没有修改哦
+#
+# Set default key —— Win
+set $mod Mod4
+
+# 窗口标题字体
+font pango:monospace 8
+# exec --no-startup-id dex --autostart --environment i3
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id nm-applet
+
+# i3wm操作
+# ===========================================================
+# 加载配置文件
+bindsym $mod+Shift+c reload
+# 重启i3
+bindsym $mod+Shift+r restart
+# 退出i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# 窗口操作
+# ===========================================================
+# start a terminal
+# -----------------------------------------------------------
+# kde终端
+bindsym $mod+Return exec konsole
+# alacritty
+# bindsym $mod+Shift+Return exec alacritty -e zellij attach --index 0 --create
+bindsym $mod+Shift+Return exec alacritty
+# 浮窗
+for_window [instance="center-termux"]floating enable resize set 825 550 move scratchpad border pixel 2
+bindsym $mod+Mod1+Return exec --no-startup-id alacritty --class center-termux
+
+# 程序启动器
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# kill focused window
+# -----------------------------------------------------------
+bindsym $mod+q kill
+
+# 全屏
+# -----------------------------------------------------------
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle global
+
+# 改变操作窗口
+# -----------------------------------------------------------
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# 方向键
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# 移动窗口
+# -----------------------------------------------------------
+# 移动窗口位置
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# 方向键
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# 通过鼠标+$mod移动窗口 Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# 窗口排布方式
+# -----------------------------------------------------------
+# 垂直标签页重叠式排列窗口成组
+bindsym $mod+s layout stacking
+# 水平标签页重叠式排列窗口成组
+bindsym $mod+w layout tabbed
+# 平铺式排列窗口（会拆分窗口组）
+bindsym $mod+e layout toggle split
+# 窗口分割方式
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 垂直分割
+bindsym $mod+g split h
+# 水平分割
+bindsym $mod+v split v
+
+# 浮窗有关
+# -----------------------------------------------------------
+# 开启浮窗
+bindsym $mod+space floating toggle
+# 在浮窗与窗口间移动
+bindsym $mod+Mod1+space focus mode_toggle
+# 移动焦点到主窗口
+bindsym $mod+a focus parent
+
+# 调整窗口大小
+# -----------------------------------------------------------
+mode "resize" {
+	bindsym h resize shrink width 10 px or 10 ppt
+	bindsym j resize grow height 10 px or 10 ppt
+	bindsym k resize shrink height 10 px or 10 ppt
+	bindsym l resize grow width 10 px or 10 ppt
+	# 方向键
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
+	# 回到正常模式
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# 工作区 Define names for default workspaces for which we configure key bindings later on.We use variables to avoid repeating the names in multiple places.
+# ===========================================================
+# 共117行
+# 普通工作区切换
+# -----------------------------------------------------------
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+set $ws21 "21"
+set $ws22 "22"
+set $ws23 "23"
+set $ws24 "24"
+set $ws25 "25"
+set $ws26 "26"
+set $ws27 "27"
+set $ws28 "28"
+set $ws29 "29"
+set $ws30 "30"
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# 工作区模式1
+# -----------------------------------------------------------
+mode "workspaces" {
+	bindsym $mod+1 workspace number $ws11
+	bindsym $mod+2 workspace number $ws12
+	bindsym $mod+3 workspace number $ws13
+	bindsym $mod+4 workspace number $ws14
+	bindsym $mod+5 workspace number $ws15
+	bindsym $mod+6 workspace number $ws16
+	bindsym $mod+7 workspace number $ws17
+	bindsym $mod+8 workspace number $ws18
+	bindsym $mod+9 workspace number $ws19
+	bindsym $mod+0 workspace number $ws20
+	bindsym $mod+Shift+1 move container to workspace number $ws11
+	bindsym $mod+Shift+2 move container to workspace number $ws12
+	bindsym $mod+Shift+3 move container to workspace number $ws13
+	bindsym $mod+Shift+4 move container to workspace number $ws14
+	bindsym $mod+Shift+5 move container to workspace number $ws15
+	bindsym $mod+Shift+6 move container to workspace number $ws16
+	bindsym $mod+Shift+7 move container to workspace number $ws17
+	bindsym $mod+Shift+8 move container to workspace number $ws18
+	bindsym $mod+Shift+9 move container to workspace number $ws19
+	bindsym $mod+Shift+0 move container to workspace number $ws20
+	# 回到正常模式
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+F1 mode "default"
+	bindsym $mod+F2 mode "workspaces2"
+}
+bindsym $mod+F1 mode "workspaces"
+
+# 工作区模式2
+# -----------------------------------------------------------
+mode "workspaces2" {
+	bindsym $mod+1 workspace number $ws21
+	bindsym $mod+2 workspace number $ws22
+	bindsym $mod+3 workspace number $ws23
+	bindsym $mod+4 workspace number $ws24
+	bindsym $mod+5 workspace number $ws25
+	bindsym $mod+6 workspace number $ws26
+	bindsym $mod+7 workspace number $ws27
+	bindsym $mod+8 workspace number $ws28
+	bindsym $mod+9 workspace number $ws29
+	bindsym $mod+0 workspace number $ws30
+	bindsym $mod+Shift+1 move container to workspace number $ws21
+	bindsym $mod+Shift+2 move container to workspace number $ws22
+	bindsym $mod+Shift+3 move container to workspace number $ws23
+	bindsym $mod+Shift+4 move container to workspace number $ws24
+	bindsym $mod+Shift+5 move container to workspace number $ws25
+	bindsym $mod+Shift+6 move container to workspace number $ws26
+	bindsym $mod+Shift+7 move container to workspace number $ws27
+	bindsym $mod+Shift+8 move container to workspace number $ws28
+	bindsym $mod+Shift+9 move container to workspace number $ws29
+	bindsym $mod+Shift+0 move container to workspace number $ws30
+	# 回到正常模式
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+F2 mode "default"
+	bindsym $mod+F1 mode "workspaces"
+}
+bindsym $mod+F2 mode "workspaces2"
+# 以上内容共117行
+
+# 音频管理 Use pactl to adjust volume in PulseAudio.
+# ===========================================================
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% &amp;&amp; $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% &amp;&amp; $refresh_i3status
+bindsym Mod1+F8 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% &amp;&amp; $refresh_i3status
+bindsym Mod1+F7 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% &amp;&amp; $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle &amp;&amp; $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle &amp;&amp; $refresh_i3status
+
+# 开启i3status
+# ===========================================================
+# bar {
+	# status_command i3status
+# }
+
+
+# 一些键位的展示
+# ===========================================================
+# |       键位       |                  作用                  |
+# |:----------------:|:--------------------------------------:|
+# |      $mod+f      |                  全屏                  |
+# |    $mod+Enter    |              打开一个终端              |
+# |    $mod+space    |          让窗口切换到浮窗模式          |
+# | $mod+Shift+space |             浮动窗口全局显示           |
+# |      $mod+d      |             打开程序的dmenu            |
+# |      $mod+q      |              杀死一个窗口              |
+# |     $mod+num     |            切换到第n个工作区           |
+# |      $mod+F1     |        切换到扩展工作区切换模式1       |
+# |      $mod+f1     |        切换到扩展工作区切换模式1       |
+# |     $mod+hjkl    |        切换操作窗口（逻辑同vim）       |
+# |  $mod+Shift+hjkl |        移动操作窗口（逻辑同vim）       |
+# |      $mod+g      |                垂直分割                |
+# |      $mod+v      |                水平分割                |
+# |      $mod+s      |        垂直标签页重叠式排列窗口        |
+# |      $mod+w      |        横向标签页重叠式排列窗口        |
+# |      $mod+e      | 分割式平铺窗口，会将当前的窗口组合拆开 |
+# | $mod+Mod1+space |      在浮动窗口与平铺式窗口间切换      |
+# |      $mod+a      |     移动焦点到打开其他窗口的主窗口     |
+# |      Escape      | （仅在进入其他模式时有用）返回正常模式 |
+# |   $mod+Shift+c   |              加载配置文件              |
+# |   $mod+Shift+r   |                 重启i3                 |
+# |   $mod+Shift+e   |           退出i3（会有提示）           |
+# |      $mod+r      |      进入大小模式（设置窗口大小）      |
+# |    $mod+Pause    |            进入系统电源模式            |
+# |    $mod+Mod1+l   |                  锁屏                  |
+# |      $mod+p      |                  截屏                  |
+# |    $mod+comma    |      `comma`意为`,`，上一个工作区      |
+# |    $mod+period   |      `period`意为`.`，下一个工作区     |
+# |      $mod+z      |           进入快捷键扩展模式           |
+# |      $mod+x      |                启动nvim                |
+# |     $mod+Tab     |         显示rofi的窗口选择界面         |
+# |      Mod1+F7     |               系统音量减               |
+# |      Mod1+F8     |               系统音量加               |
+# |      Mod1+F5     |        （正在播放程序）音量减1%        |
+# |      Mod1+F6     |        （正在播放程序）音量加1%        |
+# |      Mod1+F9     |         （正在播放程序）上一曲         |
+# |     Mod1+F10     |          （正在播放程序）暂停          |
+# |     Mod1+F11     |         （正在播放程序）下一曲         |
+# |      Mod1+d      |           打开fsearch快速搜索          |
+
+# 300
+# ===========================================================
+# ---------------------User's Config-------------------------
+# ===========================================================
+# 
+# 用户的所有配置都在这！User's config in all are here!
+# 
+
+# 自启动（登录时自启动的软件）
+# ===========================================================
+# 登陆时启动polybar  (一个dock软件)
+# -----------------------------------------------------------
+exec --no-startup-id ~/.config/polybar/launch.sh --cuts
+
+# 媒体控制服务
+# -----------------------------------------------------------
+exec --no-startup-id playerctld daemon
+
+# 自动垂直树直分布
+# -----------------------------------------------------------
+exec_always --no-startup-id autotiling
+
+# 登录时 启用窗口透明
+# -----------------------------------------------------------
+# exec --no-startup-id compton -b
+# exec --no-startup-id picom -b
+exec --no-startup-id ~/.config/picom/launch.sh
+
+# 启动conky
+# -----------------------------------------------------------
+exec --no-startup-id conky -c ~/.config/conky/conky_leon
+
+# 其他自启动软件
+# -----------------------------------------------------------
+exec --no-startup-id fcitx
+exec_always --no-startup-id utools
+exec --no-startup-id kdeconnect-indicator
+exec --no-startup-id klipper
+# exec --no-startup-id
+# exec --no-startup-id plasmashell
+
+# 系统的电源管理
+# ===========================================================
+# 快捷键
+set $Locker i3lock &amp;&amp; sleep 1
+# 系统的电源管理
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+	bindsym l exec --no-startup-id $Locker, mode "default"
+	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym s exec --no-startup-id $Locker &amp;&amp; systemctl suspend, mode "default"
+	bindsym h exec --no-startup-id $Locker &amp;&amp; systemctl hibernate, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+
+# 用户的自定义快捷键
+# ===========================================================
+# 锁屏
+bindsym $mod+Mod1+l exec --no-startup-id $Locker, mode "default"
+# 截屏
+bindsym $mod+p exec --no-startup-id spectacle
+# 工作区切换
+bindsym $mod+comma workspace prev
+bindsym $mod+period workspace next
+# 快速搜索（Everthing）
+bindsym Mod1+d exec --no-startup-id fsearch
+# 启用一个空的编辑器
+bindsym $mod+x exec --no-startup-id alacritty --class editor-nvim -e nvim /tmp/tmpfile
+# 清空文件
+bindsym Mod1+x exec --no-startup-id cat /dev/null &gt; /tmp/tmpfile
+# 展示所有的窗口
+bindsym $mod+Tab exec --no-startup-id rofi -show window
+# 浮动窗口全局显示
+bindsym $mod+Shift+space sticky toggle
+
+# 扩展快捷键模式（主要是因为键位比较多但又不常用）
+# -----------------------------------------------------------
+mode "$mode_app" {
+	# 启动polybar（会将前一个polybar杀死，算是重启了）
+	bindsym 1 exec --no-startup-id  ~/.config/polybar/launch.sh --cuts
+	# 使用指令让polybar重启
+	bindsym 2 exec --no-startup-id polybar-msg cmd restart
+	# 状态栏隐藏
+	bindsym h exec --no-startup-id polybar-msg cmd hide
+	# 状态栏反隐藏
+	bindsym Shift+h exec --no-startup-id polybar-msg cmd show
+	# 壁纸选择模式
+	bindsym b mode "$mode_bg"
+	# 重启picom（因为我的picom分支有问题，要多次重启）
+	bindsym 3 exec --no-startup-id ~/.config/picom/launch.sh
+	# 启动conky
+	bindsym 4 exec --no-startup-id conky -c ~/.config/conky/conky_leon
+	# 让playerctld服务切换到下一个播放器
+	bindsym Left exec --no-startup-id playerctld shift
+	# 让playerctld服务切换到上一个播放器
+	bindsym Right exec --no-startup-id playerctld unshift
+
+	# 显示终端时钟
+	bindsym c exec --no-startup-id alacritty --class ttyclock -e tty-clock -csC 3
+	# 启动计算器No.1
+	bindsym m exec --no-startup-id alacritty --class math1 -e eva
+	# 启动计算器No.2
+	bindsym Shift+m exec --no-startup-id alacritty --class math2 -e bc
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+z mode "default"
+}
+bindsym $mod+z mode "$mode_app"
+
+# 壁纸选择模式
+# -----------------------------------------------------------
+mode "$mode_bg" {
+	# 随机壁纸
+	bindsym $mod+1 exec --no-startup-id feh --randomize --bg-fill ~/图片/其他/高清大图/.壁纸/*/*
+	# 设定原壁纸
+	bindsym $mod+2 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/86426220_p0.png
+	# 设定黑屏壁纸
+	bindsym $mod+3 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/black.png
+	# 设置其他壁纸
+	# bindsym $mod+&lt;++&gt; exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/&lt;++&gt;
+	bindsym $mod+4 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/请问您今天要来点兔子吗/a.jpg
+	bindsym $mod+5 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/请问您今天要来点兔子吗/751137.png
+	bindsym $mod+6 exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/Download/88640994_p0.jpg
+	# bindsym $mod+7 exec --no-startup-id feh --bg-max ~/图片/其他/高清大图/.壁纸/Download/88640994_p0.jpg
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "$mode_app"
+	bindsym Escape mode "$mode_app"
+}
+
+# 播放器（播放多媒体的程序）的控制
+# -----------------------------------------------------------
+bindsym Mod1+F5 exec --no-startup-id playerctl volume 0.01-
+bindsym Mod1+F6 exec --no-startup-id playerctl volume 0.01+
+bindsym Mod1+F9 exec --no-startup-id playerctl previous
+bindsym Mod1+F10 exec --no-startup-id playerctl play-pause
+bindsym Mod1+F11 exec --no-startup-id playerctl next
+
+# 对于有特定的class的窗口的默认显示设定
+# ===========================================================
+for_window [instance="ttyclock"]floating enable
+for_window [instance="ttyclock"]resize set 550 250
+# for_window [instance="ttyclock"]border pixel 2
+
+for_window [instance="math1"]floating enable
+# for_window [instance="math1"]resize set 825 550
+# for_window [instance="math1"]border pixel 2
+
+for_window [instance="math2"]floating enable
+# for_window [instance="math2"]resize set 825 550
+# for_window [instance="math2"]border pixel 2
+
+for_window [instance="bilibili"]floating enable
+# for_window [instance="bilibili"]resize set 825 550
+# for_window [instance="bilibili"]border pixel 2
+# for_window [instance="bilibili"]move right 330px
+# for_window [instance="bilibili"]move down 70px
+
+for_window [instance="utools"]floating enable
+for_window [instance="qq.exe"]floating enable
+for_window [instance="fsearch"]floating enable
+for_window [instance="editor-nvim"]floating enable
+for_window [instance="Steam"]floating enable
+for_window [instance="Terraria.bin.x86_64"]fullscreen enable
+
+
+# ===========================================================
+# -------------------Config of theme-------------------------
+# ===========================================================
+#
+# 关于i3wm的外貌
+#
+
+# 默认窗口不显示标题栏
+# ===========================================================
+# new_window 1pixel
+# new_float 1pixel
+new_window none
+new_float none
+hide_edge_borders both
+
+# 设置窗口间距
+# ===========================================================
+gaps inner 7
+gaps outer 3
+
+# 选择壁纸
+# ===========================================================
+# exec --no-startup-id feh --randomize --bg-fill ~/图片/其他/高清大图/壁纸/*
+exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.壁纸/86426220_p0.png
+# exec --no-startup-id feh --bg-fill ~/图片/其他/高清大图/.二次元/请问您今天要来点兔子吗/a.jpg
+
+# 选择主题
+# ===========================================================
+client.focused #689d6a #689d6a #282828 #282828
+client.focused_inactive #1d2021 #1d2021 #928374 #282828
+client.unfocused #32302f #32302f #928374 #282828
+client.urgent #cc241d #cc241d #ebdbb2 #282828
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-orgf3d77aa" class="outline-4">
+<h4 id="orgf3d77aa"><span class="section-number-4">1.2.2.</span> polybar</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+我的polybar基于仓库<a href="https://github.com/adi1090x/polybar-themes">polybar-themes</a>中的 **Cuts**修改而来
+</p>
+
+
+<div id="org0125b24" class="figure">
+<p><img src="./2022-07-03_01/2022-07-03_01-01.png" alt="2022-07-03_01-01.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>效果</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfa4c160" class="outline-4">
+<h4 id="orgfa4c160"><span class="section-number-4">1.2.3.</span> picom</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+启动脚本：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">#!/bin/env bash
+killall -q picom
+picom -b
+</pre>
+</div>
+
+<p>
+配置：
+</p>
+
+<details>
+<summary>picom配置</summary>
+<div class="org-src-container">
+<pre class="src src-conf">#################################
+#          Animations           #
+#################################
+# requires https://github.com/jonaburg/picom
+# (These are also the default values)
+transition-length = 300
+transition-pow-x = 0.1
+transition-pow-y = 0.1
+transition-pow-w = 0.1
+transition-pow-h = 0.1
+size-transition = true
+
+
+#################################
+#             Corners           #
+#################################
+# requires: https://github.com/sdhand/compton or https://github.com/jonaburg/picom
+corner-radius = 12.0;
+# 黑名单
+rounded-corners-exclude = [
+	#"window_type = 'normal'",
+	# "class_g = 'awesome'",
+	# "class_g = 'URxvt'",
+	# "class_g = 'XTerm'",
+	# "class_g = 'kitty'",
+	# "class_g = 'Alacritty'",
+	# "class_g = 'code-oss'",
+	#"class_g = 'TelegramDesktop'",
+	# "class_g = 'firefox'",
+	# "class_g = 'Thunderbird'"
+	# "class_g = 'i3-frame'",
+	"class_g = 'Polybar'",
+	"class_g = 'plasmashell'",
+];
+round-borders = 1;
+round-borders-exclude = [
+	#"class_g = 'TelegramDesktop'",
+];
+
+#################################
+#             Shadows           #
+#################################
+
+
+# Enabled client-side shadows on windows. Note desktop windows 
+# (windows with '_NET_WM_WINDOW_TYPE_DESKTOP') never get shadow, 
+# unless explicitly requested using the wintypes option.
+#
+# shadow = false
+# shadow = false;
+
+# The blur radius for shadows, in pixels. (defaults to 12)
+# shadow-radius = 12
+# shadow-radius = 7;
+
+# The opacity of shadows. (0.0 - 1.0, defaults to 0.75)
+# shadow-opacity = .75
+
+# The left offset for shadows, in pixels. (defaults to -15)
+# shadow-offset-x = -15
+# shadow-offset-x = -7;
+
+# The top offset for shadows, in pixels. (defaults to -15)
+# shadow-offset-y = -15
+# shadow-offset-y = -7;
+
+# Avoid drawing shadows on dock/panel windows. This option is deprecated,
+# you should use the *wintypes* option in your config file instead.
+#
+# no-dock-shadow = false
+
+# Don't draw shadows on drag-and-drop windows. This option is deprecated, 
+# you should use the *wintypes* option in your config file instead.
+#
+# no-dnd-shadow = false
+
+# Red color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-red = 0
+
+# Green color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-green = 0
+
+# Blue color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-blue = 0
+
+# Do not paint shadows on shaped windows. Note shaped windows 
+# here means windows setting its shape through X Shape extension. 
+# Those using ARGB background is beyond our control. 
+# Deprecated, use 
+#   shadow-exclude = 'bounding_shaped'
+# or 
+#   shadow-exclude = 'bounding_shaped &amp;&amp; !rounded_corners'
+# instead.
+#
+# shadow-ignore-shaped = ''
+
+# Specify a list of conditions of windows that should have no shadow.
+#
+# examples:
+#   shadow-exclude = "n:e:Notification";
+#
+# shadow-exclude = []
+# 黑名单
+shadow-exclude = [
+	# "name = 'Notification'",
+	"class_g = 'Conky'",
+	# "class_g ?= 'Notify-osd'",
+	# "class_g = 'Cairo-clock'",
+	# "class_g = 'slop'",
+	"class_g = 'Polybar'",
+	"_GTK_FRAME_EXTENTS@:c"
+];
+
+# Specify a X geometry that describes the region in which shadow should not
+# be painted in, such as a dock window region. Use 
+#    shadow-exclude-reg = "x10+0+0"
+# for example, if the 10 pixels on the bottom of the screen should not have shadows painted on.
+#
+# shadow-exclude-reg = "" 
+
+# Crop shadow of a window fully on a particular Xinerama screen to the screen.
+# xinerama-shadow-crop = false
+
+
+#################################
+#           Fading              #
+#################################
+
+
+# Fade windows in/out when opening/closing and when opacity changes,
+#  unless no-fading-openclose is used.
+# fading = false
+fading = true;
+
+# Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)
+# fade-in-step = 0.028
+fade-in-step = 0.03;
+
+# Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)
+# fade-out-step = 0.03
+fade-out-step = 0.03;
+
+# The time between steps in fade step, in milliseconds. (&gt; 0, defaults to 10)
+# fade-delta = 10
+
+# Specify a list of conditions of windows that should not be faded.
+# don't need this, we disable fading for all normal windows with wintypes: {}
+fade-exclude = [
+	"class_g = 'slop'"   # maim
+]
+
+# Do not fade on window open/close.
+# no-fading-openclose = false
+
+# Do not fade destroyed ARGB windows with WM frame. Workaround of bugs in Openbox, Fluxbox, etc.
+# no-fading-destroyed-argb = false
+
+
+#################################
+#   Transparency / Opacity      #
+#################################
+
+
+# Opacity of inactive windows. (0.1 - 1.0, defaults to 1.0)
+# inactive-opacity = 1
+inactive-opacity = 0.70;
+
+# Opacity of window titlebars and borders. (0.1 - 1.0, disabled by default)
+# frame-opacity = 1.0
+# frame-opacity = 0.7;
+
+# Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)
+# menu-opacity = 1.0 
+# menu-opacity is depreciated use dropdown-menu and popup-menu instead.
+
+#If using these 2 below change their values in line 510 &amp; 511 aswell
+# popup_menu = { opacity = 0.8; }
+# dropdown_menu = { opacity = 0.8; }
+
+
+# Let inactive opacity set by -i override the '_NET_WM_OPACITY' values of windows.
+# inactive-opacity-override = true
+# inactive-opacity-override = false;
+
+# Default opacity for active windows. (0.0 - 1.0, defaults to 1.0)
+active-opacity = 0.85;
+
+# Dim inactive windows. (0.0 - 1.0, defaults to 0.0)
+# inactive-dim = 0.0
+
+# Specify a list of conditions of windows that should always be considered focused.
+# focus-exclude = []
+focus-exclude = [
+	# "class_g = 'Cairo-clock'",
+	# "class_g = 'Bar'",                    # lemonbar
+	# "class_g = 'slop'"                    # maim
+];
+
+# Use fixed inactive dim value, instead of adjusting according to window opacity.
+# inactive-dim-fixed = 1.0
+
+# Specify a list of opacity rules, in the format `PERCENT:PATTERN`, 
+# like `50:name *= "Firefox"`. picom-trans is recommended over this. 
+# Note we don't make any guarantee about possible conflicts with other 
+# programs that set '_NET_WM_WINDOW_OPACITY' on frame or client windows.
+# example:
+#    opacity-rule = [ "80:class_g = 'URxvt'" ];
+#
+# opacity-rule = []
+opacity-rule = [
+	# 工具
+	"85:class_g  = 'Rofi' &amp;&amp; focused",
+	"85:class_g  = 'Rofi' &amp;&amp; !focused",
+	"100:class_g = 'bilibili' &amp;&amp; focused",
+	"100:class_g = 'bilibili' &amp;&amp; !focused",
+	"33:class_g = 'netease-cloud-music'",
+	"100:class_g  = 'Google-chrome'",
+	"100:class_g  = 'Microsoft-edge'",
+	"100:class_g  = 'vlc' &amp;&amp; focused",
+	"100:class_g  = 'gwenview' &amp;&amp; focused",
+	"100:class_g = 'VirtualBox Machine' &amp;&amp; focused",
+	"33:class_g = 'i3lock'",
+	"100:class_g = 'GitHub Desktop'",
+	"70:class_g = 'gnome-terminal-server' &amp;&amp; focused",
+	"55:class_g = 'gnome-terminal-server' &amp;&amp; !focused",
+	"33:class_g = 'plasmashell'"
+];
+	# 浏览器
+	# "85:name  *?= '的个人空间_哔哩哔哩_BILIBILI' &amp;&amp; focused",
+	# "70:name  *?= '的个人空间_哔哩哔哩_BILIBILI' &amp;&amp; !focused",
+	# "100:name  *?= '_哔哩哔哩_BILIBILI' &amp;&amp; focused",
+	# "100:name  *?= '_哔哩哔哩BILIBILI' &amp;&amp; focused",
+	# "100:name  *?= '_哔哩哔哩_BILIBILI' &amp;&amp; !focused",
+	# "100:name  *?= '_哔哩哔哩BILIBILI' &amp;&amp; !focused",
+	# "100:name  *?= '画中画' &amp;&amp; focused",
+	# "95:name  *?= '画中画' &amp;&amp; !focused",
+	# 影音/图片
+	# "100:name  *?= '.jpg'",
+	# "100:name  *?= '.png'",
+	# 游戏
+	# "100:name  *?= 'MINECRAFT' &amp;&amp; focused",
+	# "70:name  *?= 'SOMETHINGS' &amp;&amp; focused",
+	# "95:class_g = 'alacritty' &amp;&amp; !_NET_WM_STATE@:32a",
+	# "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+
+
+#################################
+#     Background-Blurring       #
+#################################
+
+
+# Parameters for background blurring, see the *BLUR* section for more information.
+# blur-method = 
+# blur-size = 12
+#
+# blur-deviation = false
+
+# Blur background of semi-transparent / ARGB windows. 
+# Bad in performance, with driver-dependent behavior. 
+# The name of the switch may change without prior notifications.
+#
+# blur-background = true;
+
+# Blur background of windows when the window frame is not opaque. 
+# Implies:
+#    blur-background 
+# Bad in performance, with driver-dependent behavior. The name may change.
+#
+# blur-background-frame = false;
+
+
+# Use fixed blur strength rather than adjusting according to window opacity.
+# blur-background-fixed = false;
+
+
+# Specify the blur convolution kernel, with the following format:
+# example:
+#   blur-kern = "5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1";
+#
+# blur-kern = ''
+# blur-kern = "3x3box";
+
+blur: {
+	# requires: https://github.com/ibhagwan/picom
+	# method = "kawase";
+	# strength = 7;
+	# deviation = 1.0;
+	# kernel = "11x11gaussian";
+	# background = false;
+	# background-frame = false;
+	# background-fixed = false;
+	# kern = "3x3box";
+}
+
+# Exclude conditions for background blur.
+blur-background-exclude = [
+	#"window_type = 'dock'",
+	#"window_type = 'desktop'",
+	#"class_g = 'URxvt'",
+	#
+	# prevents picom from blurring the background
+	# when taking selection screenshot with `main`
+	# https://github.com/naelstrof/maim/issues/130
+	"class_g = 'slop'",
+	"_GTK_FRAME_EXTENTS@:c"
+];
+
+
+#################################
+#       General Settings        #
+#################################
+
+# Daemonize process. Fork to background after initialization. Causes issues with certain (badly-written) drivers.
+# daemon = false
+
+# Specify the backend to use: `xrender`, `glx`, or `xr_glx_hybrid`.
+# `xrender` is the default one.
+#
+experimental-backends = true;
+backend = "glx";
+#backend = "xrender";
+
+
+# Enable/disable VSync.
+# vsync = false
+vsync = true
+
+# Enable remote control via D-Bus. See the *D-BUS API* section below for more details.
+# dbus = false
+
+# Try to detect WM windows (a non-override-redirect window with no 
+# child that has 'WM_STATE') and mark them as active.
+#
+# mark-wmwin-focused = false
+mark-wmwin-focused = true;
+
+# Mark override-redirect windows that doesn't have a child window with 'WM_STATE' focused.
+# mark-ovredir-focused = false
+mark-ovredir-focused = true;
+
+# Try to detect windows with rounded corners and don't consider them 
+# shaped windows. The accuracy is not very high, unfortunately.
+#
+# detect-rounded-corners = false
+detect-rounded-corners = true;
+
+# Detect '_NET_WM_OPACITY' on client windows, useful for window managers
+# not passing '_NET_WM_OPACITY' of client windows to frame windows.
+#
+# detect-client-opacity = false
+detect-client-opacity = true;
+
+# Specify refresh rate of the screen. If not specified or 0, picom will 
+# try detecting this with X RandR extension.
+#
+# refresh-rate = 60
+# refresh-rate = 0
+
+# Limit picom to repaint at most once every 1 / 'refresh_rate' second to 
+# boost performance. This should not be used with 
+#   vsync drm/opengl/opengl-oml
+# as they essentially does sw-opti's job already, 
+# unless you wish to specify a lower refresh rate than the actual value.
+#
+# sw-opti = 
+
+# Use EWMH '_NET_ACTIVE_WINDOW' to determine currently focused window, 
+# rather than listening to 'FocusIn'/'FocusOut' event. Might have more accuracy, 
+# provided that the WM supports it.
+#
+# use-ewmh-active-win = false
+
+# Unredirect all windows if a full-screen opaque window is detected, 
+# to maximize performance for full-screen windows. Known to cause flickering 
+# when redirecting/unredirecting windows. paint-on-overlay may make the flickering less obvious.
+#
+# unredir-if-possible = false
+
+# Delay before unredirecting the window, in milliseconds. Defaults to 0.
+# unredir-if-possible-delay = 0
+
+# Conditions of windows that shouldn't be considered full-screen for unredirecting screen.
+# unredir-if-possible-exclude = []
+
+# Use 'WM_TRANSIENT_FOR' to group windows, and consider windows 
+# in the same group focused at the same time.
+#
+# detect-transient = false
+detect-transient = true
+
+# Use 'WM_CLIENT_LEADER' to group windows, and consider windows in the same 
+# group focused at the same time. 'WM_TRANSIENT_FOR' has higher priority if 
+# detect-transient is enabled, too.
+#
+# detect-client-leader = false
+detect-client-leader = true
+
+# Resize damaged region by a specific number of pixels. 
+# A positive value enlarges it while a negative one shrinks it. 
+# If the value is positive, those additional pixels will not be actually painted 
+# to screen, only used in blur calculation, and such. (Due to technical limitations, 
+# with use-damage, those pixels will still be incorrectly painted to screen.) 
+# Primarily used to fix the line corruption issues of blur, 
+# in which case you should use the blur radius value here 
+# (e.g. with a 3x3 kernel, you should use `--resize-damage 1`, 
+# with a 5x5 one you use `--resize-damage 2`, and so on). 
+# May or may not work with *--glx-no-stencil*. Shrinking doesn't function correctly.
+#
+# resize-damage = 1
+
+# Specify a list of conditions of windows that should be painted with inverted color. 
+# Resource-hogging, and is not well tested.
+#
+# invert-color-include = []
+
+# GLX backend: Avoid using stencil buffer, useful if you don't have a stencil buffer. 
+# Might cause incorrect opacity when rendering transparent content (but never 
+# practically happened) and may not work with blur-background. 
+# My tests show a 15% performance boost. Recommended.
+#
+# glx-no-stencil = false
+
+# GLX backend: Avoid rebinding pixmap on window damage. 
+# Probably could improve performance on rapid window content changes, 
+# but is known to break things on some drivers (LLVMpipe, xf86-video-intel, etc.).
+# Recommended if it works.
+#
+# glx-no-rebind-pixmap = false
+
+# Disable the use of damage information. 
+# This cause the whole screen to be redrawn everytime, instead of the part of the screen
+# has actually changed. Potentially degrades the performance, but might fix some artifacts.
+# The opposing option is use-damage
+#
+# no-use-damage = false
+#use-damage = true (Causing Weird Black semi opaque rectangles when terminal is opened)
+#Changing use-damage to false fixes the problem
+use-damage = false
+
+# Use X Sync fence to sync clients' draw calls, to make sure all draw 
+# calls are finished before picom starts drawing. Needed on nvidia-drivers 
+# with GLX backend for some users.
+#
+# xrender-sync-fence = false
+
+# GLX backend: Use specified GLSL fragment shader for rendering window contents. 
+# See `compton-default-fshader-win.glsl` and `compton-fake-transparency-fshader-win.glsl` 
+# in the source tree for examples.
+#
+# glx-fshader-win = ''
+
+# Force all windows to be painted with blending. Useful if you 
+# have a glx-fshader-win that could turn opaque pixels transparent.
+#
+# force-win-blend = false
+
+# Do not use EWMH to detect fullscreen windows. 
+# Reverts to checking if a window is fullscreen based only on its size and coordinates.
+#
+# no-ewmh-fullscreen = false
+
+# Dimming bright windows so their brightness doesn't exceed this set value. 
+# Brightness of a window is estimated by averaging all pixels in the window, 
+# so this could comes with a performance hit. 
+# Setting this to 1.0 disables this behaviour. Requires --use-damage to be disabled. (default: 1.0)
+#
+# max-brightness = 1.0
+
+# Make transparent windows clip other windows like non-transparent windows do,
+# instead of blending on top of them.
+#
+# transparent-clipping = false
+
+# Set the log level. Possible values are:
+#  "trace", "debug", "info", "warn", "error"
+# in increasing level of importance. Case doesn't matter. 
+# If using the "TRACE" log level, it's better to log into a file 
+# using *--log-file*, since it can generate a huge stream of logs.
+#
+# log-level = "debug"
+log-level = "info";
+
+# Set the log file.
+# If *--log-file* is never specified, logs will be written to stderr. 
+# Otherwise, logs will to written to the given file, though some of the early 
+# logs might still be written to the stderr. 
+# When setting this option from the config file, it is recommended to use an absolute path.
+#
+# log-file = '/path/to/your/log/file'
+
+# Show all X errors (for debugging)
+# show-all-xerrors = false
+
+# Write process ID to a file.
+# write-pid-path = '/path/to/your/log/file'
+
+# Window type settings
+# 
+# 'WINDOW_TYPE' is one of the 15 window types defined in EWMH standard: 
+#     "unknown", "desktop", "dock", "toolbar", "menu", "utility", 
+#     "splash", "dialog", "normal", "dropdown_menu", "popup_menu", 
+#     "tooltip", "notification", "combo", and "dnd".
+# 
+# Following per window-type options are available: ::
+# 
+#   fade, shadow:::
+#     Controls window-type-specific shadow and fade settings.
+# 
+#   opacity:::
+#     Controls default opacity of the window type.
+# 
+#   focus:::
+#     Controls whether the window of this type is to be always considered focused. 
+#     (By default, all window types except "normal" and "dialog" has this on.)
+# 
+#   full-shadow:::
+#     Controls whether shadow is drawn under the parts of the window that you 
+#     normally won't be able to see. Useful when the window has parts of it 
+#     transparent, and you want shadows in those areas.
+# 
+#   redir-ignore:::
+#     Controls whether this type of windows should cause screen to become 
+#     redirected again after been unredirected. If you have unredir-if-possible
+#     set, and doesn't want certain window to cause unnecessary screen redirection, 
+#     you can set this to `true`.
+#
+wintypes:
+{
+	normal = { fade = false; shadow = false; }
+	tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; };
+	dock = { shadow = false; }
+	dnd = { shadow = false; }
+	popup_menu = { opacity = 0.8; }
+	dropdown_menu = { opacity = 0.8; }
+};
+</pre>
+</div>
+</details>
+
+<details>
+<summary>这里还有一份新的</summary>
+<div class="org-src-container">
+<pre class="src src-conf">#################################
+#          Animations           #
+#################################
+# requires https://github.com/jonaburg/picom
+# (These are also the default values)
+# transition-length = 500
+# transition-pow-x = 0.1
+# transition-pow-y = 0.1
+# transition-pow-w = 0.1
+# transition-pow-h = 0.1
+# size-transition = true
+
+animations: true;
+animation-stiffness = 200
+animation-window-mass = 0.4
+animation-dampening = 20
+# animation-clamping = false
+animation-for-open-window = "zoom"; #open window
+animation-for-unmap-window = "zoom"; #minimize window
+animation-for-workspace-switch-in = "slide-down"; #the windows in the workspace that is coming in
+animation-for-workspace-switch-out = "zoom"; #the windows in the workspace that are coming out
+animation-for-transient-window = "slide-up"; #popup windows
+
+
+#################################
+#             Corners           #
+#################################
+# requires: https://github.com/sdhand/compton or https://github.com/jonaburg/picom
+corner-radius = 12.0;
+# 黑名单
+rounded-corners-exclude = [
+	#"window_type = 'normal'",
+	# "class_g = 'awesome'",
+	# "class_g = 'URxvt'",
+	# "class_g = 'XTerm'",
+	# "class_g = 'kitty'",
+	# "class_g = 'Alacritty'",
+	# "class_g = 'code-oss'",
+	#"class_g = 'TelegramDesktop'",
+	# "class_g = 'firefox'",
+	# "class_g = 'Thunderbird'"
+	# "class_g = 'i3-frame'",
+	# "class_g = 'Xwinwrap'",
+	"class_g = 'rofi'",
+	"class_g = 'Polybar'",
+	"class_g = 'plasmashell'",
+	"class_g = 'dwm'",
+	"class_g = 'fcitx'",
+];
+round-borders = 1;
+round-borders-exclude = [
+	#"class_g = 'TelegramDesktop'",
+];
+
+#################################
+#             Shadows           #
+#################################
+
+
+# Enabled client-side shadows on windows. Note desktop windows 
+# (windows with '_NET_WM_WINDOW_TYPE_DESKTOP') never get shadow, 
+# unless explicitly requested using the wintypes option.
+#
+# shadow = false
+# shadow = false;
+
+# The blur radius for shadows, in pixels. (defaults to 12)
+# shadow-radius = 12
+# shadow-radius = 7;
+
+# The opacity of shadows. (0.0 - 1.0, defaults to 0.75)
+# shadow-opacity = .75
+
+# The left offset for shadows, in pixels. (defaults to -15)
+# shadow-offset-x = -15
+# shadow-offset-x = -7;
+
+# The top offset for shadows, in pixels. (defaults to -15)
+# shadow-offset-y = -15
+# shadow-offset-y = -7;
+
+# Avoid drawing shadows on dock/panel windows. This option is deprecated,
+# you should use the *wintypes* option in your config file instead.
+#
+# no-dock-shadow = false
+
+# Don't draw shadows on drag-and-drop windows. This option is deprecated, 
+# you should use the *wintypes* option in your config file instead.
+#
+# no-dnd-shadow = false
+
+# Red color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-red = 0
+
+# Green color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-green = 0
+
+# Blue color value of shadow (0.0 - 1.0, defaults to 0).
+# shadow-blue = 0
+
+# Do not paint shadows on shaped windows. Note shaped windows 
+# here means windows setting its shape through X Shape extension. 
+# Those using ARGB background is beyond our control. 
+# Deprecated, use 
+#   shadow-exclude = 'bounding_shaped'
+# or 
+#   shadow-exclude = 'bounding_shaped &amp;&amp; !rounded_corners'
+# instead.
+#
+# shadow-ignore-shaped = ''
+
+# Specify a list of conditions of windows that should have no shadow.
+#
+# examples:
+#   shadow-exclude = "n:e:Notification";
+#
+# shadow-exclude = []
+# 黑名单
+shadow-exclude = [
+	# "name = 'Notification'",
+	"class_g = 'conky'",
+	# "class_g ?= 'Notify-osd'",
+	# "class_g = 'Cairo-clock'",
+	# "class_g = 'slop'",
+	"class_g = 'Polybar'",
+	"_GTK_FRAME_EXTENTS@:c"
+];
+
+# Specify a X geometry that describes the region in which shadow should not
+# be painted in, such as a dock window region. Use 
+#    shadow-exclude-reg = "x10+0+0"
+# for example, if the 10 pixels on the bottom of the screen should not have shadows painted on.
+#
+# shadow-exclude-reg = "" 
+
+# Crop shadow of a window fully on a particular Xinerama screen to the screen.
+# xinerama-shadow-crop = false
+
+
+#################################
+#           Fading              #
+#################################
+
+
+# Fade windows in/out when opening/closing and when opacity changes,
+#  unless no-fading-openclose is used.
+# fading = false
+fading = true;
+
+# Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)
+# fade-in-step = 0.028
+fade-in-step = 0.03;
+
+# Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)
+# fade-out-step = 0.03
+fade-out-step = 0.03;
+
+# The time between steps in fade step, in milliseconds. (&gt; 0, defaults to 10)
+# fade-delta = 10
+
+# Specify a list of conditions of windows that should not be faded.
+# don't need this, we disable fading for all normal windows with wintypes: {}
+fade-exclude = [
+	"class_g = 'slop'"   # maim
+]
+
+# Do not fade on window open/close.
+# no-fading-openclose = false
+
+# Do not fade destroyed ARGB windows with WM frame. Workaround of bugs in Openbox, Fluxbox, etc.
+# no-fading-destroyed-argb = false
+
+
+#################################
+#   Transparency / Opacity      #
+#################################
+
+
+# Opacity of inactive windows. (0.1 - 1.0, defaults to 1.0)
+# inactive-opacity = 1
+inactive-opacity = 0.70;
+
+# Opacity of window titlebars and borders. (0.1 - 1.0, disabled by default)
+# frame-opacity = 1.0
+# frame-opacity = 0.7;
+
+# Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)
+# menu-opacity = 1.0 
+# menu-opacity is depreciated use dropdown-menu and popup-menu instead.
+
+#If using these 2 below change their values in line 510 &amp; 511 aswell
+# popup_menu = { opacity = 0.8; }
+# dropdown_menu = { opacity = 0.8; }
+
+
+# Let inactive opacity set by -i override the '_NET_WM_OPACITY' values of windows.
+# inactive-opacity-override = true
+# inactive-opacity-override = false;
+
+# Default opacity for active windows. (0.0 - 1.0, defaults to 1.0)
+active-opacity = 0.85;
+
+# Dim inactive windows. (0.0 - 1.0, defaults to 0.0)
+# inactive-dim = 0.0
+
+# Specify a list of conditions of windows that should always be considered focused.
+# focus-exclude = []
+focus-exclude = [
+	# "class_g = 'Cairo-clock'",
+	# "class_g = 'Bar'",                    # lemonbar
+	# "class_g = 'slop'"                    # maim
+	"class_g = 'dwm'",
+	"class_g = 'klipper'",
+];
+
+# Use fixed inactive dim value, instead of adjusting according to window opacity.
+# inactive-dim-fixed = 1.0
+
+# Specify a list of opacity rules, in the format `PERCENT:PATTERN`, 
+# like `50:name *= "Firefox"`. picom-trans is recommended over this. 
+# Note we don't make any guarantee about possible conflicts with other 
+# programs that set '_NET_WM_WINDOW_OPACITY' on frame or client windows.
+# example:
+#    opacity-rule = [ "80:class_g = 'URxvt'" ];
+#
+# opacity-rule = []
+opacity-rule = [
+	# 浏览器
+	"85:name  *?= '的个人空间_哔哩哔哩_BILIBILI' &amp;&amp; focused",
+	"70:name  *?= '的个人空间_哔哩哔哩_BILIBILI' &amp;&amp; !focused",
+	"100:name  *?= '_哔哩哔哩_BILIBILI' &amp;&amp; focused",
+	"100:name  *?= '_哔哩哔哩BILIBILI' &amp;&amp; focused",
+	"100:name  *?= '_哔哩哔哩_BILIBILI' &amp;&amp; !focused",
+	"100:name  *?= '_哔哩哔哩BILIBILI' &amp;&amp; !focused",
+	"100:name  *?= '恶魔x天使 不能友好相处' &amp;&amp; focused",
+	"100:name  *?= '画中画' &amp;&amp; focused",
+	"95:name  *?= '画中画' &amp;&amp; !focused",
+	"100:name  *?= 'yuindex' &amp;&amp; focused",
+	# 影音/图片
+	"100:name  *?= '.jpg'",
+	"100:name  *?= '.jpeg'",
+	"100:name  *?= '.mp4'",
+	"100:name  *?= '.gif'",
+	"100:name  *?= '.png'",
+	# 游戏
+	"100:name  *?= 'MINECRAFT' &amp;&amp; focused",
+	"100:class_g  = 'powder-toy' &amp;&amp; focused",
+	"100:class_g  = 'Minetest' &amp;&amp; focused",
+	"100:class_g  = 'Terraria.bin.x86_64' &amp;&amp; focused",
+	"100:class_g  = 'sunloginclient' &amp;&amp; focused",
+	"100:class_g = 'osgViewer' &amp;&amp; focused",
+	"100:class_g = 'Craft' &amp;&amp; focused",
+	"100:class_g = 'Civ6Sub' &amp;&amp; focused",
+	"100:class_g = '1room.exe' &amp;&amp; focused",
+	"100:class_g = 'dohnadohnatrial.exe' &amp;&amp; focused",
+	# "100:name  *?= 'Besiege'",
+	"100:class_g = 'Gimp-2.10'",
+	"100:class_g = 'krita'",
+	# "100:class_g = 'Blender' &amp;&amp; focused",
+	# 工具
+	"85:class_g  = 'Rofi' &amp;&amp; focused",
+	"85:class_g  = 'Rofi' &amp;&amp; !focused",
+	"100:class_g = 'bilibili' &amp;&amp; focused",
+	"100:class_g = 'bilibili' &amp;&amp; !focused",
+	"33:class_g = 'netease-cloud-music'",
+	"85:class_g = 'sogoupinyin-service'",
+	# "90:class_g = 'konsole' &amp;&amp; focused",
+	"90:class_g = 'Emacs' &amp;&amp; focused",
+	# "100:class_g  = 'Google-chrome'",
+	# "100:class_g  = 'Microsoft-edge'",
+	"100:class_g  = 'konsole'",
+	# "5:class_g = 'plasmashell'",
+	"50:class_g  = 'Gnome-terminal'",
+	"100:class_g  = 'firefox'",
+	"100:class_g  = 'vlc' &amp;&amp; focused",
+	"100:class_g  = 'mpv' &amp;&amp; focused",
+	"100:class_g  = 'MPlayer'",
+	"100:class_g  = 'Shotcut' &amp;&amp; focused",
+	"100:class_g  = 'gwenview' &amp;&amp; focused",
+	"100:class_g = 'VirtualBox Machine' &amp;&amp; focused",
+	"100:class_g = 'Qemu-system-x86_64' &amp;&amp; focused",
+	"10:class_g = 'i3lock'",
+	"100:class_g = 'GitHub Desktop'",
+	"70:class_g = 'gnome-terminal-server' &amp;&amp; focused",
+	"55:class_g = 'gnome-terminal-server' &amp;&amp; !focused",
+	"100:class_g = 'wpp' &amp;&amp; focused",
+];
+	# 浏览器
+	# "85:name  *?= '的个人空间_哔哩哔哩_BILIBILI' &amp;&amp; focused",
+	# "70:name  *?= '的个人空间_哔哩哔哩_BILIBILI' &amp;&amp; !focused",
+	# "100:name  *?= '_哔哩哔哩_BILIBILI' &amp;&amp; focused",
+	# "100:name  *?= '_哔哩哔哩BILIBILI' &amp;&amp; focused",
+	# "100:name  *?= '_哔哩哔哩_BILIBILI' &amp;&amp; !focused",
+	# "100:name  *?= '_哔哩哔哩BILIBILI' &amp;&amp; !focused",
+	# "100:name  *?= '画中画' &amp;&amp; focused",
+	# "95:name  *?= '画中画' &amp;&amp; !focused",
+	# 影音/图片
+	# "100:name  *?= '.jpg'",
+	# "100:name  *?= '.png'",
+	# 游戏
+	# "100:name  *?= 'MINECRAFT' &amp;&amp; focused",
+	# "70:name  *?= 'SOMETHINGS' &amp;&amp; focused",
+	# "95:class_g = 'alacritty' &amp;&amp; !_NET_WM_STATE@:32a",
+	# "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+
+
+#################################
+#     Background-Blurring       #
+#################################
+
+
+# Parameters for background blurring, see the *BLUR* section for more information.
+# blur-method = 
+# blur-size = 12
+#
+# blur-deviation = false
+
+# Blur background of semi-transparent / ARGB windows. 
+# Bad in performance, with driver-dependent behavior. 
+# The name of the switch may change without prior notifications.
+#
+# blur-background = true;
+
+# Blur background of windows when the window frame is not opaque. 
+# Implies:
+#    blur-background 
+# Bad in performance, with driver-dependent behavior. The name may change.
+#
+# blur-background-frame = false;
+
+
+# Use fixed blur strength rather than adjusting according to window opacity.
+# blur-background-fixed = false;
+
+
+# Specify the blur convolution kernel, with the following format:
+# example:
+#   blur-kern = "5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1";
+#
+# blur-kern = ''
+# blur-kern = "3x3box";
+
+blur: {
+	# requires: https://github.com/ibhagwan/picom
+	# method = "gaussian";
+	# method = "kawase";
+	# method = "kernel";
+	strength = 7;
+	# deviation = 1.0;
+	# kernel = "11x11gaussian";
+	background = false;
+	background-frame = false;
+	background-fixed = false;
+	kern = "3x3box";
+}
+
+# Exclude conditions for background blur.
+blur-background-exclude = [
+	#"window_type = 'dock'",
+	#"window_type = 'desktop'",
+	#"class_g = 'URxvt'",
+	#
+	# prevents picom from blurring the background
+	# when taking selection screenshot with `main`
+	# https://github.com/naelstrof/maim/issues/130
+	"class_g = 'slop'",
+	"_GTK_FRAME_EXTENTS@:c"
+];
+
+
+#################################
+#       General Settings        #
+#################################
+
+# Daemonize process. Fork to background after initialization. Causes issues with certain (badly-written) drivers.
+# daemon = false
+
+# Specify the backend to use: `xrender`, `glx`, or `xr_glx_hybrid`.
+# `xrender` is the default one.
+#
+experimental-backends = true;
+backend = "glx";
+#backend = "xrender";
+
+
+# Enable/disable VSync.
+# vsync = false
+vsync = true
+
+# Enable remote control via D-Bus. See the *D-BUS API* section below for more details.
+# dbus = false
+
+# Try to detect WM windows (a non-override-redirect window with no 
+# child that has 'WM_STATE') and mark them as active.
+#
+# mark-wmwin-focused = false
+mark-wmwin-focused = true;
+
+# Mark override-redirect windows that doesn't have a child window with 'WM_STATE' focused.
+# mark-ovredir-focused = false
+mark-ovredir-focused = true;
+
+# Try to detect windows with rounded corners and don't consider them 
+# shaped windows. The accuracy is not very high, unfortunately.
+#
+# detect-rounded-corners = false
+detect-rounded-corners = true;
+
+# Detect '_NET_WM_OPACITY' on client windows, useful for window managers
+# not passing '_NET_WM_OPACITY' of client windows to frame windows.
+#
+# detect-client-opacity = false
+detect-client-opacity = true;
+
+# Specify refresh rate of the screen. If not specified or 0, picom will 
+# try detecting this with X RandR extension.
+#
+# refresh-rate = 60
+# refresh-rate = 0
+
+# Limit picom to repaint at most once every 1 / 'refresh_rate' second to 
+# boost performance. This should not be used with 
+#   vsync drm/opengl/opengl-oml
+# as they essentially does sw-opti's job already, 
+# unless you wish to specify a lower refresh rate than the actual value.
+#
+# sw-opti = 
+
+# Use EWMH '_NET_ACTIVE_WINDOW' to determine currently focused window, 
+# rather than listening to 'FocusIn'/'FocusOut' event. Might have more accuracy, 
+# provided that the WM supports it.
+#
+# use-ewmh-active-win = false
+
+# Unredirect all windows if a full-screen opaque window is detected, 
+# to maximize performance for full-screen windows. Known to cause flickering 
+# when redirecting/unredirecting windows. paint-on-overlay may make the flickering less obvious.
+#
+# unredir-if-possible = false
+
+# Delay before unredirecting the window, in milliseconds. Defaults to 0.
+# unredir-if-possible-delay = 0
+
+# Conditions of windows that shouldn't be considered full-screen for unredirecting screen.
+# unredir-if-possible-exclude = []
+
+# Use 'WM_TRANSIENT_FOR' to group windows, and consider windows 
+# in the same group focused at the same time.
+#
+# detect-transient = false
+detect-transient = true
+
+# Use 'WM_CLIENT_LEADER' to group windows, and consider windows in the same 
+# group focused at the same time. 'WM_TRANSIENT_FOR' has higher priority if 
+# detect-transient is enabled, too.
+#
+# detect-client-leader = false
+detect-client-leader = true
+
+# Resize damaged region by a specific number of pixels. 
+# A positive value enlarges it while a negative one shrinks it. 
+# If the value is positive, those additional pixels will not be actually painted 
+# to screen, only used in blur calculation, and such. (Due to technical limitations, 
+# with use-damage, those pixels will still be incorrectly painted to screen.) 
+# Primarily used to fix the line corruption issues of blur, 
+# in which case you should use the blur radius value here 
+# (e.g. with a 3x3 kernel, you should use `--resize-damage 1`, 
+# with a 5x5 one you use `--resize-damage 2`, and so on). 
+# May or may not work with *--glx-no-stencil*. Shrinking doesn't function correctly.
+#
+# resize-damage = 1
+
+# Specify a list of conditions of windows that should be painted with inverted color. 
+# Resource-hogging, and is not well tested.
+#
+# invert-color-include = []
+
+# GLX backend: Avoid using stencil buffer, useful if you don't have a stencil buffer. 
+# Might cause incorrect opacity when rendering transparent content (but never 
+# practically happened) and may not work with blur-background. 
+# My tests show a 15% performance boost. Recommended.
+#
+# glx-no-stencil = false
+
+# GLX backend: Avoid rebinding pixmap on window damage. 
+# Probably could improve performance on rapid window content changes, 
+# but is known to break things on some drivers (LLVMpipe, xf86-video-intel, etc.).
+# Recommended if it works.
+#
+# glx-no-rebind-pixmap = false
+
+# Disable the use of damage information. 
+# This cause the whole screen to be redrawn everytime, instead of the part of the screen
+# has actually changed. Potentially degrades the performance, but might fix some artifacts.
+# The opposing option is use-damage
+#
+# no-use-damage = false
+#use-damage = true (Causing Weird Black semi opaque rectangles when terminal is opened)
+#Changing use-damage to false fixes the problem
+use-damage = false
+
+# Use X Sync fence to sync clients' draw calls, to make sure all draw 
+# calls are finished before picom starts drawing. Needed on nvidia-drivers 
+# with GLX backend for some users.
+#
+# xrender-sync-fence = false
+
+# GLX backend: Use specified GLSL fragment shader for rendering window contents. 
+# See `compton-default-fshader-win.glsl` and `compton-fake-transparency-fshader-win.glsl` 
+# in the source tree for examples.
+#
+# glx-fshader-win = ''
+
+# Force all windows to be painted with blending. Useful if you 
+# have a glx-fshader-win that could turn opaque pixels transparent.
+#
+# force-win-blend = false
+
+# Do not use EWMH to detect fullscreen windows. 
+# Reverts to checking if a window is fullscreen based only on its size and coordinates.
+#
+# no-ewmh-fullscreen = false
+
+# Dimming bright windows so their brightness doesn't exceed this set value. 
+# Brightness of a window is estimated by averaging all pixels in the window, 
+# so this could comes with a performance hit. 
+# Setting this to 1.0 disables this behaviour. Requires --use-damage to be disabled. (default: 1.0)
+#
+# max-brightness = 1.0
+
+# Make transparent windows clip other windows like non-transparent windows do,
+# instead of blending on top of them.
+#
+# transparent-clipping = false
+
+# Set the log level. Possible values are:
+#  "trace", "debug", "info", "warn", "error"
+# in increasing level of importance. Case doesn't matter. 
+# If using the "TRACE" log level, it's better to log into a file 
+# using *--log-file*, since it can generate a huge stream of logs.
+#
+# log-level = "debug"
+log-level = "info";
+
+# Set the log file.
+# If *--log-file* is never specified, logs will be written to stderr. 
+# Otherwise, logs will to written to the given file, though some of the early 
+# logs might still be written to the stderr. 
+# When setting this option from the config file, it is recommended to use an absolute path.
+#
+# log-file = '/path/to/your/log/file'
+
+# Show all X errors (for debugging)
+# show-all-xerrors = false
+
+# Write process ID to a file.
+# write-pid-path = '/path/to/your/log/file'
+
+# Window type settings
+# 
+# 'WINDOW_TYPE' is one of the 15 window types defined in EWMH standard: 
+#     "unknown", "desktop", "dock", "toolbar", "menu", "utility", 
+#     "splash", "dialog", "normal", "dropdown_menu", "popup_menu", 
+#     "tooltip", "notification", "combo", and "dnd".
+# 
+# Following per window-type options are available: ::
+# 
+#   fade, shadow:::
+#     Controls window-type-specific shadow and fade settings.
+# 
+#   opacity:::
+#     Controls default opacity of the window type.
+# 
+#   focus:::
+#     Controls whether the window of this type is to be always considered focused. 
+#     (By default, all window types except "normal" and "dialog" has this on.)
+# 
+#   full-shadow:::
+#     Controls whether shadow is drawn under the parts of the window that you 
+#     normally won't be able to see. Useful when the window has parts of it 
+#     transparent, and you want shadows in those areas.
+# 
+#   redir-ignore:::
+#     Controls whether this type of windows should cause screen to become 
+#     redirected again after been unredirected. If you have unredir-if-possible
+#     set, and doesn't want certain window to cause unnecessary screen redirection, 
+#     you can set this to `true`.
+#
+wintypes:
+{
+	# normal = { fade = false; shadow = false; }
+	normal = { fade = true; shadow = true; opacity = 0.75; }
+	desktop = { fade = false; shadow = false; opacity = 1; }
+	# normal = { fade = true; shadow = true}
+	tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; }
+	dock = { shadow = false; }
+	dnd = { shadow = false; }
+	popup_menu = { opacity = 0.8; }
+	dropdown_menu = { opacity = 0.8; }
+};
+</pre>
+</div>
+</details>
+</div>
+</div>
+
+<div id="outline-container-orgcb832ab" class="outline-4">
+<h4 id="orgcb832ab"><span class="section-number-4">1.2.4.</span> rofi</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+配置：
+</p>
+<details>
+<summary>rofi配置</summary>
+<div class="org-src-container">
+<pre class="src src-conf">configuration {
+	modi: "window,run,ssh,drun";
+/*	font: "mono 12";*/
+/*	location: 0;*/
+/*	yoffset: 0;*/
+/*	xoffset: 0;*/
+/*	fixed-num-lines: true;*/
+	show-icons: true;
+/*	terminal: "rofi-sensible-terminal";*/
+/*	ssh-client: "ssh";*/
+/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
+/*	run-command: "{cmd}";*/
+/*	run-list-command: "";*/
+/*	run-shell-command: "{terminal} -e {cmd}";*/
+/*	window-command: "wmctrl -i -R {window}";*/
+/*	window-match-fields: "all";*/
+	icon-theme: "BigSur-black-dark";
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
+/*	drun-show-actions: false;*/
+/*	drun-display-format: "{name} [&lt;span weight='light' size='small'&gt;&lt;i&gt;({generic})&lt;/i&gt;&lt;/span&gt;]";*/
+/*	drun-url-launcher: "xdg-open";*/
+/*	disable-history: false;*/
+/*	ignored-prefixes: "";*/
+/*	sort: false;*/
+/*	sorting-method: "normal";*/
+/*	case-sensitive: false;*/
+/*	cycle: true;*/
+/*	sidebar-mode: false;*/
+/*	hover-select: false;*/
+/*	eh: 1;*/
+/*	auto-select: false;*/
+/*	parse-hosts: false;*/
+/*	parse-known-hosts: true;*/
+/*	combi-modi: "window,run";*/
+/*	matching: "normal";*/
+/*	tokenize: true;*/
+/*	m: "-5";*/
+/*	filter: ;*/
+/*	dpi: -1;*/
+/*	threads: 0;*/
+/*	scroll-method: 0;*/
+/*	window-format: "{w}    {c}   {t}";*/
+/*	click-to-exit: true;*/
+/*	max-history-size: 25;*/
+/*	combi-hide-mode-prefix: false;*/
+/*	combi-display-format: "{mode} {text}";*/
+/*	matching-negate-char: '-' /* unsupported */;*/
+/*	cache-dir: ;*/
+/*	window-thumbnail: false;*/
+/*	drun-use-desktop-cache: false;*/
+/*	drun-reload-desktop-cache: false;*/
+/*	normalize-match: false;*/
+/*	steal-focus: false;*/
+/*	application-fallback-icon: ;*/
+/*	pid: "/run/user/1000/rofi.pid";*/
+/*	display-window: ;*/
+/*	display-windowcd: ;*/
+/*	display-run: ;*/
+/*	display-ssh: ;*/
+/*	display-drun: ;*/
+/*	display-combi: ;*/
+/*	display-keys: ;*/
+/*	display-filebrowser: ;*/
+/*	kb-primary-paste: "Control+V,Shift+Insert";*/
+/*	kb-secondary-paste: "Control+v,Insert";*/
+/*	kb-clear-line: "Control+w";*/
+/*	kb-move-front: "Control+a";*/
+/*	kb-move-end: "Control+e";*/
+/*	kb-move-word-back: "Alt+b,Control+Left";*/
+/*	kb-move-word-forward: "Alt+f,Control+Right";*/
+/*	kb-move-char-back: "Left,Control+b";*/
+/*	kb-move-char-forward: "Right,Control+f";*/
+/*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
+/*	kb-remove-word-forward: "Control+Alt+d";*/
+/*	kb-remove-char-forward: "Delete,Control+d";*/
+/*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
+/*	kb-remove-to-eol: "Control+k";*/
+/*	kb-remove-to-sol: "Control+u";*/
+/*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
+/*	kb-accept-custom: "Control+Return";*/
+/*	kb-accept-custom-alt: "Control+Shift+Return";*/
+/*	kb-accept-alt: "Shift+Return";*/
+/*	kb-delete-entry: "Shift+Delete";*/
+/*	kb-mode-next: "Shift+Right,Control+Tab";*/
+/*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
+/*	kb-mode-complete: "Control+l";*/
+/*	kb-row-left: "Control+Page_Up";*/
+/*	kb-row-right: "Control+Page_Down";*/
+/*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
+/*	kb-row-down: "Down,Control+n";*/
+/*	kb-row-tab: "Tab";*/
+/*	kb-page-prev: "Page_Up";*/
+/*	kb-page-next: "Page_Down";*/
+/*	kb-row-first: "Home,KP_Home";*/
+/*	kb-row-last: "End,KP_End";*/
+/*	kb-row-select: "Control+space";*/
+/*	kb-screenshot: "Alt+S";*/
+/*	kb-ellipsize: "Alt+period";*/
+/*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
+/*	kb-toggle-sort: "Alt+grave";*/
+/*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
+/*	kb-custom-1: "Alt+1";*/
+/*	kb-custom-2: "Alt+2";*/
+/*	kb-custom-3: "Alt+3";*/
+/*	kb-custom-4: "Alt+4";*/
+/*	kb-custom-5: "Alt+5";*/
+/*	kb-custom-6: "Alt+6";*/
+/*	kb-custom-7: "Alt+7";*/
+/*	kb-custom-8: "Alt+8";*/
+/*	kb-custom-9: "Alt+9";*/
+/*	kb-custom-10: "Alt+0";*/
+/*	kb-custom-11: "Alt+exclam";*/
+/*	kb-custom-12: "Alt+at";*/
+/*	kb-custom-13: "Alt+numbersign";*/
+/*	kb-custom-14: "Alt+dollar";*/
+/*	kb-custom-15: "Alt+percent";*/
+/*	kb-custom-16: "Alt+dead_circumflex";*/
+/*	kb-custom-17: "Alt+ampersand";*/
+/*	kb-custom-18: "Alt+asterisk";*/
+/*	kb-custom-19: "Alt+parenleft";*/
+/*	kb-select-1: "Super+1";*/
+/*	kb-select-2: "Super+2";*/
+/*	kb-select-3: "Super+3";*/
+/*	kb-select-4: "Super+4";*/
+/*	kb-select-5: "Super+5";*/
+/*	kb-select-6: "Super+6";*/
+/*	kb-select-7: "Super+7";*/
+/*	kb-select-8: "Super+8";*/
+/*	kb-select-9: "Super+9";*/
+/*	kb-select-10: "Super+0";*/
+/*	ml-row-left: "ScrollLeft";*/
+/*	ml-row-right: "ScrollRight";*/
+/*	ml-row-up: "ScrollUp";*/
+/*	ml-row-down: "ScrollDown";*/
+/*	me-select-entry: "MousePrimary";*/
+/*	me-accept-entry: "MouseDPrimary";*/
+/*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}
+</pre>
+</div>
+</details>
+</div>
+</div>
+<div id="outline-container-orgc731c49" class="outline-4">
+<h4 id="orgc731c49"><span class="section-number-4">1.2.5.</span> Vim/Neovim</h4>
+<div class="outline-text-4" id="text-1-2-5">
+</div>
+<ol class="org-ol">
+<li><a id="org79145da"></a>Spacevim<br />
+<div class="outline-text-5" id="text-1-2-5-1">
+<p>
+推荐使用<a href="https://spacevim.org/cn/">Spacevim</a>：
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">curl -sLf https://spacevim.org/cn/install.sh | bash
+</pre>
+</div>
+<p>
+或者（我的个人方法）
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">wget https://spacevim.org/cn/install.sh
+./install.sh
+</pre>
+</div>
+
+<p>
+配置：
+</p>
+
+<p>
+<code>~/.SpaceVim/init.vim</code> ：
+</p>
+<details>
+<summary>spacevim的init.vim配置</summary>
+<pre class="example">
+"=============================================================================
+" init.vim --- Entry file for neovim
+" Copyright (c) 2016-2020 Wang Shidong &amp; Contributors
+" Author: Wang Shidong &lt; wsdjeg@outlook.com &gt;
+" URL: https://spacevim.org
+" License: GPLv3
+"=============================================================================
+
+execute 'source' fnamemodify(expand('&lt;sfile&gt;'), ':h').'/main.vim'
+
+set shiftwidth=8 " 设定 &lt;&lt; 和 &gt;&gt; 命令移动时的宽度为 8
+set softtabstop=8 " 使得按退格键时可以一次删掉 8 个空格
+set tabstop=8 " 设定 tab 长度为 8
+set noexpandtab " 不要用空格代替制表符
+
+set nobackup " 覆盖文件时不备份
+set noswapfile " 不生成交换文件
+
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+
+nnoremap &lt;silent&gt; &lt;F5&gt; :call SpaceVim#plugins#runner#open('make')
+
+" ==================== Markdown =====================
+let g:mkdp_auto_start = 0
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_echo_preview_url = 0
+" 按键
+" nmap &lt;F5&gt; &lt;Plug&gt;MarkdownPreview        " 开始预览
+" nmap &lt;F6&gt; &lt;Plug&gt;MarkdownPreviewStop    " 关闭预览
+" nmap &lt;F5&gt; &lt;Plug&gt;MarkdownPreviewToggle  " 切换预览
+</pre>
+</details>
+
+<p>
+<code>~/.SpaceVim.d/init.toml</code> ：
+</p>
+<details>
+<summary>spacevim的init.toml配置</summary>
+<pre class="example">
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2020 Wang Shidong &amp; Contributors
+# Author: Wang Shidong &lt; wsdjeg at 163.com &gt;
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+	# set spacevim theme. by default colorscheme layer is not loaded,
+	# if you want to use more colorscheme, please load the colorscheme
+	# layer
+	colorscheme = "one"
+	# colorscheme = "catppuccin"
+	colorscheme_bg = "dark"
+	# colorscheme_bg = ""
+	# Disable guicolors in basic mode, many terminal do not support 24bit
+	# true colors
+	enable_guicolors = true
+	# Disable statusline separator, if you want to use other value, please
+	# install nerd fonts
+	statusline_separator = "arrow"
+	statusline_iseparator = "arrow"
+	buffer_index_type = 4
+	enable_tabline_filetype_icon = true
+	enable_statusline_mode = true
+	vimcompatible = true
+	# 取消对应行号
+	# relativenumber = false
+	# 自动补全
+	autocomplete_method = "coc"
+	# 字体
+	guifont = "JetBrains Mono:h12"
+
+# Enable autocomplete layer
+[[layers]]
+	name = 'autocomplete'
+	auto_completion_return_key_behavior = "complete"
+	auto_completion_tab_key_behavior = "smart"
+[[layers]]
+	name = 'shell'
+	default_position = 'top'
+	default_height = 30
+[[layers]]
+	name = "colorscheme"
+[[layers]]
+	name = "git"
+[[layers]]
+	name = "foldsearch"
+[[layers]]
+	name = "edit"
+[[layers]]
+	name = "denite"
+[[layers]]
+	name = "core"
+[[layers]]
+	name = "chinese"
+
+# 语言
+[[layers]]
+	name = 'lang#c'
+	# enable_clang_syntax_highlight = true
+[[layers]]
+	name = "lsp"
+	filetypes = [
+		"c",
+		"cpp"
+	]
+	[layers.override_cmd]
+		c = ["clangd"]
+[[layers]]
+	name = "format"
+[[layers]]
+	name = "lang#markdown"
+[[layers]]
+	name = "lang#html"
+[[layers]]
+	name = "lang#xml"
+[[layers]]
+	name = "lang#python"
+
+# Github
+[[custom_plugins]]
+	name = "catppuccin/nvim"
+[[custom_plugins]]
+	name = "windwp/windline.nvim"
+[[custom_plugins]]
+	name = "akinsho/toggleterm.nvim"
+</pre>
+</details>
+</div>
+</li>
+<li><a id="org0031426"></a>裸装Vim/Neovim<br />
+<div class="outline-text-5" id="text-1-2-5-2">
+<p>
+Vim配置（~/.vim/vimrc、~/.config/nvim/init.vim）：
+</p>
+
+<details>
+<summary>纯vim的init.toml配置</summary>
+<pre class="example">
+" ==================================================
+" 
+" 基本设置
+" 
+" ==================================================
+set nocompatible
+" 关闭 vi 兼容模式
+syntax on
+" 自动语法高亮
+set autochdir
+" 自动切换当前目录为当前文件所在的目录
+set autoread
+" 打开文件监视。如果在编辑过程中文件发生外部改变(比如被别的编辑器编辑了)，就会发出提示
+set scrolloff=3
+" 设置光标距离顶部和底部的固定位置
+set magic
+" 设置魔术
+set smartindent
+" 开启新行时使用智能自动缩进
+set noeb
+set noexpandtab
+" 不要用空格代替制表符
+set backspace=indent,eol,start
+set cmdheight=1
+" 设定命令行的行数为 1
+set nowrap
+"不折行
+set sidescroll=1
+"流畅扩展
+
+filetype on
+"检测文件类型
+filetype plugin indent on
+" 开启插件
+
+" TAB
+" ==================================================
+set shiftwidth=8
+" 设定 &lt;&lt; 和 &gt;&gt; 命令移动时的宽度为 8
+set softtabstop=8
+" 使得按退格键时可以一次删掉 8 个空格
+set tabstop=8
+" 设定 tab 长度为 8
+
+" 行号
+" ==================================================
+" set number
+set nu
+" 显示行号
+set rnu
+" 显示相对行号
+
+" 搜索
+" ==================================================
+set ignorecase smartcase
+" 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+set incsearch
+" 输入搜索内容时就显示搜索结果
+
+" 状态栏
+" ==================================================
+set ruler
+" 打开状态栏标尺
+set laststatus=1
+" 显示状态栏 (默认值为 1, 无法显示状态栏)
+set statusline=%F%m%r%h%w\ [FORMAT=%{&amp;ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+" 设置在状态行显示的信息
+
+" 临时文件
+" ==================================================
+set noswapfile
+" 禁止生成临时文件
+set nobackup
+" 覆盖文件时不备份
+set backupcopy=yes
+" 设置备份时的行为为覆盖
+set hidden
+" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+
+" ==================================================
+"
+" 功能脚本
+"
+" ==================================================
+au BufReadPost * if line("'\"") &gt; 1 &amp;&amp; line("'\"") &lt;= line("$") | exe "normal! g'\"" | endif
+" 记忆文件上次打开位置
+
+let s:fcitx_cmd = executable("fcitx5-remote") ? "fcitx5-remote" : "fcitx-remote"
+autocmd InsertLeave * let b:fcitx = system(s:fcitx_cmd) | call system(s:fcitx_cmd.' -c')
+autocmd InsertEnter * if exists('b:fcitx') &amp;&amp; b:fcitx == 2 | call system(s:fcitx_cmd.' -o') | endif
+" 退出插入模式时自动切换到英文
+
+if has('persistent_undo') "check if your vim version supports it 
+	set undofile "turn on the feature 
+	set undodir=$HOME/.config/nvim/undo "directory where the undo files will be stored 
+endif
+
+" ==================================================
+"
+" 配置多语言环境
+"
+" ==================================================
+if has("multi_byte")
+" UTF-8 编码
+set encoding=utf-8
+set termencoding=utf-8
+set formatoptions+=mM
+set fencs=utf-8,gbk
+if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
+set ambiwidth=double
+endif
+if has("win32")
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
+endif
+else
+echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
+endif
+</pre>
+</details>
+
+<p>
+更多扩展设置（文件均在 <b>\$USER/.config/nvim/plugin</b> 或者
+<b>\$USER/.config/nvim/plugin</b> 目录之下）：
+</p>
+
+<p>
+<code>plugins.vim</code> 插件设置：
+</p>
+<details>
+<summary>plugins.vim</summary>
+<pre class="example">
+" ==================================================
+"
+" 插件设置
+"
+" ==================================================
+" nerdtree
+" ==================================================
+let NERDTreeWinPos='left'
+"设置在 vim 左侧显示
+let NERDTreeWinSize=20
+"设置宽度为 20
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+" autocmd vimenter * NERDTree
+wincmd w
+autocmd VimEnter * wincmd w
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 &amp;&amp; isdirectory(argv()[0]) &amp;&amp; !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 &amp;&amp; !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 &amp;&amp; exists("b:NERDTree") &amp;&amp; b:NERDTree.isTabTree()) | q | endif
+" 设置 F2 为打开或者关闭的快捷键
+noremap &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;
+inoremap &lt;F2&gt; &lt;Cmd&gt;:NERDTreeToggle&lt;CR&gt;
+
+
+" vim-airline
+" ==================================================
+set laststatus=2
+let g:airline_theme="onedark"
+
+"这个是安装字体后 必须设置此项" 
+" let g:airline_powerline_fonts = 1
+
+" 打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"设置切换Buffer快捷键"
+noremap &lt;C-tab&gt; :bn&lt;CR&gt;
+noremap &lt;C-s-tab&gt; :bp&lt;CR&gt;
+" 关闭状态显示空白符号计数
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+" 设置consolas字体"前面已经设置过
+"set guifont=Consolas\ for\ Powerline\ FixedD:h11
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+" powerline symbols
+" let g:airline_left_sep = ' '
+" let g:airline_left_alt_sep = ' '
+" let g:airline_right_sep = ' '
+" let g:airline_right_alt_sep = ' '
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.colnr = ' :'
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ' :'
+" let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.maxlinenr = 'ML '
+" let g:airline_symbols.dirty='⚡'
+" old vim-powerline symbols
+" let g:airline_left_sep = '⮀'
+" let g:airline_left_alt_sep = '⮁'
+" let g:airline_right_sep = '⮂'
+" let g:airline_right_alt_sep = '⮃'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
+
+
+" vim-theams
+" ==================================================
+syntax enable
+colorscheme space-vim-dark
+
+
+" Markdown
+" ==================================================
+" nmap &lt;F3&gt; &lt;Plug&gt;MarkdownPreview        " 开始预览
+" nmap &lt;F4&gt; &lt;Plug&gt;MarkdownPreviewStop    " 关闭预览
+" nmap &lt;F5&gt; &lt;Plug&gt;MarkdownPreviewToggle  " 切换预览
+
+
+" nerdcommenter
+" ==================================================
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '// ' } }
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/*','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+</pre>
+</details>
+
+<p>
+<code>keymap.vim</code> 键位映射设置：
+</p>
+<details>
+<summary>keymap.vim</summary>
+<pre class="example">
+" ==================================================
+"
+" 自定义快捷命令
+"
+" ==================================================
+" 自定义命令(命令模式)
+" ==================================================
+command W w
+command Q q
+command WQ wq
+command QW wq
+command Wq wq
+command Qw wq
+
+" noremap(普通模式使用)
+" ==================================================
+noremap &lt;SPACE&gt;s :w&lt;CR&gt;
+noremap &lt;SPACE&gt;q :wq&lt;CR&gt;
+noremap &lt;SPACE&gt;Q :q!&lt;CR&gt;
+autocmd Filetype markdown noremap &lt;SPACE&gt;pp :MarkdownPreview&lt;CR&gt;
+autocmd Filetype markdown noremap &lt;SPACE&gt;pP :MarkdownPreviewStop&lt;CR&gt;
+autocmd Filetype markdown noremap &lt;SPACE&gt;ptt :TableModeToggle&lt;CR&gt;
+autocmd Filetype markdown noremap &lt;SPACE&gt;ptr :TableModeRealign&lt;CR&gt; 
+autocmd Filetype markdown noremap &lt;F3&gt; &lt;Plug&gt;MarkdownPreview
+" 开始预览
+autocmd Filetype markdown noremap &lt;F4&gt; &lt;Plug&gt;MarkdownPreviewStop
+" 关闭预览
+"noremap &lt;C-[&gt; /&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l
+noremap &lt;SPACE&gt;&lt;Tab&gt; &lt;Cmd&gt;bn&lt;CR&gt;
+noremap &lt;Tab&gt; &lt;C-w&gt;w
+autocmd Filetype c noremap &lt;F3&gt; &lt;Cmd&gt;chdir ../&lt;CR&gt;&lt;Cmd&gt;set noautochdir&lt;CR&gt;
+autocmd Filetype c noremap &lt;F4&gt; &lt;Cmd&gt;!make;make clean&lt;CR&gt;
+autocmd Filetype c noremap &lt;F5&gt; &lt;Cmd&gt;terminal bin/main&lt;CR&gt;
+
+" inoremap(插入模式使用)
+" ==================================================
+inoremap ' ''&lt;ESC&gt;i
+inoremap " ""&lt;ESC&gt;i
+inoremap ( ()&lt;ESC&gt;i
+inoremap [ []&lt;ESC&gt;i
+inoremap { {&lt;CR&gt;}&lt;ESC&gt;O
+inoremap &lt; &lt;&gt;&lt;ESC&gt;i
+"inoremap 「 「」&lt;ESC&gt;i
+inoremap （ （）&lt;ESC&gt;i
+"补全
+"inoremap &lt;C-[&gt; &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l
+
+autocmd Filetype markdown inoremap &lt;F3&gt; &lt;Plug&gt;MarkdownPreview
+" 开始预览
+autocmd Filetype markdown inoremap &lt;F4&gt; &lt;Plug&gt;MarkdownPreviewStop
+" 关闭预览
+</pre>
+</details>
+
+<p>
+<code>markdown-quick-input.vim</code> markdown文件的快速输入键位映射设置：
+</p>
+<details>
+<summary>markdown-quick-input.vim</summary>
+<pre class="example">
+" ==================================================
+"
+" 自定义markdown快捷输入命令
+"
+" ==================================================
+" 查找标记点
+" ==================================================
+autocmd Filetype markdown inoremap =f &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l
+autocmd Filetype markdown inoremap == &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l
+
+" 一级标题
+" ==================================================
+autocmd Filetype markdown inoremap =1 &lt;Esc&gt;o#&lt;Space&gt;&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;2kA
+
+" 二级标题
+" ==================================================
+autocmd Filetype markdown inoremap =2 &lt;Esc&gt;o##&lt;Space&gt;&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;2kA
+
+" 三级标题
+" ==================================================
+autocmd Filetype markdown inoremap =3 &lt;Esc&gt;o###&lt;Space&gt;&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;2kA
+
+" 四级标题
+" ==================================================
+autocmd Filetype markdown inoremap =4 &lt;Esc&gt;o####&lt;Space&gt;&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;2kA
+
+" 五级标题
+" ==================================================
+autocmd Filetype markdown inoremap =5 &lt;Esc&gt;o#####&lt;Space&gt;&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;2kA
+
+" 六级标题
+" ==================================================
+autocmd Filetype markdown inoremap =6 &lt;Esc&gt;o######&lt;Space&gt;&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;2kA
+
+" 小点
+" ==================================================
+autocmd Filetype markdown inoremap =- &lt;Esc&gt;o-&lt;Space&gt;
+autocmd Filetype markdown inoremap =. &lt;Esc&gt;o-&lt;Space&gt;
+
+" 斜体文本
+" ==================================================
+autocmd Filetype markdown inoremap =i **&lt;++&gt;&lt;Esc&gt;F*i
+
+" 粗体文本
+" ==================================================
+autocmd Filetype markdown inoremap =s ****&lt;++&gt;&lt;Esc&gt;F*hi
+
+" 标注
+" ==================================================
+autocmd Filetype markdown inoremap =m ``&lt;++&gt;&lt;Esc&gt;F`i
+
+" 粗斜体文本
+" ==================================================
+autocmd Filetype markdown inoremap =e ******&lt;++&gt;&lt;Esc&gt;F*hhi
+
+" 下划线
+" ==================================================
+autocmd Filetype markdown inoremap =d &lt;Esc&gt;o~~~~&lt;++&gt;&lt;Esc&gt;F~hi
+
+" 高亮
+" ==================================================
+autocmd Filetype markdown inoremap =h ====&lt;++&gt;&lt;Esc&gt;F=hi
+
+" 插入图片
+" ==================================================
+autocmd Filetype markdown inoremap =p ![](&lt;++&gt;)&lt;++&gt;&lt;Esc&gt;F[a
+
+" 插入链接
+" ==================================================
+autocmd Filetype markdown inoremap =a [](&lt;++&gt;)&lt;++&gt;&lt;Esc&gt;F[a
+
+" 插入分隔线
+" ==================================================
+autocmd Filetype markdown inoremap =n &lt;Esc&gt;o---&lt;Enter&gt;&lt;Enter&gt;
+
+" 插入代码块
+" ==================================================
+autocmd Filetype markdown inoremap =c &lt;Esc&gt;o```&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;```&lt;Enter&gt;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;4kA
+
+" 表格操作
+" ==================================================
+autocmd Filetype markdown inoremap =T &lt;Esc&gt;o\|\|&lt;++&gt;\|&lt;Enter&gt;\|:-:\|:-:\|&lt;Enter&gt;\|&lt;++&gt;\|&lt;++&gt;\|&lt;Esc&gt;2kI&lt;Esc&gt;li
+autocmd Filetype markdown inoremap =t &lt;Esc&gt;o\|\|&lt;++&gt;\|&lt;Esc&gt;5hi
+</pre>
+</details>
+
+<p>
+<code>c-qi.vim</code> c语言快速输入键位映射设置：
+</p>
+<details>
+<summary>c-qi.vim</summary>
+<pre class="example">
+" ==================================================
+"
+" 自定义C语言命令
+"
+" ==================================================
+" 自定义命令(命令模式)
+" ==================================================
+" command W w
+" command Q q
+" command WQ wq
+" command QW wq
+" command Wq wq
+" command Qw wq
+
+" noremap(普通模式使用)
+" ==================================================
+"noremap &lt;C-[&gt; /&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l
+" autocmd Filetype c noremap &lt;F3&gt; &lt;Cmd&gt;chdir ../&lt;CR&gt;&lt;Cmd&gt;set noautochdir&lt;CR&gt;
+" autocmd Filetype c noremap &lt;F4&gt; &lt;Cmd&gt;!make;make clean&lt;CR&gt;
+" autocmd Filetype c noremap &lt;F5&gt; &lt;Cmd&gt;terminal bin/main&lt;CR&gt;
+
+" inoremap(插入模式使用)
+" ==================================================
+" inoremap ' ''&lt;ESC&gt;i
+" inoremap " ""&lt;ESC&gt;i
+" inoremap ( ()&lt;ESC&gt;i
+" inoremap [ []&lt;ESC&gt;i
+" inoremap { {&lt;CR&gt;}&lt;ESC&gt;O
+" inoremap &lt; &lt;&gt;&lt;ESC&gt;i
+" inoremap 「 「」&lt;ESC&gt;i
+" inoremap （ （）&lt;ESC&gt;i
+" inoremap &lt;C-[&gt; &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;:nohlsearch&lt;CR&gt;c4l
+
+autocmd Filetype c inoremap ]] &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+autocmd Filetype c inoremap ]= &lt;Esc&gt;/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+
+" autocmd Filetype c inoremap ]
+autocmd Filetype c inoremap ]/ &lt;Esc&gt;A&lt;Space&gt;&lt;Space&gt;&lt;Space&gt;&lt;Space&gt;/* &lt;++&gt; */&lt;Esc&gt;6hc4l
+" if
+autocmd Filetype c inoremap ]i &lt;Esc&gt;oif&lt;Space&gt;(&lt;++&gt;)&lt;Space&gt;{&lt;Esc&gt;o&lt;++&gt;&lt;Enter&gt;}&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;3k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;:nohlsearch&lt;CR&gt;c4l
+" switch
+autocmd Filetype c inoremap ]ss &lt;Esc&gt;oswitch&lt;Space&gt;(&lt;++&gt;)&lt;Space&gt;{&lt;Enter&gt;case&lt;Space&gt;&lt;++&gt;:&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;&lt;Backspace&gt;break;&lt;Enter&gt;&lt;Backspace&gt;default:&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;&lt;Backspace&gt;break;&lt;Enter&gt;&lt;Backspace&gt;&lt;Backspace&gt;}&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;8k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+autocmd Filetype c inoremap ]sc &lt;Esc&gt;/break;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;ocase&lt;Space&gt;&lt;++&gt;:&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;&lt;Backspace&gt;break;&lt;Esc&gt;2k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+" while
+autocmd Filetype c inoremap ]w &lt;Esc&gt;owhile&lt;Space&gt;(&lt;++&gt;)&lt;Space&gt;{&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;}&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;3k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+" for
+autocmd Filetype c inoremap ]f &lt;Esc&gt;ofor&lt;Space&gt;(&lt;++&gt;&lt;Space&gt;&lt;++&gt;;&lt;Space&gt;&lt;++&gt;&lt;Space&gt;&lt;++&gt;&lt;Space&gt;&lt;++&gt;;&lt;Space&gt;&lt;++&gt;)&lt;Space&gt;{&lt;Esc&gt;o&lt;++&gt;&lt;Enter&gt;}&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;3k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+" struct
+autocmd Filetype c inoremap ]t &lt;Esc&gt;ostruct&lt;Space&gt;&lt;++&gt;&lt;Space&gt;{&lt;Enter&gt;&lt;++&gt;&lt;Space&gt;&lt;++&gt;;&lt;Enter&gt;&lt;Backspace&gt;}&lt;++&gt;;&lt;Enter&gt;&lt;++&gt;&lt;Esc&gt;3k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+" functon
+autocmd Filetype c inoremap ]mm &lt;Esc&gt;o&lt;++&gt;&lt;Space&gt;&lt;++&gt;&lt;Space&gt;(&lt;++&gt;)&lt;Space&gt;{&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;&lt;Backspace&gt;return&lt;Space&gt;&lt;++&gt;;&lt;Enter&gt;&lt;Backspace&gt;}&lt;Enter&gt;&lt;Esc&gt;5k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+autocmd Filetype c inoremap ]mn &lt;Esc&gt;/^}&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;o&lt;Enter&gt;&lt;++&gt;&lt;Space&gt;&lt;++&gt;&lt;Space&gt;(&lt;++&gt;)&lt;Space&gt;{&lt;Enter&gt;&lt;++&gt;&lt;Enter&gt;&lt;Backspace&gt;return&lt;Space&gt;&lt;++&gt;;&lt;Enter&gt;&lt;Backspace&gt;}&lt;Enter&gt;&lt;Esc&gt;5k0/&lt;++&gt;&lt;CR&gt;&lt;Cmd&gt;nohlsearch&lt;CR&gt;c4l
+</pre>
+</details>
+
+<p>
+插件安装脚本：
+</p>
+<details>
+<summary>安装脚本</summary>
+<div class="org-src-container">
+<pre class="src src-bash">#!/usr/bin/env bash
+#下载Vim插件
+mkdir -p ~/.config/nvim/pack/github/start
+mkdir -p ~/.config/nvim/pack/github/opt
+mkdir -p ~/.config/nvim/undo
+mkdir -p ~/.config/nvim/plugin
+mkdir -p ~/.vim
+
+#nerdtree目录树
+git clone https://github.com/preservim/nerdtree.git ~/.config/nvim/pack/github/start/nerdtree
+
+#airline状态栏
+git clone https://github.com/vim-airline/vim-airline.git ~/.config/nvim/pack/github/start/vim-airline
+
+#space-vim-dark主题
+git clone https://github.com/liuchengxu/space-vim-dark.git ~/.config/nvim/pack/github/start/space-vim-dark
+
+#vim-airline-theme状态栏主题
+git clone https://github.com/vim-airline/vim-airline-themes.git ~/.config/nvim/pack/github/start/vim-airline-themes
+
+#vim-which-key
+git clone https://github.com/liuchengxu/vim-which-key.git ~/.config/nvim/pack/github/start/im-which-key
+
+#mathjax-support-for-mkdp
+git clone https://github.com:iamcco/mathjax-support-for-mkdp.git ~/.config/nvim/pack/github/start/mathjax-support-for-mkdp
+
+#coc.nvim自动补全
+git clone https://github.com/neoclide/coc.nvim.git ~/.config/nvim/pack/github/start/coc.nvim
+
+#emmet-vim
+git clone https://github.com/mattn/emmet-vim.git ~/.config/nvim/pack/github/start/emmet-vim
+
+#markdown-preview.nvim预览markdown文件插件
+git clone https://github.com/iamcco/markdown-preview.nvim.git ~/.config/nvim/pack/github/start/markdown-preview.nvim
+
+#vim-table-mode编辑table时自动快速对齐表格
+git clone https://github.com/dhruvasagar/vim-table-mode.git ~/.config/nvim/pack/github/start/vim-table-mode
+
+#auto-pairs成双成对，在vim中自动补全括号等，但这里设置为默认不加载，将下面的 opt 改为 start 或者移动 opt 下的目录到 start 就好了
+git clone https://github.com/jiangmiao/auto-pairs.git ~/.config/nvim/pack/github/opt/auto-pairs
+
+#nerdcommenter代码注释
+git clone https://github.com/preservim/nerdcommenter.git ~/.config/nvim/pack/github/start/nerdcommenter
+
+#vim-mundo代码注释
+git clone https://github.com/simnalamburt/vim-mundo.git ~/.config/nvim/pack/github/opt/vim-mundo
+
+ln -sf /home/$USER/.config/nvim/init.vim /home/$USER/.vim/vimrc
+ln -sf /home/$USER/.config/nvim/pack /home/$USER/.vim/pack
+ln -sf /home/$USER/.config/nvim/plugin /home/$USER/.vim/plugin
+ln -sf /home/$USER/.config/nvim/undo /home/$USER/.vim/undo
+
+cd ~/.config/nvim/pack/github/start/markdown-preview.nvim/
+yarn install
+</pre>
+</div>
+<blockquote>
+<p>
+注意， <b>markdown-preview</b> 插件需要在仓库根目录中执行 <code>yarn install</code> 进行安装
+</p>
+</blockquote>
+</details>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-07-03 22:56:29 +0800</p>
+<p class="author">Author: <a href="https://youlanjie.github.io/">Chglish</a></p>
+<p class="date">Created: 2023-04-02 日 09:49</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

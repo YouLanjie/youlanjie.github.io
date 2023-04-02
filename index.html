@@ -1,310 +1,387 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>noIdea的个人博客</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<!-- 2023-04-02 日 10:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>我的个人博客</title>
+<meta name="author" content="[[https://youlanjie.github.io/][Chglish]]" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="noIdea" /><meta name="description" content="我的个人博客" /><meta name="keywords" content="Hugo, blog" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.110.0 with theme even" />
-
-
-<link rel="canonical" href="http://youlanjie.github.io/" />
-  <link href="http://youlanjie.github.io/index.xml" rel="alternate" type="application/rss+xml" title="noIdea的个人博客" />
-  <link href="http://youlanjie.github.io/index.xml" rel="feed" type="application/rss+xml" title="noIdea的个人博客" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
-<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
-
-
-<meta property="og:title" content="noIdea的个人博客" />
-<meta property="og:description" content="我的个人博客" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://youlanjie.github.io/" />
-<meta itemprop="name" content="noIdea的个人博客">
-<meta itemprop="description" content="我的个人博客"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="noIdea的个人博客"/>
-<meta name="twitter:description" content="我的个人博客"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>
+<script src="/theme/read_the_docs/jquery.min.js"></script>
+<script src="/theme/read_the_docs/bootstrap.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/readtheorg.js"></script>
 </head>
 <body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">noidea</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div id="content" class="content">
+<h1 class="title">我的个人博客</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org54306d5">文章</a></li>
+<li><a href="#orgd45d2c3">关于</a></li>
+<li><a href="#org47de8a4">目录索引</a></li>
+</ul>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">About</li>
-      </a>
-  </ul>
-
-  
-
-
-</nav>
-
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">noidea</a>
 </div>
 
-
-
-
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">About</a>
-      </li>
-  </ul>
-</nav>
-
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/emacs/emacs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Emacs学习笔记</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-03-04 </span>
-      <div class="post-category">
-          <a href="/categories/emacs/"> emacs </a>
-          </div>
-        <span class="more-meta"> 约 5632 字 </span>
-        <span class="more-meta"> 预计阅读 12 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>
-学习Emacs，一定要学会坚持</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/emacs/emacs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0%E6%89%8B%E5%8A%A8%E8%BD%AC/">语文笔记（手动转）</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-02-18 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/"> 学习 </a>
-          </div>
-        <span class="more-meta"> 约 4084 字 </span>
-        <span class="more-meta"> 预计阅读 9 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      写作手法（表达技巧） 修辞手法（10个） 种类/类型 一共有６３大类，７９小类 比喻 定义： 把XX比作XX，让句子、描写的对象更加生动形象/活泼具体 分
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0%E6%89%8B%E5%8A%A8%E8%BD%AC/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%85%B6%E4%BB%96/%E5%B0%8F%E8%AF%B4/%E5%88%80%E5%89%91%E7%A5%9E%E5%9F%9F_%E9%9B%86%E5%90%88/">刀剑神域 全集</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-02-18 </span>
-      
-        <span class="more-meta"> 约 2225684 字 </span>
-        <span class="more-meta"> 预计阅读 4443 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>
-我有的《刀剑神域》小说内容<br>
-这里有个<a href="/src/SAO/刀剑神域_集合.html">额外的链接提供</a>，方便阅读（还有个<a href="/src/SAO/刀剑神域_集合.pdf">PDF链接</a>）</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%85%B6%E4%BB%96/%E5%B0%8F%E8%AF%B4/%E5%88%80%E5%89%91%E7%A5%9E%E5%9F%9F_%E9%9B%86%E5%90%88/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0made-by-emacs-org-mode/">语文笔记（export to md from org）</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-02-05 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/"> 学习 </a>
-          </div>
-        <span class="more-meta"> 约 4257 字 </span>
-        <span class="more-meta"> 预计阅读 9 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Table of Contents 写作手法（表达技巧） 修辞手法（10个） 种类/类型 小结/速查表 表达方式（5个） 拆分理解 种类/类型 小结 表现手法（15个） 定义 做题思维 种类 总
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AF%AD%E6%96%87/%E8%AF%AD%E6%96%87%E7%AC%94%E8%AE%B0made-by-emacs-org-mode/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6%E4%BD%BF%E7%94%A8%E7%89%B9%E6%AE%8A%E6%95%88%E6%9E%9C/">打印字符使用特殊效果</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2023-01-18 </span>
-      
-        <span class="more-meta"> 约 1276 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>
-使用ANSI转义字符实现终端输出字符带有特殊效果</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6%E4%BD%BF%E7%94%A8%E7%89%B9%E6%AE%8A%E6%95%88%E6%9E%9C/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    
-    <a class="next" href="/page/2/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
-        </div>
-        
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="http://github.com/youlanjie" class="iconfont icon-github" title="github"></a>
-  <a href="http://youlanjie.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+<div id="outline-container-org54306d5" class="outline-2">
+<h2 id="org54306d5">文章</h2>
+<div class="outline-text-2" id="text-org54306d5">
+<ul class="org-ul">
+<li>关于建站
+<ul class="org-ul">
+<li><a href="./关于建站/用github.io建立一个自己的博客网站.html">用github.io建立一个自己的博客网站</a>
+使用github.io和jekyll建立一个自己的博客网站</li>
+</ul></li>
+<li>其他
+<ul class="org-ul">
+<li>小说
+<ul class="org-ul">
+<li><a href="./其他/小说/刀剑神域_集合.html">刀剑神域 集合</a></li>
+</ul></li>
+</ul></li>
+<li>学习笔记
+<ul class="org-ul">
+<li>语文
+<ul class="org-ul">
+<li><a href="./学习笔记/语文/语文笔记.html">语文笔记</a></li>
+</ul></li>
+<li>C语言学习
+<ul class="org-ul">
+<li><a href="./学习笔记/C语言学习/打印字符使用特殊效果.html">打印字符使用特殊效果</a>
+使用ANSI转义字符实现终端输出字符带有特殊效果</li>
+</ul></li>
+</ul></li>
+<li>一些工具
+<ul class="org-ul">
+<li><a href="./一些工具/我用的小工具盘点.html">我用的小工具盘点</a>
+记录一些Linux中有趣但不一定常用的软件</li>
+<li>Emacs
+<ul class="org-ul">
+<li><a href="./一些工具/Emacs/从vim转移到emacs.html">从vim转移到emacs</a></li>
+<li><a href="./一些工具/Emacs/Emacs学习笔记.html">Emacs学习笔记</a></li>
+</ul></li>
+<li>Vim
+<ul class="org-ul">
+<li><a href="./一些工具/Vim/使用Vim.html">使用Vim</a></li>
+</ul></li>
+</ul></li>
+<li>ArchLinux学习系列
+<ul class="org-ul">
+<li><a href="./ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html">Archiso——打造属于你的在U盘上的Archlinux Live系统</a>
+如何使用archiso工具打造一个自定义的U盘上的临时Live系统</li>
+<li><a href="./ArchLinux学习系列/ArchLinux的安装.html">ArchLinux的安装</a>
+记录我个人安装archlinux的过程</li>
+<li><a href="./ArchLinux学习系列/ArchLinux的配置.html">ArchLinux的配置</a>
+记录我个人的archlinux软件配置</li>
+</ul></li>
+</ul>
+</div>
 </div>
 
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
+<div id="outline-container-orgd45d2c3" class="outline-2">
+<h2 id="orgd45d2c3">关于</h2>
+<div class="outline-text-2" id="text-orgd45d2c3">
+<p>
+这是我的个人网站，依靠Emacs Org导出为HTML构建
+</p>
 
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2022 - 
-    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>noIdea</span>
-  </span>
+<p>
+使用主题有两个：
+<a href="https://github.com/yzs249175311/org-html-theme-dull">org-html-theme-dull</a> read-the-docs
+</p>
+</div>
 </div>
 
-    </footer>
+<div id="outline-container-org47de8a4" class="outline-2">
+<h2 id="org47de8a4">目录索引</h2>
+<div class="outline-text-2" id="text-org47de8a4">
+<div class="org-src-container">
+<pre class="src src-text">post/
+├── 关于建站
+│   ├── 2022-08-04_01
+│   │   ├── 2022-07-02_01-01.png
+│   │   ├── 2022-07-02_01-02.png
+│   │   ├── 2022-07-02_01-03.png
+│   │   ├── 2022-08-05_01-04.png
+│   │   └── 2022-08-05_01-05.png
+│   ├── 用github.io建立一个自己的博客网站.html
+│   └── 用github.io建立一个自己的博客网站.org
+├── 其他
+│   └── 小说
+│       ├── 刀剑神域_集合.html
+│       ├── 刀剑神域_集合.org
+│       └── SAO
+│           ├── 刀剑神域_集合.pdf
+│           └── 刀剑神域_集合.tex
+├── 学习笔记
+│   ├── 语文
+│   │   ├── 语文笔记
+│   │   │   ├── 语文笔记.info
+│   │   │   ├── 语文笔记.man
+│   │   │   ├── 语文笔记.pdf
+│   │   │   ├── 语文笔记.txt
+│   │   │   └── 语文笔记_typora.pdf
+│   │   ├── 语文笔记.html
+│   │   └── 语文笔记.org
+│   └── C语言学习
+│       ├── 打印字符使用特殊效果
+│       │   ├── out1.png
+│       │   ├── out2.png
+│       │   ├── out3.html
+│       │   └── out3.png
+│       ├── 打印字符使用特殊效果.html
+│       └── 打印字符使用特殊效果.org
+├── 一些工具
+│   ├── 我用的小工具盘点.html
+│   ├── 我用的小工具盘点.org
+│   ├── Emacs
+│   │   ├── 2023-01-16_01
+│   │   │   ├── 2023-01-16_01-01.png
+│   │   │   └── 2023-01-16_01-02.png
+│   │   ├── 从vim转移到emacs.html
+│   │   ├── 从vim转移到emacs.org
+│   │   ├── Emacs学习笔记
+│   │   │   ├── 01.png
+│   │   │   ├── 02.png
+│   │   │   ├── 03.png
+│   │   │   └── 04.png
+│   │   ├── Emacs学习笔记.html
+│   │   └── Emacs学习笔记.org
+│   ├── tools
+│   │   ├── ccal
+│   │   │   ├── 11.ps
+│   │   │   ├── 12.ps
+│   │   │   └── 2022.ps
+│   │   └── img
+│   │       ├── 2022-12-02_01-01.png
+│   │       ├── 2022-12-02_01-02.png
+│   │       └── 2022-12-02_01-03.png
+│   └── Vim
+│       ├── 2022-07-08_01
+│       │   └── 2022-07-08_01-01.png
+│       ├── 使用Vim.html
+│       └── 使用Vim.org
+└── ArchLinux学习系列
+    ├── 2022-07-02_02
+    │   ├── 2022-07-02_02-01.png
+    │   ├── 2022-07-02_02-02.png
+    │   ├── 2022-07-02_02-03.png
+    │   ├── 2022-07-02_02-04.png
+    │   ├── 2022-07-02_02-05.png
+    │   ├── 2022-07-02_02-06.png
+    │   ├── 2022-07-02_02-07.png
+    │   ├── 2022-07-02_02-08.webm
+    │   └── archlinux.png
+    ├── 2022-07-03_01
+    │   └── 2022-07-03_01-01.png
+    ├── Archiso——打造属于你的在U盘上的Archlinux Live系统.html
+    ├── Archiso——打造属于你的在U盘上的Archlinux Live系统.org
+    ├── ArchLinux的安装.html
+    ├── ArchLinux的安装.org
+    ├── ArchLinux的配置.html
+    └── ArchLinux的配置.org
 
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
-    <script type="text/javascript" src="/lib/timeago/timeago-3.0.2.min.js"></script>
-    <script type="text/javascript" src="/lib/timeago/timeago.locales-3.0.2.min.js"></script>
-  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
-    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
-    timeago().render(document.querySelectorAll('.timeago'), languageCode);
-    timeago.cancel();  
-  </script>
-
-
-
-<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
-
-
-
-
-
-
-
-
+23 directories, 61 files
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: <a href="https://youlanjie.github.io/">Chglish</a></p>
+<p class="date">Created: 2023-04-02 日 10:35</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
 </body>
 </html>

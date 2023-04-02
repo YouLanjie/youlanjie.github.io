@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-04-02 日 08:37 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Archiso——打造属于你的在U盘上的Archlinux Live系统</title>
+<meta name="author" content="[[https://youlanjie.github.io/][Chglish]]" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>
+<script src="/theme/read_the_docs/jquery.min.js"></script>
+<script src="/theme/read_the_docs/bootstrap.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Archiso——打造属于你的在U盘上的Archlinux Live系统</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge215922">1. Archiso——打造属于你的在U盘上的Archlinux Live系统</a>
+<ul>
+<li><a href="#org4db8db4">1.1. Archiso是什么？</a>
+<ul>
+<li><a href="#org4548269">1.1.1. Archiso能够做什么？</a></li>
+<li><a href="#orgd07da78">1.1.2. 一开始的探索</a></li>
+</ul>
+</li>
+<li><a href="#org7f3e20f">1.2. 真正的开始</a>
+<ul>
+<li><a href="#org061c96a">1.2.1. 基本的准备</a></li>
+<li><a href="#orgaef8bbc">1.2.2. 自定义</a></li>
+<li><a href="#org01edcdb">1.2.3. 构建ISO映像</a></li>
+<li><a href="#orgc2d15cf">1.2.4. 其他设置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge215922" class="outline-2">
+<h2 id="orge215922"><span class="section-number-2">1.</span> Archiso——打造属于你的在U盘上的Archlinux Live系统</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org4db8db4" class="outline-3">
+<h3 id="org4db8db4"><span class="section-number-3">1.1.</span> Archiso是什么？</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+这里引用arch wiki的描述：
+</p>
+
+<blockquote>
+<p>
+<a href="https://gitlab.archlinux.org/archlinux/archiso">Archiso</a> 是一个高度可定制的工具，用于构建 Arch Linux live CD/USB ISO 映像。<a href="https://archlinux.org/download/">官方映
+像</a> 是用 Archiso 构建的。它可以用作救援系统、linux 安装程序或其他系统的基础。
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-org4548269" class="outline-4">
+<h4 id="org4548269"><span class="section-number-4">1.1.1.</span> Archiso能够做什么？</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+archiso用于制作装有archlinux的iso镜像文件，可以使用dd工具将其烧录进U盘，可以在作
+系统出问题时开展紧急补救工作（例如重新安装grub引导、重新安装linux内核、直接修改
+root密码等）。
+</p>
+
+<p>
+若是只用于补救系统，archlinux官方的镜像文件就够用了，但是我还想要更多，希望能够
+在U盘上安装一个能临时办公的系统。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd07da78" class="outline-4">
+<h4 id="orgd07da78"><span class="section-number-4">1.1.2.</span> 一开始的探索</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+一开始我尝试直接在系统上安装软件，但是我发现它的文件实际存储在内存上，没有办法存
+储在U盘内，而且烧录好的U盘变成了只读文件系统，没有办法存储文件甚至不能调整分区。
+</p>
+
+<p>
+我若尝试在U盘上安装系统时，文件大小轻松超过我的U盘大小，根本没有可能。并且U盘的
+读写速度非常的慢，就算是shell启动都要等很久。
+</p>
+
+<p>
+于是我决定要学习使用archiso定制一个属于自己的iso系统镜像。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7f3e20f" class="outline-3">
+<h3 id="org7f3e20f"><span class="section-number-3">1.2.</span> 真正的开始</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org061c96a" class="outline-4">
+<h4 id="org061c96a"><span class="section-number-4">1.2.1.</span> 基本的准备</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+首先你需要安装 archiso 或 archiso-git 包获取基本的制作工具及配置文件。在安装好软件后，你的 `/usr/share/archiso/configs` 目录下应该会有两个文件夹，分别为： <b><b>releng</b></b> 和 <b><b>baseline</b></b> 。它们的介绍如下：
+</p>
+
+<blockquote>
+<ul class="org-ul">
+<li>releng用于创建正式的每月安装ISO。它可以作为创建自定义ISO映像的起点。</li>
+<li>baseline是一种最低限度的配置，它只包括从介质启动 Live 环境所需的最低限度的软件包。</li>
+</ul>
+</blockquote>
+
+<p>
+将以上两种配置中的任意一个复制到一个可读写目录下，并自己为其命名。例如：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"># cp -r /usr/share/archiso/configs/releng/ archlive
+</pre>
+</div>
+
+<blockquote>
+<p>
+注意：本篇文章中的所有演示命令均在root权限下执行，如果是普通用户则需要使用sudo等程序提权后操作。如：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">$ sudo cp -r /usr/share/archiso/configs/releng/ archlive
+</pre>
+</div>
+</blockquote>
+
+<p>
+其中，/archlive/ 为复制出的目录名字。为了方便讲解，你可以在终端使用以下命令定义
+一个变量，将其作为路径的开头，以代替绝对路径，防止出现错误。其中， <i>archlive</i> 为
+变量名，而其值为当前工作目录的绝对路径。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"># cd archlive
+# archlive=`pwd`
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaef8bbc" class="outline-4">
+<h4 id="orgaef8bbc"><span class="section-number-4">1.2.2.</span> 自定义</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="orge0657d5"></a>软件包<br />
+<div class="outline-text-5" id="text-1-2-2-1">
+<p>
+要设置镜像中安装的软件包，需要编辑 <code>$archlive/packages.x86_64</code> 文件。每行为一个
+软件包名。需要移除包时删除该行，添加包时添加包名到新的一行即可。
+</p>
+
+<p>
+若是需要添加AUR的软件包，可以先下载软件的 <b>PAGBUILD</b> 文件到本地并使用 <code>makepkg</code>
+工具将其构建成软件包（文件名格式一般为 <code>packages-name-version-arch.pkg.tar.zst</code>
+）。将所有要安装的软件包放置在同一个可读文件下，使用 <code>repo-add</code> *新建一个本地仓
+库*（Arch Wiki: <a href="https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Custom_local_repository">en</a> <a href="https://wiki.archlinux.org/title/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Tips_and_tricks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E8%87%AA%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">中文</a>）并将软件包信息放入。并添加如下信息到
+<code>$archlive/pacman.conf</code> 文件中：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf">[customrepo]
+SigLevel = Optional TrustAll
+Server = file:///path/to/customrepo
+</pre>
+</div>
+
+<blockquote>
+<ul class="org-ul">
+<li>注意：要将示范中的 <b>customrepo</b> 替换为你创建的仓库名称（不是文件名），*Server*
+后面的路径要提换为仓库文件所在的路径（不包括文件名）。</li>
+
+<li>注意：一般情况下要将 <b>SigLevel</b> 后的值改为 `Never` 不对仓库进行签名认证，可以省
+去很多工作。</li>
+
+<li>注意（引自arch wiki）：pacman.conf 中的顺序很重要。要为您的自定义存储库提供最高
+优先级，请将其置于其他存储库条目之上。</li>
+</ul>
+</blockquote>
+
+<blockquote>
+<p>
+<code>repo-add</code> 的帮助信息如下：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">repo-add (pacman) 6.0.2
+
+用法：repo-add [选项]  &lt;path-to-db&gt; &lt;package&gt; ...
+
+repo-add 会通过读取某个软件包来更新软件包数据库。
+可以在命令行中添加多个指定的软件包。
+
+选项：
+  -n, --new 只增加数据库中没有的包
+  -R, --remove 在更新数据库之后，删除旧的软件包文件
+  -p, --prevent-downgrade  阻止降级，如果数据库中已有一个更高的版本的软件包存在
+  --nocolor 关闭颜色输出
+  -q, --quiet       最小化输出信息
+  -s, --sign        更新后使用 GnuPG 签名数据库
+  -k, --key &lt;密钥&gt;   使用指定的密钥签名该数据库
+  -v, --verify      更新前验证数据库签名
+
+更多可用选项的描述及细节请参见 repo-add(8)。
+
+示例：repo-add /path/to/repo.db.tar.gz pacman-3.0.0-1-i686.pkg.tar.gz
+</pre>
+</div>
+</blockquote>
+</div>
+</li>
+
+<li><a id="orgb2b6422"></a>向镜像内添加文件<br />
+<div class="outline-text-5" id="text-1-2-2-2">
+<p>
+如果需要向镜像内添加文件，则需要在 <b>\$archlive/airootfs/</b> 目录下添加。其中，该文
+件夹将作为Live系统的 <b>根目录</b> （/）的起点，
+</p>
+
+<p>
+如果需要为特定的文件、文件夹设置权限或者所有权，请修改
+<code>\$archlive/profiledef.sh</code> 脚本。
+</p>
+
+<blockquote>
+<p>
+注意（引自arch wiki）：<br />
+默认情况下，<a href="https://wiki.archlinux.org/title/File_permissions_and_attributes">权限</a>将是 <code>644</code> （对于文件）和 <code>755</code> （对于目录）。所有这些都将归根用
+户所有。要为特定文件和/或文件夹设置不同的权限或所有权，请使用 <code>profiledef.sh</code> 中
+的 <code>file_permissions</code> 关联列表。有关详细信息，请参阅<a href="https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/docs/README.profile.rst">README.profile.rst</a>。
+</p>
+</blockquote>
+</div>
+</li>
+
+<li><a id="org6842a18"></a>修改内核<br />
+<div class="outline-text-5" id="text-1-2-2-3">
+<p>
+倘若我们不配置gui界面直接使用终端，那么没有中文的影响是致命的（Linux的tty不支持
+输出中文）。为了使用中文，我们可以使用打过 <code>cjktty</code> 补丁的内核。但是出于知识受限，
+我不会自定义内核。好在 <code>archlinuxcn/linux-lily</code> 已经将补丁打入内核了（尽管它的更
+新速度有点慢），我们只需要在 <code>$archlive/packages.x86_64</code> 中添加软件包名，在
+<code>$archlive/pacman.conf</code> 中添加以下内容开启 <code>archlinuxcn</code> 仓库，并且修改启动引导
+即可。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf">[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+</pre>
+</div>
+
+<p>
+但是实际上我也并不清楚该如何更改启动引导，只会更改 <b>\$archlive/grub/grub.cfg</b> 文件。在文件中找到 `# Menu entries` 一行，并在下面添加上：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf">menuentry "Arch Linux安装镜像(x86_64, UEFI)(内核linux-lily支持中文)" --class arch --class gnu-linux --class gnu --class os --id 'archlinux-lily' {
+    set gfxpayload=keep
+    search --no-floppy --set=root --label %ARCHISO_LABEL%
+    linux /%INSTALL_DIR%/boot/x86_64/vmlinuz-linux-lily archisobasedir=%INSTALL_DIR% archisolabel=%ARCHISO_LABEL%
+    initrd /%INSTALL_DIR%/boot/intel-ucode.img /%INSTALL_DIR%/boot/amd-ucode.img /%INSTALL_DIR%/boot/x86_64/initramfs-linux-lily.img
+}
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org01edcdb" class="outline-4">
+<h4 id="org01edcdb"><span class="section-number-4">1.2.3.</span> 构建ISO映像</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+在配置好后就应该开始构建镜像了。你可以通过下列命令开始构建镜像文件：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"># mkarchiso -v -w $archlive/../work -o $archlive/../ $archlive/
+</pre>
+</div>
+
+<p>
+这里再引用arch wiki的描述：
+</p>
+
+<blockquote>
+<p>
+<code>-w</code> 指定工作目录。如果未指定该选项，则默认为当前目录中的 <code>work</code> 。
+</p>
+
+<p>
+<code>-o</code> 指定将放置构建的 ISO 映像的目录。如果未指定该选项，则默认为当前目录中的
+<code>out</code> 。
+</p>
+
+<p>
+需要注意的是配置文件 <code>profiledef.sh</code> 在运行 mkarchiso 时不能指定，只能指定文件的
+路径。
+</p>
+</blockquote>
+
+<p>
+在这里我再作一些补充：
+</p>
+
+<ul class="org-ul">
+<li><code>-w</code> 指定的是输出临时文件的目录。在构建的过程中会产生的文件、要安装的软件包都将会放置在此，空间占用也会非常巨大。</li>
+<li><code>-o</code> 指定的是生成出的iso文件的保存目录，它会自动为ISO文件命名（但是会覆盖同名文件）。</li>
+<li>最后一个选项是配置文件所在的目录</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc2d15cf" class="outline-4">
+<h4 id="orgc2d15cf"><span class="section-number-4">1.2.4.</span> 其他设置</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+如果你需要动态调整根目录的大小，你可以尝试使用以下命令：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"># mount -o remount,size=2G /run/archiso/cowspace
+</pre>
+</div>
+
+<p>
+其中的 <code>size</code> 后的值为根分区（交换空间）的目标大小。如果你想，你可以使用它弄出一
+个1024PB大小的根目录（实际上是假的）。
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-11-26 22:47</p>
+<p class="author">Author: <a href="https://youlanjie.github.io/">Chglish</a></p>
+<p class="date">Created: 2023-04-02 日 08:37</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
