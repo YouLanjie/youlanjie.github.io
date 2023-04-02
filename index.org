@@ -3,60 +3,129 @@
 # +OPTIONS: toc:nil
 #+OPTIONS: num:nil
 
-#+setupfile: ./setup.setup
+#+setupfile: ./setup2.setup
 
 * 文章
 - 关于建站
-  - [[./post/关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站]]
+  - [[./关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站]]
     使用github.io和jekyll建立一个自己的博客网站
 - 其他
   - 小说
-    - [[./post/其他/小说/刀剑神域_集合.html][刀剑神域 集合]]
+    - [[./其他/小说/刀剑神域_集合.html][刀剑神域 集合]]
 - 学习笔记
   - 语文
-    - [[./post/学习笔记/语文/语文笔记.html][语文笔记]]
+    - [[./学习笔记/语文/语文笔记.html][语文笔记]]
   - C语言学习
-    - [[./post/学习笔记/C语言学习/打印字符使用特殊效果.html][打印字符使用特殊效果]]
+    - [[./学习笔记/C语言学习/打印字符使用特殊效果.html][打印字符使用特殊效果]]
       使用ANSI转义字符实现终端输出字符带有特殊效果
 - 一些工具
-  - [[./post/一些工具/我用的小工具盘点.html][我用的小工具盘点]]
+  - [[./一些工具/我用的小工具盘点.html][我用的小工具盘点]]
     记录一些Linux中有趣但不一定常用的软件
   - Emacs
-    - [[./post/一些工具/Emacs/从vim转移到emacs.html][从vim转移到emacs]]
-    - [[./post/一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
+    - [[./一些工具/Emacs/从vim转移到emacs.html][从vim转移到emacs]]
+    - [[./一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
   - Vim
-    - [[./post/一些工具/Vim/使用Vim.html][使用Vim]]
+    - [[./一些工具/Vim/使用Vim.html][使用Vim]]
 - ArchLinux学习系列
-  - [[./post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
+  - [[./ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
     如何使用archiso工具打造一个自定义的U盘上的临时Live系统
-  - [[./post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
+  - [[./ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
     记录我个人安装archlinux的过程
-  - [[./post/ArchLinux学习系列/ArchLinux的配置.html][ArchLinux的配置]]
+  - [[./ArchLinux学习系列/ArchLinux的配置.html][ArchLinux的配置]]
     记录我个人的archlinux软件配置
+    
+* 关于
+这是我的个人网站，依靠Emacs Org导出为HTML构建
+
+使用主题有两个：
+[[https://github.com/yzs249175311/org-html-theme-dull][org-html-theme-dull]] read-the-docs
+
 * 目录索引
 #+begin_src text
 post/
 ├── 关于建站
-│   └── 用github.io建立一个自己的博客网站.md
+│   ├── 2022-08-04_01
+│   │   ├── 2022-07-02_01-01.png
+│   │   ├── 2022-07-02_01-02.png
+│   │   ├── 2022-07-02_01-03.png
+│   │   ├── 2022-08-05_01-04.png
+│   │   └── 2022-08-05_01-05.png
+│   ├── 用github.io建立一个自己的博客网站.html
+│   └── 用github.io建立一个自己的博客网站.org
 ├── 其他
 │   └── 小说
-│       └── 刀剑神域_集合.org
+│       ├── 刀剑神域_集合.html
+│       ├── 刀剑神域_集合.org
+│       └── SAO
+│           ├── 刀剑神域_集合.pdf
+│           └── 刀剑神域_集合.tex
 ├── 学习笔记
 │   ├── 语文
+│   │   ├── 语文笔记
+│   │   │   ├── 语文笔记.info
+│   │   │   ├── 语文笔记.man
+│   │   │   ├── 语文笔记.pdf
+│   │   │   ├── 语文笔记.txt
+│   │   │   └── 语文笔记_typora.pdf
+│   │   ├── 语文笔记.html
 │   │   └── 语文笔记.org
 │   └── C语言学习
+│       ├── 打印字符使用特殊效果
+│       │   ├── out1.png
+│       │   ├── out2.png
+│       │   ├── out3.html
+│       │   └── out3.png
+│       ├── 打印字符使用特殊效果.html
 │       └── 打印字符使用特殊效果.org
 ├── 一些工具
-│   ├── 我用的小工具盘点.md
+│   ├── 我用的小工具盘点.html
+│   ├── 我用的小工具盘点.org
 │   ├── Emacs
+│   │   ├── 2023-01-16_01
+│   │   │   ├── 2023-01-16_01-01.png
+│   │   │   └── 2023-01-16_01-02.png
+│   │   ├── 从vim转移到emacs.html
 │   │   ├── 从vim转移到emacs.org
+│   │   ├── Emacs学习笔记
+│   │   │   ├── 01.png
+│   │   │   ├── 02.png
+│   │   │   ├── 03.png
+│   │   │   └── 04.png
+│   │   ├── Emacs学习笔记.html
 │   │   └── Emacs学习笔记.org
+│   ├── tools
+│   │   ├── ccal
+│   │   │   ├── 11.ps
+│   │   │   ├── 12.ps
+│   │   │   └── 2022.ps
+│   │   └── img
+│   │       ├── 2022-12-02_01-01.png
+│   │       ├── 2022-12-02_01-02.png
+│   │       └── 2022-12-02_01-03.png
 │   └── Vim
-│       └── 使用Vim.md
+│       ├── 2022-07-08_01
+│       │   └── 2022-07-08_01-01.png
+│       ├── 使用Vim.html
+│       └── 使用Vim.org
 └── ArchLinux学习系列
-    ├── Archiso——打造属于你的在U盘上的Archlinux Live系统.md
-    ├── ArchLinux的安装.md
-    └── ArchLinux的配置.md
+    ├── 2022-07-02_02
+    │   ├── 2022-07-02_02-01.png
+    │   ├── 2022-07-02_02-02.png
+    │   ├── 2022-07-02_02-03.png
+    │   ├── 2022-07-02_02-04.png
+    │   ├── 2022-07-02_02-05.png
+    │   ├── 2022-07-02_02-06.png
+    │   ├── 2022-07-02_02-07.png
+    │   ├── 2022-07-02_02-08.webm
+    │   └── archlinux.png
+    ├── 2022-07-03_01
+    │   └── 2022-07-03_01-01.png
+    ├── Archiso——打造属于你的在U盘上的Archlinux Live系统.html
+    ├── Archiso——打造属于你的在U盘上的Archlinux Live系统.org
+    ├── ArchLinux的安装.html
+    ├── ArchLinux的安装.org
+    ├── ArchLinux的配置.html
+    └── ArchLinux的配置.org
 
-11 directories, 11 files
+23 directories, 61 files
 #+end_src

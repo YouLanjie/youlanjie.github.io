@@ -1,0 +1,9 @@
+#+TITLE: 404
+
+# +OPTIONS: toc:nil
+#+OPTIONS: num:nil
+
+#+setupfile: ./setup2.setup
+
+* 404
+您访问的链接不存在，点击[[https://youlanjie.github.io][这里]]返回主页
