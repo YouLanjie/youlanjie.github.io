@@ -4,5 +4,7 @@
 
 #+setupfile: ./theme/read_the_docs/theme-local.setup
 
+#+HTML_HEAD: <link rel="shortcut icon" href="/img/icon.jpg">
+
 #+LATEX_COMPILER: xelatex
 #+LATEX_HEADER: \usepackage[UTF8]{ctex}

@@ -3,9 +3,11 @@
 #+AUTHOR: [[https://youlanjie.github.io/][Chglish]]
 
 #+OPTIONS: html-style:nil
+
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
 #+HTML_HEAD: <script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
 
+#+HTML_HEAD: <link rel="shortcut icon" href="/img/icon.jpg">
 
 #+LATEX_COMPILER: xelatex
 #+LATEX_HEADER: \usepackage[UTF8]{ctex}

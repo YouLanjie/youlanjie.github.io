@@ -21,3 +21,6 @@ cp index.html public/
 cp 404.html public/
 
 cp -r theme/ public/
+
+cp -r img/ public/
+
