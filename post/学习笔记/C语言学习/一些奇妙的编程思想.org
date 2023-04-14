@@ -1,0 +1,6 @@
+#+TITLE: 一些奇妙的编程思想
+
+#+SETUPFILE: ../../../setup2.setup
+
+* 一些奇妙的编程思想
+

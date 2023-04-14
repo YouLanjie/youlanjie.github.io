@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-04-14 五 21:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SAO小说资源索引</title>
+<meta name="author" content="[[https://youlanjie.github.io/][Chglish]]" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>
+<script src="/theme/read_the_docs/jquery.min.js"></script>
+<script src="/theme/read_the_docs/bootstrap.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/theme/read_the_docs/js/readtheorg.js"></script>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">SAO小说资源索引</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9c6bf4f">小说</a>
+<ul>
+<li><a href="#org3a35a3f"><span class="todo TODO">TODO</span> 刀剑神域小说1-18卷</a></li>
+<li><a href="#org177d185"><span class="todo TODO">TODO</span> 刀剑神域WEB版+外传、特典<code>[0/2]</code></a>
+<ul>
+<li><a href="#org25acdf9"><span class="todo TODO">TODO</span> WEB版</a></li>
+<li><a href="#org85d801e"><span class="todo TODO">TODO</span> 子分类<code>[0/3]</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgcf3ec2a"><span class="todo TODO">TODO</span> PDF文件</a></li>
+<li><a href="#orgaa3fe97"><span class="done DONE">DONE</span> TXT源文件（已全）</a>
+<ul>
+<li><a href="#orge365918">刀剑神域小说1-18卷</a></li>
+<li><a href="#org6c23f91">刀剑神域WEB版+外传、特典</a>
+<ul>
+<li><a href="#org6d7fe19">Sword Art Online WEB EX版外传</a></li>
+<li><a href="#org04d7951">Sword Art Online WEB ME版（素材版）</a></li>
+<li><a href="#org2d40cb1">Sword Art Online WEB版 Alicization篇主线</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9c6bf4f" class="outline-2">
+<h2 id="org9c6bf4f">小说</h2>
+<div class="outline-text-2" id="text-org9c6bf4f">
+</div>
+<div id="outline-container-org3a35a3f" class="outline-3">
+<h3 id="org3a35a3f"><span class="todo TODO">TODO</span> 刀剑神域小说1-18卷</h3>
+<div class="outline-text-3" id="text-org3a35a3f">
+<ul class="org-ul">
+<li><a href="./刀剑神域_文库版_全集.html">刀剑神域 文库版 全集</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org177d185" class="outline-3">
+<h3 id="org177d185"><span class="todo TODO">TODO</span> 刀剑神域WEB版+外传、特典<code>[0/2]</code></h3>
+<div class="outline-text-3" id="text-org177d185">
+</div>
+<div id="outline-container-org25acdf9" class="outline-4">
+<h4 id="org25acdf9"><span class="todo TODO">TODO</span> WEB版</h4>
+</div>
+<div id="outline-container-org85d801e" class="outline-4">
+<h4 id="org85d801e"><span class="todo TODO">TODO</span> 子分类<code>[0/3]</code></h4>
+<div class="outline-text-4" id="text-org85d801e">
+</div>
+<ul class="org-ul">
+<li><a id="org34d18eb"></a><span class="todo TODO">TODO</span> Sword Art Online WEB EX版外传<br /></li>
+<li><a id="orgd3fa02d"></a><span class="todo TODO">TODO</span> Sword Art Online WEB ME版（素材版）<br /></li>
+<li><a id="org901c4d2"></a><span class="todo TODO">TODO</span> Sword Art Online WEB版 Alicization篇主线<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcf3ec2a" class="outline-2">
+<h2 id="orgcf3ec2a"><span class="todo TODO">TODO</span> PDF文件</h2>
+<div class="outline-text-2" id="text-orgcf3ec2a">
+<ul class="org-ul">
+<li><a href="./刀剑神域_文库版_全集.pdf">刀剑神域 文库版 全集</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaa3fe97" class="outline-2">
+<h2 id="orgaa3fe97"><span class="done DONE">DONE</span> TXT源文件（已全）</h2>
+<div class="outline-text-2" id="text-orgaa3fe97">
+</div>
+<div id="outline-container-orge365918" class="outline-3">
+<h3 id="orge365918">刀剑神域小说1-18卷</h3>
+<div class="outline-text-3" id="text-orge365918">
+<ul class="org-ul">
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域01 艾恩葛朗特.txt">（萌动王朝）刀剑神域01 艾恩葛朗特.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域02 艾恩葛朗特.txt">（萌动王朝）刀剑神域02 艾恩葛朗特.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域03 妖精之舞 上.txt">（萌动王朝）刀剑神域03 妖精之舞 上.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域04 妖精之舞 下.txt">（萌动王朝）刀剑神域04 妖精之舞 下.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域05 幽灵子弹 上.txt">（萌动王朝）刀剑神域05 幽灵子弹 上.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域06 幽灵子弹 下.txt">（萌动王朝）刀剑神域06 幽灵子弹 下.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域07 圣母圣咏.txt">（萌动王朝）刀剑神域07 圣母圣咏.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域08 Early and Late.txt">（萌动王朝）刀剑神域08 Early and Late.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域09 Alicization篇（1）.txt">（萌动王朝）刀剑神域09 Alicization篇（1）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域10 Alicization篇（2）.txt">（萌动王朝）刀剑神域10 Alicization篇（2）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域11 Alicization篇（3）.txt">（萌动王朝）刀剑神域11 Alicization篇（3）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域12 Alicization篇（4）.txt">（萌动王朝）刀剑神域12 Alicization篇（4）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域13 Alicization篇（5）.txt">（萌动王朝）刀剑神域13 Alicization篇（5）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域14 Alicization篇（6）.txt">（萌动王朝）刀剑神域14 Alicization篇（6）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域15 Alicization篇（7）.txt">（萌动王朝）刀剑神域15 Alicization篇（7）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域16 Alicization篇（8）.txt">（萌动王朝）刀剑神域16 Alicization篇（8）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域17 Alicization篇（9）.txt">（萌动王朝）刀剑神域17 Alicization篇（9）.txt</a></li>
+<li><a href="./刀剑神域小说1-18卷/（萌动王朝）刀剑神域18 Alicization篇（10）.txt">（萌动王朝）刀剑神域18 Alicization篇（10）.txt</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6c23f91" class="outline-3">
+<h3 id="org6c23f91">刀剑神域WEB版+外传、特典</h3>
+<div class="outline-text-3" id="text-org6c23f91">
+<ul class="org-ul">
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 03 The Dead Gun.txt">Sword Art Online 03 The Dead Gun.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 刀剑神域 BD特典 短篇.txt">Sword Art Online 刀剑神域 BD特典 短篇.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 访谈录.txt">Sword Art Online 访谈录.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 圣剑篇（攻略成功）.txt">Sword Art Online 圣剑篇（攻略成功）.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 圣剑篇SS（攻略失败）.txt">Sword Art Online 圣剑篇SS（攻略失败）.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 水之音 锤之音.txt">Sword Art Online 水之音 锤之音.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 唯一的究极手段.txt">Sword Art Online 唯一的究极手段.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online 在冬天的阳光下.txt">Sword Art Online 在冬天的阳光下.txt</a></li>
+</ul>
+</div>
+<div id="outline-container-org6d7fe19" class="outline-4">
+<h4 id="org6d7fe19">Sword Art Online WEB EX版外传</h4>
+<div class="outline-text-4" id="text-org6d7fe19">
+<ul class="org-ul">
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX01 黑色剑士.txt">Sword Art Online EX01 黑色剑士.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX02 Four Days.txt">Sword Art Online EX02 Four Days.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX03 心之温度.txt">Sword Art Online EX03 心之温度.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX04 绝剑.txt">Sword Art Online EX04 绝剑.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX05 圈内事件.txt">Sword Art Online EX05 圈内事件.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX06 红鼻子麋鹿.txt">Sword Art Online EX06 红鼻子麋鹿.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB EX版外传/Sword Art Online EX07 月之摇篮.txt">Sword Art Online EX07 月之摇篮.txt</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org04d7951" class="outline-4">
+<h4 id="org04d7951">Sword Art Online WEB ME版（素材版）</h4>
+<div class="outline-text-4" id="text-org04d7951">
+<ul class="org-ul">
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME02 Early Characters.txt">Sword Art Online ME02 Early Characters.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME03 Ceramic Heart.txt">Sword Art Online ME03 Ceramic Heart.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME04 Cold hand，Warm heart.txt">Sword Art Online ME04 Cold hand，Warm heart.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME05 鼠尾草.txt">Sword Art Online ME05 鼠尾草.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME06 阿尔格特的决斗.txt">Sword Art Online ME06 阿尔格特的决斗.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME07 无星夜的咏叹调.txt">Sword Art Online ME07 无星夜的咏叹调.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME07 续-无星夜的咏叹调.txt">Sword Art Online ME07 续-无星夜的咏叹调.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME08 胧幻剑的圆舞曲.txt">Sword Art Online ME08 胧幻剑的圆舞曲.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB ME版（素材版）/Sword Art Online ME09 黑与白的协奏曲（第1章 未完）.txt">Sword Art Online ME09 黑与白的协奏曲（第1章 未完）.txt</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2d40cb1" class="outline-4">
+<h4 id="org2d40cb1">Sword Art Online WEB版 Alicization篇主线</h4>
+<div class="outline-text-4" id="text-org2d40cb1">
+<ul class="org-ul">
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第1章.txt">Sword Art Online WEB版 第1章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第2章.txt">Sword Art Online WEB版 第2章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第3章.txt">Sword Art Online WEB版 第3章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第4章.txt">Sword Art Online WEB版 第4章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第5章.txt">Sword Art Online WEB版 第5章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第6章.txt">Sword Art Online WEB版 第6章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第7章.txt">Sword Art Online WEB版 第7章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第8章.txt">Sword Art Online WEB版 第8章.txt</a></li>
+<li><a href="./刀剑神域WEB版+外传、特典/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 终章.txt">Sword Art Online WEB版 终章.txt</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: <a href="https://youlanjie.github.io/">Chglish</a></p>
+<p class="date">Created: 2023-04-14 五 21:01</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
