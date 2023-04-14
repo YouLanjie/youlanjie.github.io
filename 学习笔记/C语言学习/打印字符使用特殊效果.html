@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-04-04 二 18:43 -->
+<!-- 2023-04-14 五 19:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>打印字符使用特殊效果</title>
@@ -208,20 +208,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfb56816">1. 打印字符使用特殊效果</a>
+<li><a href="#org3ca050e">1. 打印字符使用特殊效果</a>
 <ul>
-<li><a href="#org71402a6">1.1. 简单介绍</a></li>
-<li><a href="#orgdb53687">1.2. m型效果</a>
+<li><a href="#org3caa55f">1.1. 简单介绍</a></li>
+<li><a href="#orgb0a23b0">1.2. m型效果</a>
 <ul>
-<li><a href="#orgf49c573">1.2.1. 颜色</a></li>
-<li><a href="#orgbb27935">1.2.2. 文字效果</a></li>
+<li><a href="#org4767f02">1.2.1. 颜色</a></li>
+<li><a href="#org29d3ee0">1.2.2. 文字效果</a></li>
 </ul>
 </li>
-<li><a href="#org22cfcc6">1.3. 其他类型</a>
+<li><a href="#org4e2739e">1.3. 其他类型</a>
 <ul>
-<li><a href="#orga8cda39">1.3.1. 光标移动</a></li>
-<li><a href="#org9a6a934">1.3.2. 光标显示</a></li>
-<li><a href="#org1ed31d2">1.3.3. 光标位置</a></li>
+<li><a href="#org5136b41">1.3.1. 光标移动</a></li>
+<li><a href="#org2f5c689">1.3.2. 光标显示</a></li>
+<li><a href="#orgcff5c20">1.3.3. 光标位置</a></li>
 </ul>
 </li>
 </ul>
@@ -230,12 +230,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgfb56816" class="outline-2">
-<h2 id="orgfb56816"><span class="section-number-2">1.</span> 打印字符使用特殊效果</h2>
+<div id="outline-container-org3ca050e" class="outline-2">
+<h2 id="org3ca050e"><span class="section-number-2">1.</span> 打印字符使用特殊效果</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org71402a6" class="outline-3">
-<h3 id="org71402a6"><span class="section-number-3">1.1.</span> 简单介绍</h3>
+<div id="outline-container-org3caa55f" class="outline-3">
+<h3 id="org3caa55f"><span class="section-number-3">1.1.</span> 简单介绍</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 特殊效果的支持源自ANSI标准，由于我不是很懂所以不多赘述。这里重点关注我们应该如何使用它。
@@ -259,8 +259,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgdb53687" class="outline-3">
-<h3 id="orgdb53687"><span class="section-number-3">1.2.</span> m型效果</h3>
+<div id="outline-container-orgb0a23b0" class="outline-3">
+<h3 id="orgb0a23b0"><span class="section-number-3">1.2.</span> m型效果</h3>
 <div class="outline-text-3" id="text-1-2">
 <blockquote>
 <p>
@@ -268,27 +268,27 @@
 </p>
 </blockquote>
 </div>
-<div id="outline-container-orgf49c573" class="outline-4">
-<h4 id="orgf49c573"><span class="section-number-4">1.2.1.</span> 颜色</h4>
+<div id="outline-container-org4767f02" class="outline-4">
+<h4 id="org4767f02"><span class="section-number-4">1.2.1.</span> 颜色</h4>
 <div class="outline-text-4" id="text-1-2-1">
 </div>
 <ol class="org-ol">
-<li><a id="org3b4ecc2"></a>使用普通颜色（非256色）<br />
+<li><a id="orgbde4a1d"></a>使用普通颜色（非256色）<br />
 <div class="outline-text-5" id="text-1-2-1-1">
 <p>
 要打印出普通的颜色，只需要使用下面的程序：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C">#include &lt;stdio.h&gt;
+<pre class="src src-C"><span style="color: #F92672;">#include</span> <span style="color: #E6DB74;">&lt;stdio.h&gt;</span>
 
-int main()
+<span style="color: #66D9EF;">int</span> <span style="color: #A6E22E;">main</span>()
 {
-	int color_code = 31;    /* 这里使用变量不是必须的，只是为了更容易看懂，实际上需要打印出对应的数字即可 */
-	printf("\033[%dm"
-	       "在这里放你想要带特殊效果打印的东西\n",
-	       color_code);
-	return 0;
+        <span style="color: #66D9EF;">int</span> <span style="color: #FD971F;">color_code</span> = 31;    <span style="color: #75715E;">/* </span><span style="color: #75715E;">&#36825;&#37324;&#20351;&#29992;&#21464;&#37327;&#19981;&#26159;&#24517;&#39035;&#30340;&#65292;&#21482;&#26159;&#20026;&#20102;&#26356;&#23481;&#26131;&#30475;&#25026;&#65292;&#23454;&#38469;&#19978;&#38656;&#35201;&#25171;&#21360;&#20986;&#23545;&#24212;&#30340;&#25968;&#23383;&#21363;&#21487;</span><span style="color: #75715E;"> */</span>
+        printf(<span style="color: #E6DB74;">"\033[%dm"</span>
+               <span style="color: #E6DB74;">"&#22312;&#36825;&#37324;&#25918;&#20320;&#24819;&#35201;&#24102;&#29305;&#27530;&#25928;&#26524;&#25171;&#21360;&#30340;&#19996;&#35199;\n"</span>,
+               color_code);
+        <span style="color: #F92672;">return</span> 0;
 }
 </pre>
 </div>
@@ -298,7 +298,7 @@ int main()
 它运行后的输出结果是这样的：
 </p>
 
-<div id="org042e2b4" class="figure">
+<div id="org3e205ff" class="figure">
 <p><img src="./打印字符使用特殊效果/out1.png" alt="out1.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>输出结果</p>
@@ -394,17 +394,17 @@ int main()
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C">#include &lt;stdio.h&gt;
+<pre class="src src-C"><span style="color: #F92672;">#include</span> <span style="color: #E6DB74;">&lt;stdio.h&gt;</span>
 
-int main()
+<span style="color: #66D9EF;">int</span> <span style="color: #A6E22E;">main</span>()
 {
-	int color_code_bg = 44,    /* 蓝色背景 */
-	    color_code_fg = 31;    /* 红色字体 */
-	/* 这里的转义相当于 \033[44;31m */
-	printf("\033[%d;%dm"
-	       "Put someting here you want to print.\n",
-	       color_code_bg, color_code_fg);
-	return 0;
+        <span style="color: #66D9EF;">int</span> <span style="color: #FD971F;">color_code_bg</span> = 44,    <span style="color: #75715E;">/* </span><span style="color: #75715E;">&#34013;&#33394;&#32972;&#26223;</span><span style="color: #75715E;"> */</span>
+            <span style="color: #FD971F;">color_code_fg</span> = 31;    <span style="color: #75715E;">/* </span><span style="color: #75715E;">&#32418;&#33394;&#23383;&#20307;</span><span style="color: #75715E;"> */</span>
+        <span style="color: #75715E;">/* </span><span style="color: #75715E;">&#36825;&#37324;&#30340;&#36716;&#20041;&#30456;&#24403;&#20110; \033[44;31m</span><span style="color: #75715E;"> */</span>
+        printf(<span style="color: #E6DB74;">"\033[%d;%dm"</span>
+               <span style="color: #E6DB74;">"Put someting here you want to print.\n"</span>,
+               color_code_bg, color_code_fg);
+        <span style="color: #F92672;">return</span> 0;
 }
 </pre>
 </div>
@@ -412,7 +412,7 @@ int main()
 运行效果如下：
 </p>
 
-<div id="org1c90629" class="figure">
+<div id="orgaa1018a" class="figure">
 <p><img src="./打印字符使用特殊效果/out2.png" alt="out2.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>运行结果</p>
@@ -421,7 +421,7 @@ int main()
 </div>
 </li>
 
-<li><a id="org3e7539f"></a>使用真彩色（256色）<br />
+<li><a id="orge1f70dc"></a>使用真彩色（256色）<br />
 <div class="outline-text-5" id="text-1-2-1-2">
 <p>
 在这种情况下，我们可以打印出256种颜色，比普通颜色高级多了。不过我也还是不知道Vim和Emacs这些编辑器使用主题时是怎样打印任意颜色的。毕竟我取过色，发现我使用的主题有很多都不在256色的范围内，所以说挺令我困惑的。
@@ -432,26 +432,26 @@ int main()
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C">#include &lt;stdio.h&gt;
+<pre class="src src-C"><span style="color: #F92672;">#include</span> <span style="color: #E6DB74;">&lt;stdio.h&gt;</span>
 
-int main()
+<span style="color: #66D9EF;">int</span> <span style="color: #A6E22E;">main</span>()
 {
-	int color_code = 0;
-	/* 在这里将各段控制字符分开是为了方便理解，不是必须的 */
-	for (color_code = 0; color_code &lt; 256; color_code++) {
-		if (color_code &gt;= 16 &amp;&amp; (color_code - 16) % 6 == 0) {
-			printf("\n");
-		}
-		printf("\033["
-		       "48;"
-		       "5;"
-		       "%dm"
-		       "%03d"
-		       "\033[0m ",
-		       color_code, color_code);
-	}
-	printf("\n");
-	return 0;
+        <span style="color: #66D9EF;">int</span> <span style="color: #FD971F;">color_code</span> = 0;
+        <span style="color: #75715E;">/* </span><span style="color: #75715E;">&#22312;&#36825;&#37324;&#23558;&#21508;&#27573;&#25511;&#21046;&#23383;&#31526;&#20998;&#24320;&#26159;&#20026;&#20102;&#26041;&#20415;&#29702;&#35299;&#65292;&#19981;&#26159;&#24517;&#39035;&#30340;</span><span style="color: #75715E;"> */</span>
+        <span style="color: #F92672;">for</span> (color_code = 0; color_code &lt; 256; color_code++) {
+                <span style="color: #F92672;">if</span> (color_code &gt;= 16 &amp;&amp; (color_code - 16) % 6 == 0) {
+                        printf(<span style="color: #E6DB74;">"\n"</span>);
+                }
+                printf(<span style="color: #E6DB74;">"\033["</span>
+                       <span style="color: #E6DB74;">"48;"</span>
+                       <span style="color: #E6DB74;">"5;"</span>
+                       <span style="color: #E6DB74;">"%dm"</span>
+                       <span style="color: #E6DB74;">"%03d"</span>
+                       <span style="color: #E6DB74;">"\033[0m "</span>,
+                       color_code, color_code);
+        }
+        printf(<span style="color: #E6DB74;">"\n"</span>);
+        <span style="color: #F92672;">return</span> 0;
 }
 </pre>
 </div>
@@ -460,7 +460,7 @@ int main()
 运行效果如下：
 </p>
 
-<div id="org34f1911" class="figure">
+<div id="org56e08bd" class="figure">
 <p><img src="./打印字符使用特殊效果/out3.png" alt="out3.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>运行结果</p>
@@ -492,8 +492,8 @@ int main()
 </ol>
 </div>
 
-<div id="outline-container-orgbb27935" class="outline-4">
-<h4 id="orgbb27935"><span class="section-number-4">1.2.2.</span> 文字效果</h4>
+<div id="outline-container-org29d3ee0" class="outline-4">
+<h4 id="org29d3ee0"><span class="section-number-4">1.2.2.</span> 文字效果</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 如果你观察仔细，就应该会发现刚刚的代码里面有一些新的控制符，例如刚刚提到的 <code>\033[5m;</code> 也有 <code>\033[0m</code> 。现在，是时候列出一个效果列表了。
@@ -563,12 +563,12 @@ int main()
 </div>
 </div>
 
-<div id="outline-container-org22cfcc6" class="outline-3">
-<h3 id="org22cfcc6"><span class="section-number-3">1.3.</span> 其他类型</h3>
+<div id="outline-container-org4e2739e" class="outline-3">
+<h3 id="org4e2739e"><span class="section-number-3">1.3.</span> 其他类型</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-orga8cda39" class="outline-4">
-<h4 id="orga8cda39"><span class="section-number-4">1.3.1.</span> 光标移动</h4>
+<div id="outline-container-org5136b41" class="outline-4">
+<h4 id="org5136b41"><span class="section-number-4">1.3.1.</span> 光标移动</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -611,8 +611,8 @@ int main()
 </p>
 </div>
 </div>
-<div id="outline-container-org9a6a934" class="outline-4">
-<h4 id="org9a6a934"><span class="section-number-4">1.3.2.</span> 光标显示</h4>
+<div id="outline-container-org2f5c689" class="outline-4">
+<h4 id="org2f5c689"><span class="section-number-4">1.3.2.</span> 光标显示</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 隐藏光标： <code>\033[?25l</code>
@@ -623,8 +623,8 @@ int main()
 </p>
 </div>
 </div>
-<div id="outline-container-org1ed31d2" class="outline-4">
-<h4 id="org1ed31d2"><span class="section-number-4">1.3.3.</span> 光标位置</h4>
+<div id="outline-container-orgcff5c20" class="outline-4">
+<h4 id="orgcff5c20"><span class="section-number-4">1.3.3.</span> 光标位置</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 保存： <code>\033[u</code>
@@ -641,7 +641,7 @@ int main()
 <div id="postamble" class="status">
 <p class="date">Date: 2023-01-18 18:22</p>
 <p class="author">Author: 既然博客都是我的那我就皮一下 <a href="https://youlanjie.github.io/">Chglish</a></p>
-<p class="date">Created: 2023-04-04 二 18:43</p>
+<p class="date">Created: 2023-04-14 五 19:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
