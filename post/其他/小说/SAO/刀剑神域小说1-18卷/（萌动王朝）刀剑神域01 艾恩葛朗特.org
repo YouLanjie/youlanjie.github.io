@@ -1,11 +1,13 @@
 #+TITLE: 第1卷 艾恩葛朗特 上
-#+AUTHOR: 不要在意我的头像QwQ
 #+DATE: 2023-04-21 五 20:03
 
 #+LATEX_CLASS: book
 #+LATEX_HEADER: \usepackage{geometry}
 #+LATEX_HEADER: \geometry{a4paper, scale=0.8}
 #+LATEX_HEADER: \linespread{1.1}
+
+#+STARTUP: fold
+#+HTML_LINK_UP: ../index.html
 
 #+SETUPFILE: ../../../../../setup2.setup
 

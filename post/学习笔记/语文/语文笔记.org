@@ -1,6 +1,5 @@
 #+title: 语文笔记
 #+date: 2023-01-08 08:17
-#+author: 不要在意我的头像QwQ
 
 #+setupfile: ../../../setup.setup
 

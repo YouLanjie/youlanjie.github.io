@@ -1,7 +1,7 @@
 #+title: 用github.io+jekyll建立一个自己的博客网站
-#+date:   2022-08-04 11:00
+#+date: 2022-08-04 11:00
 
-#+setupfile: ../../setup2.setup
+#+setupfile: ../../setup.setup
 
 * 用github.io+jekyll建立一个自己的博客网站
 ** 写在前面

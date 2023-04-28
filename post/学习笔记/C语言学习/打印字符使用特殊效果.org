@@ -2,7 +2,7 @@
 #+author: 既然博客都是我的那我就皮一下
 #+date: 2023-01-18 18:22
 
-#+setupfile: ../../../setup2.setup
+#+setupfile: ../../../setup.setup
 
 * 打印字符使用特殊效果
 ** 简单介绍

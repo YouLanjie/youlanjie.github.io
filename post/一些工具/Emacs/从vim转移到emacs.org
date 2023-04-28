@@ -1,15 +1,15 @@
 #+title: 从vim转移到emacs
 #+date: 2023-01-16 12:30
 
-#+setupfile: ../../../setup2.setup
+#+setupfile: ../../../setup.setup
 
+* 开始
+** 前言
 随手记下我是怎么从一个Vim用户转为一位Emacs用户的（实际上是脚踏两条船）
 
 #+BEGIN_QUOTE
 *警告，这篇文章不是教程，只是我转变的新路历程，仅对大的方向有参考作用*
 #+END_QUOTE
-
-* 开始
 ** 原因
 最开始的原因是，看到别人吹emacs的org-mode有多么厉害，功能多么强大，而vim下安装插件也只是模仿了一半而已，功能残缺。出于“试一试”的心态，我就第一次安装了Emacs
 ** 几次失败

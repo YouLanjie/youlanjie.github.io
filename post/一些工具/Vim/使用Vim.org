@@ -1,7 +1,7 @@
 #+title: 使用Vim/Neovim
 #+date: 2022-07-08 22:57
 
-#+setupfile: ../../../setup2.setup
+#+setupfile: ../../../setup.setup
 
 关于我个人是怎么理解使用Vim的
 

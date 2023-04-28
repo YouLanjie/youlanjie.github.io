@@ -1,7 +1,7 @@
 #+title: Archiso——打造属于你的在U盘上的Archlinux Live系统
 #+date: 2022-11-26 22:47
 
-#+setupfile: ../../setup2.setup
+#+setupfile: ../../setup.setup
 
 * Archiso——打造属于你的在U盘上的Archlinux Live系统
 ** Archiso是什么？
