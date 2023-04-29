@@ -6,7 +6,9 @@
 
 * 文章
 - 关于建站
-  - [[./关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站]]
+  - [[./关于建站/使用github.io建立自己的博客.html][使用github.io建立自己的博客 - hexo+hugo+Emacs Org]]
+    分别使用Hexo、Hugo、Emacs Org建立自己的博客。
+  - [[./关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站 - 仅Jekyll]]
     使用github.io和jekyll建立一个自己的博客网站
 - 其他
   - 小说
