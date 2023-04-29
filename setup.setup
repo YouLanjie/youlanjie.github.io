@@ -3,12 +3,11 @@
 #+AUTHOR: 不要在意我的头像QwQ
 
 #+HTML_LINK_HOME: /
+#+LANGUAGE: zh
 
 #+OPTIONS: html-style:nil
-
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
 #+HTML_HEAD: <script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
-
 #+HTML_HEAD: <link rel="shortcut icon" href="/img/icon.jpg">
 
 #+LATEX_COMPILER: xelatex

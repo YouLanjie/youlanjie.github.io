@@ -1,7 +1,6 @@
 #+TITLE: 我的个人博客
-
-# +OPTIONS: toc:nil
-# +OPTIONS: num:nil
+# #+OPTIONS: toc:nil
+# #+OPTIONS: num:nil
 
 #+setupfile: ./setup.setup
 
