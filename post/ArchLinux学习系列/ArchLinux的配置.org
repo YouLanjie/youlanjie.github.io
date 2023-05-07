@@ -1,5 +1,5 @@
 #+title: 我的ArchLinux的配置
-#+date:   2022-07-03 22:56:29 +0800
+#+date:   2022-07-03 22:56
 
 #+setupfile: ../../setup.setup
 

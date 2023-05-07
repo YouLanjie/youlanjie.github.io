@@ -1,0 +1,38 @@
+- 关于建站
+  - [[./post/关于建站/使用github.io建立自己的博客.html][使用github.io建立自己的博客 - hexo+hugo+Emacs Org]]
+    分别使用Hexo、Hugo、Emacs Org建立自己的博客。
+  - [[./post/关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站 - 仅Jekyll]]
+    使用github.io和jekyll建立一个自己的博客网站
+- 其他
+  - 小说
+    - [[./post/其他/小说/SAO/][《刀剑神域》资源索引]]
+      由于资源有点多所以做了个分页作索引
+- 学习笔记
+  - 语文
+    - [[./post/学习笔记/语文/语文笔记.html][语文笔记]]
+  - 道法
+    - [[./post/学习笔记/道法/八下早读材料.html][八下早读材料]]
+  - C语言学习
+    - [[./post/学习笔记/C语言学习/打印字符使用特殊效果.html][打印字符使用特殊效果]]
+      使用ANSI转义字符实现终端输出字符带有特殊效果
+    - [[./post/学习笔记/C语言学习/一些奇妙的编程思想.html][一些奇妙的编程思想]]
+      一些我在学编程中用到的思想，或许有用，或许没用
+    - [[./post/学习笔记/C语言学习/C语言入门.html][C语言入门]]
+      一本C语言教程
+- 一些工具
+  - [[./post/一些工具/我用的小工具盘点.html][我用的小工具盘点]]
+    记录一些Linux中有趣但不一定常用的软件
+  - Emacs
+    - [[./post/一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
+      我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
+    - [[./post/一些工具/Emacs/从vim转移到emacs.html][从vim转移到emacs]]
+      单纯的口水文
+  - Vim
+    - [[./post/一些工具/Vim/使用Vim.html][使用Vim]]
+- ArchLinux学习系列
+  - [[./post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
+    如何使用archiso工具打造一个自定义的U盘上的临时Live系统
+  - [[./post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
+    记录我个人安装archlinux的过程
+  - [[./post/ArchLinux学习系列/ArchLinux的配置.html][ArchLinux的配置]]
+    记录我个人的archlinux软件配置
