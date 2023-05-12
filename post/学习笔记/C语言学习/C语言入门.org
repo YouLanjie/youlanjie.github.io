@@ -1,5 +1,6 @@
 #+TITLE: C语言入门
 #+DATE: <2023-04-30 日 14:28>
+#+description: 一本C语言教程
 
 #+SETUPFILE: ../../../setup.setup
 

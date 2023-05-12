@@ -1,5 +1,6 @@
 #+title: 语文笔记
 #+date: 2023-01-08 08:17
+#+description: 内容来自B站的视频，笔记是我自己写的
 
 #+setupfile: ../../../setup.setup
 

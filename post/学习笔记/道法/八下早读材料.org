@@ -1,5 +1,6 @@
 #+title: 八下道法背诵材料
 #+date: <2023-04-07 五 11:09>
+#+description: 我的道法笔记
 
 #+setupfile: ../../../setup.setup
 

@@ -1,5 +1,6 @@
 #+title: 一些我用的小工具盘点
 #+date: 2022-12-02 18:42
+#+description: 记录一些Linux中有趣但不一定常用的软件
 
 #+setupfile: ../../setup2.setup
 

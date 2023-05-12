@@ -1,6 +1,7 @@
 #+title: 打印字符使用特殊效果
 #+author: 既然博客都是我的那我就皮一下
 #+date: 2023-01-18 18:22
+#+description: 使用ANSI转义字符实现终端输出字符带有特殊效果
 
 #+setupfile: ../../../setup.setup
 

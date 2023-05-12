@@ -1,5 +1,6 @@
 #+title: 从vim转移到emacs
 #+date: 2023-01-16 12:30
+#+description: 单纯的有感而发的口水文
 
 #+setupfile: ../../../setup.setup
 

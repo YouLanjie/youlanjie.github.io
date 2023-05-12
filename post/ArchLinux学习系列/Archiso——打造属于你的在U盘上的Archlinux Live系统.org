@@ -1,5 +1,6 @@
 #+title: Archiso——打造属于你的在U盘上的Archlinux Live系统
 #+date: 2022-11-26 22:47
+#+description: 如何使用archiso工具打造一个自定义的U盘上的临时Live系统
 
 #+setupfile: ../../setup.setup
 

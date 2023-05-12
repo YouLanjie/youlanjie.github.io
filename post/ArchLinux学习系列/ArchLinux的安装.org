@@ -1,5 +1,6 @@
 #+title: ArchLinux的安装
 #+date: 2022-07-02 22:56
+#+description: 记录我个人安装archlinux的过程
 
 #+setupfile: ../../setup.setup
 

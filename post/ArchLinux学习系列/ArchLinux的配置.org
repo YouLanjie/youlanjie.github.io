@@ -1,5 +1,6 @@
 #+title: 我的ArchLinux的配置
 #+date:   2022-07-03 22:56
+#+description: 记录我个人的archlinux软件配置
 
 #+setupfile: ../../setup.setup
 
