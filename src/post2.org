@@ -18,7 +18,8 @@
   记录一些linux中有趣但不一定常用的软件
 - /2022-11-26 22:47/ [[../post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.org][archiso——打造属于你的在u盘上的archlinux live系统]]\\
   如何使用archiso工具打造一个自定义的u盘上的临时live系统
-- /2022-08-04 11:00/ [[../post/关于建站/用github.io建立一个自己的博客网站.org][用github.io+jekyll建立一个自己的博客网站]]
+- /2022-08-04 11:00/ [[../post/关于建站/用github.io建立一个自己的博客网站.org][用github.io+jekyll建立一个自己的博客网站]]\\
+  使用github.io+jekyll建立自己的博客网站
 - /2022-07-08 22:57/ [[../post/一些工具/Vim/使用Vim.org][使用vim/neovim]]
 - /2022-07-03 22:56/ [[../post/ArchLinux学习系列/ArchLinux的配置.org][我的archlinux的配置]]\\
   记录我个人的archlinux软件配置

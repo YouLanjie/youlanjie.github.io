@@ -1,6 +1,6 @@
 #+title: 用github.io+jekyll建立一个自己的博客网站
 #+date: 2022-08-04 11:00
-#+description: 使用github.io和jekyll建立一个自己的博客网站
+#+description: 使用github.io+jekyll建立自己的博客网站
 
 #+setupfile: ../../setup.setup
 
