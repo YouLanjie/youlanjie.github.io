@@ -1,5 +1,6 @@
 #+title: 用github.io建立自己的博客
 #+date: 2023-04-29 08:55
+#+description: 分别使用Hexo、Hugo、Emacs Org建立自己的博客。
 
 #+setupfile: ../../setup.setup
 
