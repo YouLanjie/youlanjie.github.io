@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-04-29 六 01:30 -->
+<!-- 2023-05-20 六 01:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ArchLinux的安装</title>
 <meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="记录我个人安装archlinux的过程" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
 <script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
@@ -24,19 +25,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgefa8cdc">1. ArchLinux的安装</a>
+<li><a href="#org7f7dc03">1. ArchLinux的安装</a>
 <ul>
-<li><a href="#org70a5039">1.1. 写在前边</a></li>
-<li><a href="#org553a505">1.2. 安装前的准备 &#x2013; 从U盘安装</a></li>
-<li><a href="#org95680ce">1.3. 安装过程</a>
+<li><a href="#org52db147">1.1. 写在前边</a></li>
+<li><a href="#org2a97404">1.2. 安装前的准备 &#x2013; 从U盘安装</a></li>
+<li><a href="#org11c7523">1.3. 安装过程</a>
 <ul>
-<li><a href="#org946ad93">1.3.1. 确认引导类型</a></li>
-<li><a href="#orgcd690dc">1.3.2. 联网</a></li>
-<li><a href="#org99d41ac">1.3.3. 软件包</a></li>
-<li><a href="#orgf97eb49">1.3.4. 更新系统时间</a></li>
-<li><a href="#orgae9bea7">1.3.5. 为系统分区</a></li>
-<li><a href="#org08fb60c">1.3.6. 安装系统</a></li>
-<li><a href="#org9a0e765">1.3.7. 扩展——配置系统</a></li>
+<li><a href="#org5a1cf23">1.3.1. 确认引导类型</a></li>
+<li><a href="#org03fd346">1.3.2. 联网</a></li>
+<li><a href="#org291b187">1.3.3. 软件包</a></li>
+<li><a href="#org2ae9c63">1.3.4. 更新系统时间</a></li>
+<li><a href="#org3a357b8">1.3.5. 为系统分区</a></li>
+<li><a href="#orga7497e9">1.3.6. 安装系统</a></li>
+<li><a href="#org50a87e2">1.3.7. 扩展——配置系统</a></li>
 </ul>
 </li>
 </ul>
@@ -45,12 +46,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgefa8cdc" class="outline-2">
-<h2 id="orgefa8cdc"><span class="section-number-2">1.</span> ArchLinux的安装</h2>
+<div id="outline-container-org7f7dc03" class="outline-2">
+<h2 id="org7f7dc03"><span class="section-number-2">1.</span> ArchLinux的安装</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org70a5039" class="outline-3">
-<h3 id="org70a5039"><span class="section-number-3">1.1.</span> 写在前边</h3>
+<div id="outline-container-org52db147" class="outline-3">
+<h3 id="org52db147"><span class="section-number-3">1.1.</span> 写在前边</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 本blog用于记录我安装ArchLinux的方法，更专业的教程请查阅<a href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方Wiki</a>
@@ -58,8 +59,8 @@
 </div>
 </div>
 
-<div id="outline-container-org553a505" class="outline-3">
-<h3 id="org553a505"><span class="section-number-3">1.2.</span> 安装前的准备 &#x2013; 从U盘安装</h3>
+<div id="outline-container-org2a97404" class="outline-3">
+<h3 id="org2a97404"><span class="section-number-3">1.2.</span> 安装前的准备 &#x2013; 从U盘安装</h3>
 <div class="outline-text-3" id="text-1-2">
 <ol class="org-ol">
 <li>从<a href="https://archlinux.org/download/">官网</a>上下载ArchLinux的安装镜像
@@ -87,12 +88,12 @@ root权限）使用命令
 </div>
 </div>
 
-<div id="outline-container-org95680ce" class="outline-3">
-<h3 id="org95680ce"><span class="section-number-3">1.3.</span> 安装过程</h3>
+<div id="outline-container-org11c7523" class="outline-3">
+<h3 id="org11c7523"><span class="section-number-3">1.3.</span> 安装过程</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-org946ad93" class="outline-4">
-<h4 id="org946ad93"><span class="section-number-4">1.3.1.</span> 确认引导类型</h4>
+<div id="outline-container-org5a1cf23" class="outline-4">
+<h4 id="org5a1cf23"><span class="section-number-4">1.3.1.</span> 确认引导类型</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #75715E;"># </span><span style="color: #75715E;">ls /sys/firmware/efi/efivars</span>
@@ -113,7 +114,7 @@ BIOS引导的长这样：
 </p>
 
 
-<div id="orga5ba1b0" class="figure">
+<div id="orgf175f83" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-02.png" alt="2022-07-02_02-02.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>BIOS</p>
@@ -124,7 +125,7 @@ BIOS引导的长这样：
 </p>
 
 
-<div id="orgacc8393" class="figure">
+<div id="org8506371" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-01.png" alt="2022-07-02_02-01.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>EFI</p>
@@ -133,8 +134,8 @@ BIOS引导的长这样：
 </div>
 </div>
 
-<div id="outline-container-orgcd690dc" class="outline-4">
-<h4 id="orgcd690dc"><span class="section-number-4">1.3.2.</span> 联网</h4>
+<div id="outline-container-org03fd346" class="outline-4">
+<h4 id="org03fd346"><span class="section-number-4">1.3.2.</span> 联网</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 有线网络的联网教程请自行百度，这里主要讲无线网络的连接。
@@ -214,7 +215,7 @@ BIOS引导的长这样：
 操作演示图片：
 </p>
 
-<div id="org0771e0e" class="figure">
+<div id="org47b967c" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-07.png" alt="2022-07-02_02-07.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>操作演示</p>
@@ -235,12 +236,12 @@ BIOS引导的长这样：
 </div>
 </div>
 
-<div id="outline-container-org99d41ac" class="outline-4">
-<h4 id="org99d41ac"><span class="section-number-4">1.3.3.</span> 软件包</h4>
+<div id="outline-container-org291b187" class="outline-4">
+<h4 id="org291b187"><span class="section-number-4">1.3.3.</span> 软件包</h4>
 <div class="outline-text-4" id="text-1-3-3">
 </div>
 <ol class="org-ol">
-<li><a id="orgef1c735"></a>手动设置软件源<br />
+<li><a id="orge62f0c3"></a>手动设置软件源<br />
 <div class="outline-text-5" id="text-1-3-3-1">
 <blockquote>
 <p>
@@ -298,7 +299,7 @@ BIOS引导的长这样：
 </div>
 </li>
 
-<li><a id="org74c4c67"></a>自动设置软件源<br />
+<li><a id="orgd5d0816"></a>自动设置软件源<br />
 <div class="outline-text-5" id="text-1-3-3-2">
 <p>
 直接运行以下命令依照速度进行自动排序，不用手动排序
@@ -311,7 +312,7 @@ BIOS引导的长这样：
 </div>
 </li>
 
-<li><a id="org5e5f1f4"></a>多文件同时下载<br />
+<li><a id="orgbbcad5a"></a>多文件同时下载<br />
 <div class="outline-text-5" id="text-1-3-3-3">
 <p>
 编辑 <b>/etc/pacman.conf</b> 找到 <code>#ParallelDownloads = 5</code> 项，把前面的 <b>#</b> 号移除可
@@ -319,7 +320,7 @@ BIOS引导的长这样：
 </p>
 </div>
 </li>
-<li><a id="orgaa6fa35"></a>多文件同时下载<br />
+<li><a id="org474f26c"></a>多文件同时下载<br />
 <div class="outline-text-5" id="text-1-3-3-4">
 <p>
 在 <b>/etc/pacman.conf</b> 文件末尾加入
@@ -339,8 +340,8 @@ BIOS引导的长这样：
 </ol>
 </div>
 
-<div id="outline-container-orgf97eb49" class="outline-4">
-<h4 id="orgf97eb49"><span class="section-number-4">1.3.4.</span> 更新系统时间</h4>
+<div id="outline-container-org2ae9c63" class="outline-4">
+<h4 id="org2ae9c63"><span class="section-number-4">1.3.4.</span> 更新系统时间</h4>
 <div class="outline-text-4" id="text-1-3-4">
 <p>
 执行
@@ -359,8 +360,8 @@ BIOS引导的长这样：
 </div>
 </div>
 
-<div id="outline-container-orgae9bea7" class="outline-4">
-<h4 id="orgae9bea7"><span class="section-number-4">1.3.5.</span> 为系统分区</h4>
+<div id="outline-container-org3a357b8" class="outline-4">
+<h4 id="org3a357b8"><span class="section-number-4">1.3.5.</span> 为系统分区</h4>
 <div class="outline-text-4" id="text-1-3-5">
 <blockquote>
 <p>
@@ -387,7 +388,7 @@ BIOS引导的长这样：
 </p>
 
 
-<div id="orgb56839a" class="figure">
+<div id="org6939ec9" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-03.png" alt="2022-07-02_02-03.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>虚拟机——空白</p>
@@ -395,9 +396,9 @@ BIOS引导的长这样：
 </div>
 
 <ol class="org-ol">
-<li><a id="org2d855ca"></a>硬盘分区<br />
+<li><a id="org5fcf0e6"></a>硬盘分区<br />
 <ol class="org-ol">
-<li><a id="org6b9b1f3"></a>使用fdisk<br />
+<li><a id="orge957f66"></a>使用fdisk<br />
 <div class="outline-text-6" id="text-1-3-5-1-1">
 <p>
 使用命令开始为硬盘分区
@@ -453,7 +454,7 @@ fdisk在安装镜像的帮助截图：
 </p>
 
 
-<div id="org2beec3d" class="figure">
+<div id="org08872f4" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-04.png" alt="2022-07-02_02-04.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>fdisk</p>
@@ -464,7 +465,7 @@ fdisk在我现有系统的中文帮助截图：
 </p>
 
 
-<div id="org1b1a7e1" class="figure">
+<div id="orga92460e" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-06.png" alt="2022-07-02_02-06.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>fdisk-CN</p>
@@ -472,7 +473,7 @@ fdisk在我现有系统的中文帮助截图：
 </div>
 </li>
 
-<li><a id="orgdd7cb8d"></a>使用cfdisk<br />
+<li><a id="org4a4a803"></a>使用cfdisk<br />
 <div class="outline-text-6" id="text-1-3-5-1-2">
 <p>
 cfdisk有着伪图形界面，对萌新更友好。
@@ -483,14 +484,14 @@ cfdisk有着伪图形界面，对萌新更友好。
 </p>
 
 
-<div id="orgd31415b" class="figure">
+<div id="orge8f87a3" class="figure">
 <p><img src="./2022-07-02_02/2022-07-02_02-05.png" alt="2022-07-02_02-05.png" />
 </p>
 <p><span class="figure-number">Figure 7: </span>cfdisk</p>
 </div>
 </div>
 </li>
-<li><a id="org055e1d7"></a>文件系统<br />
+<li><a id="org07f1b3e"></a>文件系统<br />
 <div class="outline-text-6" id="text-1-3-5-1-3">
 <p>
 使用
@@ -506,7 +507,7 @@ cfdisk有着伪图形界面，对萌新更友好。
 </p>
 </div>
 </li>
-<li><a id="org1030965"></a>挂载分区<br />
+<li><a id="org9439c43"></a>挂载分区<br />
 <div class="outline-text-6" id="text-1-3-5-1-4">
 <p>
 使用mount,格式：
@@ -537,7 +538,7 @@ sdXn为硬盘分区，/dir 为挂载目标目录，详见下表，
 </ol>
 </li>
 
-<li><a id="org3453b2e"></a>分区建议<br />
+<li><a id="org7dd8542"></a>分区建议<br />
 <div class="outline-text-5" id="text-1-3-5-2">
 <ul class="org-ul">
 <li>BIOS</li>
@@ -688,8 +689,8 @@ sdXn为硬盘分区，/dir 为挂载目标目录，详见下表，
 </ol>
 </div>
 
-<div id="outline-container-org08fb60c" class="outline-4">
-<h4 id="org08fb60c"><span class="section-number-4">1.3.6.</span> 安装系统</h4>
+<div id="outline-container-orga7497e9" class="outline-4">
+<h4 id="orga7497e9"><span class="section-number-4">1.3.6.</span> 安装系统</h4>
 <div class="outline-text-4" id="text-1-3-6">
 <p>
 在硬盘全部挂载后，我们就可以开始安装系统了
@@ -770,7 +771,7 @@ sdXn为硬盘分区，/dir 为挂载目标目录，详见下表，
 </div>
 
 <ol class="org-ol">
-<li><a id="org9a963d5"></a>本地化<br />
+<li><a id="org1adfed9"></a>本地化<br />
 <div class="outline-text-5" id="text-1-3-6-1">
 <p>
 设置中文:
@@ -845,7 +846,7 @@ en_US.UTF-8 UTF-8
 </div>
 </li>
 
-<li><a id="org1e23398"></a>安装GRUB引导<br />
+<li><a id="orgfdb8e32"></a>安装GRUB引导<br />
 <div class="outline-text-5" id="text-1-3-6-2">
 <p>
 安装grub软件包：
@@ -868,7 +869,7 @@ en_US.UTF-8 UTF-8
 </div>
 
 <ol class="org-ol">
-<li><a id="orgc3aa9a7"></a>BIOS引导模式下<br />
+<li><a id="org88256c3"></a>BIOS引导模式下<br />
 <div class="outline-text-6" id="text-1-3-6-2-1">
 <p>
 将grub引导安装在硬盘sdX的第n个分区
@@ -887,7 +888,7 @@ en_US.UTF-8 UTF-8
 </div>
 </li>
 
-<li><a id="org1c47ecf"></a>EFI引导模式下<br />
+<li><a id="org5fba153"></a>EFI引导模式下<br />
 <div class="outline-text-6" id="text-1-3-6-2-2">
 <div class="org-src-container">
 <pre class="src src-bash">grub-install
@@ -895,7 +896,7 @@ en_US.UTF-8 UTF-8
 </div>
 </div>
 </li>
-<li><a id="orgf0c43db"></a>生成菜单、配置文件<br />
+<li><a id="org20e30ce"></a>生成菜单、配置文件<br />
 <div class="outline-text-6" id="text-1-3-6-2-3">
 <p>
 （生成/更新）配置:
@@ -916,7 +917,7 @@ en_US.UTF-8 UTF-8
 </li>
 </ol>
 </li>
-<li><a id="org912ff21"></a>用户设置<br />
+<li><a id="orgf8a8d43"></a>用户设置<br />
 <div class="outline-text-5" id="text-1-3-6-3">
 <p>
 为root用户设置密码（否则无法登录）：
@@ -973,7 +974,7 @@ en_US.UTF-8 UTF-8
 </div>
 </div>
 </li>
-<li><a id="orgbe090b7"></a>最后的配置<br />
+<li><a id="org7038ca3"></a>最后的配置<br />
 <div class="outline-text-5" id="text-1-3-6-4">
 <p>
 启用dhcpcd服务（未安装的使用 <code>pacman -S dhcpcd</code> 安装）：
@@ -1017,12 +1018,12 @@ reboot
 </li>
 </ol>
 </div>
-<div id="outline-container-org9a0e765" class="outline-4">
-<h4 id="org9a0e765"><span class="section-number-4">1.3.7.</span> 扩展——配置系统</h4>
+<div id="outline-container-org50a87e2" class="outline-4">
+<h4 id="org50a87e2"><span class="section-number-4">1.3.7.</span> 扩展——配置系统</h4>
 <div class="outline-text-4" id="text-1-3-7">
 </div>
 <ol class="org-ol">
-<li><a id="org5d9eba5"></a>使用图形界面<br />
+<li><a id="orgeb2d4e9"></a>使用图形界面<br />
 <div class="outline-text-5" id="text-1-3-7-1">
 <blockquote>
 <p>
@@ -1136,7 +1137,7 @@ picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁
 </ul>
 </div>
 </li>
-<li><a id="org12c58d9"></a>中文字体<br />
+<li><a id="orgc5ce112"></a>中文字体<br />
 <div class="outline-text-5" id="text-1-3-7-2">
 <div class="org-src-container">
 <pre class="src src-bash">pacamn -S wqy-zenhei
@@ -1154,7 +1155,7 @@ picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁
 </blockquote>
 </div>
 </li>
-<li><a id="orgac086ef"></a>使用AUR<br />
+<li><a id="orgdd19238"></a>使用AUR<br />
 <div class="outline-text-5" id="text-1-3-7-3">
 <p>
 使用AUR助手yay:
@@ -1257,7 +1258,7 @@ makepkg -si
 <div id="postamble" class="status">
 <p class="date">Date: 2022-07-02 22:56</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-04-29 六 01:30</p>
+<p class="date">Created: 2023-05-20 六 01:46</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

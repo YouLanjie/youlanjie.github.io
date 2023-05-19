@@ -206,16 +206,26 @@ nginx的学习与配置或许可以参考其他的文章或者我未来写一篇
           emacs -Q -nw ./src/fastsetup.el "$1" --eval "(eval-buffer \"fastsetup.el\")"
   }
 
+  update() {
+          #update_file index.org
+          #echo $file_list
+          for name (post/**/*.org) {
+                  out=$(echo $name|sed "s/\\.org$/.html/")
+                  if [[ (! -f $out) || ($name -nt $out) ]] {
+                          _msg_info "Export '$name' ..."
+                          update_file $name
+                  }
+          }
+  }
+
   build() {
           _msg_info "清空源文件"
           cat /dev/null > src/post2.org
           _msg_info "构建列表中"
           _msg_info "获取文件头并处理中"
-          file_list=$(find post -type f -name "*.org")
+          file_list=(post/**/*.org)
           line_max=$(echo $file_list|wc -l)
-          for ((i=1; i <= $line_max ; i++)) {
-                  name=$(echo $file_list|sed -n "${i}p")
-
+          for name ($file_list) {
                   title=$(head -n 5 $name |grep -i '#+title: ')
                   declare -l title="$title"
                   title=$(echo $title|sed 's/^#+title:[ ]*//')
@@ -247,10 +257,11 @@ nginx的学习与配置或许可以参考其他的文章或者我未来写一篇
           _msg_info "Done!"
   }
 
-  while {getopts 'mbh?' arg} {
+  while {getopts 'mbuh?' arg} {
           case $arg {
                   m) mk_public ;;
                   b) build ;;
+                  u) update ;;
                   h|?) usage 0;;
                   ,*) usage 1;;
           }
@@ -268,8 +279,8 @@ nginx的学习与配置或许可以参考其他的文章或者我未来写一篇
 #+end_src
 +该脚本除了org外的将会依照原有目录树将所有源文件复制到public目录下。然后就可以使+
 +用public目录进行最后的预览。最后使用public推送到github上。+
-该脚本现在的用法是自动更新首页。暂时没有实现自动更新文章的功能。
-脚本的链接在[[http:/build.sh][这里]]。
+
+该脚本现在的用法是自动更新首页与自动更新（导出）文章的功能。脚本的链接在[[http:/build.sh][这里]]。
 * Footnotes
 
 [fn:1] =hexo s= 是 =hexo server= 的简称 

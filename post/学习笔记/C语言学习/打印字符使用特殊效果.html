@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-04-28 五 23:24 -->
+<!-- 2023-05-20 六 01:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>打印字符使用特殊效果</title>
-<meta name="author" content="既然博客都是我的那我就皮一下" />
+<meta name="author" content="既然博客都是我的那我就皮一下 不要在意我的头像QwQ" />
+<meta name="description" content="使用ANSI转义字符实现终端输出字符带有特殊效果" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
 <script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
@@ -24,20 +25,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc1a2efd">1. 打印字符使用特殊效果</a>
+<li><a href="#org865e8dc">1. 打印字符使用特殊效果</a>
 <ul>
-<li><a href="#orge071b02">1.1. 简单介绍</a></li>
-<li><a href="#org9c617c1">1.2. m型效果</a>
+<li><a href="#org494eff0">1.1. 简单介绍</a></li>
+<li><a href="#org50f0e5d">1.2. m型效果</a>
 <ul>
-<li><a href="#orgcf3acca">1.2.1. 颜色</a></li>
-<li><a href="#org14d41d3">1.2.2. 文字效果</a></li>
+<li><a href="#org1833497">1.2.1. 颜色</a></li>
+<li><a href="#org8812d39">1.2.2. 文字效果</a></li>
 </ul>
 </li>
-<li><a href="#org9c9ed02">1.3. 其他类型</a>
+<li><a href="#orgee2f85e">1.3. 其他类型</a>
 <ul>
-<li><a href="#orgbc74068">1.3.1. 光标移动</a></li>
-<li><a href="#org9ef6987">1.3.2. 光标显示</a></li>
-<li><a href="#org96ce5e4">1.3.3. 光标位置</a></li>
+<li><a href="#orgaa94d1c">1.3.1. 光标移动</a></li>
+<li><a href="#orgd84ec75">1.3.2. 光标显示</a></li>
+<li><a href="#orgc276230">1.3.3. 光标位置</a></li>
 </ul>
 </li>
 </ul>
@@ -46,12 +47,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgc1a2efd" class="outline-2">
-<h2 id="orgc1a2efd"><span class="section-number-2">1.</span> 打印字符使用特殊效果</h2>
+<div id="outline-container-org865e8dc" class="outline-2">
+<h2 id="org865e8dc"><span class="section-number-2">1.</span> 打印字符使用特殊效果</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge071b02" class="outline-3">
-<h3 id="orge071b02"><span class="section-number-3">1.1.</span> 简单介绍</h3>
+<div id="outline-container-org494eff0" class="outline-3">
+<h3 id="org494eff0"><span class="section-number-3">1.1.</span> 简单介绍</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 特殊效果的支持源自ANSI标准，由于我不是很懂所以不多赘述。这里重点关注我们应该如何使用它。
@@ -75,8 +76,8 @@
 </div>
 </div>
 
-<div id="outline-container-org9c617c1" class="outline-3">
-<h3 id="org9c617c1"><span class="section-number-3">1.2.</span> m型效果</h3>
+<div id="outline-container-org50f0e5d" class="outline-3">
+<h3 id="org50f0e5d"><span class="section-number-3">1.2.</span> m型效果</h3>
 <div class="outline-text-3" id="text-1-2">
 <blockquote>
 <p>
@@ -84,12 +85,12 @@
 </p>
 </blockquote>
 </div>
-<div id="outline-container-orgcf3acca" class="outline-4">
-<h4 id="orgcf3acca"><span class="section-number-4">1.2.1.</span> 颜色</h4>
+<div id="outline-container-org1833497" class="outline-4">
+<h4 id="org1833497"><span class="section-number-4">1.2.1.</span> 颜色</h4>
 <div class="outline-text-4" id="text-1-2-1">
 </div>
 <ol class="org-ol">
-<li><a id="org25a9d1a"></a>使用普通颜色（非256色）<br />
+<li><a id="org8ed5112"></a>使用普通颜色（非256色）<br />
 <div class="outline-text-5" id="text-1-2-1-1">
 <p>
 要打印出普通的颜色，只需要使用下面的程序：
@@ -114,7 +115,7 @@
 它运行后的输出结果是这样的：
 </p>
 
-<div id="org0111235" class="figure">
+<div id="org12b04c0" class="figure">
 <p><img src="./打印字符使用特殊效果/out1.png" alt="out1.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>输出结果</p>
@@ -228,7 +229,7 @@
 运行效果如下：
 </p>
 
-<div id="org25d6536" class="figure">
+<div id="orga98892a" class="figure">
 <p><img src="./打印字符使用特殊效果/out2.png" alt="out2.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>运行结果</p>
@@ -237,7 +238,7 @@
 </div>
 </li>
 
-<li><a id="org568179b"></a>使用真彩色（256色）<br />
+<li><a id="orgb18a2a5"></a>使用真彩色（256色）<br />
 <div class="outline-text-5" id="text-1-2-1-2">
 <p>
 在这种情况下，我们可以打印出256种颜色，比普通颜色高级多了。不过我也还是不知道Vim和Emacs这些编辑器使用主题时是怎样打印任意颜色的。毕竟我取过色，发现我使用的主题有很多都不在256色的范围内，所以说挺令我困惑的。
@@ -276,7 +277,7 @@
 运行效果如下：
 </p>
 
-<div id="orgaa41f23" class="figure">
+<div id="org7e2e4cd" class="figure">
 <p><img src="./打印字符使用特殊效果/out3.png" alt="out3.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>运行结果</p>
@@ -308,8 +309,8 @@
 </ol>
 </div>
 
-<div id="outline-container-org14d41d3" class="outline-4">
-<h4 id="org14d41d3"><span class="section-number-4">1.2.2.</span> 文字效果</h4>
+<div id="outline-container-org8812d39" class="outline-4">
+<h4 id="org8812d39"><span class="section-number-4">1.2.2.</span> 文字效果</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 如果你观察仔细，就应该会发现刚刚的代码里面有一些新的控制符，例如刚刚提到的 <code>\033[5m;</code> 也有 <code>\033[0m</code> 。现在，是时候列出一个效果列表了。
@@ -379,12 +380,12 @@
 </div>
 </div>
 
-<div id="outline-container-org9c9ed02" class="outline-3">
-<h3 id="org9c9ed02"><span class="section-number-3">1.3.</span> 其他类型</h3>
+<div id="outline-container-orgee2f85e" class="outline-3">
+<h3 id="orgee2f85e"><span class="section-number-3">1.3.</span> 其他类型</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-orgbc74068" class="outline-4">
-<h4 id="orgbc74068"><span class="section-number-4">1.3.1.</span> 光标移动</h4>
+<div id="outline-container-orgaa94d1c" class="outline-4">
+<h4 id="orgaa94d1c"><span class="section-number-4">1.3.1.</span> 光标移动</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -427,8 +428,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org9ef6987" class="outline-4">
-<h4 id="org9ef6987"><span class="section-number-4">1.3.2.</span> 光标显示</h4>
+<div id="outline-container-orgd84ec75" class="outline-4">
+<h4 id="orgd84ec75"><span class="section-number-4">1.3.2.</span> 光标显示</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 隐藏光标： <code>\033[?25l</code>
@@ -439,8 +440,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org96ce5e4" class="outline-4">
-<h4 id="org96ce5e4"><span class="section-number-4">1.3.3.</span> 光标位置</h4>
+<div id="outline-container-orgc276230" class="outline-4">
+<h4 id="orgc276230"><span class="section-number-4">1.3.3.</span> 光标位置</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 保存： <code>\033[u</code>
@@ -456,8 +457,8 @@
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2023-01-18 18:22</p>
-<p class="author">Author: 既然博客都是我的那我就皮一下</p>
-<p class="date">Created: 2023-04-28 五 23:24</p>
+<p class="author">Author: 既然博客都是我的那我就皮一下 不要在意我的头像QwQ</p>
+<p class="date">Created: 2023-05-20 六 01:46</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

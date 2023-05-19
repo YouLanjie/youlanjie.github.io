@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-04-29 六 01:30 -->
+<!-- 2023-05-20 六 01:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Archiso——打造属于你的在U盘上的Archlinux Live系统</title>
 <meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="如何使用archiso工具打造一个自定义的U盘上的临时Live系统" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
 <script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
@@ -24,20 +25,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgae7bbad">1. Archiso——打造属于你的在U盘上的Archlinux Live系统</a>
+<li><a href="#orga13f844">1. Archiso——打造属于你的在U盘上的Archlinux Live系统</a>
 <ul>
-<li><a href="#orgea95afc">1.1. Archiso是什么？</a>
+<li><a href="#org57eb4d1">1.1. Archiso是什么？</a>
 <ul>
-<li><a href="#org33b933e">1.1.1. Archiso能够做什么？</a></li>
-<li><a href="#org7d1dc34">1.1.2. 一开始的探索</a></li>
+<li><a href="#orgfe4eebb">1.1.1. Archiso能够做什么？</a></li>
+<li><a href="#org4700c83">1.1.2. 一开始的探索</a></li>
 </ul>
 </li>
-<li><a href="#org7175ff7">1.2. 真正的开始</a>
+<li><a href="#orgbcfc2f9">1.2. 真正的开始</a>
 <ul>
-<li><a href="#org1b5e758">1.2.1. 基本的准备</a></li>
-<li><a href="#org970c12d">1.2.2. 自定义</a></li>
-<li><a href="#orgc349c6c">1.2.3. 构建ISO映像</a></li>
-<li><a href="#orge3906c4">1.2.4. 其他设置</a></li>
+<li><a href="#org97c076a">1.2.1. 基本的准备</a></li>
+<li><a href="#org28f1010">1.2.2. 自定义</a></li>
+<li><a href="#org0c5338c">1.2.3. 构建ISO映像</a></li>
+<li><a href="#org33be3b7">1.2.4. 其他设置</a></li>
 </ul>
 </li>
 </ul>
@@ -46,12 +47,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgae7bbad" class="outline-2">
-<h2 id="orgae7bbad"><span class="section-number-2">1.</span> Archiso——打造属于你的在U盘上的Archlinux Live系统</h2>
+<div id="outline-container-orga13f844" class="outline-2">
+<h2 id="orga13f844"><span class="section-number-2">1.</span> Archiso——打造属于你的在U盘上的Archlinux Live系统</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgea95afc" class="outline-3">
-<h3 id="orgea95afc"><span class="section-number-3">1.1.</span> Archiso是什么？</h3>
+<div id="outline-container-org57eb4d1" class="outline-3">
+<h3 id="org57eb4d1"><span class="section-number-3">1.1.</span> Archiso是什么？</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 这里引用arch wiki的描述：
@@ -65,8 +66,8 @@
 </blockquote>
 </div>
 
-<div id="outline-container-org33b933e" class="outline-4">
-<h4 id="org33b933e"><span class="section-number-4">1.1.1.</span> Archiso能够做什么？</h4>
+<div id="outline-container-orgfe4eebb" class="outline-4">
+<h4 id="orgfe4eebb"><span class="section-number-4">1.1.1.</span> Archiso能够做什么？</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 archiso用于制作装有archlinux的iso镜像文件，可以使用dd工具将其烧录进U盘，可以在作
@@ -81,8 +82,8 @@ root密码等）。
 </div>
 </div>
 
-<div id="outline-container-org7d1dc34" class="outline-4">
-<h4 id="org7d1dc34"><span class="section-number-4">1.1.2.</span> 一开始的探索</h4>
+<div id="outline-container-org4700c83" class="outline-4">
+<h4 id="org4700c83"><span class="section-number-4">1.1.2.</span> 一开始的探索</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 一开始我尝试直接在系统上安装软件，但是我发现它的文件实际存储在内存上，没有办法存
@@ -101,12 +102,12 @@ root密码等）。
 </div>
 </div>
 
-<div id="outline-container-org7175ff7" class="outline-3">
-<h3 id="org7175ff7"><span class="section-number-3">1.2.</span> 真正的开始</h3>
+<div id="outline-container-orgbcfc2f9" class="outline-3">
+<h3 id="orgbcfc2f9"><span class="section-number-3">1.2.</span> 真正的开始</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org1b5e758" class="outline-4">
-<h4 id="org1b5e758"><span class="section-number-4">1.2.1.</span> 基本的准备</h4>
+<div id="outline-container-org97c076a" class="outline-4">
+<h4 id="org97c076a"><span class="section-number-4">1.2.1.</span> 基本的准备</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 首先你需要安装 archiso 或 archiso-git 包获取基本的制作工具及配置文件。在安装好软件后，你的 `/usr/share/archiso/configs` 目录下应该会有两个文件夹，分别为： <b><b>releng</b></b> 和 <b><b>baseline</b></b> 。它们的介绍如下：
@@ -153,12 +154,12 @@ root密码等）。
 </div>
 </div>
 
-<div id="outline-container-org970c12d" class="outline-4">
-<h4 id="org970c12d"><span class="section-number-4">1.2.2.</span> 自定义</h4>
+<div id="outline-container-org28f1010" class="outline-4">
+<h4 id="org28f1010"><span class="section-number-4">1.2.2.</span> 自定义</h4>
 <div class="outline-text-4" id="text-1-2-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgcc63557"></a>软件包<br />
+<li><a id="org00e7b31"></a>软件包<br />
 <div class="outline-text-5" id="text-1-2-2-1">
 <p>
 要设置镜像中安装的软件包，需要编辑 <code>$archlive/packages.x86_64</code> 文件。每行为一个
@@ -225,7 +226,7 @@ repo-add &#20250;&#36890;&#36807;&#35835;&#21462;&#26576;&#20010;&#36719;&#20214
 </div>
 </li>
 
-<li><a id="org7e3484f"></a>向镜像内添加文件<br />
+<li><a id="orgd095874"></a>向镜像内添加文件<br />
 <div class="outline-text-5" id="text-1-2-2-2">
 <p>
 如果需要向镜像内添加文件，则需要在 <b>\$archlive/airootfs/</b> 目录下添加。其中，该文
@@ -248,7 +249,7 @@ repo-add &#20250;&#36890;&#36807;&#35835;&#21462;&#26576;&#20010;&#36719;&#20214
 </div>
 </li>
 
-<li><a id="org6698349"></a>修改内核<br />
+<li><a id="orga1eec84"></a>修改内核<br />
 <div class="outline-text-5" id="text-1-2-2-3">
 <p>
 倘若我们不配置gui界面直接使用终端，那么没有中文的影响是致命的（Linux的tty不支持
@@ -283,8 +284,8 @@ repo-add &#20250;&#36890;&#36807;&#35835;&#21462;&#26576;&#20010;&#36719;&#20214
 </ol>
 </div>
 
-<div id="outline-container-orgc349c6c" class="outline-4">
-<h4 id="orgc349c6c"><span class="section-number-4">1.2.3.</span> 构建ISO映像</h4>
+<div id="outline-container-org0c5338c" class="outline-4">
+<h4 id="org0c5338c"><span class="section-number-4">1.2.3.</span> 构建ISO映像</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 在配置好后就应该开始构建镜像了。你可以通过下列命令开始构建镜像文件：
@@ -327,8 +328,8 @@ repo-add &#20250;&#36890;&#36807;&#35835;&#21462;&#26576;&#20010;&#36719;&#20214
 </div>
 </div>
 
-<div id="outline-container-orge3906c4" class="outline-4">
-<h4 id="orge3906c4"><span class="section-number-4">1.2.4.</span> 其他设置</h4>
+<div id="outline-container-org33be3b7" class="outline-4">
+<h4 id="org33be3b7"><span class="section-number-4">1.2.4.</span> 其他设置</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <p>
 如果你需要动态调整根目录的大小，你可以尝试使用以下命令：
@@ -351,7 +352,7 @@ repo-add &#20250;&#36890;&#36807;&#35835;&#21462;&#26576;&#20010;&#36719;&#20214
 <div id="postamble" class="status">
 <p class="date">Date: 2022-11-26 22:47</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-04-29 六 01:30</p>
+<p class="date">Created: 2023-05-20 六 01:46</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
