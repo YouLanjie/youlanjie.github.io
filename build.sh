@@ -85,16 +85,26 @@ update_file() {
 	emacs -Q -nw ./src/fastsetup.el "$1" --eval "(eval-buffer \"fastsetup.el\")"
 }
 
+update() {
+	#update_file index.org
+	#echo $file_list
+	for name (post/**/*.org) {
+		out=$(echo $name|sed "s/\\.org$/.html/")
+		if [[ (! -f $out) || ($name -nt $out) ]] {
+			_msg_info "Export '$name' ..."
+			update_file $name
+		}
+	}
+}
+
 build() {
 	_msg_info "清空源文件"
 	cat /dev/null > src/post2.org
 	_msg_info "构建列表中"
 	_msg_info "获取文件头并处理中"
-	file_list=$(find post -type f -name "*.org")
+	file_list=(post/**/*.org)
 	line_max=$(echo $file_list|wc -l)
-	for ((i=1; i <= $line_max ; i++)) {
-		name=$(echo $file_list|sed -n "${i}p")
-
+	for name ($file_list) {
 		title=$(head -n 5 $name |grep -i '#+title: ')
 		declare -l title="$title"
 		title=$(echo $title|sed 's/^#+title:[ ]*//')
@@ -126,10 +136,11 @@ build() {
 	_msg_info "Done!"
 }
 
-while {getopts 'mbh?' arg} {
+while {getopts 'mbuh?' arg} {
 	case $arg {
 		m) mk_public ;;
 		b) build ;;
+		u) update ;;
 		h|?) usage 0;;
 		*) usage 1;;
 	}

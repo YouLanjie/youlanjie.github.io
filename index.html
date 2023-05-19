@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-05-13 六 07:45 -->
+<!-- 2023-05-20 六 01:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>我的个人博客</title>
@@ -24,15 +24,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge43cd86">1. 文章（按内容分类）</a></li>
-<li><a href="#orgc4f8bc8">2. 文章（按时间线排序）</a></li>
-<li><a href="#org9eac075">3. 关于</a></li>
+<li><a href="#org7d4f05a">1. 文章（按内容分类）</a></li>
+<li><a href="#orgb785e13">2. 文章（按时间线排序）</a></li>
+<li><a href="#org3ac1832">3. 关于</a>
+<ul>
+<li><a href="#orgb47dd71">3.1. 我想说的</a></li>
+<li><a href="#org07e7f3b">3.2. 一些小介绍</a>
+<ul>
+<li><a href="#org37fc214">3.2.1. 源文件的获取</a></li>
+<li><a href="#org7c2aa65">3.2.2. 关于草稿的问题</a></li>
+<li><a href="#org223ab44">3.2.3. 关于返回主页</a></li>
+<li><a href="#orgb939fc6">3.2.4. 关于本地构建</a></li>
+<li><a href="#orgdd341e2">3.2.5. 关于右下（或左下角）的信息</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge43cd86" class="outline-2">
-<h2 id="orge43cd86"><span class="section-number-2">1.</span> 文章（按内容分类）</h2>
+<div id="outline-container-org7d4f05a" class="outline-2">
+<h2 id="org7d4f05a"><span class="section-number-2">1.</span> 文章（按内容分类）</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>关于建站
@@ -101,8 +114,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgc4f8bc8" class="outline-2">
-<h2 id="orgc4f8bc8"><span class="section-number-2">2.</span> 文章（按时间线排序）</h2>
+<div id="outline-container-orgb785e13" class="outline-2">
+<h2 id="orgb785e13"><span class="section-number-2">2.</span> 文章（按时间线排序）</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li><i>2023-04-30 14:28</i> <a href="post/学习笔记/C语言学习/C语言入门.html">c语言入门</a><br />
@@ -121,7 +134,7 @@
 单纯的有感而发的口水文</li>
 <li><i>2023-01-08 08:17</i> <a href="post/学习笔记/语文/语文笔记.html">语文笔记</a><br />
 内容来自b站的视频，笔记是我自己写的</li>
-<li><i>2022-12-02 18:42</i> <a href="post/一些工具/我用的小工具盘点.html">一些我用的小工具盘点</a><br />
+<li><i>2022-12-02 18:42</i> <a href="post/一些工具/我用的小工具盘点.html">一些我用的软件清单</a><br />
 记录一些linux中有趣但不一定常用的软件</li>
 <li><i>2022-11-26 22:47</i> <a href="post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html">archiso——打造属于你的在u盘上的archlinux live系统</a><br />
 如何使用archiso工具打造一个自定义的u盘上的临时live系统</li>
@@ -138,16 +151,21 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org9eac075" class="outline-2">
-<h2 id="org9eac075"><span class="section-number-2">3.</span> 关于</h2>
+<div id="outline-container-org3ac1832" class="outline-2">
+<h2 id="org3ac1832"><span class="section-number-2">3.</span> 关于</h2>
 <div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgb47dd71" class="outline-3">
+<h3 id="orgb47dd71"><span class="section-number-3">3.1.</span> 我想说的</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 这是我的个人网站，依靠Emacs Org导出为HTML构建
 </p>
 
 <p>
 注意，是近纯Emacs，除了使用Emacs和简单的shell脚本之外并没有使用任何其他的软件或
-者博客引擎用于构建博客。
+者博客引擎用于构建博客。虽然如此，但我还是觉得我这博客还是“不太纯”，毕竟Shell
+的占比也太多了（指开发时间）。
 </p>
 
 <p>
@@ -156,14 +174,72 @@
 </p>
 
 <p>
-这两个主题均已内置，非外链。
+这两个主题均已内置，非外链。但是这两个主题均会使用其他的字体（来自网络），特别是
+<code>read-the-docs</code> 这个主题的加载时间会非常的长。
 </p>
+</div>
+</div>
+<div id="outline-container-org07e7f3b" class="outline-3">
+<h3 id="org07e7f3b"><span class="section-number-3">3.2.</span> 一些小介绍</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-org37fc214" class="outline-4">
+<h4 id="org37fc214"><span class="section-number-4">3.2.1.</span> 源文件的获取</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+这个网站实际上已经在 <i>2023.05.14</i> 的更新中将源文件合并进了。理论上你能够访问的
+html文件你也能够访问相应的Org源文件。就例如本页（首页）的<a href="http:/index.org">源文件</a>。我应该不会再添
+加一个源文件的下载列表，所以若想要源文件请自行将 <code>xxx.html</code> 改成 <code>xxx.org</code> 的格
+式以获取源文件。
+</p>
+</div>
+</div>
+<div id="outline-container-org7c2aa65" class="outline-4">
+<h4 id="org7c2aa65"><span class="section-number-4">3.2.2.</span> 关于草稿的问题</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+由于脚本尚不完善，所以有很多的草稿文章（或者是烂尾文）会跟着一起发出来，所以请不
+要在意，友好地关掉链接即可。
+</p>
+</div>
+</div>
+<div id="outline-container-org223ab44" class="outline-4">
+<h4 id="org223ab44"><span class="section-number-4">3.2.3.</span> 关于返回主页</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+两款主题均没有改动 <code>Up</code> 与 <code>Home</code> 的链接。在部分文章中 <code>Up</code> 链接是有定义的，不过
+大多是没有定义链接目标的所以一般会回到文章页面中。而 <code>Home</code> 链接则是有定义的，均
+为主页。所以如果想要返回主页，使用 <code>Home</code> 即可。
+</p>
+</div>
+</div>
+<div id="outline-container-orgb939fc6" class="outline-4">
+<h4 id="orgb939fc6"><span class="section-number-4">3.2.4.</span> 关于本地构建</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<p>
+由于网页对于 <code>/</code> 链接的较广泛使用，在将Github仓库克隆到本地后是无法直接访问的，
+需要使用nodejs的http-server工具开启一个服务或者使用nginx配置一下本地服务（我用的
+是nginx）
+</p>
+</div>
+</div>
+<div id="outline-container-orgdd341e2" class="outline-4">
+<h4 id="orgdd341e2"><span class="section-number-4">3.2.5.</span> 关于右下（或左下角）的信息</h4>
+<div class="outline-text-4" id="text-3-2-5">
+<p>
+那些信息部分由Org文档指定，部分由Emacs自动生成。其中 <code>Date</code> 一般为文章的创建时间，
+而 <code>Created</code> 则为Html文件的生成时间。一般可以用于参考文章的最后更新时间，不过有
+时网站做出一些调整更新所有的文章时，它就会更新。所以仅作参考，也有部分内容是虚标
+的。
+</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-05-13 六 07:45</p>
+<p class="date">Created: 2023-05-20 六 01:31</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
