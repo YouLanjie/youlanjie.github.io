@@ -2,7 +2,7 @@
 #+date: 2022-12-02 18:42
 #+description: 记录一些Linux中有趣但不一定常用的软件
 
-#+setupfile: ../../setup2.setup
+#+setupfile: ../../setup.setup
 
 * 一些我用的小工具盘点
 #+begin_quote
@@ -355,6 +355,9 @@ $ sudo npm install -g http-server
 *** MuseScore
 一个五线谱谱曲工具。你可以用它制作一些有趣的音乐，或者从它的官网上下载其他人的作
 品。
+#+begin_quote
+值得注意的是，它官网上的乐谱需要Pro用户才可下载（即付费）
+#+end_quote
 *** blender
 强大的建模软件，虽然我也不会用。
 

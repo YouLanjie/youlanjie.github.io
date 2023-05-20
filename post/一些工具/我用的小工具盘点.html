@@ -3,203 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-05-13 六 12:16 -->
+<!-- 2023-05-20 六 13:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>一些我用的软件清单</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="记录一些Linux中有趣但不一定常用的软件" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
-<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>
-<script src="/theme/read_the_docs/jquery.min.js"></script>
-<script src="/theme/read_the_docs/bootstrap.min.js"></script>
-<script type="text/javascript" src="/theme/read_the_docs/js/jquery.stickytableheaders.min.js"></script>
-<script type="text/javascript" src="/theme/read_the_docs/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
+<script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
 <link rel="shortcut icon" href="/img/icon.jpg">
 </head>
 <body>
@@ -213,25 +25,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5b2957a">1. 一些我用的小工具盘点</a>
+<li><a href="#org96442fb">1. 一些我用的小工具盘点</a>
 <ul>
-<li><a href="#org80c56bf">1.1. 终端类</a>
+<li><a href="#orgc17a626">1.1. 终端类</a>
 <ul>
-<li><a href="#org49e45b3">1.1.1. "绘图"</a></li>
-<li><a href="#orgd6107a4">1.1.2. 与时间有关</a></li>
-<li><a href="#org89cdc24">1.1.3. 有趣的小玩意</a></li>
-<li><a href="#org0469fa8">1.1.4. 包管理工具</a></li>
-<li><a href="#org2221717">1.1.5. 网络</a></li>
-<li><a href="#org95d4705">1.1.6. 娱乐</a></li>
-<li><a href="#org355e47c">1.1.7. 存储分析</a></li>
-<li><a href="#org494b302">1.1.8. 开发</a></li>
-<li><a href="#org2f418c3">1.1.9. 终端中的图形界面</a></li>
+<li><a href="#org39c088e">1.1.1. "绘图"</a></li>
+<li><a href="#orge35c7a9">1.1.2. 与时间有关</a></li>
+<li><a href="#org484908e">1.1.3. 有趣的小玩意</a></li>
+<li><a href="#orgc42efac">1.1.4. 包管理工具</a></li>
+<li><a href="#org905e010">1.1.5. 网络</a></li>
+<li><a href="#orgbd4d077">1.1.6. 娱乐</a></li>
+<li><a href="#org6ba3526">1.1.7. 存储分析</a></li>
+<li><a href="#org148ce1c">1.1.8. 开发</a></li>
+<li><a href="#org1af2641">1.1.9. 终端中的图形界面</a></li>
 </ul>
 </li>
-<li><a href="#org00ee28e">1.2. 图形界面类</a>
+<li><a href="#org513f2a1">1.2. 图形界面类</a>
 <ul>
-<li><a href="#orgffd2b73">1.2.1. MuseScore</a></li>
-<li><a href="#org99e0c7d">1.2.2. blender</a></li>
+<li><a href="#org8a3f42f">1.2.1. MuseScore</a></li>
+<li><a href="#orgbb52cff">1.2.2. blender</a></li>
 </ul>
 </li>
 </ul>
@@ -240,8 +52,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5b2957a" class="outline-2">
-<h2 id="org5b2957a"><span class="section-number-2">1.</span> 一些我用的小工具盘点</h2>
+<div id="outline-container-org96442fb" class="outline-2">
+<h2 id="org96442fb"><span class="section-number-2">1.</span> 一些我用的小工具盘点</h2>
 <div class="outline-text-2" id="text-1">
 <blockquote>
 <p>
@@ -270,16 +82,16 @@
 </table>
 </blockquote>
 </div>
-<div id="outline-container-org80c56bf" class="outline-3">
-<h3 id="org80c56bf"><span class="section-number-3">1.1.</span> 终端类</h3>
+<div id="outline-container-orgc17a626" class="outline-3">
+<h3 id="orgc17a626"><span class="section-number-3">1.1.</span> 终端类</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-org49e45b3" class="outline-4">
-<h4 id="org49e45b3"><span class="section-number-4">1.1.1.</span> "绘图"</h4>
+<div id="outline-container-org39c088e" class="outline-4">
+<h4 id="org39c088e"><span class="section-number-4">1.1.1.</span> "绘图"</h4>
 <div class="outline-text-4" id="text-1-1-1">
 </div>
 <ol class="org-ol">
-<li><a id="org086adfc"></a>lolcat<br />
+<li><a id="orge71375a"></a>lolcat<br />
 <div class="outline-text-5" id="text-1-1-1-1">
 <p>
 它是一个可以输出渐变彩色的工具，或许能让你的一些输出变得更加炫酷。它的工作依赖
@@ -287,7 +99,7 @@ ruby。
 </p>
 </div>
 </li>
-<li><a id="orgc583896"></a>cowsay<br />
+<li><a id="orge1d5dac"></a>cowsay<br />
 <div class="outline-text-5" id="text-1-1-1-2">
 <p>
 它能够将你所指定的字符整合进入一副字符画中。像下面一样：
@@ -308,7 +120,7 @@ ruby。
 </p>
 </div>
 </li>
-<li><a id="org6839033"></a>figlet<br />
+<li><a id="org6d06934"></a>figlet<br />
 <div class="outline-text-5" id="text-1-1-1-3">
 <p>
 这是一个用字符“绘制”字符（仅限英文）的工具，可以作出一些有趣的效果：
@@ -326,14 +138,14 @@ ruby。
 </li>
 </ol>
 </div>
-<div id="outline-container-orgd6107a4" class="outline-4">
-<h4 id="orgd6107a4"><span class="section-number-4">1.1.2.</span> 与时间有关</h4>
+<div id="outline-container-orge35c7a9" class="outline-4">
+<h4 id="orge35c7a9"><span class="section-number-4">1.1.2.</span> 与时间有关</h4>
 <div class="outline-text-4" id="text-1-1-2">
 </div>
 <ol class="org-ol">
-<li><a id="org0837816"></a>日历<br />
+<li><a id="org0c85db5"></a>日历<br />
 <ol class="org-ol">
-<li><a id="org4d38407"></a>cal<br />
+<li><a id="org29c38ea"></a>cal<br />
 <div class="outline-text-6" id="text-1-1-2-1-1">
 <p>
 一个十分简洁的日历软件。
@@ -419,7 +231,7 @@ $ cal -h
 </div>
 </div>
 </li>
-<li><a id="org7dba22b"></a>ccal<br />
+<li><a id="org2c84a70"></a>ccal<br />
 <div class="outline-text-6" id="text-1-1-2-1-2">
 <p>
 日历软件，可以看作是`cal`的升级版，可以查看农历，还可以用PostScrip、html、xml格
@@ -562,19 +374,19 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 截图：
 </p>
 
-<div id="org66512e1" class="figure">
+<div id="orgdf1c77d" class="figure">
 <p><img src="./tools/img/2022-12-02_01-01.png" alt="2022-12-02_01-01.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>11月</p>
 </div>
 
-<div id="org28fd35f" class="figure">
+<div id="org7756b4c" class="figure">
 <p><img src="./tools/img/2022-12-02_01-02.png" alt="2022-12-02_01-02.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>12月</p>
 </div>
 
-<div id="orgac25350" class="figure">
+<div id="orgca645a3" class="figure">
 <p><img src="./tools/img/2022-12-02_01-03.png" alt="2022-12-02_01-03.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>2022全年</p>
@@ -584,7 +396,7 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 </li>
 </ol>
 </li>
-<li><a id="org69f8498"></a>tty-clock<br />
+<li><a id="org4f5bc74"></a>tty-clock<br />
 <div class="outline-text-5" id="text-1-1-2-2">
 <p>
 要安装它，请使用命令
@@ -597,14 +409,14 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 它是一个终端的时钟程序，能自定义显示的文字颜色，并支持一些其他的选项
 </p>
 
-<div id="org6c7ad77" class="figure">
+<div id="orgd6df1c6" class="figure">
 <p><img src="./tools/img/tty-clock.png" alt="tty-clock.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>显示效果（使用命令： <code>tty-clock -csC 3</code> ）</p>
 </div>
 </div>
 </li>
-<li><a id="org1316e9c"></a>at<br />
+<li><a id="orgf7d2def"></a>at<br />
 <div class="outline-text-5" id="text-1-1-2-3">
 <p>
 一个终端的定时执行命令软件。可以尝试用于设置闹钟、更换壁纸。
@@ -613,12 +425,12 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 </li>
 </ol>
 </div>
-<div id="outline-container-org89cdc24" class="outline-4">
-<h4 id="org89cdc24"><span class="section-number-4">1.1.3.</span> 有趣的小玩意</h4>
+<div id="outline-container-org484908e" class="outline-4">
+<h4 id="org484908e"><span class="section-number-4">1.1.3.</span> 有趣的小玩意</h4>
 <div class="outline-text-4" id="text-1-1-3">
 </div>
 <ol class="org-ol">
-<li><a id="orgc84ddb6"></a>fortune<br />
+<li><a id="org67bcece"></a>fortune<br />
 <div class="outline-text-5" id="text-1-1-3-1">
 <p>
 它可以为你提供一句名人名言，但都是英文的。arch用户可以安装aur包fortune-mod-zsh使
@@ -626,7 +438,7 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 </p>
 </div>
 </li>
-<li><a id="orgc741408"></a>lsd<br />
+<li><a id="org0fa6d6c"></a>lsd<br />
 <div class="outline-text-5" id="text-1-1-3-2">
 <p>
 一个能够让ls与tree的文件名前带上图标的软件。但有可能引发显示错误
@@ -635,19 +447,19 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 </li>
 </ol>
 </div>
-<div id="outline-container-org0469fa8" class="outline-4">
-<h4 id="org0469fa8"><span class="section-number-4">1.1.4.</span> 包管理工具</h4>
+<div id="outline-container-orgc42efac" class="outline-4">
+<h4 id="orgc42efac"><span class="section-number-4">1.1.4.</span> 包管理工具</h4>
 <div class="outline-text-4" id="text-1-1-4">
 </div>
 <ol class="org-ol">
-<li><a id="orgb5def7d"></a>paru<br />
+<li><a id="org1b86394"></a>paru<br />
 <div class="outline-text-5" id="text-1-1-4-1">
 <p>
 一个基于yay的AUR助手。有一些独特的扩展功能。
 </p>
 </div>
 </li>
-<li><a id="orgb9ca8a4"></a>pcurses<br />
+<li><a id="org18e3e48"></a>pcurses<br />
 <div class="outline-text-5" id="text-1-1-4-2">
 <p>
 一个使基于ncurses和C++编写的带有“伪”图形界面的 pacman管理工具，不过不是很好用，
@@ -657,12 +469,12 @@ Usage: ccal [-t|-p|-x] [-g|-b] [-u] [[&lt;month&gt;] &lt;year&gt;].
 </li>
 </ol>
 </div>
-<div id="outline-container-org2221717" class="outline-4">
-<h4 id="org2221717"><span class="section-number-4">1.1.5.</span> 网络</h4>
+<div id="outline-container-org905e010" class="outline-4">
+<h4 id="org905e010"><span class="section-number-4">1.1.5.</span> 网络</h4>
 <div class="outline-text-4" id="text-1-1-5">
 </div>
 <ol class="org-ol">
-<li><a id="org86653d8"></a>http-server<br />
+<li><a id="org899a3ee"></a>http-server<br />
 <div class="outline-text-5" id="text-1-1-5-1">
 <p>
 这不是一个软件包，是一个nodejs的包，需要用一下工具安装：
@@ -680,19 +492,19 @@ $ sudo npm install -g http-server
 </li>
 </ol>
 </div>
-<div id="outline-container-org95d4705" class="outline-4">
-<h4 id="org95d4705"><span class="section-number-4">1.1.6.</span> 娱乐</h4>
+<div id="outline-container-orgbd4d077" class="outline-4">
+<h4 id="orgbd4d077"><span class="section-number-4">1.1.6.</span> 娱乐</h4>
 <div class="outline-text-4" id="text-1-1-6">
 </div>
 <ol class="org-ol">
-<li><a id="org32a8cab"></a>cmus<br />
+<li><a id="orgf5ed027"></a>cmus<br />
 <div class="outline-text-5" id="text-1-1-6-1">
 <p>
 这是一个终端的音乐播放器。仿Vim键位，可以切换颜色主题。
 </p>
 </div>
 </li>
-<li><a id="orge4018db"></a>mpv<br />
+<li><a id="org3d8d95f"></a>mpv<br />
 <div class="outline-text-5" id="text-1-1-6-2">
 <p>
 一个很好用的视频播放器，功能丰富，界面“极简”，不过大多数功能都依赖快捷键操作，
@@ -716,12 +528,12 @@ $ sudo npm install -g http-server
 </li>
 </ol>
 </div>
-<div id="outline-container-org355e47c" class="outline-4">
-<h4 id="org355e47c"><span class="section-number-4">1.1.7.</span> 存储分析</h4>
+<div id="outline-container-org6ba3526" class="outline-4">
+<h4 id="org6ba3526"><span class="section-number-4">1.1.7.</span> 存储分析</h4>
 <div class="outline-text-4" id="text-1-1-7">
 </div>
 <ol class="org-ol">
-<li><a id="org4929504"></a>gdu<br />
+<li><a id="orgb19a3ce"></a>gdu<br />
 <div class="outline-text-5" id="text-1-1-7-1">
 <p>
 一个终端的存储分析工具。类似于带有界面的 <code>du</code> 工具。挺方便快捷的，使用了ncurse构
@@ -729,7 +541,7 @@ $ sudo npm install -g http-server
 </p>
 </div>
 </li>
-<li><a id="org5558451"></a>duf<br />
+<li><a id="orgcdfc9c3"></a>duf<br />
 <div class="outline-text-5" id="text-1-1-7-2">
 <p>
 一个能够显示“进度条”的 <code>df</code> 工具，没用但装
@@ -738,12 +550,12 @@ $ sudo npm install -g http-server
 </li>
 </ol>
 </div>
-<div id="outline-container-org494b302" class="outline-4">
-<h4 id="org494b302"><span class="section-number-4">1.1.8.</span> 开发</h4>
+<div id="outline-container-org148ce1c" class="outline-4">
+<h4 id="org148ce1c"><span class="section-number-4">1.1.8.</span> 开发</h4>
 <div class="outline-text-4" id="text-1-1-8">
 </div>
 <ol class="org-ol">
-<li><a id="orgac35c9a"></a>lazygit<br />
+<li><a id="org6626d07"></a>lazygit<br />
 <div class="outline-text-5" id="text-1-1-8-1">
 <p>
 一个提供可视化管理git仓库的工具，在学会怎么用之前应该算不上是 <i>lazy</i> 了。
@@ -752,12 +564,12 @@ $ sudo npm install -g http-server
 </li>
 </ol>
 </div>
-<div id="outline-container-org2f418c3" class="outline-4">
-<h4 id="org2f418c3"><span class="section-number-4">1.1.9.</span> 终端中的图形界面</h4>
+<div id="outline-container-org1af2641" class="outline-4">
+<h4 id="org1af2641"><span class="section-number-4">1.1.9.</span> 终端中的图形界面</h4>
 <div class="outline-text-4" id="text-1-1-9">
 </div>
 <ol class="org-ol">
-<li><a id="orgb575230"></a>xwinwrap<br />
+<li><a id="org389d964"></a>xwinwrap<br />
 <div class="outline-text-5" id="text-1-1-9-1">
 <p>
 这是一个古老但是有用的程序，举个例子，它可以实现动态壁纸。
@@ -809,21 +621,26 @@ $ sudo npm install -g http-server
 </ol>
 </div>
 </div>
-<div id="outline-container-org00ee28e" class="outline-3">
-<h3 id="org00ee28e"><span class="section-number-3">1.2.</span> 图形界面类</h3>
+<div id="outline-container-org513f2a1" class="outline-3">
+<h3 id="org513f2a1"><span class="section-number-3">1.2.</span> 图形界面类</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-orgffd2b73" class="outline-4">
-<h4 id="orgffd2b73"><span class="section-number-4">1.2.1.</span> MuseScore</h4>
+<div id="outline-container-org8a3f42f" class="outline-4">
+<h4 id="org8a3f42f"><span class="section-number-4">1.2.1.</span> MuseScore</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 一个五线谱谱曲工具。你可以用它制作一些有趣的音乐，或者从它的官网上下载其他人的作
 品。
 </p>
+<blockquote>
+<p>
+值得注意的是，它官网上的乐谱需要Pro用户才可下载（即付费）
+</p>
+</blockquote>
 </div>
 </div>
-<div id="outline-container-org99e0c7d" class="outline-4">
-<h4 id="org99e0c7d"><span class="section-number-4">1.2.2.</span> blender</h4>
+<div id="outline-container-orgbb52cff" class="outline-4">
+<h4 id="orgbb52cff"><span class="section-number-4">1.2.2.</span> blender</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 强大的建模软件，虽然我也不会用。
@@ -836,7 +653,7 @@ $ sudo npm install -g http-server
 <div id="postamble" class="status">
 <p class="date">Date: 2022-12-02 18:42</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-05-13 六 12:16</p>
+<p class="date">Created: 2023-05-20 六 13:28</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
