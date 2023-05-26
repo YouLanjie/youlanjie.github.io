@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-05-20 六 01:46 -->
+<!-- 2023-05-26 五 22:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>使用Vim/Neovim</title>
@@ -24,27 +24,27 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org773ed12">1. 使用Vim/Neovim</a>
+<li><a href="#org1475d35">1. 使用Vim/Neovim</a>
 <ul>
-<li><a href="#orgb7505f2">1.1. 操作</a>
+<li><a href="#orgcabb008">1.1. 操作</a>
 <ul>
-<li><a href="#orgf0c693d">1.1.1. 模式介绍</a></li>
-<li><a href="#org106daa3">1.1.2. 正常模式</a></li>
-<li><a href="#orgb7fdbf3">1.1.3. 命令模式</a></li>
-<li><a href="#orga3db308">1.1.4. 插入模式</a></li>
-<li><a href="#org24d7c2d">1.1.5. 替换模式</a></li>
-<li><a href="#org7ffe15b">1.1.6. 可视模式</a></li>
+<li><a href="#org51a3d06">1.1.1. 模式介绍</a></li>
+<li><a href="#org74e4e29">1.1.2. 正常模式</a></li>
+<li><a href="#org1e28416">1.1.3. 命令模式</a></li>
+<li><a href="#org536e149">1.1.4. 插入模式</a></li>
+<li><a href="#org6b65657">1.1.5. 替换模式</a></li>
+<li><a href="#org387eb6d">1.1.6. 可视模式</a></li>
 </ul>
 </li>
-<li><a href="#org2da81e2">1.2. 配置</a>
+<li><a href="#orgc97c533">1.2. 配置</a>
 <ul>
-<li><a href="#orgc87ba99">1.2.1. vim</a></li>
-<li><a href="#org5ff2cb3">1.2.2. neovim</a></li>
-<li><a href="#orgd45cbc3">1.2.3. 配置目录结构</a></li>
-<li><a href="#org323b3e5">1.2.4. 配置语法</a></li>
+<li><a href="#orgcb6f3de">1.2.1. vim</a></li>
+<li><a href="#org9aa0a68">1.2.2. neovim</a></li>
+<li><a href="#org43393bc">1.2.3. 配置目录结构</a></li>
+<li><a href="#org84eaabe">1.2.4. 配置语法</a></li>
 </ul>
 </li>
-<li><a href="#org8495cb6">1.3. 我的配置</a></li>
+<li><a href="#orgb20e40f">1.3. 我的配置</a></li>
 </ul>
 </li>
 </ul>
@@ -54,12 +54,12 @@
 关于我个人是怎么理解使用Vim的
 </p>
 
-<div id="outline-container-org773ed12" class="outline-2">
-<h2 id="org773ed12"><span class="section-number-2">1.</span> 使用Vim/Neovim</h2>
+<div id="outline-container-org1475d35" class="outline-2">
+<h2 id="org1475d35"><span class="section-number-2">1.</span> 使用Vim/Neovim</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgb7505f2" class="outline-3">
-<h3 id="orgb7505f2"><span class="section-number-3">1.1.</span> 操作</h3>
+<div id="outline-container-orgcabb008" class="outline-3">
+<h3 id="orgcabb008"><span class="section-number-3">1.1.</span> 操作</h3>
 <div class="outline-text-3" id="text-1-1">
 <blockquote>
 <p>
@@ -77,8 +77,8 @@ Vim官方已经有了一份中文的教程了，只需要在终端执行
 </blockquote>
 </div>
 
-<div id="outline-container-orgf0c693d" class="outline-4">
-<h4 id="orgf0c693d"><span class="section-number-4">1.1.1.</span> 模式介绍</h4>
+<div id="outline-container-org51a3d06" class="outline-4">
+<h4 id="org51a3d06"><span class="section-number-4">1.1.1.</span> 模式介绍</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Vim分为多个模式，正常情况下Vim处于 <b>正常模式</b> 。在其他模式下按下 <b>ESC</b> 键可以返
@@ -156,8 +156,8 @@ Vim分为多个模式，正常情况下Vim处于 <b>正常模式</b> 。在其�
 </div>
 </div>
 
-<div id="outline-container-org106daa3" class="outline-4">
-<h4 id="org106daa3"><span class="section-number-4">1.1.2.</span> 正常模式</h4>
+<div id="outline-container-org74e4e29" class="outline-4">
+<h4 id="org74e4e29"><span class="section-number-4">1.1.2.</span> 正常模式</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 移动（官方教程原文）：
@@ -429,8 +429,8 @@ Vim分为多个模式，正常情况下Vim处于 <b>正常模式</b> 。在其�
 </table>
 </div>
 </div>
-<div id="outline-container-orgb7fdbf3" class="outline-4">
-<h4 id="orgb7fdbf3"><span class="section-number-4">1.1.3.</span> 命令模式</h4>
+<div id="outline-container-org1e28416" class="outline-4">
+<h4 id="org1e28416"><span class="section-number-4">1.1.3.</span> 命令模式</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 较为常用的命令表：
@@ -560,24 +560,24 @@ Vim分为多个模式，正常情况下Vim处于 <b>正常模式</b> 。在其�
 </table>
 </div>
 </div>
-<div id="outline-container-orga3db308" class="outline-4">
-<h4 id="orga3db308"><span class="section-number-4">1.1.4.</span> 插入模式</h4>
+<div id="outline-container-org536e149" class="outline-4">
+<h4 id="org536e149"><span class="section-number-4">1.1.4.</span> 插入模式</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 只不过是简单地输入文本并插入到文件中罢了
 </p>
 </div>
 </div>
-<div id="outline-container-org24d7c2d" class="outline-4">
-<h4 id="org24d7c2d"><span class="section-number-4">1.1.5.</span> 替换模式</h4>
+<div id="outline-container-org6b65657" class="outline-4">
+<h4 id="org6b65657"><span class="section-number-4">1.1.5.</span> 替换模式</h4>
 <div class="outline-text-4" id="text-1-1-5">
 <p>
 同插入模式，只不过内容会被直接替换
 </p>
 </div>
 </div>
-<div id="outline-container-org7ffe15b" class="outline-4">
-<h4 id="org7ffe15b"><span class="section-number-4">1.1.6.</span> 可视模式</h4>
+<div id="outline-container-org387eb6d" class="outline-4">
+<h4 id="org387eb6d"><span class="section-number-4">1.1.6.</span> 可视模式</h4>
 <div class="outline-text-4" id="text-1-1-6">
 <p>
 从原光标处起移动光标选定区域，选定的内容可以直接输入 <code>y</code> 复制，也可以直接输入
@@ -588,28 +588,28 @@ Vim分为多个模式，正常情况下Vim处于 <b>正常模式</b> 。在其�
 </div>
 </div>
 
-<div id="outline-container-org2da81e2" class="outline-3">
-<h3 id="org2da81e2"><span class="section-number-3">1.2.</span> 配置</h3>
+<div id="outline-container-orgc97c533" class="outline-3">
+<h3 id="orgc97c533"><span class="section-number-3">1.2.</span> 配置</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-orgc87ba99" class="outline-4">
-<h4 id="orgc87ba99"><span class="section-number-4">1.2.1.</span> vim</h4>
+<div id="outline-container-orgcb6f3de" class="outline-4">
+<h4 id="orgcb6f3de"><span class="section-number-4">1.2.1.</span> vim</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Vim的主配置文件可以是 <code>~/.vimrc</code> 也可以是 <code>~/.vim/vimrc</code> 。
 </p>
 </div>
 </div>
-<div id="outline-container-org5ff2cb3" class="outline-4">
-<h4 id="org5ff2cb3"><span class="section-number-4">1.2.2.</span> neovim</h4>
+<div id="outline-container-org9aa0a68" class="outline-4">
+<h4 id="org9aa0a68"><span class="section-number-4">1.2.2.</span> neovim</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Neovim的主配置文件是 <code>~/.config/nvim/init.vim</code> 。
 </p>
 </div>
 </div>
-<div id="outline-container-orgd45cbc3" class="outline-4">
-<h4 id="orgd45cbc3"><span class="section-number-4">1.2.3.</span> 配置目录结构</h4>
+<div id="outline-container-org43393bc" class="outline-4">
+<h4 id="org43393bc"><span class="section-number-4">1.2.3.</span> 配置目录结构</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 Vim/Neovim的配置文件夹结构基本一致。基本结构如下
@@ -647,14 +647,14 @@ plugin文件夹也用于存放配置文件，名称格式为 <code>任意前缀.
 </p>
 </div>
 </div>
-<div id="outline-container-org323b3e5" class="outline-4">
-<h4 id="org323b3e5"><span class="section-number-4">1.2.4.</span> 配置语法</h4>
+<div id="outline-container-org84eaabe" class="outline-4">
+<h4 id="org84eaabe"><span class="section-number-4">1.2.4.</span> 配置语法</h4>
 <div class="outline-text-4" id="text-1-2-4">
 </div>
 <ol class="org-ol">
-<li><a id="org930b4ed"></a>映射<br />
+<li><a id="org809fe8a"></a>映射<br />
 <ol class="org-ol">
-<li><a id="org8e0cb4f"></a>command<br />
+<li><a id="orgbe2b549"></a>command<br />
 <div class="outline-text-6" id="text-1-2-4-1-1">
 <p>
 command的用法：
@@ -671,7 +671,7 @@ command的用法：
 </p>
 </div>
 </li>
-<li><a id="org4e75e2b"></a>noremap<br />
+<li><a id="org8a5ff15"></a>noremap<br />
 <div class="outline-text-6" id="text-1-2-4-1-2">
 <p>
 noremap的用法（狭义）：
@@ -749,7 +749,7 @@ noremap的用法（狭义）：
 </div>
 </li>
 
-<li><a id="orgff77979"></a>inoremap<br />
+<li><a id="orgd7822de"></a>inoremap<br />
 <div class="outline-text-6" id="text-1-2-4-1-3">
 <p>
 inoremap的用法同noremap，只不过使用的模式是插入模式。也就是说插入模式下也可以有
@@ -773,7 +773,7 @@ inoremap （ （）&lt;ESC&gt;i
 </ol>
 </li>
 
-<li><a id="orge4cf7c7"></a>其他（十分有用的）功能<br />
+<li><a id="orgb2d9ca2"></a>其他（十分有用的）功能<br />
 <div class="outline-text-5" id="text-1-2-4-2">
 <p>
 实现文件退出后保存浏览进度：
@@ -821,8 +821,8 @@ endif
 </div>
 </div>
 
-<div id="outline-container-org8495cb6" class="outline-3">
-<h3 id="org8495cb6"><span class="section-number-3">1.3.</span> 我的配置</h3>
+<div id="outline-container-orgb20e40f" class="outline-3">
+<h3 id="orgb20e40f"><span class="section-number-3">1.3.</span> 我的配置</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 插件安装脚本：
@@ -1341,7 +1341,7 @@ autocmd Filetype c inoremap ]mi &lt;Esc&gt;$m1&lt;Esc&gt;?)\n{&lt;CR&gt;yyG?^#in
 <div id="postamble" class="status">
 <p class="date">Date: 2022-07-08 22:57</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-05-20 六 01:46</p>
+<p class="date">Created: 2023-05-26 五 22:40</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

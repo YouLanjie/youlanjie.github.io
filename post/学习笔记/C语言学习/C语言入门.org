@@ -1,7 +1,118 @@
 #+TITLE: C语言入门
-#+DATE: <2023-04-30 日 14:28>
-#+description: 一本C语言教程
+#+DATE: <2023-05-26 五 14:28>
+#+description: 自己尝试写的C语言教程（未完成）
 
 #+SETUPFILE: ../../../setup.setup
 
-* 前言
+* 配置开发环境
+C语言是一门古老的语言，用它编写的程序要使用编译器编译后才能够执行。所以我们需要
+做的事情就应该是：配置开发环境。要运行C语言程序，我们需要一个编译器。而且不只是
+需要编译器，我们还需要一个编辑器。基于不同系统的情况，配置开发环境的内容将会分为
+几段内容。
+** Windows
+在Windows下，重量级的开发环境有[[https://visualstudio.microsoft.com/zh-hans/#vs-section][Visual Studio]]
+系列中的Visual Studio 2022，而其中的 Visual Studio code则相对轻量，体积较小。我
+个人推荐使用VScode作为编辑器，毕竟如果 使用Visual Studio 2022作为IDE的话，安装太
+慢了（而且我也不会用）。而VScode作为一 个编辑器已经是足够了的。
+
+编译器我推荐使用GCC，而Windows平台的GCC就是[[https://sourceforge.net/projects/mingwbuilds/][mingw]]。安装教程建议看看[[https://zhuanlan.zhihu.com/p/76613134][这篇文章]]。
+
+注意：下载链接为我给出的mingw链接，mingw的官网样式有修改，链接有点难找。
+** Linux
+#+begin_quote
+在Linux下的开发效率理论上是要比windows高的，但是也没有必要为了开发直接装Linux，
+新手盲入坑会多到数不过来。建议使用虚拟机，Linux发行版新手建议使用Ubuntu，好上手
+#+end_quote
+相较于Windows平台下，Linux下的配置就简单多了。大多数Linux发行版的包管理器都提供
+GCC的安装。以Debian及其衍生发行版和Arch为例：
+
+#+begin_src shell
+  # Debian:
+  sudo apt install gcc
+#+end_src
+
+#+begin_src shell
+  # Arch:
+  sudo pacman -S gcc
+#+end_src
+
+在安装了GCC后，可以使用 =gcc 输入文件.c -o 输出文件= 为格式运行gcc（Windows下的
+命令格式相同）
+
+=gcc --help= 命令结果：
+#+begin_export html
+<details>
+  <summary>GCC帮助文档</summary>
+#+end_export
+#+begin_src text
+  用法：gcc [选项] 文件...
+  选项：
+    -pass-exit-codes         在某一阶段退出时返回其中最高的错误码。
+    --help                   显示此帮助说明。
+    --target-help            Display target specific command line options (including assembler and linker options).
+    --help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]。
+                             显示特定类型的命令行选项。
+   （使用‘-v --help’显示子进程的命令行参数）。
+    --version                显示编译器版本信息。
+    -dumpspecs               显示所有内建 spec 字符串。
+    -dumpversion             显示编译器的版本号。
+    -dumpmachine             显示编译器的目标处理器。
+    -foffload=<targets>      Specify offloading targets.
+    -print-search-dirs       显示编译器的搜索路径。
+    -print-libgcc-file-name  显示编译器伴随库的名称。
+    -print-file-name=<库>    显示 <库> 的完整路径。
+    -print-prog-name=<程序>  显示编译器组件 <程序> 的完整路径。
+    -print-multiarch         显示目标的标准 GNU 三元组（被用于库路径的一部分）。
+    -print-multi-directory   显示不同版本 libgcc 的根目录。
+    -print-multi-lib         显示命令行选项和多个版本库搜索路径间的映射。
+    -print-multi-os-directory 显示操作系统库的相对路径。
+    -print-sysroot           显示目标库目录。
+    -print-sysroot-headers-suffix 显示用于寻找头文件的 sysroot 后缀。
+    -Wa,<选项>               将逗号分隔的 <选项> 传递给汇编器。
+    -Wp,<选项>               将逗号分隔的 <选项> 传递给预处理器。
+    -Wl,<选项>               将逗号分隔的 <选项> 传递给链接器。
+    -Xassembler <参数>       将 <参数> 传递给汇编器。
+    -Xpreprocessor <参数>    将 <参数> 传递给预处理器。
+    -Xlinker <参数>          将 <参数> 传递给链接器。
+    -save-temps              不删除中间文件。
+    -save-temps=<参数>       不删除中间文件。
+    -no-canonical-prefixes   生成其他 gcc 组件的相对路径时不生成规范化的
+                             前缀。
+    -pipe                    使用管道代替临时文件。
+    -time                    为每个子进程计时。
+    -specs=<文件>            用 <文件> 的内容覆盖内建的 specs 文件。
+    -std=<标准>              假定输入源文件遵循给定的标准。
+    --sysroot=<目录>         将 <目录> 作为头文件和库文件的根目录。
+    -B <目录>                将 <目录> 添加到编译器的搜索路径中。
+    -v                       显示编译器调用的程序。
+    -###                     与 -v 类似，但选项被引号括住，并且不执行命令。
+    -E                       仅作预处理，不进行编译、汇编或链接。
+    -S                       编译到汇编语言，不进行汇编和链接，
+    -c                       编译、汇编到目标代码，不进行链接。
+    -o <文件>                输出到 <文件>。
+    -pie                     生成动态链接的位置无关可执行文件。
+    -shared                  生成一个共享库。
+    -x <语言>                指定其后输入文件的语言。
+                             允许的语言包括：c、c++、assembler、none
+                             ‘none’意味着恢复默认行为，即根据文件的扩展名猜测
+                             源文件的语言。
+
+  以 -g、-f、-m、-O、-W 或 --param 开头的选项将由 gcc 自动传递给其调用的
+   不同子进程。若要向这些进程传递其他选项，必须使用 -W<字母> 选项。
+
+  报告程序缺陷的步骤请参见：
+  <https://bugs.archlinux.org/>.
+#+end_src
+#+begin_export html
+</details>
+#+end_export
+
+除了编译器，我们还需要一个编辑器。这里我推荐使用VScode，因为它拥有非常强大的自动
+补全系统，并且支持Linux。
+
+Debian系的用户可以使用官网提供的deb包安装。下载页面链接如上面windows部分的链接相
+同，请自行回去找。
+
+而Arch的用户则需要使用AUR的 =visual-studio-code-bin= 包，使用一个AUR管理器下载安
+装。
+* 基本语法
