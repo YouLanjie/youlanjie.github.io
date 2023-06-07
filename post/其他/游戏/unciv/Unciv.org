@@ -1,0 +1,49 @@
+#+TITLE: Unciv——一款模拟文明游戏
+#+DATE: <2023-06-07 三 11:58>
+#+description: 一款仿照文明5的文明模拟策略游戏
+
+#+setupfile: ../../../../setup.setup
+
+* Unciv简介
+** 简介
+Unciv是一款仿照文明5的，用Java编写的，对模组有好的，易于运行的文明模拟游戏。而其
+[[https://github.com/yairm210/Unciv][官网]]的介绍为：
+#+begin_quote
+An open source, mod-friendly Android and Desktop remake of Civ V, made with
+LibGDX
+#+end_quote
+你或许会问：“一个仿制文明5制作的游戏，好玩吗？”实际上，在游戏性上，他是绝对不
+输文明5的，有着相当完善的功能和玩法。同时，在文章编写时，游戏的开发仍旧非常活跃，
+能够“肉眼可见”地看见功能的加入和完善——对的，尽管这是一款英文游戏，但是有着很高
+的翻译完成度，足见玩家的热情。
+** 下载&安装
+它的官网（Github）已经给出了完整的下载渠道，基于Java的特性，它基本支持全平台。抛
+开Java依赖的大小后，其本体的大小还是非常小的。尽管在官网上Falthub、windows、
+android三个平台的安装包大小如下： =109M= =85M= =19M=[fn:1]。
+
+值得注意的是，Android平台上建议使用F-droid下载，因为谷歌没有魔法根本连不上。而
+F-droid的服务器在外国，所以下载速度会很慢。如果希望能够持续快速更新的话，可以尝
+试下载它的客户端更换使用清华源下载。
+
+还有Linux平台（针对Arch用户），Unciv在archlinuxcn源上有已经打包好的软件包可以直
+接安装，不用去下载flathub的版本，并且更新频率较高。
+*** 下载渠道链接表（备用）
+| 系统          | 网站链接    |
+|---------------+-------------|
+| Windows       | [[https://yairm210.itch.io/unciv][itch.io]]     |
+| Android       | [[https://play.google.com/store/apps/details?id=com.unciv.app][Google Play]] |
+|               | [[https://f-droid.org/en/packages/com.unciv.app/][F-droid]]     |
+| Linux/ +Mac?+ | [[https://flathub.org/apps/details/io.github.yairm210.unciv][Flathub]]     |
+
+* 开始玩Unciv！
+实际上Unciv内置有较为完善的新手引导教程，不懂得也可以去内置的百科里面翻翻，我这
+种菜鸡也不好意思在这里班门弄斧。不过我建议，难度先玩移民，慢慢再提上去，要不然轻
+轻松松实现《Unciv从入门到退坑》。（注：难度是自上而下增加的，上面简单下面难），
+其他的设置保持默认就好。不建议开太大的地图，否则会很卡，文明数量也不建议设置太多。
+
+不过要提一点：建议选择特定的文明玩而非随机，不同的文明是有属性加成的。例如说阿拉
+伯会增加石油产量之类的。
+* Footnotes
+
+[fn:1] 实际上我觉得这里挺有趣的，Android本身就是由Java编写的，所以约等于已经有了
+依赖，不用再装Java环境，所以很小
