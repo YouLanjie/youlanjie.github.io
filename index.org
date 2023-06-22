@@ -4,11 +4,11 @@
 
 #+setupfile: ./setup.setup
 
-* 文章（按内容分类）
-#+include: ./src/post.org
-这里放点东西来垫下底。
 * 文章（按时间线排序）
 #+include: ./src/post2.org
+这里放点东西来垫下底。
+* 文章（按内容分类）
+#+include: ./src/post.org
 这里放点东西来垫下底。
 * 关于
 ** 我想说的

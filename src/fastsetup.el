@@ -17,5 +17,6 @@
 
 ;; Org html代码高亮
 (require 'htmlize)
+
 (org-html-export-to-html)
 (kill-emacs)
