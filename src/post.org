@@ -1,3 +1,5 @@
+#+TITLE: Blogs - 文章
+#+setupfile: ../setup.setup
 - 关于建站
   - [[../post/关于建站/使用github.io建立自己的博客.html][使用github.io建立自己的博客 - hexo+hugo+Emacs Org]]
     分别使用Hexo、Hugo、Emacs Org建立自己的博客。
@@ -21,20 +23,23 @@
       使用ANSI转义字符实现终端输出字符带有特殊效果
     - [[../post/学习笔记/C语言学习/C语言入门.html][C语言入门]]
       一本C语言教程
+  - 计算机学习
+    - [[../post/学习笔记/计算机学习/从零开始认识计算机.org][从零开始认识计算机]]
+      内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记
 - 一些工具
   - [[../post/一些工具/我用的小工具盘点.html][我用的小工具盘点]]
     记录一些Linux中有趣但不一定常用的软件
   - Emacs
-    - [[../post/一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
-      我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
     - [[../post/一些工具/Emacs/从vim转移到emacs.html][从vim转移到emacs]]
       单纯的口水文
+    - [[../post/一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
+      我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
   - Vim
     - [[../post/一些工具/Vim/使用Vim.html][使用Vim]]
 - ArchLinux学习系列
-  - [[../post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
-    如何使用archiso工具打造一个自定义的U盘上的临时Live系统
   - [[../post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
     记录我个人安装archlinux的过程
   - [[../post/ArchLinux学习系列/ArchLinux的配置.html][ArchLinux的配置]]
     记录我个人的archlinux软件配置
+  - [[../post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
+    如何使用archiso工具打造一个自定义的U盘上的临时Live系统

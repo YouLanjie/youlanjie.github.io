@@ -3,15 +3,198 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-05-20 六 01:46 -->
+<!-- 2023-07-07 五 19:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>语文笔记</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="内容来自B站的视频，笔记是我自己写的" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
-<script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
 </head>
 <body>
@@ -19,99 +202,111 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
 <h1 class="title">语文笔记</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5ba6d24">1. 写作手法（表达技巧）</a>
+<li><a href="#orgca4dc1a">1. 写作手法（表达技巧）</a>
 <ul>
-<li><a href="#org89d0ccc">1.1. 修辞手法（10个）</a>
+<li><a href="#orgf342507">1.1. 修辞手法（10个）</a>
 <ul>
-<li><a href="#org5f6124a">1.1.1. 种类/类型</a></li>
-<li><a href="#orge6148cf">1.1.2. 小结/速查表</a></li>
+<li><a href="#org63651ab">1.1.1. 种类/类型</a></li>
+<li><a href="#org674ea6b">1.1.2. 小结/速查表</a></li>
 </ul>
 </li>
-<li><a href="#orgd21a0e6">1.2. 表达方式（5个）</a>
+<li><a href="#org08cf469">1.2. 表达方式（5个）</a>
 <ul>
-<li><a href="#orgd8f86f6">1.2.1. 拆分理解</a></li>
-<li><a href="#orge8bfa38">1.2.2. 种类/类型</a></li>
+<li><a href="#orgbe973a0">1.2.1. 拆分理解</a></li>
+<li><a href="#orgba368cf">1.2.2. 种类/类型</a></li>
 </ul>
 </li>
-<li><a href="#org2acc627">1.3. 表现手法（15个）</a>
+<li><a href="#orga33ebdc">1.3. 表现手法（15个）</a>
 <ul>
-<li><a href="#org4307ac3">1.3.1. 定义</a></li>
-<li><a href="#org0f360ec">1.3.2. 做题思维</a></li>
-<li><a href="#orgb2325f0">1.3.3. 种类</a></li>
-<li><a href="#orga359be0">1.3.4. 总结</a></li>
+<li><a href="#org91b169e">1.3.1. 定义</a></li>
+<li><a href="#org3dedd00">1.3.2. 做题思维</a></li>
+<li><a href="#org5632fb9">1.3.3. 种类</a></li>
+<li><a href="#org6b5915a">1.3.4. 总结</a></li>
 </ul>
 </li>
-<li><a href="#org6e7826e">1.4. 结构手法（5个）</a>
+<li><a href="#org309a0c9">1.4. 结构手法（5个）</a>
 <ul>
-<li><a href="#orgf7d6b1e">1.4.1. 种类</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org95f5e4b">2. 理解文章/基本思想</a>
-<ul>
-<li><a href="#orga210faa">2.1. 文章式转写（看看就好）</a>
-<ul>
-<li><a href="#orgba84922">2.1.1. 理解文章（文章式转写）</a></li>
-<li><a href="#org0e4f229">2.1.2. 主角思想</a></li>
-</ul>
-</li>
-<li><a href="#orgf0eeb49">2.2. 笔记式</a></li>
-</ul>
-</li>
-<li><a href="#org1342258">3. 解题方法</a>
-<ul>
-<li><a href="#org9190d83">3.1. 做题顺序</a></li>
-<li><a href="#org21c0d88">3.2. 时间分配</a></li>
-<li><a href="#org89ebd51">3.3. 语境原则</a></li>
-</ul>
-</li>
-<li><a href="#orgf880e1d">4. 牢不可破的“三角形”</a></li>
-<li><a href="#org3083276">5. 答题技巧</a>
-<ul>
-<li><a href="#org9b7c527">5.1. 概括</a>
-<ul>
-<li><a href="#orgc942e84">5.1.1. 分类</a></li>
-<li><a href="#orge674749">5.1.2. 方法</a></li>
-<li><a href="#org26fac2d">5.1.3. 文章的两个基本结构</a></li>
+<li><a href="#org88c9e51">1.4.1. 种类</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org6e38eb1">6. 其他阅读版本</a></li>
-<li><a href="#org7c0fc3d">7. Reference</a>
+<li><a href="#org5009d13">2. 理解文章/基本思想</a>
 <ul>
-<li><a href="#org65dfbd5">7.1. B站Up</a></li>
-<li><a href="#org7dc7bfb">7.2. 部分内容参考视频链接</a></li>
+<li><a href="#org397f081">2.1. 文章式转写（看看就好）</a>
+<ul>
+<li><a href="#org5ae4c8e">2.1.1. 理解文章（文章式转写）</a></li>
+<li><a href="#org1888b04">2.1.2. 主角思想</a></li>
+</ul>
+</li>
+<li><a href="#orgbc168b3">2.2. 笔记式</a></li>
+</ul>
+</li>
+<li><a href="#orga376bf3">3. 解题方法</a>
+<ul>
+<li><a href="#org60e1ae5">3.1. 做题顺序</a></li>
+<li><a href="#org0030748">3.2. 时间分配</a></li>
+<li><a href="#orgfc0c956">3.3. 语境原则</a></li>
+</ul>
+</li>
+<li><a href="#org97795e8">4. 牢不可破的“三角形”</a></li>
+<li><a href="#orgc33d6a8">5. 答题技巧</a>
+<ul>
+<li><a href="#org2a08ed9">5.1. 概括</a>
+<ul>
+<li><a href="#org7445f58">5.1.1. 分类</a></li>
+<li><a href="#orgedd9ea1">5.1.2. 方法</a></li>
+<li><a href="#orgf642321">5.1.3. 文章的两个基本结构</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7b5a3b2">6. 其他阅读版本</a></li>
+<li><a href="#org4961ec6">7. Reference</a>
+<ul>
+<li><a href="#org949591c">7.1. B站Up</a></li>
+<li><a href="#org4c4c68c">7.2. 部分内容参考视频链接</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5ba6d24" class="outline-2">
-<h2 id="org5ba6d24"><span class="section-number-2">1.</span> 写作手法（表达技巧）</h2>
+<div id="outline-container-orgca4dc1a" class="outline-2">
+<h2 id="orgca4dc1a"><span class="section-number-2">1.</span> 写作手法（表达技巧）</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org89d0ccc" class="outline-3">
-<h3 id="org89d0ccc"><span class="section-number-3">1.1.</span> 修辞手法（10个）</h3>
+<div id="outline-container-orgf342507" class="outline-3">
+<h3 id="orgf342507"><span class="section-number-3">1.1.</span> 修辞手法（10个）</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 一共有63大类，79小类
 </p>
 </div>
-<div id="outline-container-org5f6124a" class="outline-4">
-<h4 id="org5f6124a"><span class="section-number-4">1.1.1.</span> 种类/类型</h4>
+<div id="outline-container-org63651ab" class="outline-4">
+<h4 id="org63651ab"><span class="section-number-4">1.1.1.</span> 种类/类型</h4>
 <div class="outline-text-4" id="text-1-1-1">
 </div>
 <ol class="org-ol">
-<li><a id="org3024e56"></a>比喻<br />
+<li><a id="orgc8b578f"></a>比喻<br />
 <div class="outline-text-5" id="text-1-1-1-1">
 <ul class="org-ul">
 <li>定义： 把XX比作XX，让句子、描写的对象更加 <span class="underline">生动形象/活泼具体</span></li>
@@ -119,14 +314,14 @@
 </ul>
 </div>
 </li>
-<li><a id="org4f16a45"></a>拟人<br />
+<li><a id="org5c9d9f2"></a>拟人<br />
 <div class="outline-text-5" id="text-1-1-1-2">
 <ul class="org-ul">
 <li>定义： 把XX拟人化/赋予XX人类的动作、情感，让描写对象 <span class="underline">生动形象具体</span></li>
 </ul>
 </div>
 </li>
-<li><a id="org3f07a7f"></a>夸张<br />
+<li><a id="org0447f6e"></a>夸张<br />
 <div class="outline-text-5" id="text-1-1-1-3">
 <ul class="org-ul">
 <li>作用： <b><span class="underline">突出,强调</span> 作用</b></li>
@@ -140,7 +335,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org336d0de"></a>排比（３个以上）<br />
+<li><a id="orgd817fb5"></a>排比（３个以上）<br />
 <div class="outline-text-5" id="text-1-1-1-4">
 <ul class="org-ul">
 <li>特点： 内容相关，结构相同或相近</li>
@@ -148,7 +343,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org3bad6c1"></a>反复（２个以上）<br />
+<li><a id="orgcf76047"></a>反复（２个以上）<br />
 <div class="outline-text-5" id="text-1-1-1-5">
 <ul class="org-ul">
 <li>定义： 一个句子、词语反复出现（不同于排比，但可以与排比结合来用）</li>
@@ -156,7 +351,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org25216e7"></a>对偶<br />
+<li><a id="org3475e5f"></a>对偶<br />
 <div class="outline-text-5" id="text-1-1-1-6">
 <ul class="org-ul">
 <li>定义： 字数相等， <i>结构相同，意义对称</i> 的一对 <b>短语</b> 或 <b>句子</b> ，表达两个意思相近或相反的修辞方式</li>
@@ -164,7 +359,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org29c6990"></a>反问<br />
+<li><a id="orgc0b7759"></a>反问<br />
 <div class="outline-text-5" id="text-1-1-1-7">
 <ul class="org-ul">
 <li>定义： 借助疑问句传达确定信息</li>
@@ -176,7 +371,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org5f7797b"></a>设问<br />
+<li><a id="org7131d4a"></a>设问<br />
 <div class="outline-text-5" id="text-1-1-1-8">
 <ul class="org-ul">
 <li>本质： 自问自答</li>
@@ -184,7 +379,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orgfe5a911"></a>反语<br />
+<li><a id="org55ac147"></a>反语<br />
 <div class="outline-text-5" id="text-1-1-1-9">
 <ul class="org-ul">
 <li>定义： 正话反说（褒词贬用）或反话正说</li>
@@ -192,7 +387,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orga25cc71"></a>引用<br />
+<li><a id="org0558cf1"></a>引用<br />
 <div class="outline-text-5" id="text-1-1-1-10">
 <ul class="org-ul">
 <li>定义： 说话或写作中引用现成的话</li>
@@ -200,7 +395,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org93024a5"></a>借代<br />
+<li><a id="org0b3df93"></a>借代<br />
 <div class="outline-text-5" id="text-1-1-1-11">
 <ul class="org-ul">
 <li>定义： 用同对象相关的东西代替对象（称呼），如结构部分、颜色特征</li>
@@ -208,7 +403,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orga27c762"></a>互文<br />
+<li><a id="orgd29b09a"></a>互文<br />
 <div class="outline-text-5" id="text-1-1-1-12">
 <ul class="org-ul">
 <li>定义： 属于一句（或短语）的意思写入两句话，解释时要上下句意思互补</li>
@@ -225,8 +420,8 @@
 </li>
 </ol>
 </div>
-<div id="outline-container-orge6148cf" class="outline-4">
-<h4 id="orge6148cf"><span class="section-number-4">1.1.2.</span> 小结/速查表</h4>
+<div id="outline-container-org674ea6b" class="outline-4">
+<h4 id="org674ea6b"><span class="section-number-4">1.1.2.</span> 小结/速查表</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -354,12 +549,12 @@
 </div>
 </div>
 
-<div id="outline-container-orgd21a0e6" class="outline-3">
-<h3 id="orgd21a0e6"><span class="section-number-3">1.2.</span> 表达方式（5个）</h3>
+<div id="outline-container-org08cf469" class="outline-3">
+<h3 id="org08cf469"><span class="section-number-3">1.2.</span> 表达方式（5个）</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-orgd8f86f6" class="outline-4">
-<h4 id="orgd8f86f6"><span class="section-number-4">1.2.1.</span> 拆分理解</h4>
+<div id="outline-container-orgbe973a0" class="outline-4">
+<h4 id="orgbe973a0"><span class="section-number-4">1.2.1.</span> 拆分理解</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <ul class="org-ul">
 <li>表达： （用文字）说话</li>
@@ -367,12 +562,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orge8bfa38" class="outline-4">
-<h4 id="orge8bfa38"><span class="section-number-4">1.2.2.</span> 种类/类型</h4>
+<div id="outline-container-orgba368cf" class="outline-4">
+<h4 id="orgba368cf"><span class="section-number-4">1.2.2.</span> 种类/类型</h4>
 <div class="outline-text-4" id="text-1-2-2">
 </div>
 <ol class="org-ol">
-<li><a id="org346ee1b"></a>记叙<br />
+<li><a id="org8e12191"></a>记叙<br />
 <div class="outline-text-5" id="text-1-2-2-1">
 <ul class="org-ul">
 <li>代表： 记叙文</li>
@@ -415,7 +610,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org3e6f8d9"></a>描写<br />
+<li><a id="org87b3b44"></a>描写<br />
 <div class="outline-text-5" id="text-1-2-2-2">
 <ul class="org-ul">
 <li>代表： 小说</li>
@@ -456,7 +651,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orgaf06a85"></a>抒情<br />
+<li><a id="org5135d7a"></a>抒情<br />
 <div class="outline-text-5" id="text-1-2-2-3">
 <ul class="org-ul">
 <li>代表： 散文</li>
@@ -494,7 +689,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org3a68f37"></a>说明<br />
+<li><a id="org7480c52"></a>说明<br />
 <div class="outline-text-5" id="text-1-2-2-4">
 <ul class="org-ul">
 <li>代表： 说明文</li>
@@ -524,7 +719,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org9746aa7"></a>议论<br />
+<li><a id="org594eee9"></a>议论<br />
 <div class="outline-text-5" id="text-1-2-2-5">
 <ul class="org-ul">
 <li>代表： 议论文</li>
@@ -542,12 +737,12 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org2acc627" class="outline-3">
-<h3 id="org2acc627"><span class="section-number-3">1.3.</span> 表现手法（15个）</h3>
+<div id="outline-container-orga33ebdc" class="outline-3">
+<h3 id="orga33ebdc"><span class="section-number-3">1.3.</span> 表现手法（15个）</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-org4307ac3" class="outline-4">
-<h4 id="org4307ac3"><span class="section-number-4">1.3.1.</span> 定义</h4>
+<div id="outline-container-org91b169e" class="outline-4">
+<h4 id="org91b169e"><span class="section-number-4">1.3.1.</span> 定义</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <ul class="org-ul">
 <li>广义： 约等于 <span class="underline">写作手法/表达技巧</span></li>
@@ -555,20 +750,20 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org0f360ec" class="outline-4">
-<h4 id="org0f360ec"><span class="section-number-4">1.3.2.</span> 做题思维</h4>
+<div id="outline-container-org3dedd00" class="outline-4">
+<h4 id="org3dedd00"><span class="section-number-4">1.3.2.</span> 做题思维</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 看到 <span class="underline">“XXX有什么作用”</span> 就要联想到 <span class="underline">表现手法</span>
 </p>
 </div>
 </div>
-<div id="outline-container-orgb2325f0" class="outline-4">
-<h4 id="orgb2325f0"><span class="section-number-4">1.3.3.</span> 种类</h4>
+<div id="outline-container-org5632fb9" class="outline-4">
+<h4 id="org5632fb9"><span class="section-number-4">1.3.3.</span> 种类</h4>
 <div class="outline-text-4" id="text-1-3-3">
 </div>
 <ol class="org-ol">
-<li><a id="org7430a1a"></a>对比<br />
+<li><a id="org3f40268"></a>对比<br />
 <div class="outline-text-5" id="text-1-3-3-1">
 <ul class="org-ul">
 <li>起突出强调作用</li>
@@ -578,7 +773,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orge1565fb"></a>衬托<br />
+<li><a id="org004ff24"></a>衬托<br />
 <div class="outline-text-5" id="text-1-3-3-2">
 <ul class="org-ul">
 <li>为了 <span class="underline">突出主要事物</span> ，用类似的 <span class="underline">次要</span> 事物或
@@ -588,7 +783,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orgaf9e009"></a>铺垫<br />
+<li><a id="orgb34f1b5"></a>铺垫<br />
 <div class="outline-text-5" id="text-1-3-3-3">
 <ul class="org-ul">
 <li>渲染气氛，让读者产生期待、盼望的急迫心情，增强作品的吸引力</li>
@@ -599,7 +794,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orga07ec75"></a>伏笔<br />
+<li><a id="orgc278069"></a>伏笔<br />
 <div class="outline-text-5" id="text-1-3-3-4">
 <ul class="org-ul">
 <li>交代含蓄，使文章 <span class="underline">结构严密、紧凑</span> ，让读者看到下文时，
@@ -611,7 +806,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orge19059a"></a>象征<br />
+<li><a id="org0366735"></a>象征<br />
 <div class="outline-text-5" id="text-1-3-3-5">
 <ul class="org-ul">
 <li>定义：
@@ -622,7 +817,7 @@
 </ul>
 </div>
 </li>
-<li><a id="org8e04022"></a>托物言志/借物抒情<br />
+<li><a id="org2e3bf79"></a>托物言志/借物抒情<br />
 <div class="outline-text-5" id="text-1-3-3-6">
 <ul class="org-ul">
 <li>定义：
@@ -638,7 +833,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orga6fbbd5"></a>欲扬先抑(先抑后扬) &amp; 欲抑先扬(先扬后抑)<br />
+<li><a id="org71437d8"></a>欲扬先抑(先抑后扬) &amp; 欲抑先扬(先扬后抑)<br />
 <div class="outline-text-5" id="text-1-3-3-7">
 <ul class="org-ul">
 <li>定义：一种人物描写技巧</li>
@@ -647,7 +842,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orgf40f933"></a>照应<br />
+<li><a id="org1c68d41"></a>照应<br />
 <div class="outline-text-5" id="text-1-3-3-8">
 <ul class="org-ul">
 <li>定义：前后意思相近或者相反的两个短语句子或者段落称为照应</li>
@@ -655,7 +850,7 @@
 </ul>
 </div>
 </li>
-<li><a id="orgb66a66a"></a>设置悬念<br />
+<li><a id="org0af2bb0"></a>设置悬念<br />
 <div class="outline-text-5" id="text-1-3-3-9">
 <ul class="org-ul">
 <li>定义：使读者 <span class="underline">产生好奇心</span> ，迫切需要知道后面的内容就是悬念</li>
@@ -663,14 +858,14 @@
 </ul>
 </div>
 </li>
-<li><a id="org7775a31"></a>以小见大<br />
+<li><a id="orga49b097"></a>以小见大<br />
 <div class="outline-text-5" id="text-1-3-3-10">
 <ul class="org-ul">
 <li>定义：通过一件小事，反映出一个大道理</li>
 </ul>
 </div>
 </li>
-<li><a id="org85aad2a"></a>点面结合<br />
+<li><a id="orgfb5e1f1"></a>点面结合<br />
 <div class="outline-text-5" id="text-1-3-3-11">
 <ul class="org-ul">
 <li>定义：对某个实物或多个事物的详细描写（点）和
@@ -678,21 +873,21 @@
 </ul>
 </div>
 </li>
-<li><a id="orgfc59eef"></a>虚实结合<br />
+<li><a id="org1160586"></a>虚实结合<br />
 <div class="outline-text-5" id="text-1-3-3-12">
 <ul class="org-ul">
 <li>定义：存在(实)的和不存在(虚)的都写出来</li>
 </ul>
 </div>
 </li>
-<li><a id="org87a8bf6"></a>联想<br />
+<li><a id="org1ab60ab"></a>联想<br />
 <div class="outline-text-5" id="text-1-3-3-13">
 <ul class="org-ul">
 <li>定义：联想是因一事务而想起与之有关事物的思想活动</li>
 </ul>
 </div>
 </li>
-<li><a id="org67a2a21"></a>想象<br />
+<li><a id="orgeae4e22"></a>想象<br />
 <div class="outline-text-5" id="text-1-3-3-14">
 <ul class="org-ul">
 <li>定义：设想（天马行空）</li>
@@ -701,8 +896,8 @@
 </li>
 </ol>
 </div>
-<div id="outline-container-orga359be0" class="outline-4">
-<h4 id="orga359be0"><span class="section-number-4">1.3.4.</span> 总结</h4>
+<div id="outline-container-org6b5915a" class="outline-4">
+<h4 id="org6b5915a"><span class="section-number-4">1.3.4.</span> 总结</h4>
 <div class="outline-text-4" id="text-1-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -831,33 +1026,33 @@
 </div>
 </div>
 
-<div id="outline-container-org6e7826e" class="outline-3">
-<h3 id="org6e7826e"><span class="section-number-3">1.4.</span> 结构手法（5个）</h3>
+<div id="outline-container-org309a0c9" class="outline-3">
+<h3 id="org309a0c9"><span class="section-number-3">1.4.</span> 结构手法（5个）</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-orgf7d6b1e" class="outline-4">
-<h4 id="orgf7d6b1e"><span class="section-number-4">1.4.1.</span> 种类</h4>
+<div id="outline-container-org88c9e51" class="outline-4">
+<h4 id="org88c9e51"><span class="section-number-4">1.4.1.</span> 种类</h4>
 <div class="outline-text-4" id="text-1-4-1">
 </div>
 <ol class="org-ol">
-<li><a id="orgc3acf74"></a>首段<br />
+<li><a id="org697219f"></a>首段<br />
 <ol class="org-ol">
-<li><a id="orgc969423"></a>引出下文<br /></li>
-<li><a id="org094541d"></a>总领全文<br /></li>
+<li><a id="orgb578ca5"></a>引出下文<br /></li>
+<li><a id="orgc8dbebb"></a>总领全文<br /></li>
 </ol>
 </li>
-<li><a id="org4e49d33"></a>中间<br />
+<li><a id="org6957ee9"></a>中间<br />
 <ol class="org-ol">
-<li><a id="orgb03c0f4"></a>过渡<br /></li>
-<li><a id="org1226f6d"></a>承上启下<br /></li>
+<li><a id="orgb606073"></a>过渡<br /></li>
+<li><a id="orgd0815f1"></a>承上启下<br /></li>
 </ol>
 </li>
-<li><a id="org05e878e"></a>最后段<br />
+<li><a id="org680dde4"></a>最后段<br />
 <ol class="org-ol">
-<li><a id="orgce21f87"></a>总结全文<br /></li>
+<li><a id="org99188c2"></a>总结全文<br /></li>
 </ol>
 </li>
-<li><a id="orga727acf"></a>线索<br />
+<li><a id="org53d251d"></a>线索<br />
 <div class="outline-text-5" id="text-1-4-1-4">
 <ul class="org-ul">
 <li>定义：事情可寻的端绪、路径，或贯穿于整篇文章的思路，脉络等。
@@ -880,20 +1075,20 @@
 </div>
 </div>
 
-<div id="outline-container-org95f5e4b" class="outline-2">
-<h2 id="org95f5e4b"><span class="section-number-2">2.</span> 理解文章/基本思想</h2>
+<div id="outline-container-org5009d13" class="outline-2">
+<h2 id="org5009d13"><span class="section-number-2">2.</span> 理解文章/基本思想</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orga210faa" class="outline-3">
-<h3 id="orga210faa"><span class="section-number-3">2.1.</span> 文章式转写（看看就好）</h3>
+<div id="outline-container-org397f081" class="outline-3">
+<h3 id="org397f081"><span class="section-number-3">2.1.</span> 文章式转写（看看就好）</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 我一开始这么写主要还是因为这段内容是讲述思想的，笔记式比较抽象，难理解，建议看原
 视频，而笔记部分则当做主要内容或者纲要或者是复习资料就好。
 </p>
 </div>
-<div id="outline-container-orgba84922" class="outline-4">
-<h4 id="orgba84922"><span class="section-number-4">2.1.1.</span> 理解文章（文章式转写）</h4>
+<div id="outline-container-org5ae4c8e" class="outline-4">
+<h4 id="org5ae4c8e"><span class="section-number-4">2.1.1.</span> 理解文章（文章式转写）</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 先引出一个问题：怎样才算是读懂了文章？
@@ -935,8 +1130,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org0e4f229" class="outline-4">
-<h4 id="org0e4f229"><span class="section-number-4">2.1.2.</span> 主角思想</h4>
+<div id="outline-container-org1888b04" class="outline-4">
+<h4 id="org1888b04"><span class="section-number-4">2.1.2.</span> 主角思想</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 有了上面的理解还不够，我们还需要知道怎样找到切入点，主角思想那就至关重要。
@@ -949,8 +1144,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgf0eeb49" class="outline-3">
-<h3 id="orgf0eeb49"><span class="section-number-3">2.2.</span> 笔记式</h3>
+<div id="outline-container-orgbc168b3" class="outline-3">
+<h3 id="orgbc168b3"><span class="section-number-3">2.2.</span> 笔记式</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>文章的核心
@@ -977,12 +1172,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org1342258" class="outline-2">
-<h2 id="org1342258"><span class="section-number-2">3.</span> 解题方法</h2>
+<div id="outline-container-orga376bf3" class="outline-2">
+<h2 id="orga376bf3"><span class="section-number-2">3.</span> 解题方法</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org9190d83" class="outline-3">
-<h3 id="org9190d83"><span class="section-number-3">3.1.</span> 做题顺序</h3>
+<div id="outline-container-org60e1ae5" class="outline-3">
+<h3 id="org60e1ae5"><span class="section-number-3">3.1.</span> 做题顺序</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 建议时间15min一篇，不过刚开始尝试时时间长是没有问题的。
@@ -1013,16 +1208,16 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org21c0d88" class="outline-3">
-<h3 id="org21c0d88"><span class="section-number-3">3.2.</span> 时间分配</h3>
+<div id="outline-container-org0030748" class="outline-3">
+<h3 id="org0030748"><span class="section-number-3">3.2.</span> 时间分配</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 详见上文斜体字，有具体的细分项。
 </p>
 </div>
 </div>
-<div id="outline-container-org89ebd51" class="outline-3">
-<h3 id="org89ebd51"><span class="section-number-3">3.3.</span> 语境原则</h3>
+<div id="outline-container-orgfc0c956" class="outline-3">
+<h3 id="orgfc0c956"><span class="section-number-3">3.3.</span> 语境原则</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 坚持“三项原则”：
@@ -1042,24 +1237,24 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgf880e1d" class="outline-2">
-<h2 id="orgf880e1d"><span class="section-number-2">4.</span> 牢不可破的“三角形”</h2>
+<div id="outline-container-org97795e8" class="outline-2">
+<h2 id="org97795e8"><span class="section-number-2">4.</span> 牢不可破的“三角形”</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 即 <i>写作手法 基本思想 解题方法</i> 三大点，极为重要。
 </p>
 </div>
 </div>
-<div id="outline-container-org3083276" class="outline-2">
-<h2 id="org3083276"><span class="section-number-2">5.</span> 答题技巧</h2>
+<div id="outline-container-orgc33d6a8" class="outline-2">
+<h2 id="orgc33d6a8"><span class="section-number-2">5.</span> 答题技巧</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org9b7c527" class="outline-3">
-<h3 id="org9b7c527"><span class="section-number-3">5.1.</span> 概括</h3>
+<div id="outline-container-org2a08ed9" class="outline-3">
+<h3 id="org2a08ed9"><span class="section-number-3">5.1.</span> 概括</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-orgc942e84" class="outline-4">
-<h4 id="orgc942e84"><span class="section-number-4">5.1.1.</span> 分类</h4>
+<div id="outline-container-org7445f58" class="outline-4">
+<h4 id="org7445f58"><span class="section-number-4">5.1.1.</span> 分类</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <ol class="org-ol">
 <li>一般概括
@@ -1074,8 +1269,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orge674749" class="outline-4">
-<h4 id="orge674749"><span class="section-number-4">5.1.2.</span> 方法</h4>
+<div id="outline-container-orgedd9ea1" class="outline-4">
+<h4 id="orgedd9ea1"><span class="section-number-4">5.1.2.</span> 方法</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <ul class="org-ul">
 <li>核心：文章主要人物+发生在主要人物上的主要事件（六要素归纳法）</li>
@@ -1083,8 +1278,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org26fac2d" class="outline-4">
-<h4 id="org26fac2d"><span class="section-number-4">5.1.3.</span> 文章的两个基本结构</h4>
+<div id="outline-container-orgf642321" class="outline-4">
+<h4 id="orgf642321"><span class="section-number-4">5.1.3.</span> 文章的两个基本结构</h4>
 <div class="outline-text-4" id="text-5-1-3">
 <ol class="org-ol">
 <li>递进式（一件事）<br />
@@ -1096,8 +1291,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org6e38eb1" class="outline-2">
-<h2 id="org6e38eb1"><span class="section-number-2">6.</span> 其他阅读版本</h2>
+<div id="outline-container-org7b5a3b2" class="outline-2">
+<h2 id="org7b5a3b2"><span class="section-number-2">6.</span> 其他阅读版本</h2>
 <div class="outline-text-2" id="text-6">
 <blockquote>
 <p>
@@ -1108,12 +1303,12 @@
 </div>
 </div>
 
-<div id="outline-container-org7c0fc3d" class="outline-2">
-<h2 id="org7c0fc3d"><span class="section-number-2">7.</span> Reference</h2>
+<div id="outline-container-org4961ec6" class="outline-2">
+<h2 id="org4961ec6"><span class="section-number-2">7.</span> Reference</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org65dfbd5" class="outline-3">
-<h3 id="org65dfbd5"><span class="section-number-3">7.1.</span> B站Up</h3>
+<div id="outline-container-org949591c" class="outline-3">
+<h3 id="org949591c"><span class="section-number-3">7.1.</span> B站Up</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 关于语文的阅读理解教学视频笔记,
@@ -1121,8 +1316,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org7dc7bfb" class="outline-3">
-<h3 id="org7dc7bfb"><span class="section-number-3">7.2.</span> 部分内容参考视频链接</h3>
+<div id="outline-container-org4c4c68c" class="outline-3">
+<h3 id="org4c4c68c"><span class="section-number-3">7.2.</span> 部分内容参考视频链接</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 视频链接：<br />
@@ -1153,7 +1348,7 @@
 <div id="postamble" class="status">
 <p class="date">Date: 2023-01-08 08:17</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-05-20 六 01:46</p>
+<p class="date">Created: 2023-07-07 五 19:54</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

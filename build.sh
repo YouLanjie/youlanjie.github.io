@@ -85,21 +85,25 @@ update_file() {
 	emacs -Q -nw ./src/fastsetup.el "$1" --eval "(eval-buffer \"fastsetup.el\")"
 }
 
+check_time() {
+	if [[ (! -f $2) || ($1 -nt $2) ]] {
+		_msg_info "Export '$1' ..."
+		update_file $1
+	}
+}
+
 update() {
 	#update_file index.org
 	#echo $file_list
 	for name (post/**/*.org) {
 		out=$(echo $name|sed "s/\\.org$/.html/")
-		if [[ (! -f $out) || ($name -nt $out) ]] {
-			_msg_info "Export '$name' ..."
-			update_file $name
-		}
+		check_time "$name" "$out"
 	}
 }
 
 build() {
 	_msg_info "清空源文件"
-	cat /dev/null > src/post2.org
+	echo "#+TITLE: TimeLine\n#+setupfile: ../setup.setup" > src/post2.org
 	_msg_info "构建列表中"
 	_msg_info "获取文件头并处理中"
 	file_list=(post/**/*.org)
@@ -129,10 +133,35 @@ build() {
 	list=$(cat src/post2.org|sort -r)
 	echo $list > src/post2.org
 	_msg_info "列表输出完成"
+	_msg_info "生成网页地图"
+
+	echo "#+TITLE: Site MAP\n#+setupfile: ../setup.setup" > src/map.org
+	echo "* HTML Site" >> src/map.org
+	find ./post -type f -name "*.html" | sed 's/^\.\/\(.*\)/- [[..\/\/\1]]/' >> src/map.org
+	echo "* Media File" >> src/map.org
+	find ./post -type f \
+		-name "*.png" -or \
+		-name "*.jpg" -or \
+		-name "*.jpeg" -or \
+		-name "*.mp3" -or \
+		-name "*.mp4" -or \
+		-name "*.m4a" -or \
+		-name "*.webm" \
+		| sed 's/^\.\/\(.*\)/- [[..\/\/\1][..\/\/\1]]/' >> src/map.org
+	echo "* PDF File" >> src/map.org
+	find ./post -type f -name "*.pdf" | sed 's/^\.\/\(.*\)/- [[..\/\/\1]]/' >> src/map.org
+	echo "* Text File" >> src/map.org
+	find ./post -type f -name "*.txt" | sed 's/^\.\/\(.*\)/- [[..\/\/\1]]/' >> src/map.org
 	
 	_msg_info "导出首页中..."
 	# emacs index.org -nw --eval "(progn (org-html-export-to-html) (kill-emacs))"
 	update_file index.org
+	_msg_info "导出子页面中..."
+	check_time "404.org" "404.html"
+	check_time "about.org" "about.html"
+	update_file src/post.org
+	update_file src/post2.org
+	update_file src/map.org
 	_msg_info "Done!"
 }
 

@@ -3,15 +3,198 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-05-20 六 01:46 -->
+<!-- 2023-07-07 五 19:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>八下道法背诵材料</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="我的道法笔记" />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull.css"/>
-<script type="text/javascript" src="/theme/org-html-theme-dull.js" defer></script>
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
 </head>
 <body>
@@ -19,151 +202,163 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="content" class="content">
+</div><div id="preamble" class="status">
+<header>
+     <a href="/">
+       <img src="/img/icon.jpg" height="35">
+     </a>
+     <a href="/">  Home  </a>
+     <a href="/src/post.html">  Blog  </a>
+     <a href="/src/post2.html">  TimeLine  </a>
+     <a href="/about.html">  About  </a>
+     <div class="clearfix"></div>
+   </header>
+</div>
+<div id="content" class="content">
 <h1 class="title">八下道法背诵材料</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga479407">1. 维护宪法权威</a>
+<li><a href="#orgf7ca195">1. 维护宪法权威</a>
 <ul>
-<li><a href="#orge74a2f8">1.1. 党的主张和人民意志的统一</a>
+<li><a href="#org87b7196">1.1. 党的主张和人民意志的统一</a>
 <ul>
-<li><a href="#orgeba466a">1.1.1. 新中国成立后，人民是如何确认奋斗成果的？</a></li>
-<li><a href="#org1956eae">1.1.2. 中国共产党的性质、根本宗旨、目标和地位分别是什么？</a></li>
-<li><a href="#org8b30c5c">1.1.3. 坚持中国共产党领导的重要性和做法分别是什么？</a></li>
-<li><a href="#org455c99b">1.1.4. 中国共产党如何坚持依宪执政？</a></li>
-<li><a href="#org4e913c2">1.1.5. 我国宪法的基本原则是什么？</a></li>
-<li><a href="#org1319672">1.1.6. 宪法如何确保国家一切权力属于人民？</a></li>
-<li><a href="#orgab2a45b">1.1.7. 最大的人权、我国人权的主体、保护对象及内容分别是什么？</a></li>
-<li><a href="#orgda56139">1.1.8. 国家如何做到尊重和保障人权？</a></li>
+<li><a href="#orgc25a3fe">1.1.1. 新中国成立后，人民是如何确认奋斗成果的？</a></li>
+<li><a href="#org3f4e041">1.1.2. 中国共产党的性质、根本宗旨、目标和地位分别是什么？</a></li>
+<li><a href="#org5d83eba">1.1.3. 坚持中国共产党领导的重要性和做法分别是什么？</a></li>
+<li><a href="#orge609713">1.1.4. 中国共产党如何坚持依宪执政？</a></li>
+<li><a href="#org66478c4">1.1.5. 我国宪法的基本原则是什么？</a></li>
+<li><a href="#orga966c21">1.1.6. 宪法如何确保国家一切权力属于人民？</a></li>
+<li><a href="#orge64f601">1.1.7. 最大的人权、我国人权的主体、保护对象及内容分别是什么？</a></li>
+<li><a href="#org3df933c">1.1.8. 国家如何做到尊重和保障人权？</a></li>
 </ul>
 </li>
-<li><a href="#orgef60fa1">1.2. 治国安邦的总章程</a>
+<li><a href="#org616985b">1.2. 治国安邦的总章程</a>
 <ul>
-<li><a href="#org40d2b9f">1.2.1. 宪法如何设置国家机构？</a></li>
-<li><a href="#org4ad3c6d">1.2.2. 国家机构贯彻民主集中制原则主要体现在那些方面？</a></li>
-<li><a href="#org3894a40">1.2.3. 为什么要规范权力运行？</a></li>
-<li><a href="#orgda1af11">1.2.4. 宪法如何规范权力的运行？</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgea17b32">2. 保障宪法实施</a>
-<ul>
-<li><a href="#orgdc6c7ab">2.1. 坚持依宪治国</a>
-<ul>
-<li><a href="#org1ad1962">2.1.1. 我国现行宪法的构成是怎样的？</a></li>
-<li><a href="#org79fba31">2.1.2. 为什么要维护宪法权威？</a></li>
-<li><a href="#orgc43eb2c">2.1.3. 如何维护宪法权威？</a></li>
-<li><a href="#orgbb332e0">2.1.4. 为什么说宪法具有最高的法律效力？（宪法与其他法律的关系是怎样的？）</a></li>
-<li><a href="#org3b3869e">2.1.5. 为什么说宪法是国家法治统一的基础，是中国特色社会主义法律体系的核心？</a></li>
-<li><a href="#orgb566a60">2.1.6. 为什么要坚持依宪治国？（宪法的地位/重要性）</a></li>
-</ul>
-</li>
-<li><a href="#org51e61d6">2.2. 加强宪法监督</a>
-<ul>
-<li><a href="#org68bd21a">2.2.1. 宪法监督的主体和主要内容分别是什么？</a></li>
-<li><a href="#org2c5774e">2.2.2. 为什么要加强宪法监督？</a></li>
-<li><a href="#orga26863a">2.2.3. 如何加强宪法监督？</a></li>
-<li><a href="#orgf5c2dd2">2.2.4. 我们应如何增强宪法意识？</a></li>
-<li><a href="#orge8803c2">2.2.5. 为什么要保障宪法实施？</a></li>
-<li><a href="#orgd90adcf">2.2.6. 如何保障宪法的实施？</a></li>
+<li><a href="#orga338a5a">1.2.1. 宪法如何设置国家机构？</a></li>
+<li><a href="#org6e91190">1.2.2. 国家机构贯彻民主集中制原则主要体现在那些方面？</a></li>
+<li><a href="#org374027f">1.2.3. 为什么要规范权力运行？</a></li>
+<li><a href="#org8f687da">1.2.4. 宪法如何规范权力的运行？</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org58f2c42">3. 公民权利</a>
+<li><a href="#orgf223ce7">2. 保障宪法实施</a>
 <ul>
-<li><a href="#orgb97cc5e">3.1. 公民基本权利</a>
+<li><a href="#orgf146bb4">2.1. 坚持依宪治国</a>
 <ul>
-<li><a href="#org9863d9c">3.1.1. 我国公民基本权利有哪些？</a></li>
-<li><a href="#org10d03a3">3.1.2. 公民享有政治权利的内容和意义分别是什么？</a></li>
-<li><a href="#orgc7a1ee4">3.1.3. 公民行使选举权和被选举权的条件和意义分别是什么？</a></li>
-<li><a href="#org92a7cd7">3.1.4. 言论、出版等自由的内容和重要性分别是什么？</a></li>
-<li><a href="#orgedc2966">3.1.5. 监督权的内容、行使原则和重要性分别是什么？</a></li>
-<li><a href="#orgb2ba96a">3.1.6. 人身自由的含义、内容及意义分别是什么？</a></li>
-<li><a href="#orgf764b69">3.1.7. 宪法对人身自由权作出怎样的规定？</a></li>
-<li><a href="#org25152b1">3.1.8. 社会经济权利（有哪些？）</a></li>
-<li><a href="#orgd000f7b">3.1.9. 文化教育权利（有哪些？）</a></li>
+<li><a href="#org17bf539">2.1.1. 我国现行宪法的构成是怎样的？</a></li>
+<li><a href="#org1254c05">2.1.2. 为什么要维护宪法权威？</a></li>
+<li><a href="#org18b58c5">2.1.3. 如何维护宪法权威？</a></li>
+<li><a href="#org6590950">2.1.4. 为什么说宪法具有最高的法律效力？（宪法与其他法律的关系是怎样的？）</a></li>
+<li><a href="#orgbd42822">2.1.5. 为什么说宪法是国家法治统一的基础，是中国特色社会主义法律体系的核心？</a></li>
+<li><a href="#orgb453377">2.1.6. 为什么要坚持依宪治国？（宪法的地位/重要性）</a></li>
 </ul>
 </li>
-<li><a href="#org663262e">3.2. 依法行使权利</a>
+<li><a href="#orgfeee132">2.2. 加强宪法监督</a>
 <ul>
-<li><a href="#org7b5bfbb">3.2.1. 公民应该如何正确行使权利？</a></li>
-<li><a href="#orgd561f69">3.2.2. 公民行使权利遵守正当的程序的意义是什么？</a></li>
-<li><a href="#org6ded717">3.2.3. 公民权利受到损害，怎样依照法定程序维护权利？（维护权利的方式有那些？）</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org857e4d9">4. 公民义务</a>
-<ul>
-<li><a href="#org4c34c31">4.1. 公民基本义务</a>
-<ul>
-<li><a href="#org21980bd">4.1.1. 我国公民的基本义务有那些？</a></li>
-<li><a href="#orgc4a65f4">4.1.2. 公民要遵守宪法和法律的原因、表现及做法分别是什么？</a></li>
-<li><a href="#org07d8188">4.1.3. 维护国家统一和全国各族团结的原因和做法分别是什么？</a></li>
-<li><a href="#orgde76c3e">4.1.4. 维护国家安全、荣誉和利益的内容和重要性分别是什么？</a></li>
-<li><a href="#org4e08737">4.1.5. 依法服兵役</a></li>
-<li><a href="#org260aabf">4.1.6. 依法纳税</a></li>
-</ul>
-</li>
-<li><a href="#org7da104c">4.2. 依法履行义务</a>
-<ul>
-<li><a href="#orgfaf098a">4.2.1. 我国公民权利与义务的关系是怎样的？</a></li>
-<li><a href="#org7bb974e">4.2.2. 为什么要坚持权利和义务相统一？</a></li>
-<li><a href="#org664404d">4.2.3. 如何坚持权利和义务相统一？</a></li>
-<li><a href="#orgf72816e">4.2.4. 为什么必须履行法定义务？</a></li>
-<li><a href="#org0e03520">4.2.5. 我们如何履行法定义务？</a></li>
-<li><a href="#org15d6947">4.2.6. 违反法定义务的行为的含义及其后果是什么？</a></li>
+<li><a href="#orgcc60605">2.2.1. 宪法监督的主体和主要内容分别是什么？</a></li>
+<li><a href="#org7a6ab75">2.2.2. 为什么要加强宪法监督？</a></li>
+<li><a href="#orge8aa1ae">2.2.3. 如何加强宪法监督？</a></li>
+<li><a href="#org6cda978">2.2.4. 我们应如何增强宪法意识？</a></li>
+<li><a href="#org42f0fc3">2.2.5. 为什么要保障宪法实施？</a></li>
+<li><a href="#org346d0fd">2.2.6. 如何保障宪法的实施？</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org985ba51">5. 我国的政治和经济制度</a>
+<li><a href="#org54176db">3. 公民权利</a>
 <ul>
-<li><a href="#org7863428">5.1. 根本政治制度</a>
+<li><a href="#org6defb33">3.1. 公民基本权利</a>
 <ul>
-<li><a href="#orgd605e20">5.1.1. 地位？</a></li>
-<li><a href="#orgc5e3c5d">5.1.2. 人民代表大会制度的基本内容是什么？</a></li>
-<li><a href="#orgba5fd3b">5.1.3. 各级人大代表的职权、职权来源和义务分别是什么？</a></li>
-<li><a href="#org86f6124">5.1.4. 为什么要坚持和完善人民代表大会制度？（人民代表大会制度的优越性体现在哪里？）</a></li>
-<li><a href="#orgb213de1">5.1.5. 如何坚持和完善人民代表大会制度？</a></li>
+<li><a href="#org3ed9117">3.1.1. 我国公民基本权利有哪些？</a></li>
+<li><a href="#orgd97cded">3.1.2. 公民享有政治权利的内容和意义分别是什么？</a></li>
+<li><a href="#org62c9bd5">3.1.3. 公民行使选举权和被选举权的条件和意义分别是什么？</a></li>
+<li><a href="#orgb552a9d">3.1.4. 言论、出版等自由的内容和重要性分别是什么？</a></li>
+<li><a href="#orga5fbb23">3.1.5. 监督权的内容、行使原则和重要性分别是什么？</a></li>
+<li><a href="#orgc974198">3.1.6. 人身自由的含义、内容及意义分别是什么？</a></li>
+<li><a href="#org4ef5da7">3.1.7. 宪法对人身自由权作出怎样的规定？</a></li>
+<li><a href="#orgae48b7a">3.1.8. 社会经济权利（有哪些？）</a></li>
+<li><a href="#org165aafd">3.1.9. 文化教育权利（有哪些？）</a></li>
 </ul>
 </li>
-<li><a href="#org99e56b2">5.2. 基本政治制度——中国共产党领导的多党合作和政治协商制度</a>
+<li><a href="#orgfd4c7cb">3.2. 依法行使权利</a>
 <ul>
-<li><a href="#orgbf9deb7">5.2.1. 什么是爱国统一战线？</a></li>
-<li><a href="#org110232c">5.2.2. 中国共产党各民主党派实行的基本方针是什么？</a></li>
-<li><a href="#org6e9ad27">5.2.3. 人民政治协商会议（人民政协）的地位、主题和职能分别是什么？</a></li>
-<li><a href="#org9ad7452">5.2.4. 坚持中国共产党领导的多党合作和政治协商制度的意义是什么？</a></li>
-</ul>
-</li>
-<li><a href="#org400b886">5.3. 基本政治制度——民族区域自治制度</a>
-<ul>
-<li><a href="#orgdafa6f7">5.3.1. 为什么要实行民族区域自治制度？</a></li>
-<li><a href="#orgdf2c6d8">5.3.2. 我国的民族区域自治制度是如何实施的？（我国的少数民族是如何实现区域自治的？）</a></li>
+<li><a href="#org568ff34">3.2.1. 公民应该如何正确行使权利？</a></li>
+<li><a href="#org0ce7abb">3.2.2. 公民行使权利遵守正当的程序的意义是什么？</a></li>
+<li><a href="#orgc31a933">3.2.3. 公民权利受到损害，怎样依照法定程序维护权利？（维护权利的方式有那些？）</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org8874f16">6. To Be Continuied</a></li>
-<li><a href="#org689ae42">7. 其他阅读版本</a></li>
+<li><a href="#orge09d546">4. 公民义务</a>
+<ul>
+<li><a href="#org41e61e0">4.1. 公民基本义务</a>
+<ul>
+<li><a href="#orgbeacf87">4.1.1. 我国公民的基本义务有那些？</a></li>
+<li><a href="#orgf916b9d">4.1.2. 公民要遵守宪法和法律的原因、表现及做法分别是什么？</a></li>
+<li><a href="#org6b79856">4.1.3. 维护国家统一和全国各族团结的原因和做法分别是什么？</a></li>
+<li><a href="#org5440b14">4.1.4. 维护国家安全、荣誉和利益的内容和重要性分别是什么？</a></li>
+<li><a href="#orgbf5da4d">4.1.5. 依法服兵役</a></li>
+<li><a href="#orgbcb7eef">4.1.6. 依法纳税</a></li>
+</ul>
+</li>
+<li><a href="#orgf8e34cd">4.2. 依法履行义务</a>
+<ul>
+<li><a href="#org13de287">4.2.1. 我国公民权利与义务的关系是怎样的？</a></li>
+<li><a href="#orgef649a4">4.2.2. 为什么要坚持权利和义务相统一？</a></li>
+<li><a href="#org6ed7660">4.2.3. 如何坚持权利和义务相统一？</a></li>
+<li><a href="#orgd54117b">4.2.4. 为什么必须履行法定义务？</a></li>
+<li><a href="#org7f46252">4.2.5. 我们如何履行法定义务？</a></li>
+<li><a href="#orgdc8188b">4.2.6. 违反法定义务的行为的含义及其后果是什么？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org1ab6480">5. 我国的政治和经济制度</a>
+<ul>
+<li><a href="#org4616d2a">5.1. 根本政治制度</a>
+<ul>
+<li><a href="#orgd73cbd2">5.1.1. 地位？</a></li>
+<li><a href="#org6a11ac2">5.1.2. 人民代表大会制度的基本内容是什么？</a></li>
+<li><a href="#org463bc23">5.1.3. 各级人大代表的职权、职权来源和义务分别是什么？</a></li>
+<li><a href="#orgc1c580c">5.1.4. 为什么要坚持和完善人民代表大会制度？（人民代表大会制度的优越性体现在哪里？）</a></li>
+<li><a href="#org6eda172">5.1.5. 如何坚持和完善人民代表大会制度？</a></li>
+</ul>
+</li>
+<li><a href="#org937a274">5.2. 基本政治制度——中国共产党领导的多党合作和政治协商制度</a>
+<ul>
+<li><a href="#org6241e26">5.2.1. 什么是爱国统一战线？</a></li>
+<li><a href="#org8279a15">5.2.2. 中国共产党各民主党派实行的基本方针是什么？</a></li>
+<li><a href="#orgd18636f">5.2.3. 人民政治协商会议（人民政协）的地位、主题和职能分别是什么？</a></li>
+<li><a href="#org0e765d5">5.2.4. 坚持中国共产党领导的多党合作和政治协商制度的意义是什么？</a></li>
+</ul>
+</li>
+<li><a href="#orgd034178">5.3. 基本政治制度——民族区域自治制度</a>
+<ul>
+<li><a href="#org5d99230">5.3.1. 为什么要实行民族区域自治制度？</a></li>
+<li><a href="#org6bd99a0">5.3.2. 我国的民族区域自治制度是如何实施的？（我国的少数民族是如何实现区域自治的？）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgc4a8620">6. To Be Continuied</a></li>
+<li><a href="#org0fb6475">7. 其他阅读版本</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga479407" class="outline-2">
-<h2 id="orga479407"><span class="section-number-2">1.</span> 维护宪法权威</h2>
+<div id="outline-container-orgf7ca195" class="outline-2">
+<h2 id="orgf7ca195"><span class="section-number-2">1.</span> 维护宪法权威</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge74a2f8" class="outline-3">
-<h3 id="orge74a2f8"><span class="section-number-3">1.1.</span> 党的主张和人民意志的统一</h3>
+<div id="outline-container-org87b7196" class="outline-3">
+<h3 id="org87b7196"><span class="section-number-3">1.1.</span> 党的主张和人民意志的统一</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-orgeba466a" class="outline-4">
-<h4 id="orgeba466a"><span class="section-number-4">1.1.1.</span> 新中国成立后，人民是如何确认奋斗成果的？</h4>
+<div id="outline-container-orgc25a3fe" class="outline-4">
+<h4 id="orgc25a3fe"><span class="section-number-4">1.1.1.</span> 新中国成立后，人民是如何确认奋斗成果的？</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 新中国成立后，中国共产党领导人民制定宪法，以法律的形式确认了中国各族人民奋斗的成
@@ -172,8 +367,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org1956eae" class="outline-4">
-<h4 id="org1956eae"><span class="section-number-4">1.1.2.</span> 中国共产党的性质、根本宗旨、目标和地位分别是什么？</h4>
+<div id="outline-container-org3f4e041" class="outline-4">
+<h4 id="org3f4e041"><span class="section-number-4">1.1.2.</span> 中国共产党的性质、根本宗旨、目标和地位分别是什么？</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <ol class="org-ol">
 <li>性质：中国共产党是中国工人阶级的先锋队，同时是中国人民和中华民族的先锋队。</li>
@@ -183,8 +378,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org8b30c5c" class="outline-4">
-<h4 id="org8b30c5c"><span class="section-number-4">1.1.3.</span> 坚持中国共产党领导的重要性和做法分别是什么？</h4>
+<div id="outline-container-org5d83eba" class="outline-4">
+<h4 id="org5d83eba"><span class="section-number-4">1.1.3.</span> 坚持中国共产党领导的重要性和做法分别是什么？</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <ol class="org-ol">
 <li>重要性：中国共产党领导是中国特色社会主义最本质的特征，是中国特色社会主义制度
@@ -195,8 +390,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org455c99b" class="outline-4">
-<h4 id="org455c99b"><span class="section-number-4">1.1.4.</span> 中国共产党如何坚持依宪执政？</h4>
+<div id="outline-container-orge609713" class="outline-4">
+<h4 id="orge609713"><span class="section-number-4">1.1.4.</span> 中国共产党如何坚持依宪执政？</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 中国共产党领导人民制定宪法和法律，领导人民实施宪法和法律，做到党领导立法、保证执
@@ -205,8 +400,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org4e913c2" class="outline-4">
-<h4 id="org4e913c2"><span class="section-number-4">1.1.5.</span> 我国宪法的基本原则是什么？</h4>
+<div id="outline-container-org66478c4" class="outline-4">
+<h4 id="org66478c4"><span class="section-number-4">1.1.5.</span> 我国宪法的基本原则是什么？</h4>
 <div class="outline-text-4" id="text-1-1-5">
 <p>
 我国是人民民主专政的社会主义国家。国家的一切权力属于人民，这是我国宪法的基本原则。
@@ -214,8 +409,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org1319672" class="outline-4">
-<h4 id="org1319672"><span class="section-number-4">1.1.6.</span> 宪法如何确保国家一切权力属于人民？</h4>
+<div id="outline-container-orga966c21" class="outline-4">
+<h4 id="orga966c21"><span class="section-number-4">1.1.6.</span> 宪法如何确保国家一切权力属于人民？</h4>
 <div class="outline-text-4" id="text-1-1-6">
 <ol class="org-ol">
 <li>宪法确认我国的 <span class="underline">国家性质</span> ，明确人民当家做主的地位。</li>
@@ -227,8 +422,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgab2a45b" class="outline-4">
-<h4 id="orgab2a45b"><span class="section-number-4">1.1.7.</span> 最大的人权、我国人权的主体、保护对象及内容分别是什么？</h4>
+<div id="outline-container-orge64f601" class="outline-4">
+<h4 id="orge64f601"><span class="section-number-4">1.1.7.</span> 最大的人权、我国人权的主体、保护对象及内容分别是什么？</h4>
 <div class="outline-text-4" id="text-1-1-7">
 <ol class="org-ol">
 <li>最大的人权：人民幸福生活是最大的人权</li>
@@ -240,8 +435,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgda56139" class="outline-4">
-<h4 id="orgda56139"><span class="section-number-4">1.1.8.</span> 国家如何做到尊重和保障人权？</h4>
+<div id="outline-container-org3df933c" class="outline-4">
+<h4 id="org3df933c"><span class="section-number-4">1.1.8.</span> 国家如何做到尊重和保障人权？</h4>
 <div class="outline-text-4" id="text-1-1-8">
 <ol class="org-ol">
 <li>各级国家机关树立尊重和保障人权的理念，加强人权法治保障，保证人民依法享有广泛
@@ -260,12 +455,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgef60fa1" class="outline-3">
-<h3 id="orgef60fa1"><span class="section-number-3">1.2.</span> 治国安邦的总章程</h3>
+<div id="outline-container-org616985b" class="outline-3">
+<h3 id="org616985b"><span class="section-number-3">1.2.</span> 治国安邦的总章程</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org40d2b9f" class="outline-4">
-<h4 id="org40d2b9f"><span class="section-number-4">1.2.1.</span> 宪法如何设置国家机构？</h4>
+<div id="outline-container-orga338a5a" class="outline-4">
+<h4 id="orga338a5a"><span class="section-number-4">1.2.1.</span> 宪法如何设置国家机构？</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <ol class="org-ol">
 <li>设置原则：宪法明确国家机构实行民主集中制的原则<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></li>
@@ -279,8 +474,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org4ad3c6d" class="outline-4">
-<h4 id="org4ad3c6d"><span class="section-number-4">1.2.2.</span> 国家机构贯彻民主集中制原则主要体现在那些方面？</h4>
+<div id="outline-container-org6e91190" class="outline-4">
+<h4 id="org6e91190"><span class="section-number-4">1.2.2.</span> 国家机构贯彻民主集中制原则主要体现在那些方面？</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <ol class="org-ol">
 <li>在国家机构与人民的关系方面，国家权力来自人民，由人民选举产生国家权力机关，国
@@ -291,8 +486,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org3894a40" class="outline-4">
-<h4 id="org3894a40"><span class="section-number-4">1.2.3.</span> 为什么要规范权力运行？</h4>
+<div id="outline-container-org374027f" class="outline-4">
+<h4 id="org374027f"><span class="section-number-4">1.2.3.</span> 为什么要规范权力运行？</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <ol class="org-ol">
 <li>权力是把双刃剑，运用得好，可以造福于民；如果被滥用，则会滋生腐败，贻害无穷。</li>
@@ -301,8 +496,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgda1af11" class="outline-4">
-<h4 id="orgda1af11"><span class="section-number-4">1.2.4.</span> 宪法如何规范权力的运行？</h4>
+<div id="outline-container-org8f687da" class="outline-4">
+<h4 id="org8f687da"><span class="section-number-4">1.2.4.</span> 宪法如何规范权力的运行？</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <ol class="org-ol">
 <li>加强对权力运行的制约和监督，让人民监督权力，让权力在阳光下运行，把权力关进制
@@ -318,16 +513,16 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgea17b32" class="outline-2">
-<h2 id="orgea17b32"><span class="section-number-2">2.</span> 保障宪法实施</h2>
+<div id="outline-container-orgf223ce7" class="outline-2">
+<h2 id="orgf223ce7"><span class="section-number-2">2.</span> 保障宪法实施</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgdc6c7ab" class="outline-3">
-<h3 id="orgdc6c7ab"><span class="section-number-3">2.1.</span> 坚持依宪治国</h3>
+<div id="outline-container-orgf146bb4" class="outline-3">
+<h3 id="orgf146bb4"><span class="section-number-3">2.1.</span> 坚持依宪治国</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org1ad1962" class="outline-4">
-<h4 id="org1ad1962"><span class="section-number-4">2.1.1.</span> 我国现行宪法的构成是怎样的？</h4>
+<div id="outline-container-org17bf539" class="outline-4">
+<h4 id="org17bf539"><span class="section-number-4">2.1.1.</span> 我国现行宪法的构成是怎样的？</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 我国现行宪法除序言外，设有第一章总纲，第二章公民的基本权利和义务，第三章国家机构，
@@ -335,8 +530,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org79fba31" class="outline-4">
-<h4 id="org79fba31"><span class="section-number-4">2.1.2.</span> 为什么要维护宪法权威？</h4>
+<div id="outline-container-org1254c05" class="outline-4">
+<h4 id="org1254c05"><span class="section-number-4">2.1.2.</span> 为什么要维护宪法权威？</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <ol class="org-ol">
 <li>我国宪法是党和人民意志的集中体现，是国家的根本法</li>
@@ -345,8 +540,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc43eb2c" class="outline-4">
-<h4 id="orgc43eb2c"><span class="section-number-4">2.1.3.</span> 如何维护宪法权威？</h4>
+<div id="outline-container-org18b58c5" class="outline-4">
+<h4 id="org18b58c5"><span class="section-number-4">2.1.3.</span> 如何维护宪法权威？</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <ol class="org-ol">
 <li>坚持依法治国首先要坚持依宪治国，坚持依法执政首先要坚持依宪执政。<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></li>
@@ -356,8 +551,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgbb332e0" class="outline-4">
-<h4 id="orgbb332e0"><span class="section-number-4">2.1.4.</span> 为什么说宪法具有最高的法律效力？（宪法与其他法律的关系是怎样的？）</h4>
+<div id="outline-container-org6590950" class="outline-4">
+<h4 id="org6590950"><span class="section-number-4">2.1.4.</span> 为什么说宪法具有最高的法律效力？（宪法与其他法律的关系是怎样的？）</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -467,8 +662,8 @@
 </table>
 </div>
 </div>
-<div id="outline-container-org3b3869e" class="outline-4">
-<h4 id="org3b3869e"><span class="section-number-4">2.1.5.</span> 为什么说宪法是国家法治统一的基础，是中国特色社会主义法律体系的核心？</h4>
+<div id="outline-container-orgbd42822" class="outline-4">
+<h4 id="orgbd42822"><span class="section-number-4">2.1.5.</span> 为什么说宪法是国家法治统一的基础，是中国特色社会主义法律体系的核心？</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <ol class="org-ol">
 <li>宪法的规定具有原则性的特点，各种法律制度是对宪法规定的具体落实。</li>
@@ -477,8 +672,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb566a60" class="outline-4">
-<h4 id="orgb566a60"><span class="section-number-4">2.1.6.</span> 为什么要坚持依宪治国？（宪法的地位/重要性）</h4>
+<div id="outline-container-orgb453377" class="outline-4">
+<h4 id="orgb453377"><span class="section-number-4">2.1.6.</span> 为什么要坚持依宪治国？（宪法的地位/重要性）</h4>
 <div class="outline-text-4" id="text-2-1-6">
 <ol class="org-ol">
 <li>我国宪法是党的主张和人民意志的统一，是治国安邦的总章程。</li>
@@ -490,12 +685,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org51e61d6" class="outline-3">
-<h3 id="org51e61d6"><span class="section-number-3">2.2.</span> 加强宪法监督</h3>
+<div id="outline-container-orgfeee132" class="outline-3">
+<h3 id="orgfeee132"><span class="section-number-3">2.2.</span> 加强宪法监督</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org68bd21a" class="outline-4">
-<h4 id="org68bd21a"><span class="section-number-4">2.2.1.</span> 宪法监督的主体和主要内容分别是什么？</h4>
+<div id="outline-container-orgcc60605" class="outline-4">
+<h4 id="orgcc60605"><span class="section-number-4">2.2.1.</span> 宪法监督的主体和主要内容分别是什么？</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <ol class="org-ol">
 <li>主体：全国人大及其常委会、地方各级人大
@@ -511,8 +706,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org2c5774e" class="outline-4">
-<h4 id="org2c5774e"><span class="section-number-4">2.2.2.</span> 为什么要加强宪法监督？</h4>
+<div id="outline-container-org7a6ab75" class="outline-4">
+<h4 id="org7a6ab75"><span class="section-number-4">2.2.2.</span> 为什么要加强宪法监督？</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <ol class="org-ol">
 <li>权力行使需要接受监督。监督是权力行使的根本保证，不受监督的权力将导致腐败。</li>
@@ -522,8 +717,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orga26863a" class="outline-4">
-<h4 id="orga26863a"><span class="section-number-4">2.2.3.</span> 如何加强宪法监督？</h4>
+<div id="outline-container-orge8aa1ae" class="outline-4">
+<h4 id="orge8aa1ae"><span class="section-number-4">2.2.3.</span> 如何加强宪法监督？</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <ol class="org-ol">
 <li>需要加强宪法实施和监督，健全保证宪法全民实施的制度体系
@@ -538,8 +733,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgf5c2dd2" class="outline-4">
-<h4 id="orgf5c2dd2"><span class="section-number-4">2.2.4.</span> 我们应如何增强宪法意识？</h4>
+<div id="outline-container-org6cda978" class="outline-4">
+<h4 id="org6cda978"><span class="section-number-4">2.2.4.</span> 我们应如何增强宪法意识？</h4>
 <div class="outline-text-4" id="text-2-2-4">
 <ol class="org-ol">
 <li>学习宪法
@@ -558,8 +753,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orge8803c2" class="outline-4">
-<h4 id="orge8803c2"><span class="section-number-4">2.2.5.</span> 为什么要保障宪法实施？</h4>
+<div id="outline-container-org42f0fc3" class="outline-4">
+<h4 id="org42f0fc3"><span class="section-number-4">2.2.5.</span> 为什么要保障宪法实施？</h4>
 <div class="outline-text-4" id="text-2-2-5">
 <ol class="org-ol">
 <li>宪法的生命在于实施，宪法的权威也在于实施。维护宪法权威需要我们保障宪法实施。</li>
@@ -569,8 +764,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgd90adcf" class="outline-4">
-<h4 id="orgd90adcf"><span class="section-number-4">2.2.6.</span> 如何保障宪法的实施？</h4>
+<div id="outline-container-org346d0fd" class="outline-4">
+<h4 id="org346d0fd"><span class="section-number-4">2.2.6.</span> 如何保障宪法的实施？</h4>
 <div class="outline-text-4" id="text-2-2-6">
 <ol class="org-ol">
 <li>保障宪法的实施，必须坚持依宪治国。</li>
@@ -581,16 +776,16 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org58f2c42" class="outline-2">
-<h2 id="org58f2c42"><span class="section-number-2">3.</span> 公民权利</h2>
+<div id="outline-container-org54176db" class="outline-2">
+<h2 id="org54176db"><span class="section-number-2">3.</span> 公民权利</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgb97cc5e" class="outline-3">
-<h3 id="orgb97cc5e"><span class="section-number-3">3.1.</span> 公民基本权利</h3>
+<div id="outline-container-org6defb33" class="outline-3">
+<h3 id="org6defb33"><span class="section-number-3">3.1.</span> 公民基本权利</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org9863d9c" class="outline-4">
-<h4 id="org9863d9c"><span class="section-number-4">3.1.1.</span> 我国公民基本权利有哪些？</h4>
+<div id="outline-container-org3ed9117" class="outline-4">
+<h4 id="org3ed9117"><span class="section-number-4">3.1.1.</span> 我国公民基本权利有哪些？</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <ol class="org-ol">
 <li>政治权利</li>
@@ -601,8 +796,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org10d03a3" class="outline-4">
-<h4 id="org10d03a3"><span class="section-number-4">3.1.2.</span> 公民享有政治权利的内容和意义分别是什么？</h4>
+<div id="outline-container-orgd97cded" class="outline-4">
+<h4 id="orgd97cded"><span class="section-number-4">3.1.2.</span> 公民享有政治权利的内容和意义分别是什么？</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <ol class="org-ol">
 <li>内容：选举权和被选举权、言论、出版等自由和监督权等</li>
@@ -615,8 +810,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc7a1ee4" class="outline-4">
-<h4 id="orgc7a1ee4"><span class="section-number-4">3.1.3.</span> 公民行使选举权和被选举权的条件和意义分别是什么？</h4>
+<div id="outline-container-org62c9bd5" class="outline-4">
+<h4 id="org62c9bd5"><span class="section-number-4">3.1.3.</span> 公民行使选举权和被选举权的条件和意义分别是什么？</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <ol class="org-ol">
 <li>条件：
@@ -629,8 +824,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org92a7cd7" class="outline-4">
-<h4 id="org92a7cd7"><span class="section-number-4">3.1.4.</span> 言论、出版等自由的内容和重要性分别是什么？</h4>
+<div id="outline-container-orgb552a9d" class="outline-4">
+<h4 id="orgb552a9d"><span class="section-number-4">3.1.4.</span> 言论、出版等自由的内容和重要性分别是什么？</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <ol class="org-ol">
 <li>内容：我国公民享有言论、出版、集会、结社<sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>、游行、示威的自由。</li>
@@ -638,8 +833,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgedc2966" class="outline-4">
-<h4 id="orgedc2966"><span class="section-number-4">3.1.5.</span> 监督权的内容、行使原则和重要性分别是什么？</h4>
+<div id="outline-container-orga5fbb23" class="outline-4">
+<h4 id="orga5fbb23"><span class="section-number-4">3.1.5.</span> 监督权的内容、行使原则和重要性分别是什么？</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <ol class="org-ol">
 <li>内容：我国公民对于任何国家机关和国家工作人员，有提出批评和建议的权利；对于任
@@ -650,8 +845,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb2ba96a" class="outline-4">
-<h4 id="orgb2ba96a"><span class="section-number-4">3.1.6.</span> 人身自由的含义、内容及意义分别是什么？</h4>
+<div id="outline-container-orgc974198" class="outline-4">
+<h4 id="orgc974198"><span class="section-number-4">3.1.6.</span> 人身自由的含义、内容及意义分别是什么？</h4>
 <div class="outline-text-4" id="text-3-1-6">
 <ol class="org-ol">
 <li>含义：指公民的人身不受非法侵犯的自由</li>
@@ -662,8 +857,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgf764b69" class="outline-4">
-<h4 id="orgf764b69"><span class="section-number-4">3.1.7.</span> 宪法对人身自由权作出怎样的规定？</h4>
+<div id="outline-container-org4ef5da7" class="outline-4">
+<h4 id="org4ef5da7"><span class="section-number-4">3.1.7.</span> 宪法对人身自由权作出怎样的规定？</h4>
 <div class="outline-text-4" id="text-3-1-7">
 <ol class="org-ol">
 <li>人身自由不受侵犯。我国宪法规定，任何公民，非经人民检察院批准或者人民法院决定，
@@ -680,8 +875,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org25152b1" class="outline-4">
-<h4 id="org25152b1"><span class="section-number-4">3.1.8.</span> 社会经济权利（有哪些？）</h4>
+<div id="outline-container-orgae48b7a" class="outline-4">
+<h4 id="orgae48b7a"><span class="section-number-4">3.1.8.</span> 社会经济权利（有哪些？）</h4>
 <div class="outline-text-4" id="text-3-1-8">
 <ol class="org-ol">
 <li>财产权
@@ -710,8 +905,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgd000f7b" class="outline-4">
-<h4 id="orgd000f7b"><span class="section-number-4">3.1.9.</span> 文化教育权利（有哪些？）</h4>
+<div id="outline-container-org165aafd" class="outline-4">
+<h4 id="org165aafd"><span class="section-number-4">3.1.9.</span> 文化教育权利（有哪些？）</h4>
 <div class="outline-text-4" id="text-3-1-9">
 <ol class="org-ol">
 <li>受教育权
@@ -737,12 +932,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org663262e" class="outline-3">
-<h3 id="org663262e"><span class="section-number-3">3.2.</span> 依法行使权利</h3>
+<div id="outline-container-orgfd4c7cb" class="outline-3">
+<h3 id="orgfd4c7cb"><span class="section-number-3">3.2.</span> 依法行使权利</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org7b5bfbb" class="outline-4">
-<h4 id="org7b5bfbb"><span class="section-number-4">3.2.1.</span> 公民应该如何正确行使权利？</h4>
+<div id="outline-container-org568ff34" class="outline-4">
+<h4 id="org568ff34"><span class="section-number-4">3.2.1.</span> 公民应该如何正确行使权利？</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <ol class="org-ol">
 <li>公民行使权利不能超越它本身的界限，不能滥用权利</li>
@@ -753,16 +948,16 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgd561f69" class="outline-4">
-<h4 id="orgd561f69"><span class="section-number-4">3.2.2.</span> 公民行使权利遵守正当的程序的意义是什么？</h4>
+<div id="outline-container-org0ce7abb" class="outline-4">
+<h4 id="org0ce7abb"><span class="section-number-4">3.2.2.</span> 公民行使权利遵守正当的程序的意义是什么？</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 遵守正当的程序，有利于公民实际享受权利，有效避免和化解纠纷，有利于维护权益
 </p>
 </div>
 </div>
-<div id="outline-container-org6ded717" class="outline-4">
-<h4 id="org6ded717"><span class="section-number-4">3.2.3.</span> 公民权利受到损害，怎样依照法定程序维护权利？（维护权利的方式有那些？）</h4>
+<div id="outline-container-orgc31a933" class="outline-4">
+<h4 id="orgc31a933"><span class="section-number-4">3.2.3.</span> 公民权利受到损害，怎样依照法定程序维护权利？（维护权利的方式有那些？）</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <ol class="org-ol">
 <li>和解
@@ -805,16 +1000,16 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org857e4d9" class="outline-2">
-<h2 id="org857e4d9"><span class="section-number-2">4.</span> 公民义务</h2>
+<div id="outline-container-orge09d546" class="outline-2">
+<h2 id="orge09d546"><span class="section-number-2">4.</span> 公民义务</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org4c34c31" class="outline-3">
-<h3 id="org4c34c31"><span class="section-number-3">4.1.</span> 公民基本义务</h3>
+<div id="outline-container-org41e61e0" class="outline-3">
+<h3 id="org41e61e0"><span class="section-number-3">4.1.</span> 公民基本义务</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-org21980bd" class="outline-4">
-<h4 id="org21980bd"><span class="section-number-4">4.1.1.</span> 我国公民的基本义务有那些？</h4>
+<div id="outline-container-orgbeacf87" class="outline-4">
+<h4 id="orgbeacf87"><span class="section-number-4">4.1.1.</span> 我国公民的基本义务有那些？</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <ol class="org-ol">
 <li>遵守宪法和法律</li>
@@ -826,8 +1021,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgc4a65f4" class="outline-4">
-<h4 id="orgc4a65f4"><span class="section-number-4">4.1.2.</span> 公民要遵守宪法和法律的原因、表现及做法分别是什么？</h4>
+<div id="outline-container-orgf916b9d" class="outline-4">
+<h4 id="orgf916b9d"><span class="section-number-4">4.1.2.</span> 公民要遵守宪法和法律的原因、表现及做法分别是什么？</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <ol class="org-ol">
 <li>原因：我国宪法和法律是全国各族人民意志和利益的集中体现，维护宪法和法律的尊严
@@ -842,8 +1037,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org07d8188" class="outline-4">
-<h4 id="org07d8188"><span class="section-number-4">4.1.3.</span> 维护国家统一和全国各族团结的原因和做法分别是什么？</h4>
+<div id="outline-container-org6b79856" class="outline-4">
+<h4 id="org6b79856"><span class="section-number-4">4.1.3.</span> 维护国家统一和全国各族团结的原因和做法分别是什么？</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <ol class="org-ol">
 <li>原因：我国是统一的多民族国家，国家的统一和民族的团结，是我国顺利进行社会主义
@@ -853,8 +1048,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgde76c3e" class="outline-4">
-<h4 id="orgde76c3e"><span class="section-number-4">4.1.4.</span> 维护国家安全、荣誉和利益的内容和重要性分别是什么？</h4>
+<div id="outline-container-org5440b14" class="outline-4">
+<h4 id="org5440b14"><span class="section-number-4">4.1.4.</span> 维护国家安全、荣誉和利益的内容和重要性分别是什么？</h4>
 <div class="outline-text-4" id="text-4-1-4">
 <ol class="org-ol">
 <li>内容
@@ -868,8 +1063,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org4e08737" class="outline-4">
-<h4 id="org4e08737"><span class="section-number-4">4.1.5.</span> 依法服兵役</h4>
+<div id="outline-container-orgbf5da4d" class="outline-4">
+<h4 id="orgbf5da4d"><span class="section-number-4">4.1.5.</span> 依法服兵役</h4>
 <div class="outline-text-4" id="text-4-1-5">
 <ol class="org-ol">
 <li>原因：
@@ -888,8 +1083,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org260aabf" class="outline-4">
-<h4 id="org260aabf"><span class="section-number-4">4.1.6.</span> 依法纳税</h4>
+<div id="outline-container-orgbcb7eef" class="outline-4">
+<h4 id="orgbcb7eef"><span class="section-number-4">4.1.6.</span> 依法纳税</h4>
 <div class="outline-text-4" id="text-4-1-6">
 <ol class="org-ol">
 <li>必要性：税收是国家财政收入的主要来源，依法纳税是公民的一项基本义务</li>
@@ -900,12 +1095,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org7da104c" class="outline-3">
-<h3 id="org7da104c"><span class="section-number-3">4.2.</span> 依法履行义务</h3>
+<div id="outline-container-orgf8e34cd" class="outline-3">
+<h3 id="orgf8e34cd"><span class="section-number-3">4.2.</span> 依法履行义务</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-orgfaf098a" class="outline-4">
-<h4 id="orgfaf098a"><span class="section-number-4">4.2.1.</span> 我国公民权利与义务的关系是怎样的？</h4>
+<div id="outline-container-org13de287" class="outline-4">
+<h4 id="org13de287"><span class="section-number-4">4.2.1.</span> 我国公民权利与义务的关系是怎样的？</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <ol class="org-ol">
 <li>公民的权利与义务相互依存、相互促进。权利的实现需要义务的履行，义务的履行促进
@@ -916,8 +1111,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org7bb974e" class="outline-4">
-<h4 id="org7bb974e"><span class="section-number-4">4.2.2.</span> 为什么要坚持权利和义务相统一？</h4>
+<div id="outline-container-orgef649a4" class="outline-4">
+<h4 id="orgef649a4"><span class="section-number-4">4.2.2.</span> 为什么要坚持权利和义务相统一？</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <ol class="org-ol">
 <li>公民权利的充分实现，可以激发公民主人翁意识，调动其履行义务的积极性和主动性，
@@ -927,8 +1122,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org664404d" class="outline-4">
-<h4 id="org664404d"><span class="section-number-4">4.2.3.</span> 如何坚持权利和义务相统一？</h4>
+<div id="outline-container-org6ed7660" class="outline-4">
+<h4 id="org6ed7660"><span class="section-number-4">4.2.3.</span> 如何坚持权利和义务相统一？</h4>
 <div class="outline-text-4" id="text-4-2-3">
 <ol class="org-ol">
 <li>任何公民不能只享受权利而不承担义务，也不应只承担义务而不享受权利。</li>
@@ -936,8 +1131,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgf72816e" class="outline-4">
-<h4 id="orgf72816e"><span class="section-number-4">4.2.4.</span> 为什么必须履行法定义务？</h4>
+<div id="outline-container-orgd54117b" class="outline-4">
+<h4 id="orgd54117b"><span class="section-number-4">4.2.4.</span> 为什么必须履行法定义务？</h4>
 <div class="outline-text-4" id="text-4-2-4">
 <ol class="org-ol">
 <li>法定义务是由我国宪法和法律规定的，具有强制性</li>
@@ -946,8 +1141,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org0e03520" class="outline-4">
-<h4 id="org0e03520"><span class="section-number-4">4.2.5.</span> 我们如何履行法定义务？</h4>
+<div id="outline-container-org7f46252" class="outline-4">
+<h4 id="org7f46252"><span class="section-number-4">4.2.5.</span> 我们如何履行法定义务？</h4>
 <div class="outline-text-4" id="text-4-2-5">
 <ol class="org-ol">
 <li>法律要求做的必须去做</li>
@@ -955,8 +1150,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org15d6947" class="outline-4">
-<h4 id="org15d6947"><span class="section-number-4">4.2.6.</span> 违反法定义务的行为的含义及其后果是什么？</h4>
+<div id="outline-container-orgdc8188b" class="outline-4">
+<h4 id="orgdc8188b"><span class="section-number-4">4.2.6.</span> 违反法定义务的行为的含义及其后果是什么？</h4>
 <div class="outline-text-4" id="text-4-2-6">
 <ol class="org-ol">
 <li>含义：公民实施了法律所禁止的行为，或者没有实施法律要求做的行为，都是违反法定
@@ -972,24 +1167,24 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org985ba51" class="outline-2">
-<h2 id="org985ba51"><span class="section-number-2">5.</span> 我国的政治和经济制度</h2>
+<div id="outline-container-org1ab6480" class="outline-2">
+<h2 id="org1ab6480"><span class="section-number-2">5.</span> 我国的政治和经济制度</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org7863428" class="outline-3">
-<h3 id="org7863428"><span class="section-number-3">5.1.</span> 根本政治制度</h3>
+<div id="outline-container-org4616d2a" class="outline-3">
+<h3 id="org4616d2a"><span class="section-number-3">5.1.</span> 根本政治制度</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-orgd605e20" class="outline-4">
-<h4 id="orgd605e20"><span class="section-number-4">5.1.1.</span> 地位？</h4>
+<div id="outline-container-orgd73cbd2" class="outline-4">
+<h4 id="orgd73cbd2"><span class="section-number-4">5.1.1.</span> 地位？</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 人民代表大会制度是我国的根本政治制度<sup><a id="fnr.8" class="footref" href="#fn.8" role="doc-backlink">8</a></sup>
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5e3c5d" class="outline-4">
-<h4 id="orgc5e3c5d"><span class="section-number-4">5.1.2.</span> 人民代表大会制度的基本内容是什么？</h4>
+<div id="outline-container-org6a11ac2" class="outline-4">
+<h4 id="org6a11ac2"><span class="section-number-4">5.1.2.</span> 人民代表大会制度的基本内容是什么？</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <ol class="org-ol">
 <li>国家的一切权力属于人民</li>
@@ -1001,8 +1196,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgba5fd3b" class="outline-4">
-<h4 id="orgba5fd3b"><span class="section-number-4">5.1.3.</span> 各级人大代表的职权、职权来源和义务分别是什么？</h4>
+<div id="outline-container-org463bc23" class="outline-4">
+<h4 id="org463bc23"><span class="section-number-4">5.1.3.</span> 各级人大代表的职权、职权来源和义务分别是什么？</h4>
 <div class="outline-text-4" id="text-5-1-3">
 <ol class="org-ol">
 <li>职权：依法审议各项议案和报告 <i>（审议权）</i> 、表决各项决定 <i>（表决权）</i> 、提出
@@ -1014,8 +1209,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org86f6124" class="outline-4">
-<h4 id="org86f6124"><span class="section-number-4">5.1.4.</span> 为什么要坚持和完善人民代表大会制度？（人民代表大会制度的优越性体现在哪里？）</h4>
+<div id="outline-container-orgc1c580c" class="outline-4">
+<h4 id="orgc1c580c"><span class="section-number-4">5.1.4.</span> 为什么要坚持和完善人民代表大会制度？（人民代表大会制度的优越性体现在哪里？）</h4>
 <div class="outline-text-4" id="text-5-1-4">
 <ol class="org-ol">
 <li>实践充分证明，人民代表大会制度是符合中国国情和实际、体现社会主义国家性质、保
@@ -1025,8 +1220,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgb213de1" class="outline-4">
-<h4 id="orgb213de1"><span class="section-number-4">5.1.5.</span> 如何坚持和完善人民代表大会制度？</h4>
+<div id="outline-container-org6eda172" class="outline-4">
+<h4 id="org6eda172"><span class="section-number-4">5.1.5.</span> 如何坚持和完善人民代表大会制度？</h4>
 <div class="outline-text-4" id="text-5-1-5">
 <ol class="org-ol">
 <li>必须毫不动摇坚持中国共产党的领导，依据人民代表大会制度，使党的主张通过法定程
@@ -1041,12 +1236,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org99e56b2" class="outline-3">
-<h3 id="org99e56b2"><span class="section-number-3">5.2.</span> 基本政治制度——中国共产党领导的多党合作和政治协商制度</h3>
+<div id="outline-container-org937a274" class="outline-3">
+<h3 id="org937a274"><span class="section-number-3">5.2.</span> 基本政治制度——中国共产党领导的多党合作和政治协商制度</h3>
 <div class="outline-text-3" id="text-5-2">
 </div>
-<div id="outline-container-orgbf9deb7" class="outline-4">
-<h4 id="orgbf9deb7"><span class="section-number-4">5.2.1.</span> 什么是爱国统一战线？</h4>
+<div id="outline-container-org6241e26" class="outline-4">
+<h4 id="org6241e26"><span class="section-number-4">5.2.1.</span> 什么是爱国统一战线？</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 由中国共产党领导的，有各民主党派和各人民团体参加的，包括全体社会主义劳动者、社会
@@ -1055,16 +1250,16 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org110232c" class="outline-4">
-<h4 id="org110232c"><span class="section-number-4">5.2.2.</span> 中国共产党各民主党派实行的基本方针是什么？</h4>
+<div id="outline-container-org8279a15" class="outline-4">
+<h4 id="org8279a15"><span class="section-number-4">5.2.2.</span> 中国共产党各民主党派实行的基本方针是什么？</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 长期共存、互相监督、肝胆相照、荣辱与共<sup><a id="fnr.9" class="footref" href="#fn.9" role="doc-backlink">9</a></sup>
 </p>
 </div>
 </div>
-<div id="outline-container-org6e9ad27" class="outline-4">
-<h4 id="org6e9ad27"><span class="section-number-4">5.2.3.</span> 人民政治协商会议（人民政协）的地位、主题和职能分别是什么？</h4>
+<div id="outline-container-orgd18636f" class="outline-4">
+<h4 id="orgd18636f"><span class="section-number-4">5.2.3.</span> 人民政治协商会议（人民政协）的地位、主题和职能分别是什么？</h4>
 <div class="outline-text-4" id="text-5-2-3">
 <ol class="org-ol">
 <li>地位：是中国共产党领导的多党合作和政治协商的重要机构，是中国人民爱国统一战线
@@ -1074,8 +1269,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org9ad7452" class="outline-4">
-<h4 id="org9ad7452"><span class="section-number-4">5.2.4.</span> 坚持中国共产党领导的多党合作和政治协商制度的意义是什么？</h4>
+<div id="outline-container-org0e765d5" class="outline-4">
+<h4 id="org0e765d5"><span class="section-number-4">5.2.4.</span> 坚持中国共产党领导的多党合作和政治协商制度的意义是什么？</h4>
 <div class="outline-text-4" id="text-5-2-4">
 <ol class="org-ol">
 <li>是发扬社会主义民主的重要形式</li>
@@ -1086,12 +1281,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org400b886" class="outline-3">
-<h3 id="org400b886"><span class="section-number-3">5.3.</span> 基本政治制度——民族区域自治制度</h3>
+<div id="outline-container-orgd034178" class="outline-3">
+<h3 id="orgd034178"><span class="section-number-3">5.3.</span> 基本政治制度——民族区域自治制度</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
-<div id="outline-container-orgdafa6f7" class="outline-4">
-<h4 id="orgdafa6f7"><span class="section-number-4">5.3.1.</span> 为什么要实行民族区域自治制度？</h4>
+<div id="outline-container-org5d99230" class="outline-4">
+<h4 id="org5d99230"><span class="section-number-4">5.3.1.</span> 为什么要实行民族区域自治制度？</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <ol class="org-ol">
 <li>中华人民共和国是全国各族人民共同缔造的统一的多民族国家</li>
@@ -1102,8 +1297,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgdf2c6d8" class="outline-4">
-<h4 id="orgdf2c6d8"><span class="section-number-4">5.3.2.</span> 我国的民族区域自治制度是如何实施的？（我国的少数民族是如何实现区域自治的？）</h4>
+<div id="outline-container-org6bd99a0" class="outline-4">
+<h4 id="org6bd99a0"><span class="section-number-4">5.3.2.</span> 我国的民族区域自治制度是如何实施的？（我国的少数民族是如何实现区域自治的？）</h4>
 <div class="outline-text-4" id="text-5-3-2">
 <ol class="org-ol">
 <li>无偶国宪法规定，各少数民族聚居的地方实行区域自治，设立自治机关，行使自治权。
@@ -1119,8 +1314,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org8874f16" class="outline-2">
-<h2 id="org8874f16"><span class="section-number-2">6.</span> To Be Continuied</h2>
+<div id="outline-container-orgc4a8620" class="outline-2">
+<h2 id="orgc4a8620"><span class="section-number-2">6.</span> To Be Continuied</h2>
 <div class="outline-text-2" id="text-6">
 <p class="verse">
 注意！本材料由我纯手工打入，难免会有错字。请谅解。<br />
@@ -1128,8 +1323,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org689ae42" class="outline-2">
-<h2 id="org689ae42"><span class="section-number-2">7.</span> 其他阅读版本</h2>
+<div id="outline-container-org0fb6475" class="outline-2">
+<h2 id="org0fb6475"><span class="section-number-2">7.</span> 其他阅读版本</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <a href="./八下早读材料/八下早读材料.pdf">这里</a>是此文件的Pdf阅读版本
@@ -1187,7 +1382,7 @@
 <div id="postamble" class="status">
 <p class="date">Date: 2023-04-07 五 11:09</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-05-20 六 01:46</p>
+<p class="date">Created: 2023-07-07 五 19:54</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

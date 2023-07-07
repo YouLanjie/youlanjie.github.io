@@ -106,7 +106,7 @@ BIOS引导的长这样：
 示：
 
 #+begin_export html
-<video width="640" height="480" controls>
+<video controls>
   <source src="./2022-07-02_02/2022-07-02_02-08.webm" type="video/webm">
 </video>
 #+end_export

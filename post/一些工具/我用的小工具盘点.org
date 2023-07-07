@@ -4,6 +4,12 @@
 
 #+setupfile: ../../setup.setup
 
+#+begin_export html
+<style type="text/css" media="screen">
+  pre { font-family: Noto Sans Mono CJK, Droid Sans Mono, Monaco, Consolas, "Lucida Console", monospace; }
+</style>
+#+end_export
+
 * 一些我用的小工具盘点
 #+begin_quote
 注，该文章将持续更新

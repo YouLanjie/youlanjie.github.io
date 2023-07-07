@@ -18,5 +18,18 @@
 ;; Org html代码高亮
 (require 'htmlize)
 
+(setq org-html-preamble
+"<header>
+     <a href=\"/\">
+       <img src=\"/img/icon.jpg\" height=\"35\">
+     </a>
+     <a href=\"/\">  Home  </a>
+     <a href=\"/src/post.html\">  Blog  </a>
+     <a href=\"/src/post2.html\">  TimeLine  </a>
+     <a href=\"/about.html\">  About  </a>
+     <div class=\"clearfix\"></div>
+   </header>")
+
+
 (org-html-export-to-html)
 (kill-emacs)
