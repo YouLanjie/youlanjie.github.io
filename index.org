@@ -10,5 +10,3 @@
 点击 =TimeLine= 查看按时间排序的文章列表界面。
 * 我的文章（按内容分类）
 #+include: "./src/post.org" :lines "3-"
-* 网站地图
-所有文件的链接在[[./src/map.html][这里]]。

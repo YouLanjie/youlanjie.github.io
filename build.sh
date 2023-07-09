@@ -89,7 +89,9 @@ check_time() {
 	if [[ (! -f $2) || ($1 -nt $2) ]] {
 		_msg_info "Export '$1' ..."
 		update_file $1
+		return 0
 	}
+	return -1
 }
 
 update() {
@@ -133,35 +135,17 @@ build() {
 	list=$(cat src/post2.org|sort -r)
 	echo $list > src/post2.org
 	_msg_info "列表输出完成"
-	_msg_info "生成网页地图"
-
-	echo "#+TITLE: Site MAP\n#+setupfile: ../setup.setup" > src/map.org
-	echo "* HTML Site" >> src/map.org
-	find ./post -type f -name "*.html" | sed 's/^\.\/\(.*\)/- [[..\/\/\1]]/' >> src/map.org
-	echo "* Media File" >> src/map.org
-	find ./post -type f \
-		-name "*.png" -or \
-		-name "*.jpg" -or \
-		-name "*.jpeg" -or \
-		-name "*.mp3" -or \
-		-name "*.mp4" -or \
-		-name "*.m4a" -or \
-		-name "*.webm" \
-		| sed 's/^\.\/\(.*\)/- [[..\/\/\1][..\/\/\1]]/' >> src/map.org
-	echo "* PDF File" >> src/map.org
-	find ./post -type f -name "*.pdf" | sed 's/^\.\/\(.*\)/- [[..\/\/\1]]/' >> src/map.org
-	echo "* Text File" >> src/map.org
-	find ./post -type f -name "*.txt" | sed 's/^\.\/\(.*\)/- [[..\/\/\1]]/' >> src/map.org
-	
-	_msg_info "导出首页中..."
-	# emacs index.org -nw --eval "(progn (org-html-export-to-html) (kill-emacs))"
-	update_file index.org
 	_msg_info "导出子页面中..."
+	tmp="true"
 	check_time "404.org" "404.html"
 	check_time "about.org" "about.html"
-	update_file src/post.org
+	check_time "src/post.org" "src/post.html" || tmp="false"
 	update_file src/post2.org
-	update_file src/map.org
+	if [[ $tmp == "true" ]] {
+		_msg_info "导出首页中..."
+		# emacs index.org -nw --eval "(progn (org-html-export-to-html) (kill-emacs))"
+		update_file index.org
+	}
 	_msg_info "Done!"
 }
 
