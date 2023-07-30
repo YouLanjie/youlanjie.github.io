@@ -1,0 +1,11 @@
+#+title: 语文笔记2
+#+date: <2023-07-29 六 22:20>
+#+description: 内容来自课本和部分教辅材料
+
+#+setupfile: ../../../setup.setup
+
+* 来自课本的内容
+现在暂时只有配图咯。（build by =XMind= ）
+
+[[./note2/1.png]]
+
