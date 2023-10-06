@@ -1097,6 +1097,18 @@ content: "*** "
     img {
 	max-width: 90%;
     }
+    ol {
+	padding-left: 15px;
+    }
+    ul {
+	padding-left: 15px;
+    }
+    table {
+	/* overflow: auto; */
+	width: 100%;
+	table-layout:  fixed;
+	word-break: break-all;
+    }
     #footnotes {
 	position: static;
 	max-width: 100%;
