@@ -20,7 +20,7 @@
   - 语文
     - [[../post/学习笔记/语文/语文笔记.html][语文笔记]]
       内容来自b站的视频，笔记是我自己写的
-    - [[../post/学习笔记/语文/小学语文笔记汇总.html][小学语文笔记汇总]]
+    - [[../post/学习笔记/语文/小学笔记汇总.html][小学语文笔记汇总]]
       从小学课本上抄下来的
     - [[../post/学习笔记/语文/语文笔记2.html][语文笔记2]]
       内容来自课本和部分教辅材料
@@ -44,6 +44,9 @@
       我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
   - Vim
     - [[../post/一些工具/Vim/使用Vim.html][使用Vim]]
+  - python
+    - Manim
+      - [[../post/学习笔记/python/manim/Manim学习笔记.html][Manim学习笔记]]
 - ArchLinux学习系列
   - [[../post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
     记录我个人安装archlinux的过程

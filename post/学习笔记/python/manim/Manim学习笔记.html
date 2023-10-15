@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-08-23 三 23:50 -->
+<!-- 2023-10-14 六 07:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Manim学习笔记</title>
@@ -202,45 +202,33 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="preamble" class="status">
-<header>
-     <a href="/">
-       <img src="/img/icon.jpg" height="35">
-     </a>
-     <a href="/">  Home  </a>
-     <a href="/src/post.html">  Blog  </a>
-     <a href="/src/post2.html">  TimeLine  </a>
-     <a href="/about.html">  About  </a>
-     <div class="clearfix"></div>
-   </header>
-</div>
-<div id="content" class="content">
+</div><div id="content" class="content">
 <h1 class="title">Manim学习笔记</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgba1e34a">1. Manim学习笔记</a>
+<li><a href="#org2465a64">1. Manim学习笔记</a>
 <ul>
-<li><a href="#orgffcde7d">1.1. 安装</a>
+<li><a href="#orgb9dee59">1.1. 安装</a>
 <ul>
-<li><a href="#org4e175eb">1.1.1. Latex</a></li>
-<li><a href="#orgd795107">1.1.2. ffmpeg</a></li>
-<li><a href="#org3547c71">1.1.3. manim</a></li>
+<li><a href="#org2a5ba41">1.1.1. Latex</a></li>
+<li><a href="#org418deb9">1.1.2. ffmpeg</a></li>
+<li><a href="#org7a1e7e8">1.1.3. manim</a></li>
 </ul>
 </li>
-<li><a href="#orgdc2a448">1.2. 使用</a>
+<li><a href="#org2cf0b8e">1.2. 使用</a>
 <ul>
-<li><a href="#orga56c257">1.2.1. 框架</a></li>
-<li><a href="#org503c779">1.2.2. 创建对象</a></li>
-<li><a href="#orgb2ad9d1">1.2.3. 对象定位（对象内部方法）</a></li>
-<li><a href="#org8ee23d8">1.2.4. 显示对象</a></li>
+<li><a href="#org59cb453">1.2.1. 框架</a></li>
+<li><a href="#orgd2c8591">1.2.2. 创建对象</a></li>
+<li><a href="#org72e4d23">1.2.3. 对象定位（对象内部方法）</a></li>
+<li><a href="#orga6f33ba">1.2.4. 显示对象</a></li>
 </ul>
 </li>
-<li><a href="#org9dfda92">1.3. 示例</a></li>
+<li><a href="#orgb344219">1.3. 示例</a></li>
 </ul>
 </li>
-<li><a href="#orga521058">2. Reference</a></li>
+<li><a href="#org84f1ca2">2. Reference</a></li>
 </ul>
 </div>
 </div>
@@ -253,16 +241,16 @@
 </p>
 </blockquote>
 
-<div id="outline-container-orgba1e34a" class="outline-2">
-<h2 id="orgba1e34a"><span class="section-number-2">1.</span> Manim学习笔记</h2>
+<div id="outline-container-org2465a64" class="outline-2">
+<h2 id="org2465a64"><span class="section-number-2">1.</span> Manim学习笔记</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgffcde7d" class="outline-3">
-<h3 id="orgffcde7d"><span class="section-number-3">1.1.</span> 安装</h3>
+<div id="outline-container-orgb9dee59" class="outline-3">
+<h3 id="orgb9dee59"><span class="section-number-3">1.1.</span> 安装</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
-<div id="outline-container-org4e175eb" class="outline-4">
-<h4 id="org4e175eb"><span class="section-number-4">1.1.1.</span> Latex</h4>
+<div id="outline-container-org2a5ba41" class="outline-4">
+<h4 id="org2a5ba41"><span class="section-number-4">1.1.1.</span> Latex</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 在Arch Linux下安装 <code>texlive</code> 包组：
@@ -273,8 +261,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgd795107" class="outline-4">
-<h4 id="orgd795107"><span class="section-number-4">1.1.2.</span> ffmpeg</h4>
+<div id="outline-container-org418deb9" class="outline-4">
+<h4 id="org418deb9"><span class="section-number-4">1.1.2.</span> ffmpeg</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 同理，直接
@@ -285,8 +273,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org3547c71" class="outline-4">
-<h4 id="org3547c71"><span class="section-number-4">1.1.3.</span> manim</h4>
+<div id="outline-container-org7a1e7e8" class="outline-4">
+<h4 id="org7a1e7e8"><span class="section-number-4">1.1.3.</span> manim</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均在gitbub上<br />
@@ -314,26 +302,30 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 在 <code>$HOME/</code> 下创建 <code>.pip</code> 目录并添加 <code>pip.conf</code> 文件并写入：
 </p>
 <div class="org-src-container">
-<pre class="src src-conf">[<span style="color: #66D9EF;">global</span>]
-<span style="color: #FD971F;">index-url</span> = https://pypi.tuna.tsinghua.edu.cn/simple
-[<span style="color: #66D9EF;">install</span>]
-<span style="color: #FD971F;">trusted-host</span> = https://pypi.tuna.tsinghua.edu.cn
-<span style="color: #75715E;"># </span><span style="color: #75715E;">trusted-host &#27492;&#21442;&#25968;&#26159;&#20026;&#20102;&#36991;&#20813;&#40635;&#28902;&#65292;&#21542;&#21017;&#20351;&#29992;&#30340;&#26102;&#20505;&#21487;&#33021;&#20250;&#25552;&#31034;&#19981;&#21463;&#20449;&#20219;</span>
+<pre class="src src-conf">[<span style="color: #5FD7FF;">global</span>]
+<span style="color: #FF8C00;">index-url</span> = https://pypi.tuna.tsinghua.edu.cn/simple
+[<span style="color: #5FD7FF;">install</span>]
+<span style="color: #FF8C00;">trusted-host</span> = https://pypi.tuna.tsinghua.edu.cn
+<span style="color: #8B8878;"># </span><span style="color: #8B8878;">trusted-host &#27492;&#21442;&#25968;&#26159;&#20026;&#20102;&#36991;&#20813;&#40635;&#28902;&#65292;&#21542;&#21017;&#20351;&#29992;&#30340;&#26102;&#20505;&#21487;&#33021;&#20250;&#25552;&#31034;&#19981;&#21463;&#20449;&#20219;</span>
 </pre>
 </div>
 <p>
 建议在root用户下操作
 </p>
+
+<p>
+补充:若pip执行报错外部环境问题，参见<a href="https://www.yaolong.net/article/pip-externally-managed-environment/">这里</a>。
+</p>
 </blockquote>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc2a448" class="outline-3">
-<h3 id="orgdc2a448"><span class="section-number-3">1.2.</span> 使用</h3>
+<div id="outline-container-org2cf0b8e" class="outline-3">
+<h3 id="org2cf0b8e"><span class="section-number-3">1.2.</span> 使用</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-orga56c257" class="outline-4">
-<h4 id="orga56c257"><span class="section-number-4">1.2.1.</span> 框架</h4>
+<div id="outline-container-org59cb453" class="outline-4">
+<h4 id="org59cb453"><span class="section-number-4">1.2.1.</span> 框架</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 引入manim包，随便定义一个继承自 <code>Scene</code> 的类，定义 <code>construct</code> 方法。在其中编写
@@ -344,13 +336,13 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 示例：
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #F92672;">from</span> manim <span style="color: #F92672;">import</span> *
+<pre class="src src-python"><span style="color: #FF1493;">from</span> manim <span style="color: #FF1493;">import</span> *
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">example_class</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">square</span> = Square()
-        <span style="color: #F92672;">self</span>.play(Create(square))
-        <span style="color: #F92672;">self</span>.wait(1)
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">example_class</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">square</span> = Square()
+        <span style="color: #FF1493;">self</span>.play(Create(square))
+        <span style="color: #FF1493;">self</span>.wait(1)
 </pre>
 </div>
 
@@ -374,12 +366,12 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </p>
 </div>
 </div>
-<div id="outline-container-org503c779" class="outline-4">
-<h4 id="org503c779"><span class="section-number-4">1.2.2.</span> 创建对象</h4>
+<div id="outline-container-orgd2c8591" class="outline-4">
+<h4 id="orgd2c8591"><span class="section-number-4">1.2.2.</span> 创建对象</h4>
 <div class="outline-text-4" id="text-1-2-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgadc9b70"></a>列表<br />
+<li><a id="org6ae3383"></a>列表<br />
 <div class="outline-text-5" id="text-1-2-2-1">
 <p>
 将创建对应对象的方法用表格列出：
@@ -461,7 +453,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </table>
 </div>
 </li>
-<li><a id="org78b1c78"></a>属性<br />
+<li><a id="orgdc4d616"></a>属性<br />
 <div class="outline-text-5" id="text-1-2-2-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -535,7 +527,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </table>
 </div>
 <ol class="org-ol">
-<li><a id="orge0d6855"></a>附表<br />
+<li><a id="orga49b4a4"></a>附表<br />
 <div class="outline-text-6" id="text-1-2-2-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -598,8 +590,8 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </li>
 </ol>
 </div>
-<div id="outline-container-orgb2ad9d1" class="outline-4">
-<h4 id="orgb2ad9d1"><span class="section-number-4">1.2.3.</span> 对象定位（对象内部方法）</h4>
+<div id="outline-container-org72e4d23" class="outline-4">
+<h4 id="org72e4d23"><span class="section-number-4">1.2.3.</span> 对象定位（对象内部方法）</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <ul class="org-ul">
 <li><code>move_to()</code>
@@ -626,8 +618,8 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </ul>
 </div>
 </div>
-<div id="outline-container-org8ee23d8" class="outline-4">
-<h4 id="org8ee23d8"><span class="section-number-4">1.2.4.</span> 显示对象</h4>
+<div id="outline-container-orga6f33ba" class="outline-4">
+<h4 id="orga6f33ba"><span class="section-number-4">1.2.4.</span> 显示对象</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <ul class="org-ul">
 <li><code>self.add()</code>
@@ -639,7 +631,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org278d702"></a>动画函数（外部）<br />
+<li><a id="org9b982aa"></a>动画函数（外部）<br />
 <div class="outline-text-5" id="text-1-2-4-1">
 <ul class="org-ul">
 <li><code>FadeIn()</code>
@@ -673,93 +665,93 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </ol>
 </div>
 </div>
-<div id="outline-container-org9dfda92" class="outline-3">
-<h3 id="org9dfda92"><span class="section-number-3">1.3.</span> 示例</h3>
+<div id="outline-container-orgb344219" class="outline-3">
+<h3 id="orgb344219"><span class="section-number-3">1.3.</span> 示例</h3>
 <div class="outline-text-3" id="text-1-3">
 <details>
 <summary>我的抄的实例</summary>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #75715E;">#</span><span style="color: #75715E;">!/bin/python</span>
-<span style="color: #F92672;">from</span> manim <span style="color: #F92672;">import</span> *
+<pre class="src src-python"><span style="color: #8B8878;">#</span><span style="color: #8B8878;">!/bin/python</span>
+<span style="color: #FF1493;">from</span> manim <span style="color: #FF1493;">import</span> *
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">SquareToCircle</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">circle</span> = Circle()
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">SquareToCircle</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">circle</span> = Circle()
         circle.set_fill(PINK, opacity=0.5)
 
-        <span style="color: #FD971F;">square</span> = Square()
+        <span style="color: #FF8C00;">square</span> = Square()
         square.set_fill(BLUE, opacity=0.5)
         square.flip(RIGHT)
         square.rotate(-3 * TAU / 8)
 
-        <span style="color: #F92672;">self</span>.play(Create(square))
-        <span style="color: #F92672;">self</span>.play(Transform(square, circle))
-        <span style="color: #F92672;">self</span>.play(FadeOut(square))
+        <span style="color: #FF1493;">self</span>.play(Create(square))
+        <span style="color: #FF1493;">self</span>.play(Transform(square, circle))
+        <span style="color: #FF1493;">self</span>.play(FadeOut(square))
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">mkCircle</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">circle</span> = Circle()
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">mkCircle</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">circle</span> = Circle()
         circle.set_fill(PINK, opacity=0.5)
 
-        <span style="color: #FD971F;">square</span> = Square()
+        <span style="color: #FF8C00;">square</span> = Square()
         square.set_fill(BLUE, opacity=0.5)
 
         square.next_to(circle, RIGHT, buff=0.5)
-        <span style="color: #F92672;">self</span>.play(Create(square), Create(circle))
+        <span style="color: #FF1493;">self</span>.play(Create(square), Create(circle))
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">AnimatedSquareToCircle</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">circle</span> = Circle()  <span style="color: #75715E;"># </span><span style="color: #75715E;">create a circle</span>
-        <span style="color: #FD971F;">square</span> = Square()  <span style="color: #75715E;"># </span><span style="color: #75715E;">create a square</span>
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">AnimatedSquareToCircle</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">circle</span> = Circle()  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">create a circle</span>
+        <span style="color: #FF8C00;">square</span> = Square()  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">create a square</span>
 
-        <span style="color: #F92672;">self</span>.play(Create(square))  <span style="color: #75715E;"># </span><span style="color: #75715E;">show the square on screen</span>
-        <span style="color: #F92672;">self</span>.play(square.animate.rotate(PI / 4))  <span style="color: #75715E;"># </span><span style="color: #75715E;">rotate the square</span>
-        <span style="color: #F92672;">self</span>.play(
+        <span style="color: #FF1493;">self</span>.play(Create(square))  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">show the square on screen</span>
+        <span style="color: #FF1493;">self</span>.play(square.animate.rotate(PI / 4))  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">rotate the square</span>
+        <span style="color: #FF1493;">self</span>.play(
             ReplacementTransform(square, circle)
-        )  <span style="color: #75715E;"># </span><span style="color: #75715E;">transform the square into a circle</span>
-        <span style="color: #F92672;">self</span>.play(
+        )  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">transform the square into a circle</span>
+        <span style="color: #FF1493;">self</span>.play(
             circle.animate.set_fill(PINK, opacity=0.5)
-        )  <span style="color: #75715E;"># </span><span style="color: #75715E;">color the circle on screen</span>
+        )  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">color the circle on screen</span>
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">OpeningManim</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">title</span> = Tex(r<span style="color: #E6DB74;">"This is some \LaTeX"</span>)
-        <span style="color: #FD971F;">basel</span> = MathTex(r<span style="color: #E6DB74;">"\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}"</span>)
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">OpeningManim</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">title</span> = Tex(r<span style="color: #CDC673;">"This is some \LaTeX"</span>)
+        <span style="color: #FF8C00;">basel</span> = MathTex(r<span style="color: #CDC673;">"\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}"</span>)
         VGroup(title, basel).arrange(DOWN)
-        <span style="color: #F92672;">self</span>.play(
+        <span style="color: #FF1493;">self</span>.play(
             Write(title),
             FadeIn(basel, shift=DOWN),
         )
-        <span style="color: #F92672;">self</span>.wait()
+        <span style="color: #FF1493;">self</span>.wait()
 
-        <span style="color: #FD971F;">transform_title</span> = Tex(<span style="color: #E6DB74;">"That was a transform"</span>)
+        <span style="color: #FF8C00;">transform_title</span> = Tex(<span style="color: #CDC673;">"That was a transform"</span>)
         transform_title.to_corner(UP + LEFT)
-        <span style="color: #F92672;">self</span>.play(
+        <span style="color: #FF1493;">self</span>.play(
             Transform(title, transform_title),
-            LaggedStart(*(FadeOut(obj, shift=DOWN) <span style="color: #F92672;">for</span> obj <span style="color: #F92672;">in</span> basel)),
+            LaggedStart(*(FadeOut(obj, shift=DOWN) <span style="color: #FF1493;">for</span> obj <span style="color: #FF1493;">in</span> basel)),
         )
-        <span style="color: #F92672;">self</span>.wait()
+        <span style="color: #FF1493;">self</span>.wait()
 
-        <span style="color: #FD971F;">grid</span> = NumberPlane()
-        <span style="color: #FD971F;">grid_title</span> = Tex(<span style="color: #E6DB74;">"This is a grid"</span>, font_size=72)
+        <span style="color: #FF8C00;">grid</span> = NumberPlane()
+        <span style="color: #FF8C00;">grid_title</span> = Tex(<span style="color: #CDC673;">"This is a grid"</span>, font_size=72)
         grid_title.move_to(transform_title)
 
-        <span style="color: #F92672;">self</span>.add(grid, grid_title)  <span style="color: #75715E;"># </span><span style="color: #75715E;">Make sure title is on top of grid</span>
-        <span style="color: #F92672;">self</span>.play(
+        <span style="color: #FF1493;">self</span>.add(grid, grid_title)  <span style="color: #8B8878;"># </span><span style="color: #8B8878;">Make sure title is on top of grid</span>
+        <span style="color: #FF1493;">self</span>.play(
             FadeOut(title),
             FadeIn(grid_title, shift=UP),
             Create(grid, run_time=3, lag_ratio=0.1),
         )
-        <span style="color: #F92672;">self</span>.wait()
+        <span style="color: #FF1493;">self</span>.wait()
 
-        <span style="color: #FD971F;">grid_transform_title</span> = Tex(
-            r<span style="color: #E6DB74;">"That was a non-linear function \\ applied to the grid"</span>,
+        <span style="color: #FF8C00;">grid_transform_title</span> = Tex(
+            r<span style="color: #CDC673;">"That was a non-linear function \\ applied to the grid"</span>,
         )
         grid_transform_title.move_to(grid_title, UL)
         grid.prepare_for_nonlinear_transform()
-        <span style="color: #F92672;">self</span>.play(
+        <span style="color: #FF1493;">self</span>.play(
             grid.animate.apply_function(
-                <span style="color: #F92672;">lambda</span> p: p
+                <span style="color: #FF1493;">lambda</span> p: p
                 + np.array(
                     [
                         np.sin(p[1]),
@@ -770,69 +762,69 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
             ),
             run_time=3,
         )
-        <span style="color: #F92672;">self</span>.wait()
+        <span style="color: #FF1493;">self</span>.wait()
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">test</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">text</span> = Tex(r<span style="color: #E6DB74;">"TEXT"</span>)
-        <span style="color: #F92672;">self</span>.play(Create(text))
-        <span style="color: #F92672;">self</span>.wait()
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">test</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">text</span> = Tex(r<span style="color: #CDC673;">"TEXT"</span>)
+        <span style="color: #FF1493;">self</span>.play(Create(text))
+        <span style="color: #FF1493;">self</span>.wait()
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">test2</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">text</span> = Tex(r<span style="color: #E6DB74;">"&#20013;&#25991;&#28210;&#26579;&#27979;&#35797;"</span>, tex_template=TexTemplateLibrary.ctex)
-        <span style="color: #FD971F;">text2</span> = Tex(r<span style="color: #E6DB74;">"&#36825;&#26159;&#31532;&#20108;&#27573;&#27979;&#35797;&#25991;&#23383;"</span>, tex_template=TexTemplateLibrary.ctex)
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">test2</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">text</span> = Tex(r<span style="color: #CDC673;">"&#20013;&#25991;&#28210;&#26579;&#27979;&#35797;"</span>, tex_template=TexTemplateLibrary.ctex)
+        <span style="color: #FF8C00;">text2</span> = Tex(r<span style="color: #CDC673;">"&#36825;&#26159;&#31532;&#20108;&#27573;&#27979;&#35797;&#25991;&#23383;"</span>, tex_template=TexTemplateLibrary.ctex)
         text2.move_to(DOWN)
-        <span style="color: #F92672;">self</span>.play(Create(text))
-        <span style="color: #F92672;">self</span>.play(FadeIn(text2, shift=UP))
-        <span style="color: #F92672;">self</span>.wait()
+        <span style="color: #FF1493;">self</span>.play(Create(text))
+        <span style="color: #FF1493;">self</span>.play(FadeIn(text2, shift=UP))
+        <span style="color: #FF1493;">self</span>.wait()
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">DifferentRotations</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">left_square</span> = Square(color=BLUE, fill_opacity=0.7).shift(2 * LEFT)
-        <span style="color: #FD971F;">right_square</span> = Square(color=GREEN, fill_opacity=0.7).shift(2 * RIGHT)
-        <span style="color: #F92672;">self</span>.play(
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">DifferentRotations</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">left_square</span> = Square(color=BLUE, fill_opacity=0.7).shift(2 * LEFT)
+        <span style="color: #FF8C00;">right_square</span> = Square(color=GREEN, fill_opacity=0.7).shift(2 * RIGHT)
+        <span style="color: #FF1493;">self</span>.play(
             left_square.animate.rotate(PI), Rotate(right_square, angle=PI), run_time=2
         )
-        <span style="color: #F92672;">self</span>.wait()
+        <span style="color: #FF1493;">self</span>.wait()
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Shapes</span>(Scene):
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">circle</span> = Circle()
-        <span style="color: #FD971F;">square</span> = Square()
-        <span style="color: #FD971F;">triangle</span> = Triangle()
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">Shapes</span>(Scene):
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">circle</span> = Circle()
+        <span style="color: #FF8C00;">square</span> = Square()
+        <span style="color: #FF8C00;">triangle</span> = Triangle()
 
         circle.shift(LEFT)
         square.shift(UP)
         triangle.shift(RIGHT)
 
-        <span style="color: #F92672;">self</span>.add(circle, square, triangle)
-        <span style="color: #F92672;">self</span>.wait(1)
+        <span style="color: #FF1493;">self</span>.add(circle, square, triangle)
+        <span style="color: #FF1493;">self</span>.wait(1)
 
-<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">MoreShapes</span>(Scene):
-    <span style="color: #75715E;"># </span><span style="color: #75715E;">A few more simple shapes</span>
-    <span style="color: #75715E;"># </span><span style="color: #75715E;">2.7 version runs in 3.7 without any changes</span>
-    <span style="color: #75715E;"># </span><span style="color: #75715E;">Note: I fixed my 'play command not found' issue by installing sox</span>
-    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">circle</span> = Circle(color=PURPLE_A)
-        <span style="color: #FD971F;">square</span> = Square(fill_color=GOLD_B, fill_opacity=1, color=GOLD_A)
+<span style="color: #FF1493;">class</span> <span style="color: #5FD7FF;">MoreShapes</span>(Scene):
+    <span style="color: #8B8878;"># </span><span style="color: #8B8878;">A few more simple shapes</span>
+    <span style="color: #8B8878;"># </span><span style="color: #8B8878;">2.7 version runs in 3.7 without any changes</span>
+    <span style="color: #8B8878;"># </span><span style="color: #8B8878;">Note: I fixed my 'play command not found' issue by installing sox</span>
+    <span style="color: #FF1493;">def</span> <span style="color: #87D700;">construct</span>(<span style="color: #FF1493;">self</span>):
+        <span style="color: #FF8C00;">circle</span> = Circle(color=PURPLE_A)
+        <span style="color: #FF8C00;">square</span> = Square(fill_color=GOLD_B, fill_opacity=1, color=GOLD_A)
         square.move_to(UP+LEFT)
         circle.surround(square)
-        <span style="color: #FD971F;">rectangle</span> = Rectangle(height=2, width=3)
-        <span style="color: #FD971F;">ellipse</span> = Ellipse(width=3, height=1, color=RED)
+        <span style="color: #FF8C00;">rectangle</span> = Rectangle(height=2, width=3)
+        <span style="color: #FF8C00;">ellipse</span> = Ellipse(width=3, height=1, color=RED)
         ellipse.shift(2*DOWN+2*RIGHT)
-        <span style="color: #FD971F;">pointer</span> = CurvedArrow(2*RIGHT,5*RIGHT,color=MAROON_C)
-        <span style="color: #FD971F;">arrow</span> = Arrow(LEFT,UP)
+        <span style="color: #FF8C00;">pointer</span> = CurvedArrow(2*RIGHT,5*RIGHT,color=MAROON_C)
+        <span style="color: #FF8C00;">arrow</span> = Arrow(LEFT,UP)
         arrow.next_to(circle,DOWN+LEFT)
         rectangle.next_to(arrow,DOWN+LEFT)
-        <span style="color: #FD971F;">ring</span> = Annulus(inner_radius=.5, outer_radius=1, color=BLUE)
+        <span style="color: #FF8C00;">ring</span> = Annulus(inner_radius=.5, outer_radius=1, color=BLUE)
         ring.next_to(ellipse, RIGHT)
 
-        <span style="color: #F92672;">self</span>.add(pointer)
-        <span style="color: #F92672;">self</span>.play(FadeIn(square))
-        <span style="color: #F92672;">self</span>.play(Rotating(square),FadeIn(circle))
-        <span style="color: #F92672;">self</span>.play(GrowArrow(arrow))
-        <span style="color: #F92672;">self</span>.play(GrowFromCenter(rectangle), GrowFromCenter(ellipse), GrowFromCenter(ring))
+        <span style="color: #FF1493;">self</span>.add(pointer)
+        <span style="color: #FF1493;">self</span>.play(FadeIn(square))
+        <span style="color: #FF1493;">self</span>.play(Rotating(square),FadeIn(circle))
+        <span style="color: #FF1493;">self</span>.play(GrowArrow(arrow))
+        <span style="color: #FF1493;">self</span>.play(GrowFromCenter(rectangle), GrowFromCenter(ellipse), GrowFromCenter(ring))
 
 </pre>
 </div>
@@ -841,8 +833,8 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </div>
 </div>
 
-<div id="outline-container-orga521058" class="outline-2">
-<h2 id="orga521058"><span class="section-number-2">2.</span> Reference</h2>
+<div id="outline-container-org84f1ca2" class="outline-2">
+<h2 id="org84f1ca2"><span class="section-number-2">2.</span> Reference</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>ManimGL版本的教程与文档（有部分与ManimCE不兼容）
@@ -878,7 +870,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 <div id="postamble" class="status">
 <p class="date">Date: 2023-08-23 三 00:47</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-08-23 三 23:50</p>
+<p class="date">Created: 2023-10-14 六 07:59</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

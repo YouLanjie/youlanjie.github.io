@@ -1,5 +1,3 @@
-#+TITLE: TimeLine
-#+setupfile: ../setup.setup
 - /2023-08-23 00:47/ [[../post/学习笔记/python/manim/Manim学习笔记.org][manim学习笔记]]\\
   啃manim教程
 - /2023-08-15 11:33/ [[../post/其他/小说/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域18 Alicization篇（10）.org][（萌动王朝）刀剑神域18 alicization篇（10）]]\\
@@ -75,3 +73,5 @@
   记录我个人的archlinux软件配置
 - /2022-07-02 22:56/ [[../post/ArchLinux学习系列/ArchLinux的安装.org][archlinux的安装]]\\
   记录我个人安装archlinux的过程
+#+setupfile: ../setup.setup
+#+TITLE: TimeLine
