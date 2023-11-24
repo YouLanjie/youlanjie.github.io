@@ -30,6 +30,20 @@
      <div class=\"clearfix\"></div>
    </header>")
 
+(setq-default org-src-fontify-natively t
+;; 设置org高亮代码块
+;; Non-nil means interpret "_" and "^" for display.
+	      org-export-with-sub-superscripts '{}
+	      ;; 适用于导出
+	      org-use-sub-superscripts '{}
+	      ;; 适用于org-mode中渲染
+
+	      ;; Org转PDF渲染流程
+	      ;; org-latex-pdf-process '("xelatex %f"
+	      ;; 			      "rm -fr %b.out %b.log %b.brf %b.bbl auto"
+	      ;; 			      )
+	      )
+
 
 (org-html-export-to-html)
 (kill-emacs)

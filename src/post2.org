@@ -1,3 +1,7 @@
+- /2023-11-24 22:00/ [[../post/学习笔记/python/manim/使用manim制作一个动画.org][使用manim制作一个完整的动画]]\\
+  记使用manim制作一个动画的经验或过程
+- /2023-11-24 21:00/ [[../post/学习笔记/python/manim/在Termux上安装ArchLinux并安装好Manim.org][在termux上安装archlinux并安装好manim.org]]\\
+  如题，网上资料也忒少了吧
 - /2023-08-23 00:47/ [[../post/学习笔记/python/manim/Manim学习笔记.org][manim学习笔记]]\\
   啃manim教程
 - /2023-08-15 11:33/ [[../post/其他/小说/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域18 Alicization篇（10）.org][（萌动王朝）刀剑神域18 alicization篇（10）]]\\
