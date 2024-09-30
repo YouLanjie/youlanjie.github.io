@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-11-24 Fri 21:58 -->
+<!-- 2024-10-01 Tue 01:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>在Termux上安装ArchLinux并安装好Manim.org</title>
+<title>在Termux上安装ArchLinux并安装好Manim</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="如题，网上资料也忒少了吧" />
 <meta name="generator" content="Org Mode" />
@@ -202,41 +202,29 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="preamble" class="status">
-<header>
-     <a href="/">
-       <img src="/img/icon.jpg" height="35">
-     </a>
-     <a href="/">  Home  </a>
-     <a href="/src/post.html">  Blog  </a>
-     <a href="/src/post2.html">  TimeLine  </a>
-     <a href="/about.html">  About  </a>
-     <div class="clearfix"></div>
-   </header>
-</div>
-<div id="content" class="content">
-<h1 class="title">在Termux上安装ArchLinux并安装好Manim.org</h1>
+</div><div id="content" class="content">
+<h1 class="title">在Termux上安装ArchLinux并安装好Manim</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb7a20dc">1. 准备环境</a>
+<li><a href="#orgf7f362f">1. 准备环境</a>
 <ul>
-<li><a href="#orgca3527b">1.1. 在Termux上安装ArchLinux</a></li>
-<li><a href="#orgc5d161a">1.2. 配置开发环境</a></li>
+<li><a href="#org64684a3">1.1. 在Termux上安装ArchLinux</a></li>
+<li><a href="#orgbc341b9">1.2. 配置开发环境</a></li>
 </ul>
 </li>
-<li><a href="#orgd765153">2. 安装好Manim</a></li>
+<li><a href="#orgadb2254">2. 安装好Manim</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb7a20dc" class="outline-2">
-<h2 id="orgb7a20dc"><span class="section-number-2">1.</span> 准备环境</h2>
+<div id="outline-container-orgf7f362f" class="outline-2">
+<h2 id="orgf7f362f"><span class="section-number-2">1.</span> 准备环境</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgca3527b" class="outline-3">
-<h3 id="orgca3527b"><span class="section-number-3">1.1.</span> 在Termux上安装ArchLinux</h3>
+<div id="outline-container-org64684a3" class="outline-3">
+<h3 id="org64684a3"><span class="section-number-3">1.1.</span> 在Termux上安装ArchLinux</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 在Termux中安装"proot-distro"工具以安装Archlinux:
@@ -266,8 +254,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5d161a" class="outline-3">
-<h3 id="orgc5d161a"><span class="section-number-3">1.2.</span> 配置开发环境</h3>
+<div id="outline-container-orgbc341b9" class="outline-3">
+<h3 id="orgbc341b9"><span class="section-number-3">1.2.</span> 配置开发环境</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 如果想要用默认配置的Shell，建议直接使用fish，其原装配置就足够正常使用了
@@ -336,11 +324,18 @@
 更多内容详见<a href="https://www.yaolong.net/article/pip-externally-managed-environment/">这里</a>。
 </p>
 </blockquote>
+
+<blockquote>
+<p>
+2024.10.1更新：参照其提示使用pipx或许会是更优的选择？
+</p>
+</blockquote>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd765153" class="outline-2">
-<h2 id="orgd765153"><span class="section-number-2">2.</span> 安装好Manim</h2>
+
+<div id="outline-container-orgadb2254" class="outline-2">
+<h2 id="orgadb2254"><span class="section-number-2">2.</span> 安装好Manim</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 实际上这件事的难点就在于解决安装过程中的依赖问题。在做完以上操作之后，理论上只需
@@ -350,13 +345,24 @@
 <pre class="src src-shell">pip install manim
 </pre>
 </div>
+
+<blockquote>
+<p>
+2024.10.1更新：用pipx的命令
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">run `pacman -S python-pipx` to install it</span>
+pipx install manim
+</pre>
+</div>
+</blockquote>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2023-11-24 Fri 21:00</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-11-24 Fri 21:58</p>
+<p class="date">Created: 2024-10-01 Tue 01:18</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

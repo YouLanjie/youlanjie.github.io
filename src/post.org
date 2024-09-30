@@ -34,6 +34,8 @@
   - Python
     - manim
       - [[../post/学习笔记/python/manim/在Termux上安装ArchLinux并安装好Manim.org][在Termux上安装ArchLinux并安装好Manim]]
+      - [[../post/学习笔记/python/manim/Manim学习笔记.org][Manim学习笔记]]
+      - [[../post/学习笔记/python/manim/使用manim制作一个动画.org][使用manim制作一个动画]]
   - 计算机学习
     - [[../post/学习笔记/计算机学习/从零开始认识计算机.org][从零开始认识计算机]]
       内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记
@@ -47,10 +49,6 @@
       我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
   - Vim
     - [[../post/一些工具/Vim/使用Vim.html][使用Vim]]
-  - python
-    - Manim
-      - [[../post/学习笔记/python/manim/Manim学习笔记.html][Manim学习笔记]]
-      - [[../post/学习笔记/python/manim/使用manim制作一个动画.org][使用manim制作一个动画]]
 - ArchLinux学习系列
   - [[../post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
     记录我个人安装archlinux的过程

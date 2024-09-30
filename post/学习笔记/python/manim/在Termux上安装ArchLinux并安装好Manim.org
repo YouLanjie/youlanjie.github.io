@@ -1,4 +1,4 @@
-#+TITLE: 在Termux上安装ArchLinux并安装好Manim.org
+#+TITLE: 在Termux上安装ArchLinux并安装好Manim
 #+DATE: <2023-11-24 四 21:00>
 #+description: 如题，网上资料也忒少了吧
 
@@ -67,9 +67,22 @@
 
 更多内容详见[[https://www.yaolong.net/article/pip-externally-managed-environment/][这里]]。
 #+end_quote
+
+#+begin_quote
+2024.10.1更新：参照其提示使用pipx或许会是更优的选择？
+#+end_quote
+
 * 安装好Manim
 实际上这件事的难点就在于解决安装过程中的依赖问题。在做完以上操作之后，理论上只需
 要执行以下命令即可安装manim(CE):
 #+begin_src shell
   pip install manim
 #+end_src
+
+#+begin_quote
+2024.10.1更新：用pipx的命令
+#+begin_src shell
+  # run `pacman -S python-pipx` to install it
+  pipx install manim
+#+end_src
+#+end_quote
