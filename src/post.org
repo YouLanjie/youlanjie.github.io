@@ -49,6 +49,9 @@
       我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
   - Vim
     - [[../post/一些工具/Vim/使用Vim.html][使用Vim]]
+  - Latex
+    - [[../post/一些工具/Latex/Latex笔记.org][Latex笔记]]
+      Latex学习笔记
 - ArchLinux学习系列
   - [[../post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
     记录我个人安装archlinux的过程

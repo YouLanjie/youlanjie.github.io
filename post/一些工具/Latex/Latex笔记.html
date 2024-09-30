@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2024-10-01 Tue 02:26 -->
+<!-- 2024-10-01 Tue 02:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>我的个人博客</title>
+<title>Latex学习笔记</title>
 <meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="Latex使用过程中查阅一些资料做的笔记，防忘" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -202,133 +203,66 @@
  |
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content" class="content">
-<h1 class="title">我的个人博客</h1>
+<h1 class="title">Latex学习笔记</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaab4b83">1. Welcome</a></li>
-<li><a href="#orgbaa3757">2. 我的文章（按内容分类）</a></li>
+<li><a href="#org92c0d15">1. 基本结构</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgaab4b83" class="outline-2">
-<h2 id="orgaab4b83"><span class="section-number-2">1.</span> Welcome</h2>
+<div id="outline-container-org92c0d15" class="outline-2">
+<h2 id="org92c0d15"><span class="section-number-2">1.</span> 基本结构</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-欢迎来到我的个人博客。
+Latex文件基本结构如下：
 </p>
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #75715E;">% </span><span style="color: #75715E;">&#20351;&#29992;&#30340;&#23439;&#21253;</span>
+<span style="color: #F92672;">\usepackage</span>{<span style="color: #F92672;">ctex</span>}
 
-<p>
-点击 <code>TimeLine</code> 查看按时间排序的文章列表界面。
-</p>
+<span style="color: #75715E;">% </span><span style="color: #75715E;">&#25991;&#20214;&#30340;&#20316;&#32773;&#12289;&#26085;&#26399;&#12289;&#26631;&#39064;&#31561;&#20449;&#24687;</span>
+<span style="color: #F92672;">\author</span>{}
+<span style="color: #F92672;">\date</span>{}
+<span style="color: #F92672;">\title</span>{}
+
+<span style="color: #75715E;">% </span><span style="color: #75715E;">&#25991;&#26723;&#27491;&#25991;&#24320;&#22987;</span>
+<span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">document</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">&#32472;&#21046;&#26631;&#39064;&#31561;&#65288;&#25991;&#20214;&#22836;&#65289;</span>
+<span style="color: #F92672;">\maketitle</span>
+<span style="color: #F92672;">\tableofcontents</span>
+
+<span style="color: #75715E;">% </span><span style="color: #75715E;">&#27491;&#25991;</span>
+<span style="color: #F92672;">\section</span>{<span style="color: #A6E22E;">A</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\section</span>{<span style="color: #A6E22E;">B</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\subsection</span>{<span style="color: #A6E22E;">Ba</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\subsection</span>{<span style="color: #A6E22E;">Bb</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\subsection</span>{<span style="color: #A6E22E;">Bc</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\subsubsection</span>{<span style="color: #A6E22E;">Bca</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\subsubsection</span>{<span style="color: #A6E22E;">Bcb</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+<span style="color: #F92672;">\subsection</span>{<span style="color: #A6E22E;">Bd</span>}
+<span style="color: #75715E;">% </span><span style="color: #75715E;">....</span>
+
+<span style="color: #75715E;">% </span><span style="color: #75715E;">&#27491;&#25991;&#32467;&#26463;</span>
+<span style="color: #F92672;">\end</span>{<span style="color: #A6E22E;">document</span>}
+</pre>
 </div>
-</div>
-<div id="outline-container-orgbaa3757" class="outline-2">
-<h2 id="orgbaa3757"><span class="section-number-2">2.</span> 我的文章（按内容分类）</h2>
-<div class="outline-text-2" id="text-2">
-<ul class="org-ul">
-<li>关于建站
-<ul class="org-ul">
-<li><a href="post/关于建站/使用github.io建立自己的博客.html">使用github.io建立自己的博客 - hexo+hugo+Emacs Org</a>
-分别使用Hexo、Hugo、Emacs Org建立自己的博客。</li>
-<li><a href="post/关于建站/用github.io建立一个自己的博客网站.html">用github.io建立一个自己的博客网站 - 仅Jekyll</a>
-使用github.io和jekyll建立一个自己的博客网站</li>
-</ul></li>
-<li>其他
-<ul class="org-ul">
-<li>小说
-<ul class="org-ul">
-<li><a href="post/其他/小说/SAO/">《刀剑神域》资源索引</a>
-由于资源有点多所以做了个分页作索引</li>
-</ul></li>
-<li>游戏
-<ul class="org-ul">
-<li>Unciv
-<ul class="org-ul">
-<li><a href="post/其他/游戏/unciv/Unciv.html">unciv——一款模拟文明游戏</a>
-一款仿照文明5的文明模拟策略游戏</li>
-<li><a href="post/其他/游戏/unciv/个人游玩经验分享.html">个人游玩经验分享</a>
-玩这个游戏总算是有一定的时长了，自己也摸索出来了一些比较有趣的打法分享
-（ <del>TNND不经检验啊，图一乐就好</del> ）</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>学习笔记
-<ul class="org-ul">
-<li>语文
-<ul class="org-ul">
-<li><a href="post/学习笔记/语文/语文笔记.html">语文笔记</a>
-内容来自b站的视频，笔记是我自己写的</li>
-<li><a href="post/学习笔记/语文/小学笔记汇总.html">小学语文笔记汇总</a>
-从小学课本上抄下来的</li>
-<li><a href="post/学习笔记/语文/语文笔记2.html">语文笔记2</a>
-内容来自课本和部分教辅材料</li>
-</ul></li>
-<li>道法
-<ul class="org-ul">
-<li><a href="post/学习笔记/道法/八下早读材料.html">八下早读材料</a></li>
-</ul></li>
-<li>C语言学习
-<ul class="org-ul">
-<li><a href="post/学习笔记/C语言学习/打印字符使用特殊效果.html">打印字符使用特殊效果</a>
-使用ANSI转义字符实现终端输出字符带有特殊效果</li>
-<li><a href="post/学习笔记/C语言学习/C语言入门.html">C语言入门</a>
-一本C语言教程</li>
-</ul></li>
-<li>Python
-<ul class="org-ul">
-<li>manim
-<ul class="org-ul">
-<li><a href="post/学习笔记/python/manim/在Termux上安装ArchLinux并安装好Manim.html">在Termux上安装ArchLinux并安装好Manim</a></li>
-<li><a href="post/学习笔记/python/manim/Manim学习笔记.html">Manim学习笔记</a></li>
-<li><a href="post/学习笔记/python/manim/使用manim制作一个动画.html">使用manim制作一个动画</a></li>
-</ul></li>
-</ul></li>
-<li>计算机学习
-<ul class="org-ul">
-<li><a href="post/学习笔记/计算机学习/从零开始认识计算机.html">从零开始认识计算机</a>
-内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记</li>
-</ul></li>
-</ul></li>
-<li>一些工具
-<ul class="org-ul">
-<li><a href="post/一些工具/我用的小工具盘点.html">我用的小工具盘点</a>
-记录一些Linux中有趣但不一定常用的软件</li>
-<li>Emacs
-<ul class="org-ul">
-<li><a href="post/一些工具/Emacs/从vim转移到emacs.html">从vim转移到emacs</a>
-单纯的口水文</li>
-<li><a href="post/一些工具/Emacs/Emacs学习笔记.html">Emacs学习笔记</a>
-我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中</li>
-</ul></li>
-<li>Vim
-<ul class="org-ul">
-<li><a href="post/一些工具/Vim/使用Vim.html">使用Vim</a></li>
-</ul></li>
-<li>Latex
-<ul class="org-ul">
-<li><a href="post/一些工具/Latex/Latex笔记.html">Latex笔记</a>
-Latex学习笔记</li>
-</ul></li>
-</ul></li>
-<li>ArchLinux学习系列
-<ul class="org-ul">
-<li><a href="post/ArchLinux学习系列/ArchLinux的安装.html">ArchLinux的安装</a>
-记录我个人安装archlinux的过程</li>
-<li><a href="post/ArchLinux学习系列/ArchLinux的配置.html">ArchLinux的配置</a>
-记录我个人的archlinux软件配置</li>
-<li><a href="post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html">Archiso——打造属于你的在U盘上的Archlinux Live系统</a>
-如何使用archiso工具打造一个自定义的U盘上的临时Live系统</li>
-</ul></li>
-</ul>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
+<p class="date">Date: 2024-10-01 Tue 02:04</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2024-10-01 Tue 02:26</p>
+<p class="date">Created: 2024-10-01 Tue 02:20</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

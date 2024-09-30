@@ -1,3 +1,5 @@
+- /2024-10-01 02:04/ [[../post/一些工具/Latex/Latex笔记.org][latex学习笔记]]\\
+  latex使用过程中查阅一些资料做的笔记，防忘
 - /2023-11-24 22:00/ [[../post/学习笔记/python/manim/使用manim制作一个动画.org][使用manim制作一个完整的动画]]\\
   记使用manim制作一个动画的经验或过程
 - /2023-11-24 21:00/ [[../post/学习笔记/python/manim/在Termux上安装ArchLinux并安装好Manim.org][在termux上安装archlinux并安装好manim]]\\

@@ -1,0 +1,44 @@
+#+title: Latex学习笔记
+#+date: <2024-10-01 二 02:04>
+#+description: Latex使用过程中查阅一些资料做的笔记，防忘
+
+#+setupfile: ../../../setup.setup
+
+* 基本结构
+Latex文件基本结构如下：
+#+begin_src latex
+  % 使用的宏包
+  \usepackage{ctex}
+
+  % 文件的作者、日期、标题等信息
+  \author{}
+  \date{}
+  \title{}
+
+  % 文档正文开始
+  \begin{document}
+  % 绘制标题等（文件头）
+  \maketit
+  \tableofcontents
+
+  % 正文
+  \section{A}
+  % ....
+  \section{B}
+  % ....
+  \subsection{Ba}
+  % ....
+  \subsection{Bb}
+  % ....
+  \subsection{Bc}
+  % ....
+  \subsubsection{Bca}
+  % ....
+  \subsubsection{Bcb}
+  % ....
+  \subsection{Bd}
+  % ....
+
+  % 正文结束
+  \end{document}
+#+end_src
