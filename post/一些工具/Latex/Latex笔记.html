@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2024-10-01 Tue 10:36 -->
+<!-- 2024-11-10 Sun 00:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Latex学习笔记</title>
@@ -220,19 +220,52 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge1dfaf5">1. 基本结构</a></li>
+<li><a href="#orgda15882">1. 基本语法</a></li>
+<li><a href="#org7888801">2. 基本结构</a>
+<ul>
+<li><a href="#orgc37f2dd">2.1. 文章类型</a></li>
+<li><a href="#org983bc89">2.2. 宏包</a></li>
+</ul>
+</li>
+<li><a href="#org7b85fbd">3. 正文样式</a>
+<ul>
+<li><a href="#org195df35">3.1. begin&amp;end</a></li>
+<li><a href="#orga5bb9bf">3.2. 表格</a></li>
+<li><a href="#org74687df">3.3. 字体样式</a></li>
+<li><a href="#org64147fe">3.4. 其他东西</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge1dfaf5" class="outline-2">
-<h2 id="orge1dfaf5"><span class="section-number-2">1.</span> 基本结构</h2>
+<div id="outline-container-orgda15882" class="outline-2">
+<h2 id="orgda15882"><span class="section-number-2">1.</span> 基本语法</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+Latex文件大致可分为文章内容（渲染的内容）和排版控制命令（起特殊作用）两部分，文
+章内容直接写就行，而命令的基本格式为 <code>\XXX[可选参数]{位置参数}</code> ，其中 <code>XXX</code> 为
+命令名，中括号内为可选参数（有时可直接忽略），大括号内为位置参数。如果在命令外部
+套一个大括号这可以限制其作用范围。
+</p>
+
+<p>
+命令有文档类型命令、宏包命令、用户命令等
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7888801" class="outline-2">
+<h2 id="org7888801"><span class="section-number-2">2.</span> 基本结构</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Latex文件基本结构如下：
 </p>
 <div class="org-src-container">
-<pre class="src src-latex"><span style="color: #75715E;">% </span><span style="color: #75715E;">&#20351;&#29992;&#30340;&#23439;&#21253;</span>
+<pre class="src src-latex"><span style="color: #75715E;">% </span><span style="color: #75715E;">&#25991;&#31456;&#31867;&#22411;</span>
+<span style="color: #F92672;">\documentclass</span>[11pt]{<span style="color: #F92672;">article</span>}
+
+<span style="color: #75715E;">% </span><span style="color: #75715E;">&#20351;&#29992;&#30340;&#23439;&#21253;</span>
 <span style="color: #F92672;">\usepackage</span>{<span style="color: #F92672;">ctex</span>}
 
 <span style="color: #75715E;">% </span><span style="color: #75715E;">&#25991;&#20214;&#30340;&#20316;&#32773;&#12289;&#26085;&#26399;&#12289;&#26631;&#39064;&#31561;&#20449;&#24687;</span>
@@ -269,12 +302,122 @@ Latex文件基本结构如下：
 </pre>
 </div>
 </div>
+
+<div id="outline-container-orgc37f2dd" class="outline-3">
+<h3 id="orgc37f2dd"><span class="section-number-3">2.1.</span> 文章类型</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+由命令 <code>\documentclass{}</code> 指定，常见的有 <code>article</code> <code>book</code> <code>beamer</code> 等，中括号内
+可以设置文章都字体大小。
+文章类型就好比是一个基本模板，提供了其相应的命令及其效果，如 <code>article</code> 中有
+<code>\section</code> <code>\subsection</code> 等， <code>book</code> 中有 <code>part</code> <code>chapter</code> 等，适应不同文件到需要。
+</p>
+</div>
+</div>
+<div id="outline-container-org983bc89" class="outline-3">
+<h3 id="org983bc89"><span class="section-number-3">2.2.</span> 宏包</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+宏包，即tex文件头部的 <code>usepackage</code> 语句后面所跟的参数，其功能类似于c语言的头文件，
+python的包，能够提供一些包装好的功能用于排版或者其他事情。下面我将列举些我用的宏
+包：
+</p>
+
+<ol class="org-ol">
+<li>ctex: 想要写中文tex文件就绕不过去的包，需要和xelatex搭配食用才能够正常渲染中
+文</li>
+<li>geometry: 用于控制页边距，需要在调用后使用 <code>\geometry{scale=0.7}</code> 对页边距进
+行指定</li>
+<li>mhchem: 书写化学方程式 <code>\ce{Zn + 2H2O = Zn(OH) + H2 ^}</code></li>
+<li>cancel: 使用删除线 <code>\usepackage[thicklines]{cancel}</code> <code>\cancel{}</code></li>
+<li>hyperref: 插入超链接 <code>\usepackage[hidelinks]{hyperref}</code></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7b85fbd" class="outline-2">
+<h2 id="org7b85fbd"><span class="section-number-2">3.</span> 正文样式</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org195df35" class="outline-3">
+<h3 id="org195df35"><span class="section-number-3">3.1.</span> begin&amp;end</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<code>\begin</code> <code>\end</code> 命令通常用于开始和结束某一个环境
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga5bb9bf" class="outline-3">
+<h3 id="orga5bb9bf"><span class="section-number-3">3.2.</span> 表格</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-latex"><span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">table</span>}[h]
+        <span style="color: #F92672;">\centering</span>
+        <span style="color: #F92672;">\caption</span>{&#25551;&#36848;}
+        <span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">tabular</span>}{|c|l|r|c|}
+                &#31532;&#19968;&#32452; &amp; &#31532;&#20108;&#32452; &amp; &#31532;&#19977;&#32452; &amp; &#31532;&#22235;&#32452; <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                <span style="color: #F92672;">\hline</span>
+                <span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">tabular</span>}{c|c}
+                        1 &amp; 6 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                        2 &amp; 8 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                <span style="color: #F92672;">\end</span>{<span style="color: #A6E22E;">tabular</span>} &amp;
+                <span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">tabular</span>}{c|c}
+                        3 &amp; 9 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                        <span style="color: #F92672;">\hline</span>
+                        4 &amp; 2 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                <span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">tabular</span>}{c|c}
+                <span style="color: #F92672;">\end</span>{<span style="color: #A6E22E;">tabular</span>} &amp;
+                        5 &amp; 6 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                        8 &amp; 3 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                <span style="color: #F92672;">\end</span>{<span style="color: #A6E22E;">tabular</span>} &amp;
+                <span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">tabular</span>}{c|c}
+                        4 &amp; 2 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                        <span style="color: #F92672;">\hline</span>
+                        3 &amp; 9 <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                <span style="color: #F92672;">\begin</span>{<span style="color: #A6E22E;">tabular</span>}{c|c} <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+                &#31532;&#19968;&#32452; &amp; &#31532;&#20108;&#32452; &amp; &#31532;&#19977;&#32452; &amp; &#31532;&#22235;&#32452; <span style="color: #FD971F; font-weight: bold; font-style: italic; text-decoration: underline;">\\</span>
+        <span style="color: #F92672;">\end</span>{<span style="color: #A6E22E;">tabular</span>}
+        <span style="color: #F92672;">\label</span>{<span style="color: #AE81FF;">&#34920;</span>}
+<span style="color: #F92672;">\end</span>{<span style="color: #A6E22E;">table</span>}
+</pre>
+</div>
+<p>
+以 <code>tabular</code> 作纵向表格环境，内部可以镶嵌，外部套一个 <code>table</code> 环境，表格数据间通
+过… <code>&amp;</code> 进行横向分割通过 <code>\\</code> 进行纵向分割
+</p>
+</div>
+</div>
+
+<div id="outline-container-org74687df" class="outline-3">
+<h3 id="org74687df"><span class="section-number-3">3.3.</span> 字体样式</h3>
+<div class="outline-text-3" id="text-3-3">
+<ol class="org-ol">
+<li>粗体 <code>（未知）</code></li>
+<li>斜体 <code>\textit{XXX}</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org64147fe" class="outline-3">
+<h3 id="org64147fe"><span class="section-number-3">3.4.</span> 其他东西</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+自定义命令： <code>\newcommand{\name}[arg_num]{do sth here,#1 means arg 1}</code>
+</p>
+
+<p>
+特殊字符表示: <code>~</code> 应写作 <code>\~{}</code> ,其余的套个反斜杠即可
+</p>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2024-10-01 Tue 02:04</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2024-10-01 Tue 10:36</p>
+<p class="date">Created: 2024-11-10 Sun 00:34</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

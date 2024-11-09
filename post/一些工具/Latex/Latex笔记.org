@@ -4,9 +4,20 @@
 
 #+setupfile: ../../../setup.setup
 
+* 基本语法
+Latex文件大致可分为文章内容（渲染的内容）和排版控制命令（起特殊作用）两部分，文
+章内容直接写就行，而命令的基本格式为 =\XXX[可选参数]{位置参数}= ，其中 =XXX= 为
+命令名，中括号内为可选参数（有时可直接忽略），大括号内为位置参数。如果在命令外部
+套一个大括号这可以限制其作用范围。
+
+命令有文档类型命令、宏包命令、用户命令等
+
 * 基本结构
 Latex文件基本结构如下：
 #+begin_src latex
+  % 文章类型
+  \documentclass[11pt]{article}
+
   % 使用的宏包
   \usepackage{ctex}
 
@@ -42,3 +53,69 @@ Latex文件基本结构如下：
   % 正文结束
   \end{document}
 #+end_src
+
+** 文章类型
+由命令 =\documentclass{}= 指定，常见的有 =article= =book= =beamer= 等，中括号内
+可以设置文章都字体大小。
+文章类型就好比是一个基本模板，提供了其相应的命令及其效果，如 =article= 中有
+=\section= =\subsection= 等， =book= 中有 =part= =chapter= 等，适应不同文件到需要。
+** 宏包
+宏包，即tex文件头部的 =usepackage= 语句后面所跟的参数，其功能类似于c语言的头文件，
+python的包，能够提供一些包装好的功能用于排版或者其他事情。下面我将列举些我用的宏
+包：
+
+1) ctex: 想要写中文tex文件就绕不过去的包，需要和xelatex搭配食用才能够正常渲染中
+   文
+2) geometry: 用于控制页边距，需要在调用后使用 =\geometry{scale=0.7}= 对页边距进
+   行指定
+3) mhchem: 书写化学方程式 =\ce{Zn + 2H2O = Zn(OH) + H2 ^}=
+4) cancel: 使用删除线 =\usepackage[thicklines]{cancel}= =\cancel{}=
+5) hyperref: 插入超链接 =\usepackage[hidelinks]{hyperref}=
+
+* 正文样式
+
+** begin&end
+=\begin= =\end= 命令通常用于开始和结束某一个环境
+
+** 表格
+#+begin_src latex
+  \begin{table}[h]
+          \centering
+          \caption{描述}
+          \begin{tabular}{|c|l|r|c|}
+                  第一组 & 第二组 & 第三组 & 第四组 \\
+                  \hline
+                  \begin{tabular}{c|c}
+                          1 & 6 \\
+                          2 & 8 \\
+                  \end{tabular} &
+                  \begin{tabular}{c|c}
+                          3 & 9 \\
+                          \hline
+                          4 & 2 \\
+                  \begin{tabular}{c|c}
+                  \end{tabular} &
+                          5 & 6 \\
+                          8 & 3 \\
+                  \end{tabular} &
+                  \begin{tabular}{c|c}
+                          4 & 2 \\
+                          \hline
+                          3 & 9 \\
+                  \begin{tabular}{c|c} \\
+                  第一组 & 第二组 & 第三组 & 第四组 \\
+          \end{tabular}
+          \label{表}
+  \end{table}
+#+end_src
+以 =tabular= 作纵向表格环境，内部可以镶嵌，外部套一个 =table= 环境，表格数据间通
+过… =&= 进行横向分割通过 =\\= 进行纵向分割
+
+** 字体样式
+1) 粗体 =（未知）=
+2) 斜体 =\textit{XXX}=
+
+** 其他东西
+自定义命令： =\newcommand{\name}[arg_num]{do sth here,#1 means arg 1}=
+
+特殊字符表示: =~= 应写作 =\~{}= ,其余的套个反斜杠即可
