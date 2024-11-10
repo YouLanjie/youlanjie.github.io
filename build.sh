@@ -46,6 +46,7 @@ usage: build.sh [options]
      -b 构建博客列表与首页
      -u 导出未更新的org为html页面
      -U 强制更新所有的html页面
+     -n 不更新文件内容
      -h 帮助信息"
 	echo $usagetext
 	exit $1
@@ -88,7 +89,12 @@ update_file() {
 check_time() {
 	if [[ (! -f $2) || ($1 -nt $2) ]] {
 		_msg_info "Export '$1' ..."
-		update_file $1
+		if [[ $flag_no_exp == "false" ]] {
+			update_file $1
+		}
+		if [[ $flag_no_exp == "true" ]] {
+			echo "" >> $2
+		}
 		return 0
 	}
 	return -1
@@ -149,15 +155,17 @@ build() {
 	_msg_info "Done!"
 }
 
-while {getopts 'mbuh?' arg} {
+flag_no_exp="false"
+
+while {getopts 'mbnuh?' arg} {
 	case $arg {
-		m) mk_public ;;
-		b) build ;;
-		u) update ;;
+		m) mk_public ;exit 0 ;;
+		b) build ;exit 0 ;;
+		u) update ;exit 0 ;;
+		n) flag_no_exp="true" ;;
 		h|?) usage 0;;
 		*) usage 1;;
 	}
-	exit 0
 }
 
 if [[ $@ == "" ]] {
