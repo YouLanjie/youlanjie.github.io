@@ -5,6 +5,15 @@
 #+SETUPFILE: ../../../../setup.setup
 
 * 准备环境
+#+begin_quote
+由于这篇东西写得比较早，termux本体安装manim出现的问题比较多，所以才希望在termux
+中装上archlinux后再装manim。但是经过一段时间的使用发现这样做运算效率极低，就算是
+渲染一张图可能都要算半天。
+
+到24年11月我才在termux本体安装好manim，故附注本体安装方法:能够用pkg的尽量用pkg装，
+尽可能避免所有的编译问题，否则可能会缺cmake ninja等各种奇怪的编译依赖错误，还有
+个未知原因，要求把 =~/../lib/= 设置为可读写操作状态才能够正常安装。。。
+#+end_quote
 ** 在Termux上安装ArchLinux
 在Termux中安装"proot-distro"工具以安装Archlinux:
 #+begin_src shell
