@@ -45,7 +45,7 @@ usage: build.sh [options]
      -m 创建博客到public目录下（不建议使用）
      -b 构建博客列表与首页
      -u 导出未更新的org为html页面
-     -U 强制更新所有的html页面
+     -t 导出时不检查文件的新旧
      -n 不更新文件内容
      -h 帮助信息"
 	echo $usagetext
@@ -84,10 +84,15 @@ mk_public() {
 
 update_file() {
 	emacs -Q -nw ./src/fastsetup.el "$1" --eval "(eval-buffer \"fastsetup.el\")"
+	out=$(echo $1|sed "s/\\.org$/.html/")
+	section1="^<style>"
+	section2="^<\\/style>"
+	sed -i "/$section1/,/$section2/{/$section1/!{/$section2/!d}}" "$out"
+	sed -i "/$section1/,/$section2/d" "$out"
 }
 
 check_time() {
-	if [[ (! -f $2) || ($1 -nt $2) ]] {
+	if [[ (! -f $2) || ($1 -nt $2) || $flag_no_time == "true" ]] {
 		_msg_info "Export '$1' ..."
 		if [[ $flag_no_exp == "false" ]] {
 			update_file $1
@@ -111,7 +116,7 @@ update() {
 
 build() {
 	_msg_info "清空源文件"
-	echo "#+TITLE: TimeLine\n#+setupfile: ../setup.setup" > src/post2.org
+	echo "#+TITLE: TimeLine\n#+setupfile: ../setup.setup" > src/timeline.org
 	_msg_info "构建列表中"
 	_msg_info "获取文件头并处理中"
 	file_list=(post/**/*.org)
@@ -133,20 +138,20 @@ build() {
 		if [[ $desc != "" ]] {
 			declare -l desc="$desc"
 			desc=$(echo $desc|sed 's/^#+description:[ ]*//')
-			printf '- /%s/ [[%s][%s]]\\\\\\\\\\n  %s\n' "$date" "$name" "$title" "$desc" >> src/post2.org
+			printf '- /%s/ [[%s][%s]]\\\\\\\\\\n  %s\n' "$date" "$name" "$title" "$desc" >> src/timeline.org
 		} else {
-			printf "- /%s/ [[%s][%s]]\n" "$date" "$name" "$title" >> src/post2.org
+			printf "- /%s/ [[%s][%s]]\n" "$date" "$name" "$title" >> src/timeline.org
 		}
 	}
-	list=$(cat src/post2.org|sort -r)
-	echo $list > src/post2.org
+	list=$(cat src/timeline.org|sort -r)
+	echo $list > src/timeline.org
 	_msg_info "列表输出完成"
 	_msg_info "导出子页面中..."
 	tmp="true"
 	check_time "404.org" "404.html"
 	check_time "about.org" "about.html"
 	check_time "src/post.org" "src/post.html" || tmp="false"
-	update_file src/post2.org
+	update_file src/timeline.org
 	if [[ $tmp == "true" ]] {
 		_msg_info "导出首页中..."
 		# emacs index.org -nw --eval "(progn (org-html-export-to-html) (kill-emacs))"
@@ -156,12 +161,14 @@ build() {
 }
 
 flag_no_exp="false"
+flag_no_time="false"
 
-while {getopts 'mbnuh?' arg} {
+while {getopts 'mbnuth?' arg} {
 	case $arg {
 		m) mk_public ;exit 0 ;;
 		b) build ;exit 0 ;;
 		u) update ;exit 0 ;;
+		t) flag_no_time="true" ;;
 		n) flag_no_exp="true" ;;
 		h|?) usage 0;;
 		*) usage 1;;

@@ -3,197 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2023-07-07 五 19:54 -->
+<!-- 2025-01-23 四 11:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs学习笔记</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
+<script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
 </head>
@@ -202,90 +19,78 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="preamble" class="status">
-<header>
-     <a href="/">
-       <img src="/img/icon.jpg" height="35">
-     </a>
-     <a href="/">  Home  </a>
-     <a href="/src/post.html">  Blog  </a>
-     <a href="/src/post2.html">  TimeLine  </a>
-     <a href="/about.html">  About  </a>
-     <div class="clearfix"></div>
-   </header>
-</div>
-<div id="content" class="content">
+</div><div id="content" class="content">
 <h1 class="title">Emacs学习笔记</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2919ffe">1. 前言</a></li>
-<li><a href="#org1c3561a">2. Emacs的安装与使用</a>
+<li><a href="#orgf709103">1. 前言</a></li>
+<li><a href="#org67bc1b2">2. Emacs的安装与使用</a>
 <ul>
-<li><a href="#orgd22cb68">2.1. Emacs的安装</a></li>
-<li><a href="#org6d4461a">2.2. 使用Emacs</a></li>
-<li><a href="#orgee75719">2.3. 基本的操作</a>
+<li><a href="#orge03b328">2.1. Emacs的安装</a></li>
+<li><a href="#org0a4ed4b">2.2. 使用Emacs</a></li>
+<li><a href="#org1f5dbe1">2.3. 基本的操作</a>
 <ul>
-<li><a href="#orgf086f47">2.3.1. 一级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></a></li>
-<li><a href="#orgc759252">2.3.2. 多级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></a></li>
+<li><a href="#org4a5b5d3">2.3.1. 一级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></a></li>
+<li><a href="#orgc379e92">2.3.2. 多级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org7183d47">2.4. 命令行操作</a>
+<li><a href="#org67c54e1">2.4. 命令行操作</a>
 <ul>
-<li><a href="#orga3cf842">2.4.1. emacs函数思维</a></li>
-<li><a href="#orgd28d3a1">2.4.2. 普通的命令行</a></li>
-<li><a href="#org50931e5">2.4.3. elisp命令行(evil)</a></li>
+<li><a href="#orgbc7f728">2.4.1. emacs函数思维</a></li>
+<li><a href="#orgaa48c35">2.4.2. 普通的命令行</a></li>
+<li><a href="#orgce7baf8">2.4.3. elisp命令行(evil)</a></li>
 </ul>
 </li>
-<li><a href="#org515fdae">2.5. 小结</a></li>
+<li><a href="#org6449dbc">2.5. 小结</a></li>
 </ul>
 </li>
-<li><a href="#org37ac6cf">3. Emacs的配置与调教</a>
+<li><a href="#org4bb935f">3. Emacs的配置与调教</a>
 <ul>
-<li><a href="#org8391043">3.1. 先来点降压药</a></li>
-<li><a href="#org605fbce">3.2. 配置Emacs/elisp</a>
+<li><a href="#org67dbc1f">3.1. 先来点降压药</a></li>
+<li><a href="#org5ca652d">3.2. 配置Emacs/elisp</a>
 <ul>
-<li><a href="#org8e5afcb">3.2.1. 基本语法&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#orgb67b461">3.2.2. 一些例子&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#orgf1dd528">3.2.3. 函数&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org33cc5fb">3.2.4. 变量&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org9ef6c1b">3.2.5. 流程控制语句&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org4a5564f">3.2.6. 数据的输入&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org46d29a2">3.2.7. 主模式？副模式？</a></li>
-<li><a href="#org56115f2">3.2.8. 快捷键的定义&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org0efa210">3.2.9. 宏&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org3def94e">3.2.10. 引用&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
-<li><a href="#org70b0029">3.2.11. 文件规范&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#org207cd9d">3.2.1. 基本语法&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#orge6b6f31">3.2.2. 一些例子&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#org8e027f0">3.2.3. 函数&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#org8f61255">3.2.4. 变量&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#orgbb9a32e">3.2.5. 流程控制语句&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#orge2eba41">3.2.6. 数据的输入&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#orgc3b018f">3.2.7. 主模式？副模式？</a></li>
+<li><a href="#org67d81af">3.2.8. 快捷键的定义&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#org81682e1">3.2.9. 宏&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#org5c1ec67">3.2.10. 引用&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
+<li><a href="#orgc1484d1">3.2.11. 文件规范&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org7a00955">3.3. 配置Emacs!</a>
+<li><a href="#org47845d4">3.3. 配置Emacs!</a>
 <ul>
-<li><a href="#orga87d094">3.3.1. 子模式功能&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></a></li>
-<li><a href="#org97e6529">3.3.2. 变量功能设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></a></li>
-<li><a href="#org9c9eed7">3.3.3. 其他设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></a></li>
+<li><a href="#orgbbba2fb">3.3.1. 子模式功能&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></a></li>
+<li><a href="#org8eeed42">3.3.2. 变量功能设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></a></li>
+<li><a href="#org66a8358">3.3.3. 其他设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc93e75c">4. 使用插件！</a>
+<li><a href="#org2e97c1f">4. 使用插件！</a>
 <ul>
-<li><a href="#org1891539">4.1. 插件的安装&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></a>
+<li><a href="#org6a184c2">4.1. 插件的安装&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></a>
 <ul>
-<li><a href="#org7db38eb">4.1.1. 手动安装插件</a></li>
-<li><a href="#org176d30b">4.1.2. 通过配置文件自动安装插件</a></li>
+<li><a href="#orgc6edefa">4.1.1. 手动安装插件</a></li>
+<li><a href="#org212c4bf">4.1.2. 通过配置文件自动安装插件</a></li>
 </ul>
 </li>
-<li><a href="#orgec59a32">4.2. 插件的配置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></a></li>
-<li><a href="#orge09fe90">4.3. 插件推荐/我用的插件&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></a></li>
+<li><a href="#org08bc836">4.2. 插件的配置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></a></li>
+<li><a href="#orged13b82">4.3. 插件推荐/我用的插件&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2919ffe" class="outline-2">
-<h2 id="org2919ffe"><span class="section-number-2">1.</span> 前言</h2>
+<div id="outline-container-orgf709103" class="outline-2">
+<h2 id="orgf709103"><span class="section-number-2">1.</span> 前言</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 学习Emacs，一定要学会坚持
@@ -301,12 +106,12 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org1c3561a" class="outline-2">
-<h2 id="org1c3561a"><span class="section-number-2">2.</span> Emacs的安装与使用</h2>
+<div id="outline-container-org67bc1b2" class="outline-2">
+<h2 id="org67bc1b2"><span class="section-number-2">2.</span> Emacs的安装与使用</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgd22cb68" class="outline-3">
-<h3 id="orgd22cb68"><span class="section-number-3">2.1.</span> Emacs的安装</h3>
+<div id="outline-container-orge03b328" class="outline-3">
+<h3 id="orge03b328"><span class="section-number-3">2.1.</span> Emacs的安装</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 使用对应发行版的包管理器安装Emacs<br />
@@ -318,8 +123,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org6d4461a" class="outline-3">
-<h3 id="org6d4461a"><span class="section-number-3">2.2.</span> 使用Emacs</h3>
+<div id="outline-container-org0a4ed4b" class="outline-3">
+<h3 id="org0a4ed4b"><span class="section-number-3">2.2.</span> 使用Emacs</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Emacs提供了GUI图形界面和TUI终端界面两种界面。
@@ -331,7 +136,7 @@ Emacs提供了GUI图形界面和TUI终端界面两种界面。
 </p>
 
 
-<div id="orgce2fa41" class="figure">
+<div id="org1bd2ce7" class="figure">
 <p><img src="./Emacs学习笔记/01.png" alt="01.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>图形界面</p>
@@ -342,12 +147,12 @@ Emacs提供了GUI图形界面和TUI终端界面两种界面。
 </p>
 </div>
 </div>
-<div id="outline-container-orgee75719" class="outline-3">
-<h3 id="orgee75719"><span class="section-number-3">2.3.</span> 基本的操作</h3>
+<div id="outline-container-org1f5dbe1" class="outline-3">
+<h3 id="org1f5dbe1"><span class="section-number-3">2.3.</span> 基本的操作</h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-orgf086f47" class="outline-4">
-<h4 id="orgf086f47"><span class="section-number-4">2.3.1.</span> 一级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></h4>
+<div id="outline-container-org4a5b5d3" class="outline-4">
+<h4 id="org4a5b5d3"><span class="section-number-4">2.3.1.</span> 一级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 为了方便展示，我将基本的 <i>一级</i> 操作写成表格列在下面：
@@ -550,8 +355,8 @@ Emacs提供了GUI图形界面和TUI终端界面两种界面。
 </p>
 </div>
 </div>
-<div id="outline-container-orgc759252" class="outline-4">
-<h4 id="orgc759252"><span class="section-number-4">2.3.2.</span> 多级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></h4>
+<div id="outline-container-orgc379e92" class="outline-4">
+<h4 id="orgc379e92"><span class="section-number-4">2.3.2.</span> 多级按键操作&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keys">keys</span></span></h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 或许你会有疑问：为什么没有退出？<br />
@@ -734,12 +539,12 @@ Emacs之后才能够更好地学习、扩展学识。
 </div>
 </div>
 </div>
-<div id="outline-container-org7183d47" class="outline-3">
-<h3 id="org7183d47"><span class="section-number-3">2.4.</span> 命令行操作</h3>
+<div id="outline-container-org67c54e1" class="outline-3">
+<h3 id="org67c54e1"><span class="section-number-3">2.4.</span> 命令行操作</h3>
 <div class="outline-text-3" id="text-2-4">
 </div>
-<div id="outline-container-orga3cf842" class="outline-4">
-<h4 id="orga3cf842"><span class="section-number-4">2.4.1.</span> emacs函数思维</h4>
+<div id="outline-container-orgbc7f728" class="outline-4">
+<h4 id="orgbc7f728"><span class="section-number-4">2.4.1.</span> emacs函数思维</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 实际上emacs的所有操作都是基于某一个特定的函数的。这也就是有实际意义的按键后面都
@@ -754,14 +559,14 @@ elisp命令行使用elisp语法进行调用（一般是在命令外面套上一�
 </p>
 </div>
 </div>
-<div id="outline-container-orgd28d3a1" class="outline-4">
-<h4 id="orgd28d3a1"><span class="section-number-4">2.4.2.</span> 普通的命令行</h4>
+<div id="outline-container-orgaa48c35" class="outline-4">
+<h4 id="orgaa48c35"><span class="section-number-4">2.4.2.</span> 普通的命令行</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 通过快捷键 <code>M-x</code> 进行调用，如图：
 </p>
 
-<div id="orgb75c0e6" class="figure">
+<div id="org38394c4" class="figure">
 <p><img src="./Emacs学习笔记/02.png" alt="02.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>调用命令行的图片</p>
@@ -773,8 +578,8 @@ elisp命令行使用elisp语法进行调用（一般是在命令外面套上一�
 </p>
 </div>
 </div>
-<div id="outline-container-org50931e5" class="outline-4">
-<h4 id="org50931e5"><span class="section-number-4">2.4.3.</span> elisp命令行(evil)</h4>
+<div id="outline-container-orgce7baf8" class="outline-4">
+<h4 id="orgce7baf8"><span class="section-number-4">2.4.3.</span> elisp命令行(evil)</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 这个由于在前期并不常用，所以也不细说，只要记住：它可以进行elisp的命令调用
@@ -782,8 +587,8 @@ elisp命令行使用elisp语法进行调用（一般是在命令外面套上一�
 </div>
 </div>
 </div>
-<div id="outline-container-org515fdae" class="outline-3">
-<h3 id="org515fdae"><span class="section-number-3">2.5.</span> 小结</h3>
+<div id="outline-container-org6449dbc" class="outline-3">
+<h3 id="org6449dbc"><span class="section-number-3">2.5.</span> 小结</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 在阅读完上面的文本并进行大量尝试与练习之后，相信你已经可以正常的使用emacs了吧<br />
@@ -793,12 +598,12 @@ elisp命令行使用elisp语法进行调用（一般是在命令外面套上一�
 </div>
 </div>
 </div>
-<div id="outline-container-org37ac6cf" class="outline-2">
-<h2 id="org37ac6cf"><span class="section-number-2">3.</span> Emacs的配置与调教</h2>
+<div id="outline-container-org4bb935f" class="outline-2">
+<h2 id="org4bb935f"><span class="section-number-2">3.</span> Emacs的配置与调教</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org8391043" class="outline-3">
-<h3 id="org8391043"><span class="section-number-3">3.1.</span> 先来点降压药</h3>
+<div id="outline-container-org67dbc1f" class="outline-3">
+<h3 id="org67dbc1f"><span class="section-number-3">3.1.</span> 先来点降压药</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 如果你真的想依靠默认的快捷键配置使用emacs，那简直是不可理喻的事情。<br />
@@ -839,8 +644,8 @@ elisp命令行使用elisp语法进行调用（一般是在命令外面套上一�
 </p>
 </div>
 </div>
-<div id="outline-container-org605fbce" class="outline-3">
-<h3 id="org605fbce"><span class="section-number-3">3.2.</span> 配置Emacs/elisp</h3>
+<div id="outline-container-org5ca652d" class="outline-3">
+<h3 id="org5ca652d"><span class="section-number-3">3.2.</span> 配置Emacs/elisp</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 emacs的配置文件语法是elisp（即emacs lisp），属于lisp语言的一种方言。由于其语法独
@@ -851,8 +656,8 @@ emacs的配置文件语法是elisp（即emacs lisp），属于lisp语言的一�
 一个小提示：<a href="https://learnxinyminutes.com/docs/zh-cn/elisp-cn/">这里</a>有一篇相对来说非常好的elisp教程，建议查看它的教程，或者互相参考。
 </p>
 </div>
-<div id="outline-container-org8e5afcb" class="outline-4">
-<h4 id="org8e5afcb"><span class="section-number-4">3.2.1.</span> 基本语法&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-org207cd9d" class="outline-4">
+<h4 id="org207cd9d"><span class="section-number-4">3.2.1.</span> 基本语法&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 lisp语言的本质是列表（list），其语句组成大致如下:
@@ -909,7 +714,7 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 执行结果应当如下：
 </p>
 
-<div id="org3cb79be" class="figure">
+<div id="orgfb8ac32" class="figure">
 <p><img src="./Emacs学习笔记/03.png" alt="03.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>执行结果</p>
@@ -924,8 +729,8 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 </p>
 </div>
 </div>
-<div id="outline-container-orgb67b461" class="outline-4">
-<h4 id="orgb67b461"><span class="section-number-4">3.2.2.</span> 一些例子&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-orge6b6f31" class="outline-4">
+<h4 id="orge6b6f31"><span class="section-number-4">3.2.2.</span> 一些例子&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 配置配置，肯定都是要贴合实际的，是有强功能性的。在平时的使用中应当多提问题，多想
@@ -963,8 +768,8 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 </div>
 </div>
 </div>
-<div id="outline-container-orgf1dd528" class="outline-4">
-<h4 id="orgf1dd528"><span class="section-number-4">3.2.3.</span> 函数&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-org8e027f0" class="outline-4">
+<h4 id="org8e027f0"><span class="section-number-4">3.2.3.</span> 函数&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 但是聪明的你肯定会发现，上面的语句都是单独执行的，没有办法连成一块，是没有办法成
@@ -995,7 +800,7 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 其结果应当如下：
 </p>
 
-<div id="org2633254" class="figure">
+<div id="org84fa02e" class="figure">
 <p><img src="./Emacs学习笔记/04.png" alt="04.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>执行结果</p>
@@ -1008,8 +813,8 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 </p>
 </div>
 </div>
-<div id="outline-container-org33cc5fb" class="outline-4">
-<h4 id="org33cc5fb"><span class="section-number-4">3.2.4.</span> 变量&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-org8f61255" class="outline-4">
+<h4 id="org8f61255"><span class="section-number-4">3.2.4.</span> 变量&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-4">
 <p>
 继续刚才的内容。作为一门完整的语言，elisp也不缺变量这个东西，不过它的分类较多。
@@ -1092,8 +897,8 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 </p>
 </div>
 </div>
-<div id="outline-container-org9ef6c1b" class="outline-4">
-<h4 id="org9ef6c1b"><span class="section-number-4">3.2.5.</span> 流程控制语句&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-orgbb9a32e" class="outline-4">
+<h4 id="orgbb9a32e"><span class="section-number-4">3.2.5.</span> 流程控制语句&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-5">
 <p>
 既然基本的语法学了，那么流程控制语句也不能丢。
@@ -1117,8 +922,8 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 </ul>
 </div>
 </div>
-<div id="outline-container-org4a5564f" class="outline-4">
-<h4 id="org4a5564f"><span class="section-number-4">3.2.6.</span> 数据的输入&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-orge2eba41" class="outline-4">
+<h4 id="orge2eba41"><span class="section-number-4">3.2.6.</span> 数据的输入&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-6">
 <ul class="org-ul">
 <li>read-char<br />
@@ -1128,8 +933,8 @@ lisp语言的本质是列表（list），其语句组成大致如下:
 </ul>
 </div>
 </div>
-<div id="outline-container-org46d29a2" class="outline-4">
-<h4 id="org46d29a2"><span class="section-number-4">3.2.7.</span> 主模式？副模式？</h4>
+<div id="outline-container-orgc3b018f" class="outline-4">
+<h4 id="orgc3b018f"><span class="section-number-4">3.2.7.</span> 主模式？副模式？</h4>
 <div class="outline-text-4" id="text-3-2-7">
 <p>
 Emacs有一个非常强大的机制：模式。而模式则分为 <code>major-mode</code> 主模式 与
@@ -1144,8 +949,8 @@ Emacs有一个非常强大的机制：模式。而模式则分为 <code>major-mo
 </p>
 </div>
 </div>
-<div id="outline-container-org56115f2" class="outline-4">
-<h4 id="org56115f2"><span class="section-number-4">3.2.8.</span> 快捷键的定义&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-org67d81af" class="outline-4">
+<h4 id="org67d81af"><span class="section-number-4">3.2.8.</span> 快捷键的定义&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-8">
 <p>
 如果要配置Emacs，快捷键一定是一个跨不过去的门槛。因为有很多操作总不可能是需要手
@@ -1287,8 +1092,8 @@ keymap也有很多种，如 <code>current-global-map</code> 返回全局keymap�
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org0efa210" class="outline-4">
-<h4 id="org0efa210"><span class="section-number-4">3.2.9.</span> 宏&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-org81682e1" class="outline-4">
+<h4 id="org81682e1"><span class="section-number-4">3.2.9.</span> 宏&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-9">
 <p>
 看到“宏”这么一个字眼，是不是就会觉得很晦涩难懂？不不不，正巧相反，它不仅简单，
@@ -1341,8 +1146,8 @@ keymap也有很多种，如 <code>current-global-map</code> 返回全局keymap�
 </p>
 </div>
 </div>
-<div id="outline-container-org3def94e" class="outline-4">
-<h4 id="org3def94e"><span class="section-number-4">3.2.10.</span> 引用&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-org5c1ec67" class="outline-4">
+<h4 id="org5c1ec67"><span class="section-number-4">3.2.10.</span> 引用&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-10">
 <p>
 既然文件都拆分成几个了，那么就少不了引用。<br />
@@ -1392,8 +1197,8 @@ keymap也有很多种，如 <code>current-global-map</code> 返回全局keymap�
 </div>
 </div>
 </div>
-<div id="outline-container-org70b0029" class="outline-4">
-<h4 id="org70b0029"><span class="section-number-4">3.2.11.</span> 文件规范&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div id="outline-container-orgc1484d1" class="outline-4">
+<h4 id="orgc1484d1"><span class="section-number-4">3.2.11.</span> 文件规范&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span></span></h4>
 <div class="outline-text-4" id="text-3-2-11">
 <p>
 在平时，你的每一个emacs的配置文件应该被命名为 <code>xxx.el</code> ，而Emacs最开始调用的文件
@@ -1503,8 +1308,8 @@ keymap也有很多种，如 <code>current-global-map</code> 返回全局keymap�
 </div>
 </div>
 </div>
-<div id="outline-container-org7a00955" class="outline-3">
-<h3 id="org7a00955"><span class="section-number-3">3.3.</span> 配置Emacs!</h3>
+<div id="outline-container-org47845d4" class="outline-3">
+<h3 id="org47845d4"><span class="section-number-3">3.3.</span> 配置Emacs!</h3>
 <div class="outline-text-3" id="text-3-3">
 <blockquote>
 <p>
@@ -1534,8 +1339,8 @@ emacs的设置根据设置方式可以被分为两类：子模式与变量。其
 由于这类内容过多，所以将采取使用表格的形式列出，请自行选择与使用
 </p>
 </div>
-<div id="outline-container-orga87d094" class="outline-4">
-<h4 id="orga87d094"><span class="section-number-4">3.3.1.</span> 子模式功能&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></h4>
+<div id="outline-container-orgbbba2fb" class="outline-4">
+<h4 id="orgbbba2fb"><span class="section-number-4">3.3.1.</span> 子模式功能&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></h4>
 <div class="outline-text-4" id="text-3-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1670,8 +1475,8 @@ emacs的设置根据设置方式可以被分为两类：子模式与变量。其
 </table>
 </div>
 </div>
-<div id="outline-container-org97e6529" class="outline-4">
-<h4 id="org97e6529"><span class="section-number-4">3.3.2.</span> 变量功能设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></h4>
+<div id="outline-container-org8eeed42" class="outline-4">
+<h4 id="org8eeed42"><span class="section-number-4">3.3.2.</span> 变量功能设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></h4>
 <div class="outline-text-4" id="text-3-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1731,8 +1536,8 @@ emacs的设置根据设置方式可以被分为两类：子模式与变量。其
 </table>
 </div>
 </div>
-<div id="outline-container-org9c9eed7" class="outline-4">
-<h4 id="org9c9eed7"><span class="section-number-4">3.3.3.</span> 其他设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></h4>
+<div id="outline-container-org66a8358" class="outline-4">
+<h4 id="org66a8358"><span class="section-number-4">3.3.3.</span> 其他设置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="elisp">elisp</span>&#xa0;<span class="Emacs___">Emacs的功能</span></span></h4>
 <div class="outline-text-4" id="text-3-3-3">
 <ul class="org-ul">
 <li><code>(load-theme 'name)</code><br />
@@ -1742,16 +1547,16 @@ emacs的设置根据设置方式可以被分为两类：子模式与变量。其
 </div>
 </div>
 </div>
-<div id="outline-container-orgc93e75c" class="outline-2">
-<h2 id="orgc93e75c"><span class="section-number-2">4.</span> 使用插件！</h2>
+<div id="outline-container-org2e97c1f" class="outline-2">
+<h2 id="org2e97c1f"><span class="section-number-2">4.</span> 使用插件！</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 既然是Emacs，那么怎能够不使用插件呢？插件是Emacs极为强大的功能之一，我将在这里介
 绍如何在Emacs中安装并使用插件
 </p>
 </div>
-<div id="outline-container-org1891539" class="outline-3">
-<h3 id="org1891539"><span class="section-number-3">4.1.</span> 插件的安装&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></h3>
+<div id="outline-container-org6a184c2" class="outline-3">
+<h3 id="org6a184c2"><span class="section-number-3">4.1.</span> 插件的安装&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件可供下载使用<sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup>
@@ -1782,8 +1587,8 @@ Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件�
 </pre>
 </div>
 </div>
-<div id="outline-container-org7db38eb" class="outline-4">
-<h4 id="org7db38eb"><span class="section-number-4">4.1.1.</span> 手动安装插件</h4>
+<div id="outline-container-orgc6edefa" class="outline-4">
+<h4 id="orgc6edefa"><span class="section-number-4">4.1.1.</span> 手动安装插件</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 确保无误后，便可在Emacs里执行 <code>M-x package-list-packages</code> 以打开插件列表。下面是
@@ -1841,8 +1646,8 @@ Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件�
 </p>
 </div>
 </div>
-<div id="outline-container-org176d30b" class="outline-4">
-<h4 id="org176d30b"><span class="section-number-4">4.1.2.</span> 通过配置文件自动安装插件</h4>
+<div id="outline-container-org212c4bf" class="outline-4">
+<h4 id="org212c4bf"><span class="section-number-4">4.1.2.</span> 通过配置文件自动安装插件</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 既然能够手动安装插件，那么通过配置文件自动安装插件也是不可少的。
@@ -1894,8 +1699,8 @@ Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件�
 </div>
 </div>
 </div>
-<div id="outline-container-orgec59a32" class="outline-3">
-<h3 id="orgec59a32"><span class="section-number-3">4.2.</span> 插件的配置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></h3>
+<div id="outline-container-org08bc836" class="outline-3">
+<h3 id="org08bc836"><span class="section-number-3">4.2.</span> 插件的配置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 上文有提到过 <code>use-package</code> 这个插件，它不仅能够安装插件，还能够对插件进行配置。
@@ -1963,8 +1768,8 @@ Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件�
 </table>
 </div>
 </div>
-<div id="outline-container-orge09fe90" class="outline-3">
-<h3 id="orge09fe90"><span class="section-number-3">4.3.</span> 插件推荐/我用的插件&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></h3>
+<div id="outline-container-orged13b82" class="outline-3">
+<h3 id="orged13b82"><span class="section-number-3">4.3.</span> 插件推荐/我用的插件&#xa0;&#xa0;&#xa0;<span class="tag"><span class="__">插件</span></span></h3>
 <div class="outline-text-3" id="text-4-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2133,7 +1938,7 @@ Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件�
 <div id="postamble" class="status">
 <p class="date">Date: 2023-03-04 11:20</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2023-07-07 五 19:54</p>
+<p class="date">Created: 2025-01-23 四 11:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

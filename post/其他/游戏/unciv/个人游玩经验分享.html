@@ -3,197 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2025-01-23 四 08:02 -->
+<!-- 2025-01-23 四 11:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Unciv个人游玩经验分享</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="玩这个游戏总算是有一定的时长了，自己也摸索出来了一些比较有趣的打法分享" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
+<script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
 </head>
@@ -202,36 +19,24 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="preamble" class="status">
-<header>
-     <a href="/">
-       <img src="/img/icon.jpg" height="35">
-     </a>
-     <a href="/">  Home  </a>
-     <a href="/src/post.html">  Blog  </a>
-     <a href="/src/post2.html">  TimeLine  </a>
-     <a href="/about.html">  About  </a>
-     <div class="clearfix"></div>
-   </header>
-</div>
-<div id="content" class="content">
+</div><div id="content" class="content">
 <h1 class="title">Unciv个人游玩经验分享</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge9a50df">1. 要将工作重心转移到经济建设上</a>
+<li><a href="#org448eab8">1. 要将工作重心转移到经济建设上</a>
 <ul>
-<li><a href="#org80504e7">1.1. 王子德意志vs波斯，劣势反推</a></li>
-<li><a href="#org5cb5ff6">1.2. 科技为王，经济为辅</a></li>
+<li><a href="#org717bff1">1.1. 王子德意志vs波斯，劣势反推</a></li>
+<li><a href="#orgb26f978">1.2. 科技为王，经济为辅</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge9a50df" class="outline-2">
-<h2 id="orge9a50df"><span class="section-number-2">1.</span> 要将工作重心转移到经济建设上</h2>
+<div id="outline-container-org448eab8" class="outline-2">
+<h2 id="org448eab8"><span class="section-number-2">1.</span> 要将工作重心转移到经济建设上</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 我在玩王子难度时，总想要像军阀难度一样平推其他文明，拿到征服胜利。但是，王子难度
@@ -240,8 +45,8 @@
 这相当无用，毕竟低技术的兵种战斗力低的不行。
 </p>
 </div>
-<div id="outline-container-org80504e7" class="outline-3">
-<h3 id="org80504e7"><span class="section-number-3">1.1.</span> 王子德意志vs波斯，劣势反推</h3>
+<div id="outline-container-org717bff1" class="outline-3">
+<h3 id="org717bff1"><span class="section-number-3">1.1.</span> 王子德意志vs波斯，劣势反推</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 举个例子，我在玩一局德意志王子局时，与波斯文明共分大陆，整个地图上只剩下2/4个文
@@ -282,8 +87,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org5cb5ff6" class="outline-3">
-<h3 id="org5cb5ff6"><span class="section-number-3">1.2.</span> 科技为王，经济为辅</h3>
+<div id="outline-container-orgb26f978" class="outline-3">
+<h3 id="orgb26f978"><span class="section-number-3">1.2.</span> 科技为王，经济为辅</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 最近我又开了新的德意志王子局。而在这一局游戏里，我一开始仍旧将关注点放在产能上，
@@ -291,13 +96,13 @@
 尽管在前期通过与一个文明宣战 <code>(141)</code> ，
 </p>
 
-<div id="org95a40ae" class="figure">
+<div id="org38ab23e" class="figure">
 <p><img src="./share/142.webp" alt="142.webp" />
 </p>
 <p><span class="figure-number">Figure 1: </span>第142回合的版图</p>
 </div>
 
-<div id="orgbde93d0" class="figure">
+<div id="org248cad4" class="figure">
 <p><img src="./share/142_sort.webp" alt="142_sort.webp" />
 </p>
 <p><span class="figure-number">Figure 2: </span>第142回合的数据</p>
@@ -307,7 +112,7 @@
 然后让他割沿海城市议和从而获得了两个沿海城市 <code>(156)</code> ，才摆脱了内陆国的枷锁。
 </p>
 
-<div id="orgc0790eb" class="figure">
+<div id="orgad9c6f7" class="figure">
 <p><img src="./share/160.webp" alt="160.webp" />
 </p>
 <p><span class="figure-number">Figure 3: </span>第160回合的版图</p>
@@ -318,7 +123,7 @@
 利的一座沿海城市，同时，城市的兴趣点点在了科技中。于是，科技开始迅速增长。
 </p>
 
-<div id="org58c2253" class="figure">
+<div id="org5136e6a" class="figure">
 <p><img src="./share/212_table.webp" alt="212_table.webp" />
 </p>
 <p><span class="figure-number">Figure 4: </span>第212回合的科技增长表</p>
@@ -330,19 +135,19 @@
 兴的强盛文明的城市，开始向西扩张，限制蒙古的实力。 
 </p>
 
-<div id="org16151dd" class="figure">
+<div id="org61df15a" class="figure">
 <p><img src="./share/228.webp" alt="228.webp" />
 </p>
 <p><span class="figure-number">Figure 5: </span>第228回合的版图</p>
 </div>
 
-<div id="org2e0ffbf" class="figure">
+<div id="orgc5aae60" class="figure">
 <p><img src="./share/228_t1.webp" alt="228_t1.webp" />
 </p>
 <p><span class="figure-number">Figure 6: </span>第228回合的领土面积表</p>
 </div>
 
-<div id="org12894a3" class="figure">
+<div id="org5dca0b1" class="figure">
 <p><img src="./share/228_t2.webp" alt="228_t2.webp" />
 </p>
 <p><span class="figure-number">Figure 7: </span>第228回合的军事实力表</p>
@@ -352,26 +157,26 @@
 往下的很多内容，图示即可，基本上都是运营发展，没有宣战或者其他的。
 </p>
 
-<div id="orged330a4" class="figure">
+<div id="orgbc44eae" class="figure">
 <p><img src="./share/274.webp" alt="274.webp" />
 </p>
 <p><span class="figure-number">Figure 8: </span>第274回合的版图</p>
 </div>
 
-<div id="org1d4765b" class="figure">
+<div id="org36d0726" class="figure">
 <p><img src="./share/274_t1.webp" alt="274_t1.webp" />
 </p>
 <p><span class="figure-number">Figure 9: </span>第274回合的金钱</p>
 </div>
 
 
-<div id="org2a9ce2c" class="figure">
+<div id="orgaaa885c" class="figure">
 <p><img src="./share/290.webp" alt="290.webp" />
 </p>
 <p><span class="figure-number">Figure 10: </span>第290回合的版图</p>
 </div>
 
-<div id="orgb2ac7cc" class="figure">
+<div id="org1cfb1ab" class="figure">
 <p><img src="./share/290_t1.webp" alt="290_t1.webp" />
 </p>
 <p><span class="figure-number">Figure 11: </span>第290回合的军事实力</p>
@@ -381,19 +186,19 @@
 至此，科技与金钱的全面反超顺利完成。接下来的事情，就是买城了。
 </p>
 
-<div id="orgc99e4d9" class="figure">
+<div id="orgd9df9cd" class="figure">
 <p><img src="./share/310.webp" alt="310.webp" />
 </p>
 <p><span class="figure-number">Figure 12: </span>第310回合的版图</p>
 </div>
 
-<div id="org0968944" class="figure">
+<div id="orgd760193" class="figure">
 <p><img src="./share/365.webp" alt="365.webp" />
 </p>
 <p><span class="figure-number">Figure 13: </span>第365回合的版图</p>
 </div>
 
-<div id="org07914f9" class="figure">
+<div id="org39ba53d" class="figure">
 <p><img src="./share/381.webp" alt="381.webp" />
 </p>
 <p><span class="figure-number">Figure 14: </span>第381回合的版图</p>
@@ -416,7 +221,7 @@
 <div id="postamble" class="status">
 <p class="date">Date: 2023-07-08 六 10:01</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2025-01-23 四 08:02</p>
+<p class="date">Created: 2025-01-23 四 11:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

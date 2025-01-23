@@ -18,17 +18,17 @@
 ;; Org html代码高亮
 (require 'htmlize)
 
-(setq org-html-preamble
-"<header>
-     <a href=\"/\">
-       <img src=\"/img/icon.jpg\" height=\"35\">
-     </a>
-     <a href=\"/\">  Home  </a>
-     <a href=\"/src/post.html\">  Blog  </a>
-     <a href=\"/src/post2.html\">  TimeLine  </a>
-     <a href=\"/about.html\">  About  </a>
-     <div class=\"clearfix\"></div>
-   </header>")
+;;(setq org-html-preamble
+;;"<header>
+;;     <a href=\"/\">
+;;       <img src=\"/img/icon.jpg\" height=\"35\">
+;;     </a>
+;;     <a href=\"/\">  Home  </a>
+;;     <a href=\"/src/post.html\">  Blog  </a>
+;;     <a href=\"/src/post2.html\">  TimeLine  </a>
+;;     <a href=\"/about.html\">  About  </a>
+;;     <div class=\"clearfix\"></div>
+;;   </header>")
 
 (setq-default org-src-fontify-natively t
 ;; 设置org高亮代码块

@@ -3,197 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2024-11-30 Sat 12:35 -->
+<!-- 2025-01-23 四 11:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Manim学习笔记</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="啃manim教程" />
 <meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
+<script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
 </head>
@@ -202,54 +19,42 @@
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="/"> HOME </a>
-</div><div id="preamble" class="status">
-<header>
-     <a href="/">
-       <img src="/img/icon.jpg" height="35">
-     </a>
-     <a href="/">  Home  </a>
-     <a href="/src/post.html">  Blog  </a>
-     <a href="/src/post2.html">  TimeLine  </a>
-     <a href="/about.html">  About  </a>
-     <div class="clearfix"></div>
-   </header>
-</div>
-<div id="content" class="content">
+</div><div id="content" class="content">
 <h1 class="title">Manim学习笔记</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb50179e">1. Manim的安装</a>
+<li><a href="#org367c8b3">1. Manim的安装</a>
 <ul>
-<li><a href="#orgc5fee79">1.1. Latex</a></li>
-<li><a href="#org204b7ba">1.2. ffmpeg</a></li>
-<li><a href="#orge97b7b8">1.3. manim</a></li>
+<li><a href="#org326ef0b">1.1. Latex</a></li>
+<li><a href="#orgd0d11cc">1.2. ffmpeg</a></li>
+<li><a href="#orgb3255a2">1.3. manim</a></li>
 </ul>
 </li>
-<li><a href="#orgc856739">2. Manim的使用</a>
+<li><a href="#org7cbdf2d">2. Manim的使用</a>
 <ul>
-<li><a href="#org8f9b04c">2.1. 框架</a></li>
-<li><a href="#orgd5be5aa">2.2. 创建对象</a>
+<li><a href="#org5362174">2.1. 框架</a></li>
+<li><a href="#org53cd661">2.2. 创建对象</a>
 <ul>
-<li><a href="#org2df5237">2.2.1. 列表</a></li>
-<li><a href="#org1b41bbd">2.2.2. 通用或常见属性</a></li>
+<li><a href="#org7a4c88a">2.2.1. 列表</a></li>
+<li><a href="#org837f214">2.2.2. 通用或常见属性</a></li>
 </ul>
 </li>
-<li><a href="#org062b1f3">2.3. 改变对象属性方法（对象内部方法）</a>
+<li><a href="#org4810a10">2.3. 改变对象属性方法（对象内部方法）</a>
 <ul>
-<li><a href="#orgc545dda">2.3.1. 对象定位</a></li>
+<li><a href="#orgb8ea26f">2.3.1. 对象定位</a></li>
 </ul>
 </li>
-<li><a href="#org2e3aa69">2.4. 显示对象</a>
+<li><a href="#org34e128f">2.4. 显示对象</a>
 <ul>
-<li><a href="#org10f8bcc">2.4.1. 动画函数（外部）</a></li>
+<li><a href="#orgcd6260e">2.4.1. 动画函数（外部）</a></li>
 </ul>
 </li>
-<li><a href="#org0e166db">2.5. 示例</a></li>
+<li><a href="#org613c3e5">2.5. 示例</a></li>
 </ul>
 </li>
-<li><a href="#org22c453b">3. Reference</a></li>
+<li><a href="#org53c5ce0">3. Reference</a></li>
 </ul>
 </div>
 </div>
@@ -262,12 +67,12 @@
 </p>
 </blockquote>
 
-<div id="outline-container-orgb50179e" class="outline-2">
-<h2 id="orgb50179e"><span class="section-number-2">1.</span> Manim的安装</h2>
+<div id="outline-container-org367c8b3" class="outline-2">
+<h2 id="org367c8b3"><span class="section-number-2">1.</span> Manim的安装</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgc5fee79" class="outline-3">
-<h3 id="orgc5fee79"><span class="section-number-3">1.1.</span> Latex</h3>
+<div id="outline-container-org326ef0b" class="outline-3">
+<h3 id="org326ef0b"><span class="section-number-3">1.1.</span> Latex</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 在Arch Linux下安装 <code>texlive</code> 包组：
@@ -278,8 +83,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org204b7ba" class="outline-3">
-<h3 id="org204b7ba"><span class="section-number-3">1.2.</span> ffmpeg</h3>
+<div id="outline-container-orgd0d11cc" class="outline-3">
+<h3 id="orgd0d11cc"><span class="section-number-3">1.2.</span> ffmpeg</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 同理，直接
@@ -290,8 +95,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orge97b7b8" class="outline-3">
-<h3 id="orge97b7b8"><span class="section-number-3">1.3.</span> manim</h3>
+<div id="outline-container-orgb3255a2" class="outline-3">
+<h3 id="orgb3255a2"><span class="section-number-3">1.3.</span> manim</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均在gitbub上<br />
@@ -338,12 +143,12 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </div>
 </div>
 
-<div id="outline-container-orgc856739" class="outline-2">
-<h2 id="orgc856739"><span class="section-number-2">2.</span> Manim的使用</h2>
+<div id="outline-container-org7cbdf2d" class="outline-2">
+<h2 id="org7cbdf2d"><span class="section-number-2">2.</span> Manim的使用</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org8f9b04c" class="outline-3">
-<h3 id="org8f9b04c"><span class="section-number-3">2.1.</span> 框架</h3>
+<div id="outline-container-org5362174" class="outline-3">
+<h3 id="org5362174"><span class="section-number-3">2.1.</span> 框架</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 引入manim包，随便定义一个继承自 <code>Scene</code> 的类，定义 <code>construct</code> 方法。在其中编写
@@ -439,12 +244,12 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </div>
 </div>
 
-<div id="outline-container-orgd5be5aa" class="outline-3">
-<h3 id="orgd5be5aa"><span class="section-number-3">2.2.</span> 创建对象</h3>
+<div id="outline-container-org53cd661" class="outline-3">
+<h3 id="org53cd661"><span class="section-number-3">2.2.</span> 创建对象</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org2df5237" class="outline-4">
-<h4 id="org2df5237"><span class="section-number-4">2.2.1.</span> 列表</h4>
+<div id="outline-container-org7a4c88a" class="outline-4">
+<h4 id="org7a4c88a"><span class="section-number-4">2.2.1.</span> 列表</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 将创建对应对象的方法用表格列出：
@@ -590,8 +395,8 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </table>
 </div>
 </div>
-<div id="outline-container-org1b41bbd" class="outline-4">
-<h4 id="org1b41bbd"><span class="section-number-4">2.2.2.</span> 通用或常见属性</h4>
+<div id="outline-container-org837f214" class="outline-4">
+<h4 id="org837f214"><span class="section-number-4">2.2.2.</span> 通用或常见属性</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -665,7 +470,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </table>
 </div>
 <ol class="org-ol">
-<li><a id="orgea1d72c"></a>附表<br />
+<li><a id="org1695b20"></a>附表<br />
 <div class="outline-text-5" id="text-2-2-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -719,7 +524,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </p>
 
 
-<div id="org1de0068" class="figure">
+<div id="org9ee58ad" class="figure">
 <p><img src="./img/colors.png" alt="colors.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>manim中各种颜色图</p>
@@ -759,8 +564,8 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </div>
 </div>
 
-<div id="outline-container-org062b1f3" class="outline-3">
-<h3 id="org062b1f3"><span class="section-number-3">2.3.</span> 改变对象属性方法（对象内部方法）</h3>
+<div id="outline-container-org4810a10" class="outline-3">
+<h3 id="org4810a10"><span class="section-number-3">2.3.</span> 改变对象属性方法（对象内部方法）</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 TIPS: 有相当多的方法可以使用 <code>object.animate.XXX</code> 的形式使用动画显示（需要传到
@@ -781,8 +586,8 @@ TIPS: 有相当多的方法可以使用 <code>object.animate.XXX</code> 的形�
 中只能实现转换，而不能实现旋转效果）</li>
 </ul>
 </div>
-<div id="outline-container-orgc545dda" class="outline-4">
-<h4 id="orgc545dda"><span class="section-number-4">2.3.1.</span> 对象定位</h4>
+<div id="outline-container-orgb8ea26f" class="outline-4">
+<h4 id="orgb8ea26f"><span class="section-number-4">2.3.1.</span> 对象定位</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <ul class="org-ul">
 <li><code>move_to()</code>
@@ -819,8 +624,8 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 </div>
 </div>
 </div>
-<div id="outline-container-org2e3aa69" class="outline-3">
-<h3 id="org2e3aa69"><span class="section-number-3">2.4.</span> 显示对象</h3>
+<div id="outline-container-org34e128f" class="outline-3">
+<h3 id="org34e128f"><span class="section-number-3">2.4.</span> 显示对象</h3>
 <div class="outline-text-3" id="text-2-4">
 <ul class="org-ul">
 <li><code>self.add()</code>
@@ -831,8 +636,8 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 画面静止保持等待</li>
 </ul>
 </div>
-<div id="outline-container-org10f8bcc" class="outline-4">
-<h4 id="org10f8bcc"><span class="section-number-4">2.4.1.</span> 动画函数（外部）</h4>
+<div id="outline-container-orgcd6260e" class="outline-4">
+<h4 id="orgcd6260e"><span class="section-number-4">2.4.1.</span> 动画函数（外部）</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <ul class="org-ul">
 <li><code>FadeIn()</code>
@@ -864,8 +669,8 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 </div>
 </div>
 </div>
-<div id="outline-container-org0e166db" class="outline-3">
-<h3 id="org0e166db"><span class="section-number-3">2.5.</span> 示例</h3>
+<div id="outline-container-org613c3e5" class="outline-3">
+<h3 id="org613c3e5"><span class="section-number-3">2.5.</span> 示例</h3>
 <div class="outline-text-3" id="text-2-5">
 <details>
 <summary>我的抄的实例</summary>
@@ -1032,8 +837,8 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 </div>
 </div>
 
-<div id="outline-container-org22c453b" class="outline-2">
-<h2 id="org22c453b"><span class="section-number-2">3.</span> Reference</h2>
+<div id="outline-container-org53c5ce0" class="outline-2">
+<h2 id="org53c5ce0"><span class="section-number-2">3.</span> Reference</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>ManimGL版本的教程与文档（有部分与ManimCE不兼容）
@@ -1075,9 +880,9 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Date: 2023-08-23 Wed 00:47</p>
+<p class="date">Date: 2023-08-23 三 00:47</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2024-11-30 Sat 12:35</p>
+<p class="date">Created: 2025-01-23 四 11:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
