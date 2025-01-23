@@ -11,3 +11,15 @@
 	div.insertAdjacentElement("afterbegin", header)
 	document.body.insertAdjacentElement("afterbegin", div)
 })();
+(function() {
+	let tables = document.getElementsByTagName('table')
+	if ( tables.length == 0 ) {
+		return;
+	}
+	for (let i = 0; i < tables.length; i++) {
+		let div = document.createElement("div")
+		div.className = "tables"
+		tables[i].insertAdjacentElement("beforebegin", div)
+		div.insertAdjacentElement("afterbegin", tables[i])
+	}
+})();
