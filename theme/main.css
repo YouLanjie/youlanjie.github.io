@@ -127,7 +127,8 @@
 		-moz-border-radius-bottomleft: 5px;
 		/* ensure doesn't flow off the screen when expanded */
 		max-height: 80%;
-		overflow: auto; }
+		overflow: auto;
+		}
 	#table-of-contents h2 {
 		font-size: 13pt;
 		max-width: 9em;
@@ -1113,6 +1114,7 @@
 		width: 20%;
 		box-shadow: 0 0 5px;
 		overflow: auto;
+		opacity: 0.9;
 	}
 	#postamble p, #preamble p {
 		font-size: 90%;
@@ -1132,6 +1134,7 @@
 		max-width: 50%;
 		overflow: auto;
 		background-color: #dfe8ec;
+		opacity: 0.95;
 	}
 } /* END OF @media screen */
 

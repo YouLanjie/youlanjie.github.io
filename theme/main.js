@@ -5,6 +5,7 @@
 	header.insertAdjacentHTML("beforeend", "<a href='/src/post.html'>   Blog   </a>")
 	header.insertAdjacentHTML("beforeend", "<a href='/src/timeline.html'>   TimeLine   </a>")
 	header.insertAdjacentHTML("beforeend", "<a href='/about.html'>   About   </a>")
+	header.role = "navigation"
 	let div = document.createElement('div')
 	div.id = "preamble"
 	div.className = "status"
