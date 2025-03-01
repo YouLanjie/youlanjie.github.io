@@ -3,13 +3,197 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2025-02-15 六 16:20 -->
+<!-- 2025-03-01 六 09:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>泰拉瑞亚战士全流程笔记</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="看404岛主等up的教程学的知识点笔记" />
 <meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
 <script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
@@ -25,96 +209,96 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga16fb80">1. 开局前的准备</a>
+<li><a href="#org4d294b7">1. 开局前的准备</a>
 <ul>
-<li><a href="#orgfd119ef">1.1. 熟记键位</a></li>
-<li><a href="#org37d8317">1.2. 游戏设置</a></li>
-<li><a href="#org1a7492f">1.3. 使用好的汉化包（Steam创意工坊）</a></li>
-<li><a href="#org4719627">1.4. 创建世界</a></li>
+<li><a href="#org486b653">1.1. 熟记键位</a></li>
+<li><a href="#org404e22d">1.2. 游戏设置</a></li>
+<li><a href="#orgb223178">1.3. 使用好的汉化包（Steam创意工坊）</a></li>
+<li><a href="#orga9b7fa1">1.4. 创建世界</a></li>
 </ul>
 </li>
-<li><a href="#org293c689">2. 肉前流程</a>
+<li><a href="#org227b260">2. 肉前流程</a>
 <ul>
-<li><a href="#orga284717">2.1. 开局</a></li>
-<li><a href="#org9d3d85c">2.2. 基地/NPC监狱</a></li>
-<li><a href="#org5fc93db">2.3. 探险/探图</a></li>
-<li><a href="#orga948421">2.4. 挖矿</a></li>
-<li><a href="#org20b3c97">2.5. 关于特殊事件</a>
+<li><a href="#org7388a56">2.1. 开局</a></li>
+<li><a href="#orgb576bac">2.2. 基地/NPC监狱</a></li>
+<li><a href="#orgf6b9ded">2.3. 探险/探图</a></li>
+<li><a href="#orge102b49">2.4. 挖矿</a></li>
+<li><a href="#org1e7735c">2.5. 关于特殊事件</a>
 <ul>
-<li><a href="#org1e167ff">2.5.1. 过血月/哥布林袭击</a></li>
-<li><a href="#orgd55feda">2.5.2. 打史莱姆王</a></li>
-<li><a href="#org0f7dde2">2.5.3. 过克眼（主线BOSS）</a></li>
+<li><a href="#org88b1de9">2.5.1. 过血月/哥布林袭击</a></li>
+<li><a href="#orge529ce1">2.5.2. 打史莱姆王</a></li>
+<li><a href="#org5eaa10f">2.5.3. 过克眼（主线BOSS）</a></li>
 </ul>
 </li>
-<li><a href="#org6f0ff2d">2.6. 关于更多的地形</a>
+<li><a href="#org45d4587">2.6. 关于更多的地形</a>
 <ul>
-<li><a href="#orgd61661a">2.6.1. 雪地</a></li>
-<li><a href="#org03796f2">2.6.2. 空岛</a></li>
-<li><a href="#orgb7aa9a5">2.6.3. 沙漠</a></li>
-<li><a href="#org7e6f889">2.6.4. 丛林</a></li>
-<li><a href="#orge75355e">2.6.5. 微光</a></li>
-<li><a href="#org62ab096">2.6.6. 猩红</a></li>
+<li><a href="#org52014d1">2.6.1. 雪地</a></li>
+<li><a href="#org013843e">2.6.2. 空岛</a></li>
+<li><a href="#org52c9015">2.6.3. 沙漠</a></li>
+<li><a href="#org2888b59">2.6.4. 丛林</a></li>
+<li><a href="#orgf1e24d9">2.6.5. 微光</a></li>
+<li><a href="#org217ccaa">2.6.6. 猩红</a></li>
 </ul>
 </li>
-<li><a href="#org356401c">2.7. 过克脑</a></li>
-<li><a href="#org0ce5ed4">2.8. 骷髅王</a></li>
-<li><a href="#org67c6c4c">2.9. 地牢与合成装备</a></li>
-<li><a href="#orgf8518c9">2.10. 其他BOSS</a>
+<li><a href="#orgdcc5e75">2.7. 过克脑</a></li>
+<li><a href="#org258847f">2.8. 骷髅王</a></li>
+<li><a href="#org56dfc7f">2.9. 地牢与合成装备</a></li>
+<li><a href="#org1ffb70c">2.10. 其他BOSS</a>
 <ul>
-<li><a href="#org74455ce">2.10.1. 蜂王</a></li>
-<li><a href="#org18c3e8c">2.10.2. 雪怪</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgef5921e">3. 肉前准备工作与现状概述</a>
-<ul>
-<li><a href="#orga4d353c">3.1. 建筑方块改变</a></li>
-<li><a href="#org1a95a0b">3.2. 初步形成晶塔网络与NPC编排</a>
-<ul>
-<li><a href="#org65653f1">3.2.1. 晶塔安排（个人常用）</a></li>
-<li><a href="#orgb3f31da">3.2.2. 部分NPC信息</a></li>
-</ul>
-</li>
-<li><a href="#orge09c8f3">3.3. 推荐的城填样式与部分特殊基地安排</a></li>
-<li><a href="#org4e9f753">3.4. 初步建成各群系的鱼池</a></li>
-<li><a href="#org1aad1ca">3.5. 其它肉后基础设施建筑设</a></li>
-<li><a href="#orgd7cf58f">3.6. 三套刷怪场</a>
-<ul>
-<li><a href="#orgdbc7965">3.6.1. 刷怪机制</a></li>
-<li><a href="#orge166e33">3.6.2. 环境构建</a></li>
-<li><a href="#org41cef62">3.6.3. 特殊生物处理</a></li>
-<li><a href="#org7c5953d">3.6.4. 刷怪场搭建</a></li>
-<li><a href="#org0b2c9be">3.6.5. 地表刷怪</a></li>
+<li><a href="#org6deaeb7">2.10.1. 蜂王</a></li>
+<li><a href="#org68edb01">2.10.2. 雪怪</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org818f5ab">4. 肉后</a>
+<li><a href="#org98a291c">3. 肉前准备工作与现状概述</a>
 <ul>
-<li><a href="#orga234a21">4.1. 过肉山</a></li>
-<li><a href="#orge698a2a">4.2. 过渡时期</a>
+<li><a href="#orgb4a3586">3.1. 建筑方块改变</a></li>
+<li><a href="#orgc00e418">3.2. 初步形成晶塔网络与NPC编排</a>
 <ul>
-<li><a href="#org7c1fcf6">4.2.1. 获取武器装备/npc</a></li>
-<li><a href="#org85d4e1b">4.2.2. 获取饰品/工具</a></li>
+<li><a href="#org5ed0c5e">3.2.1. 晶塔安排（个人常用）</a></li>
+<li><a href="#org3891e21">3.2.2. 部分NPC信息</a></li>
 </ul>
 </li>
-<li><a href="#orgd9bd47e">4.3. 新三王</a>
+<li><a href="#orgebe247d">3.3. 推荐的城填样式与部分特殊基地安排</a></li>
+<li><a href="#orgc9d5358">3.4. 初步建成各群系的鱼池</a></li>
+<li><a href="#org5af488c">3.5. 其它肉后基础设施建筑设</a></li>
+<li><a href="#org8e2d797">3.6. 三套刷怪场</a>
 <ul>
-<li><a href="#org06c1210">4.3.1. 铁长直/毁灭者</a></li>
-<li><a href="#orgade914b">4.3.2. 双子魔眼</a></li>
-<li><a href="#org5d085a6">4.3.3. 铁吴克/机械骷髅王</a></li>
+<li><a href="#org331b750">3.6.1. 刷怪机制</a></li>
+<li><a href="#orgc875616">3.6.2. 环境构建</a></li>
+<li><a href="#orge4a1aab">3.6.3. 特殊生物处理</a></li>
+<li><a href="#org7d8bed9">3.6.4. 刷怪场搭建</a></li>
+<li><a href="#org7d26d52">3.6.5. 地表刷怪</a></li>
 </ul>
 </li>
-<li><a href="#org7200c7d">4.4. 世纪之花</a></li>
-<li><a href="#org84b0f6b">4.5. 花后/石前</a></li>
-<li><a href="#org5af3e7c">4.6. 石巨人</a></li>
-<li><a href="#org458649b">4.7. 教徒/四柱</a></li>
-<li><a href="#orge896078">4.8. 月总/月亮领主</a></li>
-<li><a href="#orgd9377ff">4.9. 天顶剑</a></li>
 </ul>
 </li>
-<li><a href="#org466af33">5. Reference</a></li>
+<li><a href="#org4be1737">4. 肉后</a>
+<ul>
+<li><a href="#org706ad39">4.1. 过肉山</a></li>
+<li><a href="#org5b5cacf">4.2. 过渡时期</a>
+<ul>
+<li><a href="#org74b9094">4.2.1. 获取武器装备/npc</a></li>
+<li><a href="#org223c4ff">4.2.2. 获取饰品/工具</a></li>
+</ul>
+</li>
+<li><a href="#org7d05a05">4.3. 新三王</a>
+<ul>
+<li><a href="#orgb2af95b">4.3.1. 铁长直/毁灭者</a></li>
+<li><a href="#org38c0060">4.3.2. 双子魔眼</a></li>
+<li><a href="#org405923c">4.3.3. 铁吴克/机械骷髅王</a></li>
+</ul>
+</li>
+<li><a href="#orgc3001e2">4.4. 世纪之花</a></li>
+<li><a href="#orgd79138c">4.5. 花后/石前</a></li>
+<li><a href="#org3bda778">4.6. 石巨人</a></li>
+<li><a href="#org6f94a07">4.7. 教徒/四柱</a></li>
+<li><a href="#orgb3c2339">4.8. 月总/月亮领主</a></li>
+<li><a href="#org44ba98f">4.9. 天顶剑</a></li>
+</ul>
+</li>
+<li><a href="#org6f7fa0c">5. Reference</a></li>
 </ul>
 </div>
 </div>
@@ -153,13 +337,12 @@ body {
 <p>
 编者使用版本为1.4.4
 </p>
-
-<div id="outline-container-orga16fb80" class="outline-2">
-<h2 id="orga16fb80"><span class="section-number-2">1.</span> 开局前的准备</h2>
+<div id="outline-container-org4d294b7" class="outline-2">
+<h2 id="org4d294b7"><span class="section-number-2">1.</span> 开局前的准备</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgfd119ef" class="outline-3">
-<h3 id="orgfd119ef"><span class="section-number-3">1.1.</span> 熟记键位</h3>
+<div id="outline-container-org486b653" class="outline-3">
+<h3 id="org486b653"><span class="section-number-3">1.1.</span> 熟记键位</h3>
 <div class="outline-text-3" id="text-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -248,16 +431,16 @@ body {
 </table>
 </div>
 </div>
-<div id="outline-container-org37d8317" class="outline-3">
-<h3 id="org37d8317"><span class="section-number-3">1.2.</span> 游戏设置</h3>
+<div id="outline-container-org404e22d" class="outline-3">
+<h3 id="org404e22d"><span class="section-number-3">1.2.</span> 游戏设置</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>打开自动挥舞</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1a7492f" class="outline-3">
-<h3 id="org1a7492f"><span class="section-number-3">1.3.</span> 使用好的汉化包（Steam创意工坊）</h3>
+<div id="outline-container-orgb223178" class="outline-3">
+<h3 id="orgb223178"><span class="section-number-3">1.3.</span> 使用好的汉化包（Steam创意工坊）</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>Potralia的个人汉化</li>
@@ -265,8 +448,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org4719627" class="outline-3">
-<h3 id="org4719627"><span class="section-number-3">1.4.</span> 创建世界</h3>
+<div id="outline-container-orga9b7fa1" class="outline-3">
+<h3 id="orga9b7fa1"><span class="section-number-3">1.4.</span> 创建世界</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 战士，只建议玩猩红世界，以获取站神必备物品。（腐化，前期地形比较难探，且没有站神小玩具）
@@ -278,12 +461,12 @@ body {
 </div>
 </div>
 </div>
-<div id="outline-container-org293c689" class="outline-2">
-<h2 id="org293c689"><span class="section-number-2">2.</span> 肉前流程</h2>
+<div id="outline-container-org227b260" class="outline-2">
+<h2 id="org227b260"><span class="section-number-2">2.</span> 肉前流程</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orga284717" class="outline-3">
-<h3 id="orga284717"><span class="section-number-3">2.1.</span> 开局</h3>
+<div id="outline-container-org7388a56" class="outline-3">
+<h3 id="org7388a56"><span class="section-number-3">2.1.</span> 开局</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>下挖一小坑标记出生点，左右撸树平整下场地，可以丢铜短剑给史莱姆好捡个NPC压刷怪</li>
@@ -296,7 +479,7 @@ body {
 
 <blockquote>
 
-<div id="orgf9f58d3" class="figure">
+<div id="org6683f4b" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/前期卡怪墙.jpg" alt="前期卡怪墙.jpg" />
 </p>
 </div>
@@ -315,9 +498,8 @@ body {
 </blockquote>
 </div>
 </div>
-
-<div id="outline-container-org9d3d85c" class="outline-3">
-<h3 id="org9d3d85c"><span class="section-number-3">2.2.</span> 基地/NPC监狱</h3>
+<div id="outline-container-orgb576bac" class="outline-3">
+<h3 id="orgb576bac"><span class="section-number-3">2.2.</span> 基地/NPC监狱</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>基本框架：在出生点上方搭三层间隔4图格（即开局放置极限高度位置）的平台（防止怪物跳上来），在最上方的那一阶平台开始左右扩展。预留以出生点那格为中心的3格宽作过道，于两侧各搭建NPC房屋4-6间（以基本的卡怪墙为左右边界）</li>
@@ -325,7 +507,7 @@ body {
 </ul>
 <blockquote>
 
-<div id="orge780c5c" class="figure">
+<div id="orgb7396de" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/NPC监狱.jpg" alt="NPC监狱.jpg" />
 </p>
 </div>
@@ -353,8 +535,8 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-org5fc93db" class="outline-3">
-<h3 id="org5fc93db"><span class="section-number-3">2.3.</span> 探险/探图</h3>
+<div id="outline-container-orgf6b9ded" class="outline-3">
+<h3 id="orgf6b9ded"><span class="section-number-3">2.3.</span> 探险/探图</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 把家周围的地表探下，遇怪优先以躲避和堵怪为主，针对不同环境的内容总结如下：
@@ -388,7 +570,7 @@ body {
 </p>
 
 
-<div id="org829ca65" class="figure">
+<div id="org1cf8ecb" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/眉笔运气.png" alt="眉笔运气.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>眉笔运气：左边猩红堵门，右边丛林堵门</p>
@@ -399,8 +581,8 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-orga948421" class="outline-3">
-<h3 id="orga948421"><span class="section-number-3">2.4.</span> 挖矿</h3>
+<div id="outline-container-orge102b49" class="outline-3">
+<h3 id="orge102b49"><span class="section-number-3">2.4.</span> 挖矿</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 (此过程相对漫长且时刻穿插)
@@ -423,8 +605,8 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-org20b3c97" class="outline-3">
-<h3 id="org20b3c97"><span class="section-number-3">2.5.</span> 关于特殊事件</h3>
+<div id="outline-container-org1e7735c" class="outline-3">
+<h3 id="org1e7735c"><span class="section-number-3">2.5.</span> 关于特殊事件</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 在探索到一定程度，拉到一定血量上限后就会发生的事。
@@ -442,9 +624,8 @@ body {
 </p>
 </blockquote>
 </div>
-
-<div id="outline-container-org1e167ff" class="outline-4">
-<h4 id="org1e167ff"><span class="section-number-4">2.5.1.</span> 过血月/哥布林袭击</h4>
+<div id="outline-container-org88b1de9" class="outline-4">
+<h4 id="org88b1de9"><span class="section-number-4">2.5.1.</span> 过血月/哥布林袭击</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 向上延伸卡怪墙，和上层NPC房屋结合（如图），在事件期间堵住出口，然后在地上用手雷慢慢向左右清怪即可。<br />
@@ -456,7 +637,7 @@ body {
 </p>
 
 
-<div id="orga617e0e" class="figure">
+<div id="orgc53bf94" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/防御性墙.jpg" alt="防御性墙.jpg" />
 </p>
 </div>
@@ -466,15 +647,15 @@ body {
 </p>
 
 
-<div id="org782eeb2" class="figure">
+<div id="org1184b7a" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/开荒地表刷怪场.jpg " alt="开荒地表刷怪场.jpg " />
 </p>
 <p><span class="figure-number">Figure 2: </span>开荒过程中根据实际需求搭建的刷怪场，可见其中并未过克眼</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd55feda" class="outline-4">
-<h4 id="orgd55feda"><span class="section-number-4">2.5.2.</span> 打史莱姆王</h4>
+<div id="outline-container-orge529ce1" class="outline-4">
+<h4 id="orge529ce1"><span class="section-number-4">2.5.2.</span> 打史莱姆王</h4>
 <div class="outline-text-4" id="text-2-5-2">
 <p>
 召唤方式:杀够足够的史莱姆或者用材料去祭坛合成召唤物<br />
@@ -482,8 +663,8 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-org0f7dde2" class="outline-4">
-<h4 id="org0f7dde2"><span class="section-number-4">2.5.3.</span> 过克眼（主线BOSS）</h4>
+<div id="outline-container-org5eaa10f" class="outline-4">
+<h4 id="org5eaa10f"><span class="section-number-4">2.5.3.</span> 过克眼（主线BOSS）</h4>
 <div class="outline-text-4" id="text-2-5-3">
 <p>
 在家顶准备2层钩爪能够到的战斗平台，铺长点，摆上增益家具（篝火加生命回复，猫雕加防御，心灯加生命回复，向日葵加移速并降低刷怪率），换上防御最高的套装，有条件可备些廉价饰品上防御（如绳子+染料反复微光重铸），拿手榴弹，悠悠球，回旋镖，星怒等（远程）武器干就完了（武器能有就有）。
@@ -495,23 +676,23 @@ body {
 </div>
 </div>
 </div>
-<div id="outline-container-org6f0ff2d" class="outline-3">
-<h3 id="org6f0ff2d"><span class="section-number-3">2.6.</span> 关于更多的地形</h3>
+<div id="outline-container-org45d4587" class="outline-3">
+<h3 id="org45d4587"><span class="section-number-3">2.6.</span> 关于更多的地形</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 注意：探索和主线进度是同时进行的，所以说不是推完主线再去探索下述地形之类的。
 </p>
 </div>
-<div id="outline-container-orgd61661a" class="outline-4">
-<h4 id="orgd61661a"><span class="section-number-4">2.6.1.</span> 雪地</h4>
+<div id="outline-container-org52014d1" class="outline-4">
+<h4 id="org52014d1"><span class="section-number-4">2.6.1.</span> 雪地</h4>
 <div class="outline-text-4" id="text-2-6-1">
 <p>
 雪地物产不算丰富，但是相对比较安全（环境明亮没有什么穿墙怪），可算是第二甚至是第一挖矿选择，宝箱可取其中冰雪刃、冰回旋镖、和溜冰靴，雪地也较易挖出较多宝石以获取或升级勾爪。
 </p>
 </div>
 </div>
-<div id="outline-container-org03796f2" class="outline-4">
-<h4 id="org03796f2"><span class="section-number-4">2.6.2.</span> 空岛</h4>
+<div id="outline-container-org013843e" class="outline-4">
+<h4 id="org013843e"><span class="section-number-4">2.6.2.</span> 空岛</h4>
 <div class="outline-text-4" id="text-2-6-2">
 <p>
 空岛生成时有概率水池溢出落到地面，所以见到地上的疑似非正常生成水池时可以搭绳子绳子上去找空岛。如果绳子足够多且有伞则可以尝试用绳子搭根"擎天柱"上天用伞滑翔寻找，亦或者是在高空用铁轨水平方向查找（建议和床搭配）。如果有重力药水那就省事了。（绷不住的话可以尝试用如Terramap之类的地图查看器查图）
@@ -524,7 +705,7 @@ body {
 </blockquote>
 
 
-<div id="org2a48cf1" class="figure">
+<div id="orgedc9905" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/空岛.jpg" alt="空岛.jpg" />
 </p>
 <p><span class="figure-number">Figure 3: </span>大师档死好几次摸到星怒的我</p>
@@ -535,8 +716,8 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-orgb7aa9a5" class="outline-4">
-<h4 id="orgb7aa9a5"><span class="section-number-4">2.6.3.</span> 沙漠</h4>
+<div id="outline-container-org52c9015" class="outline-4">
+<h4 id="org52c9015"><span class="section-number-4">2.6.3.</span> 沙漠</h4>
 <div class="outline-text-4" id="text-2-6-3">
 <p>
 有星怒后探索地下沙漠就方便了，破仙人掌球掏生命水晶，寻找高尔夫球手。
@@ -547,30 +728,30 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-org7e6f889" class="outline-4">
-<h4 id="org7e6f889"><span class="section-number-4">2.6.4.</span> 丛林</h4>
+<div id="outline-container-org2888b59" class="outline-4">
+<h4 id="org2888b59"><span class="section-number-4">2.6.4.</span> 丛林</h4>
 <div class="outline-text-4" id="text-2-6-4">
 <p>
 主要目的:搜集丛林孢子15，藤蔓3，毒刺12以做草剑（真有了那就莽了）;<br />
 次要目的:取再生流杖
 </p>
 
-<div id="org0972b82" class="figure">
+<div id="org2ff3799" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/草剑.jpg" alt="草剑.jpg" />
 </p>
 <p><span class="figure-number">Figure 4: </span>丛林宝物：草剑</p>
 </div>
 </div>
 </div>
-<div id="outline-container-orge75355e" class="outline-4">
-<h4 id="orge75355e"><span class="section-number-4">2.6.5.</span> 微光</h4>
+<div id="outline-container-orgf1e24d9" class="outline-4">
+<h4 id="orgf1e24d9"><span class="section-number-4">2.6.5.</span> 微光</h4>
 <div class="outline-text-4" id="text-2-6-5">
 <p>
 在丛林侧海边（可以通过海螺传送）和正常地形的交界处（大世界的位置稍微更加不确定些）向下挖或用雷管炸出下滑通道，找到微光，堵下两头防怪，然后迅速建NPC屋把NPC般进来，用10金买晶塔（微光拆解合成能省很多钱）
 </p>
 
 
-<div id="org5cb3d6e" class="figure">
+<div id="orgd6e4bf6" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/微光.jpg" alt="微光.jpg" />
 </p>
 <p><span class="figure-number">Figure 5: </span>微光城镇环境示意</p>
@@ -615,8 +796,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org62ab096" class="outline-4">
-<h4 id="org62ab096"><span class="section-number-4">2.6.6.</span> 猩红</h4>
+<div id="outline-container-org217ccaa" class="outline-4">
+<h4 id="org217ccaa"><span class="section-number-4">2.6.6.</span> 猩红</h4>
 <div class="outline-text-4" id="text-2-6-6">
 <p>
 猩红没有什么矿，如果还没有去敲心脏（用锤子敲或者用炸弹炸）就去敲一下，好出哥布林袭击，主要是要搭点平台为打可脑和肉后敲祭坛作准备
@@ -624,8 +805,8 @@ body {
 </div>
 </div>
 </div>
-<div id="outline-container-org356401c" class="outline-3">
-<h3 id="org356401c"><span class="section-number-3">2.7.</span> 过克脑</h3>
+<div id="outline-container-orgdcc5e75" class="outline-3">
+<h3 id="orgdcc5e75"><span class="section-number-3">2.7.</span> 过克脑</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 猩红中央空洞里铺上几层平台，掏袭击拿到的尖球约100个洒地上，后期草剑强健。目标：得到样本组织做猩红镐，猩红套。
@@ -636,14 +817,14 @@ body {
 </p>
 
 
-<div id="org15182c3" class="figure">
+<div id="org4b07301" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/克脑.jpg" alt="克脑.jpg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0ce5ed4" class="outline-3">
-<h3 id="org0ce5ed4"><span class="section-number-3">2.8.</span> 骷髅王</h3>
+<div id="outline-container-org258847f" class="outline-3">
+<h3 id="org258847f"><span class="section-number-3">2.8.</span> 骷髅王</h3>
 <div class="outline-text-3" id="text-2-8">
 <ol class="org-ol">
 <li>套装准备：先探下地狱，用黑皮药水<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>挖狱岩矿（需要65x3=195的狱石，65个黑曜石），再挖点黑曜石做狱岩套及火山大剑（要用到地狱熔炉，需要探索遗迹获得）。</li>
@@ -653,18 +834,18 @@ body {
 </ol>
 
 <p>
-一阶段躲头用火山（换血）打手，然后同向绕圈走位用草剑打头（通过史莱姆ang的上下移速拉开距离的同时躲开螺旋追踪的骷髅头），滚筒洗衣机时平地跑即可（可全程带史莱姆ang）
+一阶段躲头用火山（换血）打手（两轮左右就可以清掉手），然后同向绕圈走位用烈焰回旋镖打头（通过史莱姆ang的上下移速拉开距离的同时躲开螺旋追踪的骷髅头），滚筒洗衣机时平地跑即可（要是懒得切坐骑可全程带史莱姆ang）
 </p>
 
 
-<div id="org78bdce5" class="figure">
+<div id="org6e5cb1d" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/囊得过分的boss.jpg" alt="囊得过分的boss.jpg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org67c6c4c" class="outline-3">
-<h3 id="org67c6c4c"><span class="section-number-3">2.9.</span> 地牢与合成装备</h3>
+<div id="outline-container-org56dfc7f" class="outline-3">
+<h3 id="org56dfc7f"><span class="section-number-3">2.9.</span> 地牢与合成装备</h3>
 <div class="outline-text-3" id="text-2-9">
 <ul class="org-ul">
 <li>刷怪取金题钥匙开箱取村正，回家合成把永夜剑（需要祭坛，火山，草剑，邪恶剑，村正）</li>
@@ -675,12 +856,12 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf8518c9" class="outline-3">
-<h3 id="orgf8518c9"><span class="section-number-3">2.10.</span> 其他BOSS</h3>
+<div id="outline-container-org1ffb70c" class="outline-3">
+<h3 id="org1ffb70c"><span class="section-number-3">2.10.</span> 其他BOSS</h3>
 <div class="outline-text-3" id="text-2-10">
 </div>
-<div id="outline-container-org74455ce" class="outline-4">
-<h4 id="org74455ce"><span class="section-number-4">2.10.1.</span> 蜂王</h4>
+<div id="outline-container-org6deaeb7" class="outline-4">
+<h4 id="org6deaeb7"><span class="section-number-4">2.10.1.</span> 蜂王</h4>
 <div class="outline-text-4" id="text-2-10-1">
 <p>
 骷髅王后配置可以直接野战蜂王（丛林找蜂巢）（无需药水），注意下就行了
@@ -693,8 +874,8 @@ body {
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org18c3e8c" class="outline-4">
-<h4 id="org18c3e8c"><span class="section-number-4">2.10.2.</span> 雪怪</h4>
+<div id="outline-container-org68edb01" class="outline-4">
+<h4 id="org68edb01"><span class="section-number-4">2.10.2.</span> 雪怪</h4>
 <div class="outline-text-4" id="text-2-10-2">
 <p>
 祭坛合成召唤物或者等待自然生成<br />
@@ -704,29 +885,27 @@ body {
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgef5921e" class="outline-2">
-<h2 id="orgef5921e"><span class="section-number-2">3.</span> 肉前准备工作与现状概述</h2>
+<div id="outline-container-org98a291c" class="outline-2">
+<h2 id="org98a291c"><span class="section-number-2">3.</span> 肉前准备工作与现状概述</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 此为战士肉后快速快乐发展之基，因此至关重要。当然，这里只是一个总结性的概述，其中的不同内容可以依据具体情况自行决定施工步骤。
 </p>
 </div>
-
-<div id="outline-container-orga4d353c" class="outline-3">
-<h3 id="orga4d353c"><span class="section-number-3">3.1.</span> 建筑方块改变</h3>
+<div id="outline-container-orgb4a3586" class="outline-3">
+<h3 id="orgb4a3586"><span class="section-number-3">3.1.</span> 建筑方块改变</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 如果缺建筑方块可以找酒馆老板买麦芽酒去微光分解成破璃（纯个人喜好，用玻璃只是因为方便）
 </p>
 </div>
 </div>
-<div id="outline-container-org1a95a0b" class="outline-3">
-<h3 id="org1a95a0b"><span class="section-number-3">3.2.</span> 初步形成晶塔网络与NPC编排</h3>
+<div id="outline-container-orgc00e418" class="outline-3">
+<h3 id="orgc00e418"><span class="section-number-3">3.2.</span> 初步形成晶塔网络与NPC编排</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org65653f1" class="outline-4">
-<h4 id="org65653f1"><span class="section-number-4">3.2.1.</span> 晶塔安排（个人常用）</h4>
+<div id="outline-container-org5ed0c5e" class="outline-4">
+<h4 id="org5ed0c5e"><span class="section-number-4">3.2.1.</span> 晶塔安排（个人常用）</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <blockquote>
 <ul class="org-ul">
@@ -756,9 +935,8 @@ body {
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb3f31da" class="outline-4">
-<h4 id="orgb3f31da"><span class="section-number-4">3.2.2.</span> 部分NPC信息</h4>
+<div id="outline-container-org3891e21" class="outline-4">
+<h4 id="org3891e21"><span class="section-number-4">3.2.2.</span> 部分NPC信息</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <blockquote>
 <ul class="org-ul">
@@ -945,9 +1123,8 @@ body {
 </div>
 </div>
 </div>
-
-<div id="outline-container-orge09c8f3" class="outline-3">
-<h3 id="orge09c8f3"><span class="section-number-3">3.3.</span> 推荐的城填样式与部分特殊基地安排</h3>
+<div id="outline-container-orgebe247d" class="outline-3">
+<h3 id="orgebe247d"><span class="section-number-3">3.3.</span> 推荐的城填样式与部分特殊基地安排</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>一般共性：NPC屋悬空于地表，可平整下地面，一般距地15格即可</li>
@@ -956,8 +1133,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org4e9f753" class="outline-3">
-<h3 id="org4e9f753"><span class="section-number-3">3.4.</span> 初步建成各群系的鱼池</h3>
+<div id="outline-container-orgc9d5358" class="outline-3">
+<h3 id="orgc9d5358"><span class="section-number-3">3.4.</span> 初步建成各群系的鱼池</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 鱼池只需300格即可没有渔力debuff
@@ -973,8 +1150,8 @@ body {
 </p>
 </div>
 </div>
-<div id="outline-container-org1aad1ca" class="outline-3">
-<h3 id="org1aad1ca"><span class="section-number-3">3.5.</span> 其它肉后基础设施建筑设</h3>
+<div id="outline-container-org5af488c" class="outline-3">
+<h3 id="org5af488c"><span class="section-number-3">3.5.</span> 其它肉后基础设施建筑设</h3>
 <div class="outline-text-3" id="text-3-5">
 <ul class="org-ul">
 <li>家具 搞到利器站（没有肉后找奸商买）、施法桌、做草药的</li>
@@ -982,7 +1159,7 @@ body {
 丛林 挖条直通车下到丛林神庙。建生命果农场（世纪之花苞农场确信），加防刷怪平台（小心感染了）
 </p>
 
-<div id="org3cdb72c" class="figure">
+<div id="org44a92b3" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/生命果农场.jpg" alt="生命果农场.jpg" />
 </p>
 <p><span class="figure-number">Figure 6: </span>生命果农场，也可以刷世花花苞</p>
@@ -1134,28 +1311,28 @@ body {
 </ul></li>
 </ul>
 
-<div id="org7a91d4b" class="figure">
+<div id="orgc4138c2" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/草药农场.jpg" alt="草药农场.jpg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd7cf58f" class="outline-3">
-<h3 id="orgd7cf58f"><span class="section-number-3">3.6.</span> 三套刷怪场</h3>
+<div id="outline-container-org8e2d797" class="outline-3">
+<h3 id="org8e2d797"><span class="section-number-3">3.6.</span> 三套刷怪场</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 分别布局在家中直通车的洞穴层（不能放在地下层），家顶（地表，城镇环境用影烛消除），海边（刷哥布林或海盗等）（最后这个可选）
 </p>
 </div>
-<div id="outline-container-orgdbc7965" class="outline-4">
-<h4 id="orgdbc7965"><span class="section-number-4">3.6.1.</span> 刷怪机制</h4>
+<div id="outline-container-org331b750" class="outline-4">
+<h4 id="org331b750"><span class="section-number-4">3.6.1.</span> 刷怪机制</h4>
 <div class="outline-text-4" id="text-3-6-1">
 <p>
 预先声明:坐标系使用的坐标原点均在玩家左上角
 </p>
 
 
-<div id="orgff7c5e6" class="figure">
+<div id="org910b2b9" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪范围.png" alt="刷怪范围.png" />
 </p>
 </div>
@@ -1169,12 +1346,12 @@ body {
 <li>删怪区域:W250，N120，E220，S140</li>
 </ul></li>
 <li>刷怪尝试 刷怪区择非实非人工墙，下寻一块（普通方块或者平台皆可)检测位置(三格高，左侧没有方块）（即在左上右下向阶梯不刷怪)，后出</li>
-<li>类型 方块（大多）、环境（丛林冰雪龟）、墙怪（蜘蛛），环境+墙+方块（地牢）、其它（混沌精要影烛）</li>
+<li>类型 方块（大多，丛林龟也是）、环境（冰雪龟）、墙怪（蜘蛛），环境+墙+方块（地牢）、其它（混沌精要影烛）</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge166e33" class="outline-4">
-<h4 id="orge166e33"><span class="section-number-4">3.6.2.</span> 环境构建</h4>
+<div id="outline-container-orgc875616" class="outline-4">
+<h4 id="orgc875616"><span class="section-number-4">3.6.2.</span> 环境构建</h4>
 <div class="outline-text-4" id="text-3-6-2">
 <ul class="org-ul">
 <li>沙漠（需要有墙）1.5k物块，雪地1.5k</li>
@@ -1188,29 +1365,29 @@ body {
 </p>
 
 
-<div id="orgf30dafb" class="figure">
+<div id="org77fcf96" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场局部3.jpg" alt="刷怪场局部3.jpg" />
 </p>
 <p><span class="figure-number">Figure 7: </span>开荒实践搭建的肉前载有雪地环境的刷怪场，用以刷小雪怪皮毛（场地经过改造故与下文图片不同）</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org41cef62" class="outline-4">
-<h4 id="org41cef62"><span class="section-number-4">3.6.3.</span> 特殊生物处理</h4>
+<div id="outline-container-orge4a1aab" class="outline-4">
+<h4 id="orge4a1aab"><span class="section-number-4">3.6.3.</span> 特殊生物处理</h4>
 <div class="outline-text-4" id="text-3-6-3">
 <p>
 法师会传送至记家6~20格范围内，空间宽3高4， <b>要有危险墙</b> ，用下面放泡泡上面倒岩浆处理
 </p>
 
 
-<div id="orgba944e9" class="figure">
+<div id="orgdeb2f85" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场局部1.jpg" alt="刷怪场局部1.jpg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org7c5953d" class="outline-4">
-<h4 id="org7c5953d"><span class="section-number-4">3.6.4.</span> 刷怪场搭建</h4>
+<div id="outline-container-org7d8bed9" class="outline-4">
+<h4 id="org7d8bed9"><span class="section-number-4">3.6.4.</span> 刷怪场搭建</h4>
 <div class="outline-text-4" id="text-3-6-4">
 <ul class="org-ul">
 <li>场地框架搭建：清空环境区域，并向多个方向多清理几格，建立如图所示的框架，建议用方块围下外框架。</li>
@@ -1228,13 +1405,13 @@ body {
 </ul></li>
 </ul>
 
-<div id="org26a0041" class="figure">
+<div id="org054e05e" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场全景.jpg" alt="刷怪场全景.jpg" />
 </p>
 </div>
 
 
-<div id="org939ff19" class="figure">
+<div id="org0056b38" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场局部2.jpg" alt="刷怪场局部2.jpg" />
 </p>
 </div>
@@ -1244,14 +1421,14 @@ body {
 </p>
 
 
-<div id="org634a8e1" class="figure">
+<div id="orga4d29bb" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场改进.jpg" alt="刷怪场改进.jpg" />
 </p>
 <p><span class="figure-number">Figure 8: </span>此图的地牢环境处理错误，法师传送处没有放危险地牢墙故法师不会传送</p>
 </div>
 
 
-<div id="org2cefa9a" class="figure">
+<div id="org0f91e5c" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/无伤宝箱怪.jpg" alt="无伤宝箱怪.jpg" />
 </p>
 <p><span class="figure-number">Figure 9: </span>扩展：无伤宝箱怪装置（宽3高4底部开孔还有倒斜坡）</p>
@@ -1262,7 +1439,7 @@ body {
 </p>
 
 
-<div id="org448588f" class="figure">
+<div id="org2277df1" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场局部4.jpg" alt="刷怪场局部4.jpg" />
 </p>
 </div>
@@ -1286,7 +1463,7 @@ body {
 </ul>
 
 
-<div id="org31ca495" class="figure">
+<div id="org03ba5e1" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/刷怪场局部5.jpg" alt="刷怪场局部5.jpg" />
 </p>
 <p><span class="figure-number">Figure 10: </span>花后正在刷地牢怪.ing</p>
@@ -1294,22 +1471,21 @@ body {
 </blockquote>
 </div>
 </div>
-
-<div id="outline-container-org0b2c9be" class="outline-4">
-<h4 id="org0b2c9be"><span class="section-number-4">3.6.5.</span> 地表刷怪</h4>
+<div id="outline-container-org7d26d52" class="outline-4">
+<h4 id="org7d26d52"><span class="section-number-4">3.6.5.</span> 地表刷怪</h4>
 <div class="outline-text-4" id="text-3-6-5">
 <p>
 丢掉环境部分，场地如法炮制，需要注意的是地表有刷哥布林袭击的需求，然而哥布林法师传送并不会只传在什么危险墙后，所以需要做好防范法师传送的工作。
 </p>
 
 
-<div id="orgab708eb" class="figure">
+<div id="orgf5c4b82" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/地表刷怪.jpg" alt="地表刷怪.jpg" />
 </p>
 </div>
 
 
-<div id="org764c999" class="figure">
+<div id="org570002f" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/地表刷怪2.jpg" alt="地表刷怪2.jpg" />
 </p>
 <p><span class="figure-number">Figure 11: </span>新版地表刷怪场，不过仍旧不能防范哥布林袭击的法师。</p>
@@ -1318,24 +1494,24 @@ body {
 </div>
 </div>
 </div>
-<div id="outline-container-org818f5ab" class="outline-2">
-<h2 id="org818f5ab"><span class="section-number-2">4.</span> 肉后</h2>
+<div id="outline-container-org4be1737" class="outline-2">
+<h2 id="org4be1737"><span class="section-number-2">4.</span> 肉后</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orga234a21" class="outline-3">
-<h3 id="orga234a21"><span class="section-number-3">4.1.</span> 过肉山</h3>
+<div id="outline-container-org706ad39" class="outline-3">
+<h3 id="org706ad39"><span class="section-number-3">4.1.</span> 过肉山</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 在地狱搭建三分之一到二分之一世界宽（中世界）铁轨，把握好距离，可用永夜剑轻松过（47防）
 </p>
 </div>
 </div>
-<div id="outline-container-orge698a2a" class="outline-3">
-<h3 id="orge698a2a"><span class="section-number-3">4.2.</span> 过渡时期</h3>
+<div id="outline-container-org5b5cacf" class="outline-3">
+<h3 id="org5b5cacf"><span class="section-number-3">4.2.</span> 过渡时期</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-org7c1fcf6" class="outline-4">
-<h4 id="org7c1fcf6"><span class="section-number-4">4.2.1.</span> 获取武器装备/npc</h4>
+<div id="outline-container-org74b9094" class="outline-4">
+<h4 id="org74b9094"><span class="section-number-4">4.2.1.</span> 获取武器装备/npc</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <ul class="org-ul">
 <li>刷怪场刷猩红怪取灵夜和魂，利用装置无伤猩红宝箱怪取臭虎爪和血指虎</li>
@@ -1346,8 +1522,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org85d4e1b" class="outline-4">
-<h4 id="org85d4e1b"><span class="section-number-4">4.2.2.</span> 获取饰品/工具</h4>
+<div id="outline-container-org223c4ff" class="outline-4">
+<h4 id="org223c4ff"><span class="section-number-4">4.2.2.</span> 获取饰品/工具</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <ul class="org-ul">
 <li>刷怪场猩红环境常驻刷猩红钥匙（要不然花后拿不了吸血刃）</li>
@@ -1406,13 +1582,12 @@ body {
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgd9bd47e" class="outline-3">
-<h3 id="orgd9bd47e"><span class="section-number-3">4.3.</span> 新三王</h3>
+<div id="outline-container-org7d05a05" class="outline-3">
+<h3 id="org7d05a05"><span class="section-number-3">4.3.</span> 新三王</h3>
 <div class="outline-text-3" id="text-4-3">
 </div>
-<div id="outline-container-org06c1210" class="outline-4">
-<h4 id="org06c1210"><span class="section-number-4">4.3.1.</span> 铁长直/毁灭者</h4>
+<div id="outline-container-orgb2af95b" class="outline-4">
+<h4 id="orgb2af95b"><span class="section-number-4">4.3.1.</span> 铁长直/毁灭者</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <ul class="org-ul">
 <li>摆上猫雕，做铁皮药，磕点灵液</li>
@@ -1437,8 +1612,8 @@ body {
 </blockquote>
 </div>
 </div>
-<div id="outline-container-orgade914b" class="outline-4">
-<h4 id="orgade914b"><span class="section-number-4">4.3.2.</span> 双子魔眼</h4>
+<div id="outline-container-org38c0060" class="outline-4">
+<h4 id="org38c0060"><span class="section-number-4">4.3.2.</span> 双子魔眼</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <ul class="org-ul">
 <li>建议打下史后拿史后鞍打以弥补全防饰品的机动性不足问题，顺便掏个刃杖</li>
@@ -1448,8 +1623,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org5d085a6" class="outline-4">
-<h4 id="org5d085a6"><span class="section-number-4">4.3.3.</span> 铁吴克/机械骷髅王</h4>
+<div id="outline-container-org405923c" class="outline-4">
+<h4 id="org405923c"><span class="section-number-4">4.3.3.</span> 铁吴克/机械骷髅王</h4>
 <div class="outline-text-4" id="text-4-3-3">
 <ul class="org-ul">
 <li>和吴克差不多，不过远程用光辉飞盘，近战用圣剑打</li>
@@ -1460,8 +1635,8 @@ body {
 </div>
 </div>
 </div>
-<div id="outline-container-org7200c7d" class="outline-3">
-<h3 id="org7200c7d"><span class="section-number-3">4.4.</span> 世纪之花</h3>
+<div id="outline-container-orgc3001e2" class="outline-3">
+<h3 id="orgc3001e2"><span class="section-number-3">4.4.</span> 世纪之花</h3>
 <div class="outline-text-3" id="text-4-4">
 <ul class="org-ul">
 <li>挖叶绿矿（总计需要480个叶绿矿，即54+24+18个叶绿锭）</li>
@@ -1486,8 +1661,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org84b0f6b" class="outline-3">
-<h3 id="org84b0f6b"><span class="section-number-3">4.5.</span> 花后/石前</h3>
+<div id="outline-container-orgd79138c" class="outline-3">
+<h3 id="orgd79138c"><span class="section-number-3">4.5.</span> 花后/石前</h3>
 <div class="outline-text-3" id="text-4-5">
 <ul class="org-ul">
 <li>第一时间去地牢取战士玩具“吸血鬼刀”</li>
@@ -1505,8 +1680,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org5af3e7c" class="outline-3">
-<h3 id="org5af3e7c"><span class="section-number-3">4.6.</span> 石巨人</h3>
+<div id="outline-container-org3bda778" class="outline-3">
+<h3 id="org3bda778"><span class="section-number-3">4.6.</span> 石巨人</h3>
 <div class="outline-text-3" id="text-4-6">
 <ul class="org-ul">
 <li>需要在丛林神庙最里面的房间用神庙电池对着祭坛使用召唤
@@ -1541,8 +1716,8 @@ body {
 </ul>
 </div>
 </div>
-<div id="outline-container-org458649b" class="outline-3">
-<h3 id="org458649b"><span class="section-number-3">4.7.</span> 教徒/四柱</h3>
+<div id="outline-container-org6f94a07" class="outline-3">
+<h3 id="org6f94a07"><span class="section-number-3">4.7.</span> 教徒/四柱</h3>
 <div class="outline-text-3" id="text-4-7">
 <ul class="org-ul">
 <li>地牢门口可站撸教徒，四柱伤害比较高有点难站撸，需要些技巧（引用下岛主的视频<a href="https://bilibili.com/video/BV1HP4y127Wc/"><code>BV1HP4y127Wc</code></a>）</li>
@@ -1569,7 +1744,7 @@ body {
 </ul>
 
 
-<div id="orgf52398f" class="figure">
+<div id="orgfc7c43e" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/月总1.jpg" alt="月总1.jpg" />
 </p>
 </div>
@@ -1604,10 +1779,8 @@ body {
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orge896078" class="outline-3">
-<h3 id="orge896078"><span class="section-number-3">4.8.</span> 月总/月亮领主</h3>
+<div id="outline-container-orgb3c2339" class="outline-3">
+<h3 id="orgb3c2339"><span class="section-number-3">4.8.</span> 月总/月亮领主</h3>
 <div class="outline-text-3" id="text-4-8">
 <ul class="org-ul">
 <li>打完最后一个柱子就只有1分钟的准备时间，需要：
@@ -1632,14 +1805,14 @@ body {
 </ul>
 
 
-<div id="org5796282" class="figure">
+<div id="org71d1eef" class="figure">
 <p><img src="./泰拉瑞亚战士全流程笔记/月总2.jpg" alt="月总2.jpg" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd9377ff" class="outline-3">
-<h3 id="orgd9377ff"><span class="section-number-3">4.9.</span> 天顶剑</h3>
+<div id="outline-container-org44ba98f" class="outline-3">
+<h3 id="org44ba98f"><span class="section-number-3">4.9.</span> 天顶剑</h3>
 <div class="outline-text-3" id="text-4-9">
 <p>
 月后无敌，日耀套、天界飞盘，自备材料自己做
@@ -1650,9 +1823,8 @@ body {
 </div>
 </div>
 </div>
-
-<div id="outline-container-org466af33" class="outline-2">
-<h2 id="org466af33"><span class="section-number-2">5.</span> Reference</h2>
+<div id="outline-container-org6f7fa0c" class="outline-2">
+<h2 id="org6f7fa0c"><span class="section-number-2">5.</span> Reference</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="https://bilibili.com/video/BV1v44y1x7qA/"><code>BV1v44y1x7qA</code></a> 【泰拉瑞亚】世界最详细新手教程！全流程机制详解</li>
@@ -1709,7 +1881,7 @@ body {
 <div id="postamble" class="status">
 <p class="date">Date: 2024-11-10 日 09:14</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2025-02-15 六 16:20</p>
+<p class="date">Created: 2025-03-01 六 09:09</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
