@@ -60,6 +60,7 @@ mk_public() {
 		}
 		_msg_warning "文件夹\`public\`不存在"
 		_msg_info "将创建public文件夹"
+		mkdir public
 		if [[ ! -d public ]] {
 			_msg_error "无法创建" 1
 		}
@@ -74,6 +75,10 @@ mk_public() {
 	find post -type f|grep -v "\.org"|sed "s/^/cp -r '/"|sed "s/ 'post\/\(.*\)$/ 'post\/\1' 'public\/post\/\1'/"|zsh
 	_msg_info "复制首页"
 	cp index.html public/
+	_msg_info "复制about页"
+	cp about.html public/
+	_msg_info "复制timeline页"
+	cp timeline.html public/
 	_msg_info "复制404页"
 	cp 404.html public/
 	_msg_info "复制主题与图片"
@@ -83,10 +88,10 @@ mk_public() {
 }
 
 update_file() {
-	emacs -Q -nw ./src/fastsetup.el "$1" --eval "(eval-buffer \"fastsetup.el\")"
+	emacs -Q -nw ./fastsetup.el "$1" --eval "(eval-buffer \"fastsetup.el\")"
 	out=$(echo $1|sed "s/\\.org$/.html/")
-	section1="^<style>"
-	section2="^<\\/style>"
+	section1='^<style type="text\/css">'
+	section2='^<\/style>'
 	sed -i "/$section1/,/$section2/{/$section1/!{/$section2/!d}}" "$out"
 	sed -i "/$section1/,/$section2/d" "$out"
 }
@@ -115,8 +120,9 @@ update() {
 }
 
 build() {
+	timeline=$(sha256sum timeline.org)
 	_msg_info "清空源文件"
-	echo "#+TITLE: TimeLine\n#+setupfile: ../setup.setup" > src/timeline.org
+	echo "#+TITLE: TimeLine\n#+setupfile: setup.setup" > timeline.org
 	_msg_info "构建列表中"
 	_msg_info "获取文件头并处理中"
 	file_list=(post/**/*.org)
@@ -138,25 +144,20 @@ build() {
 		if [[ $desc != "" ]] {
 			declare -l desc="$desc"
 			desc=$(echo $desc|sed 's/^#+description:[ ]*//')
-			printf '- /%s/ [[%s][%s]]\\\\\\\\\\n  %s\n' "$date" "$name" "$title" "$desc" >> src/timeline.org
+			printf '- /%s/ [[%s][%s]]\\\\\\\\\\n  %s\n' "$date" "$name" "$title" "$desc" >> timeline.org
 		} else {
-			printf "- /%s/ [[%s][%s]]\n" "$date" "$name" "$title" >> src/timeline.org
+			printf "- /%s/ [[%s][%s]]\n" "$date" "$name" "$title" >> timeline.org
 		}
 	}
-	list=$(cat src/timeline.org|sort -r)
-	echo $list > src/timeline.org
+	list=$(cat timeline.org|sort -r)
+	echo $list > timeline.org
 	_msg_info "列表输出完成"
 	_msg_info "导出子页面中..."
-	tmp="true"
 	check_time "404.org" "404.html"
 	check_time "about.org" "about.html"
-	check_time "src/post.org" "src/post.html" || tmp="false"
-	update_file src/timeline.org
-	if [[ $tmp == "true" ]] {
-		_msg_info "导出首页中..."
-		# emacs index.org -nw --eval "(progn (org-html-export-to-html) (kill-emacs))"
-		update_file index.org
-	}
+	#check_time "src/post.org" "src/post.html"
+	check_time "index.org" "index.html"
+	[[ $timeline != $(sha256sum timeline.org) ]] && update_file timeline.org
 	_msg_info "Done!"
 }
 
