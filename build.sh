@@ -122,7 +122,7 @@ update() {
 build() {
 	timeline=$(sha256sum timeline.org)
 	_msg_info "清空源文件"
-	echo "#+TITLE: TimeLine\n#+setupfile: setup.setup" > timeline.org
+	echo "" > timeline.org
 	_msg_info "构建列表中"
 	_msg_info "获取文件头并处理中"
 	file_list=(post/**/*.org)
@@ -150,7 +150,7 @@ build() {
 		}
 	}
 	list=$(cat timeline.org|sort -r)
-	echo $list > timeline.org
+	echo "#+TITLE: TimeLine\n#+setupfile: setup.setup\n$list" > timeline.org
 	_msg_info "列表输出完成"
 	_msg_info "导出子页面中..."
 	check_time "404.org" "404.html"

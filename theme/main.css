@@ -2,6 +2,28 @@
 
 @media all
 {
+	:root {
+		--bg: #1e2021;
+		--bgLight: #2e3031;
+		--bgQuote: #3e4041;
+		--bgMobleTable: #4e5051;
+		--fg: #fcfcfc;
+		--fgLink: #1d99f3;
+		--fgLinked: #6d99f3;
+		--fgH1: #1abc9c;
+		--fgH2: #11d116;
+		--fgH3: #F67400;
+		--fgH4: #9b59b6;
+		--transTime: 0.3s;
+	}
+	[theme="light"] {
+		--bg: #dfe8ec;
+		--bgLight: #365463;
+		--bgQuote: #e7ecef;
+		--bgMobleTable: #cfe8ed;
+		--fg: #1e2021;
+	}
+
 	html {
 		margin: 0;
 		font: .9em/1.6em "Droid Serif", "Cambria", "Georgia", "DejaVu Serif", serif;
@@ -9,14 +31,13 @@
 		background-attachment: fixed;
 		background-position: right bottom;
 		background-repeat: no-repeat;
-		color: #365463;
-		background-color: #dfe8ec;
+		color: var(--fg);
+		background-color: var(--bg);
 	}
 
 	body {
 		font-size: 12pt;
 		line-height: 18pt;
-		color: #365463;
 		margin-top: 0;
 		margin: 0px;
 		/* padding: 4px; */
@@ -26,7 +47,7 @@
 		/* min-width: 400px; */
 		margin-left: 5%;
 		margin-right: 22%;
-		background-color: #dfe8ec;
+		background-color: var(--bg);
 		padding: 2em;
 		box-shadow: 3px 3px 5px #888;
 	}
@@ -38,12 +59,8 @@
 	}
 
 	header {
-		background-color: #365463;
-		color: #dfe8ec;
+		background-color: var(--bgLight);
 		width: 100%;
-	}
-	header a {
-		color: #dfe8ec;
 	}
 
 	h1 {
@@ -55,7 +72,7 @@
 		margin-bottom: 10px;
 		margin-right: 7%;
 		/*color: #6C5D4F; */
-		color: grey;
+		color: var(--fgH1);
 		line-height: normal;
 	}
 
@@ -67,13 +84,14 @@
 		color: black;
 		border-bottom: 1px solid #ddd;
 		line-height: normal;
+		color:  var(--fgH2);
 	}
 	.outline-text-2 { margin-left: 0.1em }
 
 	h3 {
 		font-family:sans-serif;
 		font-size:1.3em;
-		color: grey;
+		color: var(--fgH3);
 		margin-left: 0.6em;
 		line-height: normal;
 	}
@@ -83,22 +101,23 @@
 		font-family:sans-serif;
 		font-size:1.2em;
 		margin-left: 1.2em;
-		color: #A5573E;
+		color: var(--fgH4);
 		line-height: normal;
 	}
 	.outline-text-4 { margin-left: 1.45em; }
 
 	a {text-decoration: none; font-weight: 400;}
-	a:visited {text-decoration: none; font-weight: 400;}
+	a:link { color: var(--fgLink);}
+	a:visited {text-decoration: none; font-weight: 400; color: var(--fgLinked);}
 	a:hover {text-decoration: underline;}
 
 	#org-div-home-and-up{
 		position: fixed;
 		right: 0;
-		top: 4em;
+		top: 4.3em;
 		z-index: 1;
 		padding: 2px;
-		background-color: #dfe8ec;
+		background-color: var(--bg);
 		border: 1px solid #CCC;
 		box-shadow: 0 0 1em #777777;
 		-webkit-box-shadow: 0 0 1em #777777;
@@ -117,7 +136,6 @@
 		z-index: 1;
 		right: 0em;
 		top: 0em;
-		background: white;
 		line-height: 12pt;
 		text-align: right;
 		box-shadow: 0 0 1em #777777;
@@ -128,7 +146,7 @@
 		/* ensure doesn't flow off the screen when expanded */
 		max-height: 80%;
 		overflow: auto;
-		}
+	}
 	#table-of-contents h2 {
 		font-size: 13pt;
 		max-width: 9em;
@@ -219,7 +237,7 @@
 
 	code {
 		font-size: 100%;
-		color: black;
+		color: #f67400;
 		border: 1px solid #DEDEDE;
 		padding: 0px 0.2em;
 		font: "Noto Sans Mono CJK";
@@ -278,8 +296,7 @@
 
 
 	blockquote {
-		background: #e7ecef;
-		border-color: #d1dbe0;
+		background-color: var(--bgQuote);
 		box-shadow: 2.8px 2.8px 2.2px #2e35380d, 6.7px 6.7px 5.3px #2e353808,
 			    12.5px 12.5px 10px #2e35380a, 22.3px 22.3px 17.9px #2e35380a,
 			    41.8px 41.8px 33.4px #2e35380d, 100px 100px 120px #2e353805,
@@ -1090,7 +1107,7 @@
 		bottom: 10px;
 		max-width: 20%;
 		padding: .2em;
-		background-color: #dfe8ec;
+		background-color: var(--bg);
 		border: 1px solid gray;
 		box-shadow: 0 0 5px;
 		overflow: auto;
@@ -1105,7 +1122,7 @@
 		font-size: 75%;
 		padding: .2em;
 		border: 1px solid gray;
-		background-color: #e7ecef;
+		background-color: var(--bg);
 		/* z-index: -1000; */
 		position: fixed;
 		right: 0px;
@@ -1134,8 +1151,8 @@
 		border: 1px solid #CCC;
 		max-width: 50%;
 		overflow: auto;
-		background-color: #dfe8ec;
-		opacity: 0.95;
+		background-color: var(--bg);
+		opacity: 0.85;
 	}
 } /* END OF @media screen */
 
@@ -1197,7 +1214,7 @@
 		table-layout: fixed;
 		/* word-break: break-all; */
 		border-collapse:collapse;
-		background-color: #cfe8ed;
+		background-color: var(--bgMobleTable);
 	}
 	#footnotes {
 		position: static;
@@ -1215,7 +1232,7 @@
 		margin-bottom: 10px;
 	}
 	#org-div-home-and-up{
-		top: 3em;
+		top: 3.3em;
 	}
 	.tables {
 		font-size: 9pt;

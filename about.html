@@ -3,12 +3,196 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2025-01-23 四 11:37 -->
+<!-- 2025-05-02 Fri 22:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>关于</title>
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
 <script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg">
@@ -24,22 +208,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcb852d8">1. 我想说的</a></li>
-<li><a href="#orga37dbda">2. 一些小介绍</a>
+<li><a href="#org6925c0d">1. 我想说的</a></li>
+<li><a href="#org92dc8b8">2. 一些小介绍</a>
 <ul>
-<li><a href="#org2d61f53">2.1. 源文件的获取</a></li>
-<li><a href="#org02039f3">2.2. 关于草稿的问题</a></li>
-<li><a href="#org491126c">2.3. 关于返回主页</a></li>
-<li><a href="#org1f57000">2.4. 关于本地构建</a></li>
-<li><a href="#orge0b004c">2.5. 关于右下（或左下角）的信息</a></li>
+<li><a href="#org281d0a3">2.1. 源文件的获取</a></li>
+<li><a href="#org2f2ed54">2.2. 关于草稿的问题</a></li>
+<li><a href="#org99b7dac">2.3. 关于返回主页</a></li>
+<li><a href="#orgc8b7b06">2.4. 关于本地构建</a></li>
+<li><a href="#orgc9885dd">2.5. 关于右下（或左下角）的信息</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcb852d8" class="outline-2">
-<h2 id="orgcb852d8"><span class="section-number-2">1.</span> 我想说的</h2>
+<div id="outline-container-org6925c0d" class="outline-2">
+<h2 id="org6925c0d"><span class="section-number-2">1.</span> 我想说的</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 这是我的个人网站，依靠Emacs Org导出为HTML构建
@@ -52,29 +236,51 @@
 </p>
 
 <p>
+关于样式我之前是这么写的：
+</p>
+<blockquote>
+<p>
 使用样式为由Org官方网页的样式文件修改而来的样式文件。修改部分配色，增加部分样式
 规定。
 </p>
 
 <p>
 曾经使用过的主题：
-<del><a href="https://github.com/yzs249175311/org-html-theme-dull">org-html-theme-dull</a> read-the-docs</del> （不过它们的文件未有删除）
 </p>
-
+<ul class="org-ul">
+<li><del><a href="https://github.com/yzs249175311/org-html-theme-dull">org-html-theme-dull</a></del></li>
+<li><del>read-the-docs</del></li>
+</ul>
+<p>
+（不过它们的文件未有删除）
+</p>
+</blockquote>
 <blockquote>
 <p>
 注：这两个主题均会使用其他的字体（来自网络），特别是 <code>read-the-docs</code> 这个主题的
 加载时间会非常的长（有的网址无法访问）。
 </p>
 </blockquote>
+<p>
+不过目前我自己在抄来的基础上也是做了不少改变，例如说使用脚本构建网页时会将所有的style内容去掉，失去的部分就进了css文件里。
+</p>
+
+<p>
+本来我并不打算使用js文件的，但是奈何若用原版的html导出生成导航栏时改一点点东西就需要全部导一遍，气不过，就改用了js，现在真香了
+</p>
+
+<p>
+主题的浅色配色部分来自 <code>org-html-theme-dull</code> ，暗色主题来自konsole终端的默认配色并稍作修改
+</p>
 </div>
 </div>
-<div id="outline-container-orga37dbda" class="outline-2">
-<h2 id="orga37dbda"><span class="section-number-2">2.</span> 一些小介绍</h2>
+
+<div id="outline-container-org92dc8b8" class="outline-2">
+<h2 id="org92dc8b8"><span class="section-number-2">2.</span> 一些小介绍</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2d61f53" class="outline-3">
-<h3 id="org2d61f53"><span class="section-number-3">2.1.</span> 源文件的获取</h3>
+<div id="outline-container-org281d0a3" class="outline-3">
+<h3 id="org281d0a3"><span class="section-number-3">2.1.</span> 源文件的获取</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 这个网站实际上已经在 <i>2023.05.14</i> 的更新中将源文件合并进了。理论上你能够访问的
@@ -84,8 +290,8 @@ html文件你也能够访问相应的Org源文件。就例如本页（首页）�
 </p>
 </div>
 </div>
-<div id="outline-container-org02039f3" class="outline-3">
-<h3 id="org02039f3"><span class="section-number-3">2.2.</span> 关于草稿的问题</h3>
+<div id="outline-container-org2f2ed54" class="outline-3">
+<h3 id="org2f2ed54"><span class="section-number-3">2.2.</span> 关于草稿的问题</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 由于脚本尚不完善，所以有很多的草稿文章（或者是烂尾文）会跟着一起发出来，所以请不
@@ -93,8 +299,8 @@ html文件你也能够访问相应的Org源文件。就例如本页（首页）�
 </p>
 </div>
 </div>
-<div id="outline-container-org491126c" class="outline-3">
-<h3 id="org491126c"><span class="section-number-3">2.3.</span> 关于返回主页</h3>
+<div id="outline-container-org99b7dac" class="outline-3">
+<h3 id="org99b7dac"><span class="section-number-3">2.3.</span> 关于返回主页</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 两款主题均没有改动 <code>Up</code> 与 <code>Home</code> 的链接。在部分文章中 <code>Up</code> 链接是有定义的，不过
@@ -103,8 +309,8 @@ html文件你也能够访问相应的Org源文件。就例如本页（首页）�
 </p>
 </div>
 </div>
-<div id="outline-container-org1f57000" class="outline-3">
-<h3 id="org1f57000"><span class="section-number-3">2.4.</span> 关于本地构建</h3>
+<div id="outline-container-orgc8b7b06" class="outline-3">
+<h3 id="orgc8b7b06"><span class="section-number-3">2.4.</span> 关于本地构建</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 由于网页对于 <code>/</code> 链接的较广泛使用，在将Github仓库克隆到本地后是无法直接访问的，
@@ -113,8 +319,8 @@ html文件你也能够访问相应的Org源文件。就例如本页（首页）�
 </p>
 </div>
 </div>
-<div id="outline-container-orge0b004c" class="outline-3">
-<h3 id="orge0b004c"><span class="section-number-3">2.5.</span> 关于右下（或左下角）的信息</h3>
+<div id="outline-container-orgc9885dd" class="outline-3">
+<h3 id="orgc9885dd"><span class="section-number-3">2.5.</span> 关于右下（或左下角）的信息</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 那些信息部分由Org文档指定，部分由Emacs自动生成。其中 <code>Date</code> 一般为文章的创建时间，
@@ -128,7 +334,7 @@ html文件你也能够访问相应的Org源文件。就例如本页（首页）�
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2025-01-23 四 11:37</p>
+<p class="date">Created: 2025-05-02 Fri 22:49</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
