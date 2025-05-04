@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2025-01-23 四 11:38 -->
+<!-- 2025-05-05 一 02:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Manim学习笔记</title>
@@ -25,147 +25,71 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org367c8b3">1. Manim的安装</a>
+<li><a href="#org6a03df8">1. Manim的安装</a></li>
+<li><a href="#orgceea33c">2. Manim基础知识</a>
 <ul>
-<li><a href="#org326ef0b">1.1. Latex</a></li>
-<li><a href="#orgd0d11cc">1.2. ffmpeg</a></li>
-<li><a href="#orgb3255a2">1.3. manim</a></li>
+<li><a href="#orgfcf31e9">2.1. 基本格式与渲染参数</a></li>
+<li><a href="#org745e7a5">2.2. 词义理解</a></li>
 </ul>
 </li>
-<li><a href="#org7cbdf2d">2. Manim的使用</a>
+<li><a href="#org9b95e16">3. Manim手册</a>
 <ul>
-<li><a href="#org5362174">2.1. 框架</a></li>
-<li><a href="#org53cd661">2.2. 创建对象</a>
-<ul>
-<li><a href="#org7a4c88a">2.2.1. 列表</a></li>
-<li><a href="#org837f214">2.2.2. 通用或常见属性</a></li>
+<li><a href="#orgf5bae9a">3.1. 常量速查</a></li>
+<li><a href="#orga40c2aa">3.2. 对象及其特异性方法一览</a></li>
+<li><a href="#orge90adcc">3.3. 广泛通用属性一览</a></li>
+<li><a href="#org836d425">3.4. 广泛通用方法一览</a></li>
+<li><a href="#org169dc42">3.5. 屏幕方法一览</a></li>
+<li><a href="#org092afe9">3.6. 动画方法一览</a></li>
+<li><a href="#org5749aa7">3.7. 示例</a></li>
 </ul>
 </li>
-<li><a href="#org4810a10">2.3. 改变对象属性方法（对象内部方法）</a>
-<ul>
-<li><a href="#orgb8ea26f">2.3.1. 对象定位</a></li>
-</ul>
-</li>
-<li><a href="#org34e128f">2.4. 显示对象</a>
-<ul>
-<li><a href="#orgcd6260e">2.4.1. 动画函数（外部）</a></li>
-</ul>
-</li>
-<li><a href="#org613c3e5">2.5. 示例</a></li>
-</ul>
-</li>
-<li><a href="#org53c5ce0">3. Reference</a></li>
+<li><a href="#org987f8bd">4. Reference</a></li>
 </ul>
 </div>
 </div>
 <blockquote>
 <p>
-警告！这只是一篇笔记！一篇笔记！非入门教程！<br />
+警告！这只是一篇笔记！一篇笔记！非入门教程！默认具有一定python基础<br />
 系统环境：Arch Linux<br />
 时间：2023-08-23<br />
 顺带一提：使用manimCE的建议看最后 <code>Reference</code> 里面最后一个链接里的官方教程
 </p>
 </blockquote>
-
-<div id="outline-container-org367c8b3" class="outline-2">
-<h2 id="org367c8b3"><span class="section-number-2">1.</span> Manim的安装</h2>
+<div id="outline-container-org6a03df8" class="outline-2">
+<h2 id="org6a03df8"><span class="section-number-2">1.</span> Manim的安装</h2>
 <div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-org326ef0b" class="outline-3">
-<h3 id="org326ef0b"><span class="section-number-3">1.1.</span> Latex</h3>
-<div class="outline-text-3" id="text-1-1">
 <p>
-在Arch Linux下安装 <code>texlive</code> 包组：
+操作如下（pipx无法使用系统环境包故不考虑用pacman安装依赖）
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">sudo pacman -S texlive
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">&#30830;&#20445;&#31995;&#32479;&#23436;&#25972;&#19988;&#20855;&#26377;gcc&#31561;&#24037;&#20855;&#65292;texlive&#36873;&#35013;</span>
+sudo pacman -S base base-devel texlive ffmpeg
+<span style="color: #75715E;"># </span><span style="color: #75715E;">python&#29615;&#22659;&#35774;&#32622;</span>
+sudo pacman -S python python-pip python-pipx
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#38236;&#20687;</span>
+pip config set global.index-url <span style="color: #E6DB74;">"https://pypi.tuna.tsinghua.edu.cn/simple"</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#23433;&#35013;ManimCE(manimgl&#26159;3b1b&#20010;&#20154;&#29256;&#26412;)</span>
+pipx install manim
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd0d11cc" class="outline-3">
-<h3 id="orgd0d11cc"><span class="section-number-3">1.2.</span> ffmpeg</h3>
-<div class="outline-text-3" id="text-1-2">
-<p>
-同理，直接
-</p>
-<div class="org-src-container">
-<pre class="src src-shell">sudo pacman -S ffmpeg
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orgb3255a2" class="outline-3">
-<h3 id="orgb3255a2"><span class="section-number-3">1.3.</span> manim</h3>
-<div class="outline-text-3" id="text-1-3">
-<p>
-manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均在gitbub上<br />
-两个版本没有太大的不同，我选择的是社区版本
-</p>
-<ul class="org-ul">
-<li><p>
-社区版安装：
-</p>
-<div class="org-src-container">
-<pre class="src src-shell">sudo pip install manim
-</pre>
-</div></li>
-<li><p>
-3B1B版本安装：
-</p>
-<div class="org-src-container">
-<pre class="src src-shell">sudo pip install manimgl
-</pre>
-</div></li>
-</ul>
-<blockquote>
-<p>
-备注：使用镜像源的方法：<br />
-在 <code>$HOME/</code> 下创建 <code>.pip</code> 目录并添加 <code>pip.conf</code> 文件并写入：
-</p>
-<div class="org-src-container">
-<pre class="src src-conf">[<span style="color: #66D9EF;">global</span>]
-<span style="color: #FD971F;">index-url</span> = https://pypi.tuna.tsinghua.edu.cn/simple
-[<span style="color: #66D9EF;">install</span>]
-<span style="color: #FD971F;">trusted-host</span> = https://pypi.tuna.tsinghua.edu.cn
-<span style="color: #75715E;"># </span><span style="color: #75715E;">trusted-host &#27492;&#21442;&#25968;&#26159;&#20026;&#20102;&#36991;&#20813;&#40635;&#28902;&#65292;&#21542;&#21017;&#20351;&#29992;&#30340;&#26102;&#20505;&#21487;&#33021;&#20250;&#25552;&#31034;&#19981;&#21463;&#20449;&#20219;</span>
-</pre>
-</div>
-<p>
-建议在root用户下操作
-</p>
-
-<p>
-补充:若pip执行报错外部环境问题，参见<a href="https://www.yaolong.net/article/pip-externally-managed-environment/">这里</a>。
-</p>
-</blockquote>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org7cbdf2d" class="outline-2">
-<h2 id="org7cbdf2d"><span class="section-number-2">2.</span> Manim的使用</h2>
+<div id="outline-container-orgceea33c" class="outline-2">
+<h2 id="orgceea33c"><span class="section-number-2">2.</span> Manim基础知识</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org5362174" class="outline-3">
-<h3 id="org5362174"><span class="section-number-3">2.1.</span> 框架</h3>
+<div id="outline-container-orgfcf31e9" class="outline-3">
+<h3 id="orgfcf31e9"><span class="section-number-3">2.1.</span> 基本格式与渲染参数</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-引入manim包，随便定义一个继承自 <code>Scene</code> 的类，定义 <code>construct</code> 方法。在其中编写
-动画。
-</p>
-
-<p>
-示例：
+一个基本manim程序范例：
 </p>
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #F92672;">from</span> manim <span style="color: #F92672;">import</span> *
 
 <span style="color: #F92672;">class</span> <span style="color: #66D9EF;">example_class</span>(Scene):
     <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
-        <span style="color: #FD971F;">square</span> = Square()
-        <span style="color: #F92672;">self</span>.play(Create(square))
-        <span style="color: #F92672;">self</span>.wait(1)
+        <span style="color: #F92672;">pass</span>
 </pre>
 </div>
 
@@ -174,19 +98,12 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </p>
 <div class="org-src-container">
 <pre class="src src-shell">manim -ql path/to/file.py example_class
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#21363;:manim [&#21442;&#25968;] &#25991;&#20214;.py [&lt;&#20320;&#23450;&#20041;&#30340;&#31867;&#21517;&gt;(&#31867;&#21517;&#21487;&#20197;&#30465;&#30053;(&#21333;&#20010;&#40664;&#35748;&#65292;&#22810;&#20010;&#35810;&#38382;))]</span>
 </pre>
 </div>
-<p>
-即
-</p>
-<div class="org-src-container">
-<pre class="src src-shell">manim -ql &#25991;&#20214;.py &#20320;&#23450;&#20041;&#30340;&#31867;&#21517;
-</pre>
-</div>
-<p>
-其中， <code>-ql</code> 指定了渲染的质量（480p 15fps），将 <code>l</code> 替换为 <code>h</code> 指定为高渲染质量
-（1080p 60fps），参数表格关系如下:
-</p>
+<ul class="org-ul">
+<li><code>-q?</code> 用于指定输出质量，对应如下:</li>
+</ul>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -236,23 +153,33 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 </tr>
 </tbody>
 </table>
-
-<p>
-类名可以省略，文件只有一个类时默认渲染那一个，如果有多个，程序会询问，如果加上
-<code>-p</code> 参数，则会在渲染完成后调用程序打开文件
-</p>
+<ul class="org-ul">
+<li><code>-p</code> 在渲染完成后预览结果</li>
+</ul>
 </div>
 </div>
-
-<div id="outline-container-org53cd661" class="outline-3">
-<h3 id="org53cd661"><span class="section-number-3">2.2.</span> 创建对象</h3>
+<div id="outline-container-org745e7a5" class="outline-3">
+<h3 id="org745e7a5"><span class="section-number-3">2.2.</span> 词义理解</h3>
 <div class="outline-text-3" id="text-2-2">
-</div>
-<div id="outline-container-org7a4c88a" class="outline-4">
-<h4 id="org7a4c88a"><span class="section-number-4">2.2.1.</span> 列表</h4>
-<div class="outline-text-4" id="text-2-2-1">
-<p>
-将创建对应对象的方法用表格列出：
+<ul class="org-ul">
+<li>空间方位 由 <code>[x,y,z]</code> 三位数组构成，一般略去问题不大。坐标可由方向常量（看下
+表）、已存在的对象以及三位数组提供（在函数间传递参数的时候）。一般而言省略掉z
+坐标问题不大。
+<ul class="org-ul">
+<li>x轴横于画面，y轴纵于画面，z轴垂直于画面。</li>
+<li><code>IN</code> 代表垂直并向着屏幕方向， <code>OUT</code> 则相反</li>
+</ul></li>
+<li>对象 一般指manim定义的那堆大写开头的可被添加到屏幕的类</li>
+<li>方法 一般指对象（类）的内部的函数，在manim中方法一般默认返回self，也就是说实际
+上可以在执行完一个方法后套上另外一个方法，如 <code>a.b().c().e()</code> 这样</li>
+<li>通用方法命名规律 用于找出想要的方法
+<ul class="org-ul">
+<li><code>get_XXX</code> 获取对象的属性</li>
+<li><code>set_XXX</code> 设置对象的属性</li>
+</ul></li>
+<li>属性 对象的属性（如颜色字体大小位置等）</li>
+<li><p>
+常见英语词汇翻译
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -262,272 +189,76 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 
 <col  class="org-left" />
 </colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">方法</th>
-<th scope="col" class="org-left">对象类型</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">几何图形</td>
+<td class="org-left">原词</td>
+<td class="org-left">意思</td>
 </tr>
 
 <tr>
-<td class="org-left">Line</td>
-<td class="org-left">线 <code>(ARG:start_xy, end_xy)</code></td>
+<td class="org-left">buff</td>
+<td class="org-left">缓冲，抵达预设位置前预留的空间</td>
 </tr>
 
 <tr>
-<td class="org-left">Square</td>
-<td class="org-left">正方形</td>
+<td class="org-left">opacity</td>
+<td class="org-left">透明度</td>
 </tr>
 
 <tr>
-<td class="org-left">Rectangle</td>
-<td class="org-left">矩形</td>
+<td class="org-left">about_point</td>
+<td class="org-left">旋转等操作的中心点</td>
 </tr>
 
 <tr>
-<td class="org-left">Triangle</td>
-<td class="org-left">三角形</td>
+<td class="org-left">vertices</td>
+<td class="org-left">顶点</td>
 </tr>
 
 <tr>
-<td class="org-left">Polygon</td>
-<td class="org-left">沿着指定的坐标点创建多边形 <code>(ARG: xy1, ..., xyn)</code></td>
-</tr>
-
-<tr>
-<td class="org-left">Circle</td>
-<td class="org-left">圆形</td>
-</tr>
-
-<tr>
-<td class="org-left">Ellipse</td>
-<td class="org-left">椭圆</td>
-</tr>
-
-<tr>
-<td class="org-left">Annulus</td>
-<td class="org-left">圆环</td>
-</tr>
-
-<tr>
-<td class="org-left">Arrow</td>
-<td class="org-left">箭头（指向）<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> <code>(ARG:start_xy, end_xy, buff=0.25)</code></td>
-</tr>
-
-<tr>
-<td class="org-left">CurvedArrow</td>
-<td class="org-left">曲箭头</td>
-</tr>
-
-<tr>
-<td class="org-left">Dot</td>
-<td class="org-left">点</td>
+<td class="org-left">axis</td>
+<td class="org-left">轴</td>
 </tr>
 </tbody>
-<tbody>
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">数轴相关</td>
-</tr>
-
-<tr>
-<td class="org-left">Axes</td>
-<td class="org-left">数轴 <code>(ARG:(x1,x2),(y1,y2), [x_length=2*6], [y_length=2*3])</code></td>
-</tr>
-
-<tr>
-<td class="org-left">ax.plot</td>
-<td class="org-left">Draw curve <code>(ARG:lambda, x_range, y_range)</code></td>
-</tr>
-
-<tr>
-<td class="org-left">ax.get_area</td>
-<td class="org-left">get Shape in area <code>(ARG:curve, range)</code></td>
-</tr>
-
-<tr>
-<td class="org-left">NumberPlane</td>
-<td class="org-left">网格</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">文字</td>
-</tr>
-
-<tr>
-<td class="org-left">Tex</td>
-<td class="org-left">文字（使用Latex生成）<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></td>
-</tr>
-
-<tr>
-<td class="org-left">MathTex</td>
-<td class="org-left">数学公式（使用Latex格式）</td>
-</tr>
-
-<tr>
-<td class="org-left">Text</td>
-<td class="org-left">一样是渲染文字（没有中文问题）</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">逻辑操作</td>
-</tr>
-
-<tr>
-<td class="org-left">VGroup</td>
-<td class="org-left">虚拟组，可以使用 <code>.add()</code> 方法将对象添加进去<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>，可以使用 <code>[index]</code> 的形式访问</td>
-</tr>
-
-<tr>
-<td class="org-left">Group</td>
-<td class="org-left">组，具体性质未知</td>
-</tr>
-</tbody>
-</table>
+</table></li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org837f214" class="outline-4">
-<h4 id="org837f214"><span class="section-number-4">2.2.2.</span> 通用或常见属性</h4>
-<div class="outline-text-4" id="text-2-2-2">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">变量名</th>
-<th scope="col" class="org-left">可用的值</th>
-<th scope="col" class="org-left">作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">color</td>
-<td class="org-left">&lt;COLOR&gt;</td>
-<td class="org-left">设置边框颜色</td>
-</tr>
-
-<tr>
-<td class="org-left">fill_color</td>
-<td class="org-left">&lt;COLOR&gt;</td>
-<td class="org-left">设置填充的颜色</td>
-</tr>
-
-<tr>
-<td class="org-left">fill_opacity</td>
-<td class="org-left">0.0~1.0</td>
-<td class="org-left">设置填充颜色的透明度</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">height</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">高</td>
-</tr>
-
-<tr>
-<td class="org-left">width</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">宽</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">inner_radius</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">内半径</td>
-</tr>
-
-<tr>
-<td class="org-left">outer_radius</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">外半径</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">font_size</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">字体大小</td>
-</tr>
-</tbody>
-</table>
 </div>
-<ol class="org-ol">
-<li><a id="org1695b20"></a>附表<br />
-<div class="outline-text-5" id="text-2-2-2-1">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">标号</th>
-<th scope="col" class="org-left">值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">&lt;COLOR&gt;</td>
-<td class="org-left">RED</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">ORANGE</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">YELLOW</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">GREEN</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">BLUE</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#x2026;</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-其他颜色见下图
+<div id="outline-container-org9b95e16" class="outline-2">
+<h2 id="org9b95e16"><span class="section-number-2">3.</span> Manim手册</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgf5bae9a" class="outline-3">
+<h3 id="orgf5bae9a"><span class="section-number-3">3.1.</span> 常量速查</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li><p>
+方位：本质为一个三维坐标（数组）
 </p>
+<div class="org-src-container">
+<pre class="src src-text">UL        UP        UR  |  OUT   &#23631;&#24149;&#22806;&#38754;
+LEFT   ORIGION   RIGHT  | (z&#36724;) ----------
+DL       DOWN       DR  |  IN    &#23631;&#24149;&#20869;&#20391;
+</pre>
+</div>
+<p>
+组合方式： 使用 <code>+</code> 号相加
+</p></li>
+<li>角度 <code>DEGREES</code> 角度制(PI/180) | <code>PI</code> 弧度制 | <code>TAU</code> 周角(2*PI)</li>
+<li><p>
+颜色
+</p>
+<div class="org-src-container">
+<pre class="src src-text">BLACK BLUE GOLD GRAY GREEN GREY
+ORANGE PINK PURPLE RED WHITE YELLOW
+</pre>
+</div>
 
-
-<div id="org9ee58ad" class="figure">
+<div id="org8646287" class="figure">
 <p><img src="./img/colors.png" alt="colors.png" />
 </p>
-<p><span class="figure-number">Figure 1: </span>manim中各种颜色图</p>
+<p><span class="figure-number">Figure 1: </span>manim中各种颜色</p>
 </div>
 
 <details>
@@ -541,8 +272,7 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
     <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">construct</span>(<span style="color: #F92672;">self</span>):
         <span style="color: #75715E;"># </span><span style="color: #75715E;">plane = NumberPlane()</span>
         <span style="color: #75715E;"># </span><span style="color: #75715E;">self.add(plane)</span>
-        <span style="color: #FD971F;">colors</span> = <span style="color: #F92672;">dir</span>(color.manim_colors)[:-10]
-        colors.remove(<span style="color: #E6DB74;">"List"</span>)
+        <span style="color: #FD971F;">colors</span> = <span style="color: #F92672;">dir</span>(color.manim_colors)[:-11]
         colors.remove(<span style="color: #E6DB74;">"ManimColor"</span>)
         <span style="color: #FD971F;">boxs</span> = VGroup()
         <span style="color: #F92672;">for</span> i <span style="color: #F92672;">in</span> colors:
@@ -557,121 +287,314 @@ manim有两个版本，社区版本和3Blue1Brown个人维护版本，源码均�
 
 </pre>
 </div>
+</details></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga40c2aa" class="outline-3">
+<h3 id="orga40c2aa"><span class="section-number-3">3.2.</span> 对象及其特异性方法一览</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+内容来自ManimCE手册，英语好的直接看定义知参数
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #E6DB74;">"""&#27880;&#65306;`#`&#27880;&#37322;&#37096;&#20998;&#30340;&#25324;&#21495;&#20869;&#20026;&#20854;&#29238;&#23545;&#35937;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#32452;(VMobject)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">VGroup</span>(*vmobjects, **kwargs)
+<span style="color: #E6DB74;">"""&#21487;&#20197;&#36890;&#36807;VGroup(xxx, xxx, ...)&#12289;VGroup.add(xxx)&#12289;VGroup()+=XXX&#31561;&#26041;&#24335;&#28155;&#21152;&#23545;&#35937;</span>
+<span style="color: #E6DB74;">   &#21487;&#20197;&#36890;&#36807;VGroup()[num]&#23545;&#26576;&#20010;&#39034;&#24207;&#20301;&#32622;&#30340;&#23545;&#35937;&#36827;&#34892;&#35775;&#38382;</span>
+<span style="color: #E6DB74;">   &#20854;&#20869;&#37096;&#30340;&#23545;&#35937;&#23454;&#38469;&#19978;&#26159;&#31181;&#25351;&#38024;&#65292;&#32452;&#20869;&#32452;&#22806;&#37117;&#33021;&#35775;&#38382;&#25511;&#21046;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#32447;(TipableVMobject)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Line</span>(start=array([-1., 0., 0.]), end=array([1., 0., 0.]), buff=0, path_arc=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#34394;&#32447;(Line)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">DashLine</span>(*args, dash_length=0.05, dashed_ratio=0.5, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20004;&#26465;&#32447;&#22841;&#35282;&#30340;&#26631;&#35760;&#24359;&#32447;(VMobjects)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Angle</span>(line1, line2, radius=<span style="color: #AE81FF;">None</span>, quadrant=(1, 1), other_angle=<span style="color: #AE81FF;">False</span>, dot=<span style="color: #AE81FF;">False</span>, dot_radius=<span style="color: #AE81FF;">None</span>, dot_distance=0.55, dot_color=ManimColor(<span style="color: #E6DB74;">'#FFFFFF'</span>), elbow=<span style="color: #AE81FF;">False</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#30697;&#24418;(RegularPolygon)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Rectangle</span>(color=ManimColor(<span style="color: #E6DB74;">'#FFFFFF'</span>), height=2.0, width=4.0, grid_xstep=<span style="color: #AE81FF;">None</span>, grid_ystep=<span style="color: #AE81FF;">None</span>, mark_paths_closed=<span style="color: #AE81FF;">True</span>, close_new_points=<span style="color: #AE81FF;">True</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#27491;&#19977;&#35282;&#24418;(RegularPolygon)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Triangle</span>(**kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#24320;&#25918;&#22411;&#22810;&#36793;&#24418;(VMobject)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Polygram</span>(*vertex_groups, color=ManimColor(<span style="color: #E6DB74;">'#58C4DD'</span>), **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#38381;&#21512;&#22411;&#22810;&#36793;&#24418;(&#29305;&#27530;&#30340;Polygram)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Polygon</span>(*vertices, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22278;&#24418;(Arc)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Circle</span>(radius=<span style="color: #AE81FF;">None</span>, color=ManimColor(<span style="color: #E6DB74;">'#FC6255'</span>), **kwargs):
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#35753;&#22278;&#30340;&#22278;&#24515;&#23545;&#40784;&#24050;&#26377;&#20803;&#32032;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">surround</span>(mobject, dim_to_match=0, stretch=<span style="color: #AE81FF;">False</span>, buffer_factor=1.2)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#26925;&#22278;(Circle)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Ellipse</span>(width=2, height=1, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#28857;(Circle)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Dot</span>(point=array([0., 0., 0.]), radius=0.08, stroke_width=0, fill_opacity=1.0, color=ManimColor(<span style="color: #E6DB74;">'#FFFFFF'</span>), **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#31661;&#22836;(Line)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Arrow</span>(*args, stroke_width=6, buff=0.25, max_tip_length_to_length_ratio=0.25, max_stroke_width_to_length_ratio=5, **kwargs)
+<span style="color: #E6DB74;">"""&#22914;&#26524;&#19981;&#35774;&#32622;buff=0&#23601;&#20250;&#36896;&#25104;&#31661;&#22836;&#30340;&#22987;&#26411;&#20301;&#32622;&#26377;&#20559;&#24046;&#30340;&#38382;&#39064;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#26354;&#31661;&#22836;(ArcBetweenPoints)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">CurvedArrow</span>(start_point, end_point, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22352;&#26631;&#36724;(VGroup, CoordinateSystem)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Axes</span>(x_range=<span style="color: #AE81FF;">None</span>, y_range=<span style="color: #AE81FF;">None</span>, x_length=12, y_length=6, axis_config=<span style="color: #AE81FF;">None</span>, x_axis_config=<span style="color: #AE81FF;">None</span>, y_axis_config=<span style="color: #AE81FF;">None</span>, tips=<span style="color: #AE81FF;">True</span>, **kwargs):
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#22352;&#26631;&#36724;&#32472;&#22270;&#65292;&#36820;&#22238;&#30340;&#26159;&#19968;&#20010;&#23545;&#35937;&#65292;&#19982;Axes&#23545;&#35937;&#26080;&#30452;&#25509;&#32852;&#31995;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">plot</span>(function, x_range=<span style="color: #AE81FF;">None</span>, use_vectorized=<span style="color: #AE81FF;">False</span>, colorscale=<span style="color: #AE81FF;">None</span>, colorscale_axis=1, **kwargs)
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">Returns a `Polygon` representing the area under the graph passed.</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_area</span>(graph, x_range=<span style="color: #AE81FF;">None</span>, color=(ManimColor(<span style="color: #E6DB74;">'#58C4DD'</span>), ManimColor(<span style="color: #E6DB74;">'#83C167'</span>)), opacity=0.3, bounded_graph=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#32593;&#26684;&#65292;&#21487;&#29992;&#20110;&#23450;&#20301;&#12289;&#26597;&#30475;&#30011;&#24067;&#22823;&#23567;&#31561;(Axes)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">NumberPlane</span>(x_range=(-7.111111111111111, 7.111111111111111, 1), y_range=(-4.0, 4.0, 1), x_length=<span style="color: #AE81FF;">None</span>, y_length=<span style="color: #AE81FF;">None</span>, background_line_style=<span style="color: #AE81FF;">None</span>, faded_line_style=<span style="color: #AE81FF;">None</span>, faded_line_ratio=1, make_smooth_after_applying_functions=<span style="color: #AE81FF;">True</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#25991;&#26412;(SVGMobject)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Text</span>(text, fill_opacity=1.0, stroke_width=0, *, color=ManimColor(<span style="color: #E6DB74;">'#FFFFFF'</span>), font_size=48, line_spacing=-1, font=<span style="color: #E6DB74;">''</span>, slant=<span style="color: #E6DB74;">'NORMAL'</span>, weight=<span style="color: #E6DB74;">'NORMAL'</span>, t2c=<span style="color: #AE81FF;">None</span>, t2f=<span style="color: #AE81FF;">None</span>, t2g=<span style="color: #AE81FF;">None</span>, t2s=<span style="color: #AE81FF;">None</span>, t2w=<span style="color: #AE81FF;">None</span>, gradient=<span style="color: #AE81FF;">None</span>, tab_width=4, warn_missing_font=<span style="color: #AE81FF;">True</span>, height=<span style="color: #AE81FF;">None</span>, width=<span style="color: #AE81FF;">None</span>, should_center=<span style="color: #AE81FF;">True</span>, disable_ligatures=<span style="color: #AE81FF;">False</span>, use_svg_cache=<span style="color: #AE81FF;">False</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#25968;&#23398;&#20844;&#24335;(SingleStringMathTex)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">MathTex</span>(*tex_strings, arg_separator=<span style="color: #E6DB74;">' '</span>, substrings_to_isolate=<span style="color: #AE81FF;">None</span>, tex_to_color_map=<span style="color: #AE81FF;">None</span>, tex_environment=<span style="color: #E6DB74;">'align*'</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">latex&#28210;&#26579;&#25991;&#26412;(Mathtex)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Tex</span>(*tex_strings, arg_separator=<span style="color: #E6DB74;">''</span>, tex_environment=<span style="color: #E6DB74;">'center'</span>, **kwargs)
+<span style="color: #E6DB74;">"""&#30001;&#20110;&#25991;&#23383;&#20351;&#29992;Latex&#28210;&#26579;&#65292;&#28210;&#26579;&#20013;&#25991;&#26102;&#21487;&#33021;&#20250;&#25253;&#38169;&#65292;&#25152;&#20197;&#35201;&#22312;&#21518;&#38754;&#21152;&#19978;&#21442;&#25968;&#21464;&#25104;</span>
+<span style="color: #E6DB74;">   Tex("Strings", ..., tex_template=TexTemplateLibrary.ctex)</span>
+<span style="color: #E6DB74;">   &#20197;&#28210;&#26579;&#20013;&#25991;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#25991;&#23383;&#21152;&#20998;&#21106;&#32447;&#32452;&#25104;&#30340;&#26631;&#39064;(Tex)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Title</span>(*text_parts, include_underline=<span style="color: #AE81FF;">True</span>, match_underline_width_to_text=<span style="color: #AE81FF;">False</span>, underline_buff=0.25, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22270;&#29255;(AbstractImageMobject)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">ImageMobject</span>(filename_or_array, scale_to_resolution=1080, invert=<span style="color: #AE81FF;">False</span>, image_mode=<span style="color: #E6DB74;">'RGBA'</span>, **kwargs)
+</pre>
+</div>
+<details>
+<summary>稍微没有那么常见的对象</summary>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #75715E;"># </span><span style="color: #75715E;">&#30690;&#37327;&#21270;&#30340;&#23545;&#35937;&#65292;&#26159;&#19968;&#22534;&#23545;&#35937;&#30340;&#29238;&#23545;&#35937;&#65292;&#22823;&#22810;&#25968;&#23545;&#35937;&#30340;&#36890;&#29992;&#23646;&#24615;&#26469;&#28304;(Mobject)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">VMobject</span>(\
+        fill_color=<span style="color: #AE81FF;">None</span>, fill_opacity=0.0,                      \
+        stroke_color=<span style="color: #AE81FF;">None</span>, stroke_opacity=1.0, stroke_width=4,  \
+        background_stroke_color=ManimColor(<span style="color: #E6DB74;">'#000000'</span>),          \
+        background_stroke_opacity=1.0,                          \
+        background_stroke_width=0,                              \
+        sheen_factor=0.0,                                       \
+        joint_type=<span style="color: #AE81FF;">None</span>,                                        \
+        sheen_direction=array([-1., 1., 0.]),                   \
+        close_new_points=<span style="color: #AE81FF;">False</span>,                                 \
+        pre_function_handle_to_anchor_scale_factor=0.01,        \
+        make_smooth_after_applying_functions=<span style="color: #AE81FF;">False</span>,             \
+        background_image=<span style="color: #AE81FF;">None</span>,                                  \
+        shade_in_3d=<span style="color: #AE81FF;">False</span>,                                      \
+        tolerance_for_point_equality=1e-06,                     \
+        n_points_per_cubic_curve=4,                             \
+        cap_style=CapStyleType.AUTO,                            \
+        **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#21487;&#20197;&#26174;&#31034;&#22312;&#23631;&#24149;&#19978;&#23545;&#35937;&#30340;&#22522;&#31867;</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Mobject</span>(color=ManimColor(<span style="color: #E6DB74;">'#FFFFFF'</span>),
+        name=<span style="color: #AE81FF;">None</span>, dim=3, target=<span style="color: #AE81FF;">None</span>, z_index=0)
+</pre>
+</div>
 </details>
 </div>
-</li>
-</ol>
 </div>
-</div>
-
-<div id="outline-container-org4810a10" class="outline-3">
-<h3 id="org4810a10"><span class="section-number-3">2.3.</span> 改变对象属性方法（对象内部方法）</h3>
-<div class="outline-text-3" id="text-2-3">
-<p>
-TIPS: 有相当多的方法可以使用 <code>object.animate.XXX</code> 的形式使用动画显示（需要传到
-<code>self.play()</code> 里）
-</p>
+<div id="outline-container-orge90adcc" class="outline-3">
+<h3 id="orge90adcc"><span class="section-number-3">3.3.</span> 广泛通用属性一览</h3>
+<div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
-<li><code>scale()</code>
-缩放</li>
-<li><code>set_fill(color, [opacity=0.x])</code>
-设置填充</li>
-<li><code>set_color(color, ...)</code>
-设置对象颜色（边框和填充）</li>
-<li><code>set_stroke(color, ...)</code>
-设置对象边框颜色</li>
-<li><code>rotate(angle, [about_point=None])</code>
-旋转对象，角度制请使用 <code>n*DEGREES</code> ，弧度制请使用 <code>n*PI</code> 的形式(还有个 <code>TAU</code>
-目前不知道怎么用)（注意:正角逆时针，负角才是顺时针），使用 <code>about_point</code> 可以实现绕点旋转（注:该方法在 <code>animate</code>
-中只能实现转换，而不能实现旋转效果）</li>
-</ul>
-</div>
-<div id="outline-container-orgb8ea26f" class="outline-4">
-<h4 id="orgb8ea26f"><span class="section-number-4">2.3.1.</span> 对象定位</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<li>颜色家族(color)： <code>color</code> <code>fill_color</code> <code>stroke_color</code>
 <ul class="org-ul">
-<li><code>move_to()</code>
-绝对位置（以坐标轴中心定位）<br />
-<ul class="org-ul">
-<li>参数：
-<ul class="org-ul">
-<li><code>UP</code> 上</li>
-<li><code>DOWN</code> 下</li>
-<li><code>LEFT</code> 左</li>
-<li><code>RIGHT</code> 右</li>
-<li><code>ORIGIN</code> 中心</li>
-<li><code>[x,y,z]</code> 坐标轴</li>
+<li>颜色属性可以直接修改设置没有问题</li>
 </ul></li>
-<li>组合方式： 使用 <code>+</code> 号相加</li>
+<li>透明度家族(opacity) <code>stroke_opacity</code> <code>fill_opacity</code>
+<ul class="org-ul">
+<li>透明度不能够通过设置属性更改，需要使用 <code>set_opacity</code> 更改，若需要分别修改则
+需要使用 <code>set_fill</code> 和 <code>set_stroke</code> 方法在参数里指定</li>
 </ul></li>
-<li><code>shift()</code>
-相对位置（以对象当前位置定位），参数同上</li>
-<li><code>next_to()</code>
-以已有对象位置定位 <del>（上面的好像也可以）</del></li>
-<li><code>align_to()</code>
-对齐某个已知对象</li>
-<li><code>surround()</code>
-<del>据说圆形特有</del> 环绕已有元素（约等于定位点重叠）</li>
-<li><code>to_corner()</code>
-未知，待补充（Tex）</li>
-<li><code>to_edge()</code>
-贴着屏幕边缘</li>
-<li><code>arrange()</code>
-VGroup()对象特有方法（好像是），可以将组内对象呈一条线型排列</li>
-<li><code>arrange_in_grid()</code>
-VGroup()对象特有方法（好像是），可以将组内对象呈网格型排列</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="outline-container-org34e128f" class="outline-3">
-<h3 id="org34e128f"><span class="section-number-3">2.4.</span> 显示对象</h3>
-<div class="outline-text-3" id="text-2-4">
+<li>大小家族： <code>height</code> <code>width</code> <code>radius</code> <code>font_size</code>
 <ul class="org-ul">
-<li><code>self.add()</code>
-直接安装定位显示对象</li>
-<li><code>self.play()</code>
-按照指定的动画显示对象， <code>run_time</code> 指定动画时间</li>
-<li><code>self.wait()</code>
-画面静止保持等待</li>
-</ul>
-</div>
-<div id="outline-container-orgcd6260e" class="outline-4">
-<h4 id="orgcd6260e"><span class="section-number-4">2.4.1.</span> 动画函数（外部）</h4>
-<div class="outline-text-4" id="text-2-4-1">
-<ul class="org-ul">
-<li><code>FadeIn()</code>
-淡入， <code>shift</code> 指定淡入运动方向</li>
-<li><code>FadeOut()</code>
-淡出</li>
-<li><code>Rotating()</code>
-旋转一周</li>
-<li><code>Rotate()</code>
-旋转， <code>angle</code> 指定角度， <code>PI</code> 为180度</li>
-<li><code>GrowArrow()</code>
-箭头生长</li>
-<li><code>GrowFromCenter()</code>
-从中心扩张</li>
-<li><code>Create()</code>
-类绘制的效果，参数 <code>lag_ratio</code> 效果未知</li>
-<li><code>Write()</code>
-类写字的效果</li>
-<li><code>Transform()</code>
-将一个对象转换为另一个对象（操作仍然通过原来的对象操作）</li>
-<li><code>ReplacementTransform()</code>
-将第一个对象替换为第二个对象而非转换</li>
-<li><code>LaggedStart()</code>
-效果未知</li>
-<li><code>ApplyMethod()</code>
-可以定义图形在场景空间中的运动补帧<br />
-参数格式： <code>对象方法指针, 位置</code></li>
+<li>前两个直接修改属性比例不变，半径修改无用，字体大小可用</li>
+</ul></li>
 </ul>
 </div>
 </div>
+<div id="outline-container-org836d425" class="outline-3">
+<h3 id="org836d425"><span class="section-number-3">3.4.</span> 广泛通用方法一览</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #75715E;"># </span><span style="color: #75715E;">Add mobjects as submobjects.</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">add</span>(*mobjects)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22797;&#21046;&#33258;&#36523;&#65292;&#21253;&#25324;&#25152;&#26377;&#23376;&#23545;&#35937;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">copy</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">==================================================</span>
+<span style="color: #E6DB74;">"""`set`&#24320;&#22836;&#30340;&#26041;&#27861;&#29992;&#20110;&#35774;&#32622;&#23646;&#24615;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#25351;&#23450;&#30340;&#23646;&#24615;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set</span>(**kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#20301;&#32622;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_x</span>(x, direction=array([0., 0., 0.]))
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_y</span>(y, direction=array([0., 0., 0.]))
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_z</span>(z, direction=array([0., 0., 0.]))
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;z&#36724;&#21516;&#23618;&#26174;&#31034;&#20248;&#20808;&#32423;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_z_index</span>(z_index_value, family=<span style="color: #AE81FF;">True</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#23545;&#35937;&#39068;&#33394;&#65288;&#36793;&#26694;&#21644;&#22635;&#20805;&#65289;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_color</span>(color, ...)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">====&#20197;&#19978;set*&#21487;&#22312;Mobject&#31867;&#20013;&#25214;&#21040;====</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#22635;&#20805;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_fill</span>(color=<span style="color: #AE81FF;">None</span>, opacity=<span style="color: #AE81FF;">None</span>, family=<span style="color: #AE81FF;">True</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#23545;&#35937;&#36793;&#26694;&#39068;&#33394;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">set_stroke</span>(color=<span style="color: #AE81FF;">None</span>, width=<span style="color: #AE81FF;">None</span>, opacity=<span style="color: #AE81FF;">None</span>, background=<span style="color: #AE81FF;">False</span>, family=<span style="color: #AE81FF;">True</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">==================================================</span>
+<span style="color: #E6DB74;">"""`get`&#24320;&#22836;&#30340;&#26041;&#27861;&#29992;&#20110;&#33719;&#21462;&#23646;&#24615;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#33719;&#21462;&#23545;&#35937;&#30896;&#25758;&#31665;&#65288;&#23558;&#23545;&#35937;&#23436;&#25972;&#21253;&#35065;&#30340;&#27491;&#26041;&#24418;&#65289;&#24213;&#37096;&#22352;&#26631;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_bottom</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#33719;&#21462;&#23545;&#35937;&#30896;&#25758;&#31665;&#39030;&#37096;&#22352;&#26631;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_top</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#33719;&#21462;&#23545;&#35937;&#30896;&#25758;&#31665;&#24038;&#36793;&#22352;&#26631;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_left</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#33719;&#21462;&#23545;&#35937;&#30896;&#25758;&#31665;&#21491;&#36793;&#22352;&#26631;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_right</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#33719;&#21462;&#23545;&#35937;&#30896;&#25758;&#31665;&#20013;&#24515;&#22352;&#26631;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_center</span>()
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_x</span>(direction=array([0., 0., 0.]))
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_y</span>(direction=array([0., 0., 0.]))
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_z</span>(direction=array([0., 0., 0.]))
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#33719;&#21462;&#39068;&#33394;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_color</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Returns the point, where the stroke that surrounds the Mobject starts</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_start</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Returns the point, where the stroke that surrounds the Mobject ends.</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_end</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Get corner Point3Ds for certain direction.</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">get_corner</span>(direction)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">==================================================</span>
+<span style="color: #E6DB74;">"""`has`&#24320;&#22836;&#30340;&#26041;&#27861;&#29992;&#20110;&#26816;&#26597;&#23646;&#24615;"""</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">has_points</span>()
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">has_no_points</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">==================================================</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#31227;&#21160;&#19982;&#24418;&#24577;&#21464;&#21270;</span>
+<span style="color: #E6DB74;">"""&#36825;&#37324;&#26377;&#30456;&#24403;&#22810;&#30340;&#26041;&#27861;&#21487;&#20197;&#20351;&#29992; =object.animate.XXX= &#30340;&#24418;&#24335;&#21160;&#30011;&#21270;</span>
+<span style="color: #E6DB74;">   &#65288;&#38656;&#35201;&#20256;&#21040;play()&#37324;&#65289;&#19981;&#36807;&#36825;&#31181;&#26041;&#27861;&#24471;&#21040;&#30340;&#32467;&#26524;&#24448;&#24448;&#26159;&#23545;&#21069;&#21518;&#32467;&#26524;&#30340;&#25554;&#24103;&#34917;&#20840;&#65292;</span>
+<span style="color: #E6DB74;">   &#24182;&#38750;&#26159;&#8220;&#26377;&#29305;&#23450;&#36816;&#21160;&#36335;&#24452;&#30340;&#21160;&#30011;&#8221;&#12290;&#20363;&#22914;&#35828;&#36825;&#26679;&#20351;&#29992;&#30340;rotate&#23601;&#19981;&#26159;&#26059;&#36716;&#21160;&#30011;</span>
+<span style="color: #E6DB74;">   &#25152;&#20197;&#35828;&#36825;&#26679;&#30340;&#25928;&#26524;&#26356;&#20687;ApplyMethod()"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#32553;&#25918;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">scale</span>(scale_factor, scale_stroke=<span style="color: #AE81FF;">False</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#26059;&#36716;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">rotate</span>(angle, axis=array([0., 0., 1.]), about_point=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #E6DB74;">"""&#20351;&#29992;`about_point`&#21487;&#20197;&#23454;&#29616;&#32469;&#28857;&#26059;&#36716;</span>
+<span style="color: #E6DB74;">   &#20351;&#29992;`axis`&#21487;&#20197;&#25351;&#23450;&#26059;&#36716;&#36724;&#65288;&#21521;&#37327;&#24418;&#24335;&#65289;&#65292;&#36873;&#25321;&#24418;&#24335;&#36981;&#20174;&#21491;&#25163;&#34746;&#26059;&#23450;&#21017;</span>
+<span style="color: #E6DB74;">   &#21491;&#25163;&#25287;&#25351;&#20026;&#36716;&#36724;&#26041;&#21521;&#65292;&#24367;&#26354;&#22235;&#25351;&#20854;&#26041;&#21521;&#20026;&#26059;&#36716;&#27491;&#26041;&#21521;&#65288;&#25152;&#20197;&#40664;&#35748;&#26041;&#21521;&#25165;&#26159;`OUT`&#65289;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20197;&#32477;&#23545;&#20301;&#32622;&#31227;&#21160;&#65288;&#20197;&#22352;&#26631;&#36724;&#20013;&#24515;&#23450;&#20301;&#65289;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">move_to</span>(point_or_mobject, aligned_edge=array([0., 0., 0.]), coor_mask=array([1, 1, 1]))
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20197;&#30456;&#23545;&#20301;&#32622;&#31227;&#21160;&#65288;&#20197;&#23545;&#35937;&#24403;&#21069;&#20301;&#32622;&#23450;&#20301;&#65289;&#65292;&#21442;&#25968;&#21516;&#19978;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">shift</span>(*vectors)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20197;&#24050;&#26377;&#23545;&#35937;&#20301;&#32622;&#23450;&#20301; +&#65288;&#19978;&#38754;&#30340;&#22909;&#20687;&#20063;&#21487;&#20197;&#65289;+</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">next_to</span>(mobject_or_point, direction=array([1., 0., 0.]), buff=0.25, aligned_edge=array([0., 0., 0.]), submobject_to_align=<span style="color: #AE81FF;">None</span>, index_of_submobject_to_align=<span style="color: #AE81FF;">None</span>, coor_mask=array([1, 1, 1]))
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22312;&#25351;&#23450;&#26041;&#21521;&#19978;&#23545;&#40784;&#26576;&#20010;&#24050;&#30693;&#23545;&#35937;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">align_to</span>(mobject_or_point, direction=array([0., 0., 0.]))
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#31227;&#21160;&#21040;&#23631;&#24149;&#35282;&#33853;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">to_corner</span>(corner=array([-1., -1., 0.]), buff=0.5)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#36148;&#30528;&#23631;&#24149;&#36793;&#32536;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">to_edge</span>(edge=array([-1., 0., 0.]), buff=0.5)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#31227;&#21160;&#33267;&#23631;&#24149;&#20013;&#22830;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">center</span>()
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#21487;&#20197;&#23558;&#32452;&#20869;&#23545;&#35937;&#21576;&#19968;&#26465;&#32447;&#22411;&#25490;&#21015;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">arrange</span>(direction=array([1., 0., 0.]), buff=0.25, center=<span style="color: #AE81FF;">True</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#21487;&#20197;&#23558;&#32452;&#20869;&#23545;&#35937;&#21576;&#32593;&#26684;&#22411;&#25490;&#21015;</span>
+<span style="color: #F92672;">def</span> <span style="color: #A6E22E;">arrange_in_grid</span>(rows=<span style="color: #AE81FF;">None</span>, cols=<span style="color: #AE81FF;">None</span>, buff=0.25, cell_alignment=array([0., 0., 0.]), row_alignments=<span style="color: #AE81FF;">None</span>, col_alignments=<span style="color: #AE81FF;">None</span>, row_heights=<span style="color: #AE81FF;">None</span>, col_widths=<span style="color: #AE81FF;">None</span>, flow_order=<span style="color: #E6DB74;">'rd'</span>, **kwargs)
+</pre>
 </div>
-<div id="outline-container-org613c3e5" class="outline-3">
-<h3 id="org613c3e5"><span class="section-number-3">2.5.</span> 示例</h3>
-<div class="outline-text-3" id="text-2-5">
+</div>
+</div>
+<div id="outline-container-org169dc42" class="outline-3">
+<h3 id="org169dc42"><span class="section-number-3">3.5.</span> 屏幕方法一览</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Scene</span>(renderer=<span style="color: #AE81FF;">None</span>, camera_class=&lt;<span style="color: #F92672;">class</span> <span style="color: #E6DB74;">'manim.camera.camera.Camera'</span>&gt;, always_update_mobjects=<span style="color: #AE81FF;">False</span>, random_seed=<span style="color: #AE81FF;">None</span>, skip_animations=<span style="color: #AE81FF;">False</span>):
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#28155;&#21152;&#23545;&#35937;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">add</span>(*mobjects)
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#31227;&#38500;&#23545;&#35937;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">remove</span>(*mobjects)
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#28165;&#38500;&#23631;&#24149;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">clear</span>()
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#26367;&#25442;&#65288;&#21487;&#23558;&#23376;&#29289;&#20307;&#20599;&#26753;&#25442;&#26609;&#65289;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">replace</span>(old_mobject, new_mobject)
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#26242;&#20572;&#65292;&#30011;&#38754;&#38745;&#27490;&#20445;&#25345;&#31561;&#24453;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">wait</span>(duration=1.0, stop_condition=<span style="color: #AE81FF;">None</span>, frozen_frame=<span style="color: #AE81FF;">None</span>)
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">wait()&#30340;&#21035;&#21517;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">pause</span>(duration=1.0)
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">&#25773;&#25918;&#21160;&#30011;</span>
+    <span style="color: #F92672;">def</span> <span style="color: #A6E22E;">play</span>(*args, subcaption=<span style="color: #AE81FF;">None</span>, subcaption_duration=<span style="color: #AE81FF;">None</span>, subcaption_offset=0, **kwargs)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org092afe9" class="outline-3">
+<h3 id="org092afe9"><span class="section-number-3">3.6.</span> 动画方法一览</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #75715E;"># </span><span style="color: #75715E;">&#21160;&#30011;(object)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Animation</span>(mobject=<span style="color: #AE81FF;">None</span>, lag_ratio=..., run_time=..., rate_func=smooth, ..., **kwargs)
+<span style="color: #E6DB74;">""" lag_ratio :&#21160;&#30011;&#36880;&#27493;&#24212;&#29992;&#21040;&#23376;&#23545;&#35937;&#30340;&#24310;&#36831;&#65292;&#20026;0&#34920;&#31034;&#21160;&#30011;&#21516;&#27493;&#36827;&#34892;</span>
+<span style="color: #E6DB74;">    run_time  :&#21160;&#30011;&#24635;&#26102;&#38388;</span>
+<span style="color: #E6DB74;">    rate_func :&#21160;&#30011;&#36895;&#24230;&#26354;&#32447;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#28155;&#21152;&#23545;&#35937;&#65292;&#25928;&#26524;&#21516;Scene.add()&#65292;&#20294;&#29992;&#20110;&#21644;&#20854;&#20182;&#21160;&#30011;&#24182;&#21015;(Animation)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Add</span>(mobject=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#26242;&#20572;(Animation)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Wait</span>(runtime=1, stop_condition=<span style="color: #AE81FF;">None</span>, frozen_frame=<span style="color: #AE81FF;">None</span>, rate_func=linear, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#23558;&#23545;&#35937;&#25152;&#26377;&#25968;&#25454;&#36716;&#25442;&#25104;&#30446;&#26631;&#23545;&#35937;&#25968;&#25454;(Animation)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Transform</span>(mobject=<span style="color: #AE81FF;">None</span>, target_mobject=<span style="color: #AE81FF;">None</span>, path_func=<span style="color: #AE81FF;">None</span>, path_arc=OUT, path_arc_centers=<span style="color: #AE81FF;">None</span>, replace_mobject_with_target_in_scene=<span style="color: #AE81FF;">False</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#23558;&#23545;&#35937;&#20599;&#26753;&#25442;&#26609;(Transform)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">ReplacementTransform</span>(mobject, target_mobject)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#29992;&#25554;&#24103;&#23558;&#25351;&#23450;&#30340;&#38750;&#21160;&#30011;&#26041;&#27861;&#21160;&#30011;&#21270;(Transform)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">ApplyMethod</span>(method, *args)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#26059;&#36716;&#21160;&#30011;(Transform)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Rotate</span>(mobject, angle=PI, axis=OUT, about_point=<span style="color: #AE81FF;">None</span>, about_edge=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #E6DB74;">"""--mobject      &#26059;&#36716;&#23545;&#35937;</span>
+<span style="color: #E6DB74;">   --angle        &#26059;&#36716;&#35282;&#24230;</span>
+<span style="color: #E6DB74;">   --axis         &#36716;&#36724;</span>
+<span style="color: #E6DB74;">   --about_point  &#26059;&#36716;&#28857;</span>
+<span style="color: #E6DB74;">   --about_edge   &#33509;&#26080;&#25351;&#23450;&#26059;&#36716;&#28857;&#65292;&#21017;&#20351;&#29992;&#25351;&#23450;&#26041;&#21521;&#30340;&#30896;&#25758;&#31665;&#36793;&#30028;&#20316;&#36716;&#28857; """</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#36716;&#19968;&#22280;(Animation)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Rotating</span>(mobject, axis=OUT, radians=TAU, about_point=<span style="color: #AE81FF;">None</span>, about_edge=<span style="color: #AE81FF;">None</span>, run_time=5, rate_func=linear, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">=========&#28129;&#20837;&#28129;&#20986;&#24335;=========</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#28129;&#20837;(_Fade)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">FadeIn</span>(mobject)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#28129;&#20986;(_Fade)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">FadeOut</span>(mobject)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">=========&#21019;&#36896;&#24335;=========</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22686;&#37327;&#26174;&#31034;&#23545;&#35937;(ShowPatial)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Create</span>(mobject, lag_ratio, introducer=<span style="color: #AE81FF;">True</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Create&#30340;&#36870;&#36807;&#31243;(Create)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Uncreate</span>(mobject, reverse_rate_functio=<span style="color: #AE81FF;">True</span>, remover=<span style="color: #AE81FF;">True</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#27169;&#25311;&#25163;&#32472;&#23545;&#35937;(DrawBorderThenFill)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Write</span>(vmobject, rate_func=linear, reverse=<span style="color: #AE81FF;">False</span>)
+<span style="color: #E6DB74;">"""&#19982;Creat&#21306;&#21035;&#20110;&#26159;&#20808;&#32472;&#21046;&#36793;&#26694;&#20877;&#19978;&#33394;</span>
+<span style="color: #E6DB74;">   reverse: &#26159;&#21542;&#20174;&#21491;&#21040;&#24038;&#20070;&#20889;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">Write&#30340;&#36870;&#36807;&#31243;(Write)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Unwrite</span>(vmobject, rate_func=linear, reverse=<span style="color: #AE81FF;">True</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">=========&#25918;&#22823;&#29983;&#38271;&#24335;=========</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#36890;&#36807;&#20174;&#19968;&#20010;&#28857;&#24320;&#22987;&#29983;&#38271;&#26469;&#24341;&#20837;&#19968;&#20010;&#23545;&#35937;(Transform)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">GrowFromPoint</span>(mobject, point, point_color=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #E6DB74;">"""point_color:&#38271;&#22823;&#21069;&#30340;&#39068;&#33394;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20174;&#20013;&#24515;&#25918;&#22823;&#36827;&#20837;&#19968;&#20010;&#23545;&#35937;(GrowFromPoint)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">GrowFromCenter</span>(mobject, point_color=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20174;&#36793;&#32536;&#25918;&#22823;&#36827;&#20837;&#19968;&#20010;&#23545;&#35937;(GrowFromPoint)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">GrowFromEdge</span>(mobject, edge, point_color=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20174;&#36793;&#32536;&#25918;&#22823;&#36827;&#20837;&#19968;&#20010;&#31661;&#22836;(GrowFromPoint)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">GrowFromPoint</span>(arrow, point_color=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20174;0&#25918;&#22823;&#24182;&#20276;&#26377;&#23436;&#32654;&#30340;&#40644;&#37329;&#34746;&#26059;&#19968;&#20010;&#23545;&#35937;(GrowFromCenter)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">SpinInFromNothing</span>(mobject, angle=PI/2, point_color=<span style="color: #AE81FF;">None</span>, **kwargs)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">=========&#24378;&#35843;=========</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#22280;&#19968;&#22280;(Succession)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Circumscribe</span>(mobject, shape=Rectangle, fade_in=<span style="color: #AE81FF;">False</span>, fade_out=<span style="color: #AE81FF;">False</span>, time_width=0.3, buff=SMALL_BUFF, color=YELLOW, run_time=1, stroke_width=DEFAULT_STROKE_WIDTH)
+<span style="color: #E6DB74;">"""shape: [Rectangle|Circle]&#20108;&#36873;&#19968;"""</span>
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#28010;&#19968;&#28010;(Homotopy)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">ApplyWave</span>(mobject, direction=UP, amplitude=0.2, wave_func=smmooth, time_width=1, ripples=1, run_time=2)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#25671;&#19968;&#25671;(Animation)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Wiggle</span>(mobject, scale_value=1.1, rotation_angle=0.001*TAU, n_wiggles=0, scale_about_point=<span style="color: #AE81FF;">None</span>, rotation_about_point=<span style="color: #AE81FF;">None</span>, run_time=2)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#38378;&#19968;&#38378;(Succession)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Blink</span>(mobject, time_on=0.5, time_off=0.5, blinks=1, hide_at_end=<span style="color: #AE81FF;">False</span>)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#27599;&#24103;&#21482;&#26174;&#31034;&#23545;&#35937;&#30340;&#19968;&#23567;&#37096;&#20998;&#65288;&#32467;&#21512;copy&#23454;&#29616;&#24378;&#35843;&#65289;(ShowPatial)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">ShowPassingFlash</span>(mobject, time_width=0.1)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#25918;&#28895;&#33457;/&#21457;&#20809;(AnimationGroup)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Flash</span>(point, line_length=0.2, num_lines=12, flash_radius=0.1, line_stroke_width=3, color=YELLOW, time_width=1, run_time=1)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#21464;&#33394;&#25918;&#22823;&#21518;&#20877;&#24674;&#22797;(Transform)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Indicate</span>(mobject, scale_factor=1.2, color=YELLOW, rate_func=there_and_back)
+<span style="color: #75715E;"># </span><span style="color: #75715E;">&#20142;&#24230;&#36974;&#32617;(Transform)</span>
+<span style="color: #F92672;">class</span> <span style="color: #66D9EF;">FocusOn</span>(focus_point, opacity=0.2, color=GREY, run_time=2)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5749aa7" class="outline-3">
+<h3 id="org5749aa7"><span class="section-number-3">3.7.</span> 示例</h3>
+<div class="outline-text-3" id="text-3-7">
 <details>
 <summary>我的抄的实例</summary>
 <div class="org-src-container">
@@ -836,15 +759,14 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 </div>
 </div>
 </div>
-
-<div id="outline-container-org53c5ce0" class="outline-2">
-<h2 id="org53c5ce0"><span class="section-number-2">3.</span> Reference</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org987f8bd" class="outline-2">
+<h2 id="org987f8bd"><span class="section-number-2">4.</span> Reference</h2>
+<div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>ManimGL版本的教程与文档（有部分与ManimCE不兼容）
 <ul class="org-ul">
 <li><a href="https://zhuanlan.zhihu.com/p/108240714">3Blue1Brown 动画制作教程(2)&#x2013;尝试更多的图形 - 知乎</a></li>
-<li><a href="https://docs.manim.org.cn/cairo-backend/constants.html">常量部分constants - manim 文档</a><sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></li>
+<li><a href="https://docs.manim.org.cn/cairo-backend/constants.html">常量部分constants - manim 文档</a><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></li>
 <li><a href="https://elteoremadebeethoven.github.io/manim_3feb_docs.github.io/html/tree/animations/creation.html">Creation — Manim Feb/03/2019 documentation</a></li>
 </ul></li>
 <li>ManimCE的教程文档
@@ -859,20 +781,6 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-如果不设置buff=0就会造成箭头的始末位置有偏差的问题
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-文字使用Latex渲染，渲染中文时可能会报错，所以要在后面加上参数
-<code>tex_template=TexTemplateLibrary.ctex</code> 便可成功执行（注意！这是是社区版的解决方
-法！）
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-也可以通过 <code>vgroup_object+=other_object</code> 的形式添加对象到组内
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 该中文文档由英文翻译过来，谨慎查看 
 </p></div></div>
 
@@ -882,7 +790,7 @@ VGroup()对象特有方法（好像是），可以将组内对象呈网格型排
 <div id="postamble" class="status">
 <p class="date">Date: 2023-08-23 三 00:47</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2025-01-23 四 11:38</p>
+<p class="date">Created: 2025-05-05 一 02:21</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
