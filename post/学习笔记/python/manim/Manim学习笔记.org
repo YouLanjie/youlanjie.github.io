@@ -12,10 +12,16 @@
 #+end_quote
 
 * Manim的安装
-操作如下（pipx无法使用系统环境包故不考虑用pacman安装依赖）
+5202年了，manim的安装仍旧让人非常想吐槽。arch或许还好还有aur，但是aur上的包都是
+使用github的链接，下载奇慢，还可能时不时出现一些编译问题。下面开始正文（注：仅适
+用于archlinux）
+
+安装manimce大致有两种方案，一是使用pipx在虚拟环境安装（仅限单用户），二是使用
+=makepkg= + =python-build= + =python-installer= 将manim打包后安装（系统级）
+** 使用pipx的方案
 #+begin_src shell
   # 确保系统完整且具有gcc等工具，texlive选装
-  sudo pacman -S base base-devel texlive ffmpeg
+  sudo pacman -S base base-devel ffmpeg texlive
   # python环境设置
   sudo pacman -S python python-pip python-pipx
   # 设置镜像
@@ -23,6 +29,106 @@
   # 安装ManimCE(manimgl是3b1b个人版本)
   pipx install manim
 #+end_src
+** 使用 =makepkg= 的方案
+#+begin_src shell
+  # 最好在运行前设置pip镜像
+  pip config set global.index-url "https://pypi.tuna.tsinghua.edu.cn/simple"
+#+end_src
+
+请确保/etc/pacman.conf中启用了archlinuxcn库，如若没有在其中添加以下内容以设置
+#+begin_src conf
+  [archlinuxcn]
+  Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+#+end_src
+
+剩下的我比较懒直接丢PKGBUILD文件得了
+#+begin_src shell
+  # Maintainer: Chglish
+  pkgname=python-manimce
+  pkgver=0.19.0
+  pkgrel=1
+  pkgdesc="Animation engine for explanatory math videos (community edition)."
+  arch=('any')
+  url="https://github.com/ManimCommunity/manim"
+  license=("MIT" "custom")
+  groups=('local-built')
+  depends=(
+      "ffmpeg"
+      "python"
+      "python-pillow"
+      "python-pygments"
+      "python-beautifulsoup4"
+      "python-click"
+      "python-decorator"
+      "python-networkx"
+      "python-numpy"
+      "python-cairo"
+      "python-rich"
+      "python-scipy"
+      "python-tqdm"
+      "python-typing_extensions"
+      "python-watchdog"
+      "python-srt"
+
+      "python-decorator"
+      "python-colour"
+      "python-google-api-core"
+      "python-importlib-metadata"
+      "python-requests"
+      "python-setuptools"
+
+      # archlinuxcn
+      "python-audioop-lts"
+      "python-av"
+      "python-click-default-group"
+      "python-pydub"
+      "python-skia-pathops"
+  )
+  makedepends=(
+      "base-devel"
+      "python-pip"
+      "python-build"
+      "python-installer"
+      "python-setuptools"
+      "python-wheel"
+  )
+  optdepends=(
+      "texlive-core: LaTeX support"
+  )
+  provides=(
+          manim python-cloup python-isosurfaces python-manimpango
+          python-mapbox-earcut python-moderngl python-glcontext
+          python-moderngl-window python-screeninfo python-svgelements
+  )
+
+  build() {
+          pip download --no-deps -i https://pypi.tuna.tsinghua.edu.cn/simple ${provides[*]#python-}
+          if [[ ! -d output ]]; then
+                  mkdir output
+          fi
+          find ./ -maxdepth 1 -type f -name "*.tar.gz" -exec tar xzf \{\} -C output \;
+          for dir in output/* ;do
+                  python -m build -w -o . $dir
+          done
+          if [[ ! -d root ]]; then
+                  mkdir root
+          fi
+          find ./ -maxdepth 1 -type f -name "*.whl" -exec python -m installer --destdir="root" \{\} \;
+  }
+
+  package() {
+          mv root/* $pkgdir
+  }
+#+end_src
+把上面的代码拷下来命名为 =PKGBUILD= 存到某个目录，然后运行 =makepkg -s= 就可以了
+(不会到了这步还不会吧？罚你去看archwiki)
+
+#+begin_quote
+btw上面的包不是标准包，因为它打包了很多个python库，没有独立的版本管理，并且以上
+所有版本都是不确定的，还请小心谨慎使用。但如果以上都不是追求的目标的话还是挺对懒
+癌友好的（至少也对国内友好）
+#+end_quote
+
 ** COMMENT 已知问题
 1. externally-managed-environment: pip与包管理器冲突
 2. manim直接pip安装问题(build问题)，以下为所有需安装包

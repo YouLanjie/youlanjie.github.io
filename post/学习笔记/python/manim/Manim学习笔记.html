@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2025-05-05 一 02:21 -->
+<!-- 2025-07-13 日 11:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Manim学习笔记</title>
@@ -25,25 +25,30 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6a03df8">1. Manim的安装</a></li>
-<li><a href="#orgceea33c">2. Manim基础知识</a>
+<li><a href="#org37dcccc">1. Manim的安装</a>
 <ul>
-<li><a href="#orgfcf31e9">2.1. 基本格式与渲染参数</a></li>
-<li><a href="#org745e7a5">2.2. 词义理解</a></li>
+<li><a href="#orgab17cf0">1.1. 使用pipx的方案</a></li>
+<li><a href="#org15a5cd2">1.2. 使用 <code>makepkg</code> 的方案</a></li>
 </ul>
 </li>
-<li><a href="#org9b95e16">3. Manim手册</a>
+<li><a href="#org06dc5be">2. Manim基础知识</a>
 <ul>
-<li><a href="#orgf5bae9a">3.1. 常量速查</a></li>
-<li><a href="#orga40c2aa">3.2. 对象及其特异性方法一览</a></li>
-<li><a href="#orge90adcc">3.3. 广泛通用属性一览</a></li>
-<li><a href="#org836d425">3.4. 广泛通用方法一览</a></li>
-<li><a href="#org169dc42">3.5. 屏幕方法一览</a></li>
-<li><a href="#org092afe9">3.6. 动画方法一览</a></li>
-<li><a href="#org5749aa7">3.7. 示例</a></li>
+<li><a href="#org9f8ab8c">2.1. 基本格式与渲染参数</a></li>
+<li><a href="#org5185958">2.2. 词义理解</a></li>
 </ul>
 </li>
-<li><a href="#org987f8bd">4. Reference</a></li>
+<li><a href="#orgbbad10e">3. Manim手册</a>
+<ul>
+<li><a href="#orgbed6082">3.1. 常量速查</a></li>
+<li><a href="#org985a29b">3.2. 对象及其特异性方法一览</a></li>
+<li><a href="#org77ee2a5">3.3. 广泛通用属性一览</a></li>
+<li><a href="#orgc20611d">3.4. 广泛通用方法一览</a></li>
+<li><a href="#org98de79e">3.5. 屏幕方法一览</a></li>
+<li><a href="#orgc0767a9">3.6. 动画方法一览</a></li>
+<li><a href="#org448508f">3.7. 示例</a></li>
+</ul>
+</li>
+<li><a href="#org80dfabb">4. Reference</a></li>
 </ul>
 </div>
 </div>
@@ -55,15 +60,26 @@
 顺带一提：使用manimCE的建议看最后 <code>Reference</code> 里面最后一个链接里的官方教程
 </p>
 </blockquote>
-<div id="outline-container-org6a03df8" class="outline-2">
-<h2 id="org6a03df8"><span class="section-number-2">1.</span> Manim的安装</h2>
+<div id="outline-container-org37dcccc" class="outline-2">
+<h2 id="org37dcccc"><span class="section-number-2">1.</span> Manim的安装</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-操作如下（pipx无法使用系统环境包故不考虑用pacman安装依赖）
+5202年了，manim的安装仍旧让人非常想吐槽。arch或许还好还有aur，但是aur上的包都是
+使用github的链接，下载奇慢，还可能时不时出现一些编译问题。下面开始正文（注：仅适
+用于archlinux）
 </p>
+
+<p>
+安装manimce大致有两种方案，一是使用pipx在虚拟环境安装（仅限单用户），二是使用
+<code>makepkg</code> + <code>python-build</code> + <code>python-installer</code> 将manim打包后安装（系统级）
+</p>
+</div>
+<div id="outline-container-orgab17cf0" class="outline-3">
+<h3 id="orgab17cf0"><span class="section-number-3">1.1.</span> 使用pipx的方案</h3>
+<div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">&#30830;&#20445;&#31995;&#32479;&#23436;&#25972;&#19988;&#20855;&#26377;gcc&#31561;&#24037;&#20855;&#65292;texlive&#36873;&#35013;</span>
-sudo pacman -S base base-devel texlive ffmpeg
+sudo pacman -S base base-devel ffmpeg texlive
 <span style="color: #75715E;"># </span><span style="color: #75715E;">python&#29615;&#22659;&#35774;&#32622;</span>
 sudo pacman -S python python-pip python-pipx
 <span style="color: #75715E;"># </span><span style="color: #75715E;">&#35774;&#32622;&#38236;&#20687;</span>
@@ -74,12 +90,127 @@ pipx install manim
 </div>
 </div>
 </div>
-<div id="outline-container-orgceea33c" class="outline-2">
-<h2 id="orgceea33c"><span class="section-number-2">2.</span> Manim基础知识</h2>
+<div id="outline-container-org15a5cd2" class="outline-3">
+<h3 id="org15a5cd2"><span class="section-number-3">1.2.</span> 使用 <code>makepkg</code> 的方案</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">&#26368;&#22909;&#22312;&#36816;&#34892;&#21069;&#35774;&#32622;pip&#38236;&#20687;</span>
+pip config set global.index-url <span style="color: #E6DB74;">"https://pypi.tuna.tsinghua.edu.cn/simple"</span>
+</pre>
+</div>
+
+<p>
+请确保/etc/pacman.conf中启用了archlinuxcn库，如若没有在其中添加以下内容以设置
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span style="color: #66D9EF;">archlinuxcn</span>]
+<span style="color: #FD971F;">Server</span> = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+</pre>
+</div>
+
+<p>
+剩下的我比较懒直接丢PKGBUILD文件得了
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #75715E;"># </span><span style="color: #75715E;">Maintainer: Chglish</span>
+<span style="color: #FD971F;">pkgname</span>=python-manimce
+<span style="color: #FD971F;">pkgver</span>=0.19.0
+<span style="color: #FD971F;">pkgrel</span>=1
+<span style="color: #FD971F;">pkgdesc</span>=<span style="color: #E6DB74;">"Animation engine for explanatory math videos (community edition)."</span>
+<span style="color: #FD971F;">arch</span>=(<span style="color: #E6DB74;">'any'</span>)
+<span style="color: #FD971F;">url</span>=<span style="color: #E6DB74;">"https://github.com/ManimCommunity/manim"</span>
+<span style="color: #FD971F;">license</span>=(<span style="color: #E6DB74;">"MIT"</span> <span style="color: #E6DB74;">"custom"</span>)
+<span style="color: #FD971F;">groups</span>=(<span style="color: #E6DB74;">'local-built'</span>)
+<span style="color: #FD971F;">depends</span>=(
+    <span style="color: #E6DB74;">"ffmpeg"</span>
+    <span style="color: #E6DB74;">"python"</span>
+    <span style="color: #E6DB74;">"python-pillow"</span>
+    <span style="color: #E6DB74;">"python-pygments"</span>
+    <span style="color: #E6DB74;">"python-beautifulsoup4"</span>
+    <span style="color: #E6DB74;">"python-click"</span>
+    <span style="color: #E6DB74;">"python-decorator"</span>
+    <span style="color: #E6DB74;">"python-networkx"</span>
+    <span style="color: #E6DB74;">"python-numpy"</span>
+    <span style="color: #E6DB74;">"python-cairo"</span>
+    <span style="color: #E6DB74;">"python-rich"</span>
+    <span style="color: #E6DB74;">"python-scipy"</span>
+    <span style="color: #E6DB74;">"python-tqdm"</span>
+    <span style="color: #E6DB74;">"python-typing_extensions"</span>
+    <span style="color: #E6DB74;">"python-watchdog"</span>
+    <span style="color: #E6DB74;">"python-srt"</span>
+
+    <span style="color: #E6DB74;">"python-decorator"</span>
+    <span style="color: #E6DB74;">"python-colour"</span>
+    <span style="color: #E6DB74;">"python-google-api-core"</span>
+    <span style="color: #E6DB74;">"python-importlib-metadata"</span>
+    <span style="color: #E6DB74;">"python-requests"</span>
+    <span style="color: #E6DB74;">"python-setuptools"</span>
+
+    <span style="color: #75715E;"># </span><span style="color: #75715E;">archlinuxcn</span>
+    <span style="color: #E6DB74;">"python-audioop-lts"</span>
+    <span style="color: #E6DB74;">"python-av"</span>
+    <span style="color: #E6DB74;">"python-click-default-group"</span>
+    <span style="color: #E6DB74;">"python-pydub"</span>
+    <span style="color: #E6DB74;">"python-skia-pathops"</span>
+)
+<span style="color: #FD971F;">makedepends</span>=(
+    <span style="color: #E6DB74;">"base-devel"</span>
+    <span style="color: #E6DB74;">"python-pip"</span>
+    <span style="color: #E6DB74;">"python-build"</span>
+    <span style="color: #E6DB74;">"python-installer"</span>
+    <span style="color: #E6DB74;">"python-setuptools"</span>
+    <span style="color: #E6DB74;">"python-wheel"</span>
+)
+<span style="color: #FD971F;">optdepends</span>=(
+    <span style="color: #E6DB74;">"texlive-core: LaTeX support"</span>
+)
+<span style="color: #FD971F;">provides</span>=(
+        manim python-cloup python-isosurfaces python-manimpango
+        python-mapbox-earcut python-moderngl python-glcontext
+        python-moderngl-window python-screeninfo python-svgelements
+)
+
+<span style="color: #A6E22E;">build</span>() {
+        pip download --no-deps -i https://pypi.tuna.tsinghua.edu.cn/simple ${<span style="color: #FD971F;">provides</span>[*]#python-}
+        <span style="color: #F92672;">if</span> [[ <span style="color: #E6DB74; font-weight: bold;">!</span> -d output ]]; <span style="color: #F92672;">then</span>
+                mkdir output
+        <span style="color: #F92672;">fi</span>
+        find ./ -maxdepth 1 -type f -name <span style="color: #E6DB74;">"*.tar.gz"</span> -exec tar xzf <span style="color: #E6DB74;">\{\}</span> -C output <span style="color: #E6DB74;">\;</span>
+        <span style="color: #F92672;">for</span> dir<span style="color: #F92672;"> in</span> output/* ;<span style="color: #F92672;">do</span>
+                python -m build -w -o . $<span style="color: #FD971F;">dir</span>
+        <span style="color: #F92672;">done</span>
+        <span style="color: #F92672;">if</span> [[ <span style="color: #E6DB74; font-weight: bold;">!</span> -d root ]]; <span style="color: #F92672;">then</span>
+                mkdir root
+        <span style="color: #F92672;">fi</span>
+        find ./ -maxdepth 1 -type f -name <span style="color: #E6DB74;">"*.whl"</span> -exec python -m installer --destdir=<span style="color: #E6DB74;">"root"</span> <span style="color: #E6DB74;">\{\}</span> <span style="color: #E6DB74;">\;</span>
+}
+
+<span style="color: #A6E22E;">package</span>() {
+        mv root/* $<span style="color: #FD971F;">pkgdir</span>
+}
+</pre>
+</div>
+<p>
+把上面的代码拷下来命名为 <code>PKGBUILD</code> 存到某个目录，然后运行 <code>makepkg -s</code> 就可以了
+(不会到了这步还不会吧？罚你去看archwiki)
+</p>
+
+<blockquote>
+<p>
+btw上面的包不是标准包，因为它打包了很多个python库，没有独立的版本管理，并且以上
+所有版本都是不确定的，还请小心谨慎使用。但如果以上都不是追求的目标的话还是挺对懒
+癌友好的（至少也对国内友好）
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="outline-container-org06dc5be" class="outline-2">
+<h2 id="org06dc5be"><span class="section-number-2">2.</span> Manim基础知识</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgfcf31e9" class="outline-3">
-<h3 id="orgfcf31e9"><span class="section-number-3">2.1.</span> 基本格式与渲染参数</h3>
+<div id="outline-container-org9f8ab8c" class="outline-3">
+<h3 id="org9f8ab8c"><span class="section-number-3">2.1.</span> 基本格式与渲染参数</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 一个基本manim程序范例：
@@ -158,8 +289,8 @@ pipx install manim
 </ul>
 </div>
 </div>
-<div id="outline-container-org745e7a5" class="outline-3">
-<h3 id="org745e7a5"><span class="section-number-3">2.2.</span> 词义理解</h3>
+<div id="outline-container-org5185958" class="outline-3">
+<h3 id="org5185958"><span class="section-number-3">2.2.</span> 词义理解</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>空间方位 由 <code>[x,y,z]</code> 三位数组构成，一般略去问题不大。坐标可由方向常量（看下
@@ -225,12 +356,12 @@ pipx install manim
 </div>
 </div>
 </div>
-<div id="outline-container-org9b95e16" class="outline-2">
-<h2 id="org9b95e16"><span class="section-number-2">3.</span> Manim手册</h2>
+<div id="outline-container-orgbbad10e" class="outline-2">
+<h2 id="orgbbad10e"><span class="section-number-2">3.</span> Manim手册</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgf5bae9a" class="outline-3">
-<h3 id="orgf5bae9a"><span class="section-number-3">3.1.</span> 常量速查</h3>
+<div id="outline-container-orgbed6082" class="outline-3">
+<h3 id="orgbed6082"><span class="section-number-3">3.1.</span> 常量速查</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li><p>
@@ -255,7 +386,7 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </pre>
 </div>
 
-<div id="org8646287" class="figure">
+<div id="org8dc3d90" class="figure">
 <p><img src="./img/colors.png" alt="colors.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>manim中各种颜色</p>
@@ -291,8 +422,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </ul>
 </div>
 </div>
-<div id="outline-container-orga40c2aa" class="outline-3">
-<h3 id="orga40c2aa"><span class="section-number-3">3.2.</span> 对象及其特异性方法一览</h3>
+<div id="outline-container-org985a29b" class="outline-3">
+<h3 id="org985a29b"><span class="section-number-3">3.2.</span> 对象及其特异性方法一览</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 内容来自ManimCE手册，英语好的直接看定义知参数
@@ -384,8 +515,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </details>
 </div>
 </div>
-<div id="outline-container-orge90adcc" class="outline-3">
-<h3 id="orge90adcc"><span class="section-number-3">3.3.</span> 广泛通用属性一览</h3>
+<div id="outline-container-org77ee2a5" class="outline-3">
+<h3 id="org77ee2a5"><span class="section-number-3">3.3.</span> 广泛通用属性一览</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>颜色家族(color)： <code>color</code> <code>fill_color</code> <code>stroke_color</code>
@@ -404,8 +535,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </ul>
 </div>
 </div>
-<div id="outline-container-org836d425" class="outline-3">
-<h3 id="org836d425"><span class="section-number-3">3.4.</span> 广泛通用方法一览</h3>
+<div id="outline-container-orgc20611d" class="outline-3">
+<h3 id="orgc20611d"><span class="section-number-3">3.4.</span> 广泛通用方法一览</h3>
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #75715E;"># </span><span style="color: #75715E;">Add mobjects as submobjects.</span>
@@ -491,8 +622,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </div>
 </div>
 </div>
-<div id="outline-container-org169dc42" class="outline-3">
-<h3 id="org169dc42"><span class="section-number-3">3.5.</span> 屏幕方法一览</h3>
+<div id="outline-container-org98de79e" class="outline-3">
+<h3 id="org98de79e"><span class="section-number-3">3.5.</span> 屏幕方法一览</h3>
 <div class="outline-text-3" id="text-3-5">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #F92672;">class</span> <span style="color: #66D9EF;">Scene</span>(renderer=<span style="color: #AE81FF;">None</span>, camera_class=&lt;<span style="color: #F92672;">class</span> <span style="color: #E6DB74;">'manim.camera.camera.Camera'</span>&gt;, always_update_mobjects=<span style="color: #AE81FF;">False</span>, random_seed=<span style="color: #AE81FF;">None</span>, skip_animations=<span style="color: #AE81FF;">False</span>):
@@ -514,8 +645,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </div>
 </div>
 </div>
-<div id="outline-container-org092afe9" class="outline-3">
-<h3 id="org092afe9"><span class="section-number-3">3.6.</span> 动画方法一览</h3>
+<div id="outline-container-orgc0767a9" class="outline-3">
+<h3 id="orgc0767a9"><span class="section-number-3">3.6.</span> 动画方法一览</h3>
 <div class="outline-text-3" id="text-3-6">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #75715E;"># </span><span style="color: #75715E;">&#21160;&#30011;(object)</span>
@@ -592,8 +723,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </div>
 </div>
 </div>
-<div id="outline-container-org5749aa7" class="outline-3">
-<h3 id="org5749aa7"><span class="section-number-3">3.7.</span> 示例</h3>
+<div id="outline-container-org448508f" class="outline-3">
+<h3 id="org448508f"><span class="section-number-3">3.7.</span> 示例</h3>
 <div class="outline-text-3" id="text-3-7">
 <details>
 <summary>我的抄的实例</summary>
@@ -759,8 +890,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </div>
 </div>
 </div>
-<div id="outline-container-org987f8bd" class="outline-2">
-<h2 id="org987f8bd"><span class="section-number-2">4.</span> Reference</h2>
+<div id="outline-container-org80dfabb" class="outline-2">
+<h2 id="org80dfabb"><span class="section-number-2">4.</span> Reference</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>ManimGL版本的教程与文档（有部分与ManimCE不兼容）
@@ -790,7 +921,7 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 <div id="postamble" class="status">
 <p class="date">Date: 2023-08-23 三 00:47</p>
 <p class="author">Author: 不要在意我的头像QwQ</p>
-<p class="date">Created: 2025-05-05 一 02:21</p>
+<p class="date">Created: 2025-07-13 日 11:22</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
