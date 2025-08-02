@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="Latex使用过程中查阅一些资料做的笔记，防忘" />
+<meta charset="utf-8" />
+<title>Latex学习笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg">
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Latex学习笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 基本语法</a></li><li><a href="#org-title-2">2. 基本结构</a><ul><li><a href="#org-title-2-1">2.1. 文章类型</a></li><li><a href="#org-title-2-2">2.2. 宏包</a></li></ul></li>
+<li><a href="#org-title-3">3. 正文样式</a><ul><li><a href="#org-title-3-1">3.1. begin&end</a></li><li><a href="#org-title-3-2">3.2. 表格</a></li><li><a href="#org-title-3-3">3.3. 字体样式</a></li><li><a href="#org-title-3-4">3.4. 其他东西</a></li></ul></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 基本语法</h2><div class="outline-text-2" id="text-1"><p>Latex文件大致可分为文章内容（渲染的内容）和排版控制命令（起特殊作用）两部分，文章内容直接写就行，而命令的基本格式为 <code>\XXX[可选参数]{位置参数}</code> ，其中 <code>XXX</code> 为命令名，中括号内为可选参数（有时可直接忽略），大括号内为位置参数。如果在命令外部套一个大括号这可以限制其作用范围。</p><p>命令有文档类型命令、宏包命令、用户命令等</p></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 基本结构</h2><div class="outline-text-2" id="text-2"><p>Latex文件基本结构如下：</p><div class="org-src-container"><pre class="src src-latex"><span class="c">% 文章类型</span>
+<span class="k">\documentclass</span><span class="na">[11pt]</span><span class="nb">{</span>article<span class="nb">}</span>
+
+<span class="c">% 使用的宏包</span>
+<span class="k">\usepackage</span><span class="nb">{</span>ctex<span class="nb">}</span>
+
+<span class="c">% 文件的作者、日期、标题等信息</span>
+<span class="k">\author</span><span class="nb">{}</span>
+<span class="k">\date</span><span class="nb">{}</span>
+<span class="k">\title</span><span class="nb">{}</span>
+
+<span class="c">% 文档正文开始</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="c">% 绘制标题等（文件头）</span>
+<span class="k">\maketit</span>
+<span class="k">\tableofcontents</span>
+
+<span class="c">% 正文</span>
+<span class="k">\section</span><span class="nb">{</span>A<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\section</span><span class="nb">{</span>B<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\subsection</span><span class="nb">{</span>Ba<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\subsection</span><span class="nb">{</span>Bb<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\subsection</span><span class="nb">{</span>Bc<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\subsubsection</span><span class="nb">{</span>Bca<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\subsubsection</span><span class="nb">{</span>Bcb<span class="nb">}</span>
+<span class="c">% ....</span>
+<span class="k">\subsection</span><span class="nb">{</span>Bd<span class="nb">}</span>
+<span class="c">% ....</span>
+
+<span class="c">% 正文结束</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div></div><div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 文章类型</h3><div class="outline-text-3" id="text-2-1"><p>由命令 <code>\documentclass{}</code> 指定，常见的有 <code>article</code><code>book</code><code>beamer</code> 等，中括号内可以设置文章都字体大小。文章类型就好比是一个基本模板，提供了其相应的命令及其效果，如 <code>article</code> 中有 <code>\section</code><code>\subsection</code> 等， <code>book</code> 中有 <code>part</code><code>chapter</code> 等，适应不同文件到需要。</p></div></div><div class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 宏包</h3><div class="outline-text-3" id="text-2-2"><p>宏包，即tex文件头部的 <code>usepackage</code> 语句后面所跟的参数，其功能类似于c语言的头文件， python的包，能够提供一些包装好的功能用于排版或者其他事情。下面我将列举些我用的宏包：</p><ol class="org-ol">
+<li>ctex: 想要写中文tex文件就绕不过去的包，需要和xelatex搭配食用才能够正常渲染中文
+</li>
+<li>geometry: 用于控制页边距，需要在调用后使用 <code>\geometry{scale=0.7}</code> 对页边距进行指定
+</li>
+<li>mhchem: 书写化学方程式 <code>\ce{Zn + 2H2O = Zn(OH) + H2 ^}</code>
+</li>
+<li>cancel: 使用删除线 <code>\usepackage[thicklines]{cancel}</code><code>\cancel{}</code>
+</li>
+<li>hyperref: 插入超链接 <code>\usepackage[hidelinks]{hyperref}</code>
+</li>
+<li>multicol: 分栏，使用环境 <code>\begin{multicols}{n}</code> (其中的n为分栏数)
+</li></ol>
+</div></div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 正文样式</h2><div class="outline-text-2" id="text-3"></div><div class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> begin&amp;end</h3><div class="outline-text-3" id="text-3-1"><p><code>\begin</code><code>\end</code> 命令通常用于开始和结束某一个环境</p></div></div><div class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 表格</h3><div class="outline-text-3" id="text-3-2"><div class="org-src-container"><pre class="src src-latex"><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h]
+        <span class="k">\centering</span>
+        <span class="k">\caption</span><span class="nb">{</span>描述<span class="nb">}</span>
+        <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|l|r|c|<span class="nb">}</span>
+                第一组 <span class="nb">&amp;</span> 第二组 <span class="nb">&amp;</span> 第三组 <span class="nb">&amp;</span> 第四组 <span class="k">\\</span>
+                <span class="k">\hline</span>
+                <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+                        1 <span class="nb">&amp;</span> 6 <span class="k">\\</span>
+                        2 <span class="nb">&amp;</span> 8 <span class="k">\\</span>
+                <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="nb">&amp;</span>
+                <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+                        3 <span class="nb">&amp;</span> 9 <span class="k">\\</span>
+                        <span class="k">\hline</span>
+                        4 <span class="nb">&amp;</span> 2 <span class="k">\\</span>
+                <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+                <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="nb">&amp;</span>
+                        5 <span class="nb">&amp;</span> 6 <span class="k">\\</span>
+                        8 <span class="nb">&amp;</span> 3 <span class="k">\\</span>
+                <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="nb">&amp;</span>
+                <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+                        4 <span class="nb">&amp;</span> 2 <span class="k">\\</span>
+                        <span class="k">\hline</span>
+                        3 <span class="nb">&amp;</span> 9 <span class="k">\\</span>
+                <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span> <span class="k">\\</span>
+                第一组 <span class="nb">&amp;</span> 第二组 <span class="nb">&amp;</span> 第三组 <span class="nb">&amp;</span> 第四组 <span class="k">\\</span>
+        <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+        <span class="k">\label</span><span class="nb">{</span>表<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div><p>以 <code>tabular</code> 作纵向表格环境，内部可以镶嵌，外部套一个 <code>table</code> 环境，表格数据间通过… <code>&amp;</code> 进行横向分割通过 <code>\\</code> 进行纵向分割</p></div></div><div class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 字体样式</h3><div class="outline-text-3" id="text-3-3"><ol class="org-ol">
+<li>粗体 <code>（未知）</code>
+</li>
+<li>斜体 <code>\textit{XXX}</code>
+</li></ol>
+</div></div><div class="outline-3">
+<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 其他东西</h3><div class="outline-text-3" id="text-3-4"><p>自定义命令： <code>\newcommand{\name}[arg_num]{do sth here,#1 means arg 1}</code></p><p>特殊字符表示: <code>~</code> 应写作 <code>\~{}</code> ,其余的套个反斜杠即可</p></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2024-10-01 二 02:04></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: Latex使用过程中查阅一些资料做的笔记，防忘</p>
+<p class="date">生成于: 2025-08-02 日 10:57:20</p>
+</div>
+</body>
+</html>

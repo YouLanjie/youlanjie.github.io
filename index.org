@@ -1,80 +1,73 @@
 #+TITLE: 我的个人博客
 # #+OPTIONS: toc:nil
 # #+OPTIONS: num:nil
-
 #+setupfile: ./setup.setup
-
 * Welcome
-欢迎来到我的个人博客。
-
-点击 =TimeLine= 查看按时间排序的文章列表界面。
+欢迎来到我的个人博客。\\
+点击 [[./timeline.html][*/TimeLine/*]] 查看按时间排序的文章列表界面。
+在大部分页面点击右上角 [[#][*/UP/*]] 按钮可以回到网页头部。
+/Table of Contents/ 是目录，鼠标悬浮或者屏幕点击展开。
+如遇代码块中英文对不齐的情况可尝试双击代码块。
 * 我的文章（按内容分类）
-- 关于建站
-  - [[../post/关于建站/使用github.io建立自己的博客.html][使用github.io建立自己的博客 - hexo+hugo+Emacs Org]]
-    分别使用Hexo、Hugo、Emacs Org建立自己的博客。
-  - [[../post/关于建站/用github.io建立一个自己的博客网站.html][用github.io建立一个自己的博客网站 - 仅Jekyll]]
-    使用github.io和jekyll建立一个自己的博客网站
-- 其他
-  - 小说
-    - [[../post/其他/小说/SAO/][《刀剑神域》资源索引]]
-      由于资源有点多所以做了个分页作索引
-  - 游戏
-    - Unciv
-      - [[../post/其他/游戏/unciv/Unciv.org][unciv——一款模拟文明游戏]]
-        一款仿照文明5的文明模拟策略游戏
-      - [[../post/其他/游戏/unciv/个人游玩经验分享.html][个人游玩经验分享]]
-        玩这个游戏总算是有一定的时长了，自己也摸索出来了一些比较有趣的打法分享
-        （ +TNND不经检验啊，图一乐就好+ ）
-    - Terraria
-      - [[../post/其他/游戏/Terraria/泰拉瑞亚战士全流程笔记.html][泰拉瑞亚战士全流程笔记]]
-        自己看404岛主等b站up学的泰拉战士（站士）笔记
-      - [[../post/其他/游戏/Terraria/泰拉速查笔记.html][泰拉速查笔记]]
-        泰拉常用但记不住的知识点速查表
-    - Minecraft
-      - [[../post/其他/游戏/mc/红石学习笔记.html][红石学习笔记]]
-        看一些视频发癫写的
-- 学习笔记
+- AboutBlog
+  - [[post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\
+    建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成
+- ArchLinux
+  - [[post/ArchLinux/Build_Archiso.html][*自定义Archlinux安装镜像*]]\\
+    通过archiso自行构建archlinux的安装镜像
+  - [[post/ArchLinux/Install_ArchLinux.html][*ArchLinux安装笔记*]]\\
+    记录我个人安装archlinux的过程，备用
+- Games
+  - Terraria
+    - [[post/Games/Terraria/泰拉瑞亚战士全流程笔记.html][*泰拉瑞亚战士全流程笔记*]]\\
+      看404岛主等up的教程学的知识点笔记
+    - [[post/Games/Terraria/泰拉速查笔记.html][*泰拉速查笔记*]]\\
+      从战士全流程笔记里摘出的常用要点信息
+  - mc
+    - [[post/Games/mc/红石学习笔记.html][*红石学习笔记*]]
+  - unciv
+    - [[post/Games/unciv/Unciv.html][*Unciv简介与黑话笔记*]]\\
+      一款仿照文明5的开源文明模拟策略游戏
+    - [[post/Games/unciv/个人游玩经验分享.html][*Unciv个人游玩经验分享*]]\\
+      玩这个游戏总算是有一定的时长了，自己也摸索出来了一些比较有趣的打法分享(虽然说后面这种玩法很难复制就是了)
+- Learning
+  - 计算机学习
+    - [[post/Learning/计算机学习/从零开始认识计算机.html][*从零开始认识计算机(from 硬件茶谈)*]]\\
+      内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记
   - 语文
-    - [[../post/学习笔记/语文/语文笔记.html][语文笔记]]
-      内容来自b站的视频，笔记是我自己写的
-    - [[../post/学习笔记/语文/小学笔记汇总.html][小学语文笔记汇总]]
+    - [[post/Learning/语文/小学笔记汇总.html][*小学语文笔记汇总*]]\\
       从小学课本上抄下来的
-    - [[../post/学习笔记/语文/语文笔记2.html][语文笔记2]]
+    - [[post/Learning/语文/语文笔记.html][*语文笔记*]]\\
+      内容来自B站的视频，笔记是我自己写的
+    - [[post/Learning/语文/语文笔记2.html][*语文笔记2*]]\\
       内容来自课本和部分教辅材料
   - 道法
-    - [[../post/学习笔记/道法/八下早读材料.html][八下早读材料]]
-  - C语言学习
-    - [[../post/学习笔记/C语言学习/打印字符使用特殊效果.html][打印字符使用特殊效果]]
-      使用ANSI转义字符实现终端输出字符带有特殊效果
-    - [[../post/学习笔记/C语言学习/C语言入门.html][C语言入门]]
-      一本C语言教程
-    - [[../post/学习笔记/C语言学习/C语言速查笔记.html][C语言速查笔记]]
+    - [[post/Learning/道法/八下早读材料.html][*八下道法背诵材料*]]\\
+      完全抄某教辅的背诵材料的道德与法治东西
+- Novel
+  - SAO
+    - [[post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
+      由于资源有点多所以做了个分页作索引(因为体积太大org都删进压缩包了)
+- Programing
+  - C_language
+    - [[post/Programing/C_language/C_language_note.html][*C语言笔记*]]\\
+      自己尝试写的C语言教程（未完成）
+    - [[post/Programing/C_language/C_languare_useful_note.html][*C语言速查笔记*]]\\
       抄别人blog的东西，塞一起应该方便自己查吧？
-  - Python
-    - manim
-      - [[../post/学习笔记/python/manim/在Termux上安装ArchLinux并安装好Manim.org][在Termux上安装ArchLinux并安装好Manim]]
-      - [[../post/学习笔记/python/manim/Manim学习笔记.org][Manim学习笔记]]
-      - [[../post/学习笔记/python/manim/使用manim制作一个动画.org][使用manim制作一个动画]]
-  - 计算机学习
-    - [[../post/学习笔记/计算机学习/从零开始认识计算机.org][从零开始认识计算机]]
-      内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记
-- 一些工具
-  - [[../post/一些工具/我用的小工具盘点.html][我用的小工具盘点]]
-    记录一些Linux中有趣但不一定常用的软件
+- Programs
   - Emacs
-    - [[../post/一些工具/Emacs/从vim转移到emacs.html][从vim转移到emacs]]
-      单纯的口水文
-    - [[../post/一些工具/Emacs/Emacs学习笔记.html][Emacs学习笔记]]
+    - [[post/Programs/Emacs/Emacs_learning_note.html][*Emacs学习笔记*]]\\
       我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
-  - Vim
-    - [[../post/一些工具/Vim/使用Vim.html][使用Vim]]
+    - [[post/Programs/Emacs/use_emacs_but_im_a_vimmer.html][*Vim党试水Emacs的心路历程与吐槽*]]\\
+      单纯的有感而发的口水文
   - Latex
-    - [[../post/一些工具/Latex/Latex笔记.org][Latex笔记]]
-      Latex学习笔记
-- ArchLinux学习系列
-  - [[../post/ArchLinux学习系列/ArchLinux的安装.html][ArchLinux的安装]]
-    记录我个人安装archlinux的过程
-  - [[../post/ArchLinux学习系列/ArchLinux的配置.html][ArchLinux的配置]]
-    记录我个人的archlinux软件配置
-  - [[../post/ArchLinux学习系列/Archiso——打造属于你的在U盘上的Archlinux Live系统.html][Archiso——打造属于你的在U盘上的Archlinux Live系统]]
-    如何使用archiso工具打造一个自定义的U盘上的临时Live系统
+    - [[post/Programs/Latex/Latex笔记.html][*Latex学习笔记*]]\\
+      Latex使用过程中查阅一些资料做的笔记，防忘
+  - Vim
+    - [[post/Programs/Vim/Vim_note.html][*Vim/Neovim使用笔记*]]
+  - manim
+    - [[post/Programs/manim/Manim_learning_note.html][*Manim学习笔记*]]\\
+      啃manim教程，自己养老备用防忘
+  - tools
+    - [[post/Programs/tools/tools_list.html][*部分工具软件清单*]]\\
+      记录一些Linux中有趣但不一定有用的软件，放着以后来玩玩
