@@ -13,6 +13,8 @@
   - [[post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\
     建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成
 - ArchLinux
+  - [[post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]]\\
+    记点杂的笔记，反正大都是关于archlinux的
   - [[post/ArchLinux/Build_Archiso.html][*自定义Archlinux安装镜像*]]\\
     通过archiso自行构建archlinux的安装镜像
   - [[post/ArchLinux/Install_ArchLinux.html][*ArchLinux安装笔记*]]\\

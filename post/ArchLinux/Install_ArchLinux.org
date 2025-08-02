@@ -5,7 +5,8 @@
 #+setupfile: ../../setup.setup
 
 * 前言
-本blog用于记录我安装ArchLinux的方法，更专业的教程请查阅[[https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][官方Wiki]]
+本blog用于记录我安装ArchLinux的方法，更专业的教程请查阅[[https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][官方Wiki]] (虽然大部分内容
+都是参考的wiki)
 * 准备U盘启动盘
 1. 从[[https://archlinux.org/download/][官网]]上下载ArchLinux的安装镜像
    1. 文件名格式一般为 =archlinux-YYYY.MM.DD-x86_64.iso=
@@ -85,11 +86,16 @@ pacman是archlinux的包管理器，暂不介绍用法，跟着做就行了
 pacman的默认mirror源非常好，列出了我们会用到的镜像源，加上sed，我们可以执行下面
 的命令开启清华镜像源:
 #+begin_src shell
-  sed -i "/tuna/s/#//" /etc/pacman.d/mirrorlist
+  cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew
+  sed -ni "/tuna/p" /etc/pacman.d/mirrorlist
 #+end_src
 如果希望用阿里云则可将命令里的 =tuna= 替换为 =aliyun= 再执行
 
 如果懂得用vim，自己编辑mirrorlist去，搜索China，自己选
+#+begin_quote
+本以为官方的iso是pacman默认文件那样没有开启任何源的，结果下载下来启动一看全是开
+的【捂脸】。好在改了个sed命令就解决了。
+#+end_quote
 *** 自动设置软件源
 直接运行以下命令依照速度进行自动排序，不用手动排序
 #+begin_src bash
@@ -252,6 +258,12 @@ arch-chroot /mnt/ /bin/bash
 * 第二安装阶段
 本阶段为进入chroot后的操作
 ** 本地化
+#+begin_quote
+官方wiki建议小白不要在这时候设置中文（因为会导致字体无法显示），建议在装好图形环
+境后再设置。
+
+如果设置了中文导致乱码，可以尝试使用 =export LANG=en_US.UTF-8= 临时补救
+#+end_quote
 设置中文:
 
 #+begin_src bash
@@ -336,6 +348,9 @@ grub-install
 #+end_src
 
 #+begin_quote
+如果需要启动时显示那一长串的日志，可以找到 =GRUB_CMDLINE_LINUX_DEFAULT= 将后面的
+quiet去除。
+
 如果使用多系统，可以编辑 =/etc/default/grub= ，找到 =GRUB_DISABLE_OS_PROBER=
 并将后面的 ="true"= 改为 ="false"= 并重新执行更新配命令
 #+end_quote

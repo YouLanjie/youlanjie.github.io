@@ -1,5 +1,7 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
+- /2025-08-02 11:17:50/ [[post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]]\\
+  记点杂的笔记，反正大都是关于archlinux的
 - /2025-07-30 02:45/ [[post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\
   建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成
 - /2025-04-19/ [[post/Programing/C_language/C_languare_useful_note.html][*C语言速查笔记*]]\\
