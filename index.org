@@ -50,6 +50,8 @@
   - SAO
     - [[post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
       由于资源有点多所以做了个分页作索引(因为体积太大org都删进压缩包了)
+  - [[post/Novel/给猫留门.html][*给猫留门*]]\\
+    原作者黄咏梅，网上找的资料
 - Programing
   - C_language
     - [[post/Programing/C_language/C_language_note.html][*C语言笔记*]]\\

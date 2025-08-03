@@ -4,6 +4,8 @@
   记点杂的笔记，反正大都是关于archlinux的
 - /2025-07-30 02:45/ [[post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\
   建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成
+- /2025-05-23 (2018)/ [[post/Novel/给猫留门.html][*给猫留门*]]\\
+  原作者黄咏梅，网上找的资料
 - /2025-04-19/ [[post/Programing/C_language/C_languare_useful_note.html][*C语言速查笔记*]]\\
   抄别人blog的东西，塞一起应该方便自己查吧？
 - /2025-03-01 08:58/ [[post/Games/Terraria/泰拉速查笔记.html][*泰拉速查笔记*]]\\
