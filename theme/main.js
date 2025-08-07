@@ -41,7 +41,6 @@
 	}
 })();
 (function() {
-	console.log("TEST!!!!")
 	let pres = document.getElementsByClassName("src")
 	if ( pres.length == 0 ) {
 		return;
@@ -54,5 +53,25 @@
 				event.currentTarget.classList.add("monofont")
 			}
 		})
+	}
+})();
+(function() {
+	var script = document.createElement("script")
+	script.setAttribute("type", "text/javascript");
+	// script.setAttribute("src", "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js")
+	script.setAttribute("src", "/theme/fancybox.umd.js")
+	var link = document.createElement("link")
+	link.setAttribute("rel", "stylesheet")
+	// link.setAttribute("href", "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css")
+	link.setAttribute("href", "/theme/fancybox.css")
+	document.getElementsByTagName("head")[0].appendChild(link)
+	document.getElementsByTagName("head")[0].appendChild(script)
+
+	let imgs = document.getElementsByTagName("img")
+	if ( imgs.length == 0 ) {
+		return;
+	}
+	for (let i = 0; i < imgs.length; i++) {
+		imgs[i].setAttribute("data-fancybox", "gallery")
 	}
 })();
