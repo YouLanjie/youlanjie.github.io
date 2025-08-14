@@ -1,5 +1,7 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
+- /2025-08-12 18:07/ [[post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]]\\
+  不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）
 - /2025-08-02 11:17:50/ [[post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]]\\
   记点杂的笔记，反正大都是关于archlinux的
 - /2025-07-30 02:45/ [[post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\

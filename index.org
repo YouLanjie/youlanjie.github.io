@@ -21,6 +21,8 @@
     记录我个人安装archlinux的过程，备用
 - Games
   - Terraria
+    - [[post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]]\\
+      不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）
     - [[post/Games/Terraria/泰拉瑞亚战士全流程笔记.html][*泰拉瑞亚战士全流程笔记*]]\\
       看404岛主等up的教程学的知识点笔记
     - [[post/Games/Terraria/泰拉速查笔记.html][*泰拉速查笔记*]]\\

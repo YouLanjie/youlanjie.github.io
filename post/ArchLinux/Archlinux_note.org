@@ -119,3 +119,21 @@
 #+begin_src shell
   sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 #+end_src
+* obs的编码问题
+- 我的HEVC编码器哪去了？\\
+  如果是intel的CPU/GPU请确保安装了 =intel-media-driver= 包，并重启obs启用硬编解
+  码
+* 老旧网卡总是重复断连
+#+begin_quote
+由于该节内容方法来源来自ai，具体原理仍不清楚，待日后查证纠正
+#+end_quote
+使用 =journalctl -f= 进行日志实时显示，然后另一边用iwd等网络管理器进行操作，观察
+日志输出。如果发现有大量类似于 =invalid HE capabilities for XX:XX:XX:XX:XX:XX=
+的输出，尝试编辑（或者创建） *//etc/iwd/main.conf/* 文件，追加以下内容:
+#+begin_src conf
+  [General]
+  DisableVHT=false
+
+  [Settings]
+  DisableHE=true
+#+end_src
