@@ -71,6 +71,8 @@
       Latex使用过程中查阅一些资料做的笔记，防忘
   - Vim
     - [[post/Programs/Vim/Vim_note.html][*Vim/Neovim使用笔记*]]
+  - [[post/Programs/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]]\\
+    在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
   - manim
     - [[post/Programs/manim/Manim_learning_note.html][*Manim学习笔记*]]\\
       啃manim教程，自己养老备用防忘

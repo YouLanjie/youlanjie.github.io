@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="啃manim教程，自己养老备用防忘" />
-<meta charset="utf-8" />
+<meta name="generator" content="Org Mode (third party program by python)" />
 <title>Manim学习笔记</title>
 <script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
-<link rel="shortcut icon" href="/img/icon.jpg">
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -28,8 +37,10 @@
 <li><a href="#org-title-5">5. Reference</a></li></ul></div></div>
 <blockquote>
 <p>警告！这只是一篇笔记！一篇笔记！非入门教程！默认具有一定python基础<br/>系统环境：Arch Linux<br/>更新时间：2025-08-01<br/> 顺带一提：使用manimCE的建议看最后 <code>Reference</code> 里面最后一个链接里的官方教程</p></blockquote><div class="outline-2">
-<h2 id="org-title-1"><span class="section-number-2">1.</span> Manim的安装</h2><div class="outline-text-2" id="text-1"><p>5202年了，manim的安装仍旧让人非常想吐槽。arch或许还好还有aur，但是aur上的包都是使用github的链接，下载奇慢，还可能时不时出现一些编译问题。下面开始正文</p><p>下面是我安装manimce的几种方案：</p></div><div class="outline-3">
-<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 使用pipx的方案</h3><div class="outline-text-3" id="text-1-1"><blockquote>
+<h2 id="org-title-1"><span class="section-number-2">1.</span> Manim的安装</h2>
+<div class="outline-text-2" id="text-1"><p>5202年了，manim的安装仍旧让人非常想吐槽。arch或许还好还有aur，但是aur上的包都是使用github的链接，下载奇慢，还可能时不时出现一些编译问题。下面开始正文</p><p>下面是我安装manimce的几种方案：</p></div><div class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 使用pipx的方案</h3>
+<div class="outline-text-3" id="text-1-1"><blockquote>
 <p>好处：</p><ol class="org-ol">
 <li>简单快捷
 </li></ol>
@@ -47,7 +58,8 @@ pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</s
 <span class="c1"># 安装ManimCE(manimgl是3b1b个人版本)</span>
 pipx<span class="w"> </span>install<span class="w"> </span>manim
 </pre></div></div></div><div class="outline-3">
-<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> 使用 <code>makepkg</code> 的方案</h3><div class="outline-text-3" id="text-1-2"><blockquote>
+<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> 使用 <code>makepkg</code> 的方案</h3>
+<div class="outline-text-3" id="text-1-2"><blockquote>
 <p>由于该方案是使用archlinux的 <code>makepkg</code> +python的 <code>python-build</code> + <code>python-installer</code> 将所有的manim依赖打包在一起，所以：</p><ol class="org-ol">
 <li>非archlinux不可用
 </li>
@@ -68,13 +80,15 @@ pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</s
 <span class="na">Server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span>
 </pre></div><p>然后从
 <a href="https://gitee.com/youlanjie/pkgbuild/raw/master/manim/PKGBUILD">这里</a>下载PKGBUILD文件存到某个目录，然后在那个目录下运行 <code>makepkg -s</code> 就可以了(不会到了这步还不会吧？罚你去看archwiki)</p></div></div><div class="outline-3">
-<h3 id="org-title-1-3"><span class="section-number-3">1.3.</span> 从aur安装(不推荐)</h3><div class="outline-text-3" id="text-1-3"><p>众所周知，aur上的包大多默认从github上下载，就算是挂了代理一般也很慢。并且吧，经过我多次被aur上的manim包坑的经历后，被搞怕了好吧。</p><p>当然，也不是没有解决办法。如果安装软件出现问题可以去对应包的aur界面看看评论，评论区有高手会提出问题并解决的</p><p>目前(2025.08.01)已知包缺少依赖：</p><ul class="org-ul">
+<h3 id="org-title-1-3"><span class="section-number-3">1.3.</span> 从aur安装(不推荐)</h3>
+<div class="outline-text-3" id="text-1-3"><p>众所周知，aur上的包大多默认从github上下载，就算是挂了代理一般也很慢。并且吧，经过我多次被aur上的manim包坑的经历后，被搞怕了好吧。</p><p>当然，也不是没有解决办法。如果安装软件出现问题可以去对应包的aur界面看看评论，评论区有高手会提出问题并解决的</p><p>目前(2025.08.01)已知包缺少依赖：</p><ul class="org-ul">
 <li>python-beautifulsoup4
 </li>
 <li>python-av
 </li></ul>
 </div></div><div class="outline-3">
-<h3 id="org-title-1-4"><span class="section-number-3">1.4.</span> 直接pip安装(非常不推荐)</h3><div class="outline-text-3" id="text-1-4"><p>过程类似pipx，不多讲，主要是我也不想这样干，已知问题见下面</p><details>
+<h3 id="org-title-1-4"><span class="section-number-3">1.4.</span> 直接pip安装(非常不推荐)</h3>
+<div class="outline-text-3" id="text-1-4"><p>过程类似pipx，不多讲，主要是我也不想这样干，已知问题见下面</p><details>
 <summary>由于比较长所以藏里面了，点击展开查看</summary>
 <div class="org-src-container"><pre class="src src-org"><span class="k">1.</span> externally-managed-environment: pip与包管理器冲突
 <span class="w">   </span><span class="k">1.</span> 解决办法： <span class="s">=sudo mv /usr/lib/python3.13/EXTERNALLY-MANAGED /usr/lib/python3.13/EXTERNALLY-MANAGED.bk=</span>
@@ -123,7 +137,8 @@ pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</s
       更多内容<span class="p">[[</span><span class="na">https://www.yaolong.net/article/pip-externally-managed-environment/</span><span class="p">][</span><span class="nt">详见这里</span><span class="p">]]</span>。
 </pre></div></details>
 </div></div><div class="outline-3">
-<h3 id="org-title-1-5"><span class="section-number-3">1.5.</span> DLC:在termux上安装manim</h3><div class="outline-text-3" id="text-1-5"><p>附赠几条提示：</p><ol class="org-ol">
+<h3 id="org-title-1-5"><span class="section-number-3">1.5.</span> DLC:在termux上安装manim</h3>
+<div class="outline-text-3" id="text-1-5"><p>附赠几条提示：</p><ol class="org-ol">
 <li>能够用pkg的尽量用pkg装，尽可能避免所有的编译问题(或许是因为由于架构问题经常会有包会傻乎乎地本地编译，浪费半天不说还会在最后给你弹出来个报错。例如说因为缺 cmake ninja等各种奇怪的编译依赖报错。
 </li>
 <li>由于未知原因，要把 <code>~/../lib/</code> 设置为可读写操作状态才能够正常安装
@@ -131,8 +146,10 @@ pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</s
 <li>仔细看报错
 </li></ol>
 </div></div></div><div class="outline-2">
-<h2 id="org-title-2"><span class="section-number-2">2.</span> Manim基础知识</h2><div class="outline-3">
-<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 基本格式与渲染参数</h3><div class="outline-text-3" id="text-2-1"><p>一个基本manim程序范例：</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<h2 id="org-title-2"><span class="section-number-2">2.</span> Manim基础知识</h2>
+<div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 基本格式与渲染参数</h3>
+<div class="outline-text-3" id="text-2-1"><p>一个基本manim程序范例：</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">example_class</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -151,7 +168,8 @@ pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</s
 <li><code>-p</code> 在渲染完成后预览结果
 </li></ul>
 </div></div><div class="outline-3">
-<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 词义理解</h3><div class="outline-text-3" id="text-2-2"><ul class="org-ul">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 词义理解</h3>
+<div class="outline-text-3" id="text-2-2"><ul class="org-ul">
 <li>空间方位 由 <code>[x,y,z]</code> 三位数组构成，一般略去问题不大。坐标可由方向常量（看下表）、已存在的对象以及三位数组提供（在函数间传递参数的时候）。一般而言省略掉z 坐标问题不大。
 <ul class="org-ul">
 <li>x轴横于画面，y轴纵于画面，z轴垂直于画面。
@@ -173,12 +191,15 @@ pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</s
 <li>属性 对象的属性（如颜色字体大小位置等）
 </li>
 <li>常见英语词汇翻译
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" /></colgroup><tbody><tr><td class="org-left">原词</td><td class="org-left">意思</td></tr><tr><td class="org-left">buff</td><td class="org-left">缓冲，抵达预设位置前预留的空间</td></tr><tr><td class="org-left">opacity</td><td class="org-left">透明度</td></tr><tr><td class="org-left">about_point</td><td class="org-left">旋转等操作的中心点</td></tr><tr><td class="org-left">vertices</td><td class="org-left">顶点</td></tr><tr><td class="org-left">axis</td><td class="org-left">轴</td></tr></table>
 </li></ul>
 </div></div></div><div class="outline-2">
-<h2 id="org-title-3"><span class="section-number-2">3.</span> Manim手册</h2><div class="outline-3">
-<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 常量速查</h3><div class="outline-text-3" id="text-3-1"><ul class="org-ul">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> Manim手册</h2>
+<div class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 常量速查</h3>
+<div class="outline-text-3" id="text-3-1"><ul class="org-ul">
 <li>方位：本质为一个三维坐标（数组）
 <div class="org-src-container"><pre class="src src-text">UL        UP        UR  |  OUT   屏幕外面
 LEFT   ORIGION   RIGHT  | (z轴) ----------
@@ -198,7 +219,9 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 <details>
 <summary>生成上图的代码</summary>
 <div class="org-src-container"><pre class="src src-python"><span class="ch">#!/usr/bin/env manim -pqh -s</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
 <span class="k">class</span><span class="w"> </span><span class="nc">Color</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># plane = NumberPlane()</span>
@@ -219,7 +242,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </details>
 </li></ul>
 </div></div><div class="outline-3">
-<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 对象及其特异性方法一览</h3><div class="outline-text-3" id="text-3-2"><p>内容来自ManimCE手册，英语好的直接看定义知参数</p><div class="org-src-container"><pre class="src src-python"><span class="sd">&quot;&quot;&quot;注：`#`注释部分的括号内为其父对象&quot;&quot;&quot;</span>
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 对象及其特异性方法一览</h3>
+<div class="outline-text-3" id="text-3-2"><p>内容来自ManimCE手册，英语好的直接看定义知参数</p><div class="org-src-container"><pre class="src src-python"><span class="sd">&quot;&quot;&quot;注：`#`注释部分的括号内为其父对象&quot;&quot;&quot;</span>
 <span class="c1"># 组(VMobject)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">VGroup</span><span class="p">(</span><span class="o">*</span><span class="n">vmobjects</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="sd">&quot;&quot;&quot;可以通过VGroup(xxx, xxx, ...)、VGroup.add(xxx)、VGroup()+=XXX等方式添加对象</span>
@@ -299,7 +323,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 	<span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div></details>
 </div></div><div class="outline-3">
-<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 广泛通用属性一览</h3><div class="outline-text-3" id="text-3-3"><ul class="org-ul">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 广泛通用属性一览</h3>
+<div class="outline-text-3" id="text-3-3"><ul class="org-ul">
 <li>颜色家族(color)： <code>color</code><code>fill_color</code><code>stroke_color</code>
 <ul class="org-ul">
 <li>颜色属性可以直接修改设置没有问题
@@ -316,7 +341,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 </li></ul>
 </li></ul>
 </div></div><div class="outline-3">
-<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 广泛通用方法一览</h3><div class="outline-text-3" id="text-3-4"><div class="org-src-container"><pre class="src src-python"><span class="c1"># Add mobjects as submobjects.</span>
+<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 广泛通用方法一览</h3>
+<div class="outline-text-3" id="text-3-4"><div class="org-src-container"><pre class="src src-python"><span class="c1"># Add mobjects as submobjects.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">mobjects</span><span class="p">)</span>
 <span class="c1"># 复制自身，包括所有子对象</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">()</span>
@@ -396,7 +422,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 <span class="c1"># 可以将组内对象呈网格型排列</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">arrange_in_grid</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">cell_alignment</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">row_alignments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col_alignments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">row_heights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col_widths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flow_order</span><span class="o">=</span><span class="s1">&#39;rd&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div></div></div><div class="outline-3">
-<h3 id="org-title-3-5"><span class="section-number-3">3.5.</span> 屏幕方法一览</h3><div class="outline-text-3" id="text-3-5"><div class="org-src-container"><pre class="src src-python"><span class="k">class</span><span class="w"> </span><span class="nc">Scene</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">camera_class</span><span class="o">=&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">&#39;</span><span class="nc">manim</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">Camera</span><span class="s1">&#39;&gt;, always_update_mobjects=False, random_seed=None, skip_animations=False):</span>
+<h3 id="org-title-3-5"><span class="section-number-3">3.5.</span> 屏幕方法一览</h3>
+<div class="outline-text-3" id="text-3-5"><div class="org-src-container"><pre class="src src-python"><span class="k">class</span><span class="w"> </span><span class="nc">Scene</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">camera_class</span><span class="o">=&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">&#39;</span><span class="nc">manim</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">Camera</span><span class="s1">&#39;&gt;, always_update_mobjects=False, random_seed=None, skip_animations=False):</span>
     <span class="c1"># 添加对象</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">mobjects</span><span class="p">)</span>
     <span class="c1"># 移除对象</span>
@@ -412,7 +439,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
     <span class="c1"># 播放动画</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">subcaption</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subcaption_duration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subcaption_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div></div></div><div class="outline-3">
-<h3 id="org-title-3-6"><span class="section-number-3">3.6.</span> 动画方法一览</h3><div class="outline-text-3" id="text-3-6"><div class="org-src-container"><pre class="src src-python"><span class="c1"># 动画(object)</span>
+<h3 id="org-title-3-6"><span class="section-number-3">3.6.</span> 动画方法一览</h3>
+<div class="outline-text-3" id="text-3-6"><div class="org-src-container"><pre class="src src-python"><span class="c1"># 动画(object)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Animation</span><span class="p">(</span><span class="n">mobject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lag_ratio</span><span class="o">=...</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=...</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="sd">&quot;&quot;&quot; lag_ratio :动画逐步应用到子对象的延迟，为0表示动画同步进行</span>
 <span class="sd">    run_time  :动画总时间</span>
@@ -483,7 +511,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 <span class="c1"># 亮度遮罩(Transform)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">FocusOn</span><span class="p">(</span><span class="n">focus_point</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">GREY</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div></div></div><div class="outline-3">
-<h3 id="org-title-3-7"><span class="section-number-3">3.7.</span> 示例</h3><div class="outline-text-3" id="text-3-7"><details>
+<h3 id="org-title-3-7"><span class="section-number-3">3.7.</span> 示例</h3>
+<div class="outline-text-3" id="text-3-7"><details>
 <summary>我的抄的实例</summary>
 <div class="org-src-container"><pre class="src src-python"><span class="ch">#!/bin/python</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
@@ -641,8 +670,10 @@ ORANGE PINK PURPLE RED WHITE YELLOW
         <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">GrowFromCenter</span><span class="p">(</span><span class="n">rectangle</span><span class="p">),</span> <span class="n">GrowFromCenter</span><span class="p">(</span><span class="n">ellipse</span><span class="p">),</span> <span class="n">GrowFromCenter</span><span class="p">(</span><span class="n">ring</span><span class="p">))</span>
 </pre></div></details>
 </div></div></div><div class="outline-2">
-<h2 id="org-title-4"><span class="section-number-2">4.</span> 制作经验</h2><div class="outline-3">
-<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 一般经验</h3><div class="outline-text-3" id="text-4-1"><ol class="org-ol">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 制作经验</h2>
+<div class="outline-3">
+<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 一般经验</h3>
+<div class="outline-text-3" id="text-4-1"><ol class="org-ol">
 <li>实际上很多复杂的动画都是简单的动画的组合，学习将你要表达的内容拆分成一步一步执行的动画是非常重要的一步
 </li>
 <li>其次，阅读源代码是必不可少的，通过对源代码的观察和生成动画的对比分析，就能学到不少东西（例如说新的动画方法之类的）
@@ -652,8 +683,10 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 <li>简单了解下Python的语法，这对于简化某些复杂的操作非常的有用（Manim制作动画最大的优势）
 </li></ol>
 </div></div><div class="outline-3">
-<h3 id="org-title-4-2"><span class="section-number-3">4.2.</span> 方法建议</h3><div class="outline-4">
-<h4 id="org-title-4-2-1"><span class="section-number-4">4.2.1.</span> 自定义图形</h4><div class="outline-text-4" id="text-4-2-1"><p>当你想要制作某一类东西需要大量用到重复的形状时，就可以尝试去编写一种方法去构建它。例如物理的电路图，其中的电源，开关，用电器，电阻，滑动变阻器等等，他们都拥有固定的形状，所以我们可以构建一种新的东西去方便我们创建它们</p><p>就以刚刚的物理制作电路图作为例子，我们可以尝试绘制一个电源:</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<h3 id="org-title-4-2"><span class="section-number-3">4.2.</span> 方法建议</h3>
+<div class="outline-4">
+<h4 id="org-title-4-2-1"><span class="section-number-4">4.2.1.</span> 自定义图形</h4>
+<div class="outline-text-4" id="text-4-2-1"><p>当你想要制作某一类东西需要大量用到重复的形状时，就可以尝试去编写一种方法去构建它。例如物理的电路图，其中的电源，开关，用电器，电阻，滑动变阻器等等，他们都拥有固定的形状，所以我们可以构建一种新的东西去方便我们创建它们</p><p>就以刚刚的物理制作电路图作为例子，我们可以尝试绘制一个电源:</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">shape</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">number_plane</span> <span class="o">=</span> <span class="n">NumberPlane</span><span class="p">()</span>
@@ -696,7 +729,8 @@ ORANGE PINK PURPLE RED WHITE YELLOW
     <span class="k">def</span><span class="w"> </span><span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div><p>在上面的例子中，我们通过继承 <code>VGroup</code> 类，自定义了一种全新的复合图形，并且这个图形拥有它自己特有的方法以执行某种动作，这极大地方便了我们进行动画的制作。</p></div></div><div class="outline-4">
-<h4 id="org-title-4-2-2"><span class="section-number-4">4.2.2.</span> 分割场景</h4><div class="outline-text-4" id="text-4-2-2"><p>当你的设备比较差，渲染时间很长的时候，你可以尝试将整一个视频的内容分割成一小段一小段的内容，再在construct方法中集中起来渲染，例如:</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<h4 id="org-title-4-2-2"><span class="section-number-4">4.2.2.</span> 分割场景</h4>
+<div class="outline-text-4" id="text-4-2-2"><p>当你的设备比较差，渲染时间很长的时候，你可以尝试将整一个视频的内容分割成一小段一小段的内容，再在construct方法中集中起来渲染，例如:</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">shape</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">scene_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
@@ -717,8 +751,10 @@ ORANGE PINK PURPLE RED WHITE YELLOW
     <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scene_3</span><span class="p">()</span>
 </pre></div><p>在例子中，可以在测试时使用继承了shape的debug类渲染，或者修改shape类的construct方法，渲染时再使用shape类渲染所有的镜头，以期在测试时减少渲染时间，加快调试速度。当然也可以配合其他手段例如调试时使用低分辨率，渲染时使用最高的分辨率和帧率</p></div></div></div><div class="outline-3">
-<h3 id="org-title-4-3"><span class="section-number-3">4.3.</span> 过程参考</h3><div class="outline-text-3" id="text-4-3"><p>在纸上（或者其他载体）拟写好你想要表达的内容，确定顺序，确定大致的构图或表达方式，再投入到实践中。在工程量较大的情况下这可以有效地节约你的时间。（至少你知道且清楚你自己到底在干嘛）</p></div></div></div><div class="outline-2">
-<h2 id="org-title-5"><span class="section-number-2">5.</span> Reference</h2><div class="outline-text-2" id="text-5"><ul class="org-ul">
+<h3 id="org-title-4-3"><span class="section-number-3">4.3.</span> 过程参考</h3>
+<div class="outline-text-3" id="text-4-3"><p>在纸上（或者其他载体）拟写好你想要表达的内容，确定顺序，确定大致的构图或表达方式，再投入到实践中。在工程量较大的情况下这可以有效地节约你的时间。（至少你知道且清楚你自己到底在干嘛）</p></div></div></div><div class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> Reference</h2>
+<div class="outline-text-2" id="text-5"><ul class="org-ul">
 <li>ManimGL版本的教程与文档（有部分与ManimCE不兼容）
 <ul class="org-ul">
 <li><a href="https://zhuanlan.zhihu.com/p/108240714">3Blue1Brown 动画制作教程(2)--尝试更多的图形 - 知乎</a>
@@ -744,7 +780,7 @@ ORANGE PINK PURPLE RED WHITE YELLOW
 <div id="postamble" class="status"><p class="date">时间: <2023-08-23 三 00:47></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 啃manim教程，自己养老备用防忘</p>
-<p class="date">生成于: 2025-08-02 日 10:57:20</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
 </div>
 </body>
 </html>

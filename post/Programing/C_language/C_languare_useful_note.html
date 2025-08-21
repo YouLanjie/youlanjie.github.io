@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="抄别人blog的东西，塞一起应该方便自己查吧？" />
-<meta charset="utf-8" />
+<meta name="generator" content="Org Mode (third party program by python)" />
 <title>C语言速查笔记</title>
 <script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
-<link rel="shortcut icon" href="/img/icon.jpg">
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -24,12 +33,16 @@
 <li><a href="#org-title-2-2">2.2. 文字效果</a></li><li><a href="#org-title-2-3">2.3. 其他类型</a><ul><li><a href="#org-title-2-3-1">2.3.1. 光标移动</a></li><li><a href="#org-title-2-3-2">2.3.2. 光标显示</a></li><li><a href="#org-title-2-3-3">2.3.3. 光标位置</a></li></ul></li></ul></li>
 <li><a href="#org-title-3">3. Linux Signal信号</a></li><li><a href="#org-title-4">4. RELRO等安全选项</a></li><li><a href="#org-title-5">5. 判断字符是中文还是英文(有局限)</a></li><li><a href="#org-title-6">6. 生成迷宫</a></li></ul></div></div>
 <div class="outline-2">
-<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2><div class="outline-text-2" id="text-1"><p>这玩意还是我自己吃菌子吃多了头脑发热写的东西，不过他应该不会像隔壁“某教程”那样写着写着就弃坑变成了烂尾楼</p><p>当然，真正的理由还是翻自己的收藏夹发现收藏了一堆网页，但一大堆都是CSDN的shit，想着能不能把他们从收藏夹里面“优化”掉，所以就想抄到自己这里来hhh</p><p>以下内容或许可以参考
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>这玩意还是我自己吃菌子吃多了头脑发热写的东西，不过他应该不会像隔壁“某教程”那样写着写着就弃坑变成了烂尾楼</p><p>当然，真正的理由还是翻自己的收藏夹发现收藏了一堆网页，但一大堆都是CSDN的shit，想着能不能把他们从收藏夹里面“优化”掉，所以就想抄到自己这里来hhh</p><p>以下内容或许可以参考
 <a href="https://gitee.com/YouLanjie/my-test">这个仓库</a>的C语言部分，我有些实例代码是写在里面的</p></div></div><div class="outline-2">
-<h2 id="org-title-2"><span class="section-number-2">2.</span> 使用ANSI转义字符为打印的字符上色</h2><div class="outline-text-2" id="text-2"><p>特殊效果的支持源自ANSI标准，由于我不是很懂所以不多赘述。这里重点关注我们应该如何使用它。</p><p>先说结论：<br/> 要使用特殊效果，通常需要使用任意输出函数输出以 <code>\033[数字选项+字符选项</code> 为格式的字符串。</p><p>其中，字符选项相当于指定了其大概的类型，只可以单独使用，并作为一串控制字符串的结束。而数字选项则是细分了其具体功能，且可以复用，只需要使用分号将其隔开。</p><p>例子请续看下文。</p></div><div class="outline-3">
-<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 颜色</h3><div class="outline-text-3" id="text-2-1"><blockquote>
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 使用ANSI转义字符为打印的字符上色</h2>
+<div class="outline-text-2" id="text-2"><p>特殊效果的支持源自ANSI标准，由于我不是很懂所以不多赘述。这里重点关注我们应该如何使用它。</p><p>先说结论：<br/> 要使用特殊效果，通常需要使用任意输出函数输出以 <code>\033[数字选项+字符选项</code> 为格式的字符串。</p><p>其中，字符选项相当于指定了其大概的类型，只可以单独使用，并作为一串控制字符串的结束。而数字选项则是细分了其具体功能，且可以复用，只需要使用分号将其隔开。</p><p>例子请续看下文。</p></div><div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 颜色</h3>
+<div class="outline-text-3" id="text-2-1"><blockquote>
 <p>做出一些提醒，该子标题内的内容都需要一个关键的字符 <code>m</code> ，所有的文字效果都是基于 <code>\033[XXm</code> 的格式，只是为了方便理解，在大部分内容都不作为重点讲述。</p></blockquote></div><div class="outline-4">
-<h4 id="org-title-2-1-1"><span class="section-number-4">2.1.1.</span> 使用普通颜色（非256色）</h4><div class="outline-text-4" id="text-2-1-1"><p>要打印出普通的颜色，只需要使用下面的程序：</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<h4 id="org-title-2-1-1"><span class="section-number-4">2.1.1.</span> 使用普通颜色（非256色）</h4>
+<div class="outline-text-4" id="text-2-1-1"><p>要打印出普通的颜色，只需要使用下面的程序：</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -58,7 +71,8 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></blockquote></div></div><div class="outline-4">
-<h4 id="org-title-2-1-2"><span class="section-number-4">2.1.2.</span> 使用真彩色（256色）</h4><div class="outline-text-4" id="text-2-1-2"><p>在这种情况下，我们可以打印出256种颜色，比普通颜色高级多了。不过我也还是不知道Vim 和Emacs这些编辑器使用主题时是怎样打印任意颜色的。毕竟我取过色，发现我使用的主题有很多都不在256色的范围内，所以说挺令我困惑的。</p><p>废话少说，先上代码示范。</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<h4 id="org-title-2-1-2"><span class="section-number-4">2.1.2.</span> 使用真彩色（256色）</h4>
+<div class="outline-text-4" id="text-2-1-2"><p>在这种情况下，我们可以打印出256种颜色，比普通颜色高级多了。不过我也还是不知道Vim 和Emacs这些编辑器使用主题时是怎样打印任意颜色的。毕竟我取过色，发现我使用的主题有很多都不在256色的范围内，所以说挺令我困惑的。</p><p>废话少说，先上代码示范。</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
@@ -80,20 +94,26 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div><p>下面开始讲解。</p><p>要想使用256色的输出，你需要的是 <code>48;5;%dm</code> 这样一串控制符。其中的 <code>48;5;</code> 就是关键。</p><p>在这里 <code>48</code> 的意思实际上应该是告诉颜色的类型是背景颜色，如果想要设置字体的颜色，只需要将其替换成 <code>38</code> 即可。</p><p>接下来的 <code>5</code> 我就不清楚具体的作用了。我只提上一点：如果单独使用它，那么它所对应的效果实际上是 <b>字体闪烁</b> 。</p></div></div></div><div class="outline-3">
-<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 文字效果</h3><div class="outline-text-3" id="text-2-2"><p>如果你观察仔细，就应该会发现刚刚的代码里面有一些新的控制符，例如刚刚提到的 <code>\033[5m;</code> 也有 <code>\033[0m</code> 。现在，是时候列出一个效果列表了。</p>
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 文字效果</h3>
+<div class="outline-text-3" id="text-2-2"><p>如果你观察仔细，就应该会发现刚刚的代码里面有一些新的控制符，例如刚刚提到的 <code>\033[5m;</code> 也有 <code>\033[0m</code> 。现在，是时候列出一个效果列表了。</p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">控制符</th><th scope="col" class="org-left">效果</th></tr>
 </thead><tbody>
 <tr><td class="org-left">0</td><td class="org-left">清除所有文字效果</td></tr><tr><td class="org-left">1</td><td class="org-left">加粗文字</td></tr><tr><td class="org-left">2</td><td class="org-left">细化文字</td></tr><tr><td class="org-left">3</td><td class="org-left">斜体</td></tr><tr><td class="org-left">4</td><td class="org-left">下划线</td></tr><tr><td class="org-left">5</td><td class="org-left">闪烁</td></tr><tr><td class="org-left">6</td><td class="org-left">未知</td></tr><tr><td class="org-left">7</td><td class="org-left">颜色反转（字体和背景颜色互换）</td></tr><tr><td class="org-left">8</td><td class="org-left">隐藏字体（或许可以尝试做一些彩蛋？）</td></tr></table></div></div><div class="outline-3">
-<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 其他类型</h3><div class="outline-4">
-<h4 id="org-title-2-3-1"><span class="section-number-4">2.3.1.</span> 光标移动</h4><div class="outline-text-4" id="text-2-3-1">
+<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 其他类型</h3>
+<div class="outline-4">
+<h4 id="org-title-2-3-1"><span class="section-number-4">2.3.1.</span> 光标移动</h4>
+<div class="outline-text-4" id="text-2-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">空字符</th><th scope="col" class="org-left">效果</th></tr>
 </thead><tbody>
 <tr><td class="org-left">D</td><td class="org-left">左</td></tr><tr><td class="org-left">C</td><td class="org-left">右</td></tr><tr><td class="org-left">A</td><td class="org-left">上</td></tr><tr><td class="org-left">B</td><td class="org-left">下</td></tr></table><p>这种情况下，数字参数用于指定步数</p></div></div><div class="outline-4">
-<h4 id="org-title-2-3-2"><span class="section-number-4">2.3.2.</span> 光标显示</h4><div class="outline-text-4" id="text-2-3-2"><p>隐藏光标： <code>\033[?25l</code></p><p>显示光标： <code>\033[?25h</code></p></div></div><div class="outline-4">
-<h4 id="org-title-2-3-3"><span class="section-number-4">2.3.3.</span> 光标位置</h4><div class="outline-text-4" id="text-2-3-3"><p>保存： <code>\033[u</code></p><p>还原： <code>\033[l</code></p></div></div></div></div><div class="outline-2">
-<h2 id="org-title-3"><span class="section-number-2">3.</span> Linux Signal信号</h2><div class="outline-text-2" id="text-3"><p><a href="https://www.cnblogs.com/frisk/p/11602973.html">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="n">SIGHUP</span><span class="w">       </span><span class="mi">1</span><span class="w">          </span><span class="cm">/* Hangup (POSIX).  */</span><span class="w">                          </span><span class="n">终止进程</span><span class="w">     </span><span class="n">终端线路挂断</span>
+<h4 id="org-title-2-3-2"><span class="section-number-4">2.3.2.</span> 光标显示</h4>
+<div class="outline-text-4" id="text-2-3-2"><p>隐藏光标： <code>\033[?25l</code></p><p>显示光标： <code>\033[?25h</code></p></div></div><div class="outline-4">
+<h4 id="org-title-2-3-3"><span class="section-number-4">2.3.3.</span> 光标位置</h4>
+<div class="outline-text-4" id="text-2-3-3"><p>保存： <code>\033[u</code></p><p>还原： <code>\033[l</code></p></div></div></div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> Linux Signal信号</h2>
+<div class="outline-text-2" id="text-3"><p><a href="https://www.cnblogs.com/frisk/p/11602973.html">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="n">SIGHUP</span><span class="w">       </span><span class="mi">1</span><span class="w">          </span><span class="cm">/* Hangup (POSIX).  */</span><span class="w">                          </span><span class="n">终止进程</span><span class="w">     </span><span class="n">终端线路挂断</span>
 <span class="n">SIGINT</span><span class="w">       </span><span class="mi">2</span><span class="w">       </span><span class="cm">/* Interrupt (ANSI).  */</span><span class="w">                        </span><span class="n">终止进程</span><span class="w">     </span><span class="n">中断进程</span><span class="w"> </span><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span>
 <span class="n">SIGQUIT</span><span class="w">      </span><span class="mi">3</span><span class="w">          </span><span class="cm">/* Quit (POSIX).  */</span><span class="w">                            </span><span class="n">建立CORE文件终止进程</span><span class="err">，</span><span class="n">并且生成core文件</span><span class="w"> </span><span class="n">Ctrl</span><span class="o">+</span>\
 <span class="n">SIGILL</span><span class="w">       </span><span class="mi">4</span><span class="w">          </span><span class="cm">/* Illegal instruction (ANSI).  */</span><span class="w">              </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">非法指令</span>
@@ -129,8 +149,10 @@
 <span class="n">SIGSYS</span><span class="w">       </span><span class="mi">31</span><span class="w">         </span><span class="cm">/* Bad system call.  */</span>
 <span class="n">SIGUNUSED</span><span class="w">    </span><span class="mi">31</span>
 </pre></div></div></div><div class="outline-2">
-<h2 id="org-title-4"><span class="section-number-2">4.</span> RELRO等安全选项</h2><div class="outline-text-2" id="text-4"><p><a href="https://blog.csdn.net/tabactivity/article/details/126660974">来源</a> 编译时使用 <code>-z now</code> 选项</p></div></div><div class="outline-2">
-<h2 id="org-title-5"><span class="section-number-2">5.</span> 判断字符是中文还是英文(有局限)</h2><div class="outline-text-2" id="text-5"><p><a href="https://blog.csdn.net/shen_chengfeng/article/details/109161829">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<h2 id="org-title-4"><span class="section-number-2">4.</span> RELRO等安全选项</h2>
+<div class="outline-text-2" id="text-4"><p><a href="https://blog.csdn.net/tabactivity/article/details/126660974">来源</a> 编译时使用 <code>-z now</code> 选项</p></div></div><div class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 判断字符是中文还是英文(有局限)</h2>
+<div class="outline-text-2" id="text-5"><p><a href="https://blog.csdn.net/shen_chengfeng/article/details/109161829">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
 <span class="w"> </span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
@@ -153,7 +175,8 @@
 <span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div><p>（以上代码可在my-test中找到）</p></div></div><div class="outline-2">
-<h2 id="org-title-6"><span class="section-number-2">6.</span> 生成迷宫</h2><div class="outline-text-2" id="text-6"><p><a href="https://blog.csdn.net/jjwwwww/article/details/82872922">来源</a> - 该程序与下列代码有较大出入</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<h2 id="org-title-6"><span class="section-number-2">6.</span> 生成迷宫</h2>
+<div class="outline-text-2" id="text-6"><p><a href="https://blog.csdn.net/jjwwwww/article/details/82872922">来源</a> - 该程序与下列代码有较大出入</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;time.h&gt;</span>
@@ -347,7 +370,7 @@
 <div id="postamble" class="status"><p class="date">时间: <2025-04-19 六></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 抄别人blog的东西，塞一起应该方便自己查吧？</p>
-<p class="date">生成于: 2025-08-02 日 10:57:20</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
 </div>
 </body>
 </html>

@@ -420,78 +420,122 @@ sudo启用sudo组内用户的支持：
   reboot
 #+end_src
 * 第三安装阶段(配置)
-重新进入系统的操作
-** 使用图形界面(X11)
-#+begin_quote
-以下操作均在root权限下执行，请自行 =su root= 或者在命令前加上 =sudo=
-#+end_quote
+重新进入系统的操作，如果未提到请参见博客的其他文章
+** 使用图形界面
+图形界面有两大阵营，一套是过去使用的X11，虽然已经过时但基本盘还在，许多软件仍旧
+使用X图形界面。而另一套是新兴的wayland，由于后发生态仍在完善中，需要使用xwayland
+在wayland使用X的窗口作为过渡，基本可用了，部分主流的DE适配甚至默认就是wayland。
 
-安装最基本的X服务
-#+begin_src bash
-  pacman -S xorg xorg-xinit
-#+end_src
-
-输入法:
-#+begin_src bash
-  pacman -S fcitx fcitx-configtool
-  echo "GTK_IM_MODULE DEFAULT=fcitx" >> /etc/environment
-  echo "QT_IM_MODULE  DEFAULT=fcitx" >> /etc/environment
-  echo "XMODIFIERS    DEFAULT=@im=fcitx" >> /etc/environment
-  echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
-  # 注：通过 ~/.pam_environment 文件设置环境变量的方法已失效，
-  # 请使用其他方法设置环境变量，例如通过 /etc/environment 文件定义
-#+end_src
 *** 安装一个桌面环境或者窗口管理器
-- gnome
+- 桌面环境(DE)
+  桌面环境一般提供了配套的桌面环境，适合开箱即用，不用太过折腾，问题较少。且一般
+  DE的包是包含各种依赖的，不用麻烦找依赖问题
+  - gnome(wayland/x11)
+    #+begin_src bash
+      pacman -S alacarte gnome networkmanager
+      systemctl enable gdm
+      # gdm为gnome的图形界面登录系统
+    #+end_src
+  - xfce(x11)
+    #+begin_src bash
+      pacman -S xfce4
+      # 可以通过运行下一行命令启动
+      # startx /usr/bin/startxfce4
+    #+end_src
+  - kde(wayland/x11)
+    #+begin_src bash
+      pacman -S plassma-meta kde-utilities-meta kde-system-meta sddm
+      # 更完整的生态可以安装 kde-applications-meta 包
+      # pacman -S konsole dolphin kdeconnet ark
+      # 启用sddm(或者每次登陆都手动使用执行命令启动):
+      systemctl enable sddm
+    #+end_src
+    kde目前(2025.08.01)已经是默认使用wayland会话而不使用x11了
+- 窗口管理器(WM)
+  一般只提供窗口管理功能，轻量，需要自选配套的应用程序套件，会存在生态、主题设置
+  等问题。
+  - i3-wm(x11)
+    #+begin_src bash
+      pacman -S i3 i3blocks i3lock i3status
+      # i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。
+      # 我个人习惯安装kde的软件并在i3wm下使用。即
+      pacman -S i3 i3blocks i3lock i3status sddm kdeconnet konsole dolphin\
+             ark qt5ct picom polybar feh rofi
+      # qt5ct用于设置在i3-wm下kde程序的主题,配置（同上*pam_environment*已失效）：
+      echo "QT_QPA_PLATFORMTHEME DEFAULT=qt5ct" >> /etc/environment
+      # 
+      # picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁纸。rofi用于启动应用
+      # 2023-01-17更新：i3-gaps已经被并入了i3软件包了
+    #+end_src
+  - dwm(x11)\\
+    好用，虽然不是新手该碰的东西(所以也不讲)
+  - hyprland(wayland)\\
+    由于需要的配置工作较大，请参见其他博客文章
+*** 安装登录管理器
+gnome官方搭配gdm，kde可使用sddm。这边建议使用sddm。
+#+begin_src shell
+  # 下面的命令需要使用root权限
+  # 安装软件包
+  pacman -S sddm
+  # 启用开机自启动服务
+  systemctl enable sddm
+  # 立即启动sddm服务
+  systemctl start sddm
+  # 若熟悉systemctl命令的可以自行摸索
+#+end_src
+
+如果不想用登录管理器，想要用tty登录的“原始”方式，可参考使用下列方法：
+- 使用X图形界面：\\
+  安装xorg-xinit软件包:
   #+begin_src bash
-    pacman -S alacarte gnome networkmanager
-    systemctl enable gdm
-    # gdm为gnome的图形界面登录系统
+    pacman -S xorg-xinit
   #+end_src
-- xfce
-  #+begin_src bash
-    pacman -S xfce4
-    # 可以通过运行下一行命令启动
-    # startx /usr/bin/startxfce4
+  在终端执行下列命令启动图形界面：
+  #+begin_src shell
+    startx /usr/bin/startplasma-x11
   #+end_src
-- kde
-  #+begin_src bash
-    pacman -S plassma-meta kde-utilities-meta kde-system-meta sddm
-    # 更完整的生态可以安装 kde-applications-meta 包
-    # pacman -S konsole dolphin kdeconnet ark
-    # 启用sddm(或者每次登陆都手动使用执行命令启动):
-    systemctl enable sddm
+  上面的命令中startx后面跟的是DE的启动可执行文件的完整路径，上例是kde的x11，若使
+  用xfce4对应的文件为/usr/bin/startxfce4，而lxde是startlxde（ldqt是startlxqt）
+- 使用wayland的则不需要使用startx，直接执行对应的文件即可。例如启动KDE:
+  #+begin_src shell
+    startplasma-wayland
   #+end_src
-- i3-wm
-  #+begin_src bash
-    pacman -S i3 i3blocks i3lock i3status
-    # i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。
-    # 我个人习惯安装kde的软件并在i3wm下使用。即
-    pacman -S i3 i3blocks i3lock i3status sddm kdeconnet konsole dolphin\
-           ark qt5ct picom polybar feh rofi
-    # qt5ct用于设置在i3-wm下kde程序的主题,配置（同上*pam_environment*已失效）：
-    echo "QT_QPA_PLATFORMTHEME DEFAULT=qt5ct" >> /etc/environment
-    # 
-    # picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁纸。rofi用于启动应用
-    # 2023-01-17更新：i3-gaps已经被并入了i3软件包了
-  #+end_src
-- dwm\\
-  好用，虽然不是新手该碰的东西(所以也不讲)
-*** 软件
+  注意，如果使用startx后面跟上上面的文件可能会出现显示错误。
+** 日常软件
 - 浏览器\\
   archlinux官方源自带的大众浏览器有俩，一个 =firefox= ，一个 =chromium= ，如果装
-  完后悔了想要下载其他镜像就可以装这两个浏览器
-** 使用wayland
-- kde\\
-  见上面x11部分，kde目前(2025.08.01)已经是默认使用wayland会话而不使用x11了
+  完后悔了想要下载其他镜像就可以装这两个浏览器。
+- 输入法(fcitx原生中文)\\
+  root权限执行下列命令安装基本fcitx框架并启用fcitx
+  #+begin_src bash
+    pacman -S fcitx fcitx-configtool
+    echo "GTK_IM_MODULE DEFAULT=fcitx" >> /etc/environment
+    echo "QT_IM_MODULE  DEFAULT=fcitx" >> /etc/environment
+    echo "XMODIFIERS    DEFAULT=@im=fcitx" >> /etc/environment
+    echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
+    # 注：通过 ~/.pam_environment 文件设置环境变量的方法已失效，
+    # 请使用其他方法设置环境变量，例如通过 /etc/environment 文件定义
+  #+end_src
+  然后执行下列命令安装原生的中文输入
+  #+begin_src bash
+    # 基本支持
+    pacman -S fcitx5-chinese-addons
+    # 拓展中文词典(archlinuxcn源)
+    pacman -S fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki
+  #+end_src
+  优点就是开箱即用，基本不用配置，但缺点就是输入效果较差。可以使用效果更好但配置
+  更麻烦的rime，详见其他文章。
 ** 中文字体
+可以简单拿来用的字体(archlinuxcn源)：
 #+begin_src bash
-pacamn -S wqy-zenhei
+  pacman -S wqy-zenhei
 #+end_src
 其他我安装的字体：
 #+begin_src bash
-  pacamn -S ttf-liberation ttf-fira-code ttf-fira-mono ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono
+  pacman -S ttf-liberation ttf-fira-code ttf-fira-mono ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono
 #+end_src
+实际上更好的字体还得是自己上网找然后自行安装到 =$HOME/.local/share/fonts/= 目录
+或者 =/usr/share/fonts/= 目录。
 ** 使用AUR
 使用AUR助手yay:
 #+begin_src bash
@@ -507,3 +551,4 @@ pacamn -S wqy-zenhei
 #+end_src
 安装yay
 #+end_quote
+

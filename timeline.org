@@ -1,5 +1,7 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
+- /2025-08-19 22:37/ [[post/Programs/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]]\\
+  在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
 - /2025-08-12 18:07/ [[post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]]\\
   不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）
 - /2025-08-02 11:17:50/ [[post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]]\\

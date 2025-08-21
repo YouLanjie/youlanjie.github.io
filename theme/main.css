@@ -3,30 +3,66 @@
 @media all
 {
 	:root {
-		--bg: #1e2021;
-		--bgLight: #2e3031;
-		--bgQuote: #3e4041;
+		--bg: #121212;
+		--bgLight: #1e2021;
+		--bgQuote: rgba(3, 218, 198, 0.1);
+		--bgQuoteBorder: #03dac6;
 		--bgMobleTable: #4e5051;
+		--bgCode: #2e2e2e;
+		--bgPre: #1e1e1e;
+		--bgPreBorder: #bb86fc;
+		--bgTable1: #ffffff0c;
+		--bgTable2: #ffffff1f;
+		--bgTableBorder: #333;
+		--bgTableBorder2: #777;
 		--fg: #fcfcfc;
 		--fgLink: #1d99f3;
 		--fgLinked: #6d99f3;
+		--fgCode: #df7689;
 		--fgH1: #1abc9c;
 		--fgH2: #11d116;
 		--fgH3: #F67400;
 		--fgH4: #9b59b6;
 		--transTime: 0.3s;
+		--TocOpacity: 0.93;
 	}
 	[theme="light"] {
 		--bg: #dfe8ec;
 		--bgLight: #365463;
-		--bgQuote: #e7ecef;
 		--bgMobleTable: #cfe8ed;
+		--bgCode: #6eaede;
+		--bgPre: #404040;
+		--bgTable1: #0000000c;
+		--bgTable2: #0000001f;
+		--bgTableBorder: #CCC;
+		--bgTableBorder2: #777;
 		--fg: #1e2021;
+		--fgCode: #fcfcfc;
+		--TocOpacity: 0.97;
+	}
+
+	::-webkit-scrollbar {
+		display: block !important;
+		width: 7px;
+		height: 7px;
+	}
+	/* 滑动条 */
+	::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+		background-color: var(--bgQuoteBorder);
+		height: 60px;
+	}
+	/* 滑动槽 */
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+		border-radius: 10px;
+		background-color: var(--bgQuote);
 	}
 
 	html {
 		margin: 0;
-		font: .9em/1.6em "Droid Serif", "Cambria", "Georgia", "DejaVu Serif", serif;
+		font: "Droid Serif", "Cambria", "Georgia", "DejaVu Serif", serif;
 		/* background-image: url(/img/background.jpg); */
 		background-attachment: fixed;
 		background-position: right bottom;
@@ -234,15 +270,25 @@
 		word-wrap: break-word;
 	}
 
-	table { border: none; }
-	td { border: none; }
-	th { border: none; }
+	table { border-collapse: collapse; }
+	thead, tbody { border: 2px solid var(--bgTableBorder2);; }
+	th, td { border: 1px solid var(--bgTableBorder); }
+	th { background-color: var(--bgTable1) }
+	tr:nth-child(even) {
+		background-color: var(--bgTable1);
+	}
+
+	tr:hover,th:hover {
+		background-color: var(--bgTable2);;
+	}
 
 	code {
 		font-size: 100%;
-		color: var(--fgH3);
-		border: 1px solid #DEDEDE;
-		padding: 0px 0.2em;
+		background-color: var(--bgCode);
+		border-radius: 6px;
+		padding: 0.2rem 0.4rem;
+		margin: 0 0.2rem;
+		color: var(--fgCode);;
 		font: "Noto Sans Mono CJK";
 	}
 
@@ -277,23 +323,19 @@
 	p.verse { margin-left: 3%; }
 	pre {
 		font-family: "JetBrainsMono-Regular", "Noto Sans Mono CJK", monospace;
-		/* "Droid Sans Mono", "Monaco", "Consolas", "Lucida Console", monospace; */
-		/*font-family: monospace;*/
-		background-color: #2b2b2b;
-		/*background-color: #f2f2f2;*/
-		border: 4px solid gray;
-		/*border-radius: 3px;*/
+		font-size: 90%;
+		background-color: var(--bgPre);;
 		color: #EEE;
+		/*border: 4px solid gray;*/
+		border-radius: 6px;
+		border-left: 3px solid var(--bgPreBorder);;
+		line-height: 125%;
+		position: static;
 		max-height: 70vh;
 		overflow: auto;
-		/*padding: 1em;*/
 		padding: 8pt;
-		/*margin: 1.2em;*/
-		font-size: 90%;
-		position: static;
 		margin-left: 0px;
 		margin-right: 0px;
-		line-height: 125%;
 	}
 	pre.monofont {
 		font-family: "Noto Sans Mono CJK", monospace;
@@ -388,12 +430,10 @@
 
 	blockquote {
 		background-color: var(--bgQuote);
-		box-shadow: 2.8px 2.8px 2.2px #2e35380d, 6.7px 6.7px 5.3px #2e353808,
-			    12.5px 12.5px 10px #2e35380a, 22.3px 22.3px 17.9px #2e35380a,
-			    41.8px 41.8px 33.4px #2e35380d, 100px 100px 120px #2e353805,
-			    inset 2.8px 2.8px 2.2px #ffffff0d, inset 6.7px 6.7px 5.3px #ffffff08;
 		padding: 0.1em 1em 0.1em 1em;
 		margin: 10px;
+		border-left: 3px solid var(--bgQuoteBorder);
+		border-radius: 0 4px 4px 0;
 	}
 
 	.org-info-box {
@@ -484,10 +524,8 @@
 		top: 5px;
 		right: 25px;
 		padding: 5px;
-		/*color: #555;*/
 		color: var(--fg);
-		/*background-color: #f2f2f299;*/
-		background-color: var(--bgQuote);
+		background-color: var(--bg);
 	}
 	pre.src:hover:before { display: inline;}
 	/* Languages per Org manual */
@@ -1250,11 +1288,11 @@
 		max-width: 50%;
 		overflow: auto;
 		background-color: var(--bg);
-		opacity: 0.85;
+		opacity: var(--TocOpacity);
 	}
 } /* END OF @media screen */
 
-@media (max-width:660px)
+@media screen and (max-width:660px)
 {
 	body #content {
 		max-width: 100%;

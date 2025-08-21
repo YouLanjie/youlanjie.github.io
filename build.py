@@ -14,6 +14,14 @@ def update_file(file:Path) -> tuple[str,str,str,str]:
         return ("", "", "", "")
     doc = orgreader2.Document(file.read_text(encoding="utf8").splitlines(), str(file))
     doc.setting["css_in_html"] = ""
+    doc.setting["js_in_html"] = """\
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>"""
     date = re.sub(r"<(.*)>", r"\1", " ".join(doc.meta["date"]))
     date = re.sub(r"([^ ]*) [一|二|三|四|五|六|日]", r"\1", date)
     outputf = Path(re.sub(r"\.org$", ".html", str(file)))
