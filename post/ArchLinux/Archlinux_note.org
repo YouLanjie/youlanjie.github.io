@@ -113,7 +113,7 @@
 
 当然说不定还会有用于为python包生成PKGBUILD文件的软件出现，但至少目前我还没有碰到
 过。
-* steam商店无法联网问题
+* steam商店无法联网问题(实际上是DNS问题)
 如果出现：
 - steam商店无法联网
 - steam云服务正常
@@ -121,8 +121,11 @@
 那么有可能你的dns没有配置好导致只有神奇的steam客户端无法联网steam商店，此时，可
 以尝试运行
 #+begin_src shell
-  sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+  sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 #+end_src
+** 更多DNS设置
+在dhcpcd+iwd且不使用NetworkManager服务时，通过修改 =/etc/dhcpcd.conf= 文件设定
+DNS服务，使用 =sudo systemctl restart systemd-resolved.service= 重启生效
 * obs的编码问题
 - 我的HEVC编码器哪去了？\\
   如果是intel的CPU/GPU请确保安装了 =intel-media-driver= 包，并重启obs启用硬编解
