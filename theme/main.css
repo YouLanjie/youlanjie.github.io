@@ -523,6 +523,7 @@
 		position: absolute;
 		top: 5px;
 		right: 25px;
+		margin-top: 0px !important;
 		padding: 5px;
 		color: var(--fg);
 		background-color: var(--bg);
@@ -535,6 +536,7 @@
 	pre.src-authinfo::before { content: 'Authinfo'; }
 	pre.src-C:before { content: 'C'; }
 	pre.src-c:before { content: 'C'; }
+	pre.src-vimrc:before { content: 'Vim Script'; }
 	/* pre.src-C++ doesn't work in CSS */
 	pre.src-clojure:before { content: 'Clojure'; }
 	pre.src-css:before { content: 'CSS'; }
