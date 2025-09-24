@@ -36,7 +36,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <li><a href="#org-title-3-3">3.3. 配置Emacs!</a><ul><li><a href="#org-title-3-3-1">3.3.1. 子模式功能&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></a></li><li><a href="#org-title-3-3-2">3.3.2. 变量功能设置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></a></li><li><a href="#org-title-3-3-3">3.3.3. 其他设置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></a></li></ul></li></ul></li>
 <li><a href="#org-title-4">4. 使用插件！</a><ul><li><a href="#org-title-4-1">4.1. 插件的安装&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></a><ul><li><a href="#org-title-4-1-1">4.1.1. 手动安装插件</a></li><li><a href="#org-title-4-1-2">4.1.2. 通过配置文件自动安装插件</a></li></ul></li>
 <li><a href="#org-title-4-2">4.2. 插件的配置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></a></li><li><a href="#org-title-4-3">4.3. 插件推荐/我用的插件&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></a></li></ul></li>
-<li><a href="#org-title-5">5. Emacs的部分主模式</a><ul><li><a href="#org-title-5-1">5.1. Org-mode</a><ul><li><a href="#org-title-5-1-1">5.1.1. 按键绑定&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></a></li></ul></li></ul></li></ul></div></div>
+<li><a href="#org-title-5">5. Emacs的部分主模式</a><ul><li><a href="#org-title-5-1">5.1. Org-mode</a><ul><li><a href="#org-title-5-1-1">5.1.1. 文件语法</a></li><li><a href="#org-title-5-1-2">5.1.2. 按键绑定&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></a></li></ul></li></ul></li></ul></div></div>
 <div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
 <div class="outline-text-2" id="text-1"><p>学习Emacs，一定要学会坚持</p><p>我的语文水平不太好，所以说表述可能会有错误，请原谅。<br/> 并且这篇文章并非专业教程，建议与其他材料对比着看。</p><p>请在上方选择栏目继续阅读。</p></div></div>
@@ -126,7 +126,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 </li>
 <li>通过进入 <code>eshell</code> 执行语句
 </li>
-<li>使用快捷键 <code>M-:</code> 打开命令行执行elisp语句
+<li><p>使用快捷键 <code>M-:</code> 打开命令行执行elisp语句</p>
 </li></ol>
 <p>我们可以使用Emacs默认打开的buffer <code>*scratch*</code> 结合 <code>C-x C-e</code> 练习elisp语法。</p><p>尝试键入下面的内容并将光标移动到命令的下面再键入执行命令的快捷键：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nv">message</span><span class="w"> </span><span class="s">&quot;如果你成功了，那么这将会是一个良好的开端&quot;</span><span class="p">)</span>
 </pre></div><p>执行结果应当如下：</p><div class="figure">
@@ -160,7 +160,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <ol class="org-ol">
 <li>局限于函数
 </li>
-<li>局限于作用域
+<li><p>局限于作用域</p>
 </li></ol>
 </li></ol>
 <p>首先是全局变量，它的作用域应当是最广的，优先级也是最低的，它的定义方法如下：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nb">defvar</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="nv">initvalue</span>
@@ -219,7 +219,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 </li>
 <li>一个 <code>keymap</code> ，通过这种方式用户可以自定义prefix key。
 </li>
-<li>一个 <code>nil</code> ，代表注销这个key。
+<li><p>一个 <code>nil</code> ，代表注销这个key。</p>
 </li></ul>
 <p>keymap也有很多种，如 <code>current-global-map</code> 返回全局keymap， <code>current-local-map</code> 返回局部keymap。对于这两种情况，Emacs提供了更直接的函数： <code>global-set-key</code> 和 <code>local-set-key</code> 。另外还有上面提到的 <code>key-translation-map</code> ，以及许多minor-mode 下定义的keymap。</p></blockquote></div></div>
 <div id="outline-container-3-2-9" class="outline-4">
@@ -274,7 +274,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 </li>
 <li>2个分号开头的注释可以理解为正常的行注释
 </li>
-<li>1个分号开头的注释一般而言和2个分号开头的注释没有什么区别，但是会有很大可能会做出一些非常令人迷惑的缩进，所以通常使用2个分号开头作注释。（这也是Emacs的注释快捷键所默认的注释方式）
+<li><p>1个分号开头的注释一般而言和2个分号开头的注释没有什么区别，但是会有很大可能会做出一些非常令人迷惑的缩进，所以通常使用2个分号开头作注释。（这也是Emacs的注释快捷键所默认的注释方式）</p>
 </li></ol>
 <p>需要值得注意的是，上面给出的是一些相对严格的注释规范，实际上对于个人的配置来说是可选的。下面是一个简化过后的示例，建议使用它作为创建el文件的模板（若没有使用自动插入文件头功能）。</p><div class="org-src-container"><pre class="src src-elisp"><span class="c1">;;; 这边是文件名 --- 这里填这个文件的描述</span>
 
@@ -403,9 +403,104 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <div class="outline-text-2" id="text-5"><p>在
 <a href="#org-title-2-3-2">2.3.2 多级按键操作</a>中有讲到过， <code>C-c</code> 这样一个快捷键前缀常用于主模式特有的快捷键。在学习完上面的内容加上一段时间的练习之后，你应该基本学会了如何使用emacs，那现在，就让我们继续学习Emacs的部分主模式内容吧。内容可能收录不全，但对于那些常用而拓展功能又很多的模式来说应该够用了。</p></div><div id="outline-container-5-1" class="outline-3">
 <h3 id="org-title-5-1"><span class="section-number-3">5.1.</span> Org-mode</h3>
-<div class="outline-text-3" id="text-5-1"></div><div id="outline-container-5-1-1" class="outline-4">
-<h4 id="org-title-5-1-1"><span class="section-number-4">5.1.1.</span> 按键绑定&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></h4>
-<div class="outline-text-4" id="text-5-1-1"><p>未完待续</p></div></div></div></div>
+<div class="outline-text-3" id="text-5-1"><p>org文件是org-mode对应的文件，类似于markdown是一门标记性语言。结合emacs使用具有许多强大的功能，将在下文中一一介绍</p><blockquote>
+<p>Btw官网似乎有一份很好的
+<a href="https://orgmode.org/zh-CN/quickstart.html">Quickstart</a>可以看看。</p><p>这里有一份
+<a href="http:/lib/python/res/test.org">org语法测试示例文件</a>可以用于研究org-mode的语法</p></blockquote></div><div id="outline-container-5-1-1" class="outline-4">
+<h4 id="org-title-5-1-1"><span class="section-number-4">5.1.1.</span> 文件语法</h4>
+<div class="outline-text-4" id="text-5-1-1"><p>宽泛地说，org语法包括以下内容：</p><ul class="org-ul">
+<li>元数据(Metadata):<br/> 指定设置有关于文档的内容，如总标题、作者、日期、代办关键词、导出设置等
+<ul class="org-ul">
+<li>构成: <code>#+NAME:TEXT</code><br/> 语句前面可以有空格；其中 <code>NAME</code> 部分不区分大小写，不可以有空格； <code>TEXT</code> 部分随意。
+</li>
+<li>如果在多行分别指定了相同的Metadata，部分会将字符串用空格拼接起来，部分是后面的metadata覆盖前面的
+</li>
+<li><p>部分 <code>NAME</code> 对应表：<br/></p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">meta名称</th><th scope="col" class="org-left">作用</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>title</code></td><td class="org-left">设置文章标题</td></tr><tr><td class="org-left"><code>author</code></td><td class="org-left">指定文章作者</td></tr><tr><td class="org-left"><code>date</code></td><td class="org-left">设置文章日期</td></tr><tr><td class="org-left"><code>description</code></td><td class="org-left">设置文档描述</td></tr><tr><td class="org-left"><code>setupfile</code></td><td class="org-left">引用外部的metadata配置，后跟文件路径或者网络链接</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>caption</code></td><td class="org-left">为插入的图片设置别名</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>options</code></td><td class="org-left">文档设置，如设置最大章节标题层级等</td></tr><tr><td class="org-left"><code>startup</code></td><td class="org-left">启动设置，例如说fold:打开文件时默认折叠所有标题</td></tr><tr><td class="org-left"><code>tags</code></td><td class="org-left">设置编辑文件时会用到的tag，可以设置对应的快捷键快速添加</td></tr><tr><td class="org-left"><code>seq_todo</code></td><td class="org-left">设置文件用到的TODO的tag，分为待办和已完成两类</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>html_link_home</code></td><td class="org-left">导出为html时设置的"HOME"的链接</td></tr><tr><td class="org-left"><code>html_link_up</code></td><td class="org-left">导出为html时设置的"UP"的链接</td></tr><tr><td class="org-left"><code>html_head</code></td><td class="org-left">导出为html时额外添加的头文件信息</td></tr><tr><td class="org-left"><code>latex_complier</code></td><td class="org-left">设置导出pdf时使用的latex引擎</td></tr><tr><td class="org-left"><code>latex_header</code></td><td class="org-left">生成tex文件时额外添加的头文件信息</td></tr></table>
+<p>更多的meta和属性将另起一章讲述</p>
+</li></ul>
+</li>
+<li><p>章节标题(Headline):<br/> 构成: <code>* [TODO|COMMENT] TEXT</code></p>
+<ul class="org-ul">
+<li>星号前面不能有空格，星号的数量代表标题的层级，星号越多层级越深。
+</li>
+<li><code>[TODO|COMMENT]</code> 是TODO状态和注释状态的关键词，是可选项，大小写敏感。
+</li>
+<li>TODO状态默认有 <code>TODO</code> 和 <code>DONE</code> 两个关键词，可以通过 <code>seq_todo</code> 自定义关键词。
+</li>
+<li>COMMENT表示该标题和子标题被注释掉了，导出时不会将他们的内容导出。如果在关键词位置前出现了非关键词则后面的关键词无效。如果出现了两个TODO关键词则后面的关键词视作非关键词。
+</li></ul>
+<p>示例：</p>
+<div class="org-src-container"><pre class="src src-org"><span class="gh">* 一级标题</span>
+<span class="gu">** 二级标题</span>
+<span class="gh">* </span><span class="gr">TODO</span><span class="gh"> 标记为待办的标题</span>
+<span class="gh">* </span><span class="gd">DONE</span><span class="gh"> 标记为完成的标题</span>
+<span class="gh">* </span><span class="cp">COMMENT</span><span class="gh"> 标记为注释的标题</span>
+<span class="gh">* </span><span class="gr">TODO</span><span class="gh"> COMMENT 标记为待办且注释的标题</span>
+<span class="gh">* </span><span class="cp">COMMENT</span><span class="gh"> TODO 错误的待办标记但正确的注释标记的标题</span>
+<span class="gh">* </span><span class="gr">TODO</span><span class="gh"> DONE COMMENT 正确的待办标记，无效的完成标记，错误的注释标记</span>
+</pre></div>
+</li>
+<li><p>行内效果/标记(Markup)<br/> 行内效果包括
+<a href="http://">链接</a>脚注<sup><a id="fnr.8" class="footref" href="#fn.8" role="doc-backlink">8</a></sup>,与标记共同包括 <code>逐字</code> 、 <code>代码</code> 、 <i>斜体</i> 、 *粗体*、 <del>删除线</del> 、 <span class="underline">下划线</span> 。 <code>逐字</code> 效果和 <code>代码</code> 效果类似，且内部 <code>/*无法再嵌套*/</code> 其他效果，但是可以 <i><b><code>在外部将其包括</code></b></i> ，其余的标记都是可以相互嵌套的。链接显示的文字也是可以
+<a href="http://"><b><i><span class="underline"><del><code>套用标记效果的</code></del></span></i></b></a>。</p>
+<div class="org-src-container"><pre class="src src-org">行内效果包括<span class="p">[[</span><span class="na">http://</span><span class="p">][</span><span class="nt">链接</span><span class="p">]]</span>脚注<span class="nt">[fn:8]</span>,与标记共同包括 <span class="s">=逐字=</span> 、 <span class="s">~代码~</span> 、 <span class="ge">/斜体/</span> 、 <span class="gs">*粗体*</span>、
+<span class="gd">+删除线+</span> 、 <span class="ges">_下划线_</span> 。 <span class="s">=逐字=</span> 效果和 <span class="s">~代码~</span> 效果类似，且内部 <span class="s">=/*无法再嵌套*/=</span>
+其他效果，但是可以 <span class="ge">/*=在外部将其包括=*/</span> ，其余的标记都是可以相互嵌套的。链接显
+示的文字也是可以<span class="p">[[</span><span class="na">http://</span><span class="p">][</span><span class="nt">*/_+~套用标记效果的~+_/*</span><span class="p">]]</span>。
+</pre></div>
+<ul class="org-ul">
+<li>链接，格式： <code>[[url][alt]]</code> ，url为链接，alt为显示的名称。
+<ul class="org-ul">
+<li><p>图片：如果url指向的是一个图片文件且没有alt选项则会将链接解读为图片。在任意单独独立成行的图片链接前增加一行 <code>#+CAPTION:...</code> 则可以指定图片的别名</p>
+<ul class="org-ul">
+<li>例子1:
+<img src="http:/img/background.jpg" alt="background.jpg" />
+
+</li>
+<li><p>例子2:</p>
+<div class="figure"><p>
+<img src="http:/img/background.jpg" alt="background.jpg" />
+</p></div>
+</li>
+<li><p>例子3:</p>
+<div class="figure">
+<p><img src="http:/img/background.jpg" alt="http:/img/background.jpg" /></p>
+<p><span class="figure-number">Figure 5: </span>别名</p></div>
+</li></ul>
+<div class="org-src-container"><pre class="src src-org"><span class="k">- </span>例子1:<span class="p">[[</span><span class="na">http:/img/background.jpg</span><span class="p">]]</span>
+<span class="k">- </span>例子2:
+
+  <span class="p">[[</span><span class="na">http:/img/background.jpg</span><span class="p">]]</span>
+<span class="k">- </span>例子3:
+  #+CAPTION: 别名
+  <span class="p">[[</span><span class="na">http:/img/background.jpg</span><span class="p">]]</span>
+</pre></div>
+</li></ul>
+</li></ul>
+</li>
+<li>列表(List)
+</li>
+<li>区块(Block)
+</li>
+<li>注释(Comment)
+</li>
+<li>表格(Table)
+</li></ul>
+</div></div>
+<div id="outline-container-5-1-2" class="outline-4">
+<h4 id="org-title-5-1-2"><span class="section-number-4">5.1.2.</span> 按键绑定&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></h4>
+<div class="outline-text-4" id="text-5-1-2"><p>未完待续</p></div></div></div></div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -438,11 +533,15 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <sup><a id="fn.7" class="footnum" href="#fnr.7" role="doc-backlink">7</a></sup>
 <div class="footpara" role="doc-footnote">
 <p class="footpara"> 这里推荐使用清华镜像源，在下面的示例就有相关内容 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.8" class="footnum" href="#fnr.8" role="doc-backlink">8</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 示范用的脚注 </p></div>
 </div></div></div></div>
 <div id="postamble" class="status"><p class="date">时间: 2023-03-04 11:20</p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中</p>
-<p class="date">生成于: 2025-09-13 日 22:17:13</p>
+<p class="date">生成于: 2025-09-24 四 16:26:42</p>
 </div>
 </body>
 </html>
