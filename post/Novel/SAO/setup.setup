@@ -1,0 +1,5 @@
+# -*- mode: org; -*-
+#+setupfile: ../../../setup.setup
+#+html_link_up: ../index.html
+#+startup: fold
+#+options: H:4

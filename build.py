@@ -12,7 +12,17 @@ def update_file(file:Path) -> tuple[str,str,str,str]:
     """更新文件"""
     if not file.is_file():
         return ("", "", "", "")
-    doc = orgreader2.Document(file.read_text(encoding="utf8").splitlines(), str(file))
+    outputf = Path(re.sub(r"\.org$", ".html", str(file)))
+    content = ""
+    try:
+        content = file.read_text(encoding="utf8")
+    except UnicodeDecodeError:
+        try:
+            content = file.read_text(encoding="gbk")
+        except UnicodeDecodeError:
+            orgreader2.pytools.print_err(f"[ERROR] '{file}' 既不是utf8也不是gbk编码")
+            return ("", str(outputf), f"[ERROR]{file}", "既不是utf8也不是gbk编码")
+    doc = orgreader2.Document(content, str(file))
     doc.setting["css_in_html"] = ""
     doc.setting["js_in_html"] = """\
 <script>
@@ -24,7 +34,6 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>"""
     date = re.sub(r"<(.*)>", r"\1", " ".join(doc.meta["date"]))
     date = re.sub(r"([^ ]*) [一|二|三|四|五|六|日]", r"\1", date)
-    outputf = Path(re.sub(r"\.org$", ".html", str(file)))
     ret = (date, str(outputf), " ".join(doc.meta["title"]), " ".join(doc.meta["description"]))
     if outputf.is_dir():
         print(f"ERROR 输出文件名被文件夹占用 - {outputf}")
