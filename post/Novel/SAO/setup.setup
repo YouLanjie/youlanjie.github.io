@@ -3,3 +3,8 @@
 #+html_link_up: ../index.html
 #+startup: fold
 #+options: H:4
+
+#+LATEX_CLASS: book
+#+LATEX_HEADER: \usepackage{geometry}
+#+LATEX_HEADER: \geometry{a4paper, scale=0.8}
+#+LATEX_HEADER: \linespread{1.1}

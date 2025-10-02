@@ -8,74 +8,120 @@
 在大部分页面点击右上角 [[#][*/UP/*]] 按钮可以回到网页头部。
 /Table of Contents/ 是目录，鼠标悬浮或者屏幕点击展开。
 如遇代码块中英文对不齐的情况可尝试双击代码块。
-* 我的文章（按内容分类）
-- AboutBlog
-  - [[post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\
+* 我的文章（按目录结构排列）
+** AboutBlog
+  - [[./post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]]\\
     建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成
-- ArchLinux
-  - [[post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]]\\
+** ArchLinux
+  - [[./post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]]\\
     记点杂的笔记，反正大都是关于archlinux的
-  - [[post/ArchLinux/Build_Archiso.html][*自定义Archlinux安装镜像*]]\\
+  - [[./post/ArchLinux/Build_Archiso.html][*自定义Archlinux安装镜像*]]\\
     通过archiso自行构建archlinux的安装镜像
-  - [[post/ArchLinux/Install_ArchLinux.html][*ArchLinux安装笔记*]]\\
+  - [[./post/ArchLinux/Install_ArchLinux.html][*ArchLinux安装笔记*]]\\
     记录我个人安装archlinux的过程，备用
-- Games
+** Games
   - Terraria
-    - [[post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]]\\
+    - [[./post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]]\\
       不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）
-    - [[post/Games/Terraria/泰拉瑞亚战士全流程笔记.html][*泰拉瑞亚战士全流程笔记*]]\\
+    - [[./post/Games/Terraria/泰拉瑞亚战士全流程笔记.html][*泰拉瑞亚战士全流程笔记*]]\\
       看404岛主等up的教程学的知识点笔记
-    - [[post/Games/Terraria/泰拉速查笔记.html][*泰拉速查笔记*]]\\
+    - [[./post/Games/Terraria/泰拉速查笔记.html][*泰拉速查笔记*]]\\
       从战士全流程笔记里摘出的常用要点信息
   - mc
-    - [[post/Games/mc/红石学习笔记.html][*红石学习笔记*]]
+    - [[./post/Games/mc/Minecraft_mods_list.html][*Minecraft模组列表*]]
+    - [[./post/Games/mc/红石学习笔记.html][*红石学习笔记*]]
   - unciv
-    - [[post/Games/unciv/Unciv.html][*Unciv简介与黑话笔记*]]\\
+    - [[./post/Games/unciv/Unciv.html][*Unciv简介与黑话笔记*]]\\
       一款仿照文明5的开源文明模拟策略游戏
-    - [[post/Games/unciv/个人游玩经验分享.html][*Unciv个人游玩经验分享*]]\\
+    - [[./post/Games/unciv/个人游玩经验分享.html][*Unciv个人游玩经验分享*]]\\
       玩这个游戏总算是有一定的时长了，自己也摸索出来了一些比较有趣的打法分享(虽然说后面这种玩法很难复制就是了)
-- Learning
+** Learning
+  - 生物
+    - [[./post/Learning/生物/Biology_jokes.html][*一些关于生物的奇思妙想*]]\\
+      放了点奇怪的东西？🤔
   - 计算机学习
-    - [[post/Learning/计算机学习/从零开始认识计算机.html][*从零开始认识计算机(from 硬件茶谈)*]]\\
+    - [[./post/Learning/计算机学习/从零开始认识计算机.html][*从零开始认识计算机(from 硬件茶谈)*]]\\
       内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记
   - 语文
-    - [[post/Learning/语文/小学笔记汇总.html][*小学语文笔记汇总*]]\\
+    - [[./post/Learning/语文/小学笔记汇总.html][*小学语文笔记汇总*]]\\
       从小学课本上抄下来的
-    - [[post/Learning/语文/语文笔记.html][*语文笔记*]]\\
+    - [[./post/Learning/语文/语文笔记.html][*语文笔记*]]\\
       内容来自B站的视频，笔记是我自己写的
-    - [[post/Learning/语文/语文笔记2.html][*语文笔记2*]]\\
+    - [[./post/Learning/语文/语文笔记2.html][*语文笔记2*]]\\
       内容来自课本和部分教辅材料
   - 道法
-    - [[post/Learning/道法/八下早读材料.html][*八下道法背诵材料*]]\\
+    - [[./post/Learning/道法/八下早读材料.html][*八下道法背诵材料*]]\\
       完全抄某教辅的背诵材料的道德与法治东西
-- Novel
+** Novel
   - SAO
-    - [[post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
-      由于资源有点多所以做了个分页作索引(因为体积太大org都删进压缩包了)
-  - [[post/Novel/给猫留门.html][*给猫留门*]]\\
+    - Sword Art Online WEB版 Alicization篇主线
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第1章.html][*Sword Art Online WEB版 第1章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第2章.html][*Sword Art Online WEB版 第2章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第3章.html][*Sword Art Online WEB版 第3章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第4章.html][*Sword Art Online WEB版 第4章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第5章.html][*Sword Art Online WEB版 第5章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第6章.html][*Sword Art Online WEB版 第6章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第7章.html][*Sword Art Online WEB版 第7章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第8章.html][*Sword Art Online WEB版 第8章*]]
+      - [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 终章.html][*Sword Art Online WEB版 终章*]]
+    - [[./post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
+      由于资源有点多所以做了个分页作索引
+    - 刀剑神域WEB版+外传、特典
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 03 The Dead Gun.html][*Sword Art Online 03 The Dead Gun*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 刀剑神域 BD特典 短篇.html][*Sword Art Online 刀剑神域 BD特典 短篇*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 唯一的究极手段.html][*Sword Art Online 唯一的究极手段*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 圣剑篇SS（攻略失败）.html][*Sword Art Online 圣剑篇SS（攻略失败）*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 圣剑篇（攻略成功）.html][*Sword Art Online 圣剑篇（攻略成功）*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 在冬天的阳光下.html][*Sword Art Online 在冬天的阳光下*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 水之音 锤之音.html][*Sword Art Online 水之音 锤之音*]]
+      - [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 访谈录.html][*Sword Art Online 访谈录*]]
+    - 刀剑神域小说1-18卷
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/刀剑神域_文库版_全集.html][*刀剑神域 文库版 全集*]]\\
+        谨慎打开此页面，因为其体量巨大，仅html文件就有接近7Mb大小
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域01 艾恩葛朗特.html][*（萌动王朝）刀剑神域01 艾恩葛朗特*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域02 艾恩葛朗特.html][*（萌动王朝）刀剑神域02 艾恩葛朗特*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域03 妖精之舞 上.html][*（萌动王朝）刀剑神域03 妖精之舞 上*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域04 妖精之舞 下.html][*（萌动王朝）刀剑神域04 妖精之舞 上*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域05 幽灵子弹 上.html][*（萌动王朝）刀剑神域05 幽灵子弹 上*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域06 幽灵子弹 下.html][*（萌动王朝）刀剑神域06 幽灵子弹 下*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域07 圣母圣咏.html][*（萌动王朝）刀剑神域07 圣母圣咏*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域08 Early and Late.html][*（萌动王朝）刀剑神域08 Early and Late*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域09 Alicization篇（1）.html][*（萌动王朝）刀剑神域09 Alicization篇（1）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域10 Alicization篇（2）.html][*（萌动王朝）刀剑神域10 Alicization篇（2）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域11 Alicization篇（3）.html][*（萌动王朝）刀剑神域11 Alicization篇（3）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域12 Alicization篇（4）.html][*（萌动王朝）刀剑神域12 Alicization篇（4）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域13 Alicization篇（5）.html][*（萌动王朝）刀剑神域13 Alicization篇（5）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域14 Alicization篇（6）.html][*（萌动王朝）刀剑神域14 Alicization篇（6）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域15 Alicization篇（7）.html][*（萌动王朝）刀剑神域15 Alicization篇（7）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域16 Alicization篇（8）.html][*（萌动王朝）刀剑神域16 Alicization篇（8）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域17 Alicization篇（9）.html][*（萌动王朝）刀剑神域17 Alicization篇（9）*]]
+      - [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域18 Alicization篇（10）.html][*（萌动王朝）刀剑神域18 Alicization篇（10）*]]
+  - [[./post/Novel/给猫留门.html][*给猫留门*]]\\
     原作者黄咏梅，网上找的资料
-- Programing
+** Programing
   - C_language
-    - [[post/Programing/C_language/C_language_note.html][*C语言笔记*]]\\
+    - [[./post/Programing/C_language/C_language_note.html][*C语言笔记*]]\\
       自己尝试写的C语言教程（未完成）
-    - [[post/Programing/C_language/C_languare_useful_note.html][*C语言速查笔记*]]\\
+    - [[./post/Programing/C_language/C_languare_useful_note.html][*C语言速查笔记*]]\\
       抄别人blog的东西，塞一起应该方便自己查吧？
-- Programs
+** Programs
   - Emacs
-    - [[post/Programs/Emacs/Emacs_learning_note.html][*Emacs学习笔记*]]\\
+    - [[./post/Programs/Emacs/Emacs_learning_note.html][*Emacs学习笔记*]]\\
       我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
-    - [[post/Programs/Emacs/use_emacs_but_im_a_vimmer.html][*Vim党试水Emacs的心路历程与吐槽*]]\\
+    - [[./post/Programs/Emacs/use_emacs_but_im_a_vimmer.html][*Vim党试水Emacs的心路历程与吐槽*]]\\
       单纯的有感而发的口水文
+  - KDE
+    - [[./post/Programs/KDE/kde_applications.html][*部分Kde体系应用记录备忘*]]
   - Latex
-    - [[post/Programs/Latex/Latex笔记.html][*Latex学习笔记*]]\\
+    - [[./post/Programs/Latex/Latex笔记.html][*Latex学习笔记*]]\\
       Latex使用过程中查阅一些资料做的笔记，防忘
   - Vim
-    - [[post/Programs/Vim/Vim_note.html][*Vim/Neovim使用笔记*]]
-  - [[post/Programs/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]]\\
+    - [[./post/Programs/Vim/Vim_note.html][*Vim/Neovim使用笔记*]]
+  - [[./post/Programs/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]]\\
     在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
   - manim
-    - [[post/Programs/manim/Manim_learning_note.html][*Manim学习笔记*]]\\
+    - [[./post/Programs/manim/Manim_learning_note.html][*Manim学习笔记*]]\\
       啃manim教程，自己养老备用防忘
   - tools
-    - [[post/Programs/tools/tools_list.html][*部分工具软件清单*]]\\
+    - [[./post/Programs/tools/tools_list.html][*部分工具软件清单*]]\\
       记录一些Linux中有趣但不一定有用的软件，放着以后来玩玩

@@ -1,0 +1,64 @@
+#+title: Minecraft模组列表
+#+date: <2025-09-26 五 10:40>
+#+setupfile: ../../../setup.setup
+
+* 前言
+这里的mc模组多是辅助类型，使用 =fabric= 作加载器，适合生电玩家，会附上下载链接
+
+建议使用1.18.2版本和1.20.1版本，这两个版本受支持的模组数量较多
+
+* 列表
+| 名称(部分使用功能作代称，括号内为原名) | 功能介绍                       | 相关链接                 |
+|----------------------------------------+--------------------------------+--------------------------|
+| 游戏性能优化：                         |                                |                          |
+| 快速启动(lazydfu)                      | 将加载行为延后加快启动速度     | [[https://www.mcmod.cn/class/3407.html][mc百科]];[[https://modrinth.com/mod/lazydfu/versions][modrinth]]          |
+| 平滑启动(smoothboot)                   | 1.19.4后游戏自带               | [[https://www.mcmod.cn/class/3422.html][mc百科]];[[https://modrinth.com/mod/smoothboot-fabric/versions][modrinth]]          |
+|----------------------------------------+--------------------------------+--------------------------|
+| 画面显示优化：                         |                                |                          |
+| 变焦(WI-Zoom)                          | 缩放视角，类似于OptFine        | [[https://www.mcmod.cn/class/5134.html][mc百科]];[[https://modrinth.com/mod/wi-zoom/versions][modrinth]]          |
+| 床渲染优化(betterbeds)                 |                                | [[https://www.mcmod.cn/class/4356.html][mc百科]];[[https://modrinth.com/mod/better-beds/versions][modrinth]]          |
+| 动态光源(lambdynamiclights)            |                                | [[https://www.mcmod.cn/class/2954.html][mc百科]];[[https://modrinth.com/mod/lambdynamiclights/versions][modrinth]]          |
+| 光影渲染(iris)                         | 光影渲染                       | [[https://www.mcmod.cn/class/3697.html][mc百科]];[[https://modrinth.com/mod/iris/versions][modrinth]]          |
+| 钠(sodium)                             | 光影渲染依赖;类OptFine渲染优化 | [[https://www.mcmod.cn/class/2785.html][mc百科]];[[https://modrinth.com/mod/sodium/versions][modrinth]]          |
+| 光照优化(starlight)                    | 1.20新的游戏光照引擎自带优化   | [[https://www.mcmod.cn/class/3303.html][mc百科]];[[https://modrinth.com/mod/starlight/versions][modrinth]]          |
+|----------------------------------------+--------------------------------+--------------------------|
+| 生电工具：                             |                                |                          |
+| 模组菜单(modmenu)                      |                                | [[https://www.mcmod.cn/class/1675.html][mc百科]];[[https://modrinth.com/mod/modmenu/versions][modrinth]]          |
+| LIB(malilib)                           | 投影，minihud,tweakeroo前置    | [[https://www.mcmod.cn/class/2298.html][mc百科]];[[https://modrinth.com/mod/malilib/versions][modrinth]];[[https://masa.dy.fi/tmp/minecraft/mods/client_mods/?mcver=All&mod=malilib][masa官方]] |
+| 工具集(tweakeroo)                      | 灵魂出窍                       | [[https://www.mcmod.cn/class/2230.html][mc百科]];[[https://modrinth.com/mod/tweakeroo/versions][modrinth]];[[https://masa.dy.fi/tmp/minecraft/mods/client_mods/?mcver=All&mod=tweakeroo][masa官方]] |
+| 迷你HUD(minihud)                       | 信息显示，光照等级，结构，长度 | [[https://www.mcmod.cn/class/2311.html][mc百科]];[[https://modrinth.com/mod/minihud/versions][modrinth]];[[https://masa.dy.fi/tmp/minecraft/mods/client_mods/?mcver=All&mod=minihud][masa官方]] |
+| 投影(litematica)                       | 抄、分享工程利器               | [[https://www.mcmod.cn/class/2261.html][mc百科]];[[https://modrinth.com/mod/litematica/versions][modrinth]];[[https://masa.dy.fi/tmp/minecraft/mods/client_mods/?mcver=All&mod=litematica][masa官方]] |
+| 地毯(fabric-carpet)                    | 假人、机器产量计数、村民信息   | [[https://www.mcmod.cn/class/2361.html][mc百科]];[[https://modrinth.com/mod/carpet/versions][modrinth]]          |
+| 地毯GCA(gugle-carpet-addition)         | 支持假人操作(真 假人科技)      | [[https://www.mcmod.cn/class/7305.html][mc百科]];[[https://modrinth.com/mod/gca][modrinth]]          |
+| 小地图(Xaeros_Minimap)                 | 更新很频繁的小地图             | [[https://www.mcmod.cn/class/1701.html][mc百科]];[[https://modrinth.com/mod/xaeros-minimap/versions][modrinth]];[[https://chocolateminecraft.com/minimapdownload.php][官方]]     |
+| 世界地图(XaerosWorldMap)               |                                | [[https://www.mcmod.cn/class/1701.html][mc百科]];[[https://modrinth.com/mod/xaeros-world-map/versions][modrinth]];[[https://chocolateminecraft.com/worldmapdownload.php][官方]]     |
+| 饱食度显示(appleskin)                  | 显示更详细的饱食度信息         | [[https://www.mcmod.cn/class/744.html][mc百科]];[[https://modrinth.com/mod/appleskin/versions][modrinth]]          |
+| LIB(badpackets)                        | wthit前置                      | [[https://www.mcmod.cn/class/6275.html][mc百科]];[[https://modrinth.com/mod/badpackets/versions][modrinth]]          |
+| 头顶物体显示(wthit)                    |                                | [[https://www.mcmod.cn/class/3471.html][mc百科]];[[https://modrinth.com/mod/wthit/versions][modrinth]]          |
+| LIB(architectury)                      | REI前置                        | [[https://www.mcmod.cn/class/3434.html][mc百科]];[[https://modrinth.com/mod/architectury-api/versions][modrinth]]          |
+| 物品管理REI(RoughlyEnoughItems)        |                                | [[https://www.mcmod.cn/class/1674.html][mc百科]];[[https://modrinth.com/mod/rei/versions][modrinth]]          |
+| LIB(fabric-language-kotlin)            | IPN前置                        | [[https://www.mcmod.cn/class/2126.html][mc百科]];[[https://modrinth.com/mod/fabric-language-kotlin/versions][modrinth]]          |
+| LIB(libIPN)                            | IPN前置                        | [[https://www.mcmod.cn/class/7713.html][mc百科]];[[https://modrinth.com/mod/libipn/versions][modrinth]]          |
+| 一键背包整理IPN(InventoryProfilesNext) |                                | [[https://www.mcmod.cn/class/4104.html][mc百科]];[[https://modrinth.com/mod/inventory-profiles-next/versions][modrinth]]          |
+| 自定义局域网联机(lanserverproperties)  |                                | [[https://www.mcmod.cn/class/2754.html][mc百科]];[[https://modrinth.com/mod/lan-server-properties/versions][modrinth]]          |
+| 自动钓鱼(Autofish)                     | 只有1.19.3及以下版本           | [[https://www.mcmod.cn/class/262.html][mc百科]];[[https://www.curseforge.com/minecraft/mc-mods/autofish][curseforge]]        |
+|----------------------------------------+--------------------------------+--------------------------|
+| 体验优化类(不一定有用)：               |                                |                          |
+| 更好的F3(BetterF3)                     |                                | [[https://www.mcmod.cn/class/3525.html][mc百科]];[[https://modrinth.com/mod/betterf3/versions][modrinth]]          |
+| 高亮实体(entity-outliner)              |                                | [[https://www.mcmod.cn/class/7339.html][mc百科]];[[https://www.curseforge.com/minecraft/mc-mods/entity-outliner][curseforge]]        |
+| 脚步声(PresenceFootsteps)              |                                | [[https://www.mcmod.cn/class/4753.html][mc百科]];[[https://modrinth.com/mod/presence-footsteps/versions][modrinth]]          |
+| 动态声音滤波器(DynamicSoundFilters)    |                                | [[https://www.mcmod.cn/class/3541.html][mc百科]];[[https://modrinth.com/mod/dynamic-sound-filters/versions][modrinth]]          |
+|----------------------------------------+--------------------------------+--------------------------|
+| 其他模组(部分可能破坏游戏玩法)：       |                                |                          |
+| 连锁挖矿(diggusmaximus)                | 仅支持到1.20.1                 | [[https://www.mcmod.cn/class/3080.html][mc百科]];[[https://modrinth.com/mod/diggus-maximus/versions][modrinth]]          |
+| 墓碑(youre-in-grave-danger)            |                                | [[https://www.mcmod.cn/class/7864.html][mc百科]];[[https://modrinth.com/mod/yigd/versions][modrinth]]          |
+| 回放mod(replaymod)                     | up主爱用                       | [[https://www.mcmod.cn/class/1203.html][mc百科]];[[https://modrinth.com/mod/replaymod/versions][modrinth]]          |
+| 鞘翅滚转(do-a-barrel-roll)             | 除非趣味，不建议使用，晕       | [[https://www.mcmod.cn/class/7724.html][mc百科]];[[https://modrinth.com/mod/do-a-barrel-roll/versions][modrinth]]          |
+| 鞘翅HUD(flighthud)                     | 仅支持到1.19                   | [[https://www.mcmod.cn/class/7547.html][mc百科]];[[https://www.curseforge.com/minecraft/mc-mods/flighthud][curseforge]]        |
+| LIB(cloth-config)                      | 一大堆模组的依赖               | [[https://www.mcmod.cn/class/2346.html][mc百科]];[[https://modrinth.com/mod/cloth-config/versions][modrinth]]          |
+
+* 资源包列表
+| 名称/功能描述              | 链接     |
+|----------------------------+----------|
+| masa模组ui界面汉化         | [[https://modrinth.com/resourcepack/masa-mod-translationpack][modrinth]] |
+| xaeros小地图和世界地图汉化 | [[https://modrinth.com/resourcepack/xaero-map-chinese][modrinth]] |
