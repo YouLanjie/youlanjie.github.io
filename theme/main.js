@@ -60,6 +60,26 @@
 		})
 	}
 })();
+// 为footnote增加双击footnote侧栏展开功能
+(function() {
+	let fn = document.getElementById("footnotes")
+	if ( ! fn ) {
+		return;
+	}
+	fn.addEventListener("dblclick", function(event) {
+		sty = window.getComputedStyle(event.currentTarget)
+		if (sty.position != "fixed") {
+			return
+		}
+		if (fn.style.maxWidth == "") {
+			fn.style.maxWidth = "98%"
+			fn.style.top = "2%"
+			fn.style.zIndex = 1
+		} else {
+			fn.style = ""
+		}
+	})
+})();
 // 为图片增设fancybox效果
 (function() {
 	var script = document.createElement("script")
