@@ -52,6 +52,16 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
         outputf.write_text(doc.to_html(), encoding="utf8")
     return ret
 
+BLACKLIST = {"post/Novel/SAO/"}
+WHITELIST = {"post/Novel/SAO/index.html"}
+
+def check_list(s:str, li:list|set) -> bool:
+    """检查文件s是否在列表内"""
+    for i in li:
+        if s.startswith(i):
+            return True
+    return False
+
 def fordir(d:Path, node:list, timeline:list):
     """遍历文件夹"""
     if not d.is_dir():
@@ -67,8 +77,9 @@ def fordir(d:Path, node:list, timeline:list):
         if file.suffix != ".org":
             continue
         ret = update_file(file)
-        node.append(ret)
-        timeline.append(ret)
+        if ret[1] and (not check_list(ret[1], BLACKLIST) or check_list(ret[1], WHITELIST)):
+            node.append(ret)
+            timeline.append(ret)
 
 def list_to_str(tree:list, hide_time:bool=False) -> str:
     """将文件列表转为org字符串"""

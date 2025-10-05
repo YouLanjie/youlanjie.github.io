@@ -11,5 +11,13 @@
 - ghostwriter: Markdown编辑器，没用过
 - gwenview: 图片查看器
 - kalzium: 元素周期表
+- kcharselect: 字符选择器(也许有用)
+- kdeconnect: 多平台联动，但一般要在kde体系内好使
+- kendlive: 剪辑软件
+- kig: 交互几何软件？
+- kjournald: 臭看日志的
+- koko: 臭看图的
+- ksystemlog: 臭看日志的
+- okular: 文档查看
 
 - kate: 编辑器一个

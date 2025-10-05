@@ -2,7 +2,7 @@
 #+date: <2025-08-19 二 22:37>
 #+description: 在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
 
-#+setupfile: ../../setup.setup
+#+setupfile: ../../../setup.setup
 * 简介
 fcitx本身有中文输入，但是有点烂。因此，尝试使用fcitx-rime方案改进输入体验。
 

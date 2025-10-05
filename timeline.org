@@ -1,36 +1,13 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
 * 2025
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX01 黑色剑士.html][*Sword Art Online EX01 黑色剑士*]] /[2025-10-03 17:47]/
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX02 Four Days.html][*Sword Art Online EX02 Four Days*]] /[2025-10-03 17:47]/
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX03 心之温度.html][*Sword Art Online EX03 心之温度*]] /[2025-10-03 17:47]/
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX04 绝剑.html][*Sword Art Online EX04 绝剑*]] /[2025-10-03 17:47]/
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX05 圈内事件.html][*Sword Art Online EX05 圈内事件*]] /[2025-10-03 17:47]/
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX06 红鼻子麋鹿.html][*Sword Art Online EX06 红鼻子麋鹿*]] /[2025-10-03 17:47]/
-- [[./post/Novel/SAO/Sword Art Online WEB EX版外传/Sword Art Online EX07 月之摇篮.html][*Sword Art Online EX07 月之摇篮*]] /[2025-10-03 17:47]/\\
-  讲在UW极限加速时初期UW内部发生的事情(Recomended)
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 03 The Dead Gun.html][*Sword Art Online 03 The Dead Gun*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 刀剑神域 BD特典 短篇.html][*Sword Art Online 刀剑神域 BD特典 短篇*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 唯一的究极手段.html][*Sword Art Online 唯一的究极手段*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 圣剑篇SS（攻略失败）.html][*Sword Art Online 圣剑篇SS（攻略失败）*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 圣剑篇（攻略成功）.html][*Sword Art Online 圣剑篇（攻略成功）*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 在冬天的阳光下.html][*Sword Art Online 在冬天的阳光下*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 水之音 锤之音.html][*Sword Art Online 水之音 锤之音*]] /[2025-10-02 01:27]/
-- [[./post/Novel/SAO/刀剑神域WEB版+外传、特典/Sword Art Online 访谈录.html][*Sword Art Online 访谈录*]] /[2025-10-02 01:27]/
+- [[./post/Programs/tools/try_non-de_except_errors.html][*对于非DE下的不适应性问题*]] /[2025-10-05 14:05]/\\
+  在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题
 - [[./post/Learning/生物/Biology_jokes.html][*一些关于生物的奇思妙想*]] /[2025-10-01 23:41]/\\
   放了点奇怪的东西？🤔
-- [[./post/Programs/KDE/kde_applications.html][*部分Kde体系应用记录备忘*]] /[2025-10-01 23:33]/
+- [[./post/Programs/tools/kde_applications.html][*部分Kde体系应用记录备忘*]] /[2025-10-01 23:33]/
 - [[./post/Games/mc/Minecraft_mods_list.html][*Minecraft模组列表*]] /[2025-09-26 10:40]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第8章.html][*Sword Art Online WEB版 第8章*]] /[2025-09-25 18:44]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 终章.html][*Sword Art Online WEB版 终章*]] /[2025-09-25 18:44]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第1章.html][*Sword Art Online WEB版 第1章*]] /[2025-09-25 18:18]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第2章.html][*Sword Art Online WEB版 第2章*]] /[2025-09-25 18:18]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第3章.html][*Sword Art Online WEB版 第3章*]] /[2025-09-25 18:18]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第4章.html][*Sword Art Online WEB版 第4章*]] /[2025-09-25 18:18]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第5章.html][*Sword Art Online WEB版 第5章*]] /[2025-09-25 18:18]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第6章.html][*Sword Art Online WEB版 第6章*]] /[2025-09-25 18:18]/
-- [[./post/Novel/SAO/Sword Art Online WEB版 Alicization篇主线/Sword Art Online WEB版 第7章.html][*Sword Art Online WEB版 第7章*]] /[2025-09-25 18:18]/
-- [[./post/Programs/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]] /[2025-08-19 22:37]/\\
+- [[./post/Programs/tools/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]] /[2025-08-19 22:37]/\\
   在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
 - [[./post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]] /[2025-08-12 18:07]/\\
   不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）
@@ -48,29 +25,11 @@
 - [[./post/Games/mc/红石学习笔记.html][*红石学习笔记*]] /[2024-11-23 Sat 18:58]/
 - [[./post/Games/Terraria/泰拉瑞亚战士全流程笔记.html][*泰拉瑞亚战士全流程笔记*]] /[2024-11-10 Sun 09:14]/\\
   看404岛主等up的教程学的知识点笔记
-- [[./post/Programs/Latex/Latex笔记.html][*Latex学习笔记*]] /[2024-10-01 02:04]/\\
+- [[./post/Programs/tools/Latex笔记.html][*Latex学习笔记*]] /[2024-10-01 02:04]/\\
   Latex使用过程中查阅一些资料做的笔记，防忘
 * 2023
 - [[./post/Programs/manim/Manim_learning_note.html][*Manim学习笔记*]] /[2023-08-23 00:47]/\\
   啃manim教程，自己养老备用防忘
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域03 妖精之舞 上.html][*（萌动王朝）刀剑神域03 妖精之舞 上*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域04 妖精之舞 下.html][*（萌动王朝）刀剑神域04 妖精之舞 上*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域05 幽灵子弹 上.html][*（萌动王朝）刀剑神域05 幽灵子弹 上*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域06 幽灵子弹 下.html][*（萌动王朝）刀剑神域06 幽灵子弹 下*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域07 圣母圣咏.html][*（萌动王朝）刀剑神域07 圣母圣咏*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域08 Early and Late.html][*（萌动王朝）刀剑神域08 Early and Late*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域09 Alicization篇（1）.html][*（萌动王朝）刀剑神域09 Alicization篇（1）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域10 Alicization篇（2）.html][*（萌动王朝）刀剑神域10 Alicization篇（2）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域11 Alicization篇（3）.html][*（萌动王朝）刀剑神域11 Alicization篇（3）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域12 Alicization篇（4）.html][*（萌动王朝）刀剑神域12 Alicization篇（4）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域13 Alicization篇（5）.html][*（萌动王朝）刀剑神域13 Alicization篇（5）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域14 Alicization篇（6）.html][*（萌动王朝）刀剑神域14 Alicization篇（6）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域15 Alicization篇（7）.html][*（萌动王朝）刀剑神域15 Alicization篇（7）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域16 Alicization篇（8）.html][*（萌动王朝）刀剑神域16 Alicization篇（8）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域17 Alicization篇（9）.html][*（萌动王朝）刀剑神域17 Alicization篇（9）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域18 Alicization篇（10）.html][*（萌动王朝）刀剑神域18 Alicization篇（10）*]] /[2023-08-15 11:33]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域02 艾恩葛朗特.html][*（萌动王朝）刀剑神域02 艾恩葛朗特*]] /[2023-08-15 11:32]/
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/（萌动王朝）刀剑神域01 艾恩葛朗特.html][*（萌动王朝）刀剑神域01 艾恩葛朗特*]] /[2023-08-15 11:13]/
 - [[./post/Learning/语文/语文笔记2.html][*语文笔记2*]] /[2023-07-29 22:20]/\\
   内容来自课本和部分教辅材料
 - [[./post/Learning/语文/小学笔记汇总.html][*小学语文笔记汇总*]] /[2023-07-25 17:55]/\\
@@ -89,8 +48,6 @@
   完全抄某教辅的背诵材料的道德与法治东西
 - [[./post/Programs/Emacs/Emacs_learning_note.html][*Emacs学习笔记*]] /[2023-03-04 11:20]/\\
   我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
-- [[./post/Novel/SAO/刀剑神域小说1-18卷/刀剑神域_文库版_全集.html][*刀剑神域 文库版 全集*]] /[2023-02-18 20:08]/\\
-  谨慎打开此页面，因为其体量巨大，仅html文件就有接近7Mb大小
 - [[./post/Programs/Emacs/use_emacs_but_im_a_vimmer.html][*Vim党试水Emacs的心路历程与吐槽*]] /[2023-01-16 12:30]/\\
   单纯的有感而发的口水文
 - [[./post/Learning/语文/语文笔记.html][*语文笔记*]] /[2023-01-08 08:17]/\\
