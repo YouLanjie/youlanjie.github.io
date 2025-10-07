@@ -1,4 +1,4 @@
-#+title: 无职
+#+title: 无职转生小说资源索引
 #+description: web版,1-24卷,内容来自b网d络p
 #+date: <2025-10-07 二 19:40>
 #+setupfile: ./setup.setup
