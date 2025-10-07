@@ -82,11 +82,10 @@ $<span class="w"> </span>ldd<span class="w"> </span>/usr/bin/adwaita-1-demo<span
 <li><code>portal</code> 翻译作“门户”，应该是指一堆 <code>xdg-desktop-portal*</code> 的东西，wayland 下的配置共享机制。如果portal不可用则需要使用下面说的dconf机制。详见
 <a href='https://wiki.archlinux.org/title/XDG_Desktop_Portal'>wiki</a>。
 </li>
-<li><p><code>dconf</code> Gnome使用的配置存储系统，配置存储在二进制文件中而非文本文件。wayland 下可用的配置共享机制。下面有个例子。</p>
+<li><p><code>dconf</code> Gnome使用的配置存储系统，配置存储在二进制文件中而非文本文件。portal 不可用时(如dwm没有portal,或者使用hyprland但没装portal包)使用的后备配置，需要设定环境变量 <code>ADW_DISABLE_PORTAL=1</code> 以启用。下面有个例子。</p>
 <div class="org-src-container"><pre class="src src-shell"><span class="c1"># 读取gtk4设置的主题：</span>
 dconf<span class="w"> </span><span class="nb">read</span><span class="w"> </span>/org/gnome/desktop/interface/gtk-theme
 </pre></div>
-<p>根据维基，如果需要使用dconf，需要设定环境变量 <code>ADW_DISABLE_PORTAL=1</code></p>
 </li>
 <li><p><code>gsettings</code> 基于dconf的更高级工具(来自glib2包)</p>
 <div class="org-src-container"><pre class="src src-shell"><span class="c1"># 列出所有的“路径”</span>
@@ -370,7 +369,7 @@ kbuildsycoca6<span class="w"> </span>running...
 <div id="postamble" class="status"><p class="date">时间: <2025-10-05 日 14:05></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题</p>
-<p class="date">生成于: 2025-10-05 日 17:53:32</p>
+<p class="date">生成于: 2025-10-07 二 01:50:08</p>
 </div>
 </body>
 </html>

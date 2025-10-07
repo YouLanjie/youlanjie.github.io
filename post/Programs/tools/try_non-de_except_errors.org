@@ -51,13 +51,13 @@
     DE启动时启动（因为其提供的systemd service是static即无法使用enable/disable）。
   - =portal= 翻译作“门户”，应该是指一堆 =xdg-desktop-portal*= 的东西，wayland
     下的配置共享机制。如果portal不可用则需要使用下面说的dconf机制。详见[[https://wiki.archlinux.org/title/XDG_Desktop_Portal][wiki]]。
-  - =dconf= Gnome使用的配置存储系统，配置存储在二进制文件中而非文本文件。wayland
-    下可用的配置共享机制。下面有个例子。
+  - =dconf= Gnome使用的配置存储系统，配置存储在二进制文件中而非文本文件。portal
+    不可用时(如dwm没有portal,或者使用hyprland但没装portal包)使用的后备配置，需要
+    设定环境变量 =ADW_DISABLE_PORTAL=1= 以启用。下面有个例子。
     #+begin_src shell
       # 读取gtk4设置的主题：
       dconf read /org/gnome/desktop/interface/gtk-theme
     #+end_src
-    根据维基，如果需要使用dconf，需要设定环境变量 =ADW_DISABLE_PORTAL=1=
   - =gsettings= 基于dconf的更高级工具(来自glib2包)
     #+begin_src shell
       # 列出所有的“路径”

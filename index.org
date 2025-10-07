@@ -56,6 +56,9 @@
   - SAO
     - [[./post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
       由于资源有点多所以做了个分页作索引
+  - 无职
+    - [[./post/Novel/无职/index.html][*无职转生小说资源索引*]]\\
+      web版,1-24卷,内容来自b网d络p
   - [[./post/Novel/给猫留门.html][*给猫留门*]]\\
     原作者黄咏梅，网上找的资料
 ** Programing

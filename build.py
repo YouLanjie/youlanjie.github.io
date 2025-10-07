@@ -52,8 +52,10 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
         outputf.write_text(doc.to_html(), encoding="utf8")
     return ret
 
-BLACKLIST = {"post/Novel/SAO/"}
-WHITELIST = {"post/Novel/SAO/index.html"}
+BLACKLIST = {"post/Novel/SAO/",
+             "post/Novel/无职/"}
+WHITELIST = {"post/Novel/SAO/index.html",
+             "post/Novel/无职/index.html"}
 
 def check_list(s:str, li:list|set) -> bool:
     """检查文件s是否在列表内"""

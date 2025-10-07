@@ -1,6 +1,8 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
 * 2025
+- [[./post/Novel/无职/index.html][*无职转生小说资源索引*]] /[2025-10-07 19:40]/\\
+  web版,1-24卷,内容来自b网d络p
 - [[./post/Programs/tools/try_non-de_except_errors.html][*对于非DE下的不适应性问题*]] /[2025-10-05 14:05]/\\
   在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题
 - [[./post/Learning/生物/Biology_jokes.html][*一些关于生物的奇思妙想*]] /[2025-10-01 23:41]/\\
