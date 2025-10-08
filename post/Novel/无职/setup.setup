@@ -4,7 +4,7 @@
 #+AUTHOR: (译者:见文件)
 #+AUTHOR: (我只是用org格式化了txt文件)
 #+HTML_LINK_HOME: /
-#+html_link_up: ../index.html
+#+html_link_up: ./index.html
 #+LANGUAGE: zh
 
 #+OPTIONS: html-style:t
