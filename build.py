@@ -7,6 +7,7 @@ from pathlib import Path
 import orgreader2
 
 ARGS = None
+project_dir = Path(orgreader2.pytools.sys.argv[0]).parent
 
 def update_file(file:Path) -> tuple[str,str,str,str]:
     """更新文件"""
@@ -29,8 +30,10 @@ def update_file(file:Path) -> tuple[str,str,str,str]:
             return ("", str(outputf), f"[ERROR]{file}", "既不是utf8也不是gbk编码")
 
     content = content.splitlines()
-    if not is_newer and len(content) > 1000:
-        content = content[:1000]    # 偷偷摸摸限制长度提高读取速度(实际上是在偷懒)
+    if not is_newer and len(content) > ((ARGS and ARGS.limit) or 100):
+        content = content[:((ARGS and ARGS.limit) or 100)]    # 偷偷摸摸限制长度提高读取速度(实际上是在偷懒)
+    if ARGS and ARGS.verbose:
+        print(f"[INFO] 正在处理文件 '{file}'")
     doc = orgreader2.Document(content, str(file))
     doc.setting["css_in_html"] = ""
     doc.setting["js_in_html"] = """\
@@ -43,13 +46,18 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>"""
     date = re.sub(r"<(.*)>", r"\1", " ".join(doc.meta["date"]))
     date = re.sub(r"([^ ]*) [一|二|三|四|五|六|日]", r"\1", date)
-    ret = (date, str(outputf), " ".join(doc.meta["title"]), " ".join(doc.meta["description"]))
+    link = str(orgreader2.pytools.calculate_relative(outputf, project_dir))
+    ret = (date, link, " ".join(doc.meta["title"]), " ".join(doc.meta["description"]))
     if outputf.is_dir():
         print(f"ERROR 输出文件名被文件夹占用 - {outputf}")
         return ret
-    if is_newer and ARGS and not ARGS.no_update:
-        print(f"INFO 输出文件 - {outputf}")
-        outputf.write_text(doc.to_html(), encoding="utf8")
+    if is_newer and ARGS:
+        if not ARGS.no_update:
+            print(f"INFO 输出文件 - {outputf}")
+            outputf.write_text(doc.to_html(), encoding="utf8")
+        elif ARGS.touch:
+            print(f"INFO 更新文件时间 - {outputf}")
+            outputf.touch()
     return ret
 
 BLACKLIST = {"post/Novel/SAO/",
@@ -114,8 +122,9 @@ def build_homepage(tree:list, timeline:list):
 """
     print("INFO 构建首页 index.org")
     content_index = index_template+re.sub(r"^\- ", "** ", list_to_str(tree,True), flags=re.M)
-    Path("index.org").write_text(content_index, encoding="utf8")
-    update_file(Path("index.org"))
+    outf_index = project_dir/"index.org"
+    outf_index.write_text(content_index, encoding="utf8")
+    update_file(outf_index)
 
     timeline_template = "#+TITLE: TimeLine\n#+setupfile: setup.setup\n"
     print("INFO 构建时间轴 timeline.org")
@@ -131,22 +140,27 @@ def build_homepage(tree:list, timeline:list):
             continue
         content_timeline.insert(ind, f"* {i}")
     content_timeline = timeline_template + "\n".join(content_timeline)
-    Path("timeline.org").write_text(content_timeline, encoding="utf8")
-    update_file(Path("timeline.org"))
+    outf_timeline = project_dir/"timeline.org"
+    outf_timeline.write_text(content_timeline, encoding="utf8")
+    update_file(outf_timeline)
 
-    update_file(Path("about.org"))
-    update_file(Path("404.org"))
+    update_file(outf_timeline/"about.org")
+    update_file(outf_timeline/"404.org")
 
 def main():
     """主函数"""
+    if not (project_dir/".git").exists():
+        print("[ERROR] 本构建程序似乎没有被放置到正确的位置")
+        return
     if ARGS and ARGS.add:
-        p1 = Path(orgreader2.pytools.sys.argv[0]).parent/"setup.setup"
+        p1 = project_dir/"setup.setup"
         p2 = Path(ARGS.add)
         if p2.exists():
             print(f"文件或目录'{p2}'已存在")
             return
         setupf = orgreader2.pytools.calculate_relative(p1, p2)
         t = "#+TITLE: \n"
+        t = "#+DESCRIPTION: \n"
         t += f"#+DATE: <{orgreader2._get_strtime(s=False)}>\n"
         t += f"#+SETUPFILE: {setupf}\n\n请输入文本\n"
         p2.write_text(t, encoding="utf8")
@@ -155,7 +169,7 @@ def main():
 
     timeline = []
     tree = []
-    for i in sorted(Path("post").iterdir()):
+    for i in sorted((project_dir/"post").iterdir()):
         fordir(i, tree, timeline)
     timeline = sorted(timeline, key=lambda x:x[0], reverse=True)
 
@@ -168,5 +182,8 @@ if __name__ == "__main__":
     parser.add_argument("-a", "--add",type=str, help="模板建立一个指定的org文件")
     parser.add_argument("-I", "--ignore-time", action="store_true", help="忽略时间")
     parser.add_argument("-N", "--no-build-home", action="store_true", help="不构建主页")
+    parser.add_argument("-t", "--touch", action="store_true", help="仅更新文件修改时间")
+    parser.add_argument("-l", "--limit", type=int, default=300, help="对大文件的简略读取行数")
+    parser.add_argument("-v", "--verbose", action="store_true", help="显示更详细的输出")
     ARGS = parser.parse_args()
     main()
