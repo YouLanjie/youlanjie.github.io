@@ -30,10 +30,11 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul><li><a href="#org-title-1">1. 基本语法</a></li><li><a href="#org-title-2">2. 基本结构</a><ul><li><a href="#org-title-2-1">2.1. 文章类型</a></li><li><a href="#org-title-2-2">2.2. 宏包</a></li></ul></li>
-<li><a href="#org-title-3">3. 正文样式</a><ul><li><a href="#org-title-3-1">3.1. begin&end</a></li><li><a href="#org-title-3-2">3.2. 表格</a></li><li><a href="#org-title-3-3">3.3. 字体样式</a></li><li><a href="#org-title-3-4">3.4. 其他东西</a></li></ul></li></ul></div></div>
-<div class="outline-2">
+<li><a href="#org-title-3">3. 正文样式</a><ul><li><a href="#org-title-3-1">3.1. begin&end</a></li><li><a href="#org-title-3-2">3.2. 表格</a></li><li><a href="#org-title-3-3">3.3. 字体样式</a></li><li><a href="#org-title-3-4">3.4. 其他东西</a><ul><li><a href="#org-title-3-4-1">3.4.1. 还是缩印大神</a></li></ul></li></ul></li></ul></div></div>
+<div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 基本语法</h2>
-<div class="outline-text-2" id="text-1"><p>Latex文件大致可分为文章内容（渲染的内容）和排版控制命令（起特殊作用）两部分，文章内容直接写就行，而命令的基本格式为 <code>\XXX[可选参数]{位置参数}</code> ，其中 <code>XXX</code> 为命令名，中括号内为可选参数（有时可直接忽略），大括号内为位置参数。如果在命令外部套一个大括号这可以限制其作用范围。</p><p>命令有文档类型命令、宏包命令、用户命令等</p></div></div><div class="outline-2">
+<div class="outline-text-2" id="text-1"><p>Latex文件大致可分为文章内容（渲染的内容）和排版控制命令（起特殊作用）两部分，文章内容直接写就行，而命令的基本格式为 <code>\XXX[可选参数]{位置参数}</code> ，其中 <code>XXX</code> 为命令名，中括号内为可选参数（有时可直接忽略），大括号内为位置参数。如果在命令外部套一个大括号这可以限制其作用范围。</p><p>命令有文档类型命令、宏包命令、用户命令等</p></div></div>
+<div id="outline-container-2" class="outline-2">
 <h2 id="org-title-2"><span class="section-number-2">2.</span> 基本结构</h2>
 <div class="outline-text-2" id="text-2"><p>Latex文件基本结构如下：</p><div class="org-src-container"><pre class="src src-latex"><span class="c">% 文章类型</span>
 <span class="k">\documentclass</span><span class="na">[11pt]</span><span class="nb">{</span>article<span class="nb">}</span>
@@ -72,14 +73,27 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 
 <span class="c">% 正文结束</span>
 <span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
-</pre></div></div><div class="outline-3">
+</pre></div></div><div id="outline-container-2-1" class="outline-3">
 <h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 文章类型</h3>
-<div class="outline-text-3" id="text-2-1"><p>由命令 <code>\documentclass{}</code> 指定，常见的有 <code>article</code><code>book</code><code>beamer</code> 等，中括号内可以设置文章都字体大小。文章类型就好比是一个基本模板，提供了其相应的命令及其效果，如 <code>article</code> 中有 <code>\section</code><code>\subsection</code> 等， <code>book</code> 中有 <code>part</code><code>chapter</code> 等，适应不同文件到需要。</p></div></div><div class="outline-3">
+<div class="outline-text-3" id="text-2-1"><p>由命令 <code>\documentclass{}</code> 指定，常见的有 <code>article</code><code>book</code><code>beamer</code> 等，中括号内可以设置文章都字体大小。文章类型就好比是一个基本模板，提供了其相应的命令及其效果，如 <code>article</code> 中有 <code>\section</code><code>\subsection</code> 等， <code>book</code> 中有 <code>part</code><code>chapter</code> 等，适应不同文件到需要。</p></div></div>
+<div id="outline-container-2-2" class="outline-3">
 <h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 宏包</h3>
 <div class="outline-text-3" id="text-2-2"><p>宏包，即tex文件头部的 <code>usepackage</code> 语句后面所跟的参数，其功能类似于c语言的头文件， python的包，能够提供一些包装好的功能用于排版或者其他事情。下面我将列举些我用的宏包：</p><ol class="org-ol">
 <li>ctex: 想要写中文tex文件就绕不过去的包，需要和xelatex搭配食用才能够正常渲染中文
 </li>
-<li>geometry: 用于控制页边距，需要在调用后使用 <code>\geometry{scale=0.7}</code> 对页边距进行指定
+<li><p>geometry: 用于控制页面布局,例子如下:</p>
+<div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span>[
+	a4paper,      <span class="c">% 使用A4纸</span>
+	left=0.7cm,   <span class="c">% 左边距0.7cm</span>
+	right=0.7cm,  <span class="c">% 右边距</span>
+	top=0.7cm,    <span class="c">% 上边距</span>
+	bottom=0.7cm, <span class="c">% 正文底边距0.7cm</span>
+	footskip=3pt, <span class="c">% 脚注与正文间隔3pt</span>
+	twoside,      <span class="c">% 使用双面打印（装订）样式</span>
+	bindingoffset=0.9cm,  <span class="c">% 设置双面打印时内侧为装订预留的页边距</span>
+]<span class="nb">{</span>geometry<span class="nb">}</span>   <span class="c">% 使用geometry,以上中括号内钧为可选参数</span>
+<span class="c">% 使用时需要注意排列顺序，部分宏包可能与它的设置冲突，可能会单向覆盖</span>
+</pre></div>
 </li>
 <li>mhchem: 书写化学方程式 <code>\ce{Zn + 2H2O = Zn(OH) + H2 ^}</code>
 </li>
@@ -87,13 +101,49 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 </li>
 <li>hyperref: 插入超链接 <code>\usepackage[hidelinks]{hyperref}</code>
 </li>
-<li>multicol: 分栏，使用环境 <code>\begin{multicols}{n}</code> (其中的n为分栏数)
+<li><p>multicol: 分栏，使用环境 <code>\begin{multicols}{n}</code> (其中的n为分栏数)</p>
+<div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span><span class="nb">{</span>multicol<span class="nb">}</span>   <span class="c">% 使用包</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\columnsep</span><span class="nb">}{</span>1mm<span class="nb">}</span>  <span class="c">% 设置分栏间隔</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+不会被分栏的内容
+<span class="k">\begin</span><span class="nb">{</span>multicols<span class="nb">}{</span>n<span class="nb">}</span> <span class="c">% 其中的n为分栏数</span>
+  会被分栏的内容
+
+  内容不够填满一整页时会优先向横向填充，在下面留出空间，而不是先一分到底
+<span class="k">\end</span><span class="nb">{</span>multicols<span class="nb">}</span>
+这里的内容也不会被分栏
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+</li>
+<li><p>fontspec: 字体设置</p>
+<div class="org-src-container"><pre class="src src-latex"><span class="c">% 在正文之外时设置英文字体</span>
+<span class="k">\setmainfont</span><span class="nb">{</span>DengXian Light<span class="nb">}</span>
+<span class="c">% 假定处于某个环境内</span>
+<span class="k">\fontsize</span><span class="nb">{</span>4<span class="nb">}{</span>0.1<span class="nb">}</span>  <span class="c">% 为下文设置4pt的字体，行间距0.1pt(也许？)</span>
+<span class="k">\selectfont</span>    <span class="c">% 应用上述设置</span>
+<span class="k">\CJKfontspec</span><span class="nb">{</span>DengXian Light<span class="nb">}</span>    <span class="c">% 设置中文字体(基于ctex包)(这里是&quot;等线Light&quot;)</span>
+</pre></div>
+</li>
+<li><p>fancyfoot: 设置页脚页眉</p>
+<div class="org-src-container"><pre class="src src-latex"><span class="k">\newcommand</span><span class="nb">{</span><span class="k">\setsmallf</span><span class="nb">}{</span><span class="k">\fontsize</span><span class="nb">{</span>4<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\CJKfontspec</span><span class="nb">{</span>DengXian Light<span class="nb">}}</span>
+<span class="k">\pagestyle</span><span class="nb">{</span>fancy<span class="nb">}</span>
+<span class="k">\fancyfoot</span><span class="na">[C]</span><span class="nb">{</span><span class="k">\setsmallf\thepage</span><span class="nb">}</span>   <span class="c">% 设置页脚（正中间）样式：使用等线light的页码</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\footnotesep</span><span class="nb">}{</span>0.5<span class="k">\footnotesep</span><span class="nb">}</span> <span class="c">% 减少脚注之间的间距</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\skip\footins</span><span class="nb">}{</span>0.5<span class="k">\skip\footins</span><span class="nb">}</span> <span class="c">% 减少脚注与正文的间距</span>
+</pre></div>
+</li>
+<li>footmisc: 作用不明，先放着再说
+</li>
+<li><p>dblfnote: 脚注分栏（固定2栏）</p>
 </li></ol>
-</div></div></div><div class="outline-2">
+</div></div></div>
+<div id="outline-container-3" class="outline-2">
 <h2 id="org-title-3"><span class="section-number-2">3.</span> 正文样式</h2>
-<div class="outline-text-2" id="text-3"></div><div class="outline-3">
+<div class="outline-text-2" id="text-3"></div><div id="outline-container-3-1" class="outline-3">
 <h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> begin&amp;end</h3>
-<div class="outline-text-3" id="text-3-1"><p><code>\begin</code><code>\end</code> 命令通常用于开始和结束某一个环境</p></div></div><div class="outline-3">
+<div class="outline-text-3" id="text-3-1"><p><code>\begin</code><code>\end</code> 命令通常用于开始和结束某一个环境</p></div></div>
+<div id="outline-container-3-2" class="outline-3">
 <h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 表格</h3>
 <div class="outline-text-3" id="text-3-2"><div class="org-src-container"><pre class="src src-latex"><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h]
         <span class="k">\centering</span>
@@ -123,20 +173,75 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
         <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
         <span class="k">\label</span><span class="nb">{</span>表<span class="nb">}</span>
 <span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</pre></div><p>以 <code>tabular</code> 作纵向表格环境，内部可以镶嵌，外部套一个 <code>table</code> 环境，表格数据间通过… <code>&amp;</code> 进行横向分割通过 <code>\\</code> 进行纵向分割</p></div></div><div class="outline-3">
+</pre></div><p>以 <code>tabular</code> 作纵向表格环境，内部可以镶嵌，外部套一个 <code>table</code> 环境，表格数据间通过… <code>&amp;</code> 进行横向分割通过 <code>\\</code> 进行纵向分割</p></div></div>
+<div id="outline-container-3-3" class="outline-3">
 <h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 字体样式</h3>
 <div class="outline-text-3" id="text-3-3"><ol class="org-ol">
 <li>粗体 <code>（未知）</code>
 </li>
-<li>斜体 <code>\textit{XXX}</code>
+<li><p>斜体(在中文表现为楷体) <code>\textit{XXX}</code></p>
 </li></ol>
-</div></div><div class="outline-3">
+</div></div>
+<div id="outline-container-3-4" class="outline-3">
 <h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 其他东西</h3>
-<div class="outline-text-3" id="text-3-4"><p>自定义命令： <code>\newcommand{\name}[arg_num]{do sth here,#1 means arg 1}</code></p><p>特殊字符表示: <code>~</code> 应写作 <code>\~{}</code> ,其余的套个反斜杠即可</p></div></div></div></div>
+<div class="outline-text-3" id="text-3-4"><p>自定义命令： <code>\newcommand{\name}[arg_num]{do sth here,#1 means arg 1}</code></p><p>特殊字符表示: <code>~</code> 应写作 <code>\~{}</code> ,其余的套个反斜杠即可</p></div><div id="outline-container-3-4-1" class="outline-4">
+<h4 id="org-title-3-4-1"><span class="section-number-4">3.4.1.</span> 还是缩印大神</h4>
+<div class="outline-text-4" id="text-3-4-1"><p>模板（管他呢，套模板就完事了）：</p><div class="org-src-container"><pre class="src src-latex"><span class="c">% Created 2025-07-06 日 17:23</span>
+<span class="c">% Intended LaTeX compiler: xelatex</span>
+<span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="c">% 页边距需要考虑打印机实际情况</span>
+<span class="k">\usepackage</span>[
+	a4paper,
+	left=0.7cm,
+	right=0.7cm,
+	top=0.7cm,
+	bottom=0.7cm,
+	footskip=3pt,
+	bindingoffset=0.9cm,
+	twoside,
+]<span class="nb">{</span>geometry<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>fontspec<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="na">[hidelinks]</span><span class="nb">{</span>hyperref<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>multicol<span class="nb">}</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\columnsep</span><span class="nb">}{</span>1mm<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="na">[UTF8]</span><span class="nb">{</span>ctex<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>fancyhdr<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>footmisc<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>dblfnote<span class="nb">}</span>
+<span class="c">% 需要装有windows自带的 &quot;等线 light&quot; 字体,</span>
+<span class="c">% 4pt字体对于600dpi激光打印机足够了</span>
+<span class="k">\setmainfont</span><span class="nb">{</span>DengXian Light<span class="nb">}</span>
+<span class="k">\newcommand</span><span class="nb">{</span><span class="k">\setsmallf</span><span class="nb">}{</span><span class="k">\fontsize</span><span class="nb">{</span>4<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\CJKfontspec</span><span class="nb">{</span>DengXian Light<span class="nb">}}</span>
+<span class="k">\newcommand</span><span class="nb">{</span><span class="k">\orgtitle</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>6<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>#1<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
+<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\section</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>6<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>【#1】<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
+<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\subsection</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>【#1】<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
+<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\subsubsection</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>【#1】<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
+<span class="k">\pagestyle</span><span class="nb">{</span>fancy<span class="nb">}</span>
+<span class="k">\fancyfoot</span><span class="na">[C]</span><span class="nb">{</span><span class="k">\setsmallf\thepage</span><span class="nb">}</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\footnotesep</span><span class="nb">}{</span>0.5<span class="k">\footnotesep</span><span class="nb">}</span> <span class="c">% 减少脚注之间的间距</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\skip\footins</span><span class="nb">}{</span>0.5<span class="k">\skip\footins</span><span class="nb">}</span> <span class="c">% 减少脚注与正文的间距</span>
+<span class="k">\let\oldfootnote\footnote</span>
+<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\footnote</span><span class="nb">}</span>[1]<span class="nb">{</span><span class="k">\oldfootnote</span><span class="nb">{</span><span class="k">\setsmallf</span>#1<span class="nb">}}</span>
+
+<span class="k">\date</span><span class="nb">{</span><span class="k">\textit</span><span class="nb">{</span>&lt;2025-07-11 五 00:32&gt;<span class="nb">}}</span>
+<span class="k">\title</span><span class="nb">{</span>latex缩印template<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="c">% 分栏、字体设置</span>
+<span class="k">\begin</span><span class="nb">{</span>multicols<span class="nb">}{</span>9<span class="nb">}</span>
+<span class="k">\setsmallf</span>
+
+<span class="k">\orgtitle</span><span class="nb">{</span>title<span class="nb">}</span>
+
+这里放想缩印的内容
+<span class="k">\end</span><span class="nb">{</span>multicols<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div><p>相关方法技巧来自
+<a href="http://www.bilibili.com/video/BV1bv4y1h7fB">这个</a>视频，非常好的方法，使我打印机旋转，就是自家打印机是喷墨的不是激光的精度没那么高(600dpi)印不了。。。</p></div></div></div></div></div>
 <div id="postamble" class="status"><p class="date">时间: <2024-10-01 二 02:04></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: Latex使用过程中查阅一些资料做的笔记，防忘</p>
-<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+<p class="date">生成于: 2025-10-25 六 17:52:23</p>
 </div>
 </body>
 </html>
