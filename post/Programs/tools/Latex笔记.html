@@ -194,9 +194,9 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 	a4paper,
 	left=0.7cm,
 	right=0.7cm,
-	top=0.7cm,
-	bottom=0.7cm,
-	footskip=3pt,
+	top=0.5cm,
+	bottom=0.9cm,  <span class="c">% 由于页码在该边距之外,所以要大点</span>
+	footskip=6.5pt,  <span class="c">% 页码到正文的间距</span>
 	bindingoffset=0.9cm,
 	twoside,
 ]<span class="nb">{</span>geometry<span class="nb">}</span>
@@ -208,40 +208,63 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <span class="k">\usepackage</span><span class="nb">{</span>fancyhdr<span class="nb">}</span>
 <span class="k">\usepackage</span><span class="nb">{</span>footmisc<span class="nb">}</span>
 <span class="k">\usepackage</span><span class="nb">{</span>dblfnote<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>titlesec<span class="nb">}</span>  <span class="c">% 控制标题格式</span>
 <span class="c">% 需要装有windows自带的 &quot;等线 light&quot; 字体,</span>
 <span class="c">% 4pt字体对于600dpi激光打印机足够了</span>
 <span class="k">\setmainfont</span><span class="nb">{</span>DengXian Light<span class="nb">}</span>
 <span class="k">\newcommand</span><span class="nb">{</span><span class="k">\setsmallf</span><span class="nb">}{</span><span class="k">\fontsize</span><span class="nb">{</span>4<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\CJKfontspec</span><span class="nb">{</span>DengXian Light<span class="nb">}}</span>
-<span class="k">\newcommand</span><span class="nb">{</span><span class="k">\orgtitle</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>6<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>#1<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
-<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\section</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>6<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>【#1】<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
-<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\subsection</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>【#1】<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
-<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\subsubsection</span><span class="nb">}</span>[1]<span class="nb">{{</span><span class="k">\par\noindent\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\textbf</span><span class="nb">{</span>【#1】<span class="nb">}</span><span class="k">\par</span><span class="nb">}}</span>
+<span class="c">% \renewcommand{\section}[1]{{\par\noindent\fontsize{6}{0.1}\selectfont\textbf{【#1】}\par}}</span>
+<span class="c">% \renewcommand{\subsection}[1]{{\par\noindent\fontsize{5}{0.1}\selectfont\textbf{【#1】}\par}}</span>
+<span class="c">% \renewcommand{\subsubsection}[1]{{\par\noindent\fontsize{5}{0.1}\selectfont\textbf{【#1】}\par}}</span>
+
+<span class="c">% 使用 titlesec 重新定义标题格式，保持目录功能</span>
+<span class="k">\titleformat</span><span class="nb">{</span><span class="k">\section</span><span class="nb">}</span>
+  <span class="nb">{</span><span class="k">\fontsize</span><span class="nb">{</span>6<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\bfseries</span><span class="nb">}</span>
+  <span class="nb">{</span>【<span class="k">\arabic</span><span class="nb">{</span>section<span class="nb">}</span>.】<span class="nb">}</span>
+  <span class="nb">{</span>0pt<span class="nb">}</span>
+  <span class="nb">{}</span>
+<span class="k">\titleformat</span><span class="nb">{</span><span class="k">\subsection</span><span class="nb">}</span>
+  <span class="nb">{</span><span class="k">\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\bfseries</span><span class="nb">}</span>
+  <span class="nb">{</span>【<span class="k">\arabic</span><span class="nb">{</span>section<span class="nb">}</span>.<span class="k">\arabic</span><span class="nb">{</span>subsection<span class="nb">}</span>.】<span class="nb">}</span>
+  <span class="nb">{</span>0pt<span class="nb">}</span>
+  <span class="nb">{}</span>
+<span class="k">\titleformat</span><span class="nb">{</span><span class="k">\subsubsection</span><span class="nb">}</span>
+  <span class="nb">{</span><span class="k">\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\bfseries</span><span class="nb">}</span>
+  <span class="nb">{</span>【<span class="k">\arabic</span><span class="nb">{</span>section<span class="nb">}</span>.<span class="k">\arabic</span><span class="nb">{</span>subsection<span class="nb">}</span>.<span class="k">\arabic</span><span class="nb">{</span>subsubsection<span class="nb">}</span>.】<span class="nb">}</span>
+  <span class="nb">{</span>0pt<span class="nb">}</span>
+  <span class="nb">{}</span>
+<span class="c">% 移除标题间距</span>
+<span class="k">\titlespacing*</span><span class="nb">{</span><span class="k">\section</span><span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}</span>
+<span class="k">\titlespacing*</span><span class="nb">{</span><span class="k">\subsection</span><span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}</span>
+<span class="k">\titlespacing*</span><span class="nb">{</span><span class="k">\subsubsection</span><span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}</span>
 <span class="k">\pagestyle</span><span class="nb">{</span>fancy<span class="nb">}</span>
 <span class="k">\fancyfoot</span><span class="na">[C]</span><span class="nb">{</span><span class="k">\setsmallf\thepage</span><span class="nb">}</span>
 <span class="k">\setlength</span><span class="nb">{</span><span class="k">\footnotesep</span><span class="nb">}{</span>0.5<span class="k">\footnotesep</span><span class="nb">}</span> <span class="c">% 减少脚注之间的间距</span>
 <span class="k">\setlength</span><span class="nb">{</span><span class="k">\skip\footins</span><span class="nb">}{</span>0.5<span class="k">\skip\footins</span><span class="nb">}</span> <span class="c">% 减少脚注与正文的间距</span>
-<span class="k">\let\oldfootnote\footnote</span>
-<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\footnote</span><span class="nb">}</span>[1]<span class="nb">{</span><span class="k">\oldfootnote</span><span class="nb">{</span><span class="k">\setsmallf</span>#1<span class="nb">}}</span>
+<span class="c">% 老方案</span>
+<span class="c">% \let\oldfootnote\footnote</span>
+<span class="c">% \renewcommand{\footnote}[1]{\oldfootnote{\setsmallf#1}}</span>
+<span class="c">% 新方案</span>
+<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\footnote</span><span class="nb">}</span>[1]<span class="nb">{{</span>【脚注：#1】<span class="nb">}}</span>
 
 <span class="k">\date</span><span class="nb">{</span><span class="k">\textit</span><span class="nb">{</span>&lt;2025-07-11 五 00:32&gt;<span class="nb">}}</span>
 <span class="k">\title</span><span class="nb">{</span>latex缩印template<span class="nb">}</span>
 
 <span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
 <span class="c">% 分栏、字体设置</span>
-<span class="k">\begin</span><span class="nb">{</span>multicols<span class="nb">}{</span>9<span class="nb">}</span>
 <span class="k">\setsmallf</span>
-
-<span class="k">\orgtitle</span><span class="nb">{</span>title<span class="nb">}</span>
-
+<span class="k">\begin</span><span class="nb">{</span>multicols<span class="nb">}{</span>5<span class="nb">}</span>
+<span class="k">\tableofcontents</span>
+<span class="k">\end</span><span class="nb">{</span>multicols<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>multicols<span class="nb">}{</span>9<span class="nb">}</span>
 这里放想缩印的内容
 <span class="k">\end</span><span class="nb">{</span>multicols<span class="nb">}</span>
 <span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
-</pre></div><p>相关方法技巧来自
-<a href="http://www.bilibili.com/video/BV1bv4y1h7fB">这个</a>视频，非常好的方法，使我打印机旋转，就是自家打印机是喷墨的不是激光的精度没那么高(600dpi)印不了。。。</p></div></div></div></div></div>
+</pre></div><p>相关方法技巧来自<a href="http://www.bilibili.com/video/BV1bv4y1h7fB">这个</a>视频，非常好的方法，使我打印机旋转，就是自家打印机是喷墨的不是激光的精度没那么高(600dpi)印不了。。。</p></div></div></div></div></div>
 <div id="postamble" class="status"><p class="date">时间: <2024-10-01 二 02:04></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: Latex使用过程中查阅一些资料做的笔记，防忘</p>
-<p class="date">生成于: 2025-10-25 六 17:52:23</p>
+<p class="date">生成于: 2025-11-08 六 14:35:00</p>
 </div>
 </body>
 </html>

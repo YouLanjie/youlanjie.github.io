@@ -4,7 +4,14 @@
 import argparse
 import re
 from pathlib import Path
-import orgreader2
+
+try:
+    import lib.python.orgreader2 as orgreader2
+except ModuleNotFoundError as e:
+    print("[ERROR] lib.python.orgreader2.py 不可用")
+    print("[ERROR] 尝试：git submodule init")
+    print("[ERROR] 尝试：git submodule update")
+    raise e
 
 ARGS = None
 project_dir = Path(orgreader2.pytools.sys.argv[0]).parent
@@ -12,6 +19,7 @@ project_dir = Path(orgreader2.pytools.sys.argv[0]).parent
 def update_file(file:Path) -> tuple[str,str,str,str]:
     """更新文件"""
     if not file.is_file():
+        orgreader2.pytools.print_err(f"[WARN] '{file}' 不是文件")
         return ("", "", "", "")
     outputf = Path(re.sub(r"\.org$", ".html", str(file)))
     content = ""
@@ -109,15 +117,15 @@ def list_to_str(tree:list, hide_time:bool=False) -> str:
 def build_homepage(tree:list, timeline:list):
     """构建主页和时间线"""
     index_template = r"""#+TITLE: 我的个人博客
-# #+OPTIONS: toc:nil
-# #+OPTIONS: num:nil
 #+setupfile: ./setup.setup
 * Welcome
 欢迎来到我的个人博客。\\
 点击 [[./timeline.html][*/TimeLine/*]] 查看按时间排序的文章列表界面。
 在大部分页面点击右上角 [[#][*/UP/*]] 按钮可以回到网页头部。
-/Table of Contents/ 是目录，鼠标悬浮或者屏幕点击展开。
+/Table of Contents/ 是目录，鼠标悬浮或者屏幕点击展开。\\
 如遇代码块中英文对不齐的情况可尝试双击代码块。
+若屏幕右侧存在脚注栏可尝试双击展开（全屏）或收回。\\
+关于页面在[[./about.html][*/这里/*]]
 * 我的文章（按目录结构排列）
 """
     print("INFO 构建首页 index.org")
@@ -143,9 +151,6 @@ def build_homepage(tree:list, timeline:list):
     outf_timeline = project_dir/"timeline.org"
     outf_timeline.write_text(content_timeline, encoding="utf8")
     update_file(outf_timeline)
-
-    update_file(outf_timeline/"about.org")
-    update_file(outf_timeline/"404.org")
 
 def main():
     """主函数"""
@@ -175,6 +180,8 @@ def main():
 
     if ARGS and not ARGS.no_build_home:
         build_homepage(tree, timeline)
+    update_file(project_dir/"about.org")
+    update_file(project_dir/"404.org")
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="构建博客用脚本")

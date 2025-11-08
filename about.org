@@ -2,9 +2,9 @@
 #+setupfile: ./setup.setup
 
 * 我想说的
-这是我的个人网站，依靠[[orgreader2.py][自制的python org导出程序]]和[[build.py][导出构建脚本]]导出的html构建。html
+这是我的个人网站，依靠[[./lib/python/orgreader2.py][自制的python org导出程序]]和[[./build.py][导出构建脚本]]导出的html构建。html
 样式基本仿照Emacs Org-mode导出的HTML文件，故也可换用emacs导出(原本用的就是emacs
-后来嫌慢才改的)
+后来嫌慢才改的)。目前两个程序都还在改进中，但已经能凑合凑合用了。
 ** 关于主题
 曾经使用过的其他css主题样式：
 - [[https://github.com/yzs249175311/org-html-theme-dull][org-html-theme-dull]]
