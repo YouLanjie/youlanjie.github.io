@@ -183,6 +183,30 @@ def main():
     update_file(project_dir/"about.org")
     update_file(project_dir/"404.org")
 
+def run_server():
+    """运行服务器"""
+    import socketserver
+    import http.server
+    import webbrowser
+    port = 8080
+    for i in range(port, port+100):
+        try:
+            with socketserver.TCPServer(("", i), http.server.SimpleHTTPRequestHandler) as httpd:
+                print(f"[INFO] 服务器(WebUI)运行在 http://localhost:{i}/")
+                print("[INFO] 浏览器或将自动打开")
+                try:
+                    webbrowser.open(f"http://localhost:{i}/")
+                except ModuleNotFoundError:
+                    print("[INFO] 无法自动打开浏览器")
+                # print("按 Ctrl+C 停止服务器")
+                try:
+                    httpd.serve_forever()
+                except KeyboardInterrupt:
+                    print("\n[INFO] 服务器已停止")
+        except OSError:
+            continue
+        break
+
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="构建博客用脚本")
     parser.add_argument("-n", "--no-update", action="store_true", help="不输出文件")
@@ -191,6 +215,9 @@ if __name__ == "__main__":
     parser.add_argument("-N", "--no-build-home", action="store_true", help="不构建主页")
     parser.add_argument("-t", "--touch", action="store_true", help="仅更新文件修改时间")
     parser.add_argument("-l", "--limit", type=int, default=300, help="对大文件的简略读取行数")
+    parser.add_argument("-r", "--run", action="store_true", help="构建后运行http.server")
     parser.add_argument("-v", "--verbose", action="store_true", help="显示更详细的输出")
     ARGS = parser.parse_args()
     main()
+    if ARGS.run:
+        run_server()

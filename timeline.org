@@ -1,6 +1,8 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
 * 2025
+- [[./post/Programing/chat_room.html][*使用python写一个聊天室程序*]] /[2025-11-22 11:00]/\\
+  对my-test仓库里的talking_local.py做的记录
 - [[./post/Learning/语文/list_of_words_online.html][*那些网上流行或出现过的东西*]] /[2025-10-24 22:52]/\\
   个人整理，纯属考古兴趣之作，大概率不准
 - [[./post/Novel/无职/index.html][*无职转生小说资源索引*]] /[2025-10-07 19:40]/\\

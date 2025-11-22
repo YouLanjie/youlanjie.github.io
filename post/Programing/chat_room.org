@@ -1,0 +1,17 @@
+#+TITLE: 使用python写一个聊天室程序
+#+DESCRIPTION: 对my-test仓库里的talking_local.py做的记录
+#+DATE: <2025-11-22 六 11:00>
+#+SETUPFILE: ../../setup.setup
+
+* 简介
+这是一个简单的python程序，被设计为不需要第三方库，可以在python3.8上正常运行。文
+件链接[[/lib/python/talking_local.py][在这里]]。
+
+** 特性
+1) 具有命令行操纵界面
+2) 拥有web ui
+3) 不依赖第三方库
+
+* 架构
+内容待续
+
