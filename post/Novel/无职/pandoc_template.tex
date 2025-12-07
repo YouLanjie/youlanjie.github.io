@@ -1,0 +1,74 @@
+\documentclass{article}
+% 页边距需要考虑打印机实际情况
+\usepackage[
+	a4paper,
+	left=0.7cm,
+	right=0.7cm,
+	top=0.5cm,
+	bottom=0.9cm,  % 由于页码在该边距之外,所以要大点
+	footskip=6.5pt,  % 页码到正文的间距
+	bindingoffset=0.9cm,
+	twoside,
+]{geometry}
+\usepackage{fontspec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{multicol}
+\setlength{\columnsep}{1mm}
+\usepackage[UTF8]{ctex}
+\usepackage{fancyhdr}
+\usepackage{footmisc}
+\usepackage{dblfnote}
+\usepackage{titlesec}  % 控制标题格式
+% 需要装有windows自带的 "等线 light" 字体,
+% 4pt字体对于600dpi激光打印机足够了
+\setmainfont{DengXian Light}
+\newcommand{\setsmallf}{\fontsize{4}{0.1}\selectfont\CJKfontspec{DengXian Light}}
+
+% 使用 titlesec 重新定义标题格式，保持目录功能
+\titleformat{\section}
+  {\fontsize{6}{0.1}\selectfont\bfseries}
+  {【\arabic{section}.】}
+  {0pt}
+  {}
+\titleformat{\subsection}
+  {\fontsize{5}{0.1}\selectfont\bfseries}
+  {【\arabic{section}.\arabic{subsection}.】}
+  {0pt}
+  {}
+\titleformat{\subsubsection}
+  {\fontsize{5}{0.1}\selectfont\bfseries}
+  {【\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.】}
+  {0pt}
+  {}
+% 移除标题间距
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
+\pagestyle{fancy}
+\fancyfoot[C]{\setsmallf\thepage}
+\setlength{\footnotesep}{0.5\footnotesep} % 减少脚注之间的间距
+\setlength{\skip\footins}{0.5\skip\footins} % 减少脚注与正文的间距
+% 新方案
+\renewcommand{\footnote}[1]{{【脚注：#1】}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+$hypersetup.latex()$
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+
+\begin{document}
+% 分栏、字体设置
+\setsmallf
+\begin{multicols}{5}
+\tableofcontents
+\end{multicols}
+\begin{multicols}{9}
+
+$body$
+
+\end{multicols}
+\end{document}
