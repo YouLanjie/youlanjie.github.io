@@ -320,7 +320,13 @@
 		margin-left: 0px;
 		margin-right: 0px;
 	}
-	p.verse { margin-left: 3%; }
+	p.verse {
+		background-color: var(--bgQuote);
+		padding: 0.1em 1em 0.1em 1em;
+		margin: 10px;
+		border-left: 3px solid var(--fgH4);
+		border-radius: 0 4px 4px 0;
+	}
 	pre {
 		font-family: "JetBrainsMono-Regular", "Noto Sans Mono CJK", monospace;
 		font-size: 90%;
