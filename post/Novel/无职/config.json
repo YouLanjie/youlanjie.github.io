@@ -1,0 +1,18 @@
+{
+	"title": "无职转生",
+	"author": "(原作:不讲理不求人（理不尽な孫の手）)",
+	"setting": {
+		"mktitle": true,
+		"papersize": "b5paper"
+	},
+	"filelist": {
+		"./": {
+			"ignore": [
+				"./025_蛇足篇1.org",
+				"./026_蛇足篇2.org",
+				"./index.org"
+			],
+			"add": []
+		}
+	}
+}
