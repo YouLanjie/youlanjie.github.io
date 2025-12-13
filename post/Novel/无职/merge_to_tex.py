@@ -75,7 +75,8 @@ class Config:
                     "ignore":[],
                     "add":[]
                     }
-                }
+                },
+            "output":"output.tex",
             }
     pandoc_template = r"""% 生成于: #${template.generate_time}
 \documentclass{article}
@@ -166,10 +167,10 @@ $body$
     pandoc_template_info = "\n\n\\noindent\n".join(r"""\section{页面设置}
 生成于:#${template.generate_time}
 纸张类型：#${setting.papersize}
-上下左右边距：#${setting.border.top}cm,#${setting.border.bottom}cm,#${setting.border.left}cm,#${setting.border.right}cm,
+上下左右边距：#${setting.border.top}cm ,#${setting.border.bottom}cm ,#${setting.border.left}cm ,#${setting.border.right}cm,
 footskip：#${setting.border.footskip}pt,
 装订偏移：#${setting.border.bindingoffset}cm,
-字体大小(h1,h2,h3,正文)pt：#${setting.fontsize.section},#${setting.fontsize.subsection},#${setting.fontsize.subsubsection},#${setting.fontsize}
+字体大小(h1,h2,h3,正文)：#${setting.fontsize.section}pt, #${setting.fontsize.subsection}pt ,#${setting.fontsize.subsubsection}pt ,#${setting.fontsize}pt
 字词统计：#${counter.words}k,
 LINES:#${counter.lines}""".splitlines())
     def __init__(self, cfg_f:Path):
@@ -224,7 +225,7 @@ LINES:#${counter.lines}""".splitlines())
         k["setting.fontsize.subsubsection"] = k["setting.fontsize"]
         if content:
             content = "\n".join(i for i in content.splitlines() if i)
-        k["counter.words"] = len(content)/1000
+        k["counter.words"] = (len(content)-len(content.splitlines()))/1000
         k["counter.lines"] = len(content.splitlines())
         k["template.mktitle"] = r"\maketitle{}" if k["setting.mktitle"] else ""
         k["template.mktoc"] = Template2(self.pandoc_template_toc).safe_substitute(k) if k["setting.mktoc"] else ""
@@ -242,13 +243,17 @@ def main():
     if ARGS.print_config:
         config.print_config_template()
         return
+    if ARGS.print_pandoc_template:
+        print(config.generate_pandoc_template())
+        return
     print("[INFO] Config:")
     __import__('pprint').pprint(config.cfg)
     content = config.generate_org_file()
     pandoc_template = config.generate_pandoc_template(content)
+    outputf = config.cfg_f.parent/config.cfg["output"]
 
     if ARGS.no_to_tex:
-        ARGS.output.write_text(content)
+        outputf.write_text(content)
         return
     org_f = tempfile.mkstemp(prefix=f"output_org_file.{time.strftime("%Y%m%d_%H%M%S")}.",
                              suffix=".org")
@@ -260,21 +265,30 @@ def main():
     os.write(template[0], pandoc_template.encode("utf-8"))
     os.close(template[0])
 
-    cmd = ["pandoc", org_f[1],"--template",template[1],"-o",ARGS.output]
+    cmd = ["pandoc", org_f[1],"--template",template[1],"-o",outputf]
     print(f"[INFO] RUN: {cmd}")
-    subprocess.run(cmd, check=False)
+    try:
+        subprocess.run(cmd, check=True)
+        print(f"[INFO] 输出文件为'{outputf}'")
+    except KeyboardInterrupt:
+        print("[INFO] 转换取消，临时文件未删除")
+        return
+    except FileNotFoundError:
+        print("[WARN] pandoc不存在, 转换取消，临时文件未删除")
+        return
+    except subprocess.CalledProcessError:
+        print("[WARN] pandoc报错, 转换取消，临时文件未删除")
+        return
     Path(org_f[1]).unlink()
     Path(template[1]).unlink()
-    print(f"INFO: 输出文件为'{ARGS.output}'")
 
 def parse_arg() -> argparse.Namespace:
     parser=argparse.ArgumentParser(description="合并org文件并利用pandoc生成缩印用的tex文件")
-    parser.add_argument("-o", "--output", type=Path, default=Path("output.tex"),
-                        help="输出文件")
     parser.add_argument("-c", "--config", type=Path, default=Path("config.json"),
                         help="配置文件")
     parser.add_argument("-n", "--no-to-tex", action="store_true", help="输出.org文件")
     parser.add_argument("-P", "--print-config", action="store_true", help="打印配置文件模板")
+    parser.add_argument("-D", "--print-pandoc-template", action="store_true", help="打印pandoc模板")
     return parser.parse_args()
 
 if __name__ == "__main__":
