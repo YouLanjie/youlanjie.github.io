@@ -1,4 +1,4 @@
-#+title: 第六卷 少年期 归乡篇
+#+title: 无职转生 第六卷 少年期 归乡篇
 #+setupfile: ./setup.setup
 * 第六卷 少年期 归乡篇
 

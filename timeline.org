@@ -1,6 +1,8 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
 * 2025
+- [[./post/Novel/春物/index.html][*春物小说资源索引*]] /[2025-12-13 06:07]/\\
+  内容来自网络
 - [[./post/Programing/chat_room.html][*使用python写一个聊天室程序*]] /[2025-11-22 11:00]/\\
   对my-test仓库里的talking_local.py做的记录
 - [[./post/Learning/语文/list_of_words_online.html][*那些网上流行或出现过的东西*]] /[2025-10-24 22:52]/\\

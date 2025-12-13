@@ -1,4 +1,4 @@
-#+title: 第十三卷 青少年期 日常篇
+#+title: 无职转生 第十三卷 青少年期 日常篇
 #+setupfile: ./setup.setup
 * 第十三卷 青少年期 日常篇
 

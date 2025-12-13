@@ -69,9 +69,11 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
     return ret
 
 BLACKLIST = {"post/Novel/SAO/",
-             "post/Novel/无职/"}
+             "post/Novel/无职/",
+             "post/Novel/春物"}
 WHITELIST = {"post/Novel/SAO/index.html",
-             "post/Novel/无职/index.html"}
+             "post/Novel/无职/index.html",
+             "post/Novel/春物/index.html"}
 
 def check_list(s:str, li:list|set) -> bool:
     """检查文件s是否在列表内"""

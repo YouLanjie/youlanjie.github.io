@@ -264,6 +264,10 @@
 	.code-highlighted { background-color: #ffff00; }
 	.org-svg { }
 
+	p {
+		overflow-wrap: break-word;
+		/*word-break: break-all;*/
+	}
 	textarea { overflow-x: auto; }
 	li {
 		margin: .4em;

@@ -1,4 +1,4 @@
-#+title: 第十四卷 青少年期 召唤篇
+#+title: 无职转生 第十四卷 青少年期 召唤篇
 #+setupfile: ./setup.setup
 * 第十四卷 青少年期 召唤篇
 

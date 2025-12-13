@@ -1,4 +1,4 @@
-#+title: 第二十三卷 青年期 决战篇 web版
+#+title: 无职转生 第二十三卷 青年期 决战篇 web版
 #+setupfile: ./setup.setup
 * 第二十三卷 青年期 决战篇 web版
 

@@ -81,7 +81,7 @@ def main():
         print((outf.is_file(), outf))
         s = "\n\n".join([i for i in content if i])
         outf.write_text(f"""\
-#+title: {h1}
+#+title: 无职转生 {h1}
 #+setupfile: ./setup.setup
 """ + s)
         ind += 1

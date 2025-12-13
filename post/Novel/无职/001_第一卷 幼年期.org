@@ -1,4 +1,4 @@
-#+title: 第一卷 幼年期
+#+title: 无职转生 第一卷 幼年期
 #+setupfile: ./setup.setup
 * 第一卷 幼年期
 

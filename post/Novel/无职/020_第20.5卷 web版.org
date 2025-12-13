@@ -1,4 +1,4 @@
-#+title: 第20.5卷 web版
+#+title: 无职转生 第20.5卷 web版
 #+setupfile: ./setup.setup
 * 第20.5卷 web版
 

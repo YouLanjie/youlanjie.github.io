@@ -1,4 +1,4 @@
-#+title: 第二卷 少年期 家庭教师篇
+#+title: 无职转生 第二卷 少年期 家庭教师篇
 #+setupfile: ./setup.setup
 * 第二卷 少年期 家庭教师篇
 
