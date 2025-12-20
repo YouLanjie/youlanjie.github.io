@@ -29,7 +29,11 @@
 	div.id = "preamble"
 	div.className = "status"
 	div.insertAdjacentElement("afterbegin", header)
-	document.body.insertAdjacentElement("afterbegin", div)
+
+	csstheme = localStorage.getItem('csstheme') || "main"
+	if (csstheme == "main") {
+		document.body.insertAdjacentElement("afterbegin", div)
+	}
 })();
 // 为表格增加父节点
 (function() {
@@ -109,5 +113,51 @@
 			continue
 		}
 		imgs[i].setAttribute("data-fancybox", "gallery")
+	}
+})();
+
+function setTheme1() {
+	localStorage.setItem('csstheme', "main");
+	document.getElementById("thname").innerText = localStorage.getItem('csstheme')
+}
+function setTheme2() {
+	localStorage.setItem('csstheme', "ohtd");
+	document.getElementById("thname").innerText = localStorage.getItem('csstheme')
+}
+function setTheme3() {
+	localStorage.setItem('csstheme', "rtd");
+	document.getElementById("thname").innerText = localStorage.getItem('csstheme')
+}
+// 切换css主题
+(function() {
+	csstheme = localStorage.getItem('csstheme') || "main"
+
+	if (csstheme != "main") {
+		links = document.head.getElementsByTagName("link")
+		for (let i = 0; i < links.length; i++) {
+			if (links[i].href.endsWith("/theme/main.css")) {
+				document.head.removeChild(links[i])
+				break
+			}
+		}
+	}
+	if (csstheme == "ohtd") {
+		document.head.insertAdjacentHTML("beforeend", '<link rel="stylesheet" type="text/css" href="/theme/org-html-theme-dull/org-html-theme-dull.css"/>')
+		let script = document.createElement("script")
+		script.type = "text/javascript"
+		script.src = "/theme/org-html-theme-dull/org-html-theme-dull.js"
+		document.head.insertAdjacentElement("beforeend", script)
+	}
+	if (csstheme == "rtd") {
+		document.head.insertAdjacentHTML("beforeend", '<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/htmlize.css"/>')
+		document.head.insertAdjacentHTML("beforeend", '<link rel="stylesheet" type="text/css" href="/theme/read_the_docs/css/readtheorg.css"/>')
+		urls = ["/theme/read_the_docs/jquery.min.js","/theme/read_the_docs/bootstrap.min.js",
+			"/theme/read_the_docs/js/jquery.stickytableheaders.min.js", "/theme/read_the_docs/js/readtheorg.js"]
+		for (let i = 0; i < urls.length; i++) {
+			let script = document.createElement("script")
+			script.type = "text/javascript"
+			script.src = urls[i]
+			document.head.insertAdjacentElement("beforeend", script)
+		}
 	}
 })();

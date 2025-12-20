@@ -38,3 +38,10 @@ html文件你也能够访问相应的Org源文件。就例如本页的[[./about.
 而 =Created= 则为Html文件的生成时间。一般可以用于参考文章的最后更新时间，不过有
 时网站做出一些调整更新所有的文章时，它就会更新。所以仅作参考，也有部分内容是虚标
 的。(现在上述英文都换成中文了)
+* Setting
+** 切换css主题
+#+begin_export html
+<a onclick='setTheme1()' href="/">[main]</a> |
+<a onclick='setTheme2()' href="/">[ohtd]</a> |
+<a onclick='setTheme3()' href="/">[rtd]</a>
+#+end_export

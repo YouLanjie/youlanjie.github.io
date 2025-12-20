@@ -15,6 +15,7 @@ except ModuleNotFoundError as e:
 
 ARGS = None
 project_dir = Path(orgreader2.pytools.sys.argv[0]).parent
+formatter = orgreader2.HtmlExportVisitor()
 
 def update_file(file:Path) -> tuple[str,str,str,str]:
     """更新文件"""
@@ -42,7 +43,8 @@ def update_file(file:Path) -> tuple[str,str,str,str]:
         content = content[:((ARGS and ARGS.limit) or 100)]    # 偷偷摸摸限制长度提高读取速度(实际上是在偷懒)
     if ARGS and ARGS.verbose:
         print(f"[INFO] 正在处理文件 '{file}'")
-    doc = orgreader2.Document(content, str(file))
+    doc = orgreader2.Document(content, str(file),
+                              setting={"progress":(ARGS and ARGS.verbose and ARGS.progress)})
     doc.setting["css_in_html"] = ""
     doc.setting["js_in_html"] = """\
 <script>
@@ -62,7 +64,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
     if is_newer and ARGS:
         if not ARGS.no_update:
             print(f"INFO 输出文件 - {outputf}")
-            outputf.write_text(doc.to_html(), encoding="utf8")
+            outputf.write_text(doc.accept(formatter), encoding="utf8")
         elif ARGS.touch:
             print(f"INFO 更新文件时间 - {outputf}")
             outputf.touch()
@@ -219,6 +221,7 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--limit", type=int, default=300, help="对大文件的简略读取行数")
     parser.add_argument("-r", "--run", action="store_true", help="构建后运行http.server")
     parser.add_argument("-v", "--verbose", action="store_true", help="显示更详细的输出")
+    parser.add_argument("-p", "--progress", action="store_true", help="显示进度条")
     ARGS = parser.parse_args()
     main()
     if ARGS.run:
