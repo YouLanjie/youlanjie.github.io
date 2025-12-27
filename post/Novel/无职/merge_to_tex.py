@@ -14,10 +14,12 @@ import os
 import re
 
 class Template2(Template):
+    """自定义模板类(变量名可含'.')"""
     delimiter = "#$"
     braceidpattern = "(?a:[._a-z][._a-z0-9]*)"
 
 def get_strtime(dt:datetime.datetime = datetime.datetime.now(), h=True,m=True,s=True) -> str:
+    """获取标准时间格式"""
     t = dt.strftime("%Y-%m-%d ")
     t += "一二三四五六日"[dt.weekday()]
     l = [i[1] for i in ((h,"%H"),(m,"%M"),(s,"%S")) if i[0]]
@@ -25,6 +27,7 @@ def get_strtime(dt:datetime.datetime = datetime.datetime.now(), h=True,m=True,s=
     return t
 
 def merge_dict(old:dict, new:dict):
+    """将new词典的内容依照old的结构和类型合并"""
     for k in new:
         if ".*" in old:
             old[k] = old[".*"]
@@ -40,15 +43,19 @@ def merge_dict(old:dict, new:dict):
         old.pop(".*")
 
 def squash_dict(data:dict, prefix="") -> dict:
+    """将分级词典以'.'为分割字符合并为同级词典"""
     new = {}
+    if prefix:
+        prefix+="."
     for k in data:
         if isinstance(data[k], dict):
-            new.update(squash_dict(data[k], prefix=f"{prefix}.{k}"))
+            new.update(squash_dict(data[k], prefix=f"{prefix}{k}"))
             continue
-        new[f"{prefix}.{k}"] = data[k]
+        new[f"{prefix}{k}"] = data[k]
     return new
 
 class Config:
+    """配置类"""
     cfg_temerate = {
             "title":"",
             "author":"",
@@ -56,6 +63,7 @@ class Config:
                 "gen_info":True,
                 "mktitle":False,
                 "mktoc":True,
+                "ruler":False,    # 尺子，测试用
                 "papersize":"a4paper",
                 "fontsize":4,
                 "fontname":"DengXian Light",
@@ -76,7 +84,7 @@ class Config:
                     "add":[]
                     }
                 },
-            "output":"output.tex",
+            "output":"output_#${title}_#${setting.papersize}_#${setting.fontsize}px_#${template.gtst}.tex",
             }
     pandoc_template = r"""% 生成于: #${template.generate_time}
 \documentclass{article}
@@ -100,7 +108,7 @@ class Config:
 \usepackage{footmisc}
 \usepackage{dblfnote}
 \usepackage{titlesec}  % 控制标题格式
-\usepackage{enumitem}  % 控制列表格式
+\usepackage{enumitem}  % 控制列表格式#${template.ruler}
 % 需要装有windows自带的 "等线 light" 字体,
 % 4pt字体对于600dpi激光打印机足够了
 \setmainfont{#${setting.fontname}}
@@ -201,7 +209,7 @@ LINES:#${counter.lines}""".splitlines())
         content = []
         for i in filelist:
             content += ["", f"【FILE:{i.name}】",""]
-            content += i.read_text().splitlines()
+            content += i.read_text(encoding="utf-8").splitlines()
         content = "\n".join(content)
         content = re.sub(r"^\s*#\+title:(.*)", r"\n【TITLE:\1】\n",content, flags=re.I+re.M)
         content = re.sub(r"^\s*#\+author:(.*)", r"\n【AUTHOR:\1】\n",content, flags=re.I+re.M)
@@ -214,12 +222,13 @@ LINES:#${counter.lines}""".splitlines())
 
 """ + content
         return content
-    def generate_pandoc_template(self, content:str = "") -> str:
-        t = Template2(self.pandoc_template)
+    def generate_template_dict(self, content:str = "") -> dict:
+        """生成用于模板的词典"""
         k : dict[str, str|int|float] = {
+                "template.gtst": time.strftime("%Y%m%d_%H%M%S"),
                 "template.generate_time": get_strtime(),
                 }
-        k.update(squash_dict(self.cfg["setting"], prefix="setting"))
+        k.update(squash_dict(self.cfg))
         k["setting.fontsize.section"] = float(k["setting.fontsize"]) + 2
         k["setting.fontsize.subsection"] = float(k["setting.fontsize"]) + 1
         k["setting.fontsize.subsubsection"] = k["setting.fontsize"]
@@ -229,13 +238,15 @@ LINES:#${counter.lines}""".splitlines())
         k["counter.lines"] = len(content.splitlines())
         k["template.mktitle"] = r"\maketitle{}" if k["setting.mktitle"] else ""
         k["template.mktoc"] = Template2(self.pandoc_template_toc).safe_substitute(k) if k["setting.mktoc"] else ""
+        k["template.ruler"] = "\n\\usepackage{fgruler}" if k["setting.ruler"] else ""
         k["template.gen_info"] = Template2(self.pandoc_template_info).safe_substitute(k) if k["setting.gen_info"] else ""
-        s = t.safe_substitute(k)
+        return k
+    def generate_pandoc_template(self, content:str = "") -> str:
         # print(s)
         # __import__('pprint').pprint({k1:k[k1] for k1 in set(k) - set(t.get_identifiers())})
         # __import__('pprint').pprint({k1:k[k1] for k1 in set(t.get_identifiers()) & set(k)})
         # __import__('pprint').pprint(set(t.get_identifiers()) - set(k))
-        return s
+        return Template2(self.pandoc_template).safe_substitute(self.generate_template_dict(content))
 
 def main():
     ARGS = parse_arg()
@@ -249,11 +260,14 @@ def main():
     print("[INFO] Config:")
     __import__('pprint').pprint(config.cfg)
     content = config.generate_org_file()
-    pandoc_template = config.generate_pandoc_template(content)
-    outputf = config.cfg_f.parent/config.cfg["output"]
+    temp_dict = config.generate_template_dict(content)
+    pandoc_template = Template2(config.pandoc_template).safe_substitute(temp_dict)
+    outputf = config.cfg_f.parent/Template2(config.cfg["output"]).safe_substitute(temp_dict)
 
     if ARGS.no_to_tex:
-        outputf.write_text(content)
+        outputf = Path(outputf.stem+".org")
+        print(f"[INFO] 保存org文件到:{outputf}")
+        outputf.write_text(content, encoding="utf-8")
         return
     org_f = tempfile.mkstemp(prefix=f"output_org_file.{time.strftime("%Y%m%d_%H%M%S")}.",
                              suffix=".org")

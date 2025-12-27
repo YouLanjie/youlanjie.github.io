@@ -8,12 +8,9 @@
 	"filelist": {
 		"./": {
 			"ignore": [
-				"./025_蛇足篇1.org",
-				"./026_蛇足篇2.org",
 				"./index.org"
 			],
 			"add": []
 		}
-	},
-	"output": "无职_b5.tex"
+	}
 }
