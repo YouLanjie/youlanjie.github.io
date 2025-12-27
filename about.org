@@ -41,7 +41,9 @@ html文件你也能够访问相应的Org源文件。就例如本页的[[./about.
 * Setting
 ** 切换css主题
 #+begin_export html
-<a onclick='setTheme1()' href="/">[main]</a> |
-<a onclick='setTheme2()' href="/">[ohtd]</a> |
-<a onclick='setTheme3()' href="/">[rtd]</a>
+<ul>
+<li><a onclick='setTheme1("main")' href="/">[main]</a>:默认主题，兼容性好（应该），性能要求低</li>
+<li><a onclick='setTheme2("ohtd")' href="/">[org-html-theme-dull]</a>:动画可能会有点卡</li>
+<li><a onclick='setTheme3("rtd")' href="/">[read_the_docs]</a>：加载起来可能会比较慢，不过还是很易读的</li>
+</ul>
 #+end_export

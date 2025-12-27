@@ -116,16 +116,11 @@
 	}
 })();
 
-function setTheme1() {
-	localStorage.setItem('csstheme', "main");
-	document.getElementById("thname").innerText = localStorage.getItem('csstheme')
-}
-function setTheme2() {
-	localStorage.setItem('csstheme', "ohtd");
-	document.getElementById("thname").innerText = localStorage.getItem('csstheme')
-}
-function setTheme3() {
-	localStorage.setItem('csstheme', "rtd");
+function setTheme(theme_name) {
+	if (!theme_name in ["main", "ohtd", "rtd"]) {
+		theme_name = "main"
+	}
+	localStorage.setItem('csstheme', theme_name);
 	document.getElementById("thname").innerText = localStorage.getItem('csstheme')
 }
 // 切换css主题
