@@ -3,6 +3,7 @@
 
 import argparse
 import re
+import time
 from pathlib import Path
 
 try:
@@ -222,7 +223,16 @@ if __name__ == "__main__":
     parser.add_argument("-r", "--run", action="store_true", help="构建后运行http.server")
     parser.add_argument("-v", "--verbose", action="store_true", help="显示更详细的输出")
     parser.add_argument("-p", "--progress", action="store_true", help="显示进度条")
+    parser.add_argument("-w", "--watch", default=0.0, nargs="?", const=5.0, type=float,
+                        help="自动循环运行相同命令")
     ARGS = parser.parse_args()
     main()
+    while ARGS.watch > 1:
+        try:
+            time.sleep(ARGS.watch)
+            main()
+        except (EOFError, KeyboardInterrupt):
+            print("[Quit Watching]")
+            break
     if ARGS.run:
         run_server()
