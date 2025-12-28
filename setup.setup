@@ -5,6 +5,8 @@
 #+HTML_LINK_HOME: /
 #+LANGUAGE: zh
 
+#+options: ^:nil
+
 # #+OPTIONS: html-style:nil
 #+HTML_HEAD: <script type="text/javascript" src="/theme/main.js" defer></script>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/theme/main.css"/>

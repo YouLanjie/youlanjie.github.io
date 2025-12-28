@@ -108,7 +108,9 @@ class Config:
 \usepackage{footmisc}
 \usepackage{dblfnote}
 \usepackage{titlesec}  % 控制标题格式
-\usepackage{enumitem}  % 控制列表格式#${template.ruler}
+\usepackage{enumitem}  % 控制列表格式
+\usepackage{tcolorbox} % 自定义quote环境格式用#${template.ruler}
+
 % 需要装有windows自带的 "等线 light" 字体,
 % 4pt字体对于600dpi激光打印机足够了
 \setmainfont{#${setting.fontname}}
@@ -134,16 +136,44 @@ class Config:
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
+
 \pagestyle{fancy}
 \fancyfoot[C]{\setsmallf\thepage}
 \setlength{\footnotesep}{0.5\footnotesep} % 减少脚注之间的间距
 \setlength{\skip\footins}{0.5\skip\footins} % 减少脚注与正文的间距
-% 新方案
-\renewcommand{\footnote}[1]{{【脚注：#1】}}
+\renewcommand{\footnote}[1]{{【脚注：#1】}} % 替换原生脚注
+
 % 设置列表的间距
 \setlist{noitemsep,leftmargin=1em,labelsep=0.1em,topsep=0.1em,partopsep=0.1em}
-% 固定段落间距防止翻页时因为标题自动拉伸浪费空间
-\setlength{\parskip}{0em}
+
+% 缩小最大段落间距防止翻页时因为标题过度自动拉伸浪费空间
+% 如果固定为0会导致每页底部无法对齐很难看
+\setlength{\parskip}{0ex plus 0.00001ex}
+
+% 自定义quote环境
+\tcbuselibrary{skins,breakable}
+% 定义新环境：左侧有竖线，整体左缩进1em，段首缩进2em
+\renewtcolorbox{quote}[1][]{
+	breakable,
+	enhanced,
+	frame hidden,
+	colback=white,
+	left=1em,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	sharp corners,
+	before skip=0.5\baselineskip,
+	after skip=0.5\baselineskip,
+	overlay={
+		\draw[line width=0.6pt, black](frame.north west) -- (frame.south west);
+	},
+	parbox=false,
+	#1
+}
+% 设置环境内段落缩进
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\setlength{\parindent}{2em}}
 
 % pandoc的奇怪东西
 \providecommand{\tightlist}{}

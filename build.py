@@ -4,6 +4,7 @@
 import argparse
 import re
 import time
+import subprocess
 from pathlib import Path
 
 try:
@@ -14,9 +15,83 @@ except ModuleNotFoundError as e:
     print("[ERROR] 尝试：git submodule update")
     raise e
 
+class EmacsBacken:
+    """Emacs服务"""
+    def __init__(self) -> None:
+        self.avaliable = False
+        ret = subprocess.run("type emacs", capture_output=True, shell=True, check=False)
+        if ret.returncode == 0:
+            self.avaliable = True
+        self.started = False
+    def _exec(self, cmd, capture_output = True):
+        if not self.avaliable:
+            return None
+        ret= subprocess.run(cmd, capture_output=capture_output, check=False)
+        if ret.returncode != 0:
+            print(f"[Code:{ret.returncode}] Cmd:{cmd}")
+            if ret.stderr:
+                print("\033[31m"+ret.stderr.decode("utf-8")+"\033[0m")
+        return ret
+    def start(self, loop=False):
+        ret = self._exec(["emacs", "--bg-daemon", "ORG_TO_HTML_SERVER"])
+        if ret and ret.returncode == 0:
+            self.started = True
+            print("Emacs Deamond had running")
+        elif ret and ret.returncode == 1:
+            self.started = True
+            self.stop()
+            if not loop:
+                self.start(True)
+        else:
+            print("Emacs Deamond start FAILD")
+            return
+        ret = self._exec(["emacsclient", "-e", """(progn (require 'package) (package-initialize)
+(setq-default make-backup-files nil auto-save-default nil)
+(setq-default org-src-fontify-natively t org-export-with-sub-superscripts '{} org-use-sub-superscripts '{})
+(require 'monokai-theme) (load-theme 'monokai t) (require 'htmlize))"""])
+    def stop(self):
+        if self.started:
+            self._exec(["emacsclient", "-e", "(kill-emacs)"])
+            self.started = False
+    def update_file(self, filename):
+        if not self.started:
+            self.start()
+        filename = str(filename)
+        bufname = filename.split("/")
+        if bufname:
+            bufname = bufname[0]
+        else:
+            bufname = filename
+        outf = ""
+        if filename[-4:] == ".org":
+            outf = filename[:-4]
+        outf += ".html"
+        ret = self._exec(["emacsclient", "-e",
+        f"""(progn (find-file "{filename}")(org-mode)(org-html-export-as-html)(write-file "{outf}")
+                    (delete-window)(kill-buffer "{bufname}")(kill-buffer))"""])
+        if ret and ret.returncode != 0:
+            return
+        file = Path(filename)
+        if not file.is_file():
+            return
+        content = file.read_text(encoding="utf8").splitlines()
+        i = 0
+        flag = False
+        while i < len(content):
+            if content[i].startswith('<style type="text/css">'):
+                flag = True
+            if content[i].startswith('</style>'):
+                del content[i]
+                break
+            if flag:
+                del content[i]
+            i += 1
+        file.write_text("\n".join(content), encoding="utf8")
+
 ARGS = None
 project_dir = Path(orgreader2.pytools.sys.argv[0]).parent
 formatter = orgreader2.HtmlExportVisitor()
+emacs = EmacsBacken()
 
 def update_file(file:Path) -> tuple[str,str,str,str]:
     """更新文件"""
@@ -44,10 +119,16 @@ def update_file(file:Path) -> tuple[str,str,str,str]:
         content = content[:((ARGS and ARGS.limit) or 100)]    # 偷偷摸摸限制长度提高读取速度(实际上是在偷懒)
     if ARGS and ARGS.verbose:
         print(f"[INFO] 正在处理文件 '{file}'")
-    doc = orgreader2.Document(content, str(file),
-                              setting={"progress":(ARGS and ARGS.verbose and ARGS.progress)})
-    doc.setting["css_in_html"] = ""
-    doc.setting["js_in_html"] = """\
+
+    if ARGS and ARGS.no_build_home and ARGS.emacs:
+        ret =  ("", str(outputf), str(outputf), "[NONUPDATE]")
+        doc = None
+    else:
+        doc = orgreader2.Document(
+                content, str(file),
+                setting={"progress":(ARGS and ARGS.verbose and ARGS.progress)})
+        doc.setting["css_in_html"] = ""
+        doc.setting["js_in_html"] = """\
 <script>
 window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
 chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
@@ -55,17 +136,23 @@ svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
 output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 </script>
 <script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>"""
-    date = re.sub(r"<(.*)>", r"\1", " ".join(doc.meta["date"]))
-    date = re.sub(r"([^ ]*) [一|二|三|四|五|六|日]", r"\1", date)
-    link = str(orgreader2.pytools.calculate_relative(outputf, project_dir))
-    ret = (date, link, " ".join(doc.meta["title"]), " ".join(doc.meta["description"]))
+        date = re.sub(r"<(.*)>", r"\1", " ".join(doc.meta["date"]))
+        date = re.sub(r"([^ ]*) [一|二|三|四|五|六|日]", r"\1", date)
+        link = str(orgreader2.pytools.calculate_relative(outputf, project_dir))
+        ret = (date, link, " ".join(doc.meta["title"]) if
+               doc.meta["title"] else file.stem,
+               " ".join(doc.meta["description"]))
+
     if outputf.is_dir():
         print(f"ERROR 输出文件名被文件夹占用 - {outputf}")
         return ret
     if is_newer and ARGS:
         if not ARGS.no_update:
             print(f"INFO 输出文件 - {outputf}")
-            outputf.write_text(doc.accept(formatter), encoding="utf8")
+            if doc:
+                outputf.write_text(doc.accept(formatter), encoding="utf8")
+            else:
+                emacs.update_file(file)
         elif ARGS.touch:
             print(f"INFO 更新文件时间 - {outputf}")
             outputf.touch()
@@ -225,8 +312,12 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--progress", action="store_true", help="显示进度条")
     parser.add_argument("-w", "--watch", default=0.0, nargs="?", const=5.0, type=float,
                         help="自动循环运行相同命令")
+    parser.add_argument("-e", "--emacs", action="store_true", help="Run Emacs as outputor")
     ARGS = parser.parse_args()
-    main()
+    try:
+        main()
+    except (EOFError, KeyboardInterrupt):
+        print("Stoppping...")
     while ARGS.watch > 1:
         try:
             time.sleep(ARGS.watch)
@@ -234,5 +325,6 @@ if __name__ == "__main__":
         except (EOFError, KeyboardInterrupt):
             print("[Quit Watching]")
             break
+    emacs.stop()
     if ARGS.run:
         run_server()

@@ -487,11 +487,18 @@ fgruler宏包生成尺子评估打印效果。
 *** 自定义命令
 #+begin_src tex
   \newcommand{\name}[arg_num]{do sth here,#1 means arg 1}
+  \renewcommand{\name}[arg_num]{do sth here,#1 means arg 1}
+#+end_src
+*** 自定义环境
+#+begin_src tex
+  \newenvironment{新环境名称}[参数个数][参数默认值]{开始部分定义}{结束部分定义}
+  \renewenvironment{新环境名称}[参数个数][参数默认值]{开始部分定义}{结束部分定义}
 #+end_src
 ** 其他杂七杂八的东西
 *** 宏包备忘录
 1) hyperref: 插入超链接 =\usepackage[hidelinks]{hyperref}=
 2) footmisc: 作用不明，先放着再说
+3) lipsum: 使用 =\lipsum[num]= 插入示范文本
 
 * Reference
 - [[https://oi-wiki.org/tools/latex/][Latex入门教程]]
