@@ -33,7 +33,7 @@ class EmacsBacken:
                 print("\033[31m"+ret.stderr.decode("utf-8")+"\033[0m")
         return ret
     def start(self, loop=False):
-        ret = self._exec(["emacs", "--bg-daemon", "ORG_TO_HTML_SERVER"])
+        ret = self._exec(["emacs", "--bg-daemon", "ORG_TO_HTML_SERVER", "-Q"])
         if ret and ret.returncode == 0:
             self.started = True
             print("Emacs Deamond had running")
@@ -43,7 +43,7 @@ class EmacsBacken:
             if not loop:
                 self.start(True)
         else:
-            print("Emacs Deamond start FAILD")
+            print("[INFO] Emacs Deamond start FAILD")
             return
         ret = self._exec(["emacsclient", "-e", """(progn (require 'package) (package-initialize)
 (setq-default make-backup-files nil auto-save-default nil)
@@ -57,18 +57,8 @@ class EmacsBacken:
         if not self.started:
             self.start()
         filename = str(filename)
-        bufname = filename.split("/")
-        if bufname:
-            bufname = bufname[0]
-        else:
-            bufname = filename
-        outf = ""
-        if filename[-4:] == ".org":
-            outf = filename[:-4]
-        outf += ".html"
         ret = self._exec(["emacsclient", "-e",
-        f"""(progn (find-file "{filename}")(org-mode)(org-html-export-as-html)(write-file "{outf}")
-                    (delete-window)(kill-buffer "{bufname}")(kill-buffer))"""])
+        f"""(progn (find-file "{filename}")(org-mode)(org-html-export-to-html)(kill-buffer-and-window)())"""])
         if ret and ret.returncode != 0:
             return
         file = Path(filename)

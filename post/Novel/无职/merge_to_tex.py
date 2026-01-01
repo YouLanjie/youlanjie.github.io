@@ -99,17 +99,31 @@ class Config:
 	bindingoffset=#${setting.border.bindingoffset}cm,
 	twoside,
 ]{geometry}
+% \usepackage{footmisc}
+% \usepackage{dblfnote}
 \usepackage{fontspec}
 \usepackage[hidelinks]{hyperref}
 \usepackage{multicol}
-\setlength{\columnsep}{1mm}
 \usepackage[UTF8]{ctex}
-\usepackage{fancyhdr}
-\usepackage{footmisc}
-\usepackage{dblfnote}
+\usepackage{xcolor}
+\usepackage{titling}   % 保留title等变量
+\usepackage{fancyhdr}  % 自定义脚注
 \usepackage{titlesec}  % 控制标题格式
 \usepackage{enumitem}  % 控制列表格式
-\usepackage{tcolorbox} % 自定义quote环境格式用#${template.ruler}
+\usepackage{tcolorbox} % 自定义quote环境格式用
+\usepackage{listings}  % 自定义src环境格式用#${template.ruler}
+
+% 多栏设置
+\setlength{\columnsep}{6mm}
+
+% 缩小最大段落间距防止翻页时因为标题过度自动拉伸浪费空间
+% 如果固定为0会导致每页底部无法对齐很难看
+\setlength{\parskip}{0ex plus 0.00001ex}
+
+% 脚注设置
+\setlength{\footnotesep}{0.5\footnotesep} % 减少脚注之间的间距
+\setlength{\skip\footins}{0.5\skip\footins} % 减少脚注与正文的间距
+\renewcommand{\footnote}[1]{{【脚注：#1】}} % 替换原生脚注
 
 % 需要装有windows自带的 "等线 light" 字体,
 % 4pt字体对于600dpi激光打印机足够了
@@ -137,18 +151,16 @@ class Config:
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
 
+% 页脚设置
 \pagestyle{fancy}
 \fancyfoot[C]{\setsmallf\thepage}
-\setlength{\footnotesep}{0.5\footnotesep} % 减少脚注之间的间距
-\setlength{\skip\footins}{0.5\skip\footins} % 减少脚注与正文的间距
-\renewcommand{\footnote}[1]{{【脚注：#1】}} % 替换原生脚注
+\fancyfoot[RO]{\setsmallf【\thetitle】|【\leftmark】}
+\fancyfoot[LE]{\setsmallf【\thetitle】|【\leftmark】}
+\fancyfoot[LO]{\setsmallf【\thedate】}
+\fancyfoot[RE]{\setsmallf【\thedate】}
 
 % 设置列表的间距
 \setlist{noitemsep,leftmargin=1em,labelsep=0.1em,topsep=0.1em,partopsep=0.1em}
-
-% 缩小最大段落间距防止翻页时因为标题过度自动拉伸浪费空间
-% 如果固定为0会导致每页底部无法对齐很难看
-\setlength{\parskip}{0ex plus 0.00001ex}
 
 % 自定义quote环境
 \tcbuselibrary{skins,breakable}
@@ -175,14 +187,32 @@ class Config:
 \usepackage{etoolbox}
 \AtBeginEnvironment{quote}{\setlength{\parindent}{2em}}
 
+% 自定义src环境
+\lstset{
+    breaklines=true,
+    breakatwhitespace=false,     % 允许在任意位置换行
+    breakindent=2em,            % 换行缩进
+    prebreak=\mbox{\textcolor{red}{$\hookleftarrow$}\space},
+    postbreak=\mbox{\space\textcolor{red}{$\hookrightarrow$}},
+    numbers=left,      % 行号位置
+    numbersep=0.5em,   % 行号距左侧宽度
+    xleftmargin=1em,   % 左侧整体偏移
+    %numberstyle=\tiny\color{gray},
+    %basicstyle=\ttfamily\small,
+}
+
+% 文档信息
+\hypersetup{
+  pdftitle={#${title}},
+  pdfauthor={#${author}},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc(and a python script)}}
+\title{#${title}}
+\author{#${author}}
+\date{#${template.generate_time}}
+
 % pandoc的奇怪东西
 \providecommand{\tightlist}{}
-$hypersetup.latex()$
-$if(title)$
-\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
-$endif$
-\author{$for(author)$$author$$sep$ \and $endfor$}
-\date{$date$}
 
 \begin{document}
 % 分栏、字体设置
@@ -211,6 +241,14 @@ footskip：#${setting.border.footskip}pt,
 字体大小(h1,h2,h3,正文)：#${setting.fontsize.section}pt, #${setting.fontsize.subsection}pt ,#${setting.fontsize.subsubsection}pt ,#${setting.fontsize}pt
 字词统计：#${counter.words}k,
 LINES:#${counter.lines}""".splitlines())
+    pandoc_template_fgruler = r"""
+\usepackage[type=alledges]{fgruler}
+\fgrulerdefuser{
+    \ifnum\value{page}<3\relax
+        \fgrulertype{\fgrulerunit}{alledges}
+    \fi
+}
+"""
     def __init__(self, cfg_f:Path):
         self.cfg_f = cfg_f
         self.cfg = self.cfg_temerate
@@ -244,8 +282,8 @@ LINES:#${counter.lines}""".splitlines())
         content = re.sub(r"^\s*#\+title:(.*)", r"\n【TITLE:\1】\n",content, flags=re.I+re.M)
         content = re.sub(r"^\s*#\+author:(.*)", r"\n【AUTHOR:\1】\n",content, flags=re.I+re.M)
         content = re.sub(r"^\s*#\+date:(.*)", r"\n【DATE:\1】\n",content, flags=re.I+re.M)
-        content = re.sub(r"^\s*#\+begin_(.*)", "\n【BEGIN:\\1】\n", content, flags=re.I+re.M)
-        content = re.sub(r"^\s*#\+end_(.*)", "\n【END:\\1】\n", content, flags=re.I+re.M)
+        # content = re.sub(r"^\s*#\+begin_(.*)", "\n【BEGIN:\\1】\n", content, flags=re.I+re.M)
+        # content = re.sub(r"^\s*#\+end_(.*)", "\n【END:\\1】\n", content, flags=re.I+re.M)
         content = f"""#+title: {self.cfg["title"]}
 #+author: {self.cfg["author"]}
 #+date: {get_strtime()}
@@ -268,7 +306,7 @@ LINES:#${counter.lines}""".splitlines())
         k["counter.lines"] = len(content.splitlines())
         k["template.mktitle"] = r"\maketitle{}" if k["setting.mktitle"] else ""
         k["template.mktoc"] = Template2(self.pandoc_template_toc).safe_substitute(k) if k["setting.mktoc"] else ""
-        k["template.ruler"] = "\n\\usepackage{fgruler}" if k["setting.ruler"] else ""
+        k["template.ruler"] = self.pandoc_template_fgruler if k["setting.ruler"] else ""
         k["template.gen_info"] = Template2(self.pandoc_template_info).safe_substitute(k) if k["setting.gen_info"] else ""
         return k
     def generate_pandoc_template(self, content:str = "") -> str:

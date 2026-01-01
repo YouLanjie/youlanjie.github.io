@@ -7,7 +7,7 @@
 #+html_link_up: ../index.html
 #+LANGUAGE: zh
 
-#+OPTIONS: html-style:t
+#+OPTIONS: html-style:t ^:nil
 #+options: H:4
 #+startup: fold
 #+HTML_HEAD: <script type="text/javascript" src="/theme/main.js" defer></script>

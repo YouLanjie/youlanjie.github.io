@@ -301,7 +301,7 @@ normal size words
 {\LARGE LARGE words}
 {\huge huge words}
 #+end_src
-*** 超链接
+*** TODO 超链接
 *** 书写化学方程式
 使用mhchem宏包:
 #+begin_src 
@@ -313,16 +313,56 @@ normal size words
 效果图:
 #+CAPTION: 化学方程式效果图
 [[./latex/20251227_230211.avif]]
+*** 示例文本（假文）
+使用lispum宏包以插入示例文本:
+#+begin_src latex
+  \usepackage{lispum}
+  \begin{document}
+  % 这里的"114"是开始段落的意思，"514"是结束段落的意思
+  % 个人推测就是从一个文本库里按照给定的自然段编号或者范围
+  % 抽出来塞进正文里
+  % 所以一直\lispum[1]给出来到文字都会是重复的
+  \lispum[114-514]
+  \end{document}
+#+end_src
+如果想要使用中文的可以使用zhlispum宏包，对应的命令变更成
+=\zhlispum= 即可
 ** 行外内容
 *** 表格
 以 =tabular= 作纵向表格环境，内部可以镶嵌，外部套一个 =table= 环境，表格数据间通
 过… =&= 进行横向分割通过 =\\= 进行纵向分割
-*** 插入图片
-*** 列表
+*** TODO 插入图片
+*** TODO 列表
 关于设定列表的边距：
 #+begin_src tex
 % 设置列表的间距
 \setlist{noitemsep,leftmargin=1em,labelsep=0.1em,topsep=0.1em,partopsep=0.1em}
+#+end_src
+*** 代码块
+可以使用原生的verbatim环境(emacs导出src时使用)，不过更好的是使用listings宏包。
+#+begin_src latex
+  \lstset{
+      breaklines=true,
+      breakatwhitespace=false,     % 允许在任意位置换行
+      breakindent=2em,            % 换行缩进
+      prebreak=\mbox{\textcolor{red}{$\hookleftarrow$}\space},
+      postbreak=\mbox{\space\textcolor{red}{$\hookrightarrow$}},
+      numbers=left,      % 行号位置
+      numbersep=0.5em,   % 行号距左侧宽度
+      xleftmargin=1em,   % 左侧整体偏移
+      %numberstyle=\tiny\color{gray},
+      %basicstyle=\ttfamily\small,
+  }
+  \begin{document}
+  \begin{lstlisting}[language=Java]
+  public class Example {
+      // 这是一个很长的注释行，会在这里自动换行显示，因为这一行确实太长了，超出了页面边界
+      public static void main(String[] args) {
+          System.out.println("Hello, World!");
+      }
+  }
+  \end{lstlisting}
+  \end{document}
 #+end_src
 ** 特殊字符转义
 #+begin_src latex
@@ -469,21 +509,51 @@ fgruler宏包生成尺子评估打印效果。
 #+end_src
 *** 分栏
 使用multicol宏包实现分栏
-   #+begin_src latex
-     \usepackage{multicol}   % 使用包
-     \setlength{\columnsep}{1mm}  % 设置分栏间隔
-     \begin{document}
-     不会被分栏的内容
-     \begin{multicols}{n} % 其中的n为分栏数
-       会被分栏的内容
+#+begin_src latex
+  \usepackage{multicol}   % 使用包
+  \setlength{\columnsep}{1mm}  % 设置分栏间隔
+  \begin{document}
+  不会被分栏的内容
+  \begin{multicols}{n} % 其中的n为分栏数
+    会被分栏的内容
 
-       内容不够填满一整页时会优先向横向填充，在下面留出空间，而不是先一分到底
-     \end{multicols}
-     这里的内容也不会被分栏
-     \end{document}
-   #+end_src
+    内容不够填满一整页时会优先向横向填充，在下面留出空间，而不是先一分到底
+  \end{multicols}
+  这里的内容也不会被分栏
+  \end{document}
+#+end_src
 使用dblfnote可以实现脚注分栏，但是是固定2栏
+*** 尺子
+可以使用fgruler宏包生成实际尺寸的尺子，这里有[[http://mirrors.ctan.org/macros/latex/contrib/fgruler/fgruler.pdf][官方文档(pdf)]]。
+#+begin_src latex
+  \usepackage[type=user]{fgruler}
+  % 指定类型为用户自定义(type=user)
+  \fgrulerdefuser{
+  	% 进行判断：仅在前两页生成尺子
+  	\ifnum\value{page}<3\relax
+		% 生成尺子，类型为alledges(四边都有)
+		% alledges也可作为\usepackage时type=的参数
+  		\fgrulertype{\fgrulerunit}{alledges}
+  	\fi
+  }
+#+end_src
+
+#+begin_quote
+常见纸张类型尺寸备忘：
+- A4： 210mm*297mm
+- A5： 148mm*210mm
+- B5： 176mm*250mm
+#+end_quote
+
 ** Latex语法类控制命令
+*** 判断
+#+begin_src tex
+  \ifodd\value{page}
+  	当前为奇数页
+  \else
+  	当前为偶数页
+  \fi
+#+end_src
 *** 自定义命令
 #+begin_src tex
   \newcommand{\name}[arg_num]{do sth here,#1 means arg 1}
@@ -505,5 +575,7 @@ fgruler宏包生成尺子评估打印效果。
 - [[https://dylandong.top/posts/e480/][【LaTeX】新手教程：从入门到日常使用]]
 - [[https://github.com/FrogGuaGuaGua/HighSchoolMathematics/blob/main/Latex%E9%80%9F%E6%9F%A5.pdf/][Latex速查手册(tex+pdf) - （Github）]]
 - [[https://www.mohu.org/info/symbols/symbols.htm][latex数学符号]]
+- [[https://zhuanlan.zhihu.com/p/261667944][LaTeX listings 宏包使用说明 - 知乎]]
+- [[https://blog.csdn.net/robert_chen1988/article/details/52739825][latex 中的长度单位，尺寸 - CSDN博客]]
 * Footnotes
 [fn:1] 参考文章：[[https://liam.page/2018/11/26/introduction-to-TeX-engine-format-and-distribution/][TeX 引擎、格式、发行版之介绍]]
