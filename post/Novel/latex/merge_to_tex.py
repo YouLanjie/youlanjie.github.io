@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 # Created:2025.12.07
-# pandoc required
+# required: lib/python/orgreader2.py
 
 from string import Template
 from pathlib import Path
 import time
 import datetime
-import subprocess
 import json
 import argparse
-import tempfile
-import os
 import re
+
+import lib.orgreader2 as org2
 
 class Template2(Template):
     """自定义模板类(变量名可含'.')"""
@@ -54,6 +53,20 @@ def squash_dict(data:dict, prefix="") -> dict:
         new[f"{prefix}{k}"] = data[k]
     return new
 
+class TexExport(org2.TexExportVisitor):
+    """导出 LaTeX with 缩印模板"""
+    def visit_blockcode(self, node: org2.BlockCode) -> str:
+        ret = r"\begin{lstlisting}"
+        if node.lang:
+            ret += f"[language={node.lang}]"
+        ret += "\n"
+        if isinstance(node.line, org2.Strings):
+            ret += node.line.s
+        ret += "\\end{lstlisting}"
+        return ret
+    def visit_document(self, node: org2.Document) -> str:
+        return node.root.accept(self)
+
 class Config:
     """配置类"""
     cfg_temerate = {
@@ -73,7 +86,7 @@ class Config:
                     "top":0.5,
                     "bottom":0.9,  # 由于页码在该边距之外,所以要大点
                     "bindingoffset":.9,
-                    "footskip":6.5, # pt
+                    "footskip":6.9, # pt
                     },
                 "cols":9,
                 "toc_cols":5,
@@ -86,7 +99,7 @@ class Config:
                 },
             "output":"output_#${title}_#${setting.papersize}_#${setting.fontsize}px_#${template.gtst}.tex",
             }
-    pandoc_template = r"""% 生成于: #${template.generate_time}
+    latex_template = r"""% 生成于: #${template.generate_time}
 \documentclass{article}
 % 页边距需要考虑打印机实际情况
 \usepackage[
@@ -101,12 +114,12 @@ class Config:
 ]{geometry}
 % \usepackage{footmisc}
 % \usepackage{dblfnote}
+% \usepackage{titling}   % 保留title等变量
 \usepackage{fontspec}
 \usepackage[hidelinks]{hyperref}
 \usepackage{multicol}
 \usepackage[UTF8]{ctex}
 \usepackage{xcolor}
-\usepackage{titling}   % 保留title等变量
 \usepackage{fancyhdr}  % 自定义脚注
 \usepackage{titlesec}  % 控制标题格式
 \usepackage{enumitem}  % 控制列表格式
@@ -114,7 +127,7 @@ class Config:
 \usepackage{listings}  % 自定义src环境格式用#${template.ruler}
 
 % 多栏设置
-\setlength{\columnsep}{6mm}
+\setlength{\columnsep}{1mm}
 
 % 缩小最大段落间距防止翻页时因为标题过度自动拉伸浪费空间
 % 如果固定为0会导致每页底部无法对齐很难看
@@ -154,10 +167,10 @@ class Config:
 % 页脚设置
 \pagestyle{fancy}
 \fancyfoot[C]{\setsmallf\thepage}
-\fancyfoot[RO]{\setsmallf【\thetitle】|【\leftmark】}
-\fancyfoot[LE]{\setsmallf【\thetitle】|【\leftmark】}
-\fancyfoot[LO]{\setsmallf【\thedate】}
-\fancyfoot[RE]{\setsmallf【\thedate】}
+\fancyfoot[RO]{\setsmallf【#${title}】|【\leftmark】}
+\fancyfoot[LE]{\setsmallf【\leftmark】|【#${title}】}
+\fancyfoot[LO]{\setsmallf【#${template.generate_time}】}
+\fancyfoot[RE]{\setsmallf【#${template.generate_time}】}
 
 % 设置列表的间距
 \setlist{noitemsep,leftmargin=1em,labelsep=0.1em,topsep=0.1em,partopsep=0.1em}
@@ -206,13 +219,10 @@ class Config:
   pdftitle={#${title}},
   pdfauthor={#${author}},
   hidelinks,
-  pdfcreator={LaTeX via pandoc(and a python script)}}
+  pdfcreator={LaTeX via a python script}}
 \title{#${title}}
 \author{#${author}}
 \date{#${template.generate_time}}
-
-% pandoc的奇怪东西
-\providecommand{\tightlist}{}
 
 \begin{document}
 % 分栏、字体设置
@@ -223,16 +233,16 @@ class Config:
 
 #${template.gen_info}
 
-$body$
+#${template.body}
 
 \end{multicols}
 \end{document}
 """
-    pandoc_template_toc = r"""\begin{multicols}{#${setting.toc_cols}}
+    latex_template_toc = r"""\begin{multicols}{#${setting.toc_cols}}
 \tableofcontents
 \end{multicols}
 """
-    pandoc_template_info = "\n\n\\noindent\n".join(r"""\section{页面设置}
+    latex_template_info = "\n\n\\noindent\n".join(r"""\section{页面设置}
 生成于:#${template.generate_time}
 纸张类型：#${setting.papersize}
 上下左右边距：#${setting.border.top}cm ,#${setting.border.bottom}cm ,#${setting.border.left}cm ,#${setting.border.right}cm,
@@ -241,8 +251,8 @@ footskip：#${setting.border.footskip}pt,
 字体大小(h1,h2,h3,正文)：#${setting.fontsize.section}pt, #${setting.fontsize.subsection}pt ,#${setting.fontsize.subsubsection}pt ,#${setting.fontsize}pt
 字词统计：#${counter.words}k,
 LINES:#${counter.lines}""".splitlines())
-    pandoc_template_fgruler = r"""
-\usepackage[type=alledges]{fgruler}
+    latex_template_fgruler = r"""
+\usepackage[type=user]{fgruler}
 \fgrulerdefuser{
     \ifnum\value{page}<3\relax
         \fgrulertype{\fgrulerunit}{alledges}
@@ -274,6 +284,9 @@ LINES:#${counter.lines}""".splitlines())
             wl = {home/inp_dir/i for i in self.cfg["filelist"][inp_dir]["add"]}
             filelist |= {i.resolve() for i in ((fl-bl)|wl)}
         filelist = sorted(filelist)
+        print("[INFO] filelist:")
+        for i in filelist:
+            print(f"       - '{i}'")
         content = []
         for i in filelist:
             content += ["", f"【FILE:{i.name}】",""]
@@ -284,11 +297,6 @@ LINES:#${counter.lines}""".splitlines())
         content = re.sub(r"^\s*#\+date:(.*)", r"\n【DATE:\1】\n",content, flags=re.I+re.M)
         # content = re.sub(r"^\s*#\+begin_(.*)", "\n【BEGIN:\\1】\n", content, flags=re.I+re.M)
         # content = re.sub(r"^\s*#\+end_(.*)", "\n【END:\\1】\n", content, flags=re.I+re.M)
-        content = f"""#+title: {self.cfg["title"]}
-#+author: {self.cfg["author"]}
-#+date: {get_strtime()}
-
-""" + content
         return content
     def generate_template_dict(self, content:str = "") -> dict:
         """生成用于模板的词典"""
@@ -305,16 +313,10 @@ LINES:#${counter.lines}""".splitlines())
         k["counter.words"] = (len(content)-len(content.splitlines()))/1000
         k["counter.lines"] = len(content.splitlines())
         k["template.mktitle"] = r"\maketitle{}" if k["setting.mktitle"] else ""
-        k["template.mktoc"] = Template2(self.pandoc_template_toc).safe_substitute(k) if k["setting.mktoc"] else ""
-        k["template.ruler"] = self.pandoc_template_fgruler if k["setting.ruler"] else ""
-        k["template.gen_info"] = Template2(self.pandoc_template_info).safe_substitute(k) if k["setting.gen_info"] else ""
+        k["template.mktoc"] = Template2(self.latex_template_toc).safe_substitute(k) if k["setting.mktoc"] else ""
+        k["template.ruler"] = self.latex_template_fgruler if k["setting.ruler"] else ""
+        k["template.gen_info"] = Template2(self.latex_template_info).safe_substitute(k) if k["setting.gen_info"] else ""
         return k
-    def generate_pandoc_template(self, content:str = "") -> str:
-        # print(s)
-        # __import__('pprint').pprint({k1:k[k1] for k1 in set(k) - set(t.get_identifiers())})
-        # __import__('pprint').pprint({k1:k[k1] for k1 in set(t.get_identifiers()) & set(k)})
-        # __import__('pprint').pprint(set(t.get_identifiers()) - set(k))
-        return Template2(self.pandoc_template).safe_substitute(self.generate_template_dict(content))
 
 def main():
     ARGS = parse_arg()
@@ -322,14 +324,14 @@ def main():
     if ARGS.print_config:
         config.print_config_template()
         return
-    if ARGS.print_pandoc_template:
-        print(config.generate_pandoc_template())
+    if ARGS.print_template:
+        print(Template2(config.latex_template).safe_substitute(
+            config.generate_template_dict("")))
         return
     print("[INFO] Config:")
     __import__('pprint').pprint(config.cfg)
     content = config.generate_org_file()
     temp_dict = config.generate_template_dict(content)
-    pandoc_template = Template2(config.pandoc_template).safe_substitute(temp_dict)
     outputf = config.cfg_f.parent/Template2(config.cfg["output"]).safe_substitute(temp_dict)
 
     if ARGS.no_to_tex:
@@ -337,40 +339,25 @@ def main():
         print(f"[INFO] 保存org文件到:{outputf}")
         outputf.write_text(content, encoding="utf-8")
         return
-    org_f = tempfile.mkstemp(prefix=f"output_org_file.{time.strftime("%Y%m%d_%H%M%S")}.",
-                             suffix=".org")
-    os.write(org_f[0], content.encode("utf-8"))
-    os.close(org_f[0])
 
-    template = tempfile.mkstemp(prefix=f"pandoc_template.{time.strftime("%Y%m%d_%H%M%S")}.",
-                                suffix=".tex")
-    os.write(template[0], pandoc_template.encode("utf-8"))
-    os.close(template[0])
-
-    cmd = ["pandoc", org_f[1],"--template",template[1],"-o",outputf]
-    print(f"[INFO] RUN: {cmd}")
-    try:
-        subprocess.run(cmd, check=True)
-        print(f"[INFO] 输出文件为'{outputf}'")
-    except KeyboardInterrupt:
-        print("[INFO] 转换取消，临时文件未删除")
-        return
-    except FileNotFoundError:
-        print("[WARN] pandoc不存在, 转换取消，临时文件未删除")
-        return
-    except subprocess.CalledProcessError:
-        print("[WARN] pandoc报错, 转换取消，临时文件未删除")
-        return
-    Path(org_f[1]).unlink()
-    Path(template[1]).unlink()
+    doc = org2.Document(
+        content.splitlines(),
+        file_name=f"out_{time.strftime("%Y%m%d_%H%M%S")}.org",
+        setting={"progress":True,
+                 "verbose_msg":True})
+    temp_dict["template.body"] = doc.accept(TexExport())
+    outputf.write_text(Template2(config.latex_template).safe_substitute(temp_dict),
+                       encoding="utf8")
+    print(f"[INFO] 输出文件为'{outputf}'")
 
 def parse_arg() -> argparse.Namespace:
-    parser=argparse.ArgumentParser(description="合并org文件并利用pandoc生成缩印用的tex文件")
+    """解释参数"""
+    parser=argparse.ArgumentParser(description="合并org文件并生成缩印用的tex文件")
     parser.add_argument("-c", "--config", type=Path, default=Path("config.json"),
                         help="配置文件")
     parser.add_argument("-n", "--no-to-tex", action="store_true", help="输出.org文件")
-    parser.add_argument("-P", "--print-config", action="store_true", help="打印配置文件模板")
-    parser.add_argument("-D", "--print-pandoc-template", action="store_true", help="打印pandoc模板")
+    parser.add_argument("-C", "--print-config", action="store_true", help="打印配置文件模板")
+    parser.add_argument("-p", "--print-template", action="store_true", help="打印latex模板")
     return parser.parse_args()
 
 if __name__ == "__main__":

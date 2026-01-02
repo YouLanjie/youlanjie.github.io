@@ -310,6 +310,7 @@ if __name__ == "__main__":
         print("Stoppping...")
     while ARGS.watch > 1:
         try:
+            print("[Watching...]")
             time.sleep(ARGS.watch)
             main()
         except (EOFError, KeyboardInterrupt):

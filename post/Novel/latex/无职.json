@@ -3,10 +3,11 @@
 	"author": "(原作:不讲理不求人（理不尽な孫の手）)",
 	"setting": {
 		"mktitle": true,
-		"papersize": "b5paper"
+		"papersize": "b5paper",
+		"ruler": true
 	},
 	"filelist": {
-		"./": {
+		"../无职/": {
 			"ignore": [
 				"./index.org"
 			],
