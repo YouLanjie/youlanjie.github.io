@@ -9,9 +9,12 @@
 	"filelist": {
 		"../无职/": {
 			"ignore": [
-				"./index.org"
+				"./index.org",
+				"./027_蛇足篇web版补全.org"
 			],
-			"add": []
+			"add": [
+				"./027_蛇足篇web版补全.org::25716"
+			]
 		}
 	}
 }

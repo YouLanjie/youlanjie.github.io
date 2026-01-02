@@ -1,5 +1,8 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
+* 2026
+- [[./post/Novel/latex/index.html][*基于latex生成缩印用pdf*]] /[2026-01-03 05:54]/\\
+  如何将这个小说文件夹的内容整出一个缩印用的pdf
 * 2025
 - [[./post/Novel/春物/index.html][*春物小说资源索引*]] /[2025-12-13 06:07]/\\
   内容来自网络

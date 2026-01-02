@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 
 try:
-    import lib.python.orgreader2 as orgreader2
+    from lib.python import orgreader2
 except ModuleNotFoundError as e:
     print("[ERROR] lib.python.orgreader2.py 不可用")
     print("[ERROR] 尝试：git submodule init")
@@ -33,6 +33,7 @@ class EmacsBacken:
                 print("\033[31m"+ret.stderr.decode("utf-8")+"\033[0m")
         return ret
     def start(self, loop=False):
+        """启动进程"""
         ret = self._exec(["emacs", "--bg-daemon", "ORG_TO_HTML_SERVER", "-Q"])
         if ret and ret.returncode == 0:
             self.started = True
@@ -50,10 +51,12 @@ class EmacsBacken:
 (setq-default org-src-fontify-natively t org-export-with-sub-superscripts '{} org-use-sub-superscripts '{})
 (require 'monokai-theme) (load-theme 'monokai t) (require 'htmlize))"""])
     def stop(self):
+        """退出emacs"""
         if self.started:
             self._exec(["emacsclient", "-e", "(kill-emacs)"])
             self.started = False
     def update_file(self, filename):
+        """更新文件（自动过滤css）"""
         if not self.started:
             self.start()
         filename = str(filename)
@@ -248,7 +251,7 @@ def main():
         setupf = orgreader2.pytools.calculate_relative(p1, p2)
         t = "#+TITLE: \n"
         t = "#+DESCRIPTION: \n"
-        t += f"#+DATE: <{orgreader2._get_strtime(s=False)}>\n"
+        t += f"#+DATE: <{orgreader2.pytools.get_strtime(s=False)}>\n"
         t += f"#+SETUPFILE: {setupf}\n\n请输入文本\n"
         p2.write_text(t, encoding="utf8")
         print(f"已创建文件'{p2}'")

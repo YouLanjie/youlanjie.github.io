@@ -177,13 +177,13 @@ class Config:
 
 % 自定义quote环境
 \tcbuselibrary{skins,breakable}
-% 定义新环境：左侧有竖线，整体左缩进1em，段首缩进2em
+% 定义新环境：左侧有竖线，整体左缩进0.5em，段首缩进2em
 \renewtcolorbox{quote}[1][]{
 	breakable,
 	enhanced,
 	frame hidden,
 	colback=white,
-	left=1em,
+	left=0.5em,
 	right=0pt,
 	top=0pt,
 	bottom=0pt,
@@ -191,7 +191,7 @@ class Config:
 	before skip=0.5\baselineskip,
 	after skip=0.5\baselineskip,
 	overlay={
-		\draw[line width=0.6pt, black](frame.north west) -- (frame.south west);
+		\draw[line width=0.3pt, black]([shift={(0.5em, -0.5em)}]frame.north west) -- ([shift={(0.5em, 0.5em)}]frame.south west);
 	},
 	parbox=false,
 	#1
@@ -204,7 +204,7 @@ class Config:
 \lstset{
     breaklines=true,
     breakatwhitespace=false,     % 允许在任意位置换行
-    breakindent=2em,            % 换行缩进
+    breakindent=0em,             % 换行缩进（由于设置了箭头符号故这里设置为0）
     prebreak=\mbox{\textcolor{red}{$\hookleftarrow$}\space},
     postbreak=\mbox{\space\textcolor{red}{$\hookrightarrow$}},
     numbers=left,      % 行号位置
@@ -213,6 +213,11 @@ class Config:
     %numberstyle=\tiny\color{gray},
     %basicstyle=\ttfamily\small,
 }
+
+% 重定义verse环境
+\renewenvironment{verse}
+  {\begin{quote}【Verse】\par}
+  {\end{quote}}
 
 % 文档信息
 \hypersetup{
@@ -273,32 +278,66 @@ LINES:#${counter.lines}""".splitlines())
             cfg = {}
         merge_dict(self.cfg, cfg)
     def print_config_template(self):
+        """打印模板json"""
         print(json.dumps(self.cfg_temerate, ensure_ascii=False, indent='\t'))
-    def generate_org_file(self) -> str:
+    def get_merged(self) -> tuple[int,int,str]:
+        """生成org文件内容"""
+        def get_white_list(li:list[str]) -> dict[str,list[int]]:
+            """返回经过处理的白名单"""
+            ret = {}
+            for s in li:
+                l = s.split("::")
+                if len(l) != 2:
+                    ret[s] = []
+                    continue
+                nums = []
+                try:
+                    nums = [int(i or -1) for i in l[1].split("-")]
+                except ValueError:
+                    ret[s] = (-1, -1)
+                    continue
+                ret[l[0]] = nums
+            return ret
         filelist = set()
+        whitelist = {}
         home = self.cfg_f.parent
         for inp_dir in self.cfg["filelist"]:
             print(f"[INFO] searching '{home/inp_dir}'")
             fl = set((home/inp_dir).glob("**/*.org"))
             bl = {home/inp_dir/i for i in self.cfg["filelist"][inp_dir]["ignore"]}
-            wl = {home/inp_dir/i for i in self.cfg["filelist"][inp_dir]["add"]}
+            wl = get_white_list(self.cfg["filelist"][inp_dir]["add"])
+            whitelist.update({(home/inp_dir/i).resolve():j for i,j in wl.items()})
+            wl = {home/inp_dir/i for i in wl}
             filelist |= {i.resolve() for i in ((fl-bl)|wl)}
         filelist = sorted(filelist)
+        content = ""
+        print(whitelist)
         print("[INFO] filelist:")
+        exportor = TexExport()
         for i in filelist:
-            print(f"       - '{i}'")
-        content = []
-        for i in filelist:
-            content += ["", f"【FILE:{i.name}】",""]
-            content += i.read_text(encoding="utf-8").splitlines()
-        content = "\n".join(content)
-        content = re.sub(r"^\s*#\+title:(.*)", r"\n【TITLE:\1】\n",content, flags=re.I+re.M)
-        content = re.sub(r"^\s*#\+author:(.*)", r"\n【AUTHOR:\1】\n",content, flags=re.I+re.M)
-        content = re.sub(r"^\s*#\+date:(.*)", r"\n【DATE:\1】\n",content, flags=re.I+re.M)
-        # content = re.sub(r"^\s*#\+begin_(.*)", "\n【BEGIN:\\1】\n", content, flags=re.I+re.M)
-        # content = re.sub(r"^\s*#\+end_(.*)", "\n【END:\\1】\n", content, flags=re.I+re.M)
-        return content
-    def generate_template_dict(self, content:str = "") -> dict:
+            file = org2.pytools.calculate_relative(i, home)
+            filename = str(file)
+            if i in whitelist:
+                filename += f" {whitelist[i]}"
+            print(f"       - {filename}")
+            s = i.read_text(encoding="utf-8").splitlines()
+            if i in whitelist:
+                nums = whitelist[i]
+                if len(nums) == 1:
+                    s = s[nums[0]:]
+                elif len(nums) == 2 and nums[0] < nums[1]:
+                    s = s[nums[0]:nums[1]]
+                print("         > "+"\n         > ".join(s[:5]))
+            s = ["#+begin_verse", f"【FILE:{filename}】","#+end_verse",""] + s
+            doc = org2.Document(
+                    s,
+                    file_name=str(file),
+                    setting={"verbose_msg":True})
+            content += doc.accept(exportor)
+        l = len([i for i in content.splitlines() if i])
+        white = len([i for i in content if i not in " \t\n\r\\{}[]"])
+        return (white,l,content)
+    def generate_template_dict(self, words = 0, lines = 0) -> dict:
         """生成用于模板的词典"""
         k : dict[str, str|int|float] = {
                 "template.gtst": time.strftime("%Y%m%d_%H%M%S"),
@@ -308,44 +347,37 @@ LINES:#${counter.lines}""".splitlines())
         k["setting.fontsize.section"] = float(k["setting.fontsize"]) + 2
         k["setting.fontsize.subsection"] = float(k["setting.fontsize"]) + 1
         k["setting.fontsize.subsubsection"] = k["setting.fontsize"]
-        if content:
-            content = "\n".join(i for i in content.splitlines() if i)
-        k["counter.words"] = (len(content)-len(content.splitlines()))/1000
-        k["counter.lines"] = len(content.splitlines())
+        k["counter.words"] = words
+        k["counter.lines"] = lines
         k["template.mktitle"] = r"\maketitle{}" if k["setting.mktitle"] else ""
-        k["template.mktoc"] = Template2(self.latex_template_toc).safe_substitute(k) if k["setting.mktoc"] else ""
+        k["template.mktoc"] = Template2(self.latex_template_toc).safe_substitute(k) \
+                if k["setting.mktoc"] else ""
         k["template.ruler"] = self.latex_template_fgruler if k["setting.ruler"] else ""
-        k["template.gen_info"] = Template2(self.latex_template_info).safe_substitute(k) if k["setting.gen_info"] else ""
+        k["template.gen_info"] = Template2(self.latex_template_info).safe_substitute(k) \
+                if k["setting.gen_info"] else ""
         return k
 
 def main():
-    ARGS = parse_arg()
-    config = Config(ARGS.config)
-    if ARGS.print_config:
+    """主函数"""
+    args = parse_arg()
+    config = Config(args.config)
+    if args.print_config:
         config.print_config_template()
         return
-    if ARGS.print_template:
+    if not config.cfg_f.is_file():
+        print(f"配置文件 '{config.cfg_f}' 不存在")
+        return
+    if args.print_template:
         print(Template2(config.latex_template).safe_substitute(
-            config.generate_template_dict("")))
+            config.generate_template_dict()))
         return
     print("[INFO] Config:")
     __import__('pprint').pprint(config.cfg)
-    content = config.generate_org_file()
-    temp_dict = config.generate_template_dict(content)
+    w,l,c = config.get_merged()
+    temp_dict = config.generate_template_dict(w, l)
     outputf = config.cfg_f.parent/Template2(config.cfg["output"]).safe_substitute(temp_dict)
 
-    if ARGS.no_to_tex:
-        outputf = Path(outputf.stem+".org")
-        print(f"[INFO] 保存org文件到:{outputf}")
-        outputf.write_text(content, encoding="utf-8")
-        return
-
-    doc = org2.Document(
-        content.splitlines(),
-        file_name=f"out_{time.strftime("%Y%m%d_%H%M%S")}.org",
-        setting={"progress":True,
-                 "verbose_msg":True})
-    temp_dict["template.body"] = doc.accept(TexExport())
+    temp_dict["template.body"] = c
     outputf.write_text(Template2(config.latex_template).safe_substitute(temp_dict),
                        encoding="utf8")
     print(f"[INFO] 输出文件为'{outputf}'")
@@ -353,13 +385,11 @@ def main():
 def parse_arg() -> argparse.Namespace:
     """解释参数"""
     parser=argparse.ArgumentParser(description="合并org文件并生成缩印用的tex文件")
-    parser.add_argument("-c", "--config", type=Path, default=Path("config.json"),
+    parser.add_argument("-c", "-i", "--config", type=Path, default=Path("config.json"),
                         help="配置文件")
-    parser.add_argument("-n", "--no-to-tex", action="store_true", help="输出.org文件")
     parser.add_argument("-C", "--print-config", action="store_true", help="打印配置文件模板")
     parser.add_argument("-p", "--print-template", action="store_true", help="打印latex模板")
     return parser.parse_args()
 
 if __name__ == "__main__":
     main()
-

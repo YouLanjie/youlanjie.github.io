@@ -58,6 +58,9 @@
   - SAO
     - [[./post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
       由于资源有点多所以做了个分页作索引
+  - latex
+    - [[./post/Novel/latex/index.html][*基于latex生成缩印用pdf*]]\\
+      如何将这个小说文件夹的内容整出一个缩印用的pdf
   - 无职
     - [[./post/Novel/无职/index.html][*无职转生小说资源索引*]]\\
       web版,1-24卷,内容来自b网d络p
