@@ -337,7 +337,7 @@ LINES:#${counter.lines}""".splitlines())
             s = "\n".join(s)
             li = re.findall(r"^(\*+) (.*)", s, re.M)
             levels = sorted({len(i[0]) for i in li})
-            if min(levels) > 1 and max(levels) < 4:
+            if levels and min(levels) > 1 and max(levels) < 4:
                 s = f"* {i.name}\n" + s
             s = s.splitlines()
             s = ["#+begin_verse", f"【FILE:{filename}】","#+end_verse",""] + s
