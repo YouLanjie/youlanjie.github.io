@@ -10,6 +10,12 @@ import json
 import argparse
 import re
 
+try:
+    from natsort import natsorted as mysorted
+except ModuleNotFoundError:
+    mysorted = sorted
+    print("[INFO] no natsort")
+
 import lib.orgreader2 as org2
 
 class Template2(Template):
@@ -57,8 +63,9 @@ class TexExport(org2.TexExportVisitor):
     """导出 LaTeX with 缩印模板"""
     def visit_blockcode(self, node: org2.BlockCode) -> str:
         ret = r"\begin{lstlisting}"
-        if node.lang:
-            ret += f"[language={node.lang}]"
+        # 可能导致latex编译错误
+        # if node.lang:
+            # ret += f"[language={node.lang}]"
         ret += "\n"
         if isinstance(node.line, org2.Strings):
             ret += node.line.s
@@ -309,9 +316,8 @@ LINES:#${counter.lines}""".splitlines())
             whitelist.update({(home/inp_dir/i).resolve():j for i,j in wl.items()})
             wl = {home/inp_dir/i for i in wl}
             filelist |= {i.resolve() for i in ((fl-bl)|wl)}
-        filelist = sorted(filelist)
+        filelist = mysorted(filelist)
         content = ""
-        print(whitelist)
         print("[INFO] filelist:")
         exportor = TexExport()
         for i in filelist:
@@ -328,6 +334,12 @@ LINES:#${counter.lines}""".splitlines())
                 elif len(nums) == 2 and nums[0] < nums[1]:
                     s = s[nums[0]:nums[1]]
                 print("         > "+"\n         > ".join(s[:5]))
+            s = "\n".join(s)
+            li = re.findall(r"^(\*+) (.*)", s, re.M)
+            levels = sorted({len(i[0]) for i in li})
+            if min(levels) > 1 and max(levels) < 4:
+                s = f"* {i.name}\n" + s
+            s = s.splitlines()
             s = ["#+begin_verse", f"【FILE:{filename}】","#+end_verse",""] + s
             doc = org2.Document(
                     s,
