@@ -328,19 +328,19 @@ normal size words
 #+CAPTION: 化学方程式效果图
 [[./latex/20251227_230211.avif]]
 *** 示例文本（假文）
-使用lispum宏包以插入示例文本:
+使用lipsum宏包以插入示例文本:
 #+begin_src latex
-  \usepackage{lispum}
+  \usepackage{lipsum}
   \begin{document}
   % 这里的"114"是开始段落的意思，"514"是结束段落的意思
   % 个人推测就是从一个文本库里按照给定的自然段编号或者范围
   % 抽出来塞进正文里
-  % 所以一直\lispum[1]给出来到文字都会是重复的
-  \lispum[114-514]
+  % 所以一直\lipsum[1]给出来到文字都会是重复的
+  \lipsum[114-514]
   \end{document}
 #+end_src
-如果想要使用中文的可以使用zhlispum宏包，对应的命令变更成
-=\zhlispum= 即可
+如果想要使用中文的可以使用zhlipsum宏包，对应的命令变更成
+=\zhlipsum= 即可
 *** 可用命令表示的普通字符
 省略号(中文的 =……= 省略号在ctex会被转换为居中的省略号)
 - 无需数学环境:

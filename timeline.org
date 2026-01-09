@@ -1,6 +1,8 @@
 #+TITLE: TimeLine
 #+setupfile: setup.setup
 * 2026
+- [[./post/Learning/语文/高中语文古诗词.html][*高中语文古诗词合集*]] /[2026-01-10 01:20]/\\
+  仅用于缩印背书用，请勿模仿
 - [[./post/Novel/latex/index.html][*基于latex生成缩印用pdf*]] /[2026-01-03 05:54]/\\
   如何将这个小说文件夹的内容整出一个缩印用的pdf
 * 2025

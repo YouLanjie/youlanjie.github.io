@@ -146,7 +146,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
                 outputf.write_text(doc.accept(formatter), encoding="utf8")
             else:
                 emacs.update_file(file)
-        elif ARGS.touch:
+        elif ARGS.touch and outputf.is_file():
             print(f"INFO 更新文件时间 - {outputf}")
             outputf.touch()
     return ret
@@ -250,7 +250,7 @@ def main():
             return
         setupf = orgreader2.pytools.calculate_relative(p1, p2)
         t = "#+TITLE: \n"
-        t = "#+DESCRIPTION: \n"
+        t += "#+DESCRIPTION: \n"
         t += f"#+DATE: <{orgreader2.pytools.get_strtime(s=False)}>\n"
         t += f"#+SETUPFILE: {setupf}\n\n请输入文本\n"
         p2.write_text(t, encoding="utf8")

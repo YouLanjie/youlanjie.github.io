@@ -10,13 +10,13 @@ import json
 import argparse
 import re
 
+import lib.orgreader2 as org2
+
 try:
     from natsort import natsorted as mysorted
 except ModuleNotFoundError:
     mysorted = sorted
-    print("[INFO] no natsort")
-
-import lib.orgreader2 as org2
+    org2.pytools.print_err("[WARN] no natsort")
 
 class Template2(Template):
     """自定义模板类(变量名可含'.')"""
@@ -97,6 +97,7 @@ class Config:
                     },
                 "cols":9,
                 "toc_cols":5,
+                "col_gap":"1mm",
                 },
             "filelist":{
                 ".*":{
@@ -134,7 +135,7 @@ class Config:
 \usepackage{listings}  % 自定义src环境格式用#${template.ruler}
 
 % 多栏设置
-\setlength{\columnsep}{1mm}
+\setlength{\columnsep}{#${setting.col_gap}}
 
 % 缩小最大段落间距防止翻页时因为标题过度自动拉伸浪费空间
 % 如果固定为0会导致每页底部无法对齐很难看
@@ -309,8 +310,12 @@ LINES:#${counter.lines}""".splitlines())
         whitelist = {}
         home = self.cfg_f.parent
         for inp_dir in self.cfg["filelist"]:
-            print(f"[INFO] searching '{home/inp_dir}'")
-            fl = set((home/inp_dir).glob("**/*.org"))
+            if (home/inp_dir).is_dir():
+                print(f"[INFO] searching '{home/inp_dir}'")
+                fl = set((home/inp_dir).glob("**/*.org"))
+            else:
+                print(f"[INFO] adding '{home/inp_dir}'")
+                fl = {home/inp_dir}
             bl = {home/inp_dir/i for i in self.cfg["filelist"][inp_dir]["ignore"]}
             wl = get_white_list(self.cfg["filelist"][inp_dir]["add"])
             whitelist.update({(home/inp_dir/i).resolve():j for i,j in wl.items()})
@@ -376,12 +381,12 @@ def main():
     if args.print_config:
         config.print_config_template()
         return
-    if not config.cfg_f.is_file():
-        print(f"配置文件 '{config.cfg_f}' 不存在")
-        return
     if args.print_template:
         print(Template2(config.latex_template).safe_substitute(
             config.generate_template_dict()))
+        return
+    if not config.cfg_f.is_file():
+        print(f"配置文件 '{config.cfg_f}' 不存在")
         return
     print("[INFO] Config:")
     __import__('pprint').pprint(config.cfg)
