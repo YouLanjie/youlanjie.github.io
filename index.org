@@ -57,20 +57,22 @@
     - [[./post/Learning/道法/八下早读材料.html][*八下道法背诵材料*]]\\
       完全抄某教辅的背诵材料的道德与法治东西
 ** Novel
+  - [[./post/Novel/Index.html][*小说资源使用说明（自我吹嘘）*]]\\
+    关于一些脚本实现的额外功能使用说明
   - SAO
     - [[./post/Novel/SAO/index.html][*SAO小说资源索引*]]\\
       由于资源有点多所以做了个分页作索引
-  - latex
-    - [[./post/Novel/latex/index.html][*基于latex生成缩印用pdf*]]\\
-      如何将这个小说文件夹的内容整出一个缩印用的pdf
   - 无职
     - [[./post/Novel/无职/index.html][*无职转生小说资源索引*]]\\
       web版,1-24卷,内容来自b网d络p
   - 春物
     - [[./post/Novel/春物/index.html][*春物小说资源索引*]]\\
-      内容来自网络
+      内容来自网络(轻小说文库)
   - [[./post/Novel/给猫留门.html][*给猫留门*]]\\
     原作者黄咏梅，网上找的资料
+  - 败犬女主
+    - [[./post/Novel/败犬女主/index.html][*《败犬女主太多了！》资源索引*]]\\
+      内容来自网络(轻小说文库)
 ** Programing
   - C_language
     - [[./post/Programing/C_language/C_language_note.html][*C语言笔记*]]\\

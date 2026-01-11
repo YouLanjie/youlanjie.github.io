@@ -9,6 +9,7 @@ from pathlib import Path
 
 try:
     from lib.python import orgreader2
+    from lib.python import pytools
 except ModuleNotFoundError as e:
     print("[ERROR] lib.python.orgreader2.py 不可用")
     print("[ERROR] 尝试：git submodule init")
@@ -82,14 +83,14 @@ class EmacsBacken:
         file.write_text("\n".join(content), encoding="utf8")
 
 ARGS = None
-project_dir = Path(orgreader2.pytools.sys.argv[0]).parent
+project_dir = Path(pytools.sys.argv[0]).parent
 formatter = orgreader2.HtmlExportVisitor()
 emacs = EmacsBacken()
 
 def update_file(file:Path) -> tuple[str,str,str,str]:
     """更新文件"""
     if not file.is_file():
-        orgreader2.pytools.print_err(f"[WARN] '{file}' 不是文件")
+        pytools.print_err(f"[WARN] '{file}' 不是文件")
         return ("", "", "", "")
     outputf = Path(re.sub(r"\.org$", ".html", str(file)))
     content = ""
@@ -104,7 +105,7 @@ def update_file(file:Path) -> tuple[str,str,str,str]:
         try:
             content = file.read_text(encoding="gbk")
         except UnicodeDecodeError:
-            orgreader2.pytools.print_err(f"[ERROR] '{file}' 既不是utf8也不是gbk编码")
+            pytools.print_err(f"[ERROR] '{file}' 既不是utf8也不是gbk编码")
             return ("", str(outputf), f"[ERROR]{file}", "既不是utf8也不是gbk编码")
 
     content = content.splitlines()
@@ -131,7 +132,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>"""
         date = re.sub(r"<(.*)>", r"\1", " ".join(doc.meta["date"]))
         date = re.sub(r"([^ ]*) [一|二|三|四|五|六|日]", r"\1", date)
-        link = str(orgreader2.pytools.calculate_relative(outputf, project_dir))
+        link = str(pytools.calculate_relative(outputf, project_dir))
         ret = (date, link, " ".join(doc.meta["title"]) if
                doc.meta["title"] else file.stem,
                " ".join(doc.meta["description"]))
@@ -153,10 +154,12 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 
 BLACKLIST = {"post/Novel/SAO/",
              "post/Novel/无职/",
-             "post/Novel/春物"}
+             "post/Novel/春物/",
+             "post/Novel/败犬女主/"}
 WHITELIST = {"post/Novel/SAO/index.html",
              "post/Novel/无职/index.html",
-             "post/Novel/春物/index.html"}
+             "post/Novel/春物/index.html",
+             "post/Novel/败犬女主/index.html"}
 
 def check_list(s:str, li:list|set) -> bool:
     """检查文件s是否在列表内"""
@@ -248,10 +251,10 @@ def main():
         if p2.exists():
             print(f"文件或目录'{p2}'已存在")
             return
-        setupf = orgreader2.pytools.calculate_relative(p1, p2)
+        setupf = pytools.calculate_relative(p1, p2)
         t = "#+TITLE: \n"
         t += "#+DESCRIPTION: \n"
-        t += f"#+DATE: <{orgreader2.pytools.get_strtime(s=False)}>\n"
+        t += f"#+DATE: <{pytools.get_strtime(s=False)}>\n"
         t += f"#+SETUPFILE: {setupf}\n\n请输入文本\n"
         p2.write_text(t, encoding="utf8")
         print(f"已创建文件'{p2}'")
@@ -311,9 +314,10 @@ if __name__ == "__main__":
         main()
     except (EOFError, KeyboardInterrupt):
         print("Stoppping...")
+    if ARGS.watch > 1:
+        print("[Watching...]")
     while ARGS.watch > 1:
         try:
-            print("[Watching...]")
             time.sleep(ARGS.watch)
             main()
         except (EOFError, KeyboardInterrupt):

@@ -2,9 +2,7 @@
 	"title": "无职转生",
 	"author": "(原作:不讲理不求人（理不尽な孫の手）)",
 	"setting": {
-		"mktitle": true,
-		"papersize": "b5paper",
-		"ruler": true
+		"papersize": "b5paper"
 	},
 	"filelist": {
 		"../无职/": {

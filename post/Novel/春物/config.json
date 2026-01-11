@@ -1,0 +1,7 @@
+{
+	"source_file": "./1213.txt",
+	"title": "我的青春恋爱物语果然有问题",
+	"setupfile": "./setup.setup",
+	"section_pattern":"^([^ ]*[章卷节典结].+)$",
+	"comment": "文件下载自轻小说文库，自己去找"
+}

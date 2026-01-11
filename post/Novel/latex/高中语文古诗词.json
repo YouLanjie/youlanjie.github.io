@@ -2,9 +2,6 @@
 	"title": "高中语文古诗词小册",
 	"author": "语文书",
 	"setting": {
-		"gen_info": true,
-		"mktitle": true,
-		"mktoc": true,
 		"ruler": true,
 		"papersize": "a4paper",
 		"fontsize": 6,
