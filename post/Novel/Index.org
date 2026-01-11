@@ -4,10 +4,10 @@
 #+SETUPFILE: ../../setup.setup
 
 * 简介
-所有程序均存放在[[../../lib/python/]]即submodule里。下面逐个介绍：
-- [[../../lib/python/split_novel.py][split_novel.py]]:
+所有程序均存放在[[./../../lib/python/]]即submodule里。下面逐个介绍：
+- [[./../../lib/python/split_novel.py][split_novel.py]]:
   根据配置，按卷分割合集式txt小说文件排成org文件（用于构造blog用）
-- [[../../lib/python/merge2tex.py][merge2tex.py]]:
+- [[./../../lib/python/merge2tex.py][merge2tex.py]]:
   根据配置，将org文件合并成一个使用了缩印模板的tex文件以用xelatex生成pdf文件进行打印
 
 * 食用方法
