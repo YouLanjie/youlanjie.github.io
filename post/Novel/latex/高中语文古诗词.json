@@ -2,18 +2,14 @@
 	"title": "高中语文古诗词小册",
 	"author": "语文书",
 	"setting": {
-		"ruler": true,
 		"papersize": "a5paper",
 		"fontsize": 10.0,
 		"fontsizes": {
-			"autocontrol": false,
-			"section": 12.0,
-			"subsection": 11.0,
-			"subsubsection": 10.0,
 			"footer": 6.0
 		},
 		"fontname": "DengXian Light",
-		"fontname_backup": "Source Han Sans SC ExtraLight",
+		"fontname1": "Source Han Sans SC ExtraLight",
+		"fontname2": "Source Han Serif CN VF",
 		"cols": 2,
 		"toc_cols": 2,
 		"col_gap": "1em"
