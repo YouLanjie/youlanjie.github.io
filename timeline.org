@@ -1,0 +1,77 @@
+#+TITLE: TimeLine
+#+setupfile: setup.setup
+* 2026
+- [[./post/Novel/败犬女主/index.html][*《败犬女主太多了！》资源索引*]] /[2026-01-11 12:28]/\\
+  内容来自网络(轻小说文库)
+- [[./post/Novel/春物/index.html][*春物小说资源索引*]] /[2026-01-10 22:24]/\\
+  内容来自网络(轻小说文库)
+- [[./post/Learning/语文/高中语文古诗词.html][*高中语文古诗词合集*]] /[2026-01-10 01:20]/\\
+  仅用于缩印背书用，请勿模仿
+- [[./post/Novel/Index.html][*小说资源使用说明（自我吹嘘）*]] /[2026-01-03 05:54]/\\
+  关于一些脚本实现的额外功能使用说明
+* 2025
+- [[./post/Programing/chat_room.html][*使用python写一个聊天室程序*]] /[2025-11-22 11:00]/\\
+  对my-test仓库里的talking_local.py做的记录
+- [[./post/Learning/语文/list_of_words_online.html][*那些网上流行或出现过的东西*]] /[2025-10-24 22:52]/\\
+  个人整理，纯属考古兴趣之作，大概率不准
+- [[./post/Novel/无职/index.html][*无职转生小说资源索引*]] /[2025-10-07 19:40]/\\
+  web版,1-24卷,内容来自b网d络p
+- [[./post/Programs/tools/try_non-de_except_errors.html][*对于非DE下的不适应性问题*]] /[2025-10-05 14:05]/\\
+  在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题
+- [[./post/Learning/生物/Biology_jokes.html][*一些关于生物的奇思妙想*]] /[2025-10-01 23:41]/\\
+  放了点奇怪的东西？🤔
+- [[./post/Programs/tools/kde_applications.html][*部分Kde体系应用记录备忘*]] /[2025-10-01 23:33]/
+- [[./post/Games/mc/Minecraft_mods_list.html][*Minecraft模组列表*]] /[2025-09-26 10:40]/
+- [[./post/Programs/tools/fcitx_rime_and_chinese.html][*fcitx/rime/雾凇拼音/万象语言模型的安装与配置*]] /[2025-08-19 22:37]/\\
+  在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
+- [[./post/Games/Terraria/Terraria_note.html][*其他的泰拉笔记*]] /[2025-08-12 18:07]/\\
+  不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）
+- [[./post/ArchLinux/Archlinux_note.html][*Archlinux笔记*]] /[2025-08-02 11:17:50]/\\
+  记点杂的笔记，反正大都是关于archlinux的
+- [[./post/AboutBlog/build_blog_site_by_githubio.html][*使用github.io托管自己搭建的博客网站(重置)*]] /[2025-07-30 02:45]/\\
+  建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成
+- [[./post/Novel/给猫留门.html][*给猫留门*]] /[2025-05-23 (2018)]/\\
+  原作者黄咏梅，网上找的资料
+- [[./post/Programing/C_language/C_languare_useful_note.html][*C语言速查笔记*]] /[2025-04-19]/\\
+  抄别人blog的东西，塞一起应该方便自己查吧？
+- [[./post/Games/Terraria/泰拉速查笔记.html][*泰拉速查笔记*]] /[2025-03-01 08:58]/\\
+  从战士全流程笔记里摘出的常用要点信息
+* 2024
+- [[./post/Games/mc/红石学习笔记.html][*红石学习笔记*]] /[2024-11-23 Sat 18:58]/
+- [[./post/Games/Terraria/泰拉瑞亚战士全流程笔记.html][*泰拉瑞亚战士全流程笔记*]] /[2024-11-10 Sun 09:14]/\\
+  看404岛主等up的教程学的知识点笔记
+- [[./post/Programs/tools/Latex笔记.html][*Latex学习笔记*]] /[2024-10-01 02:04]/\\
+  Latex使用过程中查阅一些资料做的笔记，防忘
+* 2023
+- [[./post/Programs/manim/Manim_learning_note.html][*Manim学习笔记*]] /[2023-08-23 00:47]/\\
+  啃manim教程，自己养老备用防忘
+- [[./post/Learning/语文/语文笔记2.html][*语文笔记2*]] /[2023-07-29 22:20]/\\
+  内容来自课本和部分教辅材料
+- [[./post/Learning/语文/小学笔记汇总.html][*小学语文笔记汇总*]] /[2023-07-25 17:55]/\\
+  从小学课本上抄下来的
+- [[./post/Games/unciv/个人游玩经验分享.html][*Unciv个人游玩经验分享*]] /[2023-07-08 10:01]/\\
+  玩这个游戏总算是有一定的时长了，自己也摸索出来了一些比较有趣的打法分享(虽然说后面这种玩法很难复制就是了)
+- [[./post/Learning/计算机学习/从零开始认识计算机.html][*从零开始认识计算机(from 硬件茶谈)*]] /[2023-06-08 00:06]/\\
+  内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记
+- [[./post/Games/unciv/Unciv.html][*Unciv简介与黑话笔记*]] /[2023-06-07 11:58]/\\
+  一款仿照文明5的开源文明模拟策略游戏
+- [[./post/Programing/C_language/C_language_note.html][*C语言笔记*]] /[2023-05-26 14:28]/\\
+  自己尝试写的C语言教程（未完成）
+- [[./post/Novel/SAO/index.html][*SAO小说资源索引*]] /[2023-04-24 00:00]/\\
+  由于资源有点多所以做了个分页作索引
+- [[./post/Learning/道法/八下早读材料.html][*八下道法背诵材料*]] /[2023-04-07 11:09]/\\
+  完全抄某教辅的背诵材料的道德与法治东西
+- [[./post/Programs/Emacs/Emacs_learning_note.html][*Emacs学习笔记*]] /[2023-03-04 11:20]/\\
+  我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中
+- [[./post/Programs/Emacs/use_emacs_but_im_a_vimmer.html][*Vim党试水Emacs的心路历程与吐槽*]] /[2023-01-16 12:30]/\\
+  单纯的有感而发的口水文
+- [[./post/Learning/语文/语文笔记.html][*语文笔记*]] /[2023-01-08 08:17]/\\
+  内容来自B站的视频，笔记是我自己写的
+* 2022
+- [[./post/Programs/tools/tools_list.html][*部分工具软件清单*]] /[2022-12-02 18:42]/\\
+  记录一些Linux中有趣但不一定有用的软件，放着以后来玩玩
+- [[./post/ArchLinux/Build_Archiso.html][*自定义Archlinux安装镜像*]] /[2022-11-26 22:47]/\\
+  通过archiso自行构建archlinux的安装镜像
+- [[./post/Programs/Vim/Vim_note.html][*Vim/Neovim使用笔记*]] /[2022-07-08 22:57]/
+- [[./post/ArchLinux/Install_ArchLinux.html][*ArchLinux安装笔记*]] /[2022-07-02 22:56]/\\
+  记录我个人安装archlinux的过程，备用

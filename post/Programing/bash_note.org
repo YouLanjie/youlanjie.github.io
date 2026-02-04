@@ -1,0 +1,12 @@
+#+TITLE: Bash Note
+#+DESCRIPTION: Have a try
+#+DATE: <2026-01-24 六 16:07>
+#+SETUPFILE: ../../setup.setup
+
+* base
+#+begin_src bash
+a=1
+echo $a
+a=$((a+1))
+echo $a
+#+end_src

@@ -1,0 +1,386 @@
+#+title: C语言速查笔记
+#+date: <2025-04-19 六>
+#+description:  抄别人blog的东西，塞一起应该方便自己查吧？
+
+#+setupfile: ../../../setup.setup
+
+* 前言
+这玩意还是我自己吃菌子吃多了头脑发热写的东西，不过他应该不会像隔壁“某教程”那样
+写着写着就弃坑变成了烂尾楼
+
+当然，真正的理由还是翻自己的收藏夹发现收藏了一堆网页，但一大堆都是CSDN的shit，想
+着能不能把他们从收藏夹里面“优化”掉，所以就想抄到自己这里来hhh
+
+以下内容或许可以参考[[https://gitee.com/YouLanjie/my-test][这个仓库]]的C语言部分，我有些实例代码是写在里面的
+
+* 使用ANSI转义字符为打印的字符上色
+这里贴一个更详细些的博客链接：[[https://www.cnblogs.com/unclemac/p/12783387.html][终端中输出的颜色和格式详解]]
+#+begin_quote
+ai查资料上大分，下面部分的内容大体上是查ai查出来的（已将原本比较烂的笔记删去）
+#+end_quote
+** 约定说明
+- =\e= 代表转义字符 (ASCII 27, 0x1B)。在 Bash 的 =printf= 或 echo 中，可以使用
+  =\e= 、 =\033= （八进制）或 =\x1b= （十六进制）。
+- =CSI= 代表 "Control Sequence Introducer"，即 =\e[= 。这是大多数序列的开头。
+- =<n>= 代表一个数字参数。多个参数用分号 =;= 分隔。
+- 括号 =[]= 内的参数是可选的。
+** CSI (Control Sequence Introducer) 序列 - =\e[...=
+这是最常用的一类序列。
+*** 光标移动 (Cursor Movement)
+| 序列                          | 描述                                 | 示例 & 效果                                  |
+|-------------------------------+--------------------------------------+----------------------------------------------|
+| =\e[<n>A=                     | 光标上移 =<n>= 行 (Cursor Up)        | =printf "\e[2A"= # 上移2行                   |
+| =\e[<n>B=                     | 光标下移 =<n>= 行 (Cursor Down)      | =printf "\e[1B"= # 下移1行                   |
+| =\e[<n>C=                     | 光标右移 =<n>= 列 (Cursor Forward)   | =printf "\e[5C"= # 右移5列                   |
+| =\e[<n>D=                     | 光标左移 =<n>= 列 (Cursor Backward)  | =printf "\e[3D"= # 左移3列                   |
+| =\e[<r>;<c>H= , =\e[<r>;<c>f= | 将光标移动到第 =<r>= 行，第 =<c>= 列 | =printf "\e[10;1HStart"= # 移动到第10行第1列 |
+| =\e[6n=                       | 查询光标位置                         | 终端会响应位置,报告格式: =\e[<r>;<c>R=       |
+#+begin_quote
+关于保存和恢复光标位置见下文的[[#org-title-2-3-3]["2.3.3. 其他"]]部分
+#+end_quote
+*** 擦除操作 (Erase)
+| 序列             | 描述                                | 示例 & 效果                            |
+|------------------+-------------------------------------+----------------------------------------|
+| =\e[0J= , =\e[J= | 从光标位置擦除到屏幕末尾            | =printf "\e[0J"=                       |
+| =\e[1J=          | 从光标位置擦除到屏幕开头            | =printf "\e[1J"=                       |
+| =\e[2J=          | *清空整个屏幕* ，并移动光标到左上角 | =printf "\e[2J"= # 相当于 =clear= 命令 |
+| =\e[0K= , =\e[K= | 从光标位置擦除到行尾                | =printf "\e[0K"=                       |
+| =\e[1K=          | 从光标位置擦除到行首                | =printf "\e[1K"=                       |
+| =\e[2K=          | *擦除整行* ，光标位置不变           | =printf "\e[2K"=                       |
+*** 图形模式 (SGR - Select Graphic Rendition) - =\e[<n>m=
+这是用于设置文本颜色和样式的序列。 *多个属性用分号分隔，最终用 =m= 结尾。*
+| 序列    | 描述                           | 示例                             |
+|---------+--------------------------------+----------------------------------|
+| =\e[0m= | *重置所有属性* (最重要！)      | =printf "\e[31mRed\e[0m Normal"= |
+| =\e[1m= | 粗体或高亮度 (Bold/Bright)     | =printf "\e[1mBold"=             |
+| =\e[2m= | 模糊 (Faint) (支持度不高)      |                                  |
+| =\e[3m= | 斜体 (Italic)                  | =printf "\e[3mItalic"=           |
+| =\e[4m= | 下划线 (Underline)             | =printf "\e[4mUnderline"=        |
+| =\e[5m= | 慢闪烁 (Blink)                 | =printf "\e[5mBlink"=            |
+| =\e[7m= | 反显 (Inverse)，前景背景色互换 | =printf "\e[7mInverse"=          |
+| =\e[8m= | 隐藏 (Conceal)                 | =printf "\e[8mHidden"=           |
+| =\e[9m= | 删除线 (Strikethrough)         | =printf "\e[9mStrike"=           |
+
+*8/16 色前景色 (Foreground)*
+| 序列                | 描述                                              | 示例                               |
+|---------------------+---------------------------------------------------+------------------------------------|
+| =\e[30m= - =\e[37m= | 设置标准前景色  | =printf "\e[31mRed"=               |
+| =\e[39m=            | 重置为默认前景色                                  | =printf "\e[31mRed\e[39m Default"= |
+| =\e[90m= - =\e[97m= | 设置明亮前景色 (Bright)                           | =printf "\e[91mBright Red"=        |
+#+begin_quote
+颜色分别对应：30黑,31红,32绿,33黄,34蓝,35洋红,36青,37白\\
+背景则把前面的3改成4
+#+end_quote
+
+*8/16 色背景色 (Background)*
+| 序列                  | 描述             | 示例                            |
+|-----------------------+------------------+---------------------------------|
+| =\e[40m= - =\e[47m=   | 设置标准背景色   | =printf "\e[41mRed BG"=         |
+| =\e[49m=              | 重置为默认背景色 | =printf "\e[41mRed BG\e[49m"=   |
+| =\e[100m= - =\e[107m= | 设置明亮背景色   | =printf "\e[101mBright Red BG"= |
+
+*256 色和 RGB 真彩色 (更现代的支持)*
+| 序列                   | 描述                               | 示例                                   |
+|------------------------+------------------------------------+----------------------------------------|
+| =\e[38;5;<n>m=         | 设置 256 色前景色 (=<n>= 从 0-255) | =printf "\e[38;5;202mOrange"=          |
+| =\e[48;5;<n>m=         | 设置 256 色背景色                  | =printf "\e[48;5;202mOrange BG"=       |
+| =\e[38;2;<r>;<g>;<b>m= | 设置 RGB 真彩色前景色              | =printf "\e[38;2;255;100;0mOrange"=    |
+| =\e[48;2;<r>;<g>;<b>m= | 设置 RGB 真彩色背景色              | =printf "\e[48;2;255;100;0mOrange BG"= |
+** 其他有用的序列
+*** 字符集控制 (Character Set Control)
+| 序列   | 描述                             | 示例 & 效果                          |
+|--------+----------------------------------+--------------------------------------|
+| =\e(0= | 启用 DEC 特殊字符集（线绘模式）  | =printf "\e(0lq\e(B"= # 输出 =┌─=    |
+| =\e(B= | 启用 US ASCII 字符集（正常模式） | =printf "\e(B"= # 撤销 =\e(0= 的效果 |
+| =\e)0= | 为 G1 字符集启用 DEC 特殊字符集  |                                      |
+*** 操作系统命令 (OSC) - =\e]...\a= 或 =\e]...\x07=
+| 序列            | 描述                         | 示例 & 效果                       |
+|-----------------+------------------------------+-----------------------------------|
+| =\e]0;<str>\a=  | 设置终端窗口的图标名称和标题 | =printf "\e]0;My Custom Title\a"= |
+| =\e]2;<str>\a=  | 仅设置终端窗口的标题         | =printf "\e]2;Window Title\a"=    |
+| =\e]10;<str>\a= | 设置动态文本颜色（支持度低） |                                   |
+| =\e]11;<str>\a= | 设置动态背景颜色（支持度低） |                                   |
+*** 其他
+| 序列          | 描述                                  | 示例 & 效果                               |
+|---------------+---------------------------------------+-------------------------------------------|
+| =\e#3=        | 双倍高度行（顶部）                    | =printf "\e#3D\n"= # 'D' 会显示为双倍高度 |
+| =\e#4=        | 双倍高度行（底部）                    | =printf "\e#4D\n"=                        |
+| =\e#5=        | 单倍宽度行                            | =printf "\e#5"=                           |
+| =\e#6=        | 双倍宽度行                            | =printf "\e#6W\n"= # 'W' 会显示为双倍宽度 |
+| =\e7=, =\e[u= | *保存当前光标位置和属性*              | 推荐用前者                            |
+| =\e8=, =\e[s= | *恢复之前保存的光标位置和属性*        | 推荐用前者                                |
+| =\eM=         | 反转的索引 (Reverse Index) - 上滚一行 | =printf "\eM"=                                |
+** 非标准ANSI序列控制字符
+隐藏光标： =\033[?25l=\\
+显示光标： =\033[?25h=
+* Linux Signal信号
+#+begin_quote
+实际上这个内容可以直接 =man signal= 即可查看，不用上网查
+#+end_quote
+[[https://www.cnblogs.com/frisk/p/11602973.html][来源]]
+#+begin_src c
+  SIGHUP       1          /* Hangup (POSIX).  */                          终止进程     终端线路挂断
+  SIGINT       2       /* Interrupt (ANSI).  */                        终止进程     中断进程 Ctrl+C
+  SIGQUIT      3          /* Quit (POSIX).  */                            建立CORE文件终止进程，并且生成core文件 Ctrl+\
+  SIGILL       4          /* Illegal instruction (ANSI).  */              建立CORE文件,非法指令
+  SIGTRAP      5          /* Trace trap (POSIX).  */                      建立CORE文件,跟踪自陷
+  SIGABRT      6          /* Abort (ANSI).  */
+  SIGIOT       6          /* IOT trap (4.2 BSD).  */                      建立CORE文件,执行I/O自陷
+  SIGBUS       7          /* BUS error (4.2 BSD).  */                     建立CORE文件,总线错误
+  SIGFPE       8          /* Floating-point exception (ANSI).  */         建立CORE文件,浮点异常
+  SIGKILL      9        /* Kill, unblockable (POSIX).  */               终止进程     杀死进程
+  SIGUSR1      10         /* User-defined signal 1 (POSIX).  */           终止进程     用户定义信号1
+  SIGSEGV      11         /* Segmentation violation (ANSI).  */           建立CORE文件,段非法错误
+  SIGUSR2      12         /* User-defined signal 2 (POSIX).  */           终止进程     用户定义信号2
+  SIGPIPE      13         /* Broken pipe (POSIX).  */                     终止进程     向一个没有读进程的管道写数据
+  SIGALARM     14       /* Alarm clock (POSIX).  */                     终止进程     计时器到时
+  SIGTERM      15       /* Termination (ANSI).  */                      终止进程     软件终止信号
+  SIGSTKFLT    16         /* Stack fault.  */
+  SIGCLD       SIGCHLD    /* Same as SIGCHLD (System V).  */
+  SIGCHLD      17         /* Child status has changed (POSIX).  */        忽略信号     当子进程停止或退出时通知父进程
+  SIGCONT      18         /* Continue (POSIX).  */                        忽略信号     继续执行一个停止的进程
+  SIGSTOP      19         /* Stop, unblockable (POSIX).  */               停止进程     非终端来的停止信号
+  SIGTSTP      20         /* Keyboard stop (POSIX).  */                   停止进程     终端来的停止信号 Ctrl+Z
+  SIGTTIN      21         /* Background read from tty (POSIX).  */        停止进程     后台进程读终端
+  SIGTTOU      22         /* Background write to tty (POSIX).  */         停止进程     后台进程写终端
+  SIGURG       23         /* Urgent condition on socket (4.2 BSD).  */    忽略信号     I/O紧急信号
+  SIGXCPU      24         /* CPU limit exceeded (4.2 BSD).  */            终止进程     CPU时限超时
+  SIGXFSZ      25         /* File size limit exceeded (4.2 BSD).  */      终止进程     文件长度过长
+  SIGVTALRM    26         /* Virtual alarm clock (4.2 BSD).  */           终止进程     虚拟计时器到时
+  SIGPROF      27         /* Profiling alarm clock (4.2 BSD).  */         终止进程     统计分布图用计时器到时
+  SIGWINCH     28         /* Window size change (4.3 BSD, Sun).  */       忽略信号     窗口大小发生变化
+  SIGPOLL      SIGIO      /* Pollable event occurred (System V).  */
+  SIGIO        29         /* I/O now possible (4.2 BSD).  */              忽略信号     描述符上可以进行I/O
+  SIGPWR       30         /* Power failure restart (System V).  */
+  SIGSYS       31         /* Bad system call.  */
+  SIGUNUSED    31
+#+end_src
+
+* RELRO等安全选项
+[[https://blog.csdn.net/tabactivity/article/details/126660974][来源]]
+编译时使用 =-z now= 选项
+
+* 判断字符是中文还是英文(有局限)
+[[https://blog.csdn.net/shen_chengfeng/article/details/109161829][来源]]
+#+begin_src c
+  #include <stdio.h>
+  #include <string.h>
+   
+  int main(int argc, char** argv)
+  {
+  	if(argc != 2) {
+  		printf("Usage:\n./xxx str\n");
+  		return 0;
+  	}
+  	
+  	char *p = argv[1];
+  	int   len = strlen(p);
+  	for(int i = 0; i < len; i++) {
+  		if( *p & 0x80) {
+  			printf("chinese: %x\n", *p);
+  		} else {
+  			printf("english: %x\n", *p);
+  		}
+  		p++;
+  	}
+  	return 0;
+  }
+#+end_src
+（以上代码可在my-test中找到）
+
+* 生成迷宫
+[[https://blog.csdn.net/jjwwwww/article/details/82872922][来源]] - 该程序与下列代码有较大出入
+#+begin_src c
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <unistd.h>
+  #include <time.h>
+
+  #define SECOND 1000000
+  #define TPS    (SECOND / 20)
+
+  //地图长度L，包括迷宫主体20，外侧的包围的墙体2，
+  //最外侧包围路径2（之后会解释）
+  #define L (20 + 4)
+
+  //墙和路径的标识
+  #define WALL  0
+  #define ROUTE 1
+  #define MARK  2
+  #define WALL_C  "国"
+  #define ROUTE_C "  "
+  #define MARK_C  ":;"
+
+  int **Maze = NULL;
+  static int Rank = 0; // 控制迷宫的复杂度，数值越大复杂度越低，最小值为0
+  int level = 0;
+
+  void init();
+  void print_map();
+  void CreateMaze(int **maze, int x, int y); //生成迷宫
+
+  int main(void)
+  {				/*{{{ */
+  	printf("\033[?25l");
+  	init();
+  	print_map();
+
+  	//创造迷宫，（2，2）为起点
+  	CreateMaze(Maze, 2, 2);
+
+  	//画迷宫的入口和出口
+  	Maze[2][1] = ROUTE;
+
+  	//由于算法随机性，出口有一定概率不在（L-3,L-2）处，
+  	//此时需要寻找出口
+  	for (int i = L - 3; i >= 0; i--) {
+  		if (Maze[i][L - 3] == ROUTE) {
+  			Maze[i][L - 2] = ROUTE;
+  			break;
+  		}
+  	}
+
+  	print_map();
+  	printf("\033[%dB", L);
+
+  	FILE *fp = fopen("maze.txt", "w");
+  	if (!fp) goto LEAVE;
+  	for (int i = 1; i < L - 1; i++) {
+  		for (int j = 1; j < L - 1; j++) {
+  			fprintf(fp, "%d ", Maze[i][j]);
+  		}
+  		fprintf(fp, "\n");
+  	}
+  	fclose(fp);
+
+  LEAVE:
+  	printf("\033[?25h");
+  	for (int i = 0; i < L; i++)
+  		free(Maze[i]);
+  	free(Maze);
+  	return 0;
+  }				/*}}} */
+
+  void init()
+  {				/*{{{ */
+  	srand((unsigned)time(NULL));
+
+  	Maze = (int **)malloc(L * sizeof(int *));
+  	for (int i = 0; i < L; i++) {
+  		Maze[i] = (int *)calloc(L, sizeof(int));
+  	}
+
+  	// 最外围层设为路径的原因，为了防止挖路时挖出边界，
+  	// 同时为了保护迷宫主体外的一圈墙体被挖穿
+  	for (int i = 0; i < L; i++) {
+  		Maze[i][0] = ROUTE;
+  		Maze[0][i] = ROUTE;
+  		Maze[i][L - 1] = ROUTE;
+  		Maze[L - 1][i] = ROUTE;
+  	}
+  	return;
+  }				/*}}} */
+
+  void print_map()
+  {				/*{{{ */
+  	int l = L - 2;
+  	int deep = L * L / 2 - Rank;    /* 并无实际意义，经验公式 */
+
+  	//画迷宫
+  	for (int i = 1; i < L - 1; i++) {
+  		for (int j = 1; j < L - 1; j++) {
+  			printf("%s",
+  			       Maze[i][j] != WALL ? (Maze[i][j] == MARK ? MARK_C : ROUTE_C ) : WALL_C);
+  		}
+  		printf("\n");
+  	}
+  	printf("\033[%dA", l);
+  	printf("\033[%dC  | 符号解释: '%s'为遍历节点\n", l*2, MARK_C);
+  	printf("\033[%dC  |           '%s'为走道\n", l*2, ROUTE_C);
+  	printf("\033[%dC  |           '%s'为边墙\n", l*2, WALL_C);
+  	printf("\033[%dC  | 全图边长: %d\n", l*2, L);
+  	printf("\033[%dC  | 实体边长: %d\n", l*2, l);
+  	printf("\033[%dC  | 本体边长: %d\n", l*2, l - 2);
+  	printf("\033[%dC  | 复杂程度: %d (值越小越复杂) \n", l*2, Rank);
+  	printf("\033[%dC  | 延迟时间: %.4fs\n", l*2, (double)(int)TPS/SECOND);
+  	printf("\033[%dC  | 遍历深度: %-3d [%4.1f%%]\n", l*2, level, (double)level / deep * 100);
+  	printf("\033[1A\033[%dC [", l*2 + 25);
+  	int lim = 80 - (l*2 + 28);
+  	for (int i = 0; i < lim; i++) {
+  		printf((double)i / lim < (double)level / deep ? "#" : " ");
+  	}
+  	printf("]\n");
+  	printf("\033[%dA", 9);
+  	return;
+  }				/*}}} */
+
+  void CreateMaze(int **maze, int x, int y)
+  {				/*{{{ */
+  	level++;
+  	maze[x][y] = maze[x][y] == WALL ? ROUTE : maze[x][y];
+
+  	//确保四个方向随机
+  	int direction[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+  	for (int i = 0; i < 4; i++) {
+  		/* Swap data */
+  		int r = rand() % 4;
+  		int temp = direction[0][0];
+  		direction[0][0] = direction[r][0];
+  		direction[r][0] = temp;
+
+  		temp = direction[0][1];
+  		direction[0][1] = direction[r][1];
+  		direction[r][1] = temp;
+  	}
+
+  	//向四个方向开挖
+  	for (int i = 0; i < 4; i++) {
+  		int dx = x;
+  		int dy = y;
+
+  		//控制挖的距离，由Rank来调整大小
+  		int range = 1 + (Rank == 0 ? 0 : rand() % Rank);
+  		while (range > 0) {
+  			dx += direction[i][0];
+  			dy += direction[i][1];
+
+  			//排除掉回头路
+  			if (maze[dx][dy] != WALL) {
+  				break;
+  			}
+  			//判断是否挖穿路径
+  			int count = 0;
+  			for (int j = dx - 1; j < dx + 2; j++) {
+  				for (int k = dy - 1; k < dy + 2; k++) {
+  					// abs(j - dx) + abs(k - dy) == 1 
+  					// 确保只判断九宫格的四个特定位置
+  					if (abs(j - dx) + abs(k - dy) == 1
+  					    && maze[j][k] != WALL) {
+  						count++;
+  					}
+  				}
+  			}
+
+  			if (count > 1) {
+  				break;
+  			}
+  			//确保不会挖穿时，前进
+  			--range;
+  			maze[dx][dy] = ROUTE;
+  			print_map();
+  			usleep(TPS);
+  		}
+
+  		//没有挖穿危险，以此为节点递归
+  		if (range <= 0) {
+  			maze[dx][dy] = MARK;
+  			CreateMaze(maze, dx, dy);
+  			maze[dx][dy] = ROUTE;
+  		}
+  	}
+  	level--;
+  	return;
+  }				/*}}} */
+
+#+end_src
+（以上代码可在my-test中找到）

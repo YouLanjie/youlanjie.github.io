@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>对于非DE下的不适应性问题</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">对于非DE下的不适应性问题</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 前言</a></li><li><a href="#org-title-2">2. Qt应用主题</a></li><li><a href="#org-title-3">3. Gtk应用主题</a></li><li><a href="#org-title-4">4. Qt/KDE/Dolphin打开方式列表清空问题</a></li><li><a href="#org-title-5">5. Hyprland拓展控制脚本</a></li></ul></div></div>
+<div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>自认为是一个WM用户，辗转过i3,bspwm,dwm,hyprland,主要使用KDE体系程序</p><p>本文重点记载解决：主题问题、体系程序正常运行问题</p></div></div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> Qt应用主题</h2>
+<div class="outline-text-2" id="text-2"><p>使用kvantum+qt5ct/qt6ct解决。使用kvantum设置主题，再使用qt5ct/qt6ct作为后端。</p><p>特别的，对于qt6ct存在配色无法正确应用的问题（主要体现在dolphin，如果使用暗色主题那它的问题会很明显：背景色和字体颜色都是暗色的看不清，若使用列表查看会看到文件一条隔一条的白色背景行），可以换换qt6ct-kde这个打过补丁的aur包。</p></div></div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> Gtk应用主题</h2>
+<div class="outline-text-2" id="text-3"><blockquote>
+<p>由于我也不是很懂，所以仅供参考。</p></blockquote><p>较为独立的设置程序(
+<a href='https://wiki.archlinux.org/title/GTK#Configuration_tools'>archwiki</a>)：</p><ul class="org-ul">
+<li>lxappearance: 设置gtk2配置(覆写gtk2配置文件)
+</li>
+<li>lxappearance-gtk3: 设置gtk3配置(覆写gtk3配置文件)
+</li>
+<li>dconf-editor: gnome修改由dconf保存的配置
+</li></ul>
+<p>可供测试的程序(ldd判断版本)：</p><ul class="org-ul">
+<li><code>gtk-demo</code> gtk2测试，属gtk2包(gtk2库自带)
+</li>
+<li><code>thunar</code> gtk3测试，属thunar包(xfce4的文件管理器)
+</li>
+<li><code>iwgtk</code> 纯gtk4测试，属iwgtk包(gtk写的iwd控制界面)
+</li>
+<li><p><code>zenity</code> gtk4+libadwaita测试，属zenity包</p>
+<div class="org-src-container"><pre class="src src-shell"><span class="c1"># 示例命令：</span>
+zenity<span class="w"> </span>--title<span class="w"> </span>中文输入<span class="w"> </span>--text<span class="w"> </span>中文输入<span class="w"> </span>--width<span class="w"> </span><span class="m">500</span><span class="w"> </span>--entry
+</pre></div>
+</li>
+<li><code>adwaita-1-demo</code> gtk4+libadwaita测试，属libadwaita-demos包
+</li></ul>
+<p>配置文件/体系(
+<a href='https://wiki.archlinux.org/title/GTK#Configuration'>archwiki</a>)：</p><ul class="org-ul">
+<li>gtk2: <code>~/.gtkrc-2.0</code>
+</li>
+<li>gtk3: <code>~/.config/gtk-3.0/settings.ini</code>
+</li>
+<li><p>gtk4: <code>~/.config/gtk-4.0/settings.ini</code> (仅后备使用，即在无更高级的配置共享机制情况向的fallback,
+<a href='https://docs.gtk.org.cn/gtk4/class.Settings.html'>gtk4文档</a>)</p>
+<blockquote>
+<p>个人认为gtk4最大的问题是很多用它开发的程序都链接了libadwaita库</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>ldd<span class="w"> </span>/usr/bin/zenity<span class="p">|</span>grep<span class="w"> </span>adw
+<span class="w">	</span>libadwaita-1.so.0<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/usr/lib/libadwaita-1.so.0<span class="w"> </span><span class="o">(</span>0x00007f9a19200000<span class="o">)</span>
+$<span class="w"> </span>ldd<span class="w"> </span>/usr/bin/adwaita-1-demo<span class="p">|</span>grep<span class="w"> </span>adw
+<span class="w">	</span>libadwaita-1.so.0<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/usr/lib/libadwaita-1.so.0<span class="w"> </span><span class="o">(</span>0x00007faf0d600000<span class="o">)</span>
+...
+</pre></div><p>而这个库最大一问题就是它默认不支持自定义主题，目的在于统一外观，减少开发工作量。虽说它可以被强制要求主题化，但很多主题都不支持libadwaita所以看起来也不好。</p></blockquote>
+<ul class="org-ul">
+<li><code>xsettings</code> 一套在X11下使用的配置共享机制,一般由xsettingsd包提供后台服务，由 DE启动时启动（因为其提供的systemd service是static即无法使用enable/disable）。
+</li>
+<li><code>portal</code> 翻译作“门户”，应该是指一堆 <code>xdg-desktop-portal*</code> 的东西，wayland 下的配置共享机制。如果portal不可用则需要使用下面说的dconf机制。详见
+<a href='https://wiki.archlinux.org/title/XDG_Desktop_Portal'>wiki</a>。
+</li>
+<li><p><code>dconf</code> Gnome使用的配置存储系统，配置存储在二进制文件中而非文本文件。portal 不可用时(如dwm没有portal,或者使用hyprland但没装portal包)使用的后备配置，需要设定环境变量 <code>ADW_DISABLE_PORTAL=1</code> 以启用。下面有个例子。</p>
+<div class="org-src-container"><pre class="src src-shell"><span class="c1"># 读取gtk4设置的主题：</span>
+dconf<span class="w"> </span><span class="nb">read</span><span class="w"> </span>/org/gnome/desktop/interface/gtk-theme
+</pre></div>
+</li>
+<li><p><code>gsettings</code> 基于dconf的更高级工具(来自glib2包)</p>
+<div class="org-src-container"><pre class="src src-shell"><span class="c1"># 列出所有的“路径”</span>
+gsettings<span class="w"> </span>list-schemas
+<span class="c1"># 列出指定路径下所有的“key”,对应到下一条命令的`gtk-theme`</span>
+gsettings<span class="w"> </span>list-keys<span class="w"> </span>org.gnome.desktop.interface
+<span class="c1"># 读取gtk4设置的主题(进行与上面的dconf一样的操作)：</span>
+gsettings<span class="w"> </span>get<span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>gtk-theme
+<span class="c1"># 设置gtk4主题：</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>gtk-theme<span class="w"> </span><span class="s2">&quot;Arc:dark&quot;</span>
+<span class="c1"># 设置亮色主题：</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="w"> </span>default
+<span class="c1"># 设置暗色主题：</span>
+gsettings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>org.gnome.desktop.interface<span class="w"> </span>color-scheme<span class="w"> </span>prefer-dark
+</pre></div>
+<p>如果嫌命令行麻烦可以安装上面的dconf-editor进行配置，主题相关设置应该都在 <i>org.gnome.desktop.interface</i> 里</p>
+</li>
+<li><p><code>GTK_THEME</code> 它是一个环境变量，并非工具，但是可以强制要求沟槽的libadwaita库使用其中指定的主题。 <b>注意：很多主题对libadwaita的支持并不完善，很可能会出现奇奇怪怪的问题</b> 如图：</p>
+<div class="figure">
+<p><img src='./try_non-de_except_errors/scr_20251005_161743.avif' alt='./try_non-de_except_errors/scr_20251005_161743.avif' /></p>
+<p><span class="figure-number">Figure 1: </span>Hyprland在shell设置GTK_THEME后启动依赖libadwaita的程序</p></div>
+<p>在设置为"Arc-Dark"，准确地说是设置为/usr/share/theme下所有为 <code>Arc*</code> 文件夹的名称，是有问题的（界面变成了透明的），而设置为"Arc:dark"，准确地说是在上面的基础上加上":dark"后缀，则没有问题。很神奇对吧。</p>
+<p>呃，实际上经过我刚刚的测试，实际上这个和 <i>org.gnome.desktop.interface color-scheme</i> 的设定有关。如果设定为 <i>default</i> 则使用无":dark"是没有问题的，但如果设定为 <i>prefer-dark</i> 则需要使用":dark"否则会出现像上面一样的问题。</p>
+</li></ul>
+</li></ul>
+</div></div>
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> Qt/KDE/Dolphin打开方式列表清空问题</h2>
+<div class="outline-text-2" id="text-4"><p>原因：在kde下会后台更新一个类似数据库的文件，dolphin等会在这个列表中读取可用的应用。在非DE下不会更新该文件，导致列表消失。一般情况下在dolphin设置了某种文件类型的默认打开方式则会“更新”那个文件，导致列表消失。</p><p>救法：</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># 查看可用的前缀</span>
+$<span class="w"> </span>ls<span class="w"> </span>/etc/xdg/menus/*-applications.menu
+/etc/xdg/menus/arch-applications.menu
+/etc/xdg/menus/plasma-applications.menu
+/etc/xdg/menus/xfce-applications.menu
+<span class="c1"># 重建缓存</span>
+$<span class="w"> </span><span class="nv">XDG_MENU_PREFIX</span><span class="o">=</span>arch-<span class="w"> </span>kbuildsycoca6
+</pre></div><p>如果不设置或者错误设置 <code>XDG_MENU_PREFIX</code> 则会报错：</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>kbuildsycoca6
+kbuildsycoca6<span class="w"> </span>running...
+<span class="s2">&quot;applications.menu&quot;</span><span class="w">  </span>not<span class="w"> </span>found<span class="w"> </span><span class="k">in</span><span class="w">  </span>QList<span class="o">(</span><span class="s2">&quot;/home/Chglish/.config/menus&quot;</span>,<span class="w"> </span><span class="s2">&quot;/etc/xdg/menus&quot;</span><span class="o">)</span>
+</pre></div><p>其自动更新的文件是 <code>~/.cache/ksycoca6_*</code> ，如果能够监控该文件的变化然后在变更后运行命令更新上面的命令即可优雅地解决该问题，而不是要么手动更新，要么一直挂着个 while和sleep定时自动更新浪费性能。</p><p>下面引用个自己搓的python脚本(顺带有使用swww设置固定、随机幻灯片壁纸功能)：</p><div class="org-src-container"><pre class="src src-python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Created:2025.10.04</span>
+<span class="sd">&quot;&quot;&quot;用于窗口管理器(hyprland,dwm等)的自定义会话服务&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_lock</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;检查进程锁&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/tmp/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hyprland_custom_server.</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">()</span><span class="si">}</span><span class="s2">.*&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INFO clean up lock file &#39;</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+            <span class="k">continue</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARN same process &#39;</span><span class="si">{</span><span class="n">pid</span><span class="si">}</span><span class="s2">&#39; exists&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tmp/hyprland_custom_server.</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">()</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AppsMenu</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;构建KDE的applications.menu缓存(kbuildsycoca6)&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">base_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/etc/xdg/menus/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*-applications.menu&quot;</span><span class="p">),</span>
+                            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">base_files</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR &#39;/etc/xdg/menus/*-applications.menu&#39; not found&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Try: pacman -S archlinux-xdg-menu&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">base_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-applications.menu&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INFO using file &#39;</span><span class="si">{</span><span class="n">base_files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; with prefix &#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;XDG_MENU_PREFIX&quot;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">-&quot;</span><span class="p">})</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_build</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARN kbuildsycoca6 不可用&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">home</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span>
+        <span class="n">build_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">home</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;.cache/ksycoca6_*&quot;</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">build_files</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR file &#39;~/.cache/ksycoca6_*&#39; not found&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mtime</span> <span class="o">=</span> <span class="n">build_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_file</span> <span class="o">=</span> <span class="n">build_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;运行kbuildsycoca6命令&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;kbuildsycoca6&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">returncode</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_mtime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;获取目标文件时间&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_file</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;对比更新文件&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="c1"># print(f&quot;Check, {time.strftime(&quot;%Y.%m.%d %H:%M:%S&quot;)}&quot;)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mtime</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mtime</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run_build</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mtime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mtime</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Wallpaper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;更新壁纸&quot;&quot;&quot;</span>
+    <span class="n">el</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="s2">&quot;jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;jpeg&quot;</span><span class="p">,</span> <span class="s2">&quot;webp&quot;</span><span class="p">,</span> <span class="s2">&quot;avif&quot;</span><span class="p">)</span>
+    <span class="n">wallpaper_path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="o">/</span><span class="s2">&quot;Pictures/Wallpaper/&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_wallpaper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span><span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;设置壁纸&quot;&quot;&quot;</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">==</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;swww&quot;</span><span class="p">,</span> <span class="s2">&quot;img&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_wallpaper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;更新壁纸&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">el</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wallpaper_path</span><span class="o">/</span><span class="sa">f</span><span class="s2">&quot;wallpaper_set.</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_wallpaper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wallpaper_path</span><span class="o">/</span><span class="sa">f</span><span class="s2">&quot;wallpaper_set.</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">%</span> <span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">build_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">el</span><span class="p">:</span>
+            <span class="n">build_files</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wallpaper_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**/*.</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">build_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">build_files</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">is_file</span><span class="p">()],</span>
+                             <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_wallpaper</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">build_files</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;主函数&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WAYLAND_DISPLAY&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DISPLAY&quot;</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARN both &#39;WAYLAND_DISPLAY&#39; and &#39;DISPLAY&#39; are empty&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exiting...&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">check_lock</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exiting...&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">menu</span> <span class="o">=</span> <span class="n">AppsMenu</span><span class="p">()</span>
+    <span class="n">wallpaper</span> <span class="o">=</span> <span class="n">Wallpaper</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">menu</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="n">wallpaper</span><span class="o">.</span><span class="n">update_wallpaper</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div></div></div>
+<div id="outline-container-5" class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> Hyprland拓展控制脚本</h2>
+<div class="outline-text-2" id="text-5"><p>到目前(2025.10)，Hyprland默认还不支持移动平铺窗口和悬浮窗口二合一的命令，也就是说默认情况下想用键盘移动窗口需要区分开平铺和悬浮的快捷键，要么自己写个脚本，那彳亍，这里就有我自己写的个脚本。它还有以下功能：</p><ul class="org-ul">
+<li>移动窗口，自动判断平铺和悬浮窗口可用命令
+</li>
+<li>切换工作区内窗口，基于rofi(自带的-show window不支持局限于工作区内)
+</li>
+<li>为工作区内窗口打标签，基于上一条功能。可用于自行设定针对特定tag的windowrule，用于应用特定设置，如透明度甚至是取消焦点（即不能聚焦和操作那个窗口，想恢复就只能依赖在窗口直接选择，也是脚本产生的一个重要原因）等。
+</li>
+<li>切换毛玻璃效果(-c "blur")
+</li></ul>
+<div class="org-src-container"><pre class="src src-python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># hyprland控制拓展脚本</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">err</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">select_window</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;hyprctl clients -j&quot;</span><span class="p">,</span>
+                           <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;hyprctl activeworkspace -j&quot;</span><span class="p">,</span>
+                           <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">windows</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">err</span><span class="p">(</span><span class="s2">&quot;hyprctl命令出问题了？(json格式)&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">obj_windows</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">windows</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s2">&quot;workspace&quot;</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">workspace</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span>
+    <span class="n">selections</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s2"># </span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">ind</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj_windows</span><span class="p">)])</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+    <span class="n">selected_window</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cat|rofi -dmenu&quot;</span><span class="p">,</span>
+                                     <span class="nb">input</span><span class="o">=</span><span class="n">selections</span><span class="p">,</span>
+                                     <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">selected_window</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
+        <span class="n">err</span><span class="p">(</span><span class="s2">&quot;选择取消&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="n">obj_windows</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">selected_window</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])][</span><span class="s2">&quot;address&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">address</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;which hyprctl &gt; /dev/null&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">returncode</span><span class="p">:</span>
+        <span class="n">err</span><span class="p">(</span><span class="s2">&quot;没有hyprctl命令，请检查后端&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;-</span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> 0&quot;</span><span class="p">,</span> <span class="s2">&quot;j&quot;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;0 </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;0 -</span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> 0&quot;</span><span class="p">}</span>
+    <span class="n">hyprland_direction</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;h&quot;</span><span class="p">:</span><span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="s2">&quot;j&quot;</span><span class="p">:</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="s2">&quot;r&quot;</span><span class="p">}</span>
+    <span class="n">argparser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;hyprland控制拓展脚本&quot;</span><span class="p">)</span>
+    <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;--move&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;移动窗口&quot;</span><span class="p">)</span>
+    <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-c&quot;</span><span class="p">,</span> <span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;设置（切换）某些变量的值&quot;</span><span class="p">)</span>
+    <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;--tag&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;为工作区内窗口打标签&quot;</span><span class="p">)</span>
+    <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--switch&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;切换工作区内窗口&quot;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">argparser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">move</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">move</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">direction</span><span class="p">:</span>
+            <span class="n">err</span><span class="p">(</span><span class="s2">&quot;方向错误，应当为以下几个的一个(VimBindings):&quot;</span><span class="p">)</span>
+            <span class="n">err</span><span class="p">(</span><span class="n">direction</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">return</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;hyprctl activewindow -j&quot;</span><span class="p">,</span>
+                                <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">err</span><span class="p">(</span><span class="s2">&quot;hyprctl命令出问题了？(json格式)&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">stat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;floating&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">stat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fullscreen&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;hyprctl dispatch moveactive </span><span class="se">\&quot;</span><span class="s2"> </span><span class="si">{</span><span class="n">direction</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">move</span><span class="p">]</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;hyprctl dispatch movewindow </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">hyprland_direction</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">move</span><span class="p">]</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+        <span class="n">err</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RUN: </span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="o">==</span> <span class="s2">&quot;blur&quot;</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;hyprctl getoption decoration:blur:enabled -j&quot;</span><span class="p">,</span>
+                                <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">err</span><span class="p">(</span><span class="s2">&quot;hyprctl命令出问题了？(json格式)&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">err</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
+        <span class="n">err</span><span class="p">(</span><span class="n">stat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;set&quot;</span><span class="p">))</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s2">&quot;false&quot;</span> <span class="k">if</span> <span class="n">stat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;true&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;hyprctl keywords decoration:blur:enabled </span><span class="si">{</span><span class="n">flag</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">err</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RUN: </span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">switch</span><span class="p">:</span>
+        <span class="n">address</span> <span class="o">=</span> <span class="n">select_window</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">address</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hyprctl dispatch focuswindow address:</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                       <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">tag</span><span class="p">:</span>
+        <span class="n">selected_tag</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">tag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">selected_tag</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;cat|rofi -dmenu&quot;</span><span class="p">,</span>
+                                          <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+                                          <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">selected_tag</span><span class="p">:</span>
+                <span class="n">err</span><span class="p">(</span><span class="s2">&quot;选择取消&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">selected_tag</span> <span class="o">=</span> <span class="n">selected_tag</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">address</span> <span class="o">=</span> <span class="n">select_window</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">address</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hyprctl dispatch tagwindow </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">selected_tag</span><span class="p">)</span><span class="si">}</span><span class="s2"> address:</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hyprctl dispatch tagwindow </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">selected_tag</span><span class="p">)</span><span class="si">}</span><span class="s2"> address:</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                       <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2025-10-05 日 14:05></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题</p>
+<p class="date">生成于: 2025-10-07 二 01:50:08</p>
+</div>
+</body>
+</html>

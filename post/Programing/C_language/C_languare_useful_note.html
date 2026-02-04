@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="抄别人blog的东西，塞一起应该方便自己查吧？" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>C语言速查笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">C语言速查笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 前言</a></li><li><a href="#org-title-2">2. 使用ANSI转义字符为打印的字符上色</a><ul><li><a href="#org-title-2-1">2.1. 约定说明</a></li><li><a href="#org-title-2-2">2.2. CSI (Control Sequence Introducer) 序列 - <code>\e[...</code> </a><ul><li><a href="#org-title-2-2-1">2.2.1. 光标移动 (Cursor Movement)</a></li><li><a href="#org-title-2-2-2">2.2.2. 擦除操作 (Erase)</a></li><li><a href="#org-title-2-2-3">2.2.3. 图形模式 (SGR - Select Graphic Rendition) - <code>\e[<n>m</code> </a></li></ul></li>
+<li><a href="#org-title-2-3">2.3. 其他有用的序列</a><ul><li><a href="#org-title-2-3-1">2.3.1. 字符集控制 (Character Set Control)</a></li><li><a href="#org-title-2-3-2">2.3.2. 操作系统命令 (OSC) - <code>\e]...\a</code>  或 <code>\e]...\x07</code> </a></li><li><a href="#org-title-2-3-3">2.3.3. 其他</a></li></ul></li>
+<li><a href="#org-title-2-4">2.4. 非标准ANSI序列控制字符</a></li></ul></li>
+<li><a href="#org-title-3">3. Linux Signal信号</a></li><li><a href="#org-title-4">4. RELRO等安全选项</a></li><li><a href="#org-title-5">5. 判断字符是中文还是英文(有局限)</a></li><li><a href="#org-title-6">6. 生成迷宫</a></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>这玩意还是我自己吃菌子吃多了头脑发热写的东西，不过他应该不会像隔壁“某教程”那样写着写着就弃坑变成了烂尾楼</p><p>当然，真正的理由还是翻自己的收藏夹发现收藏了一堆网页，但一大堆都是CSDN的shit，想着能不能把他们从收藏夹里面“优化”掉，所以就想抄到自己这里来hhh</p><p>以下内容或许可以参考
+<a href="https://gitee.com/YouLanjie/my-test">这个仓库</a>的C语言部分，我有些实例代码是写在里面的</p></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 使用ANSI转义字符为打印的字符上色</h2>
+<div class="outline-text-2" id="text-2"><p>这里贴一个更详细些的博客链接：
+<a href="https://www.cnblogs.com/unclemac/p/12783387.html">终端中输出的颜色和格式详解</a></p><blockquote>
+<p>ai查资料上大分，下面部分的内容大体上是查ai查出来的（已将原本比较烂的笔记删去）</p></blockquote></div><div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 约定说明</h3>
+<div class="outline-text-3" id="text-2-1"><ul class="org-ul">
+<li><code>\e</code> 代表转义字符 (ASCII 27, 0x1B)。在 Bash 的 <code>printf</code> 或 echo 中，可以使用 <code>\e</code> 、 <code>\033</code> （八进制）或 <code>\x1b</code> （十六进制）。
+</li>
+<li><code>CSI</code> 代表 "Control Sequence Introducer"，即 <code>\e[</code> 。这是大多数序列的开头。
+</li>
+<li><code>&lt;n&gt;</code> 代表一个数字参数。多个参数用分号 <code>;</code> 分隔。
+</li>
+<li>括号 <code>[]</code> 内的参数是可选的。
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> CSI (Control Sequence Introducer) 序列 - <code>\e[...</code></h3>
+<div class="outline-text-3" id="text-2-2"><p>这是最常用的一类序列。</p></div><div class="outline-4">
+<h4 id="org-title-2-2-1"><span class="section-number-4">2.2.1.</span> 光标移动 (Cursor Movement)</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e[&lt;n&gt;A</code></td><td class="org-left">光标上移 <code>&lt;n&gt;</code> 行 (Cursor Up)</td><td class="org-left"><code>printf "\e[2A"</code> # 上移2行</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;B</code></td><td class="org-left">光标下移 <code>&lt;n&gt;</code> 行 (Cursor Down)</td><td class="org-left"><code>printf "\e[1B"</code> # 下移1行</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;C</code></td><td class="org-left">光标右移 <code>&lt;n&gt;</code> 列 (Cursor Forward)</td><td class="org-left"><code>printf "\e[5C"</code> # 右移5列</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;D</code></td><td class="org-left">光标左移 <code>&lt;n&gt;</code> 列 (Cursor Backward)</td><td class="org-left"><code>printf "\e[3D"</code> # 左移3列</td></tr><tr><td class="org-left"><code>\e[&lt;r&gt;;&lt;c&gt;H</code> , <code>\e[&lt;r&gt;;&lt;c&gt;f</code></td><td class="org-left">将光标移动到第 <code>&lt;r&gt;</code> 行，第 <code>&lt;c&gt;</code> 列</td><td class="org-left"><code>printf "\e[10;1HStart"</code> # 移动到第10行第1列</td></tr><tr><td class="org-left"><code>\e[6n</code></td><td class="org-left">查询光标位置</td><td class="org-left">终端会响应位置,报告格式: <code>\e[&lt;r&gt;;&lt;c&gt;R</code></td></tr></table><blockquote>
+<p>关于保存和恢复光标位置见下文的
+<a href="#org-title-2-3-3">"2.3.3. 其他"</a>部分</p></blockquote></div></div><div class="outline-4">
+<h4 id="org-title-2-2-2"><span class="section-number-4">2.2.2.</span> 擦除操作 (Erase)</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e[0J</code> , <code>\e[J</code></td><td class="org-left">从光标位置擦除到屏幕末尾</td><td class="org-left"><code>printf "\e[0J"</code></td></tr><tr><td class="org-left"><code>\e[1J</code></td><td class="org-left">从光标位置擦除到屏幕开头</td><td class="org-left"><code>printf "\e[1J"</code></td></tr><tr><td class="org-left"><code>\e[2J</code></td><td class="org-left"><b>清空整个屏幕</b> ，并移动光标到左上角</td><td class="org-left"><code>printf "\e[2J"</code> # 相当于 <code>clear</code> 命令</td></tr><tr><td class="org-left"><code>\e[0K</code> , <code>\e[K</code></td><td class="org-left">从光标位置擦除到行尾</td><td class="org-left"><code>printf "\e[0K"</code></td></tr><tr><td class="org-left"><code>\e[1K</code></td><td class="org-left">从光标位置擦除到行首</td><td class="org-left"><code>printf "\e[1K"</code></td></tr><tr><td class="org-left"><code>\e[2K</code></td><td class="org-left"><b>擦除整行</b> ，光标位置不变</td><td class="org-left"><code>printf "\e[2K"</code></td></tr></table></div></div><div class="outline-4">
+<h4 id="org-title-2-2-3"><span class="section-number-4">2.2.3.</span> 图形模式 (SGR - Select Graphic Rendition) - <code>\e[&lt;n&gt;m</code></h4>
+<div class="outline-text-4" id="text-2-2-3"><p>这是用于设置文本颜色和样式的序列。 <b>多个属性用分号分隔，最终用 <code>m</code> 结尾。</b></p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e[0m</code></td><td class="org-left"><b>重置所有属性</b> (最重要！)</td><td class="org-left"><code>printf "\e[31mRed\e[0m Normal"</code></td></tr><tr><td class="org-left"><code>\e[1m</code></td><td class="org-left">粗体或高亮度 (Bold/Bright)</td><td class="org-left"><code>printf "\e[1mBold"</code></td></tr><tr><td class="org-left"><code>\e[2m</code></td><td class="org-left">模糊 (Faint) (支持度不高)</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\e[3m</code></td><td class="org-left">斜体 (Italic)</td><td class="org-left"><code>printf "\e[3mItalic"</code></td></tr><tr><td class="org-left"><code>\e[4m</code></td><td class="org-left">下划线 (Underline)</td><td class="org-left"><code>printf "\e[4mUnderline"</code></td></tr><tr><td class="org-left"><code>\e[5m</code></td><td class="org-left">慢闪烁 (Blink)</td><td class="org-left"><code>printf "\e[5mBlink"</code></td></tr><tr><td class="org-left"><code>\e[7m</code></td><td class="org-left">反显 (Inverse)，前景背景色互换</td><td class="org-left"><code>printf "\e[7mInverse"</code></td></tr><tr><td class="org-left"><code>\e[8m</code></td><td class="org-left">隐藏 (Conceal)</td><td class="org-left"><code>printf "\e[8mHidden"</code></td></tr><tr><td class="org-left"><code>\e[9m</code></td><td class="org-left">删除线 (Strikethrough)</td><td class="org-left"><code>printf "\e[9mStrike"</code></td></tr></table><p><b>8/16 色前景色 (Foreground)</b></p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e[30m</code> - <code>\e[37m</code></td><td class="org-left">设置标准前景色</td><td class="org-left"><code>printf "\e[31mRed"</code></td></tr><tr><td class="org-left"><code>\e[39m</code></td><td class="org-left">重置为默认前景色</td><td class="org-left"><code>printf "\e[31mRed\e[39m Default"</code></td></tr><tr><td class="org-left"><code>\e[90m</code> - <code>\e[97m</code></td><td class="org-left">设置明亮前景色 (Bright)</td><td class="org-left"><code>printf "\e[91mBright Red"</code></td></tr></table><blockquote>
+<p>颜色分别对应：30黑,31红,32绿,33黄,34蓝,35洋红,36青,37白<br/> 背景则把前面的3改成4</p></blockquote><p><b>8/16 色背景色 (Background)</b></p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e[40m</code> - <code>\e[47m</code></td><td class="org-left">设置标准背景色</td><td class="org-left"><code>printf "\e[41mRed BG"</code></td></tr><tr><td class="org-left"><code>\e[49m</code></td><td class="org-left">重置为默认背景色</td><td class="org-left"><code>printf "\e[41mRed BG\e[49m"</code></td></tr><tr><td class="org-left"><code>\e[100m</code> - <code>\e[107m</code></td><td class="org-left">设置明亮背景色</td><td class="org-left"><code>printf "\e[101mBright Red BG"</code></td></tr></table><p><b>256 色和 RGB 真彩色 (更现代的支持)</b></p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e[38;5;&lt;n&gt;m</code></td><td class="org-left">设置 256 色前景色 (<code>&lt;n&gt;</code> 从 0-255)</td><td class="org-left"><code>printf "\e[38;5;202mOrange"</code></td></tr><tr><td class="org-left"><code>\e[48;5;&lt;n&gt;m</code></td><td class="org-left">设置 256 色背景色</td><td class="org-left"><code>printf "\e[48;5;202mOrange BG"</code></td></tr><tr><td class="org-left"><code>\e[38;2;&lt;r&gt;;&lt;g&gt;;&lt;b&gt;m</code></td><td class="org-left">设置 RGB 真彩色前景色</td><td class="org-left"><code>printf "\e[38;2;255;100;0mOrange"</code></td></tr><tr><td class="org-left"><code>\e[48;2;&lt;r&gt;;&lt;g&gt;;&lt;b&gt;m</code></td><td class="org-left">设置 RGB 真彩色背景色</td><td class="org-left"><code>printf "\e[48;2;255;100;0mOrange BG"</code></td></tr></table></div></div></div><div class="outline-3">
+<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 其他有用的序列</h3>
+<div class="outline-4">
+<h4 id="org-title-2-3-1"><span class="section-number-4">2.3.1.</span> 字符集控制 (Character Set Control)</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e(0</code></td><td class="org-left">启用 DEC 特殊字符集（线绘模式）</td><td class="org-left"><code>printf "\e(0lq\e(B"</code> # 输出 <code>┌─</code></td></tr><tr><td class="org-left"><code>\e(B</code></td><td class="org-left">启用 US ASCII 字符集（正常模式）</td><td class="org-left"><code>printf "\e(B"</code> # 撤销 <code>\e(0</code> 的效果</td></tr><tr><td class="org-left"><code>\e)0</code></td><td class="org-left">为 G1 字符集启用 DEC 特殊字符集</td><td class="org-left">&nbsp;</td></tr></table></div></div><div class="outline-4">
+<h4 id="org-title-2-3-2"><span class="section-number-4">2.3.2.</span> 操作系统命令 (OSC) - <code>\e]...\a</code> 或 <code>\e]...\x07</code></h4>
+<div class="outline-text-4" id="text-2-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e]0;&lt;str&gt;\a</code></td><td class="org-left">设置终端窗口的图标名称和标题</td><td class="org-left"><code>printf "\e]0;My Custom Title\a"</code></td></tr><tr><td class="org-left"><code>\e]2;&lt;str&gt;\a</code></td><td class="org-left">仅设置终端窗口的标题</td><td class="org-left"><code>printf "\e]2;Window Title\a"</code></td></tr><tr><td class="org-left"><code>\e]10;&lt;str&gt;\a</code></td><td class="org-left">设置动态文本颜色（支持度低）</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\e]11;&lt;str&gt;\a</code></td><td class="org-left">设置动态背景颜色（支持度低）</td><td class="org-left">&nbsp;</td></tr></table></div></div><div class="outline-4">
+<h4 id="org-title-2-3-3"><span class="section-number-4">2.3.3.</span> 其他</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\e#3</code></td><td class="org-left">双倍高度行（顶部）</td><td class="org-left"><code>printf "\e#3D\n"</code> # 'D' 会显示为双倍高度</td></tr><tr><td class="org-left"><code>\e#4</code></td><td class="org-left">双倍高度行（底部）</td><td class="org-left"><code>printf "\e#4D\n"</code></td></tr><tr><td class="org-left"><code>\e#5</code></td><td class="org-left">单倍宽度行</td><td class="org-left"><code>printf "\e#5"</code></td></tr><tr><td class="org-left"><code>\e#6</code></td><td class="org-left">双倍宽度行</td><td class="org-left"><code>printf "\e#6W\n"</code> # 'W' 会显示为双倍宽度</td></tr><tr><td class="org-left"><code>\e7</code>, <code>\e[u</code></td><td class="org-left"><b>保存当前光标位置和属性</b></td><td class="org-left">推荐用前者</td></tr><tr><td class="org-left"><code>\e8</code>, <code>\e[s</code></td><td class="org-left"><b>恢复之前保存的光标位置和属性</b></td><td class="org-left">推荐用前者</td></tr><tr><td class="org-left"><code>\eM</code></td><td class="org-left">反转的索引 (Reverse Index) - 上滚一行</td><td class="org-left"><code>printf "\eM"</code></td></tr></table></div></div></div><div class="outline-3">
+<h3 id="org-title-2-4"><span class="section-number-3">2.4.</span> 非标准ANSI序列控制字符</h3>
+<div class="outline-text-3" id="text-2-4"><p>隐藏光标： <code>\033[?25l</code><br/> 显示光标： <code>\033[?25h</code></p></div></div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> Linux Signal信号</h2>
+<div class="outline-text-2" id="text-3"><blockquote>
+<p>实际上这个内容可以直接 <code>man signal</code> 即可查看，不用上网查</p></blockquote><p><a href="https://www.cnblogs.com/frisk/p/11602973.html">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="n">SIGHUP</span><span class="w">       </span><span class="mi">1</span><span class="w">          </span><span class="cm">/* Hangup (POSIX).  */</span><span class="w">                          </span><span class="n">终止进程</span><span class="w">     </span><span class="n">终端线路挂断</span>
+<span class="n">SIGINT</span><span class="w">       </span><span class="mi">2</span><span class="w">       </span><span class="cm">/* Interrupt (ANSI).  */</span><span class="w">                        </span><span class="n">终止进程</span><span class="w">     </span><span class="n">中断进程</span><span class="w"> </span><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span>
+<span class="n">SIGQUIT</span><span class="w">      </span><span class="mi">3</span><span class="w">          </span><span class="cm">/* Quit (POSIX).  */</span><span class="w">                            </span><span class="n">建立CORE文件终止进程</span><span class="err">，</span><span class="n">并且生成core文件</span><span class="w"> </span><span class="n">Ctrl</span><span class="o">+</span>\
+<span class="n">SIGILL</span><span class="w">       </span><span class="mi">4</span><span class="w">          </span><span class="cm">/* Illegal instruction (ANSI).  */</span><span class="w">              </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">非法指令</span>
+<span class="n">SIGTRAP</span><span class="w">      </span><span class="mi">5</span><span class="w">          </span><span class="cm">/* Trace trap (POSIX).  */</span><span class="w">                      </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">跟踪自陷</span>
+<span class="n">SIGABRT</span><span class="w">      </span><span class="mi">6</span><span class="w">          </span><span class="cm">/* Abort (ANSI).  */</span>
+<span class="n">SIGIOT</span><span class="w">       </span><span class="mi">6</span><span class="w">          </span><span class="cm">/* IOT trap (4.2 BSD).  */</span><span class="w">                      </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">执行I</span><span class="o">/</span><span class="n">O自陷</span>
+<span class="n">SIGBUS</span><span class="w">       </span><span class="mi">7</span><span class="w">          </span><span class="cm">/* BUS error (4.2 BSD).  */</span><span class="w">                     </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">总线错误</span>
+<span class="n">SIGFPE</span><span class="w">       </span><span class="mi">8</span><span class="w">          </span><span class="cm">/* Floating-point exception (ANSI).  */</span><span class="w">         </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">浮点异常</span>
+<span class="n">SIGKILL</span><span class="w">      </span><span class="mi">9</span><span class="w">        </span><span class="cm">/* Kill, unblockable (POSIX).  */</span><span class="w">               </span><span class="n">终止进程</span><span class="w">     </span><span class="n">杀死进程</span>
+<span class="n">SIGUSR1</span><span class="w">      </span><span class="mi">10</span><span class="w">         </span><span class="cm">/* User-defined signal 1 (POSIX).  */</span><span class="w">           </span><span class="n">终止进程</span><span class="w">     </span><span class="n">用户定义信号1</span>
+<span class="n">SIGSEGV</span><span class="w">      </span><span class="mi">11</span><span class="w">         </span><span class="cm">/* Segmentation violation (ANSI).  */</span><span class="w">           </span><span class="n">建立CORE文件</span><span class="p">,</span><span class="n">段非法错误</span>
+<span class="n">SIGUSR2</span><span class="w">      </span><span class="mi">12</span><span class="w">         </span><span class="cm">/* User-defined signal 2 (POSIX).  */</span><span class="w">           </span><span class="n">终止进程</span><span class="w">     </span><span class="n">用户定义信号2</span>
+<span class="n">SIGPIPE</span><span class="w">      </span><span class="mi">13</span><span class="w">         </span><span class="cm">/* Broken pipe (POSIX).  */</span><span class="w">                     </span><span class="n">终止进程</span><span class="w">     </span><span class="n">向一个没有读进程的管道写数据</span>
+<span class="n">SIGALARM</span><span class="w">     </span><span class="mi">14</span><span class="w">       </span><span class="cm">/* Alarm clock (POSIX).  */</span><span class="w">                     </span><span class="n">终止进程</span><span class="w">     </span><span class="n">计时器到时</span>
+<span class="n">SIGTERM</span><span class="w">      </span><span class="mi">15</span><span class="w">       </span><span class="cm">/* Termination (ANSI).  */</span><span class="w">                      </span><span class="n">终止进程</span><span class="w">     </span><span class="n">软件终止信号</span>
+<span class="n">SIGSTKFLT</span><span class="w">    </span><span class="mi">16</span><span class="w">         </span><span class="cm">/* Stack fault.  */</span>
+<span class="n">SIGCLD</span><span class="w">       </span><span class="n">SIGCHLD</span><span class="w">    </span><span class="cm">/* Same as SIGCHLD (System V).  */</span>
+<span class="n">SIGCHLD</span><span class="w">      </span><span class="mi">17</span><span class="w">         </span><span class="cm">/* Child status has changed (POSIX).  */</span><span class="w">        </span><span class="n">忽略信号</span><span class="w">     </span><span class="n">当子进程停止或退出时通知父进程</span>
+<span class="n">SIGCONT</span><span class="w">      </span><span class="mi">18</span><span class="w">         </span><span class="cm">/* Continue (POSIX).  */</span><span class="w">                        </span><span class="n">忽略信号</span><span class="w">     </span><span class="n">继续执行一个停止的进程</span>
+<span class="n">SIGSTOP</span><span class="w">      </span><span class="mi">19</span><span class="w">         </span><span class="cm">/* Stop, unblockable (POSIX).  */</span><span class="w">               </span><span class="n">停止进程</span><span class="w">     </span><span class="n">非终端来的停止信号</span>
+<span class="n">SIGTSTP</span><span class="w">      </span><span class="mi">20</span><span class="w">         </span><span class="cm">/* Keyboard stop (POSIX).  */</span><span class="w">                   </span><span class="n">停止进程</span><span class="w">     </span><span class="n">终端来的停止信号</span><span class="w"> </span><span class="n">Ctrl</span><span class="o">+</span><span class="n">Z</span>
+<span class="n">SIGTTIN</span><span class="w">      </span><span class="mi">21</span><span class="w">         </span><span class="cm">/* Background read from tty (POSIX).  */</span><span class="w">        </span><span class="n">停止进程</span><span class="w">     </span><span class="n">后台进程读终端</span>
+<span class="n">SIGTTOU</span><span class="w">      </span><span class="mi">22</span><span class="w">         </span><span class="cm">/* Background write to tty (POSIX).  */</span><span class="w">         </span><span class="n">停止进程</span><span class="w">     </span><span class="n">后台进程写终端</span>
+<span class="n">SIGURG</span><span class="w">       </span><span class="mi">23</span><span class="w">         </span><span class="cm">/* Urgent condition on socket (4.2 BSD).  */</span><span class="w">    </span><span class="n">忽略信号</span><span class="w">     </span><span class="n">I</span><span class="o">/</span><span class="n">O紧急信号</span>
+<span class="n">SIGXCPU</span><span class="w">      </span><span class="mi">24</span><span class="w">         </span><span class="cm">/* CPU limit exceeded (4.2 BSD).  */</span><span class="w">            </span><span class="n">终止进程</span><span class="w">     </span><span class="n">CPU时限超时</span>
+<span class="n">SIGXFSZ</span><span class="w">      </span><span class="mi">25</span><span class="w">         </span><span class="cm">/* File size limit exceeded (4.2 BSD).  */</span><span class="w">      </span><span class="n">终止进程</span><span class="w">     </span><span class="n">文件长度过长</span>
+<span class="n">SIGVTALRM</span><span class="w">    </span><span class="mi">26</span><span class="w">         </span><span class="cm">/* Virtual alarm clock (4.2 BSD).  */</span><span class="w">           </span><span class="n">终止进程</span><span class="w">     </span><span class="n">虚拟计时器到时</span>
+<span class="n">SIGPROF</span><span class="w">      </span><span class="mi">27</span><span class="w">         </span><span class="cm">/* Profiling alarm clock (4.2 BSD).  */</span><span class="w">         </span><span class="n">终止进程</span><span class="w">     </span><span class="n">统计分布图用计时器到时</span>
+<span class="n">SIGWINCH</span><span class="w">     </span><span class="mi">28</span><span class="w">         </span><span class="cm">/* Window size change (4.3 BSD, Sun).  */</span><span class="w">       </span><span class="n">忽略信号</span><span class="w">     </span><span class="n">窗口大小发生变化</span>
+<span class="n">SIGPOLL</span><span class="w">      </span><span class="n">SIGIO</span><span class="w">      </span><span class="cm">/* Pollable event occurred (System V).  */</span>
+<span class="n">SIGIO</span><span class="w">        </span><span class="mi">29</span><span class="w">         </span><span class="cm">/* I/O now possible (4.2 BSD).  */</span><span class="w">              </span><span class="n">忽略信号</span><span class="w">     </span><span class="n">描述符上可以进行I</span><span class="o">/</span><span class="n">O</span>
+<span class="n">SIGPWR</span><span class="w">       </span><span class="mi">30</span><span class="w">         </span><span class="cm">/* Power failure restart (System V).  */</span>
+<span class="n">SIGSYS</span><span class="w">       </span><span class="mi">31</span><span class="w">         </span><span class="cm">/* Bad system call.  */</span>
+<span class="n">SIGUNUSED</span><span class="w">    </span><span class="mi">31</span>
+</pre></div></div></div><div class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> RELRO等安全选项</h2>
+<div class="outline-text-2" id="text-4"><p><a href="https://blog.csdn.net/tabactivity/article/details/126660974">来源</a> 编译时使用 <code>-z now</code> 选项</p></div></div><div class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 判断字符是中文还是英文(有局限)</h2>
+<div class="outline-text-2" id="text-5"><p><a href="https://blog.csdn.net/shen_chengfeng/article/details/109161829">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage:</span><span class="se">\n</span><span class="s">./xxx str</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">	</span><span class="kt">int</span><span class="w">   </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="w">	</span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x80</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;chinese: %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;english: %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">p</span><span class="o">++</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div><p>（以上代码可在my-test中找到）</p></div></div><div class="outline-2">
+<h2 id="org-title-6"><span class="section-number-2">6.</span> 生成迷宫</h2>
+<div class="outline-text-2" id="text-6"><p><a href="https://blog.csdn.net/jjwwwww/article/details/82872922">来源</a> - 该程序与下列代码有较大出入</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;time.h&gt;</span>
+
+<span class="cp">#define SECOND 1000000</span>
+<span class="cp">#define TPS    (SECOND / 20)</span>
+
+<span class="c1">//地图长度L，包括迷宫主体20，外侧的包围的墙体2，</span>
+<span class="c1">//最外侧包围路径2（之后会解释）</span>
+<span class="cp">#define L (20 + 4)</span>
+
+<span class="c1">//墙和路径的标识</span>
+<span class="cp">#define WALL  0</span>
+<span class="cp">#define ROUTE 1</span>
+<span class="cp">#define MARK  2</span>
+<span class="cp">#define WALL_C  &quot;国&quot;</span>
+<span class="cp">#define ROUTE_C &quot;  &quot;</span>
+<span class="cp">#define MARK_C  &quot;:;&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="o">**</span><span class="n">Maze</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// 控制迷宫的复杂度，数值越大复杂度越低，最小值为0</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_map</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">CreateMaze</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">**</span><span class="n">maze</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">//生成迷宫</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span><span class="w">				</span><span class="cm">/*{{{ */</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[?25l&quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="n">init</span><span class="p">();</span>
+<span class="w">	</span><span class="n">print_map</span><span class="p">();</span>
+
+<span class="w">	</span><span class="c1">//创造迷宫，（2，2）为起点</span>
+<span class="w">	</span><span class="n">CreateMaze</span><span class="p">(</span><span class="n">Maze</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="w">	</span><span class="c1">//画迷宫的入口和出口</span>
+<span class="w">	</span><span class="n">Maze</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+
+<span class="w">	</span><span class="c1">//由于算法随机性，出口有一定概率不在（L-3,L-2）处，</span>
+<span class="w">	</span><span class="c1">//此时需要寻找出口</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">			</span><span class="k">break</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="n">print_map</span><span class="p">();</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dB&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+
+<span class="w">	</span><span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">&quot;maze.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;w&quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">LEAVE</span><span class="p">;</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+
+<span class="nl">LEAVE</span><span class="p">:</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[?25h&quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">		</span><span class="n">free</span><span class="p">(</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">	</span><span class="n">free</span><span class="p">(</span><span class="n">Maze</span><span class="p">);</span>
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">				</span><span class="cm">/*}}} */</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
+<span class="p">{</span><span class="w">				</span><span class="cm">/*{{{ */</span>
+<span class="w">	</span><span class="n">srand</span><span class="p">((</span><span class="kt">unsigned</span><span class="p">)</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+
+<span class="w">	</span><span class="n">Maze</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">));</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="c1">// 最外围层设为路径的原因，为了防止挖路时挖出边界，</span>
+<span class="w">	</span><span class="c1">// 同时为了保护迷宫主体外的一圈墙体被挖穿</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">		</span><span class="n">Maze</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">		</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">		</span><span class="n">Maze</span><span class="p">[</span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span><span class="w">				</span><span class="cm">/*}}} */</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_map</span><span class="p">()</span>
+<span class="p">{</span><span class="w">				</span><span class="cm">/*{{{ */</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">deep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Rank</span><span class="p">;</span><span class="w">    </span><span class="cm">/* 并无实际意义，经验公式 */</span>
+
+<span class="w">	</span><span class="c1">//画迷宫</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span>
+<span class="w">			       </span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">WALL</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="n">Maze</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MARK</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">MARK_C</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ROUTE_C</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">WALL_C</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">		</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 符号解释: &#39;%s&#39;为遍历节点</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">MARK_C</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  |           &#39;%s&#39;为走道</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">ROUTE_C</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  |           &#39;%s&#39;为边墙</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">WALL_C</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 全图边长: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 实体边长: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 本体边长: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 复杂程度: %d (值越小越复杂) </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">Rank</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 延迟时间: %.4fs</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span><span class="n">TPS</span><span class="o">/</span><span class="n">SECOND</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dC  | 遍历深度: %-3d [%4.1f%%]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">level</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">deep</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[1A</span><span class="se">\033</span><span class="s">[%dC [&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">25</span><span class="p">);</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">lim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">28</span><span class="p">);</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="n">printf</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">lim</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">level</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">deep</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;#&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">	</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[%dA&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
+<span class="w">	</span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span><span class="w">				</span><span class="cm">/*}}} */</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">CreateMaze</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">**</span><span class="n">maze</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span><span class="w">				</span><span class="cm">/*{{{ */</span>
+<span class="w">	</span><span class="n">level</span><span class="o">++</span><span class="p">;</span>
+<span class="w">	</span><span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">WALL</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">ROUTE</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+
+<span class="w">	</span><span class="c1">//确保四个方向随机</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="cm">/* Swap data */</span>
+<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">		</span><span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">		</span><span class="n">direction</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+
+<span class="w">		</span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">		</span><span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">		</span><span class="n">direction</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">	</span><span class="p">}</span>
+
+<span class="w">	</span><span class="c1">//向四个方向开挖</span>
+<span class="w">	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">		</span><span class="c1">//控制挖的距离，由Rank来调整大小</span>
+<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">Rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">Rank</span><span class="p">);</span>
+<span class="w">		</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">dx</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">			</span><span class="n">dy</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+
+<span class="w">			</span><span class="c1">//排除掉回头路</span>
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">WALL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="k">break</span><span class="p">;</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">			</span><span class="c1">//判断是否挖穿路径</span>
+<span class="w">			</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">					</span><span class="c1">// abs(j - dx) + abs(k - dy) == 1 </span>
+<span class="w">					</span><span class="c1">// 确保只判断九宫格的四个特定位置</span>
+<span class="w">					</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dx</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dy</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">					    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maze</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">WALL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">						</span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">					</span><span class="p">}</span>
+<span class="w">				</span><span class="p">}</span>
+<span class="w">			</span><span class="p">}</span>
+
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="k">break</span><span class="p">;</span>
+<span class="w">			</span><span class="p">}</span>
+<span class="w">			</span><span class="c1">//确保不会挖穿时，前进</span>
+<span class="w">			</span><span class="o">--</span><span class="n">range</span><span class="p">;</span>
+<span class="w">			</span><span class="n">maze</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">			</span><span class="n">print_map</span><span class="p">();</span>
+<span class="w">			</span><span class="n">usleep</span><span class="p">(</span><span class="n">TPS</span><span class="p">);</span>
+<span class="w">		</span><span class="p">}</span>
+
+<span class="w">		</span><span class="c1">//没有挖穿危险，以此为节点递归</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">			</span><span class="n">maze</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MARK</span><span class="p">;</span>
+<span class="w">			</span><span class="n">CreateMaze</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">);</span>
+<span class="w">			</span><span class="n">maze</span><span class="p">[</span><span class="n">dx</span><span class="p">][</span><span class="n">dy</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUTE</span><span class="p">;</span>
+<span class="w">		</span><span class="p">}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="w">	</span><span class="n">level</span><span class="o">--</span><span class="p">;</span>
+<span class="w">	</span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span><span class="w">				</span><span class="cm">/*}}} */</span>
+</pre></div><p>（以上代码可在my-test中找到）</p></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2025-04-19 六></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 抄别人blog的东西，塞一起应该方便自己查吧？</p>
+<p class="date">生成于: 2025-08-28 五 20:30:47</p>
+</div>
+</body>
+</html>

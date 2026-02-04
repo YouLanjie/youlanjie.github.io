@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="啃manim教程，自己养老备用防忘" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>Manim学习笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Manim学习笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. Manim的安装</a><ul><li><a href="#org-title-1-1">1.1. 使用pipx的方案</a></li><li><a href="#org-title-1-2">1.2. 使用 <code>makepkg</code>  的方案</a></li><li><a href="#org-title-1-3">1.3. 从aur安装(不推荐)</a></li><li><a href="#org-title-1-4">1.4. 直接pip安装(非常不推荐)</a></li><li><a href="#org-title-1-5">1.5. DLC:在termux上安装manim</a></li></ul></li>
+<li><a href="#org-title-2">2. Manim基础知识</a><ul><li><a href="#org-title-2-1">2.1. 基本格式与渲染参数</a></li><li><a href="#org-title-2-2">2.2. 词义理解</a></li></ul></li>
+<li><a href="#org-title-3">3. Manim手册</a><ul><li><a href="#org-title-3-1">3.1. 常量速查</a></li><li><a href="#org-title-3-2">3.2. 对象及其特异性方法一览</a></li><li><a href="#org-title-3-3">3.3. 广泛通用属性一览</a></li><li><a href="#org-title-3-4">3.4. 广泛通用方法一览</a></li><li><a href="#org-title-3-5">3.5. 屏幕方法一览</a></li><li><a href="#org-title-3-6">3.6. 动画方法一览</a></li><li><a href="#org-title-3-7">3.7. 示例</a></li></ul></li>
+<li><a href="#org-title-4">4. 制作经验</a><ul><li><a href="#org-title-4-1">4.1. 一般经验</a></li><li><a href="#org-title-4-2">4.2. 方法建议</a><ul><li><a href="#org-title-4-2-1">4.2.1. 自定义图形</a></li><li><a href="#org-title-4-2-2">4.2.2. 分割场景</a></li></ul></li>
+<li><a href="#org-title-4-3">4.3. 过程参考</a></li></ul></li>
+<li><a href="#org-title-5">5. Reference</a></li></ul></div></div>
+<blockquote>
+<p>警告！这只是一篇笔记！一篇笔记！非入门教程！默认具有一定python基础<br/>系统环境：Arch Linux<br/>更新时间：2025-08-01<br/> 顺带一提：使用manimCE的建议看最后 <code>Reference</code> 里面最后一个链接里的官方教程</p></blockquote><div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> Manim的安装</h2>
+<div class="outline-text-2" id="text-1"><p>5202年了，manim的安装仍旧让人非常想吐槽。arch或许还好还有aur，但是aur上的包都是使用github的链接，下载奇慢，还可能时不时出现一些编译问题。下面开始正文</p><p>下面是我安装manimce的几种方案：</p></div><div class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 使用pipx的方案</h3>
+<div class="outline-text-3" id="text-1-1"><blockquote>
+<p>好处：</p><ol class="org-ol">
+<li>简单快捷
+</li></ol>
+<p>坏处：</p><ol class="org-ol">
+<li>仅限单用户
+</li>
+<li>需要配置下ide以实现自动补全（但我没试过，故不给出方案）
+</li></ol>
+</blockquote><div class="org-src-container"><pre class="src src-shell"><span class="c1"># 确保系统完整且具有gcc等工具，texlive选装</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>base<span class="w"> </span>base-devel<span class="w"> </span>ffmpeg<span class="w"> </span>texlive
+<span class="c1"># python环境设置</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>python<span class="w"> </span>python-pip<span class="w"> </span>python-pipx
+<span class="c1"># 设置镜像</span>
+pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>global.index-url<span class="w"> </span><span class="s2">&quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;</span>
+<span class="c1"># 安装ManimCE(manimgl是3b1b个人版本)</span>
+pipx<span class="w"> </span>install<span class="w"> </span>manim
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> 使用 <code>makepkg</code> 的方案</h3>
+<div class="outline-text-3" id="text-1-2"><blockquote>
+<p>由于该方案是使用archlinux的 <code>makepkg</code> +python的 <code>python-build</code> + <code>python-installer</code> 将所有的manim依赖打包在一起，所以：</p><ol class="org-ol">
+<li>非archlinux不可用
+</li>
+<li>可能会造成混乱（因为其他依赖包不是独立打包的，没有独立的版本管理，版本升级不方便）
+</li>
+<li>如果有软件包洁癖勿入，因为它不是标准包，打包了很多个python库
+</li></ol>
+<p>优点：</p><ol class="org-ol">
+<li>对懒癌友好(相较于aur的manim的一堆从github下载的依赖包)
+</li>
+<li>设置了pip镜像后对国内用户友好(不用等yay一个一个地从github上下东西)
+</li>
+<li>将manim打包后系统级安装，直接用自动补全
+</li></ol>
+</blockquote><div class="org-src-container"><pre class="src src-shell"><span class="c1"># 最好在运行前设置pip镜像</span>
+pip<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>global.index-url<span class="w"> </span><span class="s2">&quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;</span>
+</pre></div><p>请确保/etc/pacman.conf中启用了archlinuxcn库，如若没有在其中添加以下内容以设置</p><div class="org-src-container"><pre class="src src-conf"><span class="k">[archlinuxcn]</span>
+<span class="na">Server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span>
+</pre></div><p>然后从
+<a href="https://gitee.com/youlanjie/pkgbuild/raw/master/manim/PKGBUILD">这里</a>下载PKGBUILD文件存到某个目录，然后在那个目录下运行 <code>makepkg -s</code> 就可以了(不会到了这步还不会吧？罚你去看archwiki)</p></div></div><div class="outline-3">
+<h3 id="org-title-1-3"><span class="section-number-3">1.3.</span> 从aur安装(不推荐)</h3>
+<div class="outline-text-3" id="text-1-3"><p>众所周知，aur上的包大多默认从github上下载，就算是挂了代理一般也很慢。并且吧，经过我多次被aur上的manim包坑的经历后，被搞怕了好吧。</p><p>当然，也不是没有解决办法。如果安装软件出现问题可以去对应包的aur界面看看评论，评论区有高手会提出问题并解决的</p><p>目前(2025.08.01)已知包缺少依赖：</p><ul class="org-ul">
+<li>python-beautifulsoup4
+</li>
+<li>python-av
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-1-4"><span class="section-number-3">1.4.</span> 直接pip安装(非常不推荐)</h3>
+<div class="outline-text-3" id="text-1-4"><p>过程类似pipx，不多讲，主要是我也不想这样干，已知问题见下面</p><details>
+<summary>由于比较长所以藏里面了，点击展开查看</summary>
+<div class="org-src-container"><pre class="src src-org"><span class="k">1.</span> externally-managed-environment: pip与包管理器冲突
+<span class="w">   </span><span class="k">1.</span> 解决办法： <span class="s">=sudo mv /usr/lib/python3.13/EXTERNALLY-MANAGED /usr/lib/python3.13/EXTERNALLY-MANAGED.bk=</span>
+<span class="k">2.</span> manim直接pip安装问题(build问题)，以下为所有需安装包
+<span class="w">   </span><span class="k">1.</span> manim
+<span class="w">   </span><span class="k">2.</span> pillow
+<span class="w">   </span><span class="k">3.</span> Pygments
+<span class="w">   </span><span class="k">4.</span> audioop-lts
+<span class="w">   </span><span class="k">5.</span> av &gt;<span class="s">=</span>
+<span class="s">   6. beautifulsoup4</span>
+<span class="s">      1. soupsieve</span>
+<span class="s">   7. click</span>
+<span class="s">   8. =cloup=</span>
+<span class="w">   </span><span class="k">9.</span> decorator
+<span class="w">   </span><span class="k">10.</span> isosurfaces
+<span class="w">   </span><span class="k">11.</span> manimpango
+<span class="w">   </span><span class="k">12.</span> mapbox-earcut
+<span class="w">   </span><span class="k">13.</span> moderngl
+<span class="w">       </span><span class="k">1.</span> glcontext
+<span class="w">   </span><span class="k">14.</span> moderngl-window
+<span class="w">       </span><span class="k">1.</span> pyglet
+<span class="w">       </span><span class="k">2.</span> pyglm    ?
+<span class="w">   </span><span class="k">15.</span> networkx
+<span class="w">   </span><span class="k">16.</span> numpy
+<span class="w">   </span><span class="k">17.</span> pycairo
+<span class="w">       </span><span class="k">1.</span> Err: cc/gcc/clang/nvc/pgcc/icc/icx no found -&gt; install base-devel(gcc)
+<span class="w">          </span><span class="k">1.</span> Err: if gcc only: Pkg-config for machine host machine not found. -&gt;
+             install pkg-config
+<span class="w">             </span><span class="k">1.</span> if then only: RequiredDependencyException: pangocairo &gt;<span class="s">= 1.30.0</span>
+<span class="s">                is required -&gt; install ffmpeg(included cairo and pango(required</span>
+<span class="s">                by librsvg))</span>
+<span class="s">   18. =pydub=</span>
+<span class="w">   </span><span class="k">19.</span> rich
+<span class="w">       </span><span class="k">1.</span> markdown-it-py
+<span class="w">          </span><span class="k">1.</span> mdurl
+<span class="w">   </span><span class="k">20.</span> scipy
+<span class="w">   </span><span class="k">21.</span> screeninfo
+<span class="w">   </span><span class="k">22.</span> skia-pathops
+<span class="w">   </span><span class="k">23.</span> srt
+<span class="w">   </span><span class="k">24.</span> svgelements
+<span class="w">   </span><span class="k">25.</span> tqdm
+<span class="w">   </span><span class="k">26.</span> typing-extensions
+<span class="w">   </span><span class="k">27.</span> watchdog
+<span class="k">3.</span> pip config迁移: .pip/pip.conf <span class="s">=&gt; .config/pip/pip.conf</span>
+<span class="s">   1. 解决办法： =pip config set global.index-url &quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;=</span>
+      更多内容<span class="p">[[</span><span class="na">https://www.yaolong.net/article/pip-externally-managed-environment/</span><span class="p">][</span><span class="nt">详见这里</span><span class="p">]]</span>。
+</pre></div></details>
+</div></div><div class="outline-3">
+<h3 id="org-title-1-5"><span class="section-number-3">1.5.</span> DLC:在termux上安装manim</h3>
+<div class="outline-text-3" id="text-1-5"><p>附赠几条提示：</p><ol class="org-ol">
+<li>能够用pkg的尽量用pkg装，尽可能避免所有的编译问题(或许是因为由于架构问题经常会有包会傻乎乎地本地编译，浪费半天不说还会在最后给你弹出来个报错。例如说因为缺 cmake ninja等各种奇怪的编译依赖报错。
+</li>
+<li>由于未知原因，要把 <code>~/../lib/</code> 设置为可读写操作状态才能够正常安装
+</li>
+<li>仔细看报错
+</li></ol>
+</div></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> Manim基础知识</h2>
+<div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 基本格式与渲染参数</h3>
+<div class="outline-text-3" id="text-2-1"><p>一个基本manim程序范例：</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">example_class</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div><p>然后在命令行执行以下格式的命令渲染：</p><div class="org-src-container"><pre class="src src-shell">manim<span class="w"> </span>-ql<span class="w"> </span>path/to/file.py<span class="w"> </span>example_class
+<span class="c1"># 即:manim [参数] 文件.py [&lt;你定义的类名&gt;(类名可以省略(单个默认，多个询问))]</span>
+</pre></div><ul class="org-ul">
+<li><code>-q?</code> 用于指定输出质量，对应如下:
+</li></ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">参数</th><th scope="col" class="org-left">输出规格</th><th scope="col" class="org-left">含义</th></tr>
+</thead><tbody>
+<tr><td class="org-left">-ql</td><td class="org-left">854x480 15fps</td><td class="org-left">low(480p)</td></tr><tr><td class="org-left">-qm</td><td class="org-left">1280x730 30fps</td><td class="org-left">medium(720p)</td></tr><tr><td class="org-left">-qh</td><td class="org-left">1920x1080 60fps</td><td class="org-left">high(1080p)</td></tr><tr><td class="org-left">-qp</td><td class="org-left">2560x1440 60fps</td><td class="org-left">2k</td></tr><tr><td class="org-left">-qk</td><td class="org-left">3840x2160 60fps</td><td class="org-left">4k</td></tr></table><ul class="org-ul">
+<li><code>-p</code> 在渲染完成后预览结果
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 词义理解</h3>
+<div class="outline-text-3" id="text-2-2"><ul class="org-ul">
+<li>空间方位 由 <code>[x,y,z]</code> 三位数组构成，一般略去问题不大。坐标可由方向常量（看下表）、已存在的对象以及三位数组提供（在函数间传递参数的时候）。一般而言省略掉z 坐标问题不大。
+<ul class="org-ul">
+<li>x轴横于画面，y轴纵于画面，z轴垂直于画面。
+</li>
+<li><code>IN</code> 代表垂直并向着屏幕方向， <code>OUT</code> 则相反
+</li></ul>
+</li>
+<li>对象 一般指manim定义的那堆大写开头的可被添加到屏幕的类
+</li>
+<li>方法 一般指对象（类）的内部的函数，在manim中方法一般默认返回self，也就是说实际上可以在执行完一个方法后套上另外一个方法，如 <code>a.b().c().e()</code> 这样
+</li>
+<li>通用方法命名规律 用于找出想要的方法
+<ul class="org-ul">
+<li><code>get_XXX</code> 获取对象的属性
+</li>
+<li><code>set_XXX</code> 设置对象的属性
+</li></ul>
+</li>
+<li>属性 对象的属性（如颜色字体大小位置等）
+</li>
+<li>常见英语词汇翻译
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><tbody><tr><td class="org-left">原词</td><td class="org-left">意思</td></tr><tr><td class="org-left">buff</td><td class="org-left">缓冲，抵达预设位置前预留的空间</td></tr><tr><td class="org-left">opacity</td><td class="org-left">透明度</td></tr><tr><td class="org-left">about_point</td><td class="org-left">旋转等操作的中心点</td></tr><tr><td class="org-left">vertices</td><td class="org-left">顶点</td></tr><tr><td class="org-left">axis</td><td class="org-left">轴</td></tr></table>
+</li></ul>
+</div></div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> Manim手册</h2>
+<div class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 常量速查</h3>
+<div class="outline-text-3" id="text-3-1"><ul class="org-ul">
+<li>方位：本质为一个三维坐标（数组）
+<div class="org-src-container"><pre class="src src-text">UL        UP        UR  |  OUT   屏幕外面
+LEFT   ORIGION   RIGHT  | (z轴) ----------
+DL       DOWN       DR  |  IN    屏幕内侧
+</pre></div>
+<p>组合方式： 使用 <code>+</code> 号相加</p>
+</li>
+<li>角度 <code>DEGREES</code> 角度制(PI/180) | <code>PI</code> 弧度制 | <code>TAU</code> 周角(2*PI)
+</li>
+<li>颜色
+<div class="org-src-container"><pre class="src src-text">BLACK BLUE GOLD GRAY GREEN GREY
+ORANGE PINK PURPLE RED WHITE YELLOW
+</pre></div>
+<div class="figure">
+<p><img src="./img/colors.png" alt="./img/colors.png" /></p>
+<p><span class="figure-number">Figure 1: </span>manim中各种颜色</p></div>
+<details>
+<summary>生成上图的代码</summary>
+<div class="org-src-container"><pre class="src src-python"><span class="ch">#!/usr/bin/env manim -pqh -s</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Color</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># plane = NumberPlane()</span>
+        <span class="c1"># self.add(plane)</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="nb">dir</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">manim_colors</span><span class="p">)[:</span><span class="o">-</span><span class="mi">11</span><span class="p">]</span>
+        <span class="n">colors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;ManimColor&quot;</span><span class="p">)</span>
+        <span class="n">boxs</span> <span class="o">=</span> <span class="n">VGroup</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">VGroup</span><span class="p">()</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">manim_colors</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">box</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="o">.</span><span class="n">next_to</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">UP</span><span class="o">*</span><span class="mf">0.2</span><span class="p">)</span>
+            <span class="n">group</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+            <span class="n">boxs</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+        <span class="n">boxs</span><span class="o">.</span><span class="n">arrange_in_grid</span><span class="p">(</span><span class="n">buff</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">boxs</span><span class="p">)</span>
+</pre></div>
+</details>
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 对象及其特异性方法一览</h3>
+<div class="outline-text-3" id="text-3-2"><p>内容来自ManimCE手册，英语好的直接看定义知参数</p><div class="org-src-container"><pre class="src src-python"><span class="sd">&quot;&quot;&quot;注：`#`注释部分的括号内为其父对象&quot;&quot;&quot;</span>
+<span class="c1"># 组(VMobject)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VGroup</span><span class="p">(</span><span class="o">*</span><span class="n">vmobjects</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;可以通过VGroup(xxx, xxx, ...)、VGroup.add(xxx)、VGroup()+=XXX等方式添加对象</span>
+<span class="sd">   可以通过VGroup()[num]对某个顺序位置的对象进行访问</span>
+<span class="sd">   其内部的对象实际上是种指针，组内组外都能访问控制&quot;&quot;&quot;</span>
+<span class="c1"># 线(TipableVMobject)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Line</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">end</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">buff</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">path_arc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 虚线(Line)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DashLine</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">dash_length</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">dashed_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 两条线夹角的标记弧线(VMobjects)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Angle</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">line2</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quadrant</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">other_angle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dot_radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dot_distance</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">dot_color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">),</span> <span class="n">elbow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 矩形(RegularPolygon)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">),</span> <span class="n">height</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">grid_xstep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">grid_ystep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mark_paths_closed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">close_new_points</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 正三角形(RegularPolygon)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Triangle</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 开放型多边形(VMobject)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Polygram</span><span class="p">(</span><span class="o">*</span><span class="n">vertex_groups</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#58C4DD&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 闭合型多边形(特殊的Polygram)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Polygon</span><span class="p">(</span><span class="o">*</span><span class="n">vertices</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 圆形(Arc)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#FC6255&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># 让圆的圆心对齐已有元素</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">surround</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">dim_to_match</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">buffer_factor</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="c1"># 椭圆(Circle)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Ellipse</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 点(Circle)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Dot</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 箭头(Line)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Arrow</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">max_tip_length_to_length_ratio</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">max_stroke_width_to_length_ratio</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;如果不设置buff=0就会造成箭头的始末位置有偏差的问题&quot;&quot;&quot;</span>
+<span class="c1"># 曲箭头(ArcBetweenPoints)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CurvedArrow</span><span class="p">(</span><span class="n">start_point</span><span class="p">,</span> <span class="n">end_point</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 坐标轴(VGroup, CoordinateSystem)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Axes</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">axis_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_axis_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_axis_config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tips</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># 坐标轴绘图，返回的是一个对象，与Axes对象无直接联系</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_vectorized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">colorscale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colorscale_axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># Returns a `Polygon` representing the area under the graph passed.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_area</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#58C4DD&#39;</span><span class="p">),</span> <span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#83C167&#39;</span><span class="p">)),</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">bounded_graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 网格，可用于定位、查看画布大小等(Axes)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NumberPlane</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">7.111111111111111</span><span class="p">,</span> <span class="mf">7.111111111111111</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">background_line_style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">faded_line_style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">faded_line_ratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_smooth_after_applying_functions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 文本(SVGMobject)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">),</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">line_spacing</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">slant</span><span class="o">=</span><span class="s1">&#39;NORMAL&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;NORMAL&#39;</span><span class="p">,</span> <span class="n">t2c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t2f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t2g</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t2s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t2w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gradient</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tab_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">warn_missing_font</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">should_center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disable_ligatures</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_svg_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 数学公式(SingleStringMathTex)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MathTex</span><span class="p">(</span><span class="o">*</span><span class="n">tex_strings</span><span class="p">,</span> <span class="n">arg_separator</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">substrings_to_isolate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tex_to_color_map</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tex_environment</span><span class="o">=</span><span class="s1">&#39;align*&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># latex渲染文本(Mathtex)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Tex</span><span class="p">(</span><span class="o">*</span><span class="n">tex_strings</span><span class="p">,</span> <span class="n">arg_separator</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">tex_environment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;由于文字使用Latex渲染，渲染中文时可能会报错，所以要在后面加上参数变成</span>
+<span class="sd">   Tex(&quot;Strings&quot;, ..., tex_template=TexTemplateLibrary.ctex)</span>
+<span class="sd">   以渲染中文&quot;&quot;&quot;</span>
+<span class="c1"># 文字加分割线组成的标题(Tex)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Title</span><span class="p">(</span><span class="o">*</span><span class="n">text_parts</span><span class="p">,</span> <span class="n">include_underline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">match_underline_width_to_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">underline_buff</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 图片(AbstractImageMobject)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ImageMobject</span><span class="p">(</span><span class="n">filename_or_array</span><span class="p">,</span> <span class="n">scale_to_resolution</span><span class="o">=</span><span class="mi">1080</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">image_mode</span><span class="o">=</span><span class="s1">&#39;RGBA&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div><details>
+<summary>稍微没有那么常见的对象</summary>
+<div class="org-src-container"><pre class="src src-python"><span class="c1"># 矢量化的对象，是一堆对象的父对象，大多数对象的通用属性来源(Mobject)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VMobject</span><span class="p">(</span>\
+	<span class="n">fill_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>			\
+	<span class="n">stroke_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stroke_opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>	\
+	<span class="n">background_stroke_color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#000000&#39;</span><span class="p">),</span>		\
+	<span class="n">background_stroke_opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>				\
+	<span class="n">background_stroke_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>				\
+	<span class="n">sheen_factor</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>					\
+	<span class="n">joint_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>					\
+	<span class="n">sheen_direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span>			\
+	<span class="n">close_new_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>					\
+	<span class="n">pre_function_handle_to_anchor_scale_factor</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>	\
+	<span class="n">make_smooth_after_applying_functions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>		\
+	<span class="n">background_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>					\
+	<span class="n">shade_in_3d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>					\
+	<span class="n">tolerance_for_point_equality</span><span class="o">=</span><span class="mf">1e-06</span><span class="p">,</span>			\
+	<span class="n">n_points_per_cubic_curve</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>				\
+	<span class="n">cap_style</span><span class="o">=</span><span class="n">CapStyleType</span><span class="o">.</span><span class="n">AUTO</span><span class="p">,</span>				\
+	<span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 可以显示在屏幕上对象的基类</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Mobject</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">ManimColor</span><span class="p">(</span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">),</span>
+	<span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div></details>
+</div></div><div class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 广泛通用属性一览</h3>
+<div class="outline-text-3" id="text-3-3"><ul class="org-ul">
+<li>颜色家族(color)： <code>color</code><code>fill_color</code><code>stroke_color</code>
+<ul class="org-ul">
+<li>颜色属性可以直接修改设置没有问题
+</li></ul>
+</li>
+<li>透明度家族(opacity) <code>stroke_opacity</code><code>fill_opacity</code>
+<ul class="org-ul">
+<li>透明度不能够通过设置属性更改，需要使用 <code>set_opacity</code> 更改，若需要分别修改则需要使用 <code>set_fill</code> 和 <code>set_stroke</code> 方法在参数里指定
+</li></ul>
+</li>
+<li>大小家族： <code>height</code><code>width</code><code>radius</code><code>font_size</code>
+<ul class="org-ul">
+<li>前两个直接修改属性比例不变，半径修改无用，字体大小可用
+</li></ul>
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 广泛通用方法一览</h3>
+<div class="outline-text-3" id="text-3-4"><div class="org-src-container"><pre class="src src-python"><span class="c1"># Add mobjects as submobjects.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">mobjects</span><span class="p">)</span>
+<span class="c1"># 复制自身，包括所有子对象</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">()</span>
+<span class="c1"># ==================================================</span>
+<span class="sd">&quot;&quot;&quot;`set`开头的方法用于设置属性&quot;&quot;&quot;</span>
+<span class="c1"># 设置指定的属性</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 设置位置</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_y</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_z</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="c1"># 设置z轴同层显示优先级</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_z_index</span><span class="p">(</span><span class="n">z_index_value</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 设置对象颜色（边框和填充）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="c1"># ====以上set*可在Mobject类中找到====</span>
+<span class="c1"># 设置填充</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_fill</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 设置对象边框颜色</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_stroke</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># ==================================================</span>
+<span class="sd">&quot;&quot;&quot;`get`开头的方法用于获取属性&quot;&quot;&quot;</span>
+<span class="c1"># 获取对象碰撞箱（将对象完整包裹的正方形）底部坐标</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_bottom</span><span class="p">()</span>
+<span class="c1"># 获取对象碰撞箱顶部坐标</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_top</span><span class="p">()</span>
+<span class="c1"># 获取对象碰撞箱左边坐标</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_left</span><span class="p">()</span>
+<span class="c1"># 获取对象碰撞箱右边坐标</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_right</span><span class="p">()</span>
+<span class="c1"># 获取对象碰撞箱中心坐标</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_center</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_x</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_y</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_z</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="c1"># 获取颜色</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_color</span><span class="p">()</span>
+<span class="c1"># Returns the point, where the stroke that surrounds the Mobject starts</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_start</span><span class="p">()</span>
+<span class="c1"># Returns the point, where the stroke that surrounds the Mobject ends.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_end</span><span class="p">()</span>
+<span class="c1"># Get corner Point3Ds for certain direction.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_corner</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+<span class="c1"># ==================================================</span>
+<span class="sd">&quot;&quot;&quot;`has`开头的方法用于检查属性&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_points</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_no_points</span><span class="p">()</span>
+<span class="c1"># ==================================================</span>
+<span class="c1"># 移动与形态变化</span>
+<span class="sd">&quot;&quot;&quot;这里有相当多的方法可以使用 =object.animate.XXX= 的形式动画化</span>
+<span class="sd">   （需要传到play()里）不过这种方法得到的结果往往是对前后结果的插帧补全，</span>
+<span class="sd">   并非是“有特定运动路径的动画”。例如说这样使用的rotate就不是旋转动画</span>
+<span class="sd">   所以说这样的效果更像ApplyMethod()&quot;&quot;&quot;</span>
+<span class="c1"># 缩放</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">,</span> <span class="n">scale_stroke</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 旋转</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]),</span> <span class="n">about_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;使用`about_point`可以实现绕点旋转</span>
+<span class="sd">   使用`axis`可以指定旋转轴（向量形式），选择形式遵从右手螺旋定则</span>
+<span class="sd">   右手拇指为转轴方向，弯曲四指其方向为旋转正方向（所以默认方向才是`OUT`）&quot;&quot;&quot;</span>
+<span class="c1"># 以绝对位置移动（以坐标轴中心定位）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">move_to</span><span class="p">(</span><span class="n">point_or_mobject</span><span class="p">,</span> <span class="n">aligned_edge</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">coor_mask</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="c1"># 以相对位置移动（以对象当前位置定位），参数同上</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">shift</span><span class="p">(</span><span class="o">*</span><span class="n">vectors</span><span class="p">)</span>
+<span class="c1"># 以已有对象位置定位 +（上面的好像也可以）+</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">next_to</span><span class="p">(</span><span class="n">mobject_or_point</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">aligned_edge</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">submobject_to_align</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index_of_submobject_to_align</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">coor_mask</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="c1"># 在指定方向上对齐某个已知对象</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">align_to</span><span class="p">(</span><span class="n">mobject_or_point</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]))</span>
+<span class="c1"># 移动到屏幕角落</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_corner</span><span class="p">(</span><span class="n">corner</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1"># 贴着屏幕边缘</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_edge</span><span class="p">(</span><span class="n">edge</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1"># 移动至屏幕中央</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">center</span><span class="p">()</span>
+<span class="c1"># 可以将组内对象呈一条线型排列</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">arrange</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 可以将组内对象呈网格型排列</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">arrange_in_grid</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">cell_alignment</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]),</span> <span class="n">row_alignments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col_alignments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">row_heights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col_widths</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flow_order</span><span class="o">=</span><span class="s1">&#39;rd&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-3-5"><span class="section-number-3">3.5.</span> 屏幕方法一览</h3>
+<div class="outline-text-3" id="text-3-5"><div class="org-src-container"><pre class="src src-python"><span class="k">class</span><span class="w"> </span><span class="nc">Scene</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">camera_class</span><span class="o">=&lt;</span><span class="k">class</span><span class="w"> </span><span class="err">&#39;</span><span class="nc">manim</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">Camera</span><span class="s1">&#39;&gt;, always_update_mobjects=False, random_seed=None, skip_animations=False):</span>
+    <span class="c1"># 添加对象</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">mobjects</span><span class="p">)</span>
+    <span class="c1"># 移除对象</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="o">*</span><span class="n">mobjects</span><span class="p">)</span>
+    <span class="c1"># 清除屏幕</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">()</span>
+    <span class="c1"># 替换（可将子物体偷梁换柱）</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace</span><span class="p">(</span><span class="n">old_mobject</span><span class="p">,</span> <span class="n">new_mobject</span><span class="p">)</span>
+    <span class="c1"># 暂停，画面静止保持等待</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wait</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_condition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frozen_frame</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># wait()的别名</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pause</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="c1"># 播放动画</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">subcaption</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subcaption_duration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subcaption_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-3-6"><span class="section-number-3">3.6.</span> 动画方法一览</h3>
+<div class="outline-text-3" id="text-3-6"><div class="org-src-container"><pre class="src src-python"><span class="c1"># 动画(object)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Animation</span><span class="p">(</span><span class="n">mobject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lag_ratio</span><span class="o">=...</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=...</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot; lag_ratio :动画逐步应用到子对象的延迟，为0表示动画同步进行</span>
+<span class="sd">    run_time  :动画总时间</span>
+<span class="sd">    rate_func :动画速度曲线&quot;&quot;&quot;</span>
+<span class="c1"># 添加对象，效果同Scene.add()，但用于和其他动画并列(Animation)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Add</span><span class="p">(</span><span class="n">mobject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 暂停(Animation)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Wait</span><span class="p">(</span><span class="n">runtime</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop_condition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frozen_frame</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">linear</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 将对象所有数据转换成目标对象数据(Animation)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Transform</span><span class="p">(</span><span class="n">mobject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_mobject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path_arc</span><span class="o">=</span><span class="n">OUT</span><span class="p">,</span> <span class="n">path_arc_centers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">replace_mobject_with_target_in_scene</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 将对象偷梁换柱(Transform)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReplacementTransform</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">target_mobject</span><span class="p">)</span>
+<span class="c1"># 用插帧将指定的非动画方法动画化(Transform)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ApplyMethod</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="c1"># 旋转动画(Transform)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Rotate</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">PI</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">OUT</span><span class="p">,</span> <span class="n">about_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">about_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;--mobject      旋转对象</span>
+<span class="sd">   --angle        旋转角度</span>
+<span class="sd">   --axis         转轴</span>
+<span class="sd">   --about_point  旋转点</span>
+<span class="sd">   --about_edge   若无指定旋转点，则使用指定方向的碰撞箱边界作转点 &quot;&quot;&quot;</span>
+<span class="c1"># 转一圈(Animation)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Rotating</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">OUT</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="n">TAU</span><span class="p">,</span> <span class="n">about_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">about_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">linear</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># =========淡入淡出式=========</span>
+<span class="c1"># 淡入(_Fade)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FadeIn</span><span class="p">(</span><span class="n">mobject</span><span class="p">)</span>
+<span class="c1"># 淡出(_Fade)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FadeOut</span><span class="p">(</span><span class="n">mobject</span><span class="p">)</span>
+<span class="c1"># =========创造式=========</span>
+<span class="c1"># 增量显示对象(ShowPatial)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Create</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">lag_ratio</span><span class="p">,</span> <span class="n">introducer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Create的逆过程(Create)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Uncreate</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">reverse_rate_functio</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remover</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 模拟手绘对象(DrawBorderThenFill)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Write</span><span class="p">(</span><span class="n">vmobject</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">linear</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;与Creat区别于是先绘制边框再上色</span>
+<span class="sd">   reverse: 是否从右到左书写&quot;&quot;&quot;</span>
+<span class="c1"># Write的逆过程(Write)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Unwrite</span><span class="p">(</span><span class="n">vmobject</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">linear</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># =========放大生长式=========</span>
+<span class="c1"># 通过从一个点开始生长来引入一个对象(Transform)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GrowFromPoint</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">point_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;point_color:长大前的颜色&quot;&quot;&quot;</span>
+<span class="c1"># 从中心放大进入一个对象(GrowFromPoint)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GrowFromCenter</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">point_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 从边缘放大进入一个对象(GrowFromPoint)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GrowFromEdge</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">point_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 从边缘放大进入一个箭头(GrowFromPoint)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GrowFromPoint</span><span class="p">(</span><span class="n">arrow</span><span class="p">,</span> <span class="n">point_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># 从0放大并伴有完美的黄金螺旋一个对象(GrowFromCenter)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SpinInFromNothing</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">point_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1"># =========强调=========</span>
+<span class="c1"># 圈一圈(Succession)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circumscribe</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">Rectangle</span><span class="p">,</span> <span class="n">fade_in</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fade_out</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">time_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">buff</span><span class="o">=</span><span class="n">SMALL_BUFF</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">YELLOW</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stroke_width</span><span class="o">=</span><span class="n">DEFAULT_STROKE_WIDTH</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;shape: [Rectangle|Circle]二选一&quot;&quot;&quot;</span>
+<span class="c1"># 浪一浪(Homotopy)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ApplyWave</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">UP</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">wave_func</span><span class="o">=</span><span class="n">smmooth</span><span class="p">,</span> <span class="n">time_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ripples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 摇一摇(Animation)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Wiggle</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">scale_value</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">rotation_angle</span><span class="o">=</span><span class="mf">0.001</span><span class="o">*</span><span class="n">TAU</span><span class="p">,</span> <span class="n">n_wiggles</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale_about_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rotation_about_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># 闪一闪(Succession)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Blink</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">time_on</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">time_off</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">blinks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hide_at_end</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># 每帧只显示对象的一小部分（结合copy实现强调）(ShowPatial)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ShowPassingFlash</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">time_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># 放烟花/发光(AnimationGroup)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Flash</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">line_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">num_lines</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">flash_radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">line_stroke_width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">YELLOW</span><span class="p">,</span> <span class="n">time_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># 变色放大后再恢复(Transform)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Indicate</span><span class="p">(</span><span class="n">mobject</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">YELLOW</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">there_and_back</span><span class="p">)</span>
+<span class="c1"># 亮度遮罩(Transform)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FocusOn</span><span class="p">(</span><span class="n">focus_point</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">GREY</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-3-7"><span class="section-number-3">3.7.</span> 示例</h3>
+<div class="outline-text-3" id="text-3-7"><details>
+<summary>我的抄的实例</summary>
+<div class="org-src-container"><pre class="src src-python"><span class="ch">#!/bin/python</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SquareToCircle</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+        <span class="n">circle</span><span class="o">.</span><span class="n">set_fill</span><span class="p">(</span><span class="n">PINK</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">()</span>
+        <span class="n">square</span><span class="o">.</span><span class="n">set_fill</span><span class="p">(</span><span class="n">BLUE</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">square</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">RIGHT</span><span class="p">)</span>
+        <span class="n">square</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="n">TAU</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Create</span><span class="p">(</span><span class="n">square</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Transform</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">circle</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">FadeOut</span><span class="p">(</span><span class="n">square</span><span class="p">))</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">mkCircle</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+        <span class="n">circle</span><span class="o">.</span><span class="n">set_fill</span><span class="p">(</span><span class="n">PINK</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">()</span>
+        <span class="n">square</span><span class="o">.</span><span class="n">set_fill</span><span class="p">(</span><span class="n">BLUE</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="n">square</span><span class="o">.</span><span class="n">next_to</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="n">RIGHT</span><span class="p">,</span> <span class="n">buff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Create</span><span class="p">(</span><span class="n">square</span><span class="p">),</span> <span class="n">Create</span><span class="p">(</span><span class="n">circle</span><span class="p">))</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AnimatedSquareToCircle</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>  <span class="c1"># create a circle</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">()</span>  <span class="c1"># create a square</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Create</span><span class="p">(</span><span class="n">square</span><span class="p">))</span>  <span class="c1"># show the square on screen</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">square</span><span class="o">.</span><span class="n">animate</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">PI</span> <span class="o">/</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1"># rotate the square</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">ReplacementTransform</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">circle</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># transform the square into a circle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">circle</span><span class="o">.</span><span class="n">animate</span><span class="o">.</span><span class="n">set_fill</span><span class="p">(</span><span class="n">PINK</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># color the circle on screen</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OpeningManim</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;This is some \LaTeX&quot;</span><span class="p">)</span>
+        <span class="n">basel</span> <span class="o">=</span> <span class="n">MathTex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\sum_{n=1}^\infty \frac</span><span class="si">{1}</span><span class="s2">{n^2} = \frac{\pi^2}</span><span class="si">{6}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">VGroup</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">basel</span><span class="p">)</span><span class="o">.</span><span class="n">arrange</span><span class="p">(</span><span class="n">DOWN</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">Write</span><span class="p">(</span><span class="n">title</span><span class="p">),</span>
+            <span class="n">FadeIn</span><span class="p">(</span><span class="n">basel</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">DOWN</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+        <span class="n">transform_title</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="s2">&quot;That was a transform&quot;</span><span class="p">)</span>
+        <span class="n">transform_title</span><span class="o">.</span><span class="n">to_corner</span><span class="p">(</span><span class="n">UP</span> <span class="o">+</span> <span class="n">LEFT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">Transform</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">transform_title</span><span class="p">),</span>
+            <span class="n">LaggedStart</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">FadeOut</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">DOWN</span><span class="p">)</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">basel</span><span class="p">)),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">NumberPlane</span><span class="p">()</span>
+        <span class="n">grid_title</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="s2">&quot;This is a grid&quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
+        <span class="n">grid_title</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">transform_title</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid_title</span><span class="p">)</span>  <span class="c1"># Make sure title is on top of grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">FadeOut</span><span class="p">(</span><span class="n">title</span><span class="p">),</span>
+            <span class="n">FadeIn</span><span class="p">(</span><span class="n">grid_title</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">UP</span><span class="p">),</span>
+            <span class="n">Create</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">lag_ratio</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+        <span class="n">grid_transform_title</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;That was a non-linear function </span><span class="se">\\</span><span class="s2"> applied to the grid&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">grid_transform_title</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">grid_title</span><span class="p">,</span> <span class="n">UL</span><span class="p">)</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">prepare_for_nonlinear_transform</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">grid</span><span class="o">.</span><span class="n">animate</span><span class="o">.</span><span class="n">apply_function</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span>
+                <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                    <span class="p">],</span>
+                <span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">run_time</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">test</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;TEXT&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Create</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">test2</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;中文渲染测试&quot;</span><span class="p">,</span> <span class="n">tex_template</span><span class="o">=</span><span class="n">TexTemplateLibrary</span><span class="o">.</span><span class="n">ctex</span><span class="p">)</span>
+        <span class="n">text2</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;这是第二段测试文字&quot;</span><span class="p">,</span> <span class="n">tex_template</span><span class="o">=</span><span class="n">TexTemplateLibrary</span><span class="o">.</span><span class="n">ctex</span><span class="p">)</span>
+        <span class="n">text2</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">DOWN</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Create</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">FadeIn</span><span class="p">(</span><span class="n">text2</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">UP</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DifferentRotations</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">left_square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">BLUE</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">LEFT</span><span class="p">)</span>
+        <span class="n">right_square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">GREEN</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">RIGHT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
+            <span class="n">left_square</span><span class="o">.</span><span class="n">animate</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">PI</span><span class="p">),</span> <span class="n">Rotate</span><span class="p">(</span><span class="n">right_square</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">PI</span><span class="p">),</span> <span class="n">run_time</span><span class="o">=</span><span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Shapes</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">()</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">()</span>
+        <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">()</span>
+
+        <span class="n">circle</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">LEFT</span><span class="p">)</span>
+        <span class="n">square</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">UP</span><span class="p">)</span>
+        <span class="n">triangle</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">RIGHT</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span> <span class="n">square</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MoreShapes</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="c1"># A few more simple shapes</span>
+    <span class="c1"># 2.7 version runs in 3.7 without any changes</span>
+    <span class="c1"># Note: I fixed my &#39;play command not found&#39; issue by installing sox</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">PURPLE_A</span><span class="p">)</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="n">GOLD_B</span><span class="p">,</span> <span class="n">fill_opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">GOLD_A</span><span class="p">)</span>
+        <span class="n">square</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">UP</span><span class="o">+</span><span class="n">LEFT</span><span class="p">)</span>
+        <span class="n">circle</span><span class="o">.</span><span class="n">surround</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+        <span class="n">rectangle</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">RED</span><span class="p">)</span>
+        <span class="n">ellipse</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">DOWN</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">RIGHT</span><span class="p">)</span>
+        <span class="n">pointer</span> <span class="o">=</span> <span class="n">CurvedArrow</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">RIGHT</span><span class="p">,</span><span class="mi">5</span><span class="o">*</span><span class="n">RIGHT</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">MAROON_C</span><span class="p">)</span>
+        <span class="n">arrow</span> <span class="o">=</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">LEFT</span><span class="p">,</span><span class="n">UP</span><span class="p">)</span>
+        <span class="n">arrow</span><span class="o">.</span><span class="n">next_to</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span><span class="n">DOWN</span><span class="o">+</span><span class="n">LEFT</span><span class="p">)</span>
+        <span class="n">rectangle</span><span class="o">.</span><span class="n">next_to</span><span class="p">(</span><span class="n">arrow</span><span class="p">,</span><span class="n">DOWN</span><span class="o">+</span><span class="n">LEFT</span><span class="p">)</span>
+        <span class="n">ring</span> <span class="o">=</span> <span class="n">Annulus</span><span class="p">(</span><span class="n">inner_radius</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">outer_radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">BLUE</span><span class="p">)</span>
+        <span class="n">ring</span><span class="o">.</span><span class="n">next_to</span><span class="p">(</span><span class="n">ellipse</span><span class="p">,</span> <span class="n">RIGHT</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pointer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">FadeIn</span><span class="p">(</span><span class="n">square</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Rotating</span><span class="p">(</span><span class="n">square</span><span class="p">),</span><span class="n">FadeIn</span><span class="p">(</span><span class="n">circle</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">GrowArrow</span><span class="p">(</span><span class="n">arrow</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">GrowFromCenter</span><span class="p">(</span><span class="n">rectangle</span><span class="p">),</span> <span class="n">GrowFromCenter</span><span class="p">(</span><span class="n">ellipse</span><span class="p">),</span> <span class="n">GrowFromCenter</span><span class="p">(</span><span class="n">ring</span><span class="p">))</span>
+</pre></div></details>
+</div></div></div><div class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 制作经验</h2>
+<div class="outline-3">
+<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 一般经验</h3>
+<div class="outline-text-3" id="text-4-1"><ol class="org-ol">
+<li>实际上很多复杂的动画都是简单的动画的组合，学习将你要表达的内容拆分成一步一步执行的动画是非常重要的一步
+</li>
+<li>其次，阅读源代码是必不可少的，通过对源代码的观察和生成动画的对比分析，就能学到不少东西（例如说新的动画方法之类的）
+</li>
+<li>要勇敢去尝试实践，在实践中遇到的困难想想办法，总能够解决的
+</li>
+<li>简单了解下Python的语法，这对于简化某些复杂的操作非常的有用（Manim制作动画最大的优势）
+</li></ol>
+</div></div><div class="outline-3">
+<h3 id="org-title-4-2"><span class="section-number-3">4.2.</span> 方法建议</h3>
+<div class="outline-4">
+<h4 id="org-title-4-2-1"><span class="section-number-4">4.2.1.</span> 自定义图形</h4>
+<div class="outline-text-4" id="text-4-2-1"><p>当你想要制作某一类东西需要大量用到重复的形状时，就可以尝试去编写一种方法去构建它。例如物理的电路图，其中的电源，开关，用电器，电阻，滑动变阻器等等，他们都拥有固定的形状，所以我们可以构建一种新的东西去方便我们创建它们</p><p>就以刚刚的物理制作电路图作为例子，我们可以尝试绘制一个电源:</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">shape</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">number_plane</span> <span class="o">=</span> <span class="n">NumberPlane</span><span class="p">()</span>
+        <span class="n">line_left</span> <span class="o">=</span> <span class="n">Line</span><span class="p">([</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">line_right</span> <span class="o">=</span> <span class="n">Line</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">power_source</span> <span class="o">=</span> <span class="n">VGroup</span><span class="p">(</span><span class="n">line_left</span><span class="p">,</span> <span class="n">line_right</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">number_plane</span><span class="p">,</span> <span class="n">power_source</span><span class="p">)</span>
+</pre></div><p>在上面的例子中，我们创建了两条竖直的左短右长的线段作为电源，并且将其添加到了一个虚拟组里面，我们便得到了一个可用的电源，并且可以通过控制虚拟组控制它。</p><p>但是，这样一来，我们要添加一个电源就需要写两行代码，容易出错且不易读。怎么办呢? 我们有一个绝佳的办法:定义函数</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">PowerSource</span><span class="p">():</span>
+    <span class="n">line_left</span> <span class="o">=</span> <span class="n">Line</span><span class="p">([</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">line_right</span> <span class="o">=</span> <span class="n">Line</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">power_source</span> <span class="o">=</span> <span class="n">VGroup</span><span class="p">(</span><span class="n">line_left</span><span class="p">,</span> <span class="n">line_right</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">power_source</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">shape</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">number_plane</span> <span class="o">=</span> <span class="n">NumberPlane</span><span class="p">()</span>
+        <span class="n">power_source</span> <span class="o">=</span> <span class="n">PowerSource</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">number_plane</span><span class="p">,</span> <span class="n">power_source</span><span class="p">)</span>
+</pre></div><p>在上面的例子中，我们将电源的创建定义为一个函数，使得我们能够非常方便地创建复杂的相同的图形。可是这样还有一个缺点，倘若我们需要让图案中的某一部分做某一固定的特定动作时，我们需要使用 <code>power_source[n]</code> 这样的方式，这样显然时很不方便且容易出错的。那么，怎么办呢?我们有一个更好的办法:自定义图形</p><blockquote>
+<p>下面的内容可能需要一些关于Python类的知识才能看懂，建议自搜自学</p></blockquote><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Power_source</span><span class="p">(</span><span class="n">VGroup</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">VGroup</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># center</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Line</span><span class="p">([</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">BLACK</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">VGroup</span><span class="p">())</span>
+        <span class="c1"># short</span>
+        <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Line</span><span class="p">([</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+        <span class="c1"># long</span>
+        <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Line</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_stroke</span><span class="p">(</span><span class="n">BLACK</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_stroke</span><span class="p">(</span><span class="n">WHITE</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_stroke</span><span class="p">(</span><span class="n">GREEN</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">state_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_stroke</span><span class="p">(</span><span class="n">RED</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div><p>在上面的例子中，我们通过继承 <code>VGroup</code> 类，自定义了一种全新的复合图形，并且这个图形拥有它自己特有的方法以执行某种动作，这极大地方便了我们进行动画的制作。</p></div></div><div class="outline-4">
+<h4 id="org-title-4-2-2"><span class="section-number-4">4.2.2.</span> 分割场景</h4>
+<div class="outline-text-4" id="text-4-2-2"><p>当你的设备比较差，渲染时间很长的时候，你可以尝试将整一个视频的内容分割成一小段一小段的内容，再在construct方法中集中起来渲染，例如:</p><div class="org-src-container"><pre class="src src-python"><span class="kn">from</span><span class="w"> </span><span class="nn">manim</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">shape</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scene_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scene_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scene_3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scene_4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="c1"># ......</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene_1</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene_2</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene_3</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene_4</span><span class="p">()</span>
+        <span class="c1"># ......</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">debug</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene_3</span><span class="p">()</span>
+</pre></div><p>在例子中，可以在测试时使用继承了shape的debug类渲染，或者修改shape类的construct方法，渲染时再使用shape类渲染所有的镜头，以期在测试时减少渲染时间，加快调试速度。当然也可以配合其他手段例如调试时使用低分辨率，渲染时使用最高的分辨率和帧率</p></div></div></div><div class="outline-3">
+<h3 id="org-title-4-3"><span class="section-number-3">4.3.</span> 过程参考</h3>
+<div class="outline-text-3" id="text-4-3"><p>在纸上（或者其他载体）拟写好你想要表达的内容，确定顺序，确定大致的构图或表达方式，再投入到实践中。在工程量较大的情况下这可以有效地节约你的时间。（至少你知道且清楚你自己到底在干嘛）</p></div></div></div><div class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> Reference</h2>
+<div class="outline-text-2" id="text-5"><ul class="org-ul">
+<li>ManimGL版本的教程与文档（有部分与ManimCE不兼容）
+<ul class="org-ul">
+<li><a href="https://zhuanlan.zhihu.com/p/108240714">3Blue1Brown 动画制作教程(2)--尝试更多的图形 - 知乎</a>
+</li>
+<li><a href="https://docs.manim.org.cn/cairo-backend/constants.html">常量部分constants - manim 文档</a><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>
+</li>
+<li><a href="https://elteoremadebeethoven.github.io/manim_3feb_docs.github.io/html/tree/animations/creation.html">Creation — Manim Feb/03/2019 documentation</a>
+</li></ul>
+</li>
+<li>ManimCE的教程文档
+<ul class="org-ul">
+<li><a href="https://docs.manim.community/en/stable/">Manim Community v0.17.3</a>
+</li></ul>
+</li></ul>
+</div></div><div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<div class="footdef">
+<sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup>
+<div class="footpara" role="doc-footnote"> 该中文文档由英文翻译过来，谨慎查看 
+</div>
+</div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2023-08-23 三 00:47></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 啃manim教程，自己养老备用防忘</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+</div>
+</body>
+</html>

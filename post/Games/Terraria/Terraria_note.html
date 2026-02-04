@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>其他的泰拉笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">其他的泰拉笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 杂项</a></li><li><a href="#org-title-2">2. 怪物AI</a><ul><li><a href="#org-title-2-1">2.1. 战士AI</a></li><li><a href="#org-title-2-2">2.2. 致命球（日食）</a></li></ul></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 杂项</h2>
+<div class="outline-text-2" id="text-1"><ul class="org-ul">
+<li>玩家中心：位于玩家2x3位置的左上角
+</li></ul>
+</div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 怪物AI</h2>
+<div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 战士AI</h3>
+<div class="outline-text-3" id="text-2-1"><p>特点：在玩家上面时想下平台，在下面或者持平时上平台甚至跳跃。想跳跃时如果头顶一格有方块就不会跳起来（部分怪的高度比较矮所以方块的具体位置比较灵活）</p></div></div><div class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 致命球（日食）</h3>
+<div class="outline-text-3" id="text-2-2"><p>在日食期间，刷怪处与玩家有阻挡时生成</p><p>接近玩家时逻辑上有两个阶段：</p><ol class="org-ol">
+<li>屏外阶段：<br/> 要求处于玩家中心往左往右37格之外(上下超出了刷怪范围，不进行计算)，此阶段能穿墙
+</li>
+<li>屏内阶段：<br/> 在上述范围以内，如果需要恢复到屏外阶段需要到更大的范围（未计算），此阶段不能穿墙。会走直线靠近玩家。如果路径被挡住则会进行寻路，碰到方块阻挡后改变行进方向，比较像扫地机，直到找到能直接冲向玩家的路径然后伸出尖刺向玩家冲刺。
+</li></ol>
+<p>应用：</p><ol class="org-ol">
+<li>刷怪场应避免让其在屏外阶段进入穿墙状态然后直接找到玩家
+</li>
+<li>在第二阶段将其困住用岩浆烫死
+</li></ol>
+</div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2025-08-12 二 18:07></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 不仅限于战士使用的泰拉笔记（如刷怪方式，怪物AI等）</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>Emacs学习笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Emacs学习笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 前言</a></li><li><a href="#org-title-2">2. Emacs的安装与使用</a><ul><li><a href="#org-title-2-1">2.1. Emacs的安装</a></li><li><a href="#org-title-2-2">2.2. 使用Emacs</a></li><li><a href="#org-title-2-3">2.3. 基本的操作</a><ul><li><a href="#org-title-2-3-1">2.3.1. 一级按键操作&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></a></li><li><a href="#org-title-2-3-2">2.3.2. 多级按键操作&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></a></li></ul></li>
+<li><a href="#org-title-2-4">2.4. 命令行操作</a><ul><li><a href="#org-title-2-4-1">2.4.1. emacs函数思维</a></li><li><a href="#org-title-2-4-2">2.4.2. 普通的命令行</a></li><li><a href="#org-title-2-4-3">2.4.3. elisp命令行(evil)</a></li></ul></li>
+<li><a href="#org-title-2-5">2.5. 小结</a></li></ul></li>
+<li><a href="#org-title-3">3. Emacs的配置与调教</a><ul><li><a href="#org-title-3-1">3.1. 先来点降压药</a></li><li><a href="#org-title-3-2">3.2. 配置Emacs/elisp</a><ul><li><a href="#org-title-3-2-1">3.2.1. 基本语法&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-2">3.2.2. 一些例子&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-3">3.2.3. 函数&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-4">3.2.4. 变量&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-5">3.2.5. 流程控制语句&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-6">3.2.6. 数据的输入&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-7">3.2.7. 主模式？副模式？</a></li><li><a href="#org-title-3-2-8">3.2.8. 快捷键的定义&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-9">3.2.9. 宏&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-10">3.2.10. 引用&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li><li><a href="#org-title-3-2-11">3.2.11. 文件规范&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></a></li></ul></li>
+<li><a href="#org-title-3-3">3.3. 配置Emacs!</a><ul><li><a href="#org-title-3-3-1">3.3.1. 子模式功能&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></a></li><li><a href="#org-title-3-3-2">3.3.2. 变量功能设置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></a></li><li><a href="#org-title-3-3-3">3.3.3. 其他设置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></a></li></ul></li></ul></li>
+<li><a href="#org-title-4">4. 使用插件！</a><ul><li><a href="#org-title-4-1">4.1. 插件的安装&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></a><ul><li><a href="#org-title-4-1-1">4.1.1. 手动安装插件</a></li><li><a href="#org-title-4-1-2">4.1.2. 通过配置文件自动安装插件</a></li></ul></li>
+<li><a href="#org-title-4-2">4.2. 插件的配置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></a></li><li><a href="#org-title-4-3">4.3. 插件推荐/我用的插件&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></a></li></ul></li>
+<li><a href="#org-title-5">5. Emacs的部分主模式</a><ul><li><a href="#org-title-5-1">5.1. Org-mode</a><ul><li><a href="#org-title-5-1-1">5.1.1. 文件语法</a></li><li><a href="#org-title-5-1-2">5.1.2. 按键绑定&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></a></li></ul></li></ul></li></ul></div></div>
+<div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>学习Emacs，一定要学会坚持</p><p>我的语文水平不太好，所以说表述可能会有错误，请原谅。<br/> 并且这篇文章并非专业教程，建议与其他材料对比着看。</p><p>请在上方选择栏目继续阅读。</p></div></div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> Emacs的安装与使用</h2>
+<div class="outline-text-2" id="text-2"></div><div id="outline-container-2-1" class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> Emacs的安装</h3>
+<div class="outline-text-3" id="text-2-1"><p>使用对应发行版的包管理器安装Emacs<br/> 以Arch Linux为例：</p><div class="org-src-container"><pre class="src src-shell">pacman<span class="w"> </span>-S<span class="w"> </span>emacs
+</pre></div></div></div>
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 使用Emacs</h3>
+<div class="outline-text-3" id="text-2-2"><p>Emacs提供了GUI图形界面和TUI终端界面两种界面。</p><p>在图形终端输入命令 <code>emacs</code> 可以打开emacs的图形界面，或者使用 <code>emacs -nw</code> 打开非图形界面。</p><div class="figure">
+<p><img src="./Emacs学习笔记/01.png" alt="./Emacs学习笔记/01.png" /></p>
+<p><span class="figure-number">Figure 1: </span>图形界面</p></div><p>颜值不是emacs的强项，它默认的主题也确实挺丑，但是这掩盖不了它功能的强大。</p></div></div>
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 基本的操作</h3>
+<div class="outline-text-3" id="text-2-3"></div><div id="outline-container-2-3-1" class="outline-4">
+<h4 id="org-title-2-3-1"><span class="section-number-4">2.3.1.</span> 一级按键操作&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></h4>
+<div class="outline-text-4" id="text-2-3-1"><p>为了方便展示，我将基本的 <i>一级</i> 操作写成表格列在下面：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">分类</th><th scope="col" class="org-left">按键</th><th scope="col" class="org-left">调用的函数</th><th scope="col" class="org-left">功能/效果介绍</th></tr>
+</thead><tbody>
+<tr><td class="org-left">&nbsp;</td><td class="org-left">C-p</td><td class="org-left">previous-line</td><td class="org-left">上一行</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-n</td><td class="org-left">next-line</td><td class="org-left">下一行</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-b</td><td class="org-left">backward-char</td><td class="org-left">上一个字符</td></tr><tr><td class="org-left">移动</td><td class="org-left">C-f</td><td class="org-left">forward-char</td><td class="org-left">下一个字符</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">M-&lt;</td><td class="org-left">begginging-of-buffer</td><td class="org-left">跳转到文件开头</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">M-&gt;</td><td class="org-left">end-of-buffer</td><td class="org-left">跳转到文件末尾</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">&nbsp;</td><td class="org-left">C-l</td><td class="org-left">recenter-top-bottom</td><td class="org-left">重置屏幕显示位置（光标居中、顶部、底部）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-v</td><td class="org-left">scroll-up-command</td><td class="org-left">向下滚动一屏幕的位置</td></tr><tr><td class="org-left">翻屏</td><td class="org-left">M-v</td><td class="org-left">scroll-down-command</td><td class="org-left">向上滚动一屏幕的位置</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-a</td><td class="org-left">move-beginning-of-line</td><td class="org-left">光标移动到行首</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-e</td><td class="org-left">move-end-of-line</td><td class="org-left">光标移动到行末</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">搜索</td><td class="org-left">C-s</td><td class="org-left">isearch-forward</td><td class="org-left">向后搜索（顺序）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-r</td><td class="org-left">isearch-backward</td><td class="org-left">向前搜索（逆序）</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">&nbsp;</td><td class="org-left">C-g</td><td class="org-left">keyboard-quit</td><td class="org-left">在很多情况下可以终止命令的输入或者执行或是（在一般情况下）终止快捷键输入</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-k</td><td class="org-left">kill-line</td><td class="org-left">(Cut Line)删除光标右侧的内容并复制到剪贴板</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-w</td><td class="org-left">kill-region</td><td class="org-left">(Cut)剪切选择的内容</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">M-w</td><td class="org-left">kill-ring-save</td><td class="org-left">(Copy)复制选择的内容</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-y</td><td class="org-left">yank</td><td class="org-left">(Past)粘贴剪贴板的内容，粘贴历史详见官方tutorial</td></tr><tr><td class="org-left">杂项</td><td class="org-left">M-@</td><td class="org-left">mark-word</td><td class="org-left">高亮字符/单词，我也不知道具体的机制</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">S-</td><td class="org-left">&nbsp;</td><td class="org-left">可以在移动光标时同时按住Shift键，以选择字符</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-/</td><td class="org-left">undo</td><td class="org-left">(Undo)撤销，在撤销前输入一个无关的命令会相反（重做）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-q</td><td class="org-left">quoted-insert</td><td class="org-left">输入字符本身而不是进行其他操作（后面还需一个参数）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-u</td><td class="org-left">universal-argument</td><td class="org-left">重复执行某个操作多次</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">Elisp</td><td class="org-left">M-x</td><td class="org-left">execute-extended-command</td><td class="org-left">打开命令行执行命令</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">M-:</td><td class="org-left">eval-expression</td><td class="org-left">打开elisp命令行</td></tr></table><blockquote>
+<p>注： <code>C-*</code> 意为 <code>Ctrl + key</code> ，而 <code>M-*</code> 意为 <code>Meta + key</code> ，其中的 <code>Meta</code> 键由于不再在现代的键盘上使用，所以一般使用 <code>Alt</code> 键作为替代。苹果用户请另查资料。</p></blockquote><p>这些一级的按键操作构成了emacs最基本的操作逻辑，但是，这还远远不够</p></div></div>
+<div id="outline-container-2-3-2" class="outline-4">
+<h4 id="org-title-2-3-2"><span class="section-number-4">2.3.2.</span> 多级按键操作&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></h4>
+<div class="outline-text-4" id="text-2-3-2"><p>或许你会有疑问：为什么没有退出？<br/> 那是因为退出按键是一个多级的按键操作。</p><p>所谓的多级，其实是我乱取的一个称呼，实际上就是要连续按下多个快捷键。<br/> 打个比方，emacs中退出的快捷键是 <code>C-x C-c</code> ，即 <code>Ctrl+x Ctrl+c</code> 。这种快捷键模式的形成主要还是得归功于键盘上的按键不够，为了能塞下尽可能多的快捷键，就产生了这么一种“反人类”的快捷键模式，是区别于Vim多模式方法的另一种解决办法。这或许就是 Emacs学习的第一大门槛，但我要引用一些话，它们来自于Vim的官中教程vimtutor:</p><blockquote>
+<p>切记一点：本教程的设计思路是在使用中进行学习的。也就是说，您需要通过执行命令来学习它们本身的正确用法。如果您只是阅读而不操作，那么您可能会很快遗忘这些命令的！</p><p>...</p><p>特别提示：在浏览本教程时，不要强行记忆。记住一点：在使用中学习。</p><p>...</p><p>阅读完以上步骤，弄懂它们的意义，然后在实践中进行练习。</p></blockquote><p>在学习Emacs时，也应当记住上面的提示，毕竟在学习任何东西时，实践是极为有用的方法。而我在写这篇教程时，也在尽力尝试做到引导让人在实践中学习。</p><p>注意，由于编辑器系统较为复杂，所以有较多东西是没有办法一下子塞进来解释清楚的，在学习前期的内容时更要注意以“能用”为目的，学到后面才是以“理解”为目的。在理解了 Emacs之后才能够更好地学习、扩展学识。</p><p>下面给出一个常用命令的列表：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">类型</th><th scope="col" class="org-left">按键</th><th scope="col" class="org-left">对应函数</th><th scope="col" class="org-left">功能介绍</th></tr>
+</thead><tbody>
+<tr><td class="org-left">&nbsp;</td><td class="org-left">C-x</td><td class="org-left">&nbsp;</td><td class="org-left">一个前缀，其下的命令大都和窗口、文件有关</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x C-c</td><td class="org-left">save-buffers-kill-terminal</td><td class="org-left">询问文件保存并杀死终端（说直白点就是退出Emacs）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x k</td><td class="org-left">kill-buffer</td><td class="org-left">杀死当前打开的buffer</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x 0</td><td class="org-left">delete-window</td><td class="org-left">关闭聚焦的窗口（或说是正在操作的窗口）</td></tr><tr><td class="org-left">窗口</td><td class="org-left">C-x 1</td><td class="org-left">delete-other-windows</td><td class="org-left">关闭非操作的窗口（即只保留正在操作的窗口）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x 2</td><td class="org-left">split-window-below</td><td class="org-left">在窗口的下面分割出一个新的窗口</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x 3</td><td class="org-left">split-window-right</td><td class="org-left">在窗口的右边分割出一个新的窗口</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x o</td><td class="org-left">other-window</td><td class="org-left">切换到其他窗口</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x C-e</td><td class="org-left">eval-last-sexp</td><td class="org-left">执行上一个距离光标最近的elisp语句</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-x C-;</td><td class="org-left">comment-line</td><td class="org-left">将当前行或者选中行注释</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">&nbsp;</td><td class="org-left">C-c</td><td class="org-left">&nbsp;</td><td class="org-left">一个前缀，常用于特定的主模式的功能（供参考）</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">&nbsp;</td><td class="org-left">C-h</td><td class="org-left">&nbsp;</td><td class="org-left">一个前缀，用于获取帮助信息</td></tr><tr><td class="org-left">帮助</td><td class="org-left">C-h c</td><td class="org-left">describe-key-briefly</td><td class="org-left">获取指定按键所调用的函数名称（可作为一种"帮助"）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-h k</td><td class="org-left">describe-key</td><td class="org-left">获取指定按键所调用的函数的介绍信息</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">C-h t</td><td class="org-left">help-with-tutorial</td><td class="org-left">打开官方的tutorial</td></tr></table></div></div></div>
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="org-title-2-4"><span class="section-number-3">2.4.</span> 命令行操作</h3>
+<div class="outline-text-3" id="text-2-4"></div><div id="outline-container-2-4-1" class="outline-4">
+<h4 id="org-title-2-4-1"><span class="section-number-4">2.4.1.</span> emacs函数思维</h4>
+<div class="outline-text-4" id="text-2-4-1"><p>实际上emacs的所有操作都是基于某一个特定的函数的。这也就是有实际意义的按键后面都有一个“调用的函数”的原因。</p><p>若要讲清楚什么是函数，那就要扯到elisp去了，这里简单解释一下，函数分为 <i>交互式函数</i> 和 <i>非交互式函数</i> 两种，而交互式函数则被允许被用户从普通的命令行直接用函数名进行调用或者设置快捷键进行调用，反过来非交互式函数则是不被允许的，但是也可以通过 elisp命令行使用elisp语法进行调用（一般是在命令外面套上一对括号，理解就好）</p></div></div>
+<div id="outline-container-2-4-2" class="outline-4">
+<h4 id="org-title-2-4-2"><span class="section-number-4">2.4.2.</span> 普通的命令行</h4>
+<div class="outline-text-4" id="text-2-4-2"><p>通过快捷键 <code>M-x</code> 进行调用，如图：</p><div class="figure">
+<p><img src="./Emacs学习笔记/02.png" alt="./Emacs学习笔记/02.png" /></p>
+<p><span class="figure-number">Figure 2: </span>调用命令行的图片</p></div><p>你可以在里面输入命令，并且可以使用Tab键进行补全。你可以尝试使用 <code>C-h c</code> 找到一个你想要使用的命令并在命令行里面输入查看结果</p></div></div>
+<div id="outline-container-2-4-3" class="outline-4">
+<h4 id="org-title-2-4-3"><span class="section-number-4">2.4.3.</span> elisp命令行(evil)</h4>
+<div class="outline-text-4" id="text-2-4-3"><p>这个由于在前期并不常用，所以也不细说，只要记住：它可以进行elisp的命令调用</p></div></div></div>
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="org-title-2-5"><span class="section-number-3">2.5.</span> 小结</h3>
+<div class="outline-text-3" id="text-2-5"><p>在阅读完上面的文本并进行大量尝试与练习之后，相信你已经可以正常的使用emacs了吧<br/> 但是，也仅限于会使用。如果想要真正发挥emacs的实力，你还需要学会配置emacs。请继续往下看。</p></div></div></div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> Emacs的配置与调教</h2>
+<div class="outline-text-2" id="text-3"></div><div id="outline-container-3-1" class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 先来点降压药</h3>
+<div class="outline-text-3" id="text-3-1"><p>如果你真的想依靠默认的快捷键配置使用emacs，那简直是不可理喻的事情。<br/> 我最想吐槽的或许就是emacs的快捷键——Ctrl，它作为emacs的常用快捷键的基础，它竟然在键盘的左下或者右下角，这决定了大多数情况下你的小拇指都不会好过。所以说，为了拯救小拇指，你或许应该考虑给Ctrl键换个位。</p><p>对于Windows10专业版的用户来说，可以选择安装微软官方出品的 <code>Powder Toys</code> 工具箱，在里面的“键盘映射”选项中将你的 <code>Caps Lock</code> 键（即大写锁定键）映射为左右任意一个Ctrl，那么你的小拇指将会得到极大的解放。注意，该程序对于系统有版本的要求，非专业版用户无法使用。</p><p>对于苹果用户来说，请自查资料。本人财力有限，无法对网上的方法进行验证。</p><p>对于Linux用户来说，如果你想要在tty下更改键位，或许可以参考
+<a href="https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration#Other_examples">这部分Arch Wiki</a>，若想要在X图形界面下更改键位，则只需要命令</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>setxkbmap<span class="w"> </span>-option<span class="w"> </span><span class="s1">&#39;caps:ctrl_modifier&#39;</span>
+</pre></div><p>即可让Caps Lock映射到Ctrl Left，同理更改选项则可以获得不同的效果。获取选项的命令如下：</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>grep<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ctrl:\|:ctrl&quot;</span><span class="w"> </span>/usr/share/X11/xkb/rules/evdev.lst
+</pre></div><p>这部分的内容来自于
+<a href="https://wiki.archlinux.org/title/Xorg/Keyboard_configuration#Swapping_Caps_Lock_with_Left_Control">这部分的Arch Wiki</a>，可以前去参考</p><blockquote>
+<p>由于目前我切换到了wayland(Hyprland)的新兴领域，所以这里再附上Hyprland下怎么把 Caps Lock映射到Ctrl的方法：在 <code>$HOME/.config/hypr/hyprland.conf</code> （即你的 hyprland配置文件）添加：</p><div class="org-src-container"><pre class="src src-conf"><span class="na">input {</span>
+<span class="w">      </span><span class="na">kb_options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ctrl:nocaps</span>
+<span class="na">}</span>
+</pre></div></blockquote></div></div>
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 配置Emacs/elisp</h3>
+<div class="outline-text-3" id="text-3-2"><p>emacs的配置文件语法是elisp（即emacs lisp），属于lisp语言的一种方言。由于其语法独特，也可以说是emacs的第2个大门槛了</p><p>一个小提示：
+<a href="https://learnxinyminutes.com/docs/zh-cn/elisp-cn/">这里</a>有一篇相对来说非常好的elisp教程，建议查看它的教程，或者互相参考。</p></div><div id="outline-container-3-2-1" class="outline-4">
+<h4 id="org-title-3-2-1"><span class="section-number-4">3.2.1.</span> 基本语法&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-1"><p>lisp语言的本质是列表（list），其语句组成大致如下:</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nv">function_name</span><span class="w"> </span><span class="nv">argument</span><span class="p">)</span>
+</pre></div><p>即一句语句由一对括号包住，组成一个列表，第一个部分为函数名称，后面的内容即为调用函数时要传递的参数。这样就构成了一个基本的表达式，我们称之为 <i>s式</i> 。</p><p>在执行语句时，它的逻辑是自内向外的，会将作为参数的语句执行后将其结果作为参数传递，若想传递的值是它本身而非是执行它的结果，则应该使用一个引号 <code>'</code> 放置在元素的前面。</p><p>简单举一个例子：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="nv">b</span><span class="w"> </span><span class="ss">&#39;c</span><span class="p">))</span>
+</pre></div><p>在这个例子中，解释器将会执行函数 <code>b</code> 并将 <code>c</code> 这么一个符号作为参数传递进去，并将其执行的结果作为参数传递进函数 <code>a</code> 并执行。</p><p>要想学会elisp，只有理论怎么能行？实践那都是必须的。<br/> 若想要在Emacs里面执行Elisp语句可以通过以下几种方式：</p><ol class="org-ol">
+<li>使用快捷键 <code>C-x C-e</code> 可以执行光标前面最近的s式
+</li>
+<li>通过进入 <code>eshell</code> 执行语句
+</li>
+<li><p>使用快捷键 <code>M-:</code> 打开命令行执行elisp语句</p>
+</li></ol>
+<p>我们可以使用Emacs默认打开的buffer <code>*scratch*</code> 结合 <code>C-x C-e</code> 练习elisp语法。</p><p>尝试键入下面的内容并将光标移动到命令的下面再键入执行命令的快捷键：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nv">message</span><span class="w"> </span><span class="s">&quot;如果你成功了，那么这将会是一个良好的开端&quot;</span><span class="p">)</span>
+</pre></div><p>执行结果应当如下：</p><div class="figure">
+<p><img src="./Emacs学习笔记/03.png" alt="./Emacs学习笔记/03.png" /></p>
+<p><span class="figure-number">Figure 3: </span>执行结果</p></div><p>不难看出，这个语句的意思就是在消息栏里发送通知。</p><p>所以说，现在你已经学会了基本的elisp语法了，请保持这种激昂的学习情绪，继续看下去。</p></div></div>
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="org-title-3-2-2"><span class="section-number-4">3.2.2.</span> 一些例子&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-2"><p>配置配置，肯定都是要贴合实际的，是有强功能性的。在平时的使用中应当多提问题，多想想解决办法解决问题。</p><p>举个例子，如果我想实现一个功能，能够实现自动在当前窗口的右侧分割出一个新的窗口并在里面打开一个新的buffer，并且在那个buffer里面插入一些指定的内容该怎么办呢？</p><p>正常情况下我们应当寻找一个函数，其功能是在一个当前的窗口右侧打开的新窗口中打开一个新的buffer。这里废话少说，直接公布答案： <code>switch-to-buffer-other-window</code> ，这个函数便能满足我们的需求，只要在后面加上要打开的buffer的名字即可。</p><p>接下来我们要找的是一个能够在光标处插入文本的函数，这里也一并放出： <code>insert</code> ，在后面加上要插入的内容。</p><p>最后，我们需要一个能够返回到当前窗口的函数，即 <code>other-window</code> ，参数传递为1。</p><p>放上最终的代码：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nv">switch-to-buffer-other-window</span><span class="w"> </span><span class="s">&quot;*新的buffer*&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">insert</span><span class="w"> </span><span class="s">&quot;这是你想要输入的内容&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">other-window</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</pre></div></div></div>
+<div id="outline-container-3-2-3" class="outline-4">
+<h4 id="org-title-3-2-3"><span class="section-number-4">3.2.3.</span> 函数&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-3"><p>但是聪明的你肯定会发现，上面的语句都是单独执行的，没有办法连成一块，是没有办法成功执行的。那么，有没有一种可能，可以将多个语句的内容合并到一起去呢？有！那就是函数。</p><p>函数的定义语句为</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nb">defun</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="p">()</span>
+<span class="w">  </span><span class="p">(</span><span class="nv">message</span><span class="w"> </span><span class="s">&quot;......&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span>
+</pre></div><p>其中， <code>name</code> 表示名称，其后的括号表示参数列表，里面可以填变量名，再往后便是执行语句了。</p><p>就以刚才的功能举例，我们可以将其扔进一个函数内部，执行完函数的定义语句后，再添加一个执行函数的代码并执行即可。在执行定义语句时，会将函数的名称返回并显示到通知栏。</p><p>其结果应当如下：</p><div class="figure">
+<p><img src="./Emacs学习笔记/04.png" alt="./Emacs学习笔记/04.png" /></p>
+<p><span class="figure-number">Figure 4: </span>执行结果</p></div><p>值得注意的是，函数并非连接多个语句的必经之选，实际上还有 <code>progn</code> 语句可以实现相似的功能，有些时候我们并不希望定义一个函数但是参数必须是一个函数时，我们可以使用 <code>lambda</code> 临时函数而不必定义一个函数名</p></div></div>
+<div id="outline-container-3-2-4" class="outline-4">
+<h4 id="org-title-3-2-4"><span class="section-number-4">3.2.4.</span> 变量&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-4"><p>继续刚才的内容。作为一门完整的语言，elisp也不缺变量这个东西，不过它的分类较多。大致如下：</p><ol class="org-ol">
+<li>全局变量
+<ol class="org-ol">
+<li>普通的全局变量
+</li>
+<li>customize的全局变量
+</li></ol>
+</li>
+<li>局部变量
+<ol class="org-ol">
+<li>局限于函数
+</li>
+<li><p>局限于作用域</p>
+</li></ol>
+</li></ol>
+<p>首先是全局变量，它的作用域应当是最广的，优先级也是最低的，它的定义方法如下：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nb">defvar</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="nv">initvalue</span>
+<span class="w">  </span><span class="s">&quot;docstring&quot;</span><span class="p">)</span>
+</pre></div><p>其中， <code>name</code> 是名字， <code>initvalue</code> 是初始值，而 <code>docstring</code> 则是介绍文档。一般用于向用户说明函数的功能。</p><p>还有另外一种全局变量，定义如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nb">defcustom</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="nv">standard</span>
+<span class="w">   </span><span class="s">&quot;docstring&quot;</span>
+<span class="w">   </span><span class="nv">args</span><span class="p">)</span>
+</pre></div><p>这个就属于elisp里面的“方言”部分了，有了它，你就可以通过 <code>M-x customize-option</code> 设置变量的值并保存在customize的生成的内容里了。顺带一提， <code>args</code> 是它的参数，可以传入 <code>:type ...</code><code>:group ...</code> 进行设置，一个指定类型，二个指定它所属的组，方便管理（组需要使用 <code>defgroup</code> 额外定义）</p><p>接着的就是局部变量了。在我的认知范围内，变量的作用域有两种：作为函数参数的局部变量和额外定义的局部变量。这里只谈额外定义的局部变量。</p><p>定义一个变量的语法如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">((</span><span class="nv">name</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">message</span><span class="w"> </span><span class="s">&quot;这部分是执行语句&quot;</span><span class="p">))</span>
+</pre></div><p>即一个列表，列表里面再套个列表，第一个是变量名，第二个是初始值</p><p>设置变量的语法如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</pre></div><p>也可以使用 <code>set</code> ，但是变量名前需要有 <code>'</code> 包裹。<br/> 该函数也可以定义全局变量或者对已有的变量重定义，而 <code>defvar</code> 则不可以。</p><p>而使用 <code>setq-local</code> 函数则可以定义一个作用域为当前buffer的变量</p></div></div>
+<div id="outline-container-3-2-5" class="outline-4">
+<h4 id="org-title-3-2-5"><span class="section-number-4">3.2.5.</span> 流程控制语句&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-5"><p>既然基本的语法学了，那么流程控制语句也不能丢。</p><blockquote>
+<p>注：在elisp中的布尔值一般表示为 <code>t</code> 和 <code>nil</code> ，分别表示真和假。</p></blockquote><p>这里我就简单提一些(知识有限，请原谅)：</p><ul class="org-ul">
+<li><code>(if (表达式) (执行语句))</code> <br/> 判断
+</li>
+<li><code>(unless (表达式) (执行语句))</code> <br/> 判断，但是是在结果为 <code>nil</code> 执行
+</li></ul>
+</div></div>
+<div id="outline-container-3-2-6" class="outline-4">
+<h4 id="org-title-3-2-6"><span class="section-number-4">3.2.6.</span> 数据的输入&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-6"><ul class="org-ul">
+<li>read-char<br/> 读取char输入
+</li>
+<li>read-number<br/> 读取数字类型输入，建议使用 <code>C-h f read-number</code> 查看详细介绍
+</li></ul>
+</div></div>
+<div id="outline-container-3-2-7" class="outline-4">
+<h4 id="org-title-3-2-7"><span class="section-number-4">3.2.7.</span> 主模式？副模式？</h4>
+<div class="outline-text-4" id="text-3-2-7"><p>Emacs有一个非常强大的机制：模式。而模式则分为 <code>major-mode</code> 主模式 与 <code>minor-mode</code> 子模式。而他们也决定着Emacs的快捷键绑定方式，所以在了解如何绑定快捷键之前，我们有必要了解一下Emacs的模式系统。</p><p>首先，一个Buffer只能同时使用一个主模式，一般会根据文件类型自动选择，而一个buffer 能够同时开启多个子模式。而主模式通常会有一个hook用于在启动某个模式时自动执行某些命令（与Elisp代码 <code>(add-hook ...)</code> 搭配使用）</p></div></div>
+<div id="outline-container-3-2-8" class="outline-4">
+<h4 id="org-title-3-2-8"><span class="section-number-4">3.2.8.</span> 快捷键的定义&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-8"><p>如果要配置Emacs，快捷键一定是一个跨不过去的门槛。因为有很多操作总不可能是需要手动打命令吧？如果是，你能记熟吗？相较于习惯形成的肌肉记忆，你选择那个呢？</p><p>先介绍一些常用的Emacs中设置快捷键的语句，并附上他们之间的区别：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">名称</th><th scope="col" class="org-left">功能（区别）</th><th scope="col" class="org-left">作用域</th></tr>
+</thead><tbody>
+<tr><td class="org-left">global-set-key</td><td class="org-left">设置全局快捷键，但是优先级最低（会被覆盖）</td><td class="org-left">全局</td></tr><tr><td class="org-left">global-unset-key</td><td class="org-left">删除特定的快捷键</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left">local-set-key</td><td class="org-left">仅在相应的major主模式下可用</td><td class="org-left">major-mode</td></tr><tr><td class="org-left">local-unset-key</td><td class="org-left">删除特定的快捷键</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left">define-key</td><td class="org-left">最为基础的快捷键定义，可自定义keymap</td><td class="org-left">指定的keymap</td></tr><tr><td class="org-left">kbd</td><td class="org-left">能够将字符形式的按键转为真正的按键</td><td class="org-left">&nbsp;</td></tr></table><p>先来看 <code>global-set-key</code> ，它的优先级最低，作用域为全局，其语法如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nv">global-set-key</span><span class="w"> </span><span class="p">(</span><span class="nv">kbd</span><span class="w"> </span><span class="s">&quot;KEY&quot;</span><span class="p">)</span><span class="w"> </span><span class="ss">&#39;command</span><span class="p">)</span>
+</pre></div><p>其中， <code>KEY</code> 为要设置的快捷键，如 <code>C-c f F</code> ，而 <code>command</code> 则为函数的名字或者宏<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 的名字。其意思为在按下 <code>KEY</code> 时，执行 <code>command</code> 。</p><p>而 <code>global-unset-key</code> 的用法如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nv">global-unset-key</span><span class="w"> </span><span class="p">(</span><span class="nv">kbd</span><span class="w"> </span><span class="s">&quot;your-key&quot;</span><span class="p">))</span>
+</pre></div><p><code>local-set-key</code> 的用法和 <code>global-set-key</code> 的语法基本一样，仅仅是作用域不同了。这里举个实际例子：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nv">add-hook</span><span class="w"> </span><span class="ss">&#39;c-mode-hook</span>
+<span class="w">          </span><span class="p">(</span><span class="nv">local-set-key</span><span class="w"> </span><span class="p">(</span><span class="nv">kbd</span><span class="w"> </span><span class="s">&quot;C-c f&quot;</span><span class="p">)</span>
+<span class="w">                         </span><span class="p">(</span><span class="nb">lambda</span><span class="w"> </span><span class="p">()</span>
+<span class="w">                           </span><span class="s">&quot;这是介绍文档&quot;</span>
+<span class="w">                           </span><span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+<span class="w">                           </span><span class="p">(</span><span class="nf">message</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="p">)</span>
+<span class="w">                           </span><span class="p">)</span>
+<span class="w">                         </span><span class="p">)</span>
+<span class="w">          </span><span class="p">)</span>
+</pre></div><p>在该例子中，用到了一个lambda函数，其大致功能是在 <code>c-mode</code> 时，定义快捷键 <code>C-c f</code> 并执行临时函数，在状态栏输出 <code>Hello world</code> 字样。其中，函数的 <code>(interactive)</code> 语句是必须添加的，它声明函数是一个交互式函数，使其允许被以快捷键的方式调用。如果将其运用在实名函数中，则可以使函数能在 <code>M-x</code> 中调用并执行。</p><p><code>define-key</code> 的用法则相对复杂些，其语法如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nf">define-key</span><span class="w"> </span><span class="nv">keymap</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="nv">def</span><span class="p">)</span>
+</pre></div><p>引用一段介绍：</p><blockquote>
+<p>这里的 <code>key</code> 是你要绑定的键。 <code>keymap</code> 是这个 <code>key</code> 所属的集合，不同的 <code>keymap</code> 决定了这个 <code>key</code> 在什么情况下触发，什么情况下隐藏，优先级如何。 <code>def</code> 代表了这个 <code>key</code> 的定义，它可以是很多东西，常见的有：</p><ul class="org-ul">
+<li>一个 <code>interactive function</code> ，即一个command，这也是键绑定最直接的方式。
+</li>
+<li>一个 <code>key</code> ，仅对于keymap为 <code>'key-translation-map</code> 这种情况，意味着映射到另一个键。
+</li>
+<li>一个 <code>keymap</code> ，通过这种方式用户可以自定义prefix key。
+</li>
+<li><p>一个 <code>nil</code> ，代表注销这个key。</p>
+</li></ul>
+<p>keymap也有很多种，如 <code>current-global-map</code> 返回全局keymap， <code>current-local-map</code> 返回局部keymap。对于这两种情况，Emacs提供了更直接的函数： <code>global-set-key</code> 和 <code>local-set-key</code> 。另外还有上面提到的 <code>key-translation-map</code> ，以及许多minor-mode 下定义的keymap。</p></blockquote></div></div>
+<div id="outline-container-3-2-9" class="outline-4">
+<h4 id="org-title-3-2-9"><span class="section-number-4">3.2.9.</span> 宏&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-9"><p>看到“宏”这么一个字眼，是不是就会觉得很晦涩难懂？不不不，正巧相反，它不仅简单，而且能够在某种程度上减轻你配置的工作量，或者实现一些特殊功能。</p><p>首先，要使用宏，我们就应该知道宏是什么。根据最狭隘的理解，就是能将你进行的操作保存下来，并可以重复执行这个操作。这在做某些重复性劳动时的效率极高，并且还不用去思考如何通过编写lisp语句（至少可以省下很多思考时间）去实现相应的功能，或者去了解那些复杂的接口之类的。</p><p>那么，“宏”到底怎么用呢？首先，我们需要按下 <code>C-x (</code> 以开始录制一个宏。然后接下来的操作将被记录下来，再结束时再按下 <code>C-x )</code> 即可。</p><p>但是这只是录制罢了，还有使用呢。如果这是一个临时的宏，则可以使用快捷键 <code>C-x e</code> 执行上一个定义的宏，并且能够继续按 <code>e</code> 键继续执行，也可以使用 <code>C-u 次数 C-x e</code> 以执行数次该宏。倘若该宏需要保存在文件中，则可以使用 <code>M-x name-last-kbd-marco</code> 为上一个定义的宏命名。在命名后，则可以打开一个el文件。执行 <code>M-x insert-kbd-marco</code> 并输入相应的名字即可插入录制好的宏。并且可以为其设置相对应的快捷键。而设置快捷键所传进的参数（函数名称一栏）则填定义的宏的名称。例如：输入：</p><div class="org-src-container"><pre class="src src-text">C-a C-k C-k C-p C-y
+</pre></div><p>形成的elisp代码，并设置全局快捷键 <code>F5</code> ：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nf">fset</span><span class="w"> </span><span class="ss">&#39;move-line</span>
+<span class="w">   </span><span class="p">(</span><span class="nv">kmacro-lambda-form</span><span class="w"> </span><span class="p">[</span><span class="sc">?\C</span><span class="nv">-a</span><span class="w"> </span><span class="sc">?\C</span><span class="nv">-k</span><span class="w"> </span><span class="sc">?\C</span><span class="nv">-k</span><span class="w"> </span><span class="sc">?\C</span><span class="nv">-p</span><span class="w"> </span><span class="sc">?\C</span><span class="nv">-y</span><span class="p">]</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">global-set-key</span><span class="w"> </span><span class="p">(</span><span class="nv">kbd</span><span class="w"> </span><span class="s">&quot;&lt;f8&gt;&quot;</span><span class="p">)</span><span class="w"> </span><span class="ss">&#39;move-line</span><span class="p">)</span>
+</pre></div><p>在这个例子中， <code>move-line</code> 是宏的名字，在其下方则定义了其快捷键 <code>F8</code> 。如果按下设置的快捷键，将会执行该宏，而其效果为将当前行与上一行交换。简单粗暴。</p><p>但是值得注意的是，这种宏不能够适应keymap的变化。在执行时就有可能会出现问题，所以还请谨慎使用。</p></div></div>
+<div id="outline-container-3-2-10" class="outline-4">
+<h4 id="org-title-3-2-10"><span class="section-number-4">3.2.10.</span> 引用&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-10"><p>既然文件都拆分成几个了，那么就少不了引用。<br/> 上文中我讲了文件应当如何让自己允许被引用，那么就应当知道如何引用文件。</p><p>首先，你需要在你的init.el添加这么一句：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nv">add-to-list</span><span class="w"> </span><span class="ss">&#39;load-path</span><span class="w"> </span><span class="s">&quot;~/.emacs.d/lisp/&quot;</span><span class="p">)</span>
+</pre></div><p>其中 <code>add-to-list</code> 的功能是为指定的列表变量添加一个元素，在这里添加的即为文件的加载目录。而后面的 <code>load-path</code> 则是加载列表的变量，而最后的字符串则是你想要加载的el文件所处的文件夹。</p><p>在这之后，就可以添加引用的语句了：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;name</span><span class="p">)</span>
+</pre></div><p><code>name</code> 为你的文件里填写的 <code>provide</code> 的名字。</p><p>另外，这里提供一段设置custom文件的配置，这里不作解释。</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">custom-file</span><span class="w"> </span><span class="p">(</span><span class="nf">expand-file-name</span><span class="w"> </span><span class="s">&quot;~/.emacs.d/custom.el&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">load</span><span class="w"> </span><span class="nv">custom-file</span><span class="w"> </span><span class="ss">&#39;no-error</span><span class="w"> </span><span class="ss">&#39;no-message</span><span class="p">)</span>
+</pre></div><p>最后，这里额外提示一下，如果不希望使用 <code>provide</code> 和 <code>require</code> 的方式，则可以使用 <code>load-file</code> 方式加载执行Elisp文件，具体例子如下：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nv">load-file</span><span class="w"> </span><span class="s">&quot;这里是你的文件路径与文件名，要自己改&quot;</span><span class="p">)</span>
+</pre></div></div></div>
+<div id="outline-container-3-2-11" class="outline-4">
+<h4 id="org-title-3-2-11"><span class="section-number-4">3.2.11.</span> 文件规范&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span></span></h4>
+<div class="outline-text-4" id="text-3-2-11"><p>在平时，你的每一个emacs的配置文件应该被命名为 <code>xxx.el</code> ，而Emacs最开始调用的文件是 <code>init.el</code> 文件。根据习惯，它应该存放在 <code>~/.emacs.d/</code> 目录下，即 <code>~/.emacs.d/init.el</code> 文件。</p><p>根据规范，针对插件包来看，el文件应该有一个这样的架构：</p><div class="org-src-container"><pre class="src src-elisp"><span class="c1">;;; init.el --- 这里填这个文件的描述                    -*- lexical-binding: t; -*-</span>
+
+<span class="c1">;; Copyright (C) 2023  不要在意我的头像QwQ</span>
+
+<span class="c1">;; Author: 不要在意我的头像QwQ &lt;Chglish@Chglish&gt;</span>
+<span class="c1">;; Keywords: docs, c, lisp, files</span>
+
+<span class="c1">;; This program is free software; you can redistribute it and/or modify</span>
+<span class="c1">;; it under the terms of the GNU General Public License as published by</span>
+<span class="c1">;; the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">;; (at your option) any later version.</span>
+
+<span class="c1">;; This program is distributed in the hope that it will be useful,</span>
+<span class="c1">;; but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">;; GNU General Public License for more details.</span>
+
+<span class="c1">;; You should have received a copy of the GNU General Public License</span>
+<span class="c1">;; along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c1">;;; Commentary:</span>
+
+<span class="c1">;; 这里理论上是填写文件的评论的地方</span>
+
+<span class="c1">;;; Code:</span>
+
+<span class="c1">;; 这里存放你的代码</span>
+
+<span class="p">(</span><span class="nb">provide</span><span class="w"> </span><span class="ss">&#39;init</span><span class="p">)</span>
+<span class="c1">;;; init.el ends here</span>
+</pre></div><p>注意，在lisp中以分号开头的行均为注释，但是不同的分号数量为开头的注释是有不同的含义的。下面做出一些解释：</p><ol class="org-ol">
+<li>3个分号开头的注释可理解为段落的标记
+</li>
+<li>2个分号开头的注释可以理解为正常的行注释
+</li>
+<li><p>1个分号开头的注释一般而言和2个分号开头的注释没有什么区别，但是会有很大可能会做出一些非常令人迷惑的缩进，所以通常使用2个分号开头作注释。（这也是Emacs的注释快捷键所默认的注释方式）</p>
+</li></ol>
+<p>需要值得注意的是，上面给出的是一些相对严格的注释规范，实际上对于个人的配置来说是可选的。下面是一个简化过后的示例，建议使用它作为创建el文件的模板（若没有使用自动插入文件头功能）。</p><div class="org-src-container"><pre class="src src-elisp"><span class="c1">;;; 这边是文件名 --- 这里填这个文件的描述</span>
+
+<span class="c1">;;; Commentary:</span>
+
+<span class="c1">;;; Code:</span>
+
+<span class="c1">;; 这里中间的部分用于存放你的配置</span>
+
+<span class="p">(</span><span class="nb">provide</span><span class="w"> </span><span class="ss">&#39;这里的名称是文件名去掉后缀</span><span class="p">)</span>
+<span class="c1">;;; 这里同样也是文件名 ends here</span>
+</pre></div><p>这里只对 <code>provide</code> 作简单的解释。它的功能主要是将一个文件的内容“导出”，让其允许被其他文件引用( <code>require</code> )并执行，有利于配置文件模块化，方便管理。</p><blockquote>
+<p>温馨提示： <code>init.el</code> 实际上没有必要使用provide，因为它就是总调用文件</p></blockquote><p>下面再给出一个参考用的文件结构：</p><div class="org-src-container"><pre class="src src-text">~/.emacs.d/
+├── custom.el
+├── init.el
+└── lisp
+    ├── init-auto-insert.el
+    ├── init-auto-save.el
+    ├── init-better-defaults.el
+    ├── init-custom.el
+    ├── init-keybindings.el
+    ├── init-loop-alpha.el
+    ├── init-open-files.el
+    ├── init-org.el
+    ├── init-packages.el
+    ├── init-quickly-input-c.el
+    └── init-ui.el
+</pre></div></div></div></div>
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 配置Emacs!</h3>
+<div class="outline-text-3" id="text-3-3"><blockquote>
+<p>如果想要照抄配置，可以参考参考那些大佬的配置，例如
+<a href="https://github.com/purcell/emacs.d">Purcell的配置</a>，或者是
+<a href="https://github.com/redguardtoo/emacs.d">陈斌的配置</a>，再或者是其他的<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>。这里我再提一个建议：可以尝试将自己的配置发布在Github上。</p></blockquote><p>憋了这么久，是不是特别难受？在学完了上面的所有内容之后，你应该对于elisp这门解释型语言有了一定的了解。那么下面，我们将正式开始对Emacs的配置。</p><p>emacs的设置根据设置方式可以被分为两类：子模式与变量。其中，变量的配置可以说是在子模式的基础上建立起来的。因为开启子模式用于启用功能，而变量则是设置这些功能的细节，当然也不排除编辑器本身的功能变量设置</p><blockquote>
+<p>额外提示：有些时候mode也可以使用设置变量的方式开启，所以不能够保证绝对没有混淆的内容，只能尽量减少</p></blockquote><p>由于这类内容过多，所以将采取使用表格的形式列出，请自行选择与使用</p></div><div id="outline-container-3-3-1" class="outline-4">
+<h4 id="org-title-3-3-1"><span class="section-number-4">3.3.1.</span> 子模式功能&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></h4>
+<div class="outline-text-4" id="text-3-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">适用范围</th><th scope="col" class="org-left">名称</th><th scope="col" class="org-left">功能描述</th></tr>
+</thead><tbody>
+<tr><td class="org-left">程序样式</td><td class="org-left">tool-bar-mode</td><td class="org-left">可以开启工具栏（默认开启），传入参数0可关闭</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">menu-bar-mode</td><td class="org-left">可以显示菜单栏（其余同上）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">display-time-mode</td><td class="org-left">显示时间，传入参数t开启</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">默认工具</td><td class="org-left">save-place-mode</td><td class="org-left">记忆文件上次打开的位置</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">electric-pair-mode</td><td class="org-left">自动补全括号（和引号之类的）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">column-number-mode</td><td class="org-left">在默认状态栏显示行号</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">global-auto-revert-mode</td><td class="org-left">自动重新读取被改动过的文件</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">delete-selection-mode</td><td class="org-left">选中文本后输入文本会替换文本</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">global-display-line-numbers-mode</td><td class="org-left">在窗口显示行号（传入参数t开启）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">global-hl-line-mode</td><td class="org-left">高亮当前行（传入参数t开启）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">savehist-mode</td><td class="org-left">打开Buffer历史记录保存</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">global-display-fill-column-indicator-mode</td><td class="org-left">在设置的自动换行大小<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>处显示一条竖线</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">文本编辑</td><td class="org-left">auto-fill-mode</td><td class="org-left">能够实现文本自动换行</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">编程</td><td class="org-left">auto-insert-mode</td><td class="org-left">能够实现在新建一个源文件时自动插入文件头</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">show-paren-mode</td><td class="org-left">光标在括号上时高亮另一个括号</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">indent-tabs-mode</td><td class="org-left">使用tab键缩进，但是效果不详<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">hs-minor-mode</td><td class="org-left">启用代码缩进，默认的快捷键开头是 <code>C-c @</code></td></tr>
+</tbody><tbody>
+<tr><td class="org-left">Org Mode</td><td class="org-left">org-indent-mode</td><td class="org-left">在org模式下编辑文件时自动缩进（美观好看）</td></tr>
+</tbody><tbody>
+</table></div></div>
+<div id="outline-container-3-3-2" class="outline-4">
+<h4 id="org-title-3-3-2"><span class="section-number-4">3.3.2.</span> 变量功能设置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></h4>
+<div class="outline-text-4" id="text-3-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">适用范围</th><th scope="col" class="org-left">名称</th><th scope="col" class="org-left">描述</th></tr>
+</thead><tbody>
+<tr><td class="org-left">程序设置</td><td class="org-left">make-backup-files</td><td class="org-left">设置为nil可以关闭自动备份文件<sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup></td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">auto-save-default</td><td class="org-left">设置为nil可以关闭自动保存</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">display-line-number-type</td><td class="org-left">设置行号的类型（ <code>'relative</code> 为相对行号）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">fill-column</td><td class="org-left">设置自动换行的宽度（设置数值）</td></tr><tr><td class="org-left">&nbsp;</td><td class="org-left">tab-width</td><td class="org-left">设置一个tab的显示宽度（我设置为8）</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">编程</td><td class="org-left">c-basic-offset</td><td class="org-left">设置C语言一个缩进的大小（我设置为8）</td></tr></table></div></div>
+<div id="outline-container-3-3-3" class="outline-4">
+<h4 id="org-title-3-3-3"><span class="section-number-4">3.3.3.</span> 其他设置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="elisp">elisp</span>&nbsp;<span class="Emacs的功能">Emacs的功能</span></span></h4>
+<div class="outline-text-4" id="text-3-3-3"><ul class="org-ul">
+<li><code>(load-theme 'name)</code> <br/> 加载主题，名称为 <code>name</code>
+</li></ul>
+</div></div></div></div>
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 使用插件！</h2>
+<div class="outline-text-2" id="text-4"><p>既然是Emacs，那么怎能够不使用插件呢？插件是Emacs极为强大的功能之一，我将在这里介绍如何在Emacs中安装并使用插件</p></div><div id="outline-container-4-1" class="outline-3">
+<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 插件的安装&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></h3>
+<div class="outline-text-3" id="text-4-1"><p>Emacs有（相对）统一的插件管理仓库MELPA，里面有很多的插件可供下载使用<sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup></p><p>要设置它，请在配置文件中使用</p><div class="org-src-container"><pre class="src src-lisp"><span class="c1">;; 添加仓库</span>
+<span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</pre></div><p>以初始化插件。不过默认的插件仓库是国外的，很慢，所以说要设置一下仓库的镜像源<sup><a id="fnr.7" class="footref" href="#fn.7" role="doc-backlink">7</a></sup>。这里附上一段配置文件：</p><div class="org-src-container"><pre class="src src-lisp"><span class="c1">;; 添加仓库</span>
+<span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;package</span><span class="p">)</span>
+<span class="c1">;(add-to-list &#39;package-archives &#39;(&quot;melpa&quot; . &quot;https://melpa.org/packages/&quot;) t)</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">package-archives</span><span class="w"> </span><span class="o">&#39;</span><span class="p">(</span>
+<span class="w">  </span><span class="p">(</span><span class="s">&quot;melpa&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="s">&quot;gnu&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="s">&quot;org&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/org/&quot;</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</pre></div></div><div id="outline-container-4-1-1" class="outline-4">
+<h4 id="org-title-4-1-1"><span class="section-number-4">4.1.1.</span> 手动安装插件</h4>
+<div class="outline-text-4" id="text-4-1-1"><p>确保无误后，便可在Emacs里执行 <code>M-x package-list-packages</code> 以打开插件列表。下面是部分快捷键：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">快捷键</th><th scope="col" class="org-left">作用</th></tr>
+</thead><tbody>
+<tr><td class="org-left">i</td><td class="org-left">标记插件为安装标记</td></tr><tr><td class="org-left">d</td><td class="org-left">标记插件为删除标记</td></tr><tr><td class="org-left">u</td><td class="org-left">清除插件的标记</td></tr><tr><td class="org-left">x</td><td class="org-left">执行插件的标记</td></tr><tr><td class="org-left">U</td><td class="org-left">标记所有可升级的插件</td></tr></table><p>搜索和Emacs的默认快捷键相同是 <code>C-s</code> 和 <code>C-r</code> 。找到要安装的插件，按下 <code>i</code> 进行标记，再按下 <code>x</code> 执行标记。插件就安装好了。</p><p>但若你早就知道了插件的名称，只是想要安装插件，则可以执行 <code>M-x package-install</code> 并输入想要的插件名称即可安装。</p></div></div>
+<div id="outline-container-4-1-2" class="outline-4">
+<h4 id="org-title-4-1-2"><span class="section-number-4">4.1.2.</span> 通过配置文件自动安装插件</h4>
+<div class="outline-text-4" id="text-4-1-2"><p>既然能够手动安装插件，那么通过配置文件自动安装插件也是不可少的。</p><p>让我们先分析一下逻辑：我们需要确认一个插件是否安装，若无安装则需要安装插件。于是，我们便有了以下代码：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nb">unless</span><span class="w"> </span><span class="p">(</span><span class="nv">package-installed-p</span><span class="w"> </span><span class="ss">&#39;evil</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="nv">package-install</span><span class="w"> </span><span class="ss">&#39;evil</span><span class="p">))</span>
+</pre></div><p>在上面的示例中，将检查是否有安装 <code>evil</code> 这个插件，如果没有，则安装插件。</p><p>不过这是一种比较麻烦的办法，通常推荐修改上面的示例以安装 <code>use-package</code> 这个插件，并加入以下配置：</p><div class="org-src-container"><pre class="src src-elisp"><span class="c1">;; 进行设置</span>
+<span class="p">(</span><span class="nb">eval-and-compile</span>
+<span class="w">  </span><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">use-package-always-ensure</span><span class="w"> </span><span class="no">t</span><span class="p">)</span><span class="w">    </span><span class="c1">;不用每个包都手动添加:ensure t关键字</span>
+<span class="w">  </span><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">use-package-always-defer</span><span class="w"> </span><span class="no">t</span><span class="p">)</span><span class="w">     </span><span class="c1">;默认都是延迟加载，不用每个包都手动添加:defer t</span>
+<span class="w">  </span><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">use-package-always-demand</span><span class="w"> </span><span class="no">nil</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">use-package-expand-minimally</span><span class="w"> </span><span class="no">t</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">use-package-verbose</span><span class="w"> </span><span class="no">t</span><span class="p">))</span>
+<span class="c1">;; 加载插件</span>
+<span class="p">(</span><span class="nb">eval-when-compile</span>
+<span class="w">  </span><span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;use-package</span><span class="p">))</span>
+</pre></div><p>便可使用以下方式安装插件：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nb">use-package</span><span class="w"> </span><span class="nv">package_nmae</span><span class="p">)</span>
+</pre></div><blockquote>
+<p>注：如果在上面的配置中不加入 <code>(setq use-package-always-ensure t)</code> 这段内容，则在每个插件配置处加上一行 <code>:ensure t</code> 以确保插件安装。</p></blockquote></div></div></div>
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="org-title-4-2"><span class="section-number-3">4.2.</span> 插件的配置&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></h3>
+<div class="outline-text-3" id="text-4-2"><p>上文有提到过 <code>use-package</code> 这个插件，它不仅能够安装插件，还能够对插件进行配置。就例如 <code>evil</code> ，一个能够在Emacs中使用（大部分）Vim键位的插件。在安装插件后，往往需要使用 <code>(xxx-mode)</code> 的方式去启动插件，这时就可以使用以下代码来解决：</p><div class="org-src-container"><pre class="src src-elisp"><span class="p">(</span><span class="nb">use-package</span><span class="w"> </span><span class="nv">evil</span>
+<span class="w">  </span><span class="nb">:init</span><span class="w"> </span><span class="p">(</span><span class="nv">evil-mode</span><span class="p">))</span>
+</pre></div><p>其中的 <code>:init</code> 是种类似于标记的东西，它的标签还有：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">标签</th><th scope="col" class="org-left">描述</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>:init</code></td><td class="org-left">初始化插件用</td></tr><tr><td class="org-left"><code>:config</code></td><td class="org-left">配置插件，需要执行 <code>:init</code> 段后执行</td></tr><tr><td class="org-left"><code>:hook</code></td><td class="org-left">添加命令到hook上，如 <code>:hook (after-init . evil-mode)</code> 就意为在after-init hook后打开evil</td></tr><tr><td class="org-left"><code>:bind</code></td><td class="org-left">用于绑定快捷键，如 <code>:bind ("KEY" . function)</code> 就将function绑定到快捷键 <code>KEY</code> 上</td></tr><tr><td class="org-left"><code>:after</code></td><td class="org-left">设置在加载什么插件后加载，如 <code>:after flycheck</code></td></tr><tr><td class="org-left"><code>:commands</code></td><td class="org-left">不明</td></tr><tr><td class="org-left"><code>:ensure</code></td><td class="org-left">确保安装插件</td></tr></table></div></div>
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="org-title-4-3"><span class="section-number-3">4.3.</span> 插件推荐/我用的插件&nbsp;&nbsp;&nbsp;<span class="tag"><span class="插件">插件</span></span></h3>
+<div class="outline-text-3" id="text-4-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">名称</th><th scope="col" class="org-left">功能描述</th></tr>
+</thead><tbody>
+<tr><td class="org-left">evil</td><td class="org-left">在Emacs下使用Vim的功能与键位</td></tr><tr><td class="org-left">monokai-theme</td><td class="org-left">一款Emacs主题</td></tr><tr><td class="org-left">benchmark-init</td><td class="org-left">能检查启动速度的插件</td></tr><tr><td class="org-left">smart-mode-line</td><td class="org-left">更好的状态栏（会冲突）</td></tr><tr><td class="org-left">powerline</td><td class="org-left">另一种状态栏（会冲突）</td></tr><tr><td class="org-left">powerline-evil</td><td class="org-left">拥有Evil模式提醒的状态栏（会冲突）</td></tr><tr><td class="org-left">which-key</td><td class="org-left">显示可用键位，辅助使用快捷键</td></tr><tr><td class="org-left">company</td><td class="org-left">一个自动补全插件</td></tr><tr><td class="org-left">yasnippet</td><td class="org-left">补全模板插件</td></tr><tr><td class="org-left">yasnippet-snippets</td><td class="org-left">补全模板</td></tr><tr><td class="org-left">org-bullets</td><td class="org-left">让Org的标题有特殊样式</td></tr><tr><td class="org-left">smex</td><td class="org-left">快捷输入命令</td></tr><tr><td class="org-left">flycheck</td><td class="org-left">一个语义检查插件</td></tr><tr><td class="org-left">flycheck-clang-analyzer</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left">lsp-mode</td><td class="org-left">lsp语法解析</td></tr><tr><td class="org-left">projectile</td><td class="org-left">项目管理插件</td></tr><tr><td class="org-left">magit</td><td class="org-left">在Emacs下使用Git</td></tr><tr><td class="org-left">window-numbering</td><td class="org-left">为窗口加上编号，按下 <code>M-n</code> 切换到第n个窗口</td></tr><tr><td class="org-left">valign</td><td class="org-left">像素级别的Org中文表格对齐</td></tr><tr><td class="org-left">vimish-fold</td><td class="org-left">能够想vim一样折叠内容</td></tr><tr><td class="org-left">htmlize</td><td class="org-left">Org导出到html的代码块代码高亮功能</td></tr><tr><td class="org-left">vundo</td><td class="org-left">能够实现将undo以树状形式显示</td></tr></table></div></div></div>
+<div id="outline-container-5" class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> Emacs的部分主模式</h2>
+<div class="outline-text-2" id="text-5"><p>在
+<a href="#org-title-2-3-2">2.3.2 多级按键操作</a>中有讲到过， <code>C-c</code> 这样一个快捷键前缀常用于主模式特有的快捷键。在学习完上面的内容加上一段时间的练习之后，你应该基本学会了如何使用emacs，那现在，就让我们继续学习Emacs的部分主模式内容吧。内容可能收录不全，但对于那些常用而拓展功能又很多的模式来说应该够用了。</p></div><div id="outline-container-5-1" class="outline-3">
+<h3 id="org-title-5-1"><span class="section-number-3">5.1.</span> Org-mode</h3>
+<div class="outline-text-3" id="text-5-1"><p>org文件是org-mode对应的文件，类似于markdown是一门标记性语言。结合emacs使用具有许多强大的功能，将在下文中一一介绍</p><blockquote>
+<p>Btw官网似乎有一份很好的
+<a href="https://orgmode.org/zh-CN/quickstart.html">Quickstart</a>可以看看。</p><p>这里有一份
+<a href="http:/lib/python/res/test.org">org语法测试示例文件</a>可以用于研究org-mode的语法</p></blockquote></div><div id="outline-container-5-1-1" class="outline-4">
+<h4 id="org-title-5-1-1"><span class="section-number-4">5.1.1.</span> 文件语法</h4>
+<div class="outline-text-4" id="text-5-1-1"><p>宽泛地说，org语法包括以下内容：</p><ul class="org-ul">
+<li>元数据(Metadata):<br/> 指定设置有关于文档的内容，如总标题、作者、日期、代办关键词、导出设置等
+<ul class="org-ul">
+<li>构成: <code>#+NAME:TEXT</code><br/> 语句前面可以有空格；其中 <code>NAME</code> 部分不区分大小写，不可以有空格； <code>TEXT</code> 部分随意。
+</li>
+<li>如果在多行分别指定了相同的Metadata，部分会将字符串用空格拼接起来，部分是后面的metadata覆盖前面的
+</li>
+<li><p>部分 <code>NAME</code> 对应表：<br/></p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">meta名称</th><th scope="col" class="org-left">作用</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>title</code></td><td class="org-left">设置文章标题</td></tr><tr><td class="org-left"><code>author</code></td><td class="org-left">指定文章作者</td></tr><tr><td class="org-left"><code>date</code></td><td class="org-left">设置文章日期</td></tr><tr><td class="org-left"><code>description</code></td><td class="org-left">设置文档描述</td></tr><tr><td class="org-left"><code>setupfile</code></td><td class="org-left">引用外部的metadata配置，后跟文件路径或者网络链接</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>caption</code></td><td class="org-left">为插入的图片设置别名</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>options</code></td><td class="org-left">文档设置，如设置最大章节标题层级等</td></tr><tr><td class="org-left"><code>startup</code></td><td class="org-left">启动设置，例如说fold:打开文件时默认折叠所有标题</td></tr><tr><td class="org-left"><code>tags</code></td><td class="org-left">设置编辑文件时会用到的tag，可以设置对应的快捷键快速添加</td></tr><tr><td class="org-left"><code>seq_todo</code></td><td class="org-left">设置文件用到的TODO的tag，分为待办和已完成两类</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>html_link_home</code></td><td class="org-left">导出为html时设置的"HOME"的链接</td></tr><tr><td class="org-left"><code>html_link_up</code></td><td class="org-left">导出为html时设置的"UP"的链接</td></tr><tr><td class="org-left"><code>html_head</code></td><td class="org-left">导出为html时额外添加的头文件信息</td></tr><tr><td class="org-left"><code>latex_complier</code></td><td class="org-left">设置导出pdf时使用的latex引擎</td></tr><tr><td class="org-left"><code>latex_header</code></td><td class="org-left">生成tex文件时额外添加的头文件信息</td></tr></table>
+<p>更多的meta和属性将另起一章讲述</p>
+</li></ul>
+</li>
+<li><p>章节标题(Headline):<br/> 构成: <code>* [TODO|COMMENT] TEXT</code></p>
+<ul class="org-ul">
+<li>星号前面不能有空格，星号的数量代表标题的层级，星号越多层级越深。
+</li>
+<li><code>[TODO|COMMENT]</code> 是TODO状态和注释状态的关键词，是可选项，大小写敏感。
+</li>
+<li>TODO状态默认有 <code>TODO</code> 和 <code>DONE</code> 两个关键词，可以通过 <code>seq_todo</code> 自定义关键词。
+</li>
+<li>COMMENT表示该标题和子标题被注释掉了，导出时不会将他们的内容导出。如果在关键词位置前出现了非关键词则后面的关键词无效。如果出现了两个TODO关键词则后面的关键词视作非关键词。
+</li></ul>
+<p>示例：</p>
+<div class="org-src-container"><pre class="src src-org"><span class="gh">* 一级标题</span>
+<span class="gu">** 二级标题</span>
+<span class="gh">* </span><span class="gr">TODO</span><span class="gh"> 标记为待办的标题</span>
+<span class="gh">* </span><span class="gd">DONE</span><span class="gh"> 标记为完成的标题</span>
+<span class="gh">* </span><span class="cp">COMMENT</span><span class="gh"> 标记为注释的标题</span>
+<span class="gh">* </span><span class="gr">TODO</span><span class="gh"> COMMENT 标记为待办且注释的标题</span>
+<span class="gh">* </span><span class="cp">COMMENT</span><span class="gh"> TODO 错误的待办标记但正确的注释标记的标题</span>
+<span class="gh">* </span><span class="gr">TODO</span><span class="gh"> DONE COMMENT 正确的待办标记，无效的完成标记，错误的注释标记</span>
+</pre></div>
+</li>
+<li><p>行内效果/标记(Markup)<br/> 行内效果包括
+<a href="http://">链接</a>脚注<sup><a id="fnr.8" class="footref" href="#fn.8" role="doc-backlink">8</a></sup>,与标记共同包括 <code>逐字</code> 、 <code>代码</code> 、 <i>斜体</i> 、 *粗体*、 <del>删除线</del> 、 <span class="underline">下划线</span> 。 <code>逐字</code> 效果和 <code>代码</code> 效果类似，且内部 <code>/*无法再嵌套*/</code> 其他效果，但是可以 <i><b><code>在外部将其包括</code></b></i> ，其余的标记都是可以相互嵌套的。链接显示的文字也是可以
+<a href="http://"><b><i><span class="underline"><del><code>套用标记效果的</code></del></span></i></b></a>。</p>
+<div class="org-src-container"><pre class="src src-org">行内效果包括<span class="p">[[</span><span class="na">http://</span><span class="p">][</span><span class="nt">链接</span><span class="p">]]</span>脚注<span class="nt">[fn:8]</span>,与标记共同包括 <span class="s">=逐字=</span> 、 <span class="s">~代码~</span> 、 <span class="ge">/斜体/</span> 、 <span class="gs">*粗体*</span>、
+<span class="gd">+删除线+</span> 、 <span class="ges">_下划线_</span> 。 <span class="s">=逐字=</span> 效果和 <span class="s">~代码~</span> 效果类似，且内部 <span class="s">=/*无法再嵌套*/=</span>
+其他效果，但是可以 <span class="ge">/*=在外部将其包括=*/</span> ，其余的标记都是可以相互嵌套的。链接显
+示的文字也是可以<span class="p">[[</span><span class="na">http://</span><span class="p">][</span><span class="nt">*/_+~套用标记效果的~+_/*</span><span class="p">]]</span>。
+</pre></div>
+<ul class="org-ul">
+<li>链接，格式： <code>[[url][alt]]</code> ，url为链接，alt为显示的名称。
+<ul class="org-ul">
+<li><p>图片：如果url指向的是一个图片文件且没有alt选项则会将链接解读为图片。在任意单独独立成行的图片链接前增加一行 <code>#+CAPTION:...</code> 则可以指定图片的别名</p>
+<ul class="org-ul">
+<li>例子1:
+<img src="http:/img/background.jpg" alt="background.jpg" />
+
+</li>
+<li><p>例子2:</p>
+<div class="figure"><p>
+<img src="http:/img/background.jpg" alt="background.jpg" />
+</p></div>
+</li>
+<li><p>例子3:</p>
+<div class="figure">
+<p><img src="http:/img/background.jpg" alt="http:/img/background.jpg" /></p>
+<p><span class="figure-number">Figure 5: </span>别名</p></div>
+</li></ul>
+<div class="org-src-container"><pre class="src src-org"><span class="k">- </span>例子1:<span class="p">[[</span><span class="na">http:/img/background.jpg</span><span class="p">]]</span>
+<span class="k">- </span>例子2:
+
+  <span class="p">[[</span><span class="na">http:/img/background.jpg</span><span class="p">]]</span>
+<span class="k">- </span>例子3:
+  #+CAPTION: 别名
+  <span class="p">[[</span><span class="na">http:/img/background.jpg</span><span class="p">]]</span>
+</pre></div>
+</li></ul>
+</li></ul>
+</li>
+<li>列表(List)
+</li>
+<li>区块(Block)
+</li>
+<li>注释(Comment)
+</li>
+<li>表格(Table)
+</li></ul>
+</div></div>
+<div id="outline-container-5-1-2" class="outline-4">
+<h4 id="org-title-5-1-2"><span class="section-number-4">5.1.2.</span> 按键绑定&nbsp;&nbsp;&nbsp;<span class="tag"><span class="keys">keys</span></span></h4>
+<div class="outline-text-4" id="text-5-1-2"><p>未完待续</p></div></div></div></div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<div class="footdef">
+<sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 宏下面会讲</p></div>
+</div><div class="footdef">
+<sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 打个小广告：
+<a href="https://github.com/youlanjie/emacs.d/">我自己的配置</a></p></div>
+</div><div class="footdef">
+<sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 自动换行的大小可以用快捷键 <code>C-x f</code> 设置，默认为70 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 我不知道为什么，这个设置基本无效，配置后还有很多主模式下都还是使用空格缩进的 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 留下一个在源文件名后面加上 <code>~</code> 号的文件，手动清理很烦 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.6" class="footnum" href="#fnr.6" role="doc-backlink">6</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 关于插件的仓库似乎有部分争议，这里我只管教用，其他的我暂不理会 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.7" class="footnum" href="#fnr.7" role="doc-backlink">7</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 这里推荐使用清华镜像源，在下面的示例就有相关内容 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.8" class="footnum" href="#fnr.8" role="doc-backlink">8</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 示范用的脚注 </p></div>
+</div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: 2023-03-04 11:20</p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 我自己尝试写的Emacs入门教程，不喜勿喷，持续更新中</p>
+<p class="date">生成于: 2025-09-24 四 16:26:42</p>
+</div>
+</body>
+</html>

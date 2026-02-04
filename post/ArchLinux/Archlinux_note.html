@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="记点杂的笔记，反正大都是关于archlinux的" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>Archlinux笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Archlinux笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 前言</a></li><li><a href="#org-title-2">2. 了解关于archlinux的信息</a></li><li><a href="#org-title-3">3. 打包软件包</a><ul><li><a href="#org-title-3-1">3.1. 不规范但懒人的打包</a></li></ul></li>
+<li><a href="#org-title-4">4. steam商店无法联网问题(实际上是DNS问题)</a><ul><li><a href="#org-title-4-1">4.1. 更多DNS设置</a></li></ul></li>
+<li><a href="#org-title-5">5. obs的编码问题</a></li><li><a href="#org-title-6">6. 老旧网卡总是重复断连</a></li></ul></div></div>
+<div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>写这玩意用于记录点较为有用的但是又不一定常用的问题，可以类比成FAQ</p></div></div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 了解关于archlinux的信息</h2>
+<div class="outline-text-2" id="text-2"><ul class="org-ul">
+<li>普通新闻<br/> 建议安装一个RSS阅读器，然后订阅archlinuxcn的RSS新闻，官方新闻会搬运且翻译，另外会有一些独有的新闻信息。
+</li>
+<li><p>软件包在仓库的变动<br/> 有时候pacman更新更着更着发现有个软件包“消失了”，变成了需要从aur下载了，就可以根据下面的方法进行消息查证和原因查找</p>
+<blockquote>
+<p>这里举几个我碰见过的例子哈。例如说我2025.3.29刚从extra-any库下载了 arc-gtk-theme包，三天之内那个包就在
+<a href='https://gitlab.archlinux.org/archlinux/packaging/state/-/commit/6151afde531197261454d507c45ac6755fa88d2c'>这个提交</a>中被删除了。还有我2025.06.13装的 yutto，在2025.07.21的
+<a href='https://github.com/archlinuxcn/repo/commit/e04e10ae5a07681d5ab909ab2c4ee779cd5fb676'>这个提交</a>就被视作孤立包被删除了。我自己搓manim的PKGBUILD有个依赖叫python-skia-pathops，但是刚搓好没多久这个依赖就和yutto一起被删除了。</p></blockquote>
+<ul class="org-ul">
+<li><p>对于官方仓库的软件包变动可以访问archlinux软件仓库的git仓库： 
+<a href='https://gitlab.archlinux.org/archlinux/packaging/state'><i>官方仓库链接</i></a>， 
+<a href='https://github.com/archlinux/state'><i>github镜像</i></a>，建议访问官方而非github，一般github更慢。这两个链接只能对软件仓库的变动进行查证，如果需要查找变动原因则需要访问
+<a href='https://archlinux.org/todo/'>这个链接</a>。</p>
+<p>关于查找软件包变动记录的方法：去git仓库然后搜索想找的软件名，选择搜索commit，按照时间排序，就可以看到那个软件包是不是被 <b>Removed</b> 了。当然如果包还在那么在搜索code的时候应该会有搜索结果的。</p>
+</li>
+<li><p>当然对于社区仓库archlinuxcn也是同理，git仓库链接：
+<a href='https://github.com/archlinuxcn/repo'>只有github的链接</a></p>
+<p>和官方仓库不同的是，archlinuxcn的提交有一个可追踪的因果链。根据Search Commit 找到软件包被移除的commit后在提交的说明中一般会有一个导致包被移除的关于弃置请求的issue，里面又会有真正导致弃置的原因的issue链接，查证比较方便。</p>
+<blockquote>
+<p>以上面的yutto和python-skia-pathops为例，追踪下来发现事件链如下：</p><div class="org-src-container"><pre class="src src-text">原包维护者请求卸任 -&gt; 管理员处理并向仓库提交弃置请求issue -&gt; 审核同意 -&gt; 管理员移除失去维护者的孤儿包
+</pre></div><p>上述事件链也是一个标准的处理流程</p><p>而arc-gtk-theme挺奇妙，事件链如下：</p><div class="org-src-container"><pre class="src src-text">archlinuxcn有人维护 -&gt; 有issue说官方有了包 -&gt; 原维护者请求弃置(2022.11.21) -&gt; 官方将包移除(2025.04.01)
+</pre></div><p>官方的仓库没有相关事件链可供追踪(顺带吐槽下增加包的commit都是"Update"而非 "Add")，故包被删除的原因未知</p></blockquote>
+</li></ul>
+</li>
+<li><p>技术知识<br/> 多上维基查查，要是找不到可以尝试去英文维基翻翻</p>
+<blockquote>
+<p>2025.10.05回来吐槽：没有听从自己的忠告去翻gtk的中文维基找半天也没找到问题解决办法，最后一看内容同步于2022-04-19，属实是自己把自己坑惨了。</p></blockquote>
+</li></ul>
+</div></div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 打包软件包</h2>
+<div class="outline-text-2" id="text-3"><p>需要使用makepkg工具（在pacman内），标准的PKGBUILD文件在/usr/share/pacman/目录下，格式手册可通过 <code>man PKGBUILD</code> 查看（其余的自查维基）</p><ul class="org-ul">
+<li><p>提供与冲突<br/> 在PKGBUILD中指定 <i>provides</i> 作为该包提供的“虚包”（功能），软件包本身的名称会默认作为其中的一部分。由此可以通过指定provides里的名称安装该包。如果有多个软件包声明提供了某功能则pacman会在安装时询问使用哪个。（但如果有个软件包就叫那个名字，那么pacman只会安装那个包，不会寻找provide这个名的包）</p>
+<p>如果没有在 <i>conflect</i> 中指明自己provide的某个功能，则不会触发依赖检查的冲突（意思是认为只要不说就默认提供相同功能的包是可以共存的），但只要一在conflect中指定了provide的名字，那么所有在provide中带有那个名的包都会触发冲突。</p>
+<p>作图解释如下：<br/> 
+<img src='./arch_note/2025_08_02_pacman包关系示意图_ver2.webp' alt="2025_08_02_pacman包关系示意图_ver2.webp" />
+</p>
+</li></ul>
+</div><div id="outline-container-3-1" class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 不规范但懒人的打包</h3>
+<div class="outline-text-3" id="text-3-1"><p>由于有些aur软件可能会用到许多arch官方仓库没有的依赖包，这些包的源文件多从github 上下载，所以说就很令人烦恼。</p><p>但是，像python这种一堆第三方依赖的就有一个办法可以尝试解决这个问题：自己写一个利用pip镜像下载依赖包并一起打包安装的PKGBUILD。当然这样的包不正规，但够懒人，也够快。大致的框架如下：</p><div class="org-src-container"><pre class="src src-bash"><span class="nv">depends</span><span class="o">=(</span>
+<span class="w">    </span><span class="s2">&quot;......&quot;</span>
+<span class="w">    </span><span class="c1"># arch官方仓库和archlinuxcn仓库的依赖</span>
+<span class="o">)</span>
+<span class="nv">makedepends</span><span class="o">=(</span>
+<span class="w">    </span><span class="s2">&quot;base-devel&quot;</span>
+<span class="w">    </span><span class="s2">&quot;python-pip&quot;</span>
+<span class="w">    </span><span class="s2">&quot;python-build&quot;</span>
+<span class="w">    </span><span class="s2">&quot;python-installer&quot;</span>
+<span class="w">    </span><span class="s2">&quot;python-setuptools&quot;</span>
+<span class="w">    </span><span class="s2">&quot;python-wheel&quot;</span>
+<span class="o">)</span>
+<span class="nv">provides</span><span class="o">=(</span>
+<span class="w">    </span><span class="s2">&quot;...&quot;</span>
+<span class="w">    </span><span class="c1"># 这里决定内置什么python包</span>
+<span class="o">)</span>
+<span class="c1"># 将provides的值拷一份给conflicts</span>
+<span class="nv">conflicts</span><span class="o">=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">provides</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+build<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1"># 构建函数(用pip下载)</span>
+<span class="w">    </span>pip<span class="w"> </span>download<span class="w"> </span>--no-deps<span class="w"> </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple<span class="w"> </span><span class="si">${</span><span class="nv">provides</span><span class="p">[*]#python-</span><span class="si">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span>output<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">	</span>mkdir<span class="w"> </span>output
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>find<span class="w"> </span>./<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.tar.gz&quot;</span><span class="w"> </span>-exec<span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span><span class="se">\{\}</span><span class="w"> </span>-C<span class="w"> </span>output<span class="w"> </span><span class="se">\;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>dir<span class="w"> </span><span class="k">in</span><span class="w"> </span>output/*<span class="w"> </span><span class="p">;</span><span class="k">do</span>
+<span class="w">	</span>python<span class="w"> </span>-m<span class="w"> </span>build<span class="w"> </span>-w<span class="w"> </span>-o<span class="w"> </span>.<span class="w"> </span><span class="nv">$dir</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span>root<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">	</span>mkdir<span class="w"> </span>root
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>find<span class="w"> </span>./<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.whl&quot;</span><span class="w"> </span>-exec<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>installer<span class="w"> </span>--destdir<span class="o">=</span><span class="s2">&quot;root&quot;</span><span class="w"> </span><span class="se">\{\}</span><span class="w"> </span><span class="se">\;</span>
+<span class="o">}</span>
+
+package<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>mv<span class="w"> </span>root/*<span class="w"> </span><span class="nv">$pkgdir</span>
+<span class="o">}</span>
+</pre></div><p>总之就是官方有的就作依赖，没有的就用pip作provide。而pip能用二进制包就用二进制包，没有二进制包的就下载下来用python-build构建</p><p>当然说不定还会有用于为python包生成PKGBUILD文件的软件出现，但至少目前我还没有碰到过。</p></div></div></div>
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> steam商店无法联网问题(实际上是DNS问题)</h2>
+<div class="outline-text-2" id="text-4"><p>如果出现：</p><ul class="org-ul">
+<li>steam商店无法联网
+</li>
+<li>steam云服务正常
+</li>
+<li>浏览器可以正常打开steam商店
+</li></ul>
+<p>那么有可能你的dns没有配置好导致只有神奇的steam客户端无法联网steam商店，此时，可以尝试运行</p><div class="org-src-container"><pre class="src src-shell">sudo<span class="w"> </span>ln<span class="w"> </span>-sf<span class="w"> </span>/run/systemd/resolve/stub-resolv.conf<span class="w"> </span>/etc/resolv.conf
+</pre></div></div><div id="outline-container-4-1" class="outline-3">
+<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 更多DNS设置</h3>
+<div class="outline-text-3" id="text-4-1"><p>在dhcpcd+iwd且不使用NetworkManager服务时，通过修改 <code>/etc/dhcpcd.conf</code> 文件设定 DNS服务，使用 <code>sudo systemctl restart systemd-resolved.service</code> 重启生效</p></div></div></div>
+<div id="outline-container-5" class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> obs的编码问题</h2>
+<div class="outline-text-2" id="text-5"><ul class="org-ul">
+<li>我的HEVC编码器哪去了？<br/> 如果是intel的CPU/GPU请确保安装了 <code>intel-media-driver</code> 包，并重启obs启用硬编解码
+</li></ul>
+</div></div>
+<div id="outline-container-6" class="outline-2">
+<h2 id="org-title-6"><span class="section-number-2">6.</span> 老旧网卡总是重复断连</h2>
+<div class="outline-text-2" id="text-6"><blockquote>
+<p>由于该节内容方法来源来自ai，具体原理仍不清楚，待日后查证纠正</p></blockquote><p>使用 <code>journalctl -f</code> 进行日志实时显示，然后另一边用iwd等网络管理器进行操作，观察日志输出。如果发现有大量类似于 <code>invalid HE capabilities for XX:XX:XX:XX:XX:XX</code> 的输出，尝试编辑（或者创建） <b><i>/etc/iwd/main.conf</i></b> 文件，追加以下内容:</p><div class="org-src-container"><pre class="src src-conf"><span class="k">[General]</span>
+<span class="na">DisableVHT</span><span class="o">=</span><span class="s">false</span>
+
+<span class="k">[Settings]</span>
+<span class="na">DisableHE</span><span class="o">=</span><span class="s">true</span>
+</pre></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2025-08-02 六 11:17:50></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 记点杂的笔记，反正大都是关于archlinux的</p>
+<p class="date">生成于: 2025-10-05 日 16:14:33</p>
+</div>
+</body>
+</html>

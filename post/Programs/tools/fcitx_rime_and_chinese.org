@@ -1,0 +1,100 @@
+#+title: fcitx/rime/雾凇拼音/万象语言模型的安装与配置
+#+date: <2025-08-19 二 22:37>
+#+description: 在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入
+
+#+setupfile: ../../../setup.setup
+* 简介
+fcitx本身有中文输入，但是有点烂。因此，尝试使用fcitx-rime方案改进输入体验。
+
+按照我的个人理解，在这么一套配置中，fcitx是框架，充当运行时负责ui输入捕获之类的，
+而rime则是引擎，负责对输入进行逻辑处理变成你所看见的候选字等的工作。
+
+本博客较为粗略，更详细的内容建议看看[[https://dvel.me/posts/rime-ice/#%e6%96%b0%e6%89%8b%e6%8c%87%e5%bc%95][这篇文章]]。
+* 安装
+#+begin_src shell
+  # fcitx部分
+  pacman -S fcitx5-im fcitx5-configtool fcitx5-rime
+  # rime部分（需要使用archlinuxcn源）
+  # 这里选择直接安装别人搞好的成套配置（雾凇拼音方案rime-ice）
+  pacman -S rime-ice-pinyin-git
+  # 扩展词库
+  pacman -S rime-pinyin-moegirl rime-pinyin-simp rime-pinyin-zhwiki
+  # 万象语言模型(lts)
+  pacman -S rime-wanxiang-gram-zh-hans
+#+end_src
+然后打开fcitx配置添加“中州韵”输入法到活动项配置好快捷键即可完成安装。
+（tips:“中州韵”是rime的中文名）
+* 尝鲜
+使用fcitx设置的快捷键切换到中州韵输入法，其logo应该是一个古文字（我也不认得）。
+使用 =Ctrl+`= 调出设置选项（即Ctrl加反波浪号，在键盘左侧，Esc下面Tab和大写锁定上
+面），这里可以选择切换输入方案并且进行类似于简繁体切换的设置。这里选择雾凇拼音即
+可。
+
+虽说别人建议把fcitx的输入法能删的删避免冲突，但我目前中英文切换仍旧是使用fcitx设
+置的快捷键，也懒得管，以后出事了再回来更新。
+* 配置
+此部分比较抽象烧脑，我会尽量理论+可抄实践例子进行说明。
+
+rime的配置文件位于 =/usr/share/rime-data= (系统级配置)和
+=$HOME/.local/share/fcitx5/rime/= (仅限使用fcitx框架)，格式是yaml，文件名称解释
+如下：
+| 文件名              | 功能                                                         | 自定义要不要改 |
+|---------------------+--------------------------------------------------------------+----------------|
+| default.yaml        | 默认配置文件，在别人分享的配置中用常见                       | 不要           |
+| default.custom.yaml | 更高优先级的默认配置文件，用于给默认配置打补丁（自定义）     | 要             |
+|---------------------+--------------------------------------------------------------+----------------|
+| xxx.yaml            | xxx为配置方案名称，就好比fcitx下也支撑多个输入法一样         | 不要           |
+| xxx.schema.yaml     | 不知道，一般不是自定义文件，应该是方案的基本配置文件         | 不要           |
+| xxx.custom.yaml     | 更高优先级的配置文件，同样是为了方便自定义而不修改源文件而生 | 要             |
+| xxx.dict.yaml       | 一般为xxx方案的词典文件                                      | 可能要         |
+换句话说，default是用户的全局配置文件，其他是对应方案（例如说五笔、拼音、双拼）
+的配置文件，所有的配置文件的.yaml后缀前加上.custom后缀意思就是该文件的覆盖/补丁
+文件，可以单纯修改里面的内容覆盖别人提供的默认方案配置进行自定义。
+
+例如说，在 *default.custom.yaml* 中添加下列内容进行打补丁自定义配置：
+# md怎么emacs还特么不支持yaml真是服了
+#+begin_src yaml
+  patch:
+    key_binder/bindings/+:
+      # 开启逗号句号翻页
+      - { when: paging, accept: comma, send: Page_Up }
+      - { when: has_menu, accept: period, send: Page_Down }
+    # 设置C-`时可用的方案列表
+    schema_list:
+      - schema: rime_ice
+      - schema: luna_pinyin_simp
+      #- schema: terra_pinyin
+    # 设置每页候选词最大数量
+    menu:
+      page_size: 9
+#+end_src
+其中的 *patch* 就是打补丁的意思，更详细的语法参见[[https://dvel.me/posts/rime-ice/#%e4%bb%a5-patch-%e7%9a%84%e6%96%b9%e5%bc%8f%e6%89%93%e8%a1%a5%e4%b8%81][这里]]。
+
+若需启用万象模型，需要在 *rime_ice.custom.yaml* 中添加：
+#+begin_src yaml
+  patch:
+    grammar:
+      # file: /usr/share/rime-data/wanxiang-lts-zh-hans.gram
+      language: wanxiang-lts-zh-hans
+      collocation_max_length: 5
+      collocation_min_length: 2
+    translator/contextual_suggestions: true
+    translator/max_homophones: 7
+    translator/max_homographs: 7
+#+end_src
+
+若需启用额外词典，需要复制 */usr/share/rime-data/rime_ice.dict.yaml* 到用户空间
+变成 *rime_ice.dict.yaml* 再根据注释提示修改文件。以添加archlinuxcn的词典为例：
+#+begin_src shell
+  # 安装词典文件(archlinuxcn)
+  pacman -S rime-pinyin-moegirl rime-pinyin-zhwiki
+  # 确认词典文件名
+  pacman -Ql rime-pinyin-moegirl rime-pinyin-zhwiki | grep dict
+  # 复制rime-ice词典配置文件
+  cp /usr/share/rime-data/rime_ice.dict.yaml ~/.local/share/fcitx5/rime/
+  # 编辑配置文件，根据提示增加`- zhwiki`和`- moegirl`两行，注意缩进
+  vim ~/.local/share/fcitx5/rime/rime_ice.dict.yaml
+#+end_src
+** 应用配置
+切换到中州韵，在系统托盘，右键fcitx图标，找到“重新部署”点击并等待一会（有通知），
+如果找不到可以重启fcitx实现相同效果。

@@ -1,0 +1,6 @@
+[submodule "lib"]
+	path = lib
+	url = git@github.com:YouLanjie/my-test.git
+[submodule "post/Novel"]
+	path = post/Novel
+	url = git@github.com:YouLanjie/Novels.git

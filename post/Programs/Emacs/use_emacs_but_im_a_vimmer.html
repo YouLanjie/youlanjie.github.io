@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="单纯的有感而发的口水文" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>Vim党试水Emacs的心路历程与吐槽</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Vim党试水Emacs的心路历程与吐槽</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 开始</a><ul><li><a href="#org-title-1-1">1.1. 前言</a></li><li><a href="#org-title-1-2">1.2. 原因</a></li><li><a href="#org-title-1-3">1.3. 几次失败</a></li></ul></li>
+<li><a href="#org-title-2">2. 上手</a><ul><li><a href="#org-title-2-1">2.1. 键位问题</a><ul><li><a href="#org-title-2-1-1">2.1.1. Evil</a></li></ul></li>
+<li><a href="#org-title-2-2">2.2. 插件管理</a><ul><li><a href="#org-title-2-2-1">2.2.1. use-package</a></li></ul></li>
+<li><a href="#org-title-2-3">2.3. 配置</a></li></ul></li>
+<li><a href="#org-title-3">3. 中后期</a></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 开始</h2>
+<div class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 前言</h3>
+<div class="outline-text-3" id="text-1-1"><p>随手记下我——一个Vim用户——是怎么同时成为一位Emacs用户的</p></div></div><div class="outline-3">
+<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> 原因</h3>
+<div class="outline-text-3" id="text-1-2"><p>最开始的原因是，看到别人吹emacs的org-mode有多么厉害，功能多么强大，而vim下安装插件也只是模仿了一半而已，功能残缺。出于“试一试”的心态，我就第一次安装了Emacs</p></div></div><div class="outline-3">
+<h3 id="org-title-1-3"><span class="section-number-3">1.3.</span> 几次失败</h3>
+<div class="outline-text-3" id="text-1-3"><p>既然是第一次，那么在我打开的一瞬间，我就觉得那些夸emacs好的人是不是在搞诈骗，因为它的初始的默认的界面其实异常地丑，给人一种极端复古的感觉。下面是两张Emacs终端界面和图形界面的截图（非开始界面）</p><div class="figure">
+<p><img src="./2023-01-16_01/2023-01-16_01-01.png" alt="./2023-01-16_01/2023-01-16_01-01.png" /></p>
+<p><span class="figure-number">Figure 1: </span>终端界面</p></div><div class="figure">
+<p><img src="./2023-01-16_01/2023-01-16_01-02.png" alt="./2023-01-16_01/2023-01-16_01-02.png" /></p>
+<p><span class="figure-number">Figure 2: </span>图形界面</p></div><p>这种界面给我的第一印象就是： <b>简陋</b> 。</p><p>当然同界面一起带给我的一个巨大疑问是：这玩意怎么退出啊</p><p>我很难理解为什么一个被夸赞成“神的编辑器”居然看起来是如此地简陋。我甚至一度怀疑那些界面好看的Emacs都是虚假的。就这么，我放弃了Emacs，回到了Vim的舒适区内。后来我又尝试过几次，都都没有坚持下去。僵持近一年后，就到了23年1月，我开始了最后一次尝试，自然，也是唯一成功的一次。</p></div></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 上手</h2>
+<div class="outline-text-2" id="text-2"><p>实际上，无配置的Emacs的开始界面并非如上图所示，而是有一个开始页面。在这个页面中，我看见了个字眼: <code>tutor</code> 。它是什么意思我并不清楚，但是我知道在安装Vim后会有一个命令： <code>vimtutor</code> ，我但是就判断：这很有可能是Emacs的教程，加上在图形界面Emacs是默认开启了鼠标操作的，于是我就用鼠标打开了" <i>Emacstutor</i> "，正式开启了对Emacs的学习</p></div><div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 键位问题</h3>
+<div class="outline-text-3" id="text-2-1"><p>Emacs的这份帮助文档是中文的，这极利于我学习Emacs，而摆在所有Vim党前面的最大问题实际上是Emacs看似十分不合理的键位布局。由于没有像Vim里的“编辑模式”这种东西，所以说它的大多数快捷键都是通过“ <i>叠Buff</i> ”给叠起来的简单来说就是套娃。再通俗一点就是先按下一套快捷键，再按下另一套快捷键实现对应的功能，只有常用的快捷键不用“套娃”，如移动、复制、删除等。</p><p>但是有一个大问题，Emacs的快捷键对于Alt键和Ctrl键有着极强的依赖。对于我来说，Alt 键可以很轻松地按下——只需要左手大拇指向内勾，但是Ctrl就不是省油的灯了。因为 Emacs的移动就是使用C-bnpf <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> 来移动的，所以说这对于小拇指的工作压力是极大的。为什么会有这种问题呢？那是因为Emacs的键位并非是按照现在的键盘设计的，所以说会有这种“逆天”的快捷键组合。</p><p>但是实际上，这个问题是有解的，解一就是让 <code>Caps Lock（大写锁定）</code> 和 <code>Ctrl</code> 两个按键调换功能，或者是直接让 <code>Caps Lock</code> 直接变成 <code>Ctrl</code> 键。但方法我就不在此赘述。（出门右转我写的那篇
+<a href="http:Emacs_learning_note.html#org-title-3-1">教程</a>）</p><p>解二实际上现实得多，也对新手特别是Vim党特别友好——使用Evil</p></div><div class="outline-4">
+<h4 id="org-title-2-1-1"><span class="section-number-4">2.1.1.</span> Evil</h4>
+<div class="outline-text-4" id="text-2-1-1"><p>首先，我先下个定义： <b>Evil</b> 是一个Emacs的插件。不同于Vim，Emacs有一个内置的插件管理器和一个较为统一的插件仓库EPLA。它似乎又有一些其他的分支， <code>GNU MPLA</code> 是GNU Emacs的官方插件仓库，而 <code>MEPLA</code> 则是一个非官方插件仓库。不管怎样，我还是将全部的仓库放入了配置文件<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>里：</p><div class="org-src-container"><pre class="src src-lisp"><span class="c1">;; 添加仓库</span>
+<span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;package</span><span class="p">)</span>
+<span class="c1">;(add-to-list &#39;package-archives &#39;(&quot;melpa&quot; . &quot;https://melpa.org/packages/&quot;) t)</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">package-archives</span><span class="w"> </span><span class="o">&#39;</span><span class="p">(</span>
+<span class="w">  </span><span class="p">(</span><span class="s">&quot;melpa&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="s">&quot;gnu&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="s">&quot;org&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/org/&quot;</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+</pre></div><p>为了速度，我并不是使用其官方仓库地址，而是清华镜像。同众多的Linux发行版一样， Emacs的插件仓库是有镜像的，实际上用户也可以自己构建一个本地镜像源。不过我比较懒，不想那么做。</p></div></div></div><div class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 插件管理</h3>
+<div class="outline-text-3" id="text-2-2"><p>在Emacs的配置文件中加入了上述配置后，就可以使用 <code>M-x</code><code>list-packages</code> 或者是使用 <code>M-x</code><code>package-list-packages</code> 来列出插件列表。其中的操作如下表：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">按键</th><th scope="col" class="org-left">功能</th></tr>
+</thead><tbody>
+<tr><td class="org-left">d</td><td class="org-left">标记删除插件</td></tr><tr><td class="org-left">i</td><td class="org-left">标记安装插件</td></tr><tr><td class="org-left">U</td><td class="org-left">升级所有可升级的插件</td></tr><tr><td class="org-left">x</td><td class="org-left">执行标记的操作</td></tr><tr><td class="org-left">q</td><td class="org-left">退出插件列表</td></tr></table><p>这样，我们就可以用它来方便地安装插件了。下面再介绍一种再配置文件中安装并配置插件的办法：使用 <code>use-package</code></p></div><div class="outline-4">
+<h4 id="org-title-2-2-1"><span class="section-number-4">2.2.1.</span> use-package</h4>
+<div class="outline-text-4" id="text-2-2-1"><p>想要使用它，你需要先手动安装use-package插件，并在配置文件中加入：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nv">eval-when-compile</span><span class="w"> </span><span class="p">(</span><span class="nb">require</span><span class="w"> </span><span class="ss">&#39;use-package</span><span class="p">))</span>
+</pre></div><p>意思就是加载use-package插件，然后你就可以使用一个“宏”来管理插件：</p><div class="org-src-container"><pre class="src src-lisp"><span class="p">(</span><span class="nb">use-package</span><span class="w"> </span><span class="nv">foo</span>
+<span class="w">  </span><span class="ss">:ensure</span><span class="w"> </span><span class="no">t</span><span class="w">                  </span><span class="c1">;; 确认插件存在（不存在则自动安装）</span>
+<span class="w">  </span><span class="ss">:init</span><span class="w"> </span><span class="p">(</span><span class="k">function</span><span class="p">)</span><span class="w">           </span><span class="c1">;; 初始化的设置，一般是启动某个函数</span>
+<span class="w">  </span><span class="ss">:config</span><span class="w"> </span><span class="p">(</span><span class="k">function</span><span class="p">)</span><span class="w">         </span><span class="c1">;; 配置方面，定义功能，设置变量</span>
+<span class="w">  </span><span class="ss">:hook</span><span class="w"> </span><span class="p">(</span><span class="nv">hook</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="k">function</span><span class="p">))</span><span class="w">   </span><span class="c1">;; 定义hook，针对特定major mode的设置</span>
+</pre></div><p>它的作用通常是在安装了插件后进行相应的配置，利用这一特性，也可以通过它来让你的配置更加“ <i>模块化</i> ”</p></div></div></div><div class="outline-3">
+<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 配置</h3>
+<div class="outline-text-3" id="text-2-3"><p>这一方面我的做法是根据自己的需求（大都是想复现我在Vim配置好的功能），上网搜相应的资料抄作业。但是不知为什么，我在网上搜索到的资料比较少且大都比较杂乱，令我费解，就算是抄下来也总是出现各种莫名其妙的报错。</p><p>实际上我看过这么一篇文章<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>，里面有一个观点： <b>站在巨人的肩膀上</b> ，意为新手要先把大牛的配置抄下来学习，不要尝试自己从头建立一份配置。我并不反对这一观点，并且我还尝试了他推荐的
+<a href="https://github.com/purcell/emacs.d">purcell的Emacs配置</a>。确实，相对于我自己的配置来说（也许）更快，但我觉得有一些缺点是没有办法弥补的。别人的配置总有一些是我不需要的，也会缺少一些我需要的功能，而自己胡乱去加，又有可能引发奇怪的bug。所以说我也只是把这些配置当成抄作业的对象，但不是首要的。毕竟我不想一遍遍去看完它的所有文件。</p></div></div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 中后期</h2>
+<div class="outline-text-2" id="text-3"><p>在学会用Emacs后，有挺长一段时间emacs取代了原本vim的地位成为了主要的编辑器，写代码挺方便的。直到物理意义上的设备受限，只能在手机上使用termux的时候，emacs的速度就让人有些受不了了，因此又逐渐划回到了nvim+coc.nvim的情况去，而emacs则还有个org 兜底。只不过吧，我这blog也断更挺久了。。。（这段文字是在2025.07.31对blog大修时写的）</p><p>总之，走时是Vimmer，归来仍是Vimmer，但学Emacs也颇有收获（目前大多数shell默认使用 Emacs的键位）</p></div></div><div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<div class="footdef">
+<sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara">即Ctrl-b（向左）、Ctrl-n（向下）、Ctrl-p（向上）、Ctrl-f（向左）</p><p class="footpara">在Emacs中（其实这套方案大都通用）， <code>Key-key</code> 通常表示要从左到右同时按下的按键，而 <code>Key key</code> 则是先按下 <code>Key</code> 后再按下 <code>key</code> 的快捷键组合</p></div>
+</div><div class="footdef">
+<sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara">我的配置文件
+<a href="https://github.com/youlanjie/emacs.d/">链接</a>，虽然比较烂，但可以用作参考。</p></div>
+</div><div class="footdef">
+<sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara">这两个链接的文章是相同的，这里只是提供两个入口 
+<a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide">在Github的文章</a>
+<a href="https://blog.csdn.net/redguardtoo/article/details/7222501">在CSDN的文章</a></p></div>
+</div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: 2023-01-16 12:30</p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 单纯的有感而发的口水文</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+</div>
+</body>
+</html>

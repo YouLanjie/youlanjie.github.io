@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="Latex使用过程中查阅一些资料做的笔记，防忘" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>Latex学习笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">Latex学习笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 基本安装</a></li><li><a href="#org-title-2">2. LaTeX基础知识</a><ul><li><a href="#org-title-2-1">2.1. 基本语法</a></li><li><a href="#org-title-2-2">2.2. 基本结构</a></li><li><a href="#org-title-2-3">2.3. 编译tex文件</a></li><li><a href="#org-title-2-4">2.4. 更宽泛些的例子</a></li></ul></li>
+<li><a href="#org-title-3">3. latex手册</a><ul><li><a href="#org-title-3-1">3.1. 尺寸单位</a></li><li><a href="#org-title-3-2">3.2. 行内内容</a><ul><li><a href="#org-title-3-2-1">3.2.1. 行内文本效果</a></li><li><a href="#org-title-3-2-2">3.2.2. 字体大小</a></li><li><a href="#org-title-3-2-3">3.2.3. 超链接</a></li><li><a href="#org-title-3-2-4">3.2.4. 书写化学方程式</a></li><li><a href="#org-title-3-2-5">3.2.5. 示例文本（假文）</a></li><li><a href="#org-title-3-2-6">3.2.6. 可用命令表示的普通字符</a></li></ul></li>
+<li><a href="#org-title-3-3">3.3. 行外内容</a><ul><li><a href="#org-title-3-3-1">3.3.1. 表格</a></li><li><a href="#org-title-3-3-2">3.3.2. <span class="todo todo">TODO</span> 插入图片</a></li><li><a href="#org-title-3-3-3">3.3.3. <span class="todo todo">TODO</span> 列表</a></li><li><a href="#org-title-3-3-4">3.3.4. 代码块</a></li></ul></li>
+<li><a href="#org-title-3-4">3.4. 特殊字符转义</a></li><li><a href="#org-title-3-5">3.5. 数学公式</a></li><li><a href="#org-title-3-6">3.6. 数学符号</a><ul><li><a href="#org-title-3-6-1">3.6.1. 希腊字母</a></li></ul></li>
+<li><a href="#org-title-3-7">3.7. 页面布局</a><ul><li><a href="#org-title-3-7-1">3.7.1. 纸型&页边距</a></li><li><a href="#org-title-3-7-2">3.7.2. 字体设置</a></li><li><a href="#org-title-3-7-3">3.7.3. 自定义章节样式</a></li><li><a href="#org-title-3-7-4">3.7.4. 页眉页脚设置</a></li><li><a href="#org-title-3-7-5">3.7.5. 分栏</a></li><li><a href="#org-title-3-7-6">3.7.6. 尺子</a></li></ul></li>
+<li><a href="#org-title-3-8">3.8. Latex语法类控制命令</a><ul><li><a href="#org-title-3-8-1">3.8.1. 判断</a></li><li><a href="#org-title-3-8-2">3.8.2. 自定义命令</a></li><li><a href="#org-title-3-8-3">3.8.3. 自定义环境</a></li></ul></li>
+<li><a href="#org-title-3-9">3.9. 其他杂七杂八的东西</a><ul><li><a href="#org-title-3-9-1">3.9.1. 宏包备忘录</a></li></ul></li></ul></li>
+<li><a href="#org-title-4">4. Reference</a></li></ul></div></div>
+<blockquote>
+<p>警告！这只是一篇笔记！一篇笔记！非入门教程！<br/>系统环境：Arch Linux | Android (Termux)<br/>更新时间：2025-12-27</p></blockquote><div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 基本安装</h2>
+<div class="outline-text-2" id="text-1"><blockquote>
+<p>只会装texlive，别问，就是方便，虽然耗时但打不过它在arch和termux官方库里都有啊。</p><p>附注：TexLive就是一个Tex发行版（理解成xxx全家桶），类似于archlinux和linux内核的区别。</p></blockquote><p>在Archlinux下执行以下命令安装即可：</p><div class="org-src-container"><pre class="src src-shell">sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>texlive-bin
+</pre></div><p>在Termux下通过以下命令安装：</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># 安装安装脚本和依赖</span>
+pkg<span class="w"> </span>install<span class="w"> </span>texlive-bin
+<span class="c1"># 真正耗时间的是下面这条命令</span>
+termux-install-tl
+<span class="c1"># 备注：刚安装好要找一个tex文件编译一下以初始化</span>
+<span class="c1"># 否则其他程序（例如manim）内部进行调用时就有可能出问题</span>
+</pre></div><p>Windows下安装的经验暂缺</p></div></div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> LaTeX基础知识</h2>
+<div class="outline-text-2" id="text-2"><p>latex源文件(.tex文件)，纯文本，保存排版控制命令与内容本身。pdf文件由latex的编译器编译。一般而言编译器用xelatex即可（即使用xelatex命令）。</p></div><div id="outline-container-2-1" class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 基本语法</h3>
+<div class="outline-text-3" id="text-2-1"><p>tex文件内的命令由下列格式构成</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\command</span><span class="na">[可选参数]</span><span class="nb">{</span>位置参数<span class="nb">}</span>
+</pre></div><p>其中command为命令名，中括号内为可选参数（有时可直接忽略），大括号内为位置参数。有些时候在命令外部套一个大括号这可以限制其作用范围，就像下面这样。</p><div class="org-src-container"><pre class="src src-latex"><span class="nb">{</span><span class="k">\CJKfontspec</span><span class="nb">{</span>仿宋<span class="nb">}</span>冇<span class="nb">}</span>
+<span class="c">% latex里使用%作为行注释的开头</span>
+<span class="c">% 而对于上述命令，大括号限制了CJKfontspec的作用范围，使其仅使大括号内定字字体变为仿宋</span>
+</pre></div><p>latex的命令可以由自身定义，也可以覆盖已存在的命令</p></div></div>
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 基本结构</h3>
+<div class="outline-text-3" id="text-2-2"><p>Latex文件基本结构如下：</p><div class="org-src-container"><pre class="src src-latex"><span class="c">% 导言区</span>
+<span class="c">% 用于进行一些全局的设置，这里的文字不会进入正文</span>
+<span class="k">\documentclass</span><span class="na">[11pt]</span><span class="nb">{</span>article<span class="nb">}</span>   <span class="c">% 指定文章类型</span>
+<span class="k">\usepackage</span><span class="nb">{</span>ctex<span class="nb">}</span>   <span class="c">% 解决中文乱码无法渲染问题</span>
+<span class="c">% 这里就可以引入其他宏包、定义其他命令、设置样式等</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+这里是正文区，这里的内容会进入最后的生成结果。
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div><p>对于上述内容，</p><ul class="org-ul">
+<li><p><code>\documentclass{xxx}</code> 设置了文档类型，不同文档类型会有不同的能用的命令，生成的文件样式也不一样。常用的documentclass有：</p>
+<ul class="org-ul">
+<li><code>book</code> : 生成的文件样式类似于出版的书籍，空白较大。提供了 <code>\part</code><code>\chapter</code><code>\section</code> 等命令
+</li>
+<li><code>article</code> : 生成一般文章都样式。提供了 <code>\section</code><code>\subsection</code><code>\subsubsection</code> 等命令
+</li>
+<li><code>beamer</code> : 生成类似幻灯片（PPT）的样式
+</li>
+<li><code>standalone</code> : ???
+</li></ul>
+<p>一般而言，在指定documentclass时还可以传入参数简单地设置页面布局，如下列例子</p>
+<div class="org-src-container"><pre class="src src-tex"><span class="c">% 设置正文使用12pt字体，使用a4纸，单面打印（不会预留装订空间，对应twoside）</span>
+<span class="k">\documentclass</span><span class="na">[12pt, a4paper, oneside]</span><span class="nb">{</span>article<span class="nb">}</span>
+</pre></div>
+</li>
+<li><p><code>\usepackage{xxx}</code> 则用于使用宏包，作用类似于c语言的 <code>#include&lt;stdio.h&gt;</code> ，或者是python的 <code>import xxx</code> ，宏包能很多一些有用的功能，以免自己去重复造轮子。其中，=xxx= 是宏包名，如基本语法，在 <code>{xxx}</code> 前加上 <code>[]</code> 可以在调用宏包时传入些选项。如：</p>
+<div class="org-src-container"><pre class="src src-tex"><span class="k">\usepackage</span><span class="na">[UTF8]</span><span class="nb">{</span>ctex<span class="nb">}</span>
+</pre></div>
+</li></ul>
+</div></div>
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 编译tex文件</h3>
+<div class="outline-text-3" id="text-2-3"><p>可以尝试将上节的代码丢进任意一个 <code>.tex</code> 后缀的文件（例如 <code>a.tex</code> ）然后执行下列命令</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># a.tex需要自行替换成你的文件</span>
+xelatex<span class="w"> </span>a.tex
+</pre></div><p>ls一下应该能看到当前目录下多出了一堆杂七杂八的文件，以及一个pdf文件。打开之后效果应该类似下图：</p><div class="figure">
+<p><img src="./latex/20251227_170048.avif" alt="./latex/20251227_170048.avif" /></p>
+<p><span class="figure-number">Figure 1: </span>latex编译效果图</p></div><p>上面命令中的 <code>xelatex</code> 就是tex引擎（可执行程序），一般一个tex引擎会和某种特别的 <i>格式</i> 绑定（理解成是tex语言的 <i>方言</i> 具有独有的基础宏或命令就可以了，类比成lisp 和elisp）<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></p><p>这里选择xelatex主要是因为它的生成产物就是我们熟悉的pdf文件，而且它支持 unicode（说人话就是支持中文），所以最好直接脑子丢掉认为直接 <code>xelatex xxx</code> 编译 tex文件就好了。（除非要和不用xelatex的人对接，详见参考资料）</p></div></div>
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="org-title-2-4"><span class="section-number-3">2.4.</span> 更宽泛些的例子</h3>
+<div class="outline-text-3" id="text-2-4"><p>下面有一个包含更多latex功能的例子，解释会在注释里。</p><div class="org-src-container"><pre class="src src-latex"><span class="c">% 文章类型</span>
+<span class="k">\documentclass</span><span class="na">[12pt, a4paper, oneside]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="c">% 使用的宏包</span>
+<span class="k">\usepackage</span><span class="nb">{</span>ctex<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>fgruler<span class="nb">}</span>   <span class="c">% 为页面添加标尺（用于对应实际大小）</span>
+<span class="c">% 文件的作者、日期、标题等信息</span>
+<span class="k">\author</span><span class="nb">{</span>Here is user!<span class="nb">}</span>
+<span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>  <span class="c">% 使用\today命令生成时间字符串</span>
+<span class="k">\title</span><span class="nb">{</span>This is TITLE!!!<span class="nb">}</span>
+
+<span class="c">% 文档正文开始</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="c">% 绘制标题(包括标题、作者和时间)</span>
+<span class="k">\maketitle</span>
+<span class="c">% 生成目录</span>
+<span class="c">% 依赖于生成的.toc文件，而这个文件需要在编译过一次tex文件后才能生成</span>
+<span class="c">% 所以第一次生成的pdf没有目录（还未生成.toc文件）</span>
+<span class="c">% 第二次生成的pdf目录由于没有考虑到目录的加入导致的错位所以可能会和目录里的页码对不上</span>
+<span class="c">% 第三次编译tex文件生成的目录才会没什么问题</span>
+<span class="k">\tableofcontents</span>
+
+这里是正文
+<span class="k">\section</span><span class="nb">{</span>一级标题<span class="nb">}</span>
+这里的<span class="k">\textbf</span><span class="nb">{</span>n级标题<span class="nb">}</span>就会被用作生成目录
+
+实际上这里的section等命令实际上会随着选择的documentclass而改变。
+例如说在article里的一级标题就是section，而在book里则变成了part。
+<span class="k">\subsection</span><span class="nb">{</span>二级标题<span class="nb">}</span>
+<span class="k">\LaTeX</span> 这里放点示例文字
+<span class="k">\subsubsection</span><span class="nb">{</span>三级标题<span class="nb">}</span>
+<span class="k">\subsection</span><span class="nb">{</span>latex的自然段<span class="nb">}</span>
+latex和markdown里一样相邻的两行会被视作同一自然段
+每个自然段都会自动缩进2个汉字宽度，符合一般的排版要求
+如果需要换行则可以使用<span class="k">\textbackslash\textbackslash</span>，例如说<span class="k">\\</span>这段文字就被换行了。
+而如果要开启一个新的自然段可以使用<span class="k">\textbackslash</span><span class="nb">{}</span>par命令，<span class="k">\par</span> 例如这段文字。
+
+<span class="k">\noindent</span> 如果想要开启新段落而不缩进可以使用<span class="k">\textbackslash</span><span class="nb">{}</span>noindent命令，就例如说这个段落本身
+
+如果要开启新一页则可使用<span class="k">\textbackslash</span><span class="nb">{}</span>newpage
+<span class="k">\newpage</span> 例如说这句话应该在新的一页里出现
+
+<span class="k">\subsection</span><span class="nb">{</span><span class="k">\LaTeX</span> 的行内样式<span class="nb">}</span>
+在正文部分实际上可以使用<span class="k">\textbackslash</span><span class="nb">{}</span>textit<span class="nb">{</span>xxx<span class="nb">}</span>来
+框住xxx以设置成特殊样式的字体
+
+顺带介绍下有序列表就如源代码所展示的这样：
+<span class="c">% 这个begin和end可以理解为开始并结束某个特定的 *环境* ，例如说有序列表，或者其他的东西</span>
+<span class="k">\begin</span><span class="nb">{</span>enumerate<span class="nb">}</span>
+	<span class="k">\item</span> <span class="k">\textup</span><span class="nb">{</span>textup: 就例如这段文字(Just Like This)<span class="nb">}</span>
+	<span class="k">\item</span> <span class="k">\textit</span><span class="nb">{</span>textit: 就例如这段文字(Just Like This)<span class="nb">}</span>
+	<span class="k">\item</span> <span class="k">\textsl</span><span class="nb">{</span>textsl: 就例如这段文字(Just Like This)<span class="nb">}</span>
+	<span class="k">\item</span> <span class="k">\textsc</span><span class="nb">{</span>textsc: 就例如这段文字(Just Like This)<span class="nb">}</span>
+	<span class="k">\item</span> <span class="k">\textbf</span><span class="nb">{</span>textbf: 就例如这段文字(Just Like This)<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>enumerate<span class="nb">}</span>
+
+据说是在中文中并没有斜体这种字形，考虑到英语中的斜体作用一般是引用，
+所以在中文里就对应的换成了楷体。
+<span class="k">\subsection</span><span class="nb">{</span>latex一些环境<span class="nb">}</span>
+<span class="k">\subsubsection</span><span class="nb">{</span>verbatim<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>verbatim<span class="nb">}</span>
+	在verbatim环境的所有文字的样式都会保留原样输出。
+	具体地说，就是说假如说我就在这里换个行。
+	那他就算是另起一个段落了，而不需要空出一行或者是使用<span class="k">\par</span>命令。
+	而且所有的命令都会被忽略掉。啊，好像它还不会换行。。。。。就像是现在这样子。。。。
+	即便是英文也不能。。。
+	Never Gonna Give You UP. Never Gonna Let You Down. Never gonna run around and desert you, Never gonna make you cry never gonna say goodbye. Never gonna tell a lie and hurt you.
+<span class="k">\end</span><span class="nb">{</span>verbatim<span class="nb">}</span>
+
+<span class="k">\subsubsection</span><span class="nb">{</span>表格<span class="nb">}</span>
+如果空间不足表格可能会漂移。。。
+<span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h]
+	<span class="k">\centering</span>
+	<span class="k">\caption</span><span class="nb">{</span>描述<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|l|r|c|<span class="nb">}</span>
+		第一组 <span class="nb">&amp;</span> 第二组 <span class="nb">&amp;</span> 第三组 <span class="nb">&amp;</span> 第四组 <span class="k">\\</span>
+		<span class="k">\hline</span>
+		<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+			1 <span class="nb">&amp;</span> 6 <span class="k">\\</span>
+			2 <span class="nb">&amp;</span> 8 <span class="k">\\</span>
+		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="nb">&amp;</span>
+		<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+			3 <span class="nb">&amp;</span> 9 <span class="k">\\</span>
+			<span class="k">\hline</span>
+			4 <span class="nb">&amp;</span> 2 <span class="k">\\</span>
+		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="nb">&amp;</span>
+		<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+			5 <span class="nb">&amp;</span> 6 <span class="k">\\</span>
+			8 <span class="nb">&amp;</span> 3 <span class="k">\\</span>
+		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="nb">&amp;</span>
+		<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>c|c<span class="nb">}</span>
+			4 <span class="nb">&amp;</span> 2 <span class="k">\\</span>
+			<span class="k">\hline</span>
+			3 <span class="nb">&amp;</span> 9 <span class="k">\\</span>
+		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\label</span><span class="nb">{</span>表<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+
+<span class="k">\subsubsection</span><span class="nb">{</span>列表<span class="nb">}</span>
+有序列表
+<span class="k">\begin</span><span class="nb">{</span>enumerate<span class="nb">}</span>
+	<span class="k">\item</span> 这是第一点; 
+	<span class="k">\item</span><span class="na">[/2/]</span> 这是第二点;
+	<span class="k">\item</span><span class="na">[(3)]</span> 这是第三点. 
+		<span class="c">% 似乎是自定义前缀就不会被加进计数器里？</span>
+	<span class="k">\item</span> 列表可嵌套
+		<span class="k">\begin</span><span class="nb">{</span>enumerate<span class="nb">}</span>
+			<span class="k">\item</span> 像这样
+		<span class="k">\end</span><span class="nb">{</span>enumerate<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>enumerate<span class="nb">}</span>
+无序列表
+<span class="k">\begin</span><span class="nb">{</span>itemize<span class="nb">}</span>
+    <span class="k">\item</span> 这是第一点; 
+    <span class="k">\item</span><span class="na">[2]</span> 这是第二点;
+    <span class="k">\item</span> 这是第三点. 
+<span class="k">\end</span><span class="nb">{</span>itemize<span class="nb">}</span>
+
+<span class="c">% 正文结束</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div><p>其编译结果大致如下：</p><div class="figure">
+<p><img src="./latex/20251227_204308.avif" alt="./latex/20251227_204308.avif" /></p>
+<p><span class="figure-number">Figure 2: </span>latex编译效果图2</p></div></div></div></div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> latex手册</h2>
+<div class="outline-text-2" id="text-3"></div><div id="outline-container-3-1" class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 尺寸单位</h3>
+<div class="outline-text-3" id="text-3-1"><ul class="org-ul">
+<li><code>pt</code> (point，磅)：是一个物理长度单位，指的是72分之一英寸。
+</li>
+<li><code>px</code> (pixel，像素)：是一个虚拟长度单位，是计算机系统的数字化图像长度单位，如果px要换算成物理长度，需要指定精度DPI(Dots Per Inch，每英寸像素数)，在扫描打印时一般都有DPI可选。Windows系统默认是96dpi，Apple系统默认是72dpi。
+</li>
+<li><code>em</code> (相对长度单位，相对于当前对象内文本的字体尺寸)：是一个相对长度单位，最初是指字母M的宽度，故名em。现指的是字符宽度的倍数，用法类似百分比，如：0.8em, 1.2em,2em等。通常1em=16px。
+</li>
+<li><i>字号</i> (latex不存在)：是中文字库中特有的一种单位，以中文代号表示特定的磅值pt，便于记忆、表述。
+</li></ul>
+<p>pt和px的换算公式可以根据pt的定义得出:</p><div class="org-src-container"><pre class="src src-text">pt = 1/72(英寸), px = 1/dpi(英寸)
+</pre></div></div></div>
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 行内内容</h3>
+<div class="outline-text-3" id="text-3-2"></div><div id="outline-container-3-2-1" class="outline-4">
+<h4 id="org-title-3-2-1"><span class="section-number-4">3.2.1.</span> 行内文本效果</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">命令（宏）</th><th scope="col" class="org-left">效果（引入命令）</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\textup</code></td><td class="org-left">article类独占</td></tr><tr><td class="org-left"><code>\textit</code></td><td class="org-left">手写斜体（中文楷体）</td></tr><tr><td class="org-left"><code>\textsl</code></td><td class="org-left">一般斜体（中文楷体）</td></tr><tr><td class="org-left"><code>\textsc</code></td><td class="org-left">小写变成大写但字号稍小</td></tr><tr><td class="org-left"><code>\textbf</code></td><td class="org-left">加粗</td></tr><tr><td class="org-left"><code>\texttt</code></td><td class="org-left">打字机字体（verbatim使用的字体）（中文仿宋）</td></tr><tr><td class="org-left"><code>\textsf</code></td><td class="org-left">无衬线字体（中文黑体）</td></tr><tr><td class="org-left"><code>\textrm</code></td><td class="org-left">（没看出来根普通字体的区别）</td></tr><tr><td class="org-left"><code>\underline</code></td><td class="org-left">下划线</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">线</td><td class="org-left"><code>\usepackage[normalem]{ulem}</code></td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\uline</code></td><td class="org-left">下划线(使用ulem宏包)</td></tr><tr><td class="org-left"><code>\sout</code></td><td class="org-left">删除线(使用ulem宏包)(对中文的支持不太好)</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">中文优化线</td><td class="org-left"><code>\usepackage{xeCJKfntef}</code></td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\CJKsout</code></td><td class="org-left">删除线(支持中文自动换行)</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">cancel删除线</td><td class="org-left"><code>\usepackage[thicklines]{cancel}</code></td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\cancel</code></td><td class="org-left">单向删除线</td></tr><tr><td class="org-left"><code>\xcancel</code></td><td class="org-left">双向删除线</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">color颜色</td><td class="org-left"><code>\usepackage{color}</code></td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\color</code></td><td class="org-left">前景色</td></tr><tr><td class="org-left"><code>\colorbox</code></td><td class="org-left">背景色</td></tr></table><div class="figure">
+<p><img src="./latex/20251227_213437.avif" alt="./latex/20251227_213437.avif" /></p>
+<p><span class="figure-number">Figure 3: </span>行内文本效果</p></div></div></div>
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="org-title-3-2-2"><span class="section-number-4">3.2.2.</span> 字体大小</h4>
+<div class="outline-text-4" id="text-3-2-2"><div class="org-src-container"><pre class="src src-tex">normal size words 
+<span class="nb">{</span><span class="k">\tiny</span> tiny words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\scriptsize</span> scriptsize words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\footnotesize</span> footnotesize words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\small</span> small words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\large</span> large words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\Large</span> Large words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\LARGE</span> LARGE words<span class="nb">}</span>
+<span class="nb">{</span><span class="k">\huge</span> huge words<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-2-3" class="outline-4">
+<h4 id="org-title-3-2-3"><span class="section-number-4">3.2.3.</span> 超链接</h4>
+<div class="outline-text-4" id="text-3-2-3"><p>使用hyperref宏包插入超链接:</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span><span class="na">[hidelinks]</span><span class="nb">{</span>hyperref<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\url</span><span class="nb">{</span>http://baidu.com/<span class="nb">}</span>
+
+<span class="k">\href</span><span class="nb">{</span>http://baidu.com/<span class="nb">}{</span>Baidu<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-2-4" class="outline-4">
+<h4 id="org-title-3-2-4"><span class="section-number-4">3.2.4.</span> 书写化学方程式</h4>
+<div class="outline-text-4" id="text-3-2-4"><p>使用mhchem宏包:</p><div class="org-src-container"><pre class="src src-nil">\usepackage{mhchem}
+\begin{document}
+\ce{Zn + 2H2O = Zn(OH) + H2 ^}
+\end{document}
+</pre></div><p>效果图:</p><div class="figure">
+<p><img src="./latex/20251227_230211.avif" alt="./latex/20251227_230211.avif" /></p>
+<p><span class="figure-number">Figure 4: </span>化学方程式效果图</p></div></div></div>
+<div id="outline-container-3-2-5" class="outline-4">
+<h4 id="org-title-3-2-5"><span class="section-number-4">3.2.5.</span> 示例文本（假文）</h4>
+<div class="outline-text-4" id="text-3-2-5"><p>使用lipsum宏包以插入示例文本:</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span><span class="nb">{</span>lipsum<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="c">% 这里的&quot;114&quot;是开始段落的意思，&quot;514&quot;是结束段落的意思</span>
+<span class="c">% 个人推测就是从一个文本库里按照给定的自然段编号或者范围</span>
+<span class="c">% 抽出来塞进正文里</span>
+<span class="c">% 所以一直\lipsum[1]给出来到文字都会是重复的</span>
+<span class="k">\lipsum</span><span class="na">[114-514]</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div><p>如果想要使用中文的可以使用zhlipsum宏包，对应的命令变更成 <code>\zhlipsum</code> 即可</p></div></div>
+<div id="outline-container-3-2-6" class="outline-4">
+<h4 id="org-title-3-2-6"><span class="section-number-4">3.2.6.</span> 可用命令表示的普通字符</h4>
+<div class="outline-text-4" id="text-3-2-6"><p>省略号(中文的 <code>……</code> 省略号在ctex会被转换为居中的省略号)</p><ul class="org-ul">
+<li>无需数学环境:
+<ul class="org-ul">
+<li><code>\ldots</code> ：用于表示底部对齐的省略号，通常用于列举中的省略符号。
+</li>
+<li><code>\vdots</code> ：用于表示垂直的省略号，适合用于矩阵或多维数组。
+</li>
+<li><code>\dots</code> ：用于根据实际情况自动改变省略号的位置。
+</li></ul>
+</li>
+<li>需要数学环境:
+<ul class="org-ul">
+<li><code>\ddots</code> ：用于表示斜对齐的省略号，适合用于表示对角线上的省略。 
+</li>
+<li><code>\cdots</code> ：用于表示居中的省略号，适合用于运算（如连加、连乘等）中的省略。
+</li></ul>
+</li></ul>
+</div></div></div>
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 行外内容</h3>
+<div class="outline-text-3" id="text-3-3"></div><div id="outline-container-3-3-1" class="outline-4">
+<h4 id="org-title-3-3-1"><span class="section-number-4">3.3.1.</span> 表格</h4>
+<div class="outline-text-4" id="text-3-3-1"><p>以 <code>tabular</code> 作纵向表格环境，内部可以镶嵌，外部套一个 <code>table</code> 环境，表格数据间通过… <code>&amp;</code> 进行横向分割通过 <code>\\</code> 进行纵向分割</p></div></div>
+<div id="outline-container-3-3-2" class="outline-4">
+<h4 id="org-title-3-3-2"><span class="section-number-4">3.3.2.</span> <span class="todo TODO">TODO</span> 插入图片</h4>
+</div>
+<div id="outline-container-3-3-3" class="outline-4">
+<h4 id="org-title-3-3-3"><span class="section-number-4">3.3.3.</span> <span class="todo TODO">TODO</span> 列表</h4>
+<div class="outline-text-4" id="text-3-3-3"><p>关于设定列表的边距：</p><div class="org-src-container"><pre class="src src-tex"><span class="c">% 设置列表的间距</span>
+<span class="k">\setlist</span><span class="nb">{</span>noitemsep,leftmargin=1em,labelsep=0.1em,topsep=0.1em,partopsep=0.1em<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-3-4" class="outline-4">
+<h4 id="org-title-3-3-4"><span class="section-number-4">3.3.4.</span> 代码块</h4>
+<div class="outline-text-4" id="text-3-3-4"><p>可以使用原生的verbatim环境(emacs导出src时使用)，不过更好的是使用listings宏包。</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\lstset</span><span class="nb">{</span>
+    breaklines=true,
+    breakatwhitespace=false,     <span class="c">% 允许在任意位置换行</span>
+    breakindent=2em,            <span class="c">% 换行缩进</span>
+    prebreak=<span class="k">\mbox</span><span class="nb">{</span><span class="k">\textcolor</span><span class="nb">{</span>red<span class="nb">}{</span><span class="s">$</span><span class="nv">\hookleftarrow</span><span class="s">$</span><span class="nb">}</span><span class="k">\space</span><span class="nb">}</span>,
+    postbreak=<span class="k">\mbox</span><span class="nb">{</span><span class="k">\space\textcolor</span><span class="nb">{</span>red<span class="nb">}{</span><span class="s">$</span><span class="nv">\hookrightarrow</span><span class="s">$</span><span class="nb">}}</span>,
+    numbers=left,      <span class="c">% 行号位置</span>
+    numbersep=0.5em,   <span class="c">% 行号距左侧宽度</span>
+    xleftmargin=1em,   <span class="c">% 左侧整体偏移</span>
+    <span class="c">%numberstyle=\tiny\color{gray},</span>
+    <span class="c">%basicstyle=\ttfamily\small,</span>
+<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>lstlisting<span class="nb">}</span>[language=Java]
+public class Example <span class="nb">{</span>
+    // 这是一个很长的注释行，会在这里自动换行显示，因为这一行确实太长了，超出了页面边界
+    public static void main(String[] args) <span class="nb">{</span>
+        System.out.println(&quot;Hello, World!&quot;);
+    <span class="nb">}</span>
+<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>lstlisting<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div></div></div></div>
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 特殊字符转义</h3>
+<div class="outline-text-3" id="text-3-4"><div class="org-src-container"><pre class="src src-latex"><span class="c">% 原字符:</span>
+<span class="c">%  #  $  %  ^    &amp;  _  {  }  ~   \</span>
+<span class="c">% 对应的表示方法：</span>
+  <span class="k">\#</span> <span class="k">\$</span> <span class="k">\%</span> <span class="k">\^</span><span class="nb">{}</span> <span class="k">\&amp;</span> <span class="k">\_</span> <span class="k">\{</span> <span class="k">\}</span> <span class="k">\~</span><span class="nb">{}</span> <span class="k">\textbackslash</span>
+</pre></div></div></div>
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="org-title-3-5"><span class="section-number-3">3.5.</span> 数学公式</h3>
+<div class="outline-text-3" id="text-3-5"><style> img {background-color: white; } </style>
+<ul class="org-ul">
+<li><p>行内公式在latex里使用两个 <code>$</code> 夹住一个行内公式，例如：</p>
+<div class="org-src-container"><pre class="src src-tex"><span class="s">$</span><span class="nb">x</span><span class="o">=</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{</span><span class="m">2</span><span class="nb">}at^{</span><span class="m">2</span><span class="nb">}</span><span class="s">$</span>
+</pre></div>
+</li>
+<li><p>行间公式看代码：</p>
+<div class="org-src-container"><pre class="src src-tex"><span class="sb">$$</span><span class="nb">x</span><span class="o">=</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{</span><span class="m">2</span><span class="nb">}at^{</span><span class="m">2</span><span class="nb">}</span><span class="s">$$</span>  <span class="c">% 据传不推荐</span>
+<span class="sb">\[</span><span class="nb">x</span><span class="o">=</span><span class="nv">\frac</span><span class="nb">{</span><span class="m">1</span><span class="nb">}{</span><span class="m">2</span><span class="nb">}at^{</span><span class="m">2</span><span class="nb">}</span><span class="s">\]</span>  <span class="c">% 据传更推荐这个</span>
+<span class="k">\begin</span><span class="nb">{</span>equation<span class="nb">}</span>
+    x=<span class="k">\frac</span><span class="nb">{</span>1<span class="nb">}{</span>2<span class="nb">}</span>at<span class="nb">^{</span>2<span class="nb">}</span>  <span class="c">% 能够生成带有编号的公式</span>
+<span class="k">\end</span><span class="nb">{</span>equation<span class="nb">}</span>
+</pre></div>
+</li></ul>
+<p>效果如下：</p><div class="figure">
+<p><img src="./latex/20251227_220922.avif" alt="./latex/20251227_220922.avif" /></p>
+<p><span class="figure-number">Figure 5: </span>公式效果图</p></div></div></div>
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="org-title-3-6"><span class="section-number-3">3.6.</span> 数学符号</h3>
+<div class="outline-text-3" id="text-3-6"><p>手写数学符号识别网站：<a href="http://detexify.kirelabs.org/">http://detexify.kirelabs.org/</a></p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">命令</th><th scope="col" class="org-left">效果</th><th scope="col" class="org-left">预览(html)</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>a^{b}</code></td><td class="org-left">上标</td><td class="org-left">\[a^b\]</td></tr><tr><td class="org-left"><code>a_{b}</code></td><td class="org-left">下标</td><td class="org-left">\[a_b\]</td></tr><tr><td class="org-left"><code>\frac{a}{b}</code></td><td class="org-left">分数（a/b）</td><td class="org-left">\[\frac{a}{b}\]</td></tr><tr><td class="org-left"><code>\sqrt[n]{a}</code></td><td class="org-left">根号（a^{1/n}）</td><td class="org-left">\[\sqrt[n]{a}\]</td></tr><tr><td class="org-left"><code>\sum_{x=1}^5 y^z</code></td><td class="org-left">求和</td><td class="org-left">\[\sum_{x=1}^5 y^z\]</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>+</code></td><td class="org-left">加法</td><td class="org-left">\[a+b\]</td></tr><tr><td class="org-left"><code>-</code></td><td class="org-left">减法</td><td class="org-left">\[a-b\]</td></tr><tr><td class="org-left"><code>\times</code></td><td class="org-left">乘法</td><td class="org-left">\[x\times y\]</td></tr><tr><td class="org-left"><code>\div</code></td><td class="org-left">除法</td><td class="org-left">\[x\div y\]</td></tr><tr><td class="org-left"><code>\cdot</code></td><td class="org-left">点乘</td><td class="org-left">\[a \cdot b\]</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\leq</code></td><td class="org-left">小于等于</td><td class="org-left">\[a\leq b\]</td></tr><tr><td class="org-left"><code>\geq</code></td><td class="org-left">大于等于</td><td class="org-left">\[a\geq b\]</td></tr><tr><td class="org-left"><code>\neq</code></td><td class="org-left">不等于</td><td class="org-left">\[a\neq b\]</td></tr><tr><td class="org-left"><code>\approx</code></td><td class="org-left">约等于</td><td class="org-left">\[a\approx b\]</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\leftarrow</code></td><td class="org-left">左箭头</td><td class="org-left">\[\leftarrow\]</td></tr><tr><td class="org-left"><code>\rightarrow</code></td><td class="org-left">右箭头</td><td class="org-left">\[\rightarrow\]</td></tr><tr><td class="org-left"><code>\leftrightarrow</code></td><td class="org-left">双向箭头</td><td class="org-left">\[\leftrightarrow\]</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>(</code><code>)</code></td><td class="org-left">普通括号</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\{</code><code>\}</code></td><td class="org-left">大括号</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>[</code><code>]</code></td><td class="org-left">方括号</td><td class="org-left">&nbsp;</td></tr>
+</tbody><tbody>
+<tr><td class="org-left"><code>\infty</code></td><td class="org-left">无穷大</td><td class="org-left">\[\infty\]</td></tr><tr><td class="org-left"><code>\emptyset</code></td><td class="org-left">空集</td><td class="org-left">\[\emptyset\]</td></tr><tr><td class="org-left"><code>\partial</code></td><td class="org-left">部分导数</td><td class="org-left">\[\partial\]</td></tr><tr><td class="org-left"><code>\int_a^b f(x)</code></td><td class="org-left">积分</td><td class="org-left">\[\int_a^b f(x)\]</td></tr></table></div><div id="outline-container-3-6-1" class="outline-4">
+<h4 id="org-title-3-6-1"><span class="section-number-4">3.6.1.</span> 希腊字母</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">命令</th><th scope="col" class="org-left">字母</th></tr>
+</thead><tbody>
+<tr><td class="org-left"><code>\alpha</code></td><td class="org-left"><code>𝛼</code></td></tr><tr><td class="org-left"><code>\beta</code></td><td class="org-left"><code>𝛽</code></td></tr><tr><td class="org-left"><code>\delta</code>, <code>\Delta</code></td><td class="org-left"><code>𝛿,Δ</code></td></tr><tr><td class="org-left"><code>\pi</code>, <code>\Pi</code></td><td class="org-left"><code>𝜋,Π</code></td></tr><tr><td class="org-left"><code>\sigma</code>, <code>\Sigma</code></td><td class="org-left"><code>𝜎,Σ</code></td></tr><tr><td class="org-left"><code>\phi</code>, <code>\Phi</code>, <code>\varphi</code></td><td class="org-left"><code>𝜙,Φ,𝜑</code></td></tr><tr><td class="org-left"><code>\psi</code>, <code>\Psi</code></td><td class="org-left"><code>𝜓,Ψ</code></td></tr><tr><td class="org-left"><code>\omega</code>, <code>\Omega</code></td><td class="org-left"><code>𝜔,Ω</code></td></tr></table></div></div></div>
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="org-title-3-7"><span class="section-number-3">3.7.</span> 页面布局</h3>
+<div class="outline-text-3" id="text-3-7"></div><div id="outline-container-3-7-1" class="outline-4">
+<h4 id="org-title-3-7-1"><span class="section-number-4">3.7.1.</span> 纸型&amp;页边距</h4>
+<div class="outline-text-4" id="text-3-7-1"><p>使用geometry宏包用于控制页面布局,例子如下:</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span>[
+	a4paper,      <span class="c">% 使用A4纸</span>
+	left=0.7cm,   <span class="c">% 左边距0.7cm</span>
+	right=0.7cm,  <span class="c">% 右边距</span>
+	top=0.7cm,    <span class="c">% 上边距</span>
+	bottom=0.7cm, <span class="c">% 正文底边距0.7cm</span>
+	footskip=3pt, <span class="c">% 脚注与正文间隔3pt</span>
+	twoside,      <span class="c">% 使用双面打印（装订）样式(相对于oneside)</span>
+	bindingoffset=0.9cm,  <span class="c">% 设置双面打印时内侧为装订预留的页边距</span>
+]<span class="nb">{</span>geometry<span class="nb">}</span>   <span class="c">% 使用geometry,以上中括号内钧为可选参数</span>
+<span class="c">% 使用时需要注意排列顺序，部分宏包可能与它的设置冲突，可能会单向覆盖</span>
+</pre></div><p>以上就是一个比较极端的排版例子，页边距等都被压缩到了十分极限的地方。可以配合 fgruler宏包生成尺子评估打印效果。</p><p>相关间距说明：</p><div class="figure">
+<p><img src="./latex/geometry.webp" alt="./latex/geometry.webp" /></p>
+<p><span class="figure-number">Figure 6: </span>geometry间距说明</p></div></div></div>
+<div id="outline-container-3-7-2" class="outline-4">
+<h4 id="org-title-3-7-2"><span class="section-number-4">3.7.2.</span> 字体设置</h4>
+<div class="outline-text-4" id="text-3-7-2"><p>使用fontspec宏包进行更详细的字体设置</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span><span class="nb">{</span>fontspec<span class="nb">}</span>
+<span class="c">% 在正文之外时设置英文字体</span>
+<span class="k">\setmainfont</span><span class="nb">{</span>DengXian Light<span class="nb">}</span>
+<span class="c">% 固定段落间距防止翻页时因为标题自动拉伸浪费空间</span>
+<span class="c">% \setlength{\parskip}{0em}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="c">% 假定处于某个环境内</span>
+<span class="k">\fontsize</span><span class="nb">{</span>4<span class="nb">}{</span>0.1<span class="nb">}</span>  <span class="c">% 为下文设置4pt的字体，行间距0.1pt(也许？)</span>
+<span class="k">\selectfont</span>    <span class="c">% 应用上述设置</span>
+<span class="k">\CJKfontspec</span><span class="nb">{</span>DengXian Light<span class="nb">}</span>    <span class="c">% 设置中文字体(基于ctex包)(这里是&quot;等线Light&quot;)</span>
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-7-3" class="outline-4">
+<h4 id="org-title-3-7-3"><span class="section-number-4">3.7.3.</span> 自定义章节样式</h4>
+<div class="outline-text-4" id="text-3-7-3"><div class="org-src-container"><pre class="src src-tex"><span class="c">% 使用 titlesec 重新定义标题格式，保持目录功能</span>
+<span class="k">\titleformat</span><span class="nb">{</span><span class="k">\section</span><span class="nb">}</span>
+  <span class="nb">{</span><span class="k">\fontsize</span><span class="nb">{</span>6<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\bfseries</span><span class="nb">}</span>
+  <span class="nb">{</span>【<span class="k">\arabic</span><span class="nb">{</span>section<span class="nb">}</span>.】<span class="nb">}</span>
+  <span class="nb">{</span>0pt<span class="nb">}</span>
+  <span class="nb">{}</span>
+<span class="k">\titleformat</span><span class="nb">{</span><span class="k">\subsection</span><span class="nb">}</span>
+  <span class="nb">{</span><span class="k">\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\bfseries</span><span class="nb">}</span>
+  <span class="nb">{</span>【<span class="k">\arabic</span><span class="nb">{</span>section<span class="nb">}</span>.<span class="k">\arabic</span><span class="nb">{</span>subsection<span class="nb">}</span>.】<span class="nb">}</span>
+  <span class="nb">{</span>0pt<span class="nb">}</span>
+  <span class="nb">{}</span>
+<span class="k">\titleformat</span><span class="nb">{</span><span class="k">\subsubsection</span><span class="nb">}</span>
+  <span class="nb">{</span><span class="k">\fontsize</span><span class="nb">{</span>5<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\bfseries</span><span class="nb">}</span>
+  <span class="nb">{</span>【<span class="k">\arabic</span><span class="nb">{</span>section<span class="nb">}</span>.<span class="k">\arabic</span><span class="nb">{</span>subsection<span class="nb">}</span>.<span class="k">\arabic</span><span class="nb">{</span>subsubsection<span class="nb">}</span>.】<span class="nb">}</span>
+  <span class="nb">{</span>0pt<span class="nb">}</span>
+  <span class="nb">{}</span>
+<span class="c">% 移除标题间距</span>
+<span class="k">\titlespacing*</span><span class="nb">{</span><span class="k">\section</span><span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}</span>
+<span class="k">\titlespacing*</span><span class="nb">{</span><span class="k">\subsection</span><span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}</span>
+<span class="k">\titlespacing*</span><span class="nb">{</span><span class="k">\subsubsection</span><span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}{</span>0pt<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-7-4" class="outline-4">
+<h4 id="org-title-3-7-4"><span class="section-number-4">3.7.4.</span> 页眉页脚设置</h4>
+<div class="outline-text-4" id="text-3-7-4"><p>用fancyfoot宏包:</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\newcommand</span><span class="nb">{</span><span class="k">\setsmallf</span><span class="nb">}{</span><span class="k">\fontsize</span><span class="nb">{</span>4<span class="nb">}{</span>0.1<span class="nb">}</span><span class="k">\selectfont\CJKfontspec</span><span class="nb">{</span>DengXian Light<span class="nb">}}</span>
+<span class="k">\pagestyle</span><span class="nb">{</span>fancy<span class="nb">}</span>
+<span class="k">\fancyfoot</span><span class="na">[C]</span><span class="nb">{</span><span class="k">\setsmallf\thepage</span><span class="nb">}</span>   <span class="c">% 设置页脚（正中间）样式：使用等线light的页码</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\footnotesep</span><span class="nb">}{</span>0.5<span class="k">\footnotesep</span><span class="nb">}</span> <span class="c">% 减少脚注之间的间距</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\skip\footins</span><span class="nb">}{</span>0.5<span class="k">\skip\footins</span><span class="nb">}</span> <span class="c">% 减少脚注与正文的间距</span>
+</pre></div></div></div>
+<div id="outline-container-3-7-5" class="outline-4">
+<h4 id="org-title-3-7-5"><span class="section-number-4">3.7.5.</span> 分栏</h4>
+<div class="outline-text-4" id="text-3-7-5"><p>使用multicol宏包实现分栏</p><div class="org-src-container"><pre class="src src-latex"><span class="k">\usepackage</span><span class="nb">{</span>multicol<span class="nb">}</span>   <span class="c">% 使用包</span>
+<span class="k">\setlength</span><span class="nb">{</span><span class="k">\columnsep</span><span class="nb">}{</span>1mm<span class="nb">}</span>  <span class="c">% 设置分栏间隔</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+不会被分栏的内容
+<span class="k">\begin</span><span class="nb">{</span>multicols<span class="nb">}{</span>n<span class="nb">}</span> <span class="c">% 其中的n为分栏数</span>
+  会被分栏的内容
+
+  内容不够填满一整页时会优先向横向填充，在下面留出空间，而不是先一分到底
+<span class="k">\end</span><span class="nb">{</span>multicols<span class="nb">}</span>
+这里的内容也不会被分栏
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div><p>使用dblfnote可以实现脚注分栏，但是是固定2栏</p></div></div>
+<div id="outline-container-3-7-6" class="outline-4">
+<h4 id="org-title-3-7-6"><span class="section-number-4">3.7.6.</span> 尺子</h4>
+<div class="outline-text-4" id="text-3-7-6"><p>可以使用fgruler宏包生成实际尺寸的尺子，这里有<a href="http://mirrors.ctan.org/macros/latex/contrib/fgruler/fgruler.pdf">官方文档(pdf)</a>。</p><div class="org-src-container"><pre class="src src-latex">  <span class="k">\usepackage</span><span class="na">[type=user]</span><span class="nb">{</span>fgruler<span class="nb">}</span>
+  <span class="c">% 指定类型为用户自定义(type=user)</span>
+  <span class="k">\fgrulerdefuser</span><span class="nb">{</span>
+  	<span class="c">% 进行判断：仅在前两页生成尺子</span>
+  	<span class="k">\ifnum\value</span><span class="nb">{</span>page<span class="nb">}</span>&lt;3<span class="k">\relax</span>
+		<span class="c">% 生成尺子，类型为alledges(四边都有)</span>
+		<span class="c">% alledges也可作为\usepackage时type=的参数</span>
+  		<span class="k">\fgrulertype</span><span class="nb">{</span><span class="k">\fgrulerunit</span><span class="nb">}{</span>alledges<span class="nb">}</span>
+  	<span class="k">\fi</span>
+  <span class="nb">}</span>
+</pre></div><blockquote>
+<p>常见纸张类型尺寸备忘：</p><ul class="org-ul">
+<li>A4： 210mm*297mm
+</li>
+<li>A5： 148mm*210mm
+</li>
+<li>B5： 176mm*250mm
+</li></ul>
+</blockquote></div></div></div>
+<div id="outline-container-3-8" class="outline-3">
+<h3 id="org-title-3-8"><span class="section-number-3">3.8.</span> Latex语法类控制命令</h3>
+<div class="outline-text-3" id="text-3-8"></div><div id="outline-container-3-8-1" class="outline-4">
+<h4 id="org-title-3-8-1"><span class="section-number-4">3.8.1.</span> 判断</h4>
+<div class="outline-text-4" id="text-3-8-1"><div class="org-src-container"><pre class="src src-tex"><span class="k">\ifodd\value</span><span class="nb">{</span>page<span class="nb">}</span>
+	当前为奇数页
+<span class="k">\else</span>
+	当前为偶数页
+<span class="k">\fi</span>
+</pre></div></div></div>
+<div id="outline-container-3-8-2" class="outline-4">
+<h4 id="org-title-3-8-2"><span class="section-number-4">3.8.2.</span> 自定义命令</h4>
+<div class="outline-text-4" id="text-3-8-2"><div class="org-src-container"><pre class="src src-tex"><span class="k">\newcommand</span><span class="nb">{</span><span class="k">\name</span><span class="nb">}</span>[arg<span class="nb">_</span>num]<span class="nb">{</span>do sth here,#1 means arg 1<span class="nb">}</span>
+<span class="k">\renewcommand</span><span class="nb">{</span><span class="k">\name</span><span class="nb">}</span>[arg<span class="nb">_</span>num]<span class="nb">{</span>do sth here,#1 means arg 1<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-8-3" class="outline-4">
+<h4 id="org-title-3-8-3"><span class="section-number-4">3.8.3.</span> 自定义环境</h4>
+<div class="outline-text-4" id="text-3-8-3"><div class="org-src-container"><pre class="src src-tex"><span class="k">\newenvironment</span><span class="nb">{</span>新环境名称<span class="nb">}</span>[参数个数][参数默认值]<span class="nb">{</span>开始部分定义<span class="nb">}{</span>结束部分定义<span class="nb">}</span>
+<span class="k">\renewenvironment</span><span class="nb">{</span>新环境名称<span class="nb">}</span>[参数个数][参数默认值]<span class="nb">{</span>开始部分定义<span class="nb">}{</span>结束部分定义<span class="nb">}</span>
+</pre></div></div></div></div>
+<div id="outline-container-3-9" class="outline-3">
+<h3 id="org-title-3-9"><span class="section-number-3">3.9.</span> 其他杂七杂八的东西</h3>
+<div class="outline-text-3" id="text-3-9"></div><div id="outline-container-3-9-1" class="outline-4">
+<h4 id="org-title-3-9-1"><span class="section-number-4">3.9.1.</span> 宏包备忘录</h4>
+<div class="outline-text-4" id="text-3-9-1"><ol class="org-ol">
+<li>hyperref: 插入超链接 <code>\usepackage[hidelinks]{hyperref}</code>
+</li>
+<li>footmisc: 作用不明，先放着再说
+</li>
+<li><p>lipsum: 使用 <code>\lipsum[num]</code> 插入示范文本</p>
+</li></ol>
+</div></div></div></div>
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> Reference</h2>
+<div class="outline-text-2" id="text-4"><ul class="org-ul">
+<li><a href="https://oi-wiki.org/tools/latex/">Latex入门教程</a>
+</li>
+<li><a href="https://dylandong.top/posts/e480/">【LaTeX】新手教程：从入门到日常使用</a>
+</li>
+<li><a href="https://github.com/FrogGuaGuaGua/HighSchoolMathematics/blob/main/Latex%E9%80%9F%E6%9F%A5.pdf/">Latex速查手册(tex+pdf) - （Github）</a>
+</li>
+<li><a href="https://www.mohu.org/info/symbols/symbols.htm">latex数学符号</a>
+</li>
+<li><a href="https://zhuanlan.zhihu.com/p/261667944">LaTeX listings 宏包使用说明 - 知乎</a>
+</li>
+<li><a href="https://blog.csdn.net/robert_chen1988/article/details/52739825">latex 中的长度单位，尺寸 - CSDN博客</a>
+</li>
+<li><a href="https://www.runoob.com/w3cnote/px-pt-em-convert-table.html">px,pt,em换算表 | 菜鸟教程</a>
+</li></ul>
+</div></div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<div class="footdef">
+<sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 参考文章：<a href="https://liam.page/2018/11/26/introduction-to-TeX-engine-format-and-distribution/">TeX 引擎、格式、发行版之介绍</a></p></div>
+</div></div></div></div>
+<div id="postamble" class="status">
+<p class="date">时间: <2024-10-01 二 02:04></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: Latex使用过程中查阅一些资料做的笔记，防忘</p>
+<p class="date">生成于: 2026-02-05 四 00:40:33</p>
+</div>
+</body>
+</html>

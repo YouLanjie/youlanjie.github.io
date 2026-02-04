@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>从零开始认识计算机(from 硬件茶谈)</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">从零开始认识计算机(from 硬件茶谈)</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 认识MOSFET</a><ul><li><a href="#org-title-1-1">1.1. 物质结构</a></li><li><a href="#org-title-1-2">1.2. 电</a><ul><li><a href="#org-title-1-2-1">1.2.1. 电流</a></li><li><a href="#org-title-1-2-2">1.2.2. PN结</a></li><li><a href="#org-title-1-2-3">1.2.3. MOSFET</a></li></ul></li></ul></li></ul></div></div>
+<style type="text/css" media="screen">
+  pre { font-family: Noto Sans Mono CJK, Droid Sans Mono, Monaco, Consolas, "Lucida Console", monospace; }
+</style>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 认识MOSFET</h2>
+<div class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 物质结构</h3>
+<div class="outline-text-3" id="text-1-1"><ul class="org-ul">
+<li>分子组成物质
+</li>
+<li>原子组成分子
+</li>
+<li>原子由 <span class="underline">电子</span><span class="underline">质子</span><span class="underline">中子</span> 组成
+</li>
+<li>电子带负电，质子带正电
+</li>
+<li>电子围绕原子核活动，但轨迹不确定，因而使用电子云描述运动范围
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> 电</h3>
+<div class="outline-text-3" id="text-1-2"><p>缺失电子的原子显正电性，多出的显负电性</p></div><div class="outline-4">
+<h4 id="org-title-1-2-1"><span class="section-number-4">1.2.1.</span> 电流</h4>
+<div class="outline-text-4" id="text-1-2-1"><p>电流需要导体传播。根据导电性，材料可以被分为 <span class="underline">导体</span><span class="underline">绝缘体</span> 和 <span class="underline">半导体</span> 三种材料</p></div><div class="outline-5">
+<p id="org-title-1-2-1-1"><b><span class="section-number-5">1.2.1.1.</span> 导体</b></p>
+<div class="outline-text-5" id="text-1-2-1-1"><p>以铜为例，其最外围的电子不稳定，易摆脱束缚。</p><p>将铜做成导线，连接电源、用电器构成回路。此时电源的电压驱使铜线上的电子定向移动，形成电流</p><p>注意！电子带的负电，但电流规定的是正电荷的流动方向。所以电流方向与电子移动方向相反。（电子从电源负极移动到正极，电流则相反）</p></div></div><div class="outline-5">
+<p id="org-title-1-2-1-2"><b><span class="section-number-5">1.2.1.2.</span> 半导体</b></p>
+<div class="outline-text-5" id="text-1-2-1-2"><p>外界条件变换是，可以在导体与绝缘体之间转换</p><p>以硅为例。纯硅类绝缘体，</p></div><div class="outline-6">
+<p id="org-title-1-2-1-2-1"><b><span class="section-number-6">1.2.1.2.1.</span> N型掺杂</b></p>
+<div class="outline-text-6" id="text-1-2-1-2-1"><p>在硅中，掺杂磷元素，可增加电子（显中性）</p><p>其中，电荷的载体（载流子）是电子</p></div></div><div class="outline-6">
+<p id="org-title-1-2-1-2-2"><b><span class="section-number-6">1.2.1.2.2.</span> P型掺杂</b></p>
+<div class="outline-text-6" id="text-1-2-1-2-2"><p>在硅中，掺杂硼元素，可减少电子（增加空穴），形成空穴（显中性）</p><p>其中，载流子是空穴</p></div></div></div></div><div class="outline-4">
+<h4 id="org-title-1-2-2"><span class="section-number-4">1.2.2.</span> PN结</h4>
+<div class="outline-text-4" id="text-1-2-2"><p>在同一块硅晶体中进行N型与P型掺杂就形成了PN结，该材料内部具有扩散作用，电子会从N 区扩散到P区和空穴结合，在扩散后，N区显正电性，P区显负电性，形成从正电性指向负电性区域的电场（从N指向P区），会驱使电子移动（移动方向与电场指向相反）。</p><p>当该电场形成的作用力与材料本身的扩散作用相等时，达成平衡。而两者交界处缺乏载流子、存在内电场的区域被称为耗尽层（耗尽层可以理解为绝缘区域，电子不能进入或者离开，是扩散作用和内建电场平衡后的结果）。</p></div><div class="outline-5">
+<p id="org-title-1-2-2-1"><b><span class="section-number-5">1.2.2.1.</span> 特性</b></p>
+<div class="outline-text-5" id="text-1-2-2-1"><p>若让PN结接入回路，若电源正极接P区，负极接N区，其提供的电场方向是从P区到N区的（正极指向负极），将抵消掉内建电场，并使电流畅通。</p><div class="org-src-container"><pre class="src src-text">,----------------------.
+| 可以导电时的示意图： |
+`----------------------&#39;
+
+               PN结  ---.
+                        |
+                        V
+
+         +--------------+--------------+
+      -  | N区 正电性+  | P区 负电性-  |  +
+      -  | --内建电场-&gt; | &lt;-电子--     |  +
+,---- -  |              |              |  + ----.
+|     -  |       &lt;-电池提供电场--      |  +     |
+|     -  |              |              |  +     |
+|        +--------------+--------------+        |
+|                                               |
+|                                               |
+|                                               |
+|          ,-----------.        ,---.           |
+`----------|  -  |  +  |--------| * |-----------&#39;
+           `-----------&#39;        `---&#39;
+                 ^                ^
+                 |                |
+               电源             用电器
+</pre></div><p>若电源反接，则会导致内建电场加强，电子移动到N区，空穴移动到P区，耗尽层被加宽，于是电子几乎不可能再从P区移动到N区（不可能穿过耗尽层）。</p><div class="org-src-container"><pre class="src src-text">,------------------------.
+| 不可以导电时的示意图： |
+`------------------------&#39;
+
+               PN结  ---.
+                        |
+                        V
+
+         +--------------+--------------+
+      +  | N区 正电性+  | P区 负电性-  |  -
+      +  | --内建电场-&gt; | &lt;-电子--     |  -
+,---- +  |              |              |  - ----.
+|     +  |       --电池提供电场-&gt;      |  -     |
+|     +  |              |              |  -     |
+|        +--------------+--------------+        |
+|                                               |
+|                                               |
+|                                               |
+|          ,-----------.        ,---.           |
+`----------|  +  |  -  |--------| * |-----------&#39;
+           `-----------&#39;        `---&#39;
+                 ^                ^
+                 |                |
+               电源             用电器
+</pre></div><p>换种方式理解就是这样：</p><div class="org-src-container"><pre class="src src-text">,-----------------------------------------------------.
+|                                                     |
+|               内建电场 = 扩散作用                   |
+|                N &lt;- P     N -&gt; P                    |
+|                                                     |
+|                        ||                           |
+|                        ||                           |
+|                        ||                           |
+|    值上升              VV       值也要对应地上升    |
+|       |                                      |      |
+|       `- 内建电场 + 电池提供电场 = 扩散作用 -&#39;      |
+|                                                     |
+`-----------------------------------------------------&#39;
+</pre></div><p>由于驱使电子运动的力均上升，所以耗尽层被加宽，电子将不能通过耗尽层形成通路。（即内建电场不可提升，但是扩散作用可以提升，所以要打破平衡就必须要让电池提供的电场与内建电场相反。）</p></div></div><div class="outline-5">
+<p id="org-title-1-2-2-2"><b><span class="section-number-5">1.2.2.2.</span> 总结</b></p>
+<div class="outline-text-5" id="text-1-2-2-2"><p>PN结实际上就是一个二极管，电流可以由P流向N，但是不能够从N流向P，实现电流单向流动</p></div></div></div><div class="outline-4">
+<h4 id="org-title-1-2-3"><span class="section-number-4">1.2.3.</span> MOSFET</h4>
+<div class="outline-5">
+<p id="org-title-1-2-3-1"><b><span class="section-number-5">1.2.3.1.</span> 基本概念</b></p>
+<div class="outline-text-5" id="text-1-2-3-1"><p>先来认识一下MOSFET的基本结构。</p><div class="org-src-container"><pre class="src src-text">,----------------------------------------------------------------------------.
+|       ###|                 |###            ###|                 |###       |
+|       ###|               -------&gt;        &lt;-------               |###       |
+|       ###|                 |###            ###|                 |###       |
+|       ###|       N型       |###            ###|       N型       |###       |
+|       ###|                 |###            ###|                 |###       |
+|       ###|  内建电场指向 -------&gt;        &lt;------- 内建电场指向  |###       |
+|       ###|   |        |    |###            ###|   |        |    |###       |
+|       ###`---|--------|----&#39;###            ###`---|--------|----&#39;###       |
+|       #######|#耗尽层#|########            #######|#耗尽层#|########       |
+|       #######|########|########            #######|########|########       |
+|              V        V                           V        V               |
+|                                                                            |
+|                                  P型                                       |
+|                                                                            |
+`----------------------------------------------------------------------------&#39;
+</pre></div><p>其描述为：在一块纯硅上进行P型掺杂，在其肩膀部分进行N型掺杂。（如上画）</p><p>倘若我们将N型掺杂的部分接上导线，连接电源和用电器，开关闭合，此时在电流由P流向N 的区域电流导通，但是由N-&gt;P的区域电流不导通，不构成通路。</p><p>若将电源反接，同理，电路同样不导通。</p><div class="org-src-container"><pre class="src src-text">                                     &lt;---电流方向----
+,--------------------------.                             |      ,--------------------------.
+|                          |    -----                 ---+---   |                          |
+|                          |                             |      |                          |
+|                          |                                    |                          |
+|                  =================                    =================                  |
+|      ,----------------------------------------------------------------------------.      |
+|      |       ###|                 |###            ###|                 |###       |      |
+|      |       ###|               -------&gt;        &lt;-------               |###       |      |
+|      |       ###|                 |###            ###|                 |###       |      |
+|      |       ###|       N型       |###            ###|       N型       |###       |      |
+|      |       ###|                 |###            ###|                 |###       |      |
+|      |       ###|  内建电场指向 -------&gt;        &lt;------- 内建电场指向  |###       |      |
+|      |       ###|   |        |    |###            ###|   |        |    |###       |      |
+|      |       ###`---|--------|----&#39;###            ###`---|--------|----&#39;###       |      |
+|      |       #######|#耗尽层#|########            #######|#耗尽层#|########       |      |
+|      |       #######|########|########            #######|########|########       |      |
+|      |              V        V                           V        V               |      |
+|      |                                                                            |      |
+|      |                  /\              P型                  /\                   |      |
+|      |                  ||                                   ||                   |      |
+|      |                  ||                                   ||                   |      |
+|      |                  ||                                   ||                   |      |
+|      |               此侧导通                            此侧不导通               |      |
+|      |                                                                            |      |
+|      |                                                                            |      |
+|      `----------------------------------------------------------------------------&#39;      |
+|										           |
+|										           |
+|										           |
+|                                ,-----------.        ,---.                                |
+`--------------------------------|  -  |  +  |--------| * |--------------------------------&#39;
+                                 `-----------&#39;        `---&#39;
+                                       ^                ^
+                                       |                |
+                                     电源             用电器
+</pre></div></div></div><div class="outline-5">
+<p id="org-title-1-2-3-2"><b><span class="section-number-5">1.2.3.2.</span> 特性</b></p>
+<div class="outline-text-5" id="text-1-2-3-2"><p>这时候你就可能会问了：“欸你这东西讲了半天都还是不导通啊，有什么用啊？”</p><p>很明显，这玩意肯定由什么特殊的作用，要不然我也不会介绍那么久。这玩意虽然在这种自然状态下没有办法导电，但是实际上还是有办法导电的。</p><p>为了理解它，我先举一个例子：</p><div class="org-src-container"><pre class="src src-text">                 ----电流方向--&gt;
+   ,------------------------------------------.
+   |           &lt;--电子运动方向----            |
+   |                                          |
+,-----.                                       |
+|     |                电子从这转移  ++++++   |  ++++++
+|  +  |                     ||                |             
+|     |                     ||        =================   &lt;-----------\
+|-----|                     ||        #################   &lt;-- 绝缘层   +-- 金属板
+|     |                     ||        =================   &lt;-----------/
+|  -  |                     \/                |
+|     |                   到这边     ------   |  ------
+`-----&#39;                                       |
+   |                                          |
+   |                                          |
+   `------------------------------------------&#39;
+</pre></div><p>以上例子中，在开关闭合的情况下，电子从上层金属板转移到下层金属板，使上层金属板显正电性，而下层显负电性，绝缘层中出现从上到下的指向性电场。</p><p>若将该结构如下图般安置，</p><div class="org-src-container"><pre class="src src-text">     ,------------------------------------------.
+     |                                          |
+,---/|\-----------------------.                 |                  ,-----------------------.
+|    |                        |       + ================== +       |                       |
+|    |                        |         ##################         |                       |
+|    |                        |         ######绝缘体######         |                       |
+|    |                ================= ################## =================               |
+|    |    ,----------------------------------------------------------------------------.   |
+|    |    |       ###|                 |###            ###|                 |###       |   |
+|  ,---.  |       ###|                 |###            ###|                 |###       |   |
+|  | + |  |       ###|                 |###            ###|                 |###       |   |
+|  |---|  |       ###|       N型       |###            ###|       N型       |###       |   |
+|  | - |  |       ###|                 |###            ###|                 |###       |   |
+|  `---&#39;  |       ###|                 |###            ###|                 |###       |   |
+|    |    |       ###|                 |###            ###|                 |###       |   |
+|    |    |       ###`-----------------&#39;###            ###`-----------------&#39;###       |   |
+|    |    |       #########耗尽层##########            #########耗尽层##########       |   |
+|    |    |       #########################            #########################       |   |
+|    |    |                                                                            |   |
+|    |    |                                                                            |   |
+|    |    |                                  P型                                       |   |
+|    |    |                                                                            |   |
+|    |    |                                                                            |   |
+|    |    `----------------------------------------------------------------------------&#39;   |
+|    |                    - ============================================ -                 |
+|    |                                           |                                         |
+|    |                                           |                                         |
+|    --------------------------------------------&#39;                                         |
+|                                                                                          |
+|                                                                                          |
+|                                   ,-----------.        ,---.                             |
+`-----------------------------------|  -  |  +  |--------| * |-----------------------------&#39;
+                                    `-----------&#39;        `---&#39;
+                                          ^                ^
+                                          |                |
+                                        电源             用电器
+</pre></div></div></div></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2023-06-08 四 00:06></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 内容来自B站UP主“硬件茶谈”的视频，请多多支持原视频，本blog仅为学习笔记</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+</div>
+</body>
+</html>

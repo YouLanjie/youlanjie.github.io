@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="QwQ 不要在意我的头像QwQ" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>红石学习笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">红石学习笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 基础知识</a><ul><li><a href="#org-title-1-1">1.1. 时间单位</a></li><li><a href="#org-title-1-2">1.2. 红石组件(部分内容来自MC百科)</a><ul><li><a href="#org-title-1-2-1">1.2.1. 红石中继器</a></li><li><a href="#org-title-1-2-2">1.2.2. 红石比较器</a></li></ul></li></ul></li>
+<li><a href="#org-title-2">2. Singal Clock</a><ul><li><a href="#org-title-2-1">2.1. Time table</a></li></ul></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 基础知识</h2>
+<div class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 时间单位</h3>
+<div class="outline-text-3" id="text-1-1"><ul class="org-ul">
+<li>gt = game time (tick) (游戏时间)
+</li>
+<li>rt = redstone tick (红石刻)
+</li>
+<li>1s = 10rt = 20gt 1rt = 1gt
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> 红石组件(部分内容来自MC百科)</h3>
+<div class="outline-4">
+<h4 id="org-title-1-2-1"><span class="section-number-4">1.2.1.</span> 红石中继器</h4>
+<div class="outline-text-4" id="text-1-2-1"><div class="org-src-container"><pre class="src src-text">红石中继器（Redstone Repeater）在红石电路中是用于“中继”并放大红石信号、“锁存”信号状态或者阻止信号倒流的方块。
+</pre></div><p>有1~4rt的延迟</p></div></div><div class="outline-4">
+<h4 id="org-title-1-2-2"><span class="section-number-4">1.2.2.</span> 红石比较器</h4>
+<div class="outline-text-4" id="text-1-2-2"><div class="org-src-container"><pre class="src src-text">红石比较器（Redstone Comparator）是能使红石信号保持、比较、作差或检测特定数据值（主要是容器装载量）的红石元件方块。
+</pre></div><p>红石比较器具有两个模式:比较模式和减法模式。默认情况下是比较模式，当输出向火把亮起时则为减法模式，具体工作情况如下:</p><ul class="org-ul">
+<li>比较模式:将正面输入与两旁的输入信号强度相比较（两边同时有输入时强度哪边大选哪边进行运算），倘若正面输入比侧面的大，则有输出（强度为正面输入时的强度），否则无。
+</li>
+<li>减法模式:将正面输入减去侧面输入的信号强度作为最终信号强度的输出
+</li></ul>
+<p>无论在哪个模式下，红石比较器都能够检测容器内的物品数量并输出不等的信号强度</p><p>有1rt的延迟</p></div></div></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> Singal Clock</h2>
+<div class="outline-3">
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> Time table</h3>
+<div class="outline-text-3" id="text-2-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">rt</th><th scope="col" class="org-left">event</th></tr>
+</thead><tbody>
+<tr><td class="org-left">1rt</td><td class="org-left">toogle</td></tr><tr><td class="org-left">1rt</td><td class="org-left">fire light</td></tr><tr><td class="org-left">4rt</td><td class="org-left">wait</td></tr><tr><td class="org-left">1rt</td><td class="org-left">fire off</td></tr><tr><td class="org-left">4rt</td><td class="org-left">wiat</td></tr><tr><td class="org-left">1rt</td><td class="org-left">fire light</td></tr><tr><td class="org-left">...</td><td class="org-left">...</td></tr></table></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2024-11-23 Sat 18:58></p>
+<p class="author">作者: QwQ 不要在意我的头像QwQ</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+</div>
+</body>
+</html>

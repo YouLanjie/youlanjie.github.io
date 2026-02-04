@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="记录我个人安装archlinux的过程，备用" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>ArchLinux安装笔记</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">ArchLinux安装笔记</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 前言</a></li><li><a href="#org-title-2">2. 准备U盘启动盘</a></li><li><a href="#org-title-3">3. 第一安装阶段</a><ul><li><a href="#org-title-3-1">3.1. 确认引导类型</a></li><li><a href="#org-title-3-2">3.2. 联网</a></li><li><a href="#org-title-3-3">3.3. pacman设置</a><ul><li><a href="#org-title-3-3-1">3.3.1. 手动设置软件源</a></li><li><a href="#org-title-3-3-2">3.3.2. 自动设置软件源</a></li><li><a href="#org-title-3-3-3">3.3.3. 多文件同时下载</a></li><li><a href="#org-title-3-3-4">3.3.4. 增加archlinuxcn源</a></li></ul></li>
+<li><a href="#org-title-3-4">3.4. 更新系统时间</a></li><li><a href="#org-title-3-5">3.5. 为系统分区</a><ul><li><a href="#org-title-3-5-1">3.5.1. 分区建议</a></li><li><a href="#org-title-3-5-2">3.5.2. 使用cfdisk进行分区</a></li><li><a href="#org-title-3-5-3">3.5.3. 使用fdisk进行分区</a></li><li><a href="#org-title-3-5-4">3.5.4. 设置文件系统(mkfs)</a></li><li><a href="#org-title-3-5-5">3.5.5. 挂载分区</a></li></ul></li>
+<li><a href="#org-title-3-6">3.6. 安装基本系统</a></li></ul></li>
+<li><a href="#org-title-4">4. 第二安装阶段</a><ul><li><a href="#org-title-4-1">4.1. 本地化</a></li><li><a href="#org-title-4-2">4.2. 安装GRUB引导</a><ul><li><a href="#org-title-4-2-1">4.2.1. BIOS引导模式下</a></li><li><a href="#org-title-4-2-2">4.2.2. EFI引导模式下</a></li><li><a href="#org-title-4-2-3">4.2.3. 生成菜单、配置文件</a></li></ul></li>
+<li><a href="#org-title-4-3">4.3. 用户设置</a></li><li><a href="#org-title-4-4">4.4. 重启前最后的配置</a></li></ul></li>
+<li><a href="#org-title-5">5. 第三安装阶段(配置)</a><ul><li><a href="#org-title-5-1">5.1. 使用图形界面</a><ul><li><a href="#org-title-5-1-1">5.1.1. 安装一个桌面环境或者窗口管理器</a></li><li><a href="#org-title-5-1-2">5.1.2. 安装登录管理器</a></li></ul></li>
+<li><a href="#org-title-5-2">5.2. 日常软件</a></li><li><a href="#org-title-5-3">5.3. 中文字体</a></li><li><a href="#org-title-5-4">5.4. 使用AUR</a></li></ul></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>本blog用于记录我安装ArchLinux的方法，更专业的教程请查阅
+<a href="https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方Wiki</a> (虽然大部分内容都是参考的wiki)</p></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 准备U盘启动盘</h2>
+<div class="outline-text-2" id="text-2"><ol class="org-ol">
+<li>从
+<a href="https://archlinux.org/download/">官网</a>上下载ArchLinux的安装镜像
+<ol class="org-ol">
+<li>文件名格式一般为 <code>archlinux-YYYY.MM.DD-x86_64.iso</code>
+</li>
+<li>下滑找到 <b>China</b> 分栏 有国内镜像服务器源，速度会快很多
+</li>
+<li>推荐使用
+<a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">清华云</a>与
+<a href="https://mirrors.aliyun.com/archlinux/iso/latest/">阿里云</a>
+</li></ol>
+</li>
+<li>拷录安装镜像到U盘或者其他安装介质
+<ol class="org-ol">
+<li>windows下则使用任意一款U盘拷录软件（自行百度）拷录镜像文件到U盘（注意，被拷录的U盘的所有数据都会丢失，请备份好资料后再执行操作）。
+</li>
+<li>而Linux下则可以（使用root权限）使用下面的命令拷录镜像文件到U盘上(U盘不能挂载到系统上)
+<div class="org-src-container"><pre class="src src-shell"><span class="c1"># dd if=你的镜像文件名称 of=/dev/sdX bs=512    #sdX为要拷录的U盘设备，实际中应为sda或sdb</span>
+</pre></div>
+<blockquote>
+<p>如果确认不了你的U盘是哪个，可以执行下面的命令查看你的磁盘状况</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># fdisk -l</span>
+</pre></div><p>一般通过大小和分区情况应该能分出来</p></blockquote>
+<p>（Linux的磁盘管理机制请自行百度）</p>
+</li></ol>
+</li>
+<li><b>除非你能够同时查看教程(例如说有还有台手机之类的在旁边)则进行下一步，否则建议先记下下面的安装过程较好（没记住到时候装一半删了旧系统然后碰到问题不知道怎么解决就等着喜提砖机一块了）</b>
+</li>
+<li>重启电脑，更改启动顺序或（一般情况下）按下F12选择启动项，进入Arch的安装镜像系统。倘若屏幕上出现 <i>FALT</i> 报错请自行搜索解决(我忘了有什么情况会报错了)
+</li></ol>
+</div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 第一安装阶段</h2>
+<div class="outline-text-2" id="text-3"><p>此阶段的操作在archlinux镜像系统中进行</p></div><div class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 确认引导类型</h3>
+<div class="outline-text-3" id="text-3-1"><p>执行以下命令：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># ls /sys/firmware/efi/efivars</span>
+</pre></div><p>倘若屏幕提示 <code>No such file or directory</code> 则你的电脑是BIOS引导，反则是EFI引导</p><blockquote>
+<p>个人办法：其实如果在开机时留意一下弹出过的菜单界面就能知道你的是什么引导方式。</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><tbody><tr><td class="org-left">BIOS引导的长这样：</td><td class="org-left">而EFI的长这样：</td></tr><tr><td class="org-left"><img src="./2022-07-02_02/2022-07-02_02-02.png" alt="2022-07-02_02-02.png" />
+</td><td class="org-left"><img src="./2022-07-02_02/2022-07-02_02-01.png" alt="2022-07-02_02-01.png" />
+</td></tr><tr><td class="org-left">引导器: syslinux</td><td class="org-left">引导器: systemd-boot</td></tr></table><p>关于具体的引导器区别，建议自行维基了解</p></blockquote></div></div><div class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 联网</h3>
+<div class="outline-text-3" id="text-3-2"><p>有线网络的联网教程请自行百度，这里主要讲无线网络的连接。</p><p>无线网络联网，你可以使用 <code>wifi-menu</code> 工具联网，而我个人更倾向于使用 <code>iwd</code> 工具进行联网。在终端输入</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># iwctl</span>
+</pre></div><p>打开iwd的设置界面,一下为一些常用命令列表：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">命令</th><th scope="col" class="org-left">作用</th></tr>
+</thead><tbody>
+<tr><td class="org-left">device list</td><td class="org-left">列出可用的网络设备</td></tr><tr><td class="org-left">station 设备名称 scan</td><td class="org-left">启用指定的设备</td></tr><tr><td class="org-left">station 设备名称 get-networks</td><td class="org-left">获取网络列表</td></tr><tr><td class="org-left">station 设备名称 connet 网络名称</td><td class="org-left">连接指定的网络，有密码的会要求输入密码，连接成功后网络列表前会出现 <b><b>&gt;</b></b> 号</td></tr><tr><td class="org-left">exit</td><td class="org-left">退出</td></tr><tr><td class="org-left">quit</td><td class="org-left">退出</td></tr><tr><td class="org-left">Tab制表键</td><td class="org-left">补全或者显示出可用的命令</td></tr><tr><td class="org-left">方向上下键</td><td class="org-left">查找上一条/下一条历史命令</td></tr></table><p>操作演示图片：</p><div class="figure">
+<p><img src="./2022-07-02_02/2022-07-02_02-07.png" alt="./2022-07-02_02/2022-07-02_02-07.png" /></p>
+<p><span class="figure-number">Figure 1: </span>操作演示</p></div><p>最后使用</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># ping www.baidu.com</span>
+</pre></div><p>判断能否正常上网（使用Ctrl-C退出）</p></div></div><div class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> pacman设置</h3>
+<div class="outline-text-3" id="text-3-3"><p>pacman是archlinux的包管理器，暂不介绍用法，跟着做就行了</p></div><div class="outline-4">
+<h4 id="org-title-3-3-1"><span class="section-number-4">3.3.1.</span> 手动设置软件源</h4>
+<div class="outline-text-4" id="text-3-3-1"><p>pacman的默认mirror源非常好，列出了我们会用到的镜像源，加上sed，我们可以执行下面的命令开启清华镜像源:</p><div class="org-src-container"><pre class="src src-shell">cp<span class="w"> </span>/etc/pacman.d/mirrorlist<span class="w"> </span>/etc/pacman.d/mirrorlist.pacnew
+sed<span class="w"> </span>-ni<span class="w"> </span><span class="s2">&quot;/tuna/p&quot;</span><span class="w"> </span>/etc/pacman.d/mirrorlist
+</pre></div><p>如果希望用阿里云则可将命令里的 <code>tuna</code> 替换为 <code>aliyun</code> 再执行</p><p>如果懂得用vim，自己编辑mirrorlist去，搜索China，自己选</p><blockquote>
+<p>本以为官方的iso是pacman默认文件那样没有开启任何源的，结果下载下来启动一看全是开的【捂脸】。好在改了个sed命令就解决了。</p></blockquote></div></div><div class="outline-4">
+<h4 id="org-title-3-3-2"><span class="section-number-4">3.3.2.</span> 自动设置软件源</h4>
+<div class="outline-text-4" id="text-3-3-2"><p>直接运行以下命令依照速度进行自动排序，不用手动排序</p><div class="org-src-container"><pre class="src src-bash">reflector<span class="w"> </span>-c<span class="w"> </span>China<span class="w"> </span>-a<span class="w"> </span><span class="m">10</span><span class="w"> </span>--sort<span class="w"> </span>rate<span class="w"> </span>--save<span class="w"> </span>/etc/pacman.d/mirrorlist
+</pre></div><p>但存在问题是它可能会给你推荐一个野鸡服务器，有点让人难以接受，所以还是手动更新的好</p></div></div><div class="outline-4">
+<h4 id="org-title-3-3-3"><span class="section-number-4">3.3.3.</span> 多文件同时下载</h4>
+<div class="outline-text-4" id="text-3-3-3"><blockquote>
+<p>目前pacman的默认配置是开启多线程下载的，这一步可以跳过</p></blockquote><p>编辑 <b>/etc/pacman.conf</b> 找到 <code>#ParallelDownloads = 5</code> 项，把前面的 <b>#</b> 号移除可以实现同时下载多个文件，后面的5是最大的同时下载数量</p></div></div><div class="outline-4">
+<h4 id="org-title-3-3-4"><span class="section-number-4">3.3.4.</span> 增加archlinuxcn源</h4>
+<div class="outline-text-4" id="text-3-3-4"><p>在 <b>/etc/pacman.conf</b> 文件末尾加入</p><div class="org-src-container"><pre class="src src-conf"><span class="k">[archlinuxcn]</span>
+<span class="na">Server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span>
+</pre></div><p>可以启用 <b>archlinuxcn</b> 源，里面有一些官方仓库没有的常用软件</p></div></div></div><div class="outline-3">
+<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 更新系统时间</h3>
+<div class="outline-text-3" id="text-3-4"><p>执行下面的命令（正常情况下是没有输出的）</p><div class="org-src-container"><pre class="src src-bash">timedatectl<span class="w"> </span>set-ntp<span class="w"> </span><span class="nb">true</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-3-5"><span class="section-number-3">3.5.</span> 为系统分区</h3>
+<div class="outline-text-3" id="text-3-5"><blockquote>
+<p>注意！这个步骤要格外小心，命令回车前要确认命令无误，且要知道自己在做什么，重要的硬盘数据应提前备份好，避免带来数据的丢失</p></blockquote><p>执行命令</p><div class="org-src-container"><pre class="src src-bash">fdisk<span class="w"> </span>-l
+</pre></div><p>查看目前的分区情况</p></div><div class="outline-4">
+<h4 id="org-title-3-5-1"><span class="section-number-4">3.5.1.</span> 分区建议</h4>
+<div class="outline-text-4" id="text-3-5-1"><p>硬盘分区有分区表的区别，这影响到启动引导和分区。如果你的分区表为dos，则只能有四个主分区，想要分更多需要建立一个拓展分区占用一个主分区的名额，然后在拓展分区内划分逻辑分区（详见fdisk部分），gpt分区表则没有影响。另外，使用dos分区表一般对应使用的是BIOS引导，而gpt对应的是efi引导，对启动分区的需求有不同。</p><ul class="org-ul">
+<li>根分区：<br/> 两种分区表对根目录的要求都是一致的，都是要求类型为Linux,文件系统得是ext4、 btrfs等支持linux权限系统的的文件系统（别想着把根分区格式化成vfat或是ntfs）
+</li>
+<li>家目录分区（可选）：<br/> 一般而言如果有可能频繁重装系统那么建立一个独立的家目录(/home)分区是一个不错的选择，能够减少重装系统时重新配置的痛苦，但也会限制空间利用，导致跟分区和家目录不能共用闲置空间。
+</li>
+<li>交换分区（可选）：<br/> 目前已经有交换文件这种更加灵活方便的形式存在，没有必要再单独划分出一个交换分区了。如果需要，要在分区时指定文件系统类型。
+</li>
+<li>BOOT分区：<br/> 是MBR+BIOS所需要的分区，需要在分区时为其加上可启动标志（新电脑比较少见用BIOS的了），大小200M左右，文件系统同根目录一样，挂载点在/boot(相对跟分区的挂载点而言)
+</li>
+<li>EFI分区：是GPT+UEFI所需要的分区，要求文件系统为vfat，建议挂载点在/boot/efi目录（如果最终分区表没有设置会自动挂载到/efi目录）
+</li></ul>
+</div></div><div class="outline-4">
+<h4 id="org-title-3-5-2"><span class="section-number-4">3.5.2.</span> 使用cfdisk进行分区</h4>
+<div class="outline-text-4" id="text-3-5-2"><p>cfdisk有着伪图形界面，对萌新更友好，故放到前面来。不过它好像还有一点限制，没有 fdisk那么灵活，fdisk的教程见下一节</p><p>刚进入cfdisk时如果硬盘没有分区表会询问你。上下方向键移动，回车选择。BIOS选择dos， EFI选择gpt就好。具体的操作就不细讲了。</p></div></div><div class="outline-4">
+<h4 id="org-title-3-5-3"><span class="section-number-4">3.5.3.</span> 使用fdisk进行分区</h4>
+<div class="outline-text-4" id="text-3-5-3"><p>使用命令开始为硬盘分区</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># fdisk /dev/sdX   #sdX为目标硬盘，实际中应为sda或sdb...</span>
+</pre></div><p>关于fdisk的部分命令列表:</p><ul class="org-ul">
+<li>m 查看帮助
+</li>
+<li>g 新建GTP分区表(会清空整个硬盘删除所有分区)
+</li>
+<li>o 新建MBR分区表(会清空整个硬盘删除所有分区)
+</li>
+<li>p 打印分区表（若p命令后中Disklable type:后为dos则为MBR分区表，gpt则为gpt分区表）
+</li>
+<li>n 新建分区
+<ul class="org-ul">
+<li>MBR分区表
+<ul class="org-ul">
+<li>1.确认分区类型
+<ul class="org-ul">
+<li>p 主分区（最多四个，编号1~4）
+</li>
+<li>e 扩展分区（占用主分区数量，最多一个，有了则不显示，编号同主分区）
+</li>
+<li>l 逻辑分区（不限量，前提是得有一个扩展分区，无则不显示，最大大小为扩展分区大小，即包容在扩展分区内，编号5~?）
+</li></ul>
+</li></ul>
+</li>
+<li>GPT分区表
+<ul class="org-ul">
+<li>1.无需确认分区类型，无分区类型之分
+</li></ul>
+</li>
+<li>共同步骤
+<ul class="org-ul">
+<li>2.确认分区编号
+</li>
+<li>3.分区起始扇区（一般不管）
+</li>
+<li>4.分区结束扇区（+单位 表示多大， -单位 表示剩余多大空间）
+</li></ul>
+</li></ul>
+</li>
+<li>d 移除分区，输入编号即可
+</li>
+<li>t 更改指定分区的分区类型（作用）
+</li>
+<li>w 保存退出
+</li>
+<li>q 不保存直接退出
+</li></ul>
+<p><a href="https://wiki.archlinux.org/title/Fdisk_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">也可以参考官方wiki</a></p></div></div><div class="outline-4">
+<h4 id="org-title-3-5-4"><span class="section-number-4">3.5.4.</span> 设置文件系统(mkfs)</h4>
+<div class="outline-text-4" id="text-3-5-4"><p>使用下列命令格式化分区，一般除了efi的efi分区要用vfat外，基本上都是用ext4</p><div class="org-src-container"><pre class="src src-bash">mkfs.&lt;FS&gt;<span class="w"> </span>/dev/sdXn
+<span class="c1"># &lt;FS&gt; 为对应的文件系统类型（ext3,ext4,vfat...），sdXn为硬盘上的第n个分区，n为分区编号</span>
+</pre></div></div></div><div class="outline-4">
+<h4 id="org-title-3-5-5"><span class="section-number-4">3.5.5.</span> 挂载分区</h4>
+<div class="outline-text-4" id="text-3-5-5"><p>使用mount,格式：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># mount /dev/sdXn /dir</span>
+</pre></div><p>关于挂载分区的具体内容请查看
+<a href="https://wiki.archlinux.org/title/File_systems_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">ArchWiki官方教程</a></p><blockquote>
+<p>sdXn为硬盘分区，/dir 为挂载目标目录，详见下表，</p></blockquote><p>但是在挂载硬盘时时不能直接按照下表挂载，/根目录一般挂载在USB系统的 <code>/mnt</code> 目录下，其他的磁盘挂载点跟着变化就行了，但一定要先挂载根目录再依文件夹的关系一个个挂载，没有的文件夹使用 <code>mkdir -p</code> 创建就好（例如：/boot/efi -&gt; /mnt/boot/efi)</p></div></div></div><div class="outline-3">
+<h3 id="org-title-3-6"><span class="section-number-3">3.6.</span> 安装基本系统</h3>
+<div class="outline-text-3" id="text-3-6"><p>在硬盘全部挂载后，我们就可以开始安装系统了</p><p>安装基本系统：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># pacstrap -i /mnt/ base base-devel linux linux-firmware</span>
+</pre></div><blockquote>
+<p>命令中的 <b><i>mnt</i></b> 要替换成你所挂载根目录分区的目录名，忘记了可以使用 <code>df -h</code> 或者 <code>lsblk</code> 查看</p></blockquote><blockquote>
+<p>你还可以在安装完基本系统后安装额外的软件方便使用，使用</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># passtrap -i /mnt/ 软件包名</span>
+</pre></div><p>安装软件包。建议装上 <b>dhcpcd</b> （DNS服务） <b>iwd</b> （联网） <b>vim</b> （文件编辑） <b>fish</b> （一种shell，默认就有强大的自动补全配置）</p></blockquote><blockquote>
+<p>倘若在前面的软件包设置里启用了archlinuxcn源，其实你可以额外安装内核软件包 <b>linux-lily</b> 在tty界面它原装支持显示中文</p></blockquote><p>配置分区表：</p><div class="org-src-container"><pre class="src src-bash">genfstab<span class="w"> </span>-U<span class="w"> </span>/mnt/<span class="w"> </span>&gt;&gt;<span class="w"> </span>/mnt/etc/fstab
+</pre></div><blockquote>
+<p>这里的 <b><i>mnt</i></b> 同理。-U 为使用UUID标识的意思</p></blockquote><p>进入新安装的系统：</p><div class="org-src-container"><pre class="src src-bash">arch-chroot<span class="w"> </span>/mnt/<span class="w"> </span>/bin/bash
+</pre></div><blockquote>
+<p>若前面你安装了 <b>fish</b> 就可以使用以下命令进入新的系统</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># arch-chroot /mnt/ /bin/fish</span>
+</pre></div></blockquote></div></div></div><div class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 第二安装阶段</h2>
+<div class="outline-text-2" id="text-4"><p>本阶段为进入chroot后的操作</p></div><div class="outline-3">
+<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 本地化</h3>
+<div class="outline-text-3" id="text-4-1"><blockquote>
+<p>官方wiki建议小白不要在这时候设置中文（因为会导致字体无法显示），建议在装好图形环境后再设置。</p><p>如果设置了中文导致乱码，可以尝试使用 <code>export LANG=en_US.UTF-8</code> 临时补救</p></blockquote><p>设置中文:</p><div class="org-src-container"><pre class="src src-bash">vim<span class="w"> </span>/etc/locale.gen
+</pre></div><p>输入 <code>/</code> 搜索zh_CN.UTF-8与en_US.UTF-8,分别去除前面的 <code>#</code> 号，并将其放到文件头部。如下：</p><div class="org-src-container"><pre class="src src-conf"><span class="na">zh_CN.UTF-8 UTF-8</span>
+<span class="na">zh_CN.GBK GBK</span>
+<span class="na">en_US.UTF-8 UTF-8</span>
+<span class="c1"># ......</span>
+</pre></div><p>并执行</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># locale-gen</span>
+</pre></div><p>以及</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># echo &quot;LANG=zh_CN.UTF-8&quot; &gt;&gt; /etc/locale.conf</span>
+<span class="c1"># export LANG=zh_CN.UTF-8</span>
+</pre></div><p>设置时区为上海，这里有两种办法：</p><ol class="org-ol">
+<li>手动设置
+<div class="org-src-container"><pre class="src src-bash"><span class="c1"># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span>
+</pre></div>
+</li>
+<li>工具设置
+<div class="org-src-container"><pre class="src src-bash"><span class="c1"># timedatectl set-timezone Asia/Shanghai</span>
+</pre></div>
+</li></ol>
+<p>设置硬件时钟：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># hwclock --systohc --utc</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-4-2"><span class="section-number-3">4.2.</span> 安装GRUB引导</h3>
+<div class="outline-text-3" id="text-4-2"><p>(如果需要使用systemd-boot等其他的启动引导器，请自行wiki)</p><p>安装grub软件包：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># pacman -S grub efibootmgr os-prober</span>
+</pre></div><blockquote>
+<p><b>os-prober</b> 可以用于自动识别电脑上的其他硬盘装的其他系统</p></blockquote><p>安装grub引导：</p></div><div class="outline-4">
+<h4 id="org-title-4-2-1"><span class="section-number-4">4.2.1.</span> BIOS引导模式下</h4>
+<div class="outline-text-4" id="text-4-2-1"><p>将grub引导安装在硬盘sdX的第n个分区</p><div class="org-src-container"><pre class="src src-bash">grub-install<span class="w"> </span>/dev/sdXn
+</pre></div><blockquote>
+<p>/dev/sdXn为硬盘上的第n个分区，也是你的BOOT分区（挂载到 <b><i>boot</i></b> ）</p></blockquote></div></div><div class="outline-4">
+<h4 id="org-title-4-2-2"><span class="section-number-4">4.2.2.</span> EFI引导模式下</h4>
+<div class="outline-text-4" id="text-4-2-2"><div class="org-src-container"><pre class="src src-bash">grub-install
+</pre></div></div></div><div class="outline-4">
+<h4 id="org-title-4-2-3"><span class="section-number-4">4.2.3.</span> 生成菜单、配置文件</h4>
+<div class="outline-text-4" id="text-4-2-3"><p>（生成/更新）配置:</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># grub-mkconfig -o /boot/grub/grub.cfg</span>
+</pre></div><blockquote>
+<p>如果需要启动时显示那一长串的日志，可以找到 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 将后面的 quiet去除。</p><p>如果使用多系统，可以编辑 <code>/etc/default/grub</code> ，找到 <code>GRUB_DISABLE_OS_PROBER</code> 并将后面的 <code>"true"</code> 改为 <code>"false"</code> 并重新执行更新配命令</p></blockquote></div></div></div><div class="outline-3">
+<h3 id="org-title-4-3"><span class="section-number-3">4.3.</span> 用户设置</h3>
+<div class="outline-text-3" id="text-4-3"><p>为root用户设置密码（否则无法登录）：</p><div class="org-src-container"><pre class="src src-bash">paswwd<span class="w"> </span>root
+</pre></div><blockquote>
+<p><b>root</b> 可以省略，前提是你在用root用户操作</p></blockquote><p>创建用户：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># useradd -m USERNAME -s /bin/SHELL</span>
+</pre></div><blockquote>
+<p><b>USERNAME</b> 为你的用户名,SHELL为你想用的shell名称，默认为bash，可以省略</p></blockquote><p>添加组/启用sudo：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># usermod USERNAME -aG sudo</span>
+</pre></div><blockquote>
+<p>将用户添加进 <b>sudo</b> 组</p></blockquote><p>为新用户创建密码（否则无法登录）：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># passwd USERNAME</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-4-4"><span class="section-number-3">4.4.</span> 重启前最后的配置</h3>
+<div class="outline-text-3" id="text-4-4"><p>启用dhcpcd服务（未安装的使用 <code>pacman -S dhcpcd</code> 安装）：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># systemctl enable dhcpcd</span>
+</pre></div><blockquote>
+<p>同理，可以启用iwd服务，启用后普通用户也可以使用iwctl了（未开启时必须使用root）</p></blockquote><p>sudo启用sudo组内用户的支持：</p><div class="org-src-container"><pre class="src src-bash"><span class="c1"># vim /etc/sudoers</span>
+</pre></div><p>找到 <code>#%sudo ALL=(ALL:ALL) ALL</code> ，移除 <code>#</code> 号取消注释（按下 <code>i</code> 进入插入模式再按下 <code>Esc</code> 退回普通模式。或者直接在行首按下 <code>dw</code> ）， <code>:w!</code> 强制保存后退出</p><blockquote>
+<p>由于sudoers一般是个只读文件，如果要使用sed大法还得改权限</p></blockquote><p>退出后重启进入安装好的系统：</p><div class="org-src-container"><pre class="src src-bash"><span class="nb">exit</span>
+reboot
+</pre></div></div></div></div><div class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 第三安装阶段(配置)</h2>
+<div class="outline-text-2" id="text-5"><p>重新进入系统的操作，如果未提到请参见博客的其他文章</p></div><div class="outline-3">
+<h3 id="org-title-5-1"><span class="section-number-3">5.1.</span> 使用图形界面</h3>
+<div class="outline-text-3" id="text-5-1"><p>图形界面有两大阵营，一套是过去使用的X11，虽然已经过时但基本盘还在，许多软件仍旧使用X图形界面。而另一套是新兴的wayland，由于后发生态仍在完善中，需要使用xwayland 在wayland使用X的窗口作为过渡，基本可用了，部分主流的DE适配甚至默认就是wayland。</p></div><div class="outline-4">
+<h4 id="org-title-5-1-1"><span class="section-number-4">5.1.1.</span> 安装一个桌面环境或者窗口管理器</h4>
+<div class="outline-text-4" id="text-5-1-1"><ul class="org-ul">
+<li>桌面环境(DE) 桌面环境一般提供了配套的桌面环境，适合开箱即用，不用太过折腾，问题较少。且一般 DE的包是包含各种依赖的，不用麻烦找依赖问题
+<ul class="org-ul">
+<li>gnome(wayland/x11)
+<div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>alacarte<span class="w"> </span>gnome<span class="w"> </span>networkmanager
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>gdm
+<span class="c1"># gdm为gnome的图形界面登录系统</span>
+</pre></div>
+</li>
+<li>xfce(x11)
+<div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>xfce4
+<span class="c1"># 可以通过运行下一行命令启动</span>
+<span class="c1"># startx /usr/bin/startxfce4</span>
+</pre></div>
+</li>
+<li>kde(wayland/x11)
+<div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>plassma-meta<span class="w"> </span>kde-utilities-meta<span class="w"> </span>kde-system-meta<span class="w"> </span>sddm
+<span class="c1"># 更完整的生态可以安装 kde-applications-meta 包</span>
+<span class="c1"># pacman -S konsole dolphin kdeconnet ark</span>
+<span class="c1"># 启用sddm(或者每次登陆都手动使用执行命令启动):</span>
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>sddm
+</pre></div>
+<p>kde目前(2025.08.01)已经是默认使用wayland会话而不使用x11了</p>
+</li></ul>
+</li>
+<li>窗口管理器(WM) 一般只提供窗口管理功能，轻量，需要自选配套的应用程序套件，会存在生态、主题设置等问题。
+<ul class="org-ul">
+<li>i3-wm(x11)
+<div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>i3<span class="w"> </span>i3blocks<span class="w"> </span>i3lock<span class="w"> </span>i3status
+<span class="c1"># i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。</span>
+<span class="c1"># 我个人习惯安装kde的软件并在i3wm下使用。即</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>i3<span class="w"> </span>i3blocks<span class="w"> </span>i3lock<span class="w"> </span>i3status<span class="w"> </span>sddm<span class="w"> </span>kdeconnet<span class="w"> </span>konsole<span class="w"> </span>dolphin<span class="se">\</span>
+<span class="w">       </span>ark<span class="w"> </span>qt5ct<span class="w"> </span>picom<span class="w"> </span>polybar<span class="w"> </span>feh<span class="w"> </span>rofi
+<span class="c1"># qt5ct用于设置在i3-wm下kde程序的主题,配置（同上*pam_environment*已失效）：</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;QT_QPA_PLATFORMTHEME DEFAULT=qt5ct&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
+<span class="c1"># </span>
+<span class="c1"># picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁纸。rofi用于启动应用</span>
+<span class="c1"># 2023-01-17更新：i3-gaps已经被并入了i3软件包了</span>
+</pre></div>
+</li>
+<li>dwm(x11)<br/> 好用，虽然不是新手该碰的东西(所以也不讲)
+</li>
+<li>hyprland(wayland)<br/> 由于需要的配置工作较大，请参见其他博客文章
+</li></ul>
+</li></ul>
+</div></div><div class="outline-4">
+<h4 id="org-title-5-1-2"><span class="section-number-4">5.1.2.</span> 安装登录管理器</h4>
+<div class="outline-text-4" id="text-5-1-2"><p>gnome官方搭配gdm，kde可使用sddm。这边建议使用sddm。</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># 下面的命令需要使用root权限</span>
+<span class="c1"># 安装软件包</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>sddm
+<span class="c1"># 启用开机自启动服务</span>
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>sddm
+<span class="c1"># 立即启动sddm服务</span>
+systemctl<span class="w"> </span>start<span class="w"> </span>sddm
+<span class="c1"># 若熟悉systemctl命令的可以自行摸索</span>
+</pre></div><p>如果不想用登录管理器，想要用tty登录的“原始”方式，可参考使用下列方法：</p><ul class="org-ul">
+<li>使用X图形界面：<br/> 安装xorg-xinit软件包:
+<div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>xorg-xinit
+</pre></div>
+<p>在终端执行下列命令启动图形界面：</p>
+<div class="org-src-container"><pre class="src src-shell">startx<span class="w"> </span>/usr/bin/startplasma-x11
+</pre></div>
+<p>上面的命令中startx后面跟的是DE的启动可执行文件的完整路径，上例是kde的x11，若使用xfce4对应的文件为/usr/bin/startxfce4，而lxde是startlxde（ldqt是startlxqt）</p>
+</li>
+<li>使用wayland的则不需要使用startx，直接执行对应的文件即可。例如启动KDE:
+<div class="org-src-container"><pre class="src src-shell">startplasma-wayland
+</pre></div>
+<p>注意，如果使用startx后面跟上上面的文件可能会出现显示错误。</p>
+</li></ul>
+</div></div></div><div class="outline-3">
+<h3 id="org-title-5-2"><span class="section-number-3">5.2.</span> 日常软件</h3>
+<div class="outline-text-3" id="text-5-2"><ul class="org-ul">
+<li>浏览器<br/> archlinux官方源自带的大众浏览器有俩，一个 <code>firefox</code> ，一个 <code>chromium</code> ，如果装完后悔了想要下载其他镜像就可以装这两个浏览器。
+</li>
+<li>输入法(fcitx原生中文)<br/> root权限执行下列命令安装基本fcitx框架并启用fcitx
+<div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>fcitx<span class="w"> </span>fcitx-configtool
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;GTK_IM_MODULE DEFAULT=fcitx&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;QT_IM_MODULE  DEFAULT=fcitx&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;XMODIFIERS    DEFAULT=@im=fcitx&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;QT_QPA_PLATFORMTHEME=qt5ct&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
+<span class="c1"># 注：通过 ~/.pam_environment 文件设置环境变量的方法已失效，</span>
+<span class="c1"># 请使用其他方法设置环境变量，例如通过 /etc/environment 文件定义</span>
+</pre></div>
+<p>然后执行下列命令安装原生的中文输入</p>
+<div class="org-src-container"><pre class="src src-bash"><span class="c1"># 基本支持</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>fcitx5-chinese-addons
+<span class="c1"># 拓展中文词典(archlinuxcn源)</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>fcitx5-pinyin-moegirl<span class="w"> </span>fcitx5-pinyin-zhwiki
+</pre></div>
+<p>优点就是开箱即用，基本不用配置，但缺点就是输入效果较差。可以使用效果更好但配置更麻烦的rime，详见其他文章。</p>
+</li></ul>
+</div></div><div class="outline-3">
+<h3 id="org-title-5-3"><span class="section-number-3">5.3.</span> 中文字体</h3>
+<div class="outline-text-3" id="text-5-3"><p>可以简单拿来用的字体(archlinuxcn源)：</p><div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>wqy-zenhei
+</pre></div><p>其他我安装的字体：</p><div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>ttf-liberation<span class="w"> </span>ttf-fira-code<span class="w"> </span>ttf-fira-mono<span class="w"> </span>ttf-nerd-fonts-symbols-mono<span class="w"> </span>ttf-jetbrains-mono
+</pre></div><p>实际上更好的字体还得是自己上网找然后自行安装到 <code>$HOME/.local/share/fonts/</code> 目录或者 <code>/usr/share/fonts/</code> 目录。</p></div></div><div class="outline-3">
+<h3 id="org-title-5-4"><span class="section-number-3">5.4.</span> 使用AUR</h3>
+<div class="outline-text-3" id="text-5-4"><p>使用AUR助手yay:</p><div class="org-src-container"><pre class="src src-bash">git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/yay-bin.git
+<span class="nb">cd</span><span class="w"> </span>yay-bin
+makepkg<span class="w"> </span>-si
+</pre></div><blockquote>
+<p>如果启用了archlinuxcn源可以直接执行  </p><div class="org-src-container"><pre class="src src-bash">pacman<span class="w"> </span>-S<span class="w"> </span>yay
+</pre></div><p>安装yay</p></blockquote></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: 2022-07-02 22:56</p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 记录我个人安装archlinux的过程，备用</p>
+<p class="date">生成于: 2025-08-21 五 14:49:17</p>
+</div>
+</body>
+</html>

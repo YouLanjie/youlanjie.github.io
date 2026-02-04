@@ -1,0 +1,56 @@
+#+TITLE: 关于
+#+setupfile: ./setup.setup
+
+* 我想说的
+这是我的个人网站，依靠[[./lib/python/orgreader2.py][自制的python org导出程序]]和[[./build.py][导出构建脚本]]导出的html构建。html
+样式基本仿照Emacs Org-mode导出的HTML文件，故也可换用emacs导出(原本用的就是emacs
+后来嫌慢才改的)。目前两个程序都还在改进中，但已经能凑合凑合用了。
+** 关于主题
+曾经使用过的其他css主题样式：
+- [[https://github.com/yzs249175311/org-html-theme-dull][org-html-theme-dull]]
+- read-the-docs
+
+使用的css样式为由Org官方网页的样式文件修改而来的样式文件。修改部分配色，增加部分
+样式规定(到如今改得越来越多了)。主题的浅色配色部分来自 =org-html-theme-dull= ，
+暗色主题来自konsole终端的默认配色并稍作修改。
+
+本来我并不打算使用js文件的，但是奈何若用原版的html导出生成导航栏时改一点点东西就
+需要全部导一遍，气不过，就改用了js，现在真香了
+* 一些小介绍
+** 源文件的获取
+这个网站实际上已经在 /2023.05.14/ 的更新中将源文件合并进了。理论上你能够访问的
+html文件你也能够访问相应的Org源文件。就例如本页的[[./about.org][源文件]]。我应该不会再添
+加一个源文件的下载列表，所以若想要源文件请自行将 =xxx.html= 改成 =xxx.org= 的格
+式以获取源文件。
+** 关于草稿的问题
+由于脚本尚不完善，所以有很多的草稿文章（或者是烂尾文）会跟着一起发出来，所以请不
+要在意，友好地关掉链接即可。
+** 关于返回主页
+两款主题均没有改动 =Up= 与 =Home= 的链接。在部分文章中 =Up= 链接是有定义的，不过
+大多是没有定义链接目标的所以一般会回到文章页面中。而 =Home= 链接则是有定义的，均
+为主页。所以如果想要返回主页，使用 =Home= 即可。
+** 关于本地构建
+由于网页对于 =/= 链接的较广泛使用，在将Github仓库克隆到本地后是无法直接访问的，
+需要使用nodejs的[[https://www.npmjs.com/package/http-server][http-server]]工具开启一个服务或者使用nginx配置一下本地服务（我用的
+是nginx）
+** 关于右下（或左下角）的信息
+那些信息部分由Org文档指定，部分由Emacs自动生成。其中 =Date= 一般为文章的创建时间，
+而 =Created= 则为Html文件的生成时间。一般可以用于参考文章的最后更新时间，不过有
+时网站做出一些调整更新所有的文章时，它就会更新。所以仅作参考，也有部分内容是虚标
+的。(现在上述英文都换成中文了)
+* Setting
+** 切换css主题
+#+begin_export html
+<ul>
+<li><a onclick='setTheme("main")' href="/">[main]</a>:默认主题，兼容性好（应该），性能要求低</li>
+<li><a onclick='setTheme("ohtd")' href="/">[org-html-theme-dull]</a>:动画可能会有点卡</li>
+<li><a onclick='setTheme("rtd")' href="/">[read_the_docs]</a>：加载起来可能会比较慢，不过还是很易读的</li>
+</ul>
+#+end_export
+** 切换css字体
+#+begin_export html
+<ul>
+<li><a onclick='setFont("Sans")' href="">[Sans]</a>:默认的Sans无衬线字体</li>
+<li><a onclick='setFont("Serif")' href="">[Serif]</a>:Noto Serif CJK SC衬线字体（宋体）</li>
+</ul>
+#+end_export

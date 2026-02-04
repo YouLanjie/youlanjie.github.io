@@ -1,0 +1,23 @@
+#+TITLE: 部分Kde体系应用记录备忘
+#+DATE: <2025-10-01 三 23:33>
+#+SETUPFILE: ../../../setup.setup
+* 引
+纯记录，当清单。主要是Arch下kde-applications组一大堆包，而我傻乎乎搞不清哪些包是
+干嘛的，故作记录
+* 清单
+- ark: 压缩包相关
+- dolphin: 文件管理器
+- filelight: 磁盘占用情况分析
+- ghostwriter: Markdown编辑器，没用过
+- gwenview: 图片查看器
+- kalzium: 元素周期表
+- kcharselect: 字符选择器(也许有用)
+- kdeconnect: 多平台联动，但一般要在kde体系内好使
+- kendlive: 剪辑软件
+- kig: 交互几何软件？
+- kjournald: 臭看日志的
+- koko: 臭看图的
+- ksystemlog: 臭看日志的
+- okular: 文档查看
+
+- kate: 编辑器一个

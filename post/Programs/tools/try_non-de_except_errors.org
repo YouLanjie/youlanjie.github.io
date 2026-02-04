@@ -1,0 +1,360 @@
+#+TITLE: 对于非DE下的不适应性问题
+#+DATE: <2025-10-05 日 14:05>
+#+DESCRIPTION: 在WM(dwm,Hyprland,etc.)下可能会遇到的各种脱离环境问题
+#+SETUPFILE: ../../../setup.setup
+* 前言
+自认为是一个WM用户，辗转过i3,bspwm,dwm,hyprland,主要使用KDE体系程序
+
+本文重点记载解决：主题问题、体系程序正常运行问题
+* Qt应用主题
+使用kvantum+qt5ct/qt6ct解决。使用kvantum设置主题，再使用qt5ct/qt6ct作为后端。
+
+特别的，对于qt6ct存在配色无法正确应用的问题（主要体现在dolphin，如果使用暗色主题
+那它的问题会很明显：背景色和字体颜色都是暗色的看不清，若使用列表查看会看到文件一
+条隔一条的白色背景行），可以换换qt6ct-kde这个打过补丁的aur包。
+* Gtk应用主题
+#+begin_quote
+由于我也不是很懂，所以仅供参考。
+#+end_quote
+较为独立的设置程序([[https://wiki.archlinux.org/title/GTK#Configuration_tools][archwiki]])：
+- lxappearance: 设置gtk2配置(覆写gtk2配置文件)
+- lxappearance-gtk3: 设置gtk3配置(覆写gtk3配置文件)
+- dconf-editor: gnome修改由dconf保存的配置
+可供测试的程序(ldd判断版本)：
+- =gtk-demo= gtk2测试，属gtk2包(gtk2库自带)
+- =thunar= gtk3测试，属thunar包(xfce4的文件管理器)
+- =iwgtk= 纯gtk4测试，属iwgtk包(gtk写的iwd控制界面)
+- =zenity= gtk4+libadwaita测试，属zenity包
+  #+begin_src shell
+    # 示例命令：
+    zenity --title 中文输入 --text 中文输入 --width 500 --entry
+  #+end_src
+- =adwaita-1-demo= gtk4+libadwaita测试，属libadwaita-demos包
+配置文件/体系([[https://wiki.archlinux.org/title/GTK#Configuration][archwiki]])：
+- gtk2: =~/.gtkrc-2.0=
+- gtk3: =~/.config/gtk-3.0/settings.ini=
+- gtk4: =~/.config/gtk-4.0/settings.ini= (仅后备使用，即在无更高级的配置共享机制
+  情况向的fallback,[[https://docs.gtk.org.cn/gtk4/class.Settings.html][gtk4文档]])
+  #+begin_quote
+  个人认为gtk4最大的问题是很多用它开发的程序都链接了libadwaita库
+  #+begin_src shell
+    $ ldd /usr/bin/zenity|grep adw
+    	libadwaita-1.so.0 => /usr/lib/libadwaita-1.so.0 (0x00007f9a19200000)
+    $ ldd /usr/bin/adwaita-1-demo|grep adw
+    	libadwaita-1.so.0 => /usr/lib/libadwaita-1.so.0 (0x00007faf0d600000)
+    ...
+  #+end_src
+  而这个库最大一问题就是它默认不支持自定义主题，目的在于统一外观，减少开发工作量。
+  虽说它可以被强制要求主题化，但很多主题都不支持libadwaita所以看起来也不好。
+  #+end_quote
+  - =xsettings= 一套在X11下使用的配置共享机制,一般由xsettingsd包提供后台服务，由
+    DE启动时启动（因为其提供的systemd service是static即无法使用enable/disable）。
+  - =portal= 翻译作“门户”，应该是指一堆 =xdg-desktop-portal*= 的东西，wayland
+    下的配置共享机制。如果portal不可用则需要使用下面说的dconf机制。详见[[https://wiki.archlinux.org/title/XDG_Desktop_Portal][wiki]]。
+  - =dconf= Gnome使用的配置存储系统，配置存储在二进制文件中而非文本文件。portal
+    不可用时(如dwm没有portal,或者使用hyprland但没装portal包)使用的后备配置，需要
+    设定环境变量 =ADW_DISABLE_PORTAL=1= 以启用。下面有个例子。
+    #+begin_src shell
+      # 读取gtk4设置的主题：
+      dconf read /org/gnome/desktop/interface/gtk-theme
+    #+end_src
+  - =gsettings= 基于dconf的更高级工具(来自glib2包)
+    #+begin_src shell
+      # 列出所有的“路径”
+      gsettings list-schemas
+      # 列出指定路径下所有的“key”,对应到下一条命令的`gtk-theme`
+      gsettings list-keys org.gnome.desktop.interface
+      # 读取gtk4设置的主题(进行与上面的dconf一样的操作)：
+      gsettings get org.gnome.desktop.interface gtk-theme
+      # 设置gtk4主题：
+      gsettings set org.gnome.desktop.interface gtk-theme "Arc:dark"
+      # 设置亮色主题：
+      gsettings set org.gnome.desktop.interface color-scheme default
+      # 设置暗色主题：
+      gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+    #+end_src
+    如果嫌命令行麻烦可以安装上面的dconf-editor进行配置，主题相关设置应该都在
+    /org.gnome.desktop.interface/ 里
+  - =GTK_THEME= 它是一个环境变量，并非工具，但是可以强制要求沟槽的libadwaita库使
+    用其中指定的主题。 *注意：很多主题对libadwaita的支持并不完善，很可能会出现奇
+    奇怪怪的问题* 如图：
+    #+CAPTION: Hyprland在shell设置GTK_THEME后启动依赖libadwaita的程序
+    [[./try_non-de_except_errors/scr_20251005_161743.avif]]
+
+    在设置为"Arc-Dark"，准确地说是设置为/usr/share/theme下所有为 =Arc*= 文件夹的
+    名称，是有问题的（界面变成了透明的），而设置为"Arc:dark"，准确地说是在上面的
+    基础上加上":dark"后缀，则没有问题。很神奇对吧。
+
+    呃，实际上经过我刚刚的测试，实际上这个和 /org.gnome.desktop.interface
+    color-scheme/ 的设定有关。如果设定为 /default/ 则使用无":dark"是没有问题的，
+    但如果设定为 /prefer-dark/ 则需要使用":dark"否则会出现像上面一样的问题。
+* Qt/KDE/Dolphin打开方式列表清空问题
+原因：在kde下会后台更新一个类似数据库的文件，dolphin等会在这个列表中读取可用的应
+用。在非DE下不会更新该文件，导致列表消失。一般情况下在dolphin设置了某种文件类型
+的默认打开方式则会“更新”那个文件，导致列表消失。
+
+救法：
+#+begin_src shell
+  # 查看可用的前缀
+  $ ls /etc/xdg/menus/*-applications.menu
+  /etc/xdg/menus/arch-applications.menu
+  /etc/xdg/menus/plasma-applications.menu
+  /etc/xdg/menus/xfce-applications.menu
+  # 重建缓存
+  $ XDG_MENU_PREFIX=arch- kbuildsycoca6
+#+end_src
+如果不设置或者错误设置 =XDG_MENU_PREFIX= 则会报错：
+#+begin_src shell
+  $ kbuildsycoca6
+  kbuildsycoca6 running...
+  "applications.menu"  not found in  QList("/home/Chglish/.config/menus", "/etc/xdg/menus")
+#+end_src
+
+其自动更新的文件是 =~/.cache/ksycoca6_*= ，如果能够监控该文件的变化然后在变更后
+运行命令更新上面的命令即可优雅地解决该问题，而不是要么手动更新，要么一直挂着个
+while和sleep定时自动更新浪费性能。
+
+下面引用个自己搓的python脚本(顺带有使用swww设置固定、随机幻灯片壁纸功能)：
+#+begin_src python
+  #!/usr/bin/env python
+  # Created:2025.10.04
+  """用于窗口管理器(hyprland,dwm等)的自定义会话服务"""
+
+  import os
+  import time
+  import subprocess
+  import random
+  from pathlib import Path
+
+  def check_lock() -> bool:
+      """检查进程锁"""
+      for f in Path("/tmp/").glob(f"hyprland_custom_server.{os.getuid()}.*"):
+          if not f.is_file():
+              continue
+          pid = int(f.suffix[1:])
+          try:
+              os.kill(pid, 0)
+          except OSError:
+              print(f"INFO clean up lock file '{f}'")
+              f.unlink()
+              continue
+          print(f"WARN same process '{pid}' exists")
+          return True
+      lock = Path(f"/tmp/hyprland_custom_server.{os.getuid()}.{os.getpid()}")
+      lock.touch()
+      return False
+
+  class AppsMenu:
+      """构建KDE的applications.menu缓存(kbuildsycoca6)"""
+      def __init__(self) -> None:
+          self.available = False
+          base_files = sorted(Path("/etc/xdg/menus/").glob("*-applications.menu"),
+                              key=lambda x:x.stat().st_size, reverse=True)
+          if not base_files:
+              print("ERROR '/etc/xdg/menus/*-applications.menu' not found")
+              print("Try: pacman -S archlinux-xdg-menu")
+              return
+          prefix = base_files[0].name.replace("-applications.menu", "")
+          print(f"INFO using file '{base_files[0]}' with prefix '{prefix}'")
+          self.env = dict(os.environ)
+          self.env.update({"XDG_MENU_PREFIX":f"{prefix}-"})
+
+          if self.run_build():
+              print("WARN kbuildsycoca6 不可用")
+              return
+          home = Path.home()
+          build_files = sorted(home.glob(".cache/ksycoca6_*"), key=lambda x: x.stat().st_mtime)
+          if not build_files:
+              print("ERROR file '~/.cache/ksycoca6_*' not found")
+              return
+          self.mtime = build_files[-1].stat().st_mtime
+          self.build_file = build_files[-1]
+          self.available = True
+      def run_build(self) -> int:
+          """运行kbuildsycoca6命令"""
+          if not self.available:
+              return 0
+          return subprocess.run("kbuildsycoca6", env=self.env, check=False).returncode
+      @property
+      def get_mtime(self) -> float:
+          """获取目标文件时间"""
+          if not self.available:
+              return 0
+          return self.build_file.stat().st_mtime if self.build_file.exists() else 0
+      def update(self) -> None:
+          """对比更新文件"""
+          if not self.available:
+              return
+          # print(f"Check, {time.strftime("%Y.%m.%d %H:%M:%S")}")
+          if self.mtime != self.get_mtime:
+              self.run_build()
+              self.mtime = self.get_mtime
+
+  class Wallpaper:
+      """更新壁纸"""
+      el = ("png", "jpg", "jpeg", "webp", "avif")
+      wallpaper_path = Path.home()/"Pictures/Wallpaper/"
+      def __init__(self) -> None:
+          self.now = None
+          self.count = 0
+      def set_wallpaper(self, f:Path):
+          """设置壁纸"""
+          f = f.resolve()
+          if self.now == f:
+              return
+          self.now = f
+          subprocess.run(["swww", "img", f], check=False)
+          print(f">>> {f}")
+      def update_wallpaper(self):
+          """更新壁纸"""
+          for e in self.el:
+              if (self.wallpaper_path/f"wallpaper_set.{e}").is_file():
+                  self.set_wallpaper(self.wallpaper_path/f"wallpaper_set.{e}")
+                  self.count = 0
+                  return
+
+          if self.count % (60*3) != 0:
+              self.count += 1
+              return
+          self.count += 1
+
+          build_files = []
+          for e in self.el:
+              build_files += self.wallpaper_path.glob(f"**/*.{e}")
+          build_files = sorted([i for i in build_files if i.is_file()],
+                               key=lambda x: x.stat().st_mtime)
+          self.set_wallpaper(random.choice(build_files))
+  def main():
+      """主函数"""
+      if not (os.environ.get("WAYLAND_DISPLAY") or os.environ.get("DISPLAY")):
+          print("WARN both 'WAYLAND_DISPLAY' and 'DISPLAY' are empty")
+          print("Exiting...")
+          return
+      if check_lock():
+          print("Exiting...")
+          return
+
+      menu = AppsMenu()
+      wallpaper = Wallpaper()
+      while True:
+          menu.update()
+          wallpaper.update_wallpaper()
+          time.sleep(1)
+
+  if __name__ == "__main__":
+      main()
+#+end_src
+* Hyprland拓展控制脚本
+到目前(2025.10)，Hyprland默认还不支持移动平铺窗口和悬浮窗口二合一的命令，也就是
+说默认情况下想用键盘移动窗口需要区分开平铺和悬浮的快捷键，要么自己写个脚本，那彳
+亍，这里就有我自己写的个脚本。它还有以下功能：
+- 移动窗口，自动判断平铺和悬浮窗口可用命令
+- 切换工作区内窗口，基于rofi(自带的-show window不支持局限于工作区内)
+- 为工作区内窗口打标签，基于上一条功能。可用于自行设定针对特定tag的windowrule，
+  用于应用特定设置，如透明度甚至是取消焦点（即不能聚焦和操作那个窗口，想恢复就只
+  能依赖在窗口直接选择，也是脚本产生的一个重要原因）等。
+- 切换毛玻璃效果(-c "blur")
+#+begin_src python
+  #!/usr/bin/env python
+  # hyprland控制拓展脚本
+  import sys
+  import json
+  import argparse
+  import subprocess
+
+  def err(s):
+      print(s, file=sys.stderr)
+
+  def select_window() -> str:
+      windows = json.loads(
+              subprocess.run("hyprctl clients -j",
+                             shell=True,capture_output=True,check=False).stdout)
+      workspace = json.loads(
+              subprocess.run("hyprctl activeworkspace -j",
+                             shell=True,capture_output=True,check=False).stdout)
+      if not isinstance(windows, list) or not isinstance(workspace, dict):
+          err("hyprctl命令出问题了？(json格式)")
+          return ""
+      obj_windows = [i for i in windows if i["workspace"]["id"] == workspace["id"]]
+      selections = "\n".join([f"{ind}# {value["title"]}" for ind,value in enumerate(obj_windows)]).encode()
+      selected_window = subprocess.run("cat|rofi -dmenu",
+                                       input=selections,
+                                       shell=True,capture_output=True, check=False).stdout.decode()
+      if not selected_window.split("#"):
+          err("选择取消")
+          return ""
+      address = obj_windows[int(selected_window.split("#")[0])]["address"]
+      return address
+
+  def main():
+      if subprocess.run("which hyprctl > /dev/null", shell=True,
+                            check=False).returncode:
+          err("没有hyprctl命令，请检查后端")
+          return
+      step = 10
+      direction = {"h":f"-{step} 0", "j":f"0 {step}", "k":f"0 -{step}", "l":f"{step} 0"}
+      hyprland_direction = {"h":"l", "j":"d", "k":"u", "l":"r"}
+      argparser = argparse.ArgumentParser(description="hyprland控制拓展脚本")
+      argparser.add_argument("-m", "--move", default=None, help="移动窗口")
+      argparser.add_argument("-c", "--config", default=None, help="设置（切换）某些变量的值")
+      argparser.add_argument("-t", "--tag", action="append", help="为工作区内窗口打标签")
+      argparser.add_argument("-s", "--switch", action="store_true", help="切换工作区内窗口")
+      args = argparser.parse_args()
+      cmd = ""
+      if args.move:
+          if args.move not in direction:
+              err("方向错误，应当为以下几个的一个(VimBindings):")
+              err(direction.keys())
+              return
+          result = subprocess.run("hyprctl activewindow -j",
+                                  shell=True, capture_output=True, check=False)
+          stat = json.loads(result.stdout)
+          if not isinstance(stat, dict):
+              err("hyprctl命令出问题了？(json格式)")
+              return
+          if stat.get("floating") and stat.get("fullscreen") == 0:
+              cmd = f"hyprctl dispatch moveactive \" {direction[args.move]}\""
+          else:
+              cmd = f"hyprctl dispatch movewindow \"{hyprland_direction[args.move]}\""
+          err(f"RUN: {cmd}")
+          subprocess.run(cmd,shell=True,check=False)
+      if args.config == "blur":
+          result = subprocess.run("hyprctl getoption decoration:blur:enabled -j",
+                                  shell=True,capture_output=True,check=False)
+          stat = json.loads(result.stdout)
+          if not isinstance(stat, dict):
+              err("hyprctl命令出问题了？(json格式)")
+              return
+          err(stat)
+          err(stat.get("set"))
+          flag = "false" if stat.get("int") else "true"
+          cmd = f"hyprctl keywords decoration:blur:enabled {flag}"
+          err(f"RUN: {cmd}")
+          subprocess.run(cmd, shell=True, check=False)
+      if args.switch:
+          address = select_window()
+          if not address:
+              return
+          subprocess.run(f"hyprctl dispatch focuswindow address:{address}",
+                         shell=True,check=False)
+      if args.tag:
+          selected_tag = args.tag[0]
+          if len(args.tag) > 1:
+              selected_tag = subprocess.run("cat|rofi -dmenu",
+                                            input="\n".join(args.tag).encode(),
+                                            shell=True,capture_output=True,
+                                            check=False).stdout.decode()
+              if not selected_tag:
+                  err("选择取消")
+                  return
+              selected_tag = selected_tag.splitlines()[0]
+          address = select_window()
+          if not address:
+              return
+          print(f"hyprctl dispatch tagwindow {repr(selected_tag)} address:{address}")
+          subprocess.run(f"hyprctl dispatch tagwindow {repr(selected_tag)} address:{address}",
+                         shell=True,check=True)
+
+  if __name__ == "__main__":
+      main()
+#+end_src

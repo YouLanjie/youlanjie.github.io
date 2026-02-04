@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="对my-test仓库里的talking_local.py做的记录" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>使用python写一个聊天室程序</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">使用python写一个聊天室程序</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 简介</a><ul><li><a href="#org-title-1-1">1.1. 特性</a></li><li><a href="#org-title-1-2">1.2. Web UI界面布局</a></li></ul></li>
+<li><a href="#org-title-2">2. 说明/碎碎念</a></li></ul></div></div>
+<div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 简介</h2>
+<div class="outline-text-2" id="text-1"><p>这是一个简单的python程序，被设计为不需要第三方库，可以在python3.8上正常运行。文件链接<a href="/lib/python/talking_local.py">在这里</a>。</p></div><div id="outline-container-1-1" class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 特性</h3>
+<div class="outline-text-3" id="text-1-1"><ol class="org-ol">
+<li>具有命令行操纵界面
+</li>
+<li>拥有web ui
+</li>
+<li>不依赖第三方库
+</li>
+<li>针对私人的windows选择打开方式导致的工作目录漂移问题做了针对政策
+</li>
+<li>消息校验机制，不保护，仅提醒
+</li>
+<li><p>使用json存储聊天文件，终端且内置格式化命令，易于阅读和迁移聊天数据。</p>
+</li></ol>
+</div></div>
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="org-title-1-2"><span class="section-number-3">1.2.</span> Web UI界面布局</h3>
+<div class="outline-text-3" id="text-1-2"><ol class="org-ol">
+<li>页面最上方是导航栏，含有【消息列表】，【用户列表】，【搜索界面】，【关于】，【登录】和【注册】这几个页面。其中登录注册会在处于登录状态后变为用户名，指向用户的个人面板。
+</li>
+<li>消息列表上下含有分页选择器，在登录后页面最下面会有消息发送框。
+</li>
+<li><p>消息列表点击用户名可以跳转到用户列表，用户列表点击用户名可跳转到登录界面</p>
+</li></ol>
+</div></div></div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 说明/碎碎念</h2>
+<div class="outline-text-2" id="text-2"><p>由于程序由最初的纯终端发展而来，所以终端和web端的处理逻辑基本分离，但数据基础基本共用。程序以全局 <code>System</code> 类对象为数据共享基础，通过其操作用户、消息数据，终端和webui仅在登录用户上作区分。</p><p>由于终端限制，终端发送的消息仅能为多行。在linux下需要使用readline“标准库”增强linux下的input()功能，而在windows下经测试玄学的cmd已经够用了。相对的，相较于网页，终端的用户登录时密码不是强制要求的。所以就算命令行注册的用户设置了空密码webui也是登录不进去的。</p><blockquote>
+<p>奇怪，我总觉得这种事情挺有成就感的应当记点什么东西纪念下，但是就是没想到要记什么东西，敲半天字反而觉得多余了。。。算了，不删了，留着吧。</p></blockquote></div></div></div>
+<div id="postamble" class="status">
+<p class="date">时间: <2025-11-22 六 11:00></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 对my-test仓库里的talking_local.py做的记录</p>
+<p class="date">生成于: 2025-12-20 六 17:58:37</p>
+</div>
+</body>
+</html>

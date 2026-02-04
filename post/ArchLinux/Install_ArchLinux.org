@@ -1,0 +1,554 @@
+#+title: ArchLinux安装笔记
+#+date: 2022-07-02 22:56
+#+description: 记录我个人安装archlinux的过程，备用
+
+#+setupfile: ../../setup.setup
+
+* 前言
+本blog用于记录我安装ArchLinux的方法，更专业的教程请查阅[[https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][官方Wiki]] (虽然大部分内容
+都是参考的wiki)
+* 准备U盘启动盘
+1. 从[[https://archlinux.org/download/][官网]]上下载ArchLinux的安装镜像
+   1. 文件名格式一般为 =archlinux-YYYY.MM.DD-x86_64.iso=
+   2. 下滑找到 *China* 分栏 有国内镜像服务器源，速度会快很多
+   3. 推荐使用[[https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/][清华云]]与[[https://mirrors.aliyun.com/archlinux/iso/latest/][阿里云]]
+2. 拷录安装镜像到U盘或者其他安装介质
+   1. windows下则使用任意一款U盘拷录软件（自行百度）拷录镜像文件到U盘（注意，被
+      拷录的U盘的所有数据都会丢失，请备份好资料后再执行操作）。
+   2. 而Linux下则可以（使用root权限）使用下面的命令拷录镜像文件到U盘上(U盘不能挂
+      载到系统上)
+      #+begin_src shell
+      # dd if=你的镜像文件名称 of=/dev/sdX bs=512    #sdX为要拷录的U盘设备，实际中应为sda或sdb
+      #+end_src
+      #+begin_quote
+      如果确认不了你的U盘是哪个，可以执行下面的命令查看你的磁盘状况
+      #+begin_src shell
+        # fdisk -l
+      #+end_src
+      一般通过大小和分区情况应该能分出来
+      #+end_quote
+      （Linux的磁盘管理机制请自行百度）
+3. *除非你能够同时查看教程(例如说有还有台手机之类的在旁边)则进行下一步，否则建议
+   先记下下面的安装过程较好（没记住到时候装一半删了旧系统然后碰到问题不知道怎么
+   解决就等着喜提砖机一块了）*
+4. 重启电脑，更改启动顺序或（一般情况下）按下F12选择启动项，进入Arch的安装镜像系
+   统。倘若屏幕上出现 /FALT/ 报错请自行搜索解决(我忘了有什么情况会报错了)
+* 第一安装阶段
+此阶段的操作在archlinux镜像系统中进行
+** 确认引导类型
+执行以下命令：
+#+begin_src bash
+  # ls /sys/firmware/efi/efivars
+#+end_src
+倘若屏幕提示 =No such file or directory= 则你的电脑是BIOS引导，反则是EFI引导
+#+begin_quote
+个人办法：其实如果在开机时留意一下弹出过的菜单界面就能知道你的是什么引导方式。
+| BIOS引导的长这样：                   | 而EFI的长这样：                      |
+| [[./2022-07-02_02/2022-07-02_02-02.png]] | [[./2022-07-02_02/2022-07-02_02-01.png]] |
+| 引导器: syslinux                     | 引导器: systemd-boot                 |
+关于具体的引导器区别，建议自行维基了解
+#+end_quote
+** 联网
+有线网络的联网教程请自行百度，这里主要讲无线网络的连接。
+
+无线网络联网，你可以使用 =wifi-menu= 工具联网，而我个人更倾向于使用 =iwd= 工具进
+行联网。在终端输入
+#+begin_src bash
+# iwctl
+#+end_src
+打开iwd的设置界面,一下为一些常用命令列表：
+| 命令                             | 作用                                                                        |
+|----------------------------------+-----------------------------------------------------------------------------|
+| device list                      | 列出可用的网络设备                                                          |
+| station 设备名称 scan            | 启用指定的设备                                                              |
+| station 设备名称 get-networks    | 获取网络列表                                                                |
+| station 设备名称 connet 网络名称 | 连接指定的网络，有密码的会要求输入密码，连接成功后网络列表前会出现 **>** 号 |
+| exit                             | 退出                                                                        |
+| quit                             | 退出                                                                        |
+| Tab制表键                        | 补全或者显示出可用的命令                                                    |
+| 方向上下键                       | 查找上一条/下一条历史命令                                                   |
+
+操作演示图片：
+#+CAPTION: 操作演示
+[[./2022-07-02_02/2022-07-02_02-07.png]]
+
+最后使用
+
+#+begin_src shell
+  # ping www.baidu.com
+#+end_src
+
+判断能否正常上网（使用Ctrl-C退出）
+
+** pacman设置
+pacman是archlinux的包管理器，暂不介绍用法，跟着做就行了
+*** 手动设置软件源
+pacman的默认mirror源非常好，列出了我们会用到的镜像源，加上sed，我们可以执行下面
+的命令开启清华镜像源:
+#+begin_src shell
+  cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew
+  sed -ni "/tuna/p" /etc/pacman.d/mirrorlist
+#+end_src
+如果希望用阿里云则可将命令里的 =tuna= 替换为 =aliyun= 再执行
+
+如果懂得用vim，自己编辑mirrorlist去，搜索China，自己选
+#+begin_quote
+本以为官方的iso是pacman默认文件那样没有开启任何源的，结果下载下来启动一看全是开
+的【捂脸】。好在改了个sed命令就解决了。
+#+end_quote
+*** 自动设置软件源
+直接运行以下命令依照速度进行自动排序，不用手动排序
+#+begin_src bash
+  reflector -c China -a 10 --sort rate --save /etc/pacman.d/mirrorlist
+#+end_src
+但存在问题是它可能会给你推荐一个野鸡服务器，有点让人难以接受，所以还是手动更新的
+好
+*** 多文件同时下载
+#+begin_quote
+目前pacman的默认配置是开启多线程下载的，这一步可以跳过
+#+end_quote
+编辑 */etc/pacman.conf* 找到 =#ParallelDownloads = 5= 项，把前面的 *#* 号移除可
+以实现同时下载多个文件，后面的5是最大的同时下载数量
+*** 增加archlinuxcn源
+在 */etc/pacman.conf* 文件末尾加入
+#+begin_src conf
+  [archlinuxcn]
+  Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+#+end_src
+可以启用 *archlinuxcn* 源，里面有一些官方仓库没有的常用软件
+** 更新系统时间
+执行下面的命令（正常情况下是没有输出的）
+#+begin_src bash
+  timedatectl set-ntp true
+#+end_src
+** 为系统分区
+#+begin_quote
+注意！这个步骤要格外小心，命令回车前要确认命令无误，且要知道自己在做什么，重要的
+硬盘数据应提前备份好，避免带来数据的丢失
+#+end_quote
+执行命令
+#+begin_src bash
+  fdisk -l
+#+end_src
+查看目前的分区情况
+*** 分区建议
+硬盘分区有分区表的区别，这影响到启动引导和分区。如果你的分区表为dos，则只能有四
+个主分区，想要分更多需要建立一个拓展分区占用一个主分区的名额，然后在拓展分区内划
+分逻辑分区（详见fdisk部分），gpt分区表则没有影响。另外，使用dos分区表一般对应使
+用的是BIOS引导，而gpt对应的是efi引导，对启动分区的需求有不同。
+- 根分区：\\
+  两种分区表对根目录的要求都是一致的，都是要求类型为Linux,文件系统得是ext4、
+  btrfs等支持linux权限系统的的文件系统（别想着把根分区格式化成vfat或是ntfs）
+- 家目录分区（可选）：\\
+  一般而言如果有可能频繁重装系统那么建立一个独立的家目录(/home)分区是一个不错的
+  选择，能够减少重装系统时重新配置的痛苦，但也会限制空间利用，导致跟分区和家目录
+  不能共用闲置空间。
+- 交换分区（可选）：\\
+  目前已经有交换文件这种更加灵活方便的形式存在，没有必要再单独划分出一个交换分区
+  了。如果需要，要在分区时指定文件系统类型。
+- BOOT分区：\\
+  是MBR+BIOS所需要的分区，需要在分区时为其加上可启动标志（新电脑比较少见用BIOS的
+  了），大小200M左右，文件系统同根目录一样，挂载点在/boot(相对跟分区的挂载点而言)
+- EFI分区：
+  是GPT+UEFI所需要的分区，要求文件系统为vfat，建议挂载点在/boot/efi目录（如果最
+  终分区表没有设置会自动挂载到/efi目录）
+*** 使用cfdisk进行分区
+cfdisk有着伪图形界面，对萌新更友好，故放到前面来。不过它好像还有一点限制，没有
+fdisk那么灵活，fdisk的教程见下一节
+
+刚进入cfdisk时如果硬盘没有分区表会询问你。上下方向键移动，回车选择。BIOS选择dos，
+EFI选择gpt就好。具体的操作就不细讲了。
+*** 使用fdisk进行分区
+使用命令开始为硬盘分区
+#+begin_src bash
+# fdisk /dev/sdX   #sdX为目标硬盘，实际中应为sda或sdb...
+#+end_src
+关于fdisk的部分命令列表:
+- m 查看帮助
+- g 新建GTP分区表(会清空整个硬盘删除所有分区)
+- o 新建MBR分区表(会清空整个硬盘删除所有分区)
+- p 打印分区表（若p命令后中Disklable type:后为dos则为MBR分区表，gpt则为gpt分区表）
+- n 新建分区
+  - MBR分区表
+    - 1.确认分区类型
+      - p 主分区（最多四个，编号1~4）
+      - e 扩展分区（占用主分区数量，最多一个，有了则不显示，编号同主分区）
+      - l 逻辑分区（不限量，前提是得有一个扩展分区，无则不显示，最大大小为扩展分区大小，即包容在扩展分区内，编号5~?）
+  - GPT分区表
+    - 1.无需确认分区类型，无分区类型之分
+  - 共同步骤
+    - 2.确认分区编号
+    - 3.分区起始扇区（一般不管）
+    - 4.分区结束扇区（+单位 表示多大， -单位 表示剩余多大空间）
+- d 移除分区，输入编号即可
+- t 更改指定分区的分区类型（作用）
+- w 保存退出
+- q 不保存直接退出
+[[https://wiki.archlinux.org/title/Fdisk_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)][也可以参考官方wiki]]
+*** 设置文件系统(mkfs)
+使用下列命令格式化分区，一般除了efi的efi分区要用vfat外，基本上都是用ext4
+#+begin_src bash
+  mkfs.<FS> /dev/sdXn
+  # <FS> 为对应的文件系统类型（ext3,ext4,vfat...），sdXn为硬盘上的第n个分区，n为分区编号
+#+end_src
+*** 挂载分区
+使用mount,格式：
+#+begin_src bash
+# mount /dev/sdXn /dir
+#+end_src
+关于挂载分区的具体内容请查看[[https://wiki.archlinux.org/title/File_systems_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F][ArchWiki官方教程]]
+#+begin_quote
+sdXn为硬盘分区，/dir 为挂载目标目录，详见下表，
+#+end_quote
+但是在挂载硬盘时时不能直接按照下表挂载，/根目录一般挂载在USB系统的 =/mnt= 目录下，
+其他的磁盘挂载点跟着变化就行了，但一定要先挂载根目录再依文件夹的关系一个个挂载，
+没有的文件夹使用 =mkdir -p= 创建就好（例如：/boot/efi -> /mnt/boot/efi)
+** 安装基本系统
+在硬盘全部挂载后，我们就可以开始安装系统了
+
+安装基本系统：
+
+#+begin_src bash
+# pacstrap -i /mnt/ base base-devel linux linux-firmware
+#+end_src
+
+#+begin_quote
+命令中的 */mnt/* 要替换成你所挂载根目录分区的目录名，忘记了可以使用 =df -h= 或者
+=lsblk= 查看
+#+end_quote
+
+#+begin_quote
+你还可以在安装完基本系统后安装额外的软件方便使用，使用
+
+#+begin_src bash
+  # passtrap -i /mnt/ 软件包名
+#+end_src
+
+安装软件包。建议装上 *dhcpcd* （DNS服务） *iwd* （联网） *vim* （文件编辑）
+*fish* （一种shell，默认就有强大的自动补全配置）
+#+end_quote
+
+#+begin_quote
+倘若在前面的软件包设置里启用了archlinuxcn源，其实你可以额外安装内核软件包
+*linux-lily* 在tty界面它原装支持显示中文
+#+end_quote
+
+配置分区表：
+
+#+begin_src bash
+genfstab -U /mnt/ >> /mnt/etc/fstab
+#+end_src
+
+#+begin_quote
+这里的 */mnt/* 同理。-U 为使用UUID标识的意思
+#+end_quote
+
+进入新安装的系统：
+#+begin_src bash
+arch-chroot /mnt/ /bin/bash
+#+end_src
+
+#+begin_quote
+若前面你安装了 *fish* 就可以使用以下命令进入新的系统
+
+#+begin_src bash
+# arch-chroot /mnt/ /bin/fish
+#+end_src
+#+end_quote
+* 第二安装阶段
+本阶段为进入chroot后的操作
+** 本地化
+#+begin_quote
+官方wiki建议小白不要在这时候设置中文（因为会导致字体无法显示），建议在装好图形环
+境后再设置。
+
+如果设置了中文导致乱码，可以尝试使用 =export LANG=en_US.UTF-8= 临时补救
+#+end_quote
+设置中文:
+
+#+begin_src bash
+vim /etc/locale.gen
+#+end_src
+
+输入 =/= 搜索zh_CN.UTF-8与en_US.UTF-8,分别去除前面的 =#= 号，并将其放到文件头部。
+如下：
+
+#+begin_src conf
+zh_CN.UTF-8 UTF-8
+zh_CN.GBK GBK
+en_US.UTF-8 UTF-8
+# ......
+#+end_src
+
+并执行
+
+#+begin_src bash
+# locale-gen
+#+end_src
+
+以及
+
+#+begin_src bash
+# echo "LANG=zh_CN.UTF-8" >> /etc/locale.conf
+# export LANG=zh_CN.UTF-8
+#+end_src
+
+设置时区为上海，这里有两种办法：
+
+1. 手动设置
+   #+begin_src bash
+     # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+   #+end_src
+2. 工具设置
+   #+begin_src bash
+     # timedatectl set-timezone Asia/Shanghai
+   #+end_src
+
+设置硬件时钟：
+
+#+begin_src bash
+  # hwclock --systohc --utc
+#+end_src
+
+** 安装GRUB引导
+(如果需要使用systemd-boot等其他的启动引导器，请自行wiki)
+
+安装grub软件包：
+
+#+begin_src bash
+  # pacman -S grub efibootmgr os-prober
+#+end_src
+
+#+begin_quote
+*os-prober* 可以用于自动识别电脑上的其他硬盘装的其他系统
+#+end_quote
+
+安装grub引导：
+
+*** BIOS引导模式下
+将grub引导安装在硬盘sdX的第n个分区
+
+#+begin_src bash
+grub-install /dev/sdXn
+#+end_src
+
+#+begin_quote
+/dev/sdXn为硬盘上的第n个分区，也是你的BOOT分区（挂载到 */boot/* ）
+#+end_quote
+
+*** EFI引导模式下
+#+begin_src bash
+grub-install
+#+end_src
+*** 生成菜单、配置文件
+（生成/更新）配置:
+
+#+begin_src bash
+  # grub-mkconfig -o /boot/grub/grub.cfg
+#+end_src
+
+#+begin_quote
+如果需要启动时显示那一长串的日志，可以找到 =GRUB_CMDLINE_LINUX_DEFAULT= 将后面的
+quiet去除。
+
+如果使用多系统，可以编辑 =/etc/default/grub= ，找到 =GRUB_DISABLE_OS_PROBER=
+并将后面的 ="true"= 改为 ="false"= 并重新执行更新配命令
+#+end_quote
+** 用户设置
+为root用户设置密码（否则无法登录）：
+
+#+begin_src bash
+paswwd root
+#+end_src
+
+#+begin_quote
+*root* 可以省略，前提是你在用root用户操作
+#+end_quote
+
+创建用户：
+
+#+begin_src bash
+  # useradd -m USERNAME -s /bin/SHELL
+#+end_src
+
+#+begin_quote
+*USERNAME* 为你的用户名,SHELL为你想用的shell名称，默认为bash，可以省略
+#+end_quote
+
+添加组/启用sudo：
+
+#+begin_src bash
+  # usermod USERNAME -aG sudo
+#+end_src
+
+#+begin_quote
+将用户添加进 *sudo* 组
+#+end_quote
+
+为新用户创建密码（否则无法登录）：
+
+#+begin_src bash
+  # passwd USERNAME
+#+end_src
+** 重启前最后的配置
+启用dhcpcd服务（未安装的使用 =pacman -S dhcpcd= 安装）：
+
+#+begin_src bash
+  # systemctl enable dhcpcd
+#+end_src
+
+#+begin_quote
+同理，可以启用iwd服务，启用后普通用户也可以使用iwctl了（未开启时必须使用root）
+#+end_quote
+
+sudo启用sudo组内用户的支持：
+
+#+begin_src bash
+  # vim /etc/sudoers
+#+end_src
+
+找到 =#%sudo ALL=(ALL:ALL) ALL= ，移除 =#= 号取消注释（按下 =i= 进入插入模式再按
+下 =Esc= 退回普通模式。或者直接在行首按下 =dw= ）， =:w!= 强制保存后退出
+
+#+begin_quote
+由于sudoers一般是个只读文件，如果要使用sed大法还得改权限
+#+end_quote
+
+退出后重启进入安装好的系统：
+#+begin_src bash
+  exit
+  reboot
+#+end_src
+* 第三安装阶段(配置)
+重新进入系统的操作，如果未提到请参见博客的其他文章
+** 使用图形界面
+图形界面有两大阵营，一套是过去使用的X11，虽然已经过时但基本盘还在，许多软件仍旧
+使用X图形界面。而另一套是新兴的wayland，由于后发生态仍在完善中，需要使用xwayland
+在wayland使用X的窗口作为过渡，基本可用了，部分主流的DE适配甚至默认就是wayland。
+
+*** 安装一个桌面环境或者窗口管理器
+- 桌面环境(DE)
+  桌面环境一般提供了配套的桌面环境，适合开箱即用，不用太过折腾，问题较少。且一般
+  DE的包是包含各种依赖的，不用麻烦找依赖问题
+  - gnome(wayland/x11)
+    #+begin_src bash
+      pacman -S alacarte gnome networkmanager
+      systemctl enable gdm
+      # gdm为gnome的图形界面登录系统
+    #+end_src
+  - xfce(x11)
+    #+begin_src bash
+      pacman -S xfce4
+      # 可以通过运行下一行命令启动
+      # startx /usr/bin/startxfce4
+    #+end_src
+  - kde(wayland/x11)
+    #+begin_src bash
+      pacman -S plassma-meta kde-utilities-meta kde-system-meta sddm
+      # 更完整的生态可以安装 kde-applications-meta 包
+      # pacman -S konsole dolphin kdeconnet ark
+      # 启用sddm(或者每次登陆都手动使用执行命令启动):
+      systemctl enable sddm
+    #+end_src
+    kde目前(2025.08.01)已经是默认使用wayland会话而不使用x11了
+- 窗口管理器(WM)
+  一般只提供窗口管理功能，轻量，需要自选配套的应用程序套件，会存在生态、主题设置
+  等问题。
+  - i3-wm(x11)
+    #+begin_src bash
+      pacman -S i3 i3blocks i3lock i3status
+      # i3-wm只是一个窗口管理器而已，并非桌面系统，需要安装其他软件。
+      # 我个人习惯安装kde的软件并在i3wm下使用。即
+      pacman -S i3 i3blocks i3lock i3status sddm kdeconnet konsole dolphin\
+             ark qt5ct picom polybar feh rofi
+      # qt5ct用于设置在i3-wm下kde程序的主题,配置（同上*pam_environment*已失效）：
+      echo "QT_QPA_PLATFORMTHEME DEFAULT=qt5ct" >> /etc/environment
+      # 
+      # picom用于美化窗口界面。polybar用于替代i3status。feh用于使用壁纸。rofi用于启动应用
+      # 2023-01-17更新：i3-gaps已经被并入了i3软件包了
+    #+end_src
+  - dwm(x11)\\
+    好用，虽然不是新手该碰的东西(所以也不讲)
+  - hyprland(wayland)\\
+    由于需要的配置工作较大，请参见其他博客文章
+*** 安装登录管理器
+gnome官方搭配gdm，kde可使用sddm。这边建议使用sddm。
+#+begin_src shell
+  # 下面的命令需要使用root权限
+  # 安装软件包
+  pacman -S sddm
+  # 启用开机自启动服务
+  systemctl enable sddm
+  # 立即启动sddm服务
+  systemctl start sddm
+  # 若熟悉systemctl命令的可以自行摸索
+#+end_src
+
+如果不想用登录管理器，想要用tty登录的“原始”方式，可参考使用下列方法：
+- 使用X图形界面：\\
+  安装xorg-xinit软件包:
+  #+begin_src bash
+    pacman -S xorg-xinit
+  #+end_src
+  在终端执行下列命令启动图形界面：
+  #+begin_src shell
+    startx /usr/bin/startplasma-x11
+  #+end_src
+  上面的命令中startx后面跟的是DE的启动可执行文件的完整路径，上例是kde的x11，若使
+  用xfce4对应的文件为/usr/bin/startxfce4，而lxde是startlxde（ldqt是startlxqt）
+- 使用wayland的则不需要使用startx，直接执行对应的文件即可。例如启动KDE:
+  #+begin_src shell
+    startplasma-wayland
+  #+end_src
+  注意，如果使用startx后面跟上上面的文件可能会出现显示错误。
+** 日常软件
+- 浏览器\\
+  archlinux官方源自带的大众浏览器有俩，一个 =firefox= ，一个 =chromium= ，如果装
+  完后悔了想要下载其他镜像就可以装这两个浏览器。
+- 输入法(fcitx原生中文)\\
+  root权限执行下列命令安装基本fcitx框架并启用fcitx
+  #+begin_src bash
+    pacman -S fcitx fcitx-configtool
+    echo "GTK_IM_MODULE DEFAULT=fcitx" >> /etc/environment
+    echo "QT_IM_MODULE  DEFAULT=fcitx" >> /etc/environment
+    echo "XMODIFIERS    DEFAULT=@im=fcitx" >> /etc/environment
+    echo "QT_QPA_PLATFORMTHEME=qt5ct" >> /etc/environment
+    # 注：通过 ~/.pam_environment 文件设置环境变量的方法已失效，
+    # 请使用其他方法设置环境变量，例如通过 /etc/environment 文件定义
+  #+end_src
+  然后执行下列命令安装原生的中文输入
+  #+begin_src bash
+    # 基本支持
+    pacman -S fcitx5-chinese-addons
+    # 拓展中文词典(archlinuxcn源)
+    pacman -S fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki
+  #+end_src
+  优点就是开箱即用，基本不用配置，但缺点就是输入效果较差。可以使用效果更好但配置
+  更麻烦的rime，详见其他文章。
+** 中文字体
+可以简单拿来用的字体(archlinuxcn源)：
+#+begin_src bash
+  pacman -S wqy-zenhei
+#+end_src
+其他我安装的字体：
+#+begin_src bash
+  pacman -S ttf-liberation ttf-fira-code ttf-fira-mono ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono
+#+end_src
+实际上更好的字体还得是自己上网找然后自行安装到 =$HOME/.local/share/fonts/= 目录
+或者 =/usr/share/fonts/= 目录。
+** 使用AUR
+使用AUR助手yay:
+#+begin_src bash
+  git clone https://aur.archlinux.org/yay-bin.git
+  cd yay-bin
+  makepkg -si
+#+end_src
+
+#+begin_quote
+如果启用了archlinuxcn源可以直接执行  
+#+begin_src bash
+  pacman -S yay
+#+end_src
+安装yay
+#+end_quote
+

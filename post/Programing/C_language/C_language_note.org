@@ -1,0 +1,251 @@
+#+TITLE: C语言笔记
+#+DATE: <2023-05-26 五 14:28>
+#+description: 自己尝试写的C语言教程（未完成）
+
+#+SETUPFILE: ../../../setup.setup
+
+* 配置开发环境
+C语言是一门古老的语言，用它编写的程序要使用编译器编译后才能够执行。所以我们需要
+做的事情就应该是：配置开发环境。要运行C语言程序，我们需要一个编译器。而且不只是
+需要编译器，我们还需要一个编辑器。基于不同系统的情况，配置开发环境的内容将会分为
+几段内容。
+** Windows
+在Windows下，重量级的开发环境有[[https://visualstudio.microsoft.com/zh-hans/#vs-section][Visual Studio]]
+系列中的Visual Studio 2022，而其中的 Visual Studio code则相对轻量，体积较小。我
+个人推荐使用VScode作为编辑器，毕竟如果 使用Visual Studio 2022作为IDE的话，安装太
+慢了（而且我也不会用）。而VScode作为一 个编辑器已经是足够了的。
+
+编译器我推荐使用GCC，而Windows平台的GCC就是[[https://sourceforge.net/projects/mingwbuilds/][mingw]]。安装教程建议看看[[https://zhuanlan.zhihu.com/p/76613134][这篇文章]]。
+
+注意：下载链接为我给出的mingw链接，mingw的官网样式有修改，链接有点难找。
+** Linux
+#+begin_quote
+在Linux下的开发效率理论上是要比windows高的，但是也没有必要为了开发直接装Linux，
+新手盲入坑会多到数不过来。建议使用虚拟机，Linux发行版新手建议使用Ubuntu，好上手
+#+end_quote
+相较于Windows平台下，Linux下的配置就简单多了。大多数Linux发行版的包管理器都提供
+GCC的安装。以Debian及其衍生发行版和Arch为例：
+
+#+begin_src shell
+  # Debian:
+  sudo apt install gcc
+#+end_src
+
+#+begin_src shell
+  # Arch:
+  sudo pacman -S gcc
+#+end_src
+
+在安装了GCC后，可以使用 =gcc 输入文件.c -o 输出文件= 为格式运行gcc（Windows下的
+命令格式相同）
+
+=gcc --help= 命令结果：
+#+begin_export html
+<details>
+  <summary>GCC帮助文档</summary>
+#+end_export
+#+begin_src text
+  用法：gcc [选项] 文件...
+  选项：
+    -pass-exit-codes         在某一阶段退出时返回其中最高的错误码。
+    --help                   显示此帮助说明。
+    --target-help            Display target specific command line options (including assembler and linker options).
+    --help={common|optimizers|params|target|warnings|[^]{joined|separate|undocumented}}[,...]。
+                             显示特定类型的命令行选项。
+   （使用‘-v --help’显示子进程的命令行参数）。
+    --version                显示编译器版本信息。
+    -dumpspecs               显示所有内建 spec 字符串。
+    -dumpversion             显示编译器的版本号。
+    -dumpmachine             显示编译器的目标处理器。
+    -foffload=<targets>      Specify offloading targets.
+    -print-search-dirs       显示编译器的搜索路径。
+    -print-libgcc-file-name  显示编译器伴随库的名称。
+    -print-file-name=<库>    显示 <库> 的完整路径。
+    -print-prog-name=<程序>  显示编译器组件 <程序> 的完整路径。
+    -print-multiarch         显示目标的标准 GNU 三元组（被用于库路径的一部分）。
+    -print-multi-directory   显示不同版本 libgcc 的根目录。
+    -print-multi-lib         显示命令行选项和多个版本库搜索路径间的映射。
+    -print-multi-os-directory 显示操作系统库的相对路径。
+    -print-sysroot           显示目标库目录。
+    -print-sysroot-headers-suffix 显示用于寻找头文件的 sysroot 后缀。
+    -Wa,<选项>               将逗号分隔的 <选项> 传递给汇编器。
+    -Wp,<选项>               将逗号分隔的 <选项> 传递给预处理器。
+    -Wl,<选项>               将逗号分隔的 <选项> 传递给链接器。
+    -Xassembler <参数>       将 <参数> 传递给汇编器。
+    -Xpreprocessor <参数>    将 <参数> 传递给预处理器。
+    -Xlinker <参数>          将 <参数> 传递给链接器。
+    -save-temps              不删除中间文件。
+    -save-temps=<参数>       不删除中间文件。
+    -no-canonical-prefixes   生成其他 gcc 组件的相对路径时不生成规范化的
+                             前缀。
+    -pipe                    使用管道代替临时文件。
+    -time                    为每个子进程计时。
+    -specs=<文件>            用 <文件> 的内容覆盖内建的 specs 文件。
+    -std=<标准>              假定输入源文件遵循给定的标准。
+    --sysroot=<目录>         将 <目录> 作为头文件和库文件的根目录。
+    -B <目录>                将 <目录> 添加到编译器的搜索路径中。
+    -v                       显示编译器调用的程序。
+    -###                     与 -v 类似，但选项被引号括住，并且不执行命令。
+    -E                       仅作预处理，不进行编译、汇编或链接。
+    -S                       编译到汇编语言，不进行汇编和链接，
+    -c                       编译、汇编到目标代码，不进行链接。
+    -o <文件>                输出到 <文件>。
+    -pie                     生成动态链接的位置无关可执行文件。
+    -shared                  生成一个共享库。
+    -x <语言>                指定其后输入文件的语言。
+                             允许的语言包括：c、c++、assembler、none
+                             ‘none’意味着恢复默认行为，即根据文件的扩展名猜测
+                             源文件的语言。
+
+  以 -g、-f、-m、-O、-W 或 --param 开头的选项将由 gcc 自动传递给其调用的
+   不同子进程。若要向这些进程传递其他选项，必须使用 -W<字母> 选项。
+
+  报告程序缺陷的步骤请参见：
+  <https://bugs.archlinux.org/>.
+#+end_src
+#+begin_export html
+</details>
+#+end_export
+
+除了编译器，我们还需要一个编辑器。这里我推荐使用VScode，因为它拥有非常强大的自动
+补全系统，并且支持Linux。
+
+Debian系的用户可以使用官网提供的deb包安装。下载页面链接如上面windows部分的链接相
+同，请自行回去找。
+
+而Arch的用户则需要使用AUR的 =visual-studio-code-bin= 包，使用一个AUR管理器下载安
+装。
+* 正式学习前的准备
+** 第一个C语言程序
+作为示范程序，自然就却不了编程界中的名梗 =Hello World= 。即编写程序打印"Hello
+World"。\\
+示例代码如下：
+#+begin_src c
+  /**
+   ,* @FileName:Example.c
+   ,* @Author:Chglish
+   ,* @Description:这里是多行注释
+   ,*/
+
+  /* 引入头文件 */
+  #include <stdio.h>
+
+  /* 函数定义 */
+  int main(int argc, char *argv[])
+  {
+          printf("Hello World\n");    // 打印 Hello World
+          return 0;
+  }
+#+end_src
+在这个粒子中，我们能够接触到一些C语言的基本要素，我们一个个分析
+- 注释
+  在源代码中被 =/**/= 包裹和一行内 =//= 以右的内容均为注释（代码高亮为灰色）。
+  在编程中，由于可能要面临与他人沟通的情况，所以需要在代码内添加注释作为解释内容
+  方便理解。在编译过程中，编译器会忽略掉全部的注释信息，因此也可以将一行代码注释
+  掉代替删除该行代码。C语言中，注释又有两种，一种即为将一部分区间注释掉的 =/**/=
+  注释，另一种即为将一行中往右注释掉的 =//= 注释。
+  #+begin_src c
+    /* 这种区间注释可以在一行内使用 */
+
+    /*
+     ,* 也可以像这样子多行注释
+     ,*/
+
+    // 而单行注释只有在注释符以右的位置有用
+
+    /*
+       // 两种注释可以嵌套使用
+    ,*/
+
+    /*  /* 但是这种注释不能够嵌套使用，否则就像右边的收注释符，并不属于注释的范围内 */  */
+  #+end_src
+- 引入头文件
+  代码中的 =#include= 属于C语言中的 =预处理= ，其效果等同于将其后方跟着的文件内
+  容复制粘贴进入到当前文件，类似于嵌套文件。 =#include= 也并不只有一种，而是有两
+  种，举个例子：
+  #+begin_src C
+    #include <xxx.h>
+    #include "xxx.h"
+  #+end_src
+  上面的两行都是符合要求的例子，使用 =<>= 和使用 =""= 的区别在于，使用 =<>= 时，
+  编译器只会在（默认）指定的目录下寻找文件，而 =""= 则会让编译器搜寻本地目录的文
+  件，用于引入自己编辑的头文件，如果找不到，再去指定目录搜寻。被括起来的 =xxx.h=
+  即为文件名，而 =.h= 就是C语言头文件的后缀名。
+- main函数
+  执行程序一定得有开头，而在C语言里，这个开头就是main函数。约等于是程序的功能是
+  从main函数内开始一步步执行。对新手来说，只需要做到将程序语句放置在main函数的花
+  括号 ={}= 内部， =return= 语句前即可
+- 输出
+  倘若我们想在我们的程序输出一些内容该怎么办呢？ =printf= ，stdio.h里的函数，是C
+  语言中最基础的输出方式。在 =printf("xxx")= 中，它会将引号中的 =xxx= 打印出来到
+  终端，实现最基础的输出功能
+- 返回
+  在函数的最后有一个返回语句 =return= 。可以这样理解，一个程序是要有始有终的，而
+  这个“终”就相当于是给出了计算的结果。虽然在程序中，我们通过 =printf= 实现了输
+  出，但实际上计算机是不知道结果的。所以我们需要 =return= 语句，以退出函数并给出
+  一个结果值，而这个结果值由函数名称前的类型决定（我们暂且按下不表）。
+可见，一个普通的C语言程序可以由几部分构成：注释，引入头文件，main函数（必须），
+及其他部分。
+** 算法
+* 基本语法
+#+begin_quote
+注：由于C语言的知识体系是一个有机整体，而基于作者文学水平，以下内容以分类作编排，
+所以可能需要反复跳转查阅，请见谅
+#+end_quote
+** 关键字
+在C语言内，有预留有一部分的单词作为关键词，用于在编译时将C语言代码转为机器能够理
+解的二进制代码，下面便是一个表格，其中列出了大部分的C语言关键字，并列出了他们功
+能的简易介绍。
+| 名称    | 作用             |
+|---------+------------------|
+| =if=    | 如果，判断       |
+| =else=  | （接上）就，判断 |
+| =while= | 循环             |
+| =for=   | 循环             |
+** 变量
+*** 变量的定义与声明
+*** 变量的一些修饰词
+**** 常量
+**** 修饰词之间位置的关系
+*** 整型
+*** 浮点型
+*** 字符型
+*** 数组
+*** 指针
+*** 结构体
+**** 链表
+** 输入与输出
+*** 输出
+**** printf
+**** puts
+**** putc
+*** 输入
+**** scanf
+**** getc
+**** getchar
+** 函数
+*** 函数的定义与声明
+*** 函数的调用
+*** 函数指针
+*** 更多功能函数
+**** 字符串处理
+**** Socket套接字
+**** Ncurses打印
+** 文件
+*** 文件的打开与关闭
+*** 读取与写入
+**** 读取
+***** fscanf
+***** fgets
+***** fgetc
+***** fread
+**** 写入
+***** fprintf
+***** fputs
+***** fputc
+***** fwrite
+*** 位置控制
+** 内存管理
+*** 内存的基本概念
+*** 内存的申请
+*** 内存的释放

@@ -1,0 +1,19 @@
+#+TITLE: 404
+
+# +OPTIONS: toc:nil
+#+OPTIONS: num:nil
+
+#+setupfile: ./setup.setup
+
+* 404
+#+begin_src text
+           你好鸭
+  ´ ▽ ` )ﾉ
+           你好像找不到想要找的东西了呢
+
+           要不回首页看看？
+  (๑´ڡ`๑)
+           首页还有很多其他好看的东西哦
+#+end_src
+
+迷路了？404大神助你一臂之力 -->[[http:/][点击这里]]<-- 返回主页

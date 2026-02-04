@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="通过archiso自行构建archlinux的安装镜像" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>自定义Archlinux安装镜像</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">自定义Archlinux安装镜像</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 前言</a><ul><li><a href="#org-title-1-1">1.1. Archiso是什么？</a></li></ul></li>
+<li><a href="#org-title-2">2. Getting Start</a></li><li><a href="#org-title-3">3. 自定义(新手级)</a><ul><li><a href="#org-title-3-1">3.1. 软件包</a></li><li><a href="#org-title-3-2">3.2. 向镜像内添加文件</a></li><li><a href="#org-title-3-3">3.3. 修改内核</a></li><li><a href="#org-title-3-4">3.4. 修改启动引导</a><ul><li><a href="#org-title-3-4-1">3.4.1. Grub</a></li><li><a href="#org-title-3-4-2">3.4.2. systemd-boot</a></li><li><a href="#org-title-3-4-3">3.4.3. syslinux</a></li></ul></li></ul></li>
+<li><a href="#org-title-4">4. 构建ISO映像</a></li><li><a href="#org-title-5">5. 进阶设置</a><ul><li><a href="#org-title-5-1">5.1. 使用PKGBUILD构建包添加文件</a></li><li><a href="#org-title-5-2">5.2. 关于archiso的文件系统基础知识</a></li><li><a href="#org-title-5-3">5.3. 衍生出来的骚操作</a></li></ul></li></ul></div></div>
+<div class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
+<div class="outline-text-2" id="text-1"><p>像我这种憨批在使用archlinux时就会这样想：archlinux官方的安装镜像实在是太简陋了，有没有什么办法能够自定义安装镜像让u盘变成一个能够插上电脑开机F12就能够随地开玩的东西呢。答案当然是有的：archiso</p><blockquote>
+<p>作者的闲言碎语：</p><p>一开始我尝试直接在系统上安装软件，但是我发现它的文件实际存储在内存上，没有办法存储在U盘内，而且烧录好的U盘变成了只读文件系统，没有办法存储文件甚至不能调整分区。</p><p>我若尝试在U盘上安装系统时，文件大小轻松超过我的U盘大小，根本没有可能。并且U盘的读写速度非常的慢，就算是shell启动都要等很久。</p><p>于是我决定要学习使用archiso定制一个属于自己的iso系统镜像。</p></blockquote></div><div class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> Archiso是什么？</h3>
+<div class="outline-text-3" id="text-1-1"><p>这里引用arch wiki的描述：</p><blockquote>
+<p><a href="https://gitlab.archlinux.org/archlinux/archiso">Archiso</a> 是一个高度可定制的工具，用于构建 Arch Linux live CD/USB ISO 映像。
+<a href="https://archlinux.org/download/">官方映像</a> 是用 Archiso 构建的。它可以用作救援系统、linux 安装程序或其他系统的基础。</p></blockquote><p>综上所述，我们完全可以往安装镜像里面塞一堆奇奇怪怪的东西，包括但不限于预装桌面环境，预设中文，更换支持在tty显示中文的linux内核 <i>linux-lily</i> ，内置自己的dotfile 配置文件，预装游戏例如mc等。总而言之只要最后的空间能够塞进你的u盘，那么你就能够把arch安装镜像变成你想要的样子<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></p></div></div></div><div class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> Getting Start</h2>
+<div class="outline-text-2" id="text-2"><p>首先你需要安装archiso或archiso-git包获取基本的制作工具及配置文件。在安装好软件后，你的 <code>/usr/share/archiso/configs</code> 目录下应该会有两个文件夹，分别为： <b><b>releng</b></b> 和 <b><b>baseline</b></b> 。它们的介绍如下：</p><blockquote>
+<ul class="org-ul">
+<li>releng用于创建正式的每月安装ISO。它可以作为创建自定义ISO映像的起点。  
+</li>
+<li>baseline是一种最低限度的配置，它只包括从介质启动 Live 环境所需的最低限度的软件包。
+</li></ul>
+</blockquote><p>将以上两种配置中的任意一个复制到一个可读写目录下，并自己为其命名。例如：</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># cp -r /usr/share/archiso/configs/releng/ archlive</span>
+</pre></div><blockquote>
+<p>注意：本篇文章中的所有演示命令均在root权限下执行，如果是普通用户则需要使用sudo等程序提权后操作。如：</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>/usr/share/archiso/configs/releng/<span class="w"> </span>archlive
+</pre></div><p>如无特殊说明，下面所有的 <code>$archlive</code> 指代的均是这里拷出来的archlive文件夹，当然也可以偷懒直接设置一个同名的变量直接拷代码过去运行</p></blockquote></div></div><div class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 自定义(新手级)</h2>
+<div class="outline-text-2" id="text-3"><p>如果需要了解某个文件的作用，可以查看 <code>/usr/share/doc/archiso/README.profile.rst</code> 文件(搜索对应的文件名，看不懂英文自己找翻译)</p></div><div class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 软件包</h3>
+<div class="outline-text-3" id="text-3-1"><p>要设置镜像中安装的软件包，需要编辑 <code>$archlive/packages.x86_64</code> 文件。每行为一个软件包名。需要移除包时删除该行，添加包时添加包名到新的一行即可。</p><p>若是需要添加AUR的软件包，可以先下载软件的 <b>PAGBUILD</b> 文件到本地并使用 <code>makepkg</code> 工具将其构建成软件包（文件名格式一般为 <code>packages-name-version-arch.pkg.tar.zst</code> ）。将所有要安装的软件包放置在同一个可读文件下，使用 <code>repo-add</code><b>新建一个本地仓库</b> （Arch Wiki: 
+<a href="https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Custom_local_repository">en</a> | 
+<a href="https://wiki.archlinux.org/title/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Tips_and_tricks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E8%87%AA%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">中文</a>）并将软件包信息放入。并添加如下信息到 <code>$archlive/pacman.conf</code> 文件中：</p><div class="org-src-container"><pre class="src src-conf"><span class="k">[customrepo]</span>
+<span class="na">SigLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Optional TrustAll</span>
+<span class="na">Server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">file:///path/to/customrepo</span>
+</pre></div><blockquote>
+<ul class="org-ul">
+<li>注意：要将示范中的 <b>customrepo</b> 替换为你创建的仓库名称（不是文件名），*Server* 后面的路径要替换为仓库文件所在的路径（不包括文件名）。
+</li>
+<li>注意：一般情况下要将 <b>SigLevel</b> 后的值改为 `Never` 不对仓库进行签名认证，可以省去很多工作。
+</li>
+<li>注意（引自arch wiki）：pacman.conf 中的顺序很重要。要为您的自定义存储库提供最高优先级，请将其置于其他存储库条目之上。
+</li></ul>
+</blockquote><blockquote>
+<p><code>repo-add</code> 的帮助信息如下：</p><div class="org-src-container"><pre class="src src-text">repo-add (pacman) 6.0.2
+
+用法：repo-add [选项]  &lt;path-to-db&gt; &lt;package&gt; ...
+
+repo-add 会通过读取某个软件包来更新软件包数据库。
+可以在命令行中添加多个指定的软件包。
+
+选项：
+  -n, --new 只增加数据库中没有的包
+  -R, --remove 在更新数据库之后，删除旧的软件包文件
+  -p, --prevent-downgrade  阻止降级，如果数据库中已有一个更高的版本的软件包存在
+  --nocolor 关闭颜色输出
+  -q, --quiet       最小化输出信息
+  -s, --sign        更新后使用 GnuPG 签名数据库
+  -k, --key &lt;密钥&gt;   使用指定的密钥签名该数据库
+  -v, --verify      更新前验证数据库签名
+
+更多可用选项的描述及细节请参见 repo-add(8)。
+
+示例：repo-add /path/to/repo.db.tar.gz pacman-3.0.0-1-i686.pkg.tar.gz
+</pre></div></blockquote></div></div><div class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 向镜像内添加文件</h3>
+<div class="outline-text-3" id="text-3-2"><p>如果需要向镜像内添加文件，则需要在 <b>$archlive/airootfs/</b> 目录下添加。其中，该文件夹将作为Live系统的 <b>根目录</b> （/）的起点，</p><p>如果需要为特定的文件、文件夹设置权限或者所有权，请修改 <code>$archlive/profiledef.sh</code> 脚本。</p><blockquote>
+<p>注意（引自arch wiki）：<br/> 默认情况下，
+<a href="https://wiki.archlinux.org/title/File_permissions_and_attributes">权限</a>将是 <code>644</code> （对于文件）和 <code>755</code> （对于目录）。所有这些都将归根用户所有。要为特定文件和/或文件夹设置不同的权限或所有权，请使用 <code>profiledef.sh</code> 中的 <code>file_permissions</code> 关联列表。有关详细信息，请参阅
+<a href="https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/docs/README.profile.rst">README.profile.rst</a><sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>。</p></blockquote><blockquote>
+<p>温馨提示：软件包的文件权限是跟随软件包不变的，这点拓展玩法会提到</p></blockquote></div></div><div class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 修改内核</h3>
+<div class="outline-text-3" id="text-3-3"><p>倘若我们不配置gui界面直接使用终端，那么没有中文的影响是致命的（Linux的tty不支持输出中文）。为了使用中文，我们可以使用打过 <code>cjktty</code> 补丁的内核。但是出于知识受限，我不会自定义内核。好在 <code>archlinuxcn/linux-lily</code> 已经将补丁打入内核了（尽管它有时会落后好几个版本），我们只需要在 <code>$archlive/packages.x86_64</code> 中添加软件包名 linux-lily，在 <code>$archlive/pacman.conf</code> 中添加以下内容开启 <code>archlinuxcn</code> 仓库，并且修改启动引导即可。</p><div class="org-src-container"><pre class="src src-conf"><span class="k">[archlinuxcn]</span>
+<span class="na">Server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 修改启动引导</h3>
+<div class="outline-text-3" id="text-3-4"><p>根据README.profile.rst的说法，支持的启动引导类型在 <b>$archlive/profiledef.sh</b> 文件中通过 <i>bootmodes</i> 变量指定，支持三种起动引导器： <i>syslinux</i> , <i>grub</i> 和 <i>systemd-boot</i> ，与 $archlive 目录下引导器文件夹对应如下</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">引导器</th><th scope="col" class="org-left">对应的引导模式</th><th scope="col" class="org-left">对应文件夹</th><th scope="col" class="org-left">对应的字符串</th></tr>
+</thead><tbody>
+<tr><td class="org-left">syslinux</td><td class="org-left">bios</td><td class="org-left">syslinux</td><td class="org-left">bios.syslinux.{mbr,eltorito}</td></tr><tr><td class="org-left">grub</td><td class="org-left">uefi</td><td class="org-left">grub</td><td class="org-left">uefi-{ia32,x64}.grub.{esp,eltorito}</td></tr><tr><td class="org-left">systemd-boot</td><td class="org-left">uefi</td><td class="org-left">efiboot</td><td class="org-left">uefi-{ia32,x64}.systemd-boot.{esp,eltorito}</td></tr></table><blockquote>
+<p><b>对应文件夹</b> 如果在配置文件中没有选择对应的引导器，则该文件夹是可以删除的，如果选择了，那么引导器配置就在对应的文件夹中<br/><b>对应的字符串</b> 那里采用的展示方式是将大括号内以逗号分割的元素排列组合在一起<br/>例如 <code>a.b.{c,d}</code> --&gt; <code>a.b.c</code> 和 <code>a.b.d</code><br/>其中 <b>eltorito</b> 是指从光盘启动的支持<br/> grub和systemd-boot只能二选一，官方镜像默认使用systemd-boot(默认releng配置也是)</p></blockquote><p>一般而言，如果需要修改启动引导，可以仿照已有的配置自己修改。以添加linux-lily内核为例简单笔记如下</p></div><div class="outline-4">
+<h4 id="org-title-3-4-1"><span class="section-number-4">3.4.1.</span> Grub</h4>
+<div class="outline-text-4" id="text-3-4-1"><p>更改 <b>$archlive/grub/grub.cfg</b> 文件。在文件中找到 <code># Menu entries</code> 一行，并在下面添加上：</p><div class="org-src-container"><pre class="src src-conf"><span class="na">menuentry &quot;Arch Linux安装镜像(x86_64, UEFI)(内核linux-lily支持中文)&quot; --class arch --class gnu-linux --class gnu --class os --id &#39;archlinux-lily&#39; {</span>
+<span class="w">    </span><span class="na">set gfxpayload</span><span class="o">=</span><span class="s">keep</span>
+<span class="w">    </span><span class="na">search --no-floppy --set</span><span class="o">=</span><span class="s">root --label %ARCHISO_LABEL%</span>
+<span class="w">    </span><span class="na">linux /%INSTALL_DIR%/boot/x86_64/vmlinuz-linux-lily archisobasedir</span><span class="o">=</span><span class="s">%INSTALL_DIR% archisolabel=%ARCHISO_LABEL%</span>
+<span class="w">    </span><span class="na">initrd /%INSTALL_DIR%/boot/intel-ucode.img /%INSTALL_DIR%/boot/amd-ucode.img /%INSTALL_DIR%/boot/x86_64/initramfs-linux-lily.img</span>
+<span class="na">}</span>
+</pre></div><p>添加的这段内容和其他的menuentry的顺序就是菜单的顺序了</p></div></div><div class="outline-4">
+<h4 id="org-title-3-4-2"><span class="section-number-4">3.4.2.</span> systemd-boot</h4>
+<div class="outline-text-4" id="text-3-4-2"><p>releng默认的配置目录如下</p><div class="org-src-container"><pre class="src src-text">$archlive/efiboot/loader/
+├── entries
+│   ├── 01-archiso-x86_64-linux.conf
+│   ├── 02-archiso-x86_64-speech-linux.conf
+│   └── 03-archiso-x86_64-memtest86+.conf
+└── loader.conf
+</pre></div><p>在 loader.conf 中的 default 中设定默认选中的选项(即entries/目录下的文件名称)，要自己增加选项只需要把entries里的01-xxxxx-linux.conf文件复制一份自己按照类似的格式重命名即可（也可以直接修改现有的文件），以启动linux-lily内核的配置为例：</p><div class="org-src-container"><pre class="src src-conf"><span class="na">title   Arch Linux (x86_64, UEFI) (Chinese Supported 支持中文)</span>
+<span class="na">sort-key 01</span>
+<span class="na">linux   /%INSTALL_DIR%/boot/x86_64/vmlinuz-linux-lily</span>
+<span class="na">initrd  /%INSTALL_DIR%/boot/x86_64/initramfs-linux-lily.img</span>
+<span class="na">options archisobasedir</span><span class="o">=</span><span class="s">%INSTALL_DIR% archisosearchuuid=%ARCHISO_UUID%</span>
+</pre></div></div></div><div class="outline-4">
+<h4 id="org-title-3-4-3"><span class="section-number-4">3.4.3.</span> syslinux</h4>
+<div class="outline-text-4" id="text-3-4-3"><p>类似于systemd-boot，在 $archlive/syslinux/syslinux.cfg 中的 LABEL 设置默认启动项目，使用 INCLUDE 引入其他文件的设置（照这么说实际上可以all in one的），一个启动项目类似如下：</p><div class="org-src-container"><pre class="src src-conf"><span class="na">LABEL arch</span>
+<span class="na">MENU LABEL Arch Linux (x86_64, BIOS)</span>
+<span class="na">LINUX /%INSTALL_DIR%/boot/%ARCH%/vmlinuz-linux-lily</span>
+<span class="na">INITRD /%INSTALL_DIR%/boot/%ARCH%/initramfs-linux-lily.img</span>
+<span class="na">APPEND archisobasedir</span><span class="o">=</span><span class="s">%INSTALL_DIR% archisosearchuuid=%ARCHISO_UUID%</span>
+</pre></div></div></div></div></div><div class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 构建ISO映像</h2>
+<div class="outline-text-2" id="text-4"><p>在配置好后就应该开始构建镜像了。你可以通过下列命令开始构建镜像文件：</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># mkarchiso -v -w $archlive/../work  -o $archlive/../  $archlive/</span>
+</pre></div><p>这里再引用arch wiki的描述：</p><blockquote>
+<p><code>-w</code> 指定工作目录。如果未指定该选项，则默认为当前目录中的 <code>work</code> 。</p><p><code>-o</code> 指定将放置构建的 ISO 映像的目录。如果未指定该选项，则默认为当前目录中的 <code>out</code> 。</p><p>需要注意的是配置文件 <code>profiledef.sh</code> 在运行 mkarchiso 时不能指定，只能指定文件的路径。</p></blockquote><p>在这里我再作一些补充：</p><ul class="org-ul">
+<li><code>-w</code> 指定的是输出临时文件的目录。在构建的过程中会产生的文件、要安装的软件包都将会放置在此，空间占用也会非常巨大。(据说内存够用的可以尝试挂载一个tmpfs来用或者直接把该目录指定到/tmp/下)
+</li>
+<li><code>-o</code> 指定的是生成出的iso文件的保存目录，它会自动为ISO文件命名（但是会覆盖同名文件）。
+</li>
+<li>最后一个选项是配置文件(profiledef.sh)所在的目录
+</li></ul>
+</div></div><div class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 进阶设置</h2>
+<div class="outline-text-2" id="text-5"><blockquote>
+<p>注：该段内容由2025.08.01追加</p></blockquote></div><div class="outline-3">
+<h3 id="org-title-5-1"><span class="section-number-3">5.1.</span> 使用PKGBUILD构建包添加文件</h3>
+<div class="outline-text-3" id="text-5-1"><p>由于自己手动添加文件需要自己手动设置文件权限，比较麻烦，而且很多时候还分不清哪些是自己要更新的文件，这时候可以考虑使用Arch官方的软件包构建工具makepkg构建一个软件包再构建本地仓库进行安装，可以比较高效地实现用户配置文件的安装（如果要添加系统级配置还是需要手动设置，否则pacman会报文件冲突错误）。关于如何构建软件包，这里不再赘述，自行有出门右转找
+<a href="https://wiki.archlinuxcn.org/wiki/Arch_%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F">Arch Wiki</a>解决。</p></div></div><div class="outline-3">
+<h3 id="org-title-5-2"><span class="section-number-3">5.2.</span> 关于archiso的文件系统基础知识</h3>
+<div class="outline-text-3" id="text-5-2"><p>archlive使用squashfs+overlayfs技术来达到在u盘等移动介质上运行系统的目的，其解释如下：</p><ul class="org-ul">
+<li>squashfs: 类似于压缩包，能够压缩文件系统的大小，并且能够直接挂载成为文件系统，但是是只读的。它是能够将linux系统压缩到U盘可以容纳下的那种程度的原因。若需要创建一个squshfs文件，使用以下命令：
+<div class="org-src-container"><pre class="src src-shell">mksquashfs<span class="w"> </span><span class="s2">&quot;&lt;你要打包压缩的文件夹&gt;&quot;</span><span class="w"> </span><span class="s2">&quot;&lt;输出文件&gt;&quot;</span>
+</pre></div>
+<p>若要使用，将产生的文件挂载到任意文件夹就好了。不过挂载后的挂载点里面是被压缩文件夹里面的内容需要注意。</p>
+</li>
+<li>tmpfs: 处于内存的临时文件系统，所有的文件操作存储都在内存中进行。要自己挂载一个tmpfs需要运行以下命令：
+<div class="org-src-container"><pre class="src src-shell">sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>tmpfs<span class="w"> </span>tmpfs<span class="w"> </span>-o<span class="w"> </span><span class="nv">size</span><span class="o">=</span>SIZE<span class="w"> </span>MOUNTPOINT
+</pre></div>
+<p>其中，SIZE是临时目录的大小，MOUNTPOINT是挂载点，用该命令挂载的MOUNTPOINT默认自带t属性(允许所有用户读写)</p>
+</li>
+<li>overlayfs: 可以理解为一种可以将两个文件夹合并在一起成为一个文件夹的文件系统，要自己挂载一个overlayfs需要运行以下命令：
+<div class="org-src-container"><pre class="src src-shell">sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>LOWERDIR,upperdir<span class="o">=</span>UPPERDIR,workdir<span class="o">=</span>WORKDIR<span class="w"> </span>MERGED
+</pre></div>
+<p>其中 <code>-t</code> 指定文件系统类型， <code>-o</code> 指定文件系统的选项，其他部分含义如下</p>
+<ul class="org-ul">
+<li>MERGED: 最终的合成目录，即LOWERDIR和UPPERDIR的文件树“加”在一起的样子，也是 overlayfs允许进行文件操作的部分
+</li>
+<li>UPPERDIR: 高层目录，在MERGED中作出的文件操作都会影响到这里，包括但不限于在 MERGED中增加、修改和删除文件，对文件的属性、权限进行变更
+<ul class="org-ul">
+<li>如果只是更改了文件的权限信息，则不会往UPPERDIR中拷贝文件占用空间。
+</li>
+<li>如果在MERGED中修改了来自LOWERDIR的文件，则会将这个修改后的文件存储在 UPPERDIR中。修改包括修改文件的内容，或者使用touch更改文件的时间属性
+</li>
+<li>如果在MERGED中删除了来自LOWERDIR的文件，则会在upperdir中产生一个同名同路径的 <code>c</code> 类型字符设备文件作为顶替。
+</li></ul>
+</li>
+<li>LOWERDIR: 基层目录，应当只读，存放各种基础数据。在MERGED中作出的文件操作不会影响到这里。如果 <i>UPPERDIR</i> 存在同名同路径的文件则会顶替这里的文件展示在MERGERD 中
+</li>
+<li>WORKDIR: 工作目录，要求和UPPERDIR处于同一个文件系统内，用于临时存放数据
+</li></ul>
+</li></ul>
+<p>在archiso中，整个根目录会被打包成为squashfs文件<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>，放置在最终打包好的iso镜像的 <i>arch/&lt;ARCH&gt;</i> 目录（&lt;ARCH&gt;是架构名称），而在启动时会先挂载squashfs，然后将其挂载点作为overlayfs的lowerdir，再挂载一个tmpfs将其挂载点作为upperdir，最后将根目录作为merged目录完成文件系统的挂载。<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></p><p>由于默认的tmpfs只有苦逼的300M，如果你需要动态调整根目录的大小，你可以尝试使用以下命令：</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># mount -o remount,size=2G /run/archiso/cowspace</span>
+</pre></div><p>上述命令后面的挂载点就是tmpfs/upperdir的路径，使用下面命令可以查看挂载的文件系统兼查看他们的类型：</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>df<span class="w"> </span>-hT
+</pre></div><p>如果要查看upperdir是什么可以用下面的命令：</p><div class="org-src-container"><pre class="src src-shell">mount<span class="p">|</span>grep<span class="w"> </span><span class="s2">&quot;overlayfs&quot;</span>
+</pre></div></div></div><div class="outline-3">
+<h3 id="org-title-5-3"><span class="section-number-3">5.3.</span> 衍生出来的骚操作</h3>
+<div class="outline-text-3" id="text-5-3"><p>根据上面的知识可以知道：</p><ol class="org-ol">
+<li>使用PKGBUILD能够很方便地往里面添加文件
+</li>
+<li>squashfs能够压缩文件大小
+</li>
+<li>squashfs会保留文件属性
+</li>
+<li>使用overlayfs能够合并文件视图
+</li></ol>
+<p>那么，我们可以得出一个结论：我们也可以使用squashfs+overlayfs实现一套配置所有用户共享，在同步更新配置时只需要一更新squashfs文件就可以了，这可比自己手动添加文件而且还要自己防止不完整更新要方便得多了。配置用户家目录配置的具体做法如下：</p><blockquote>
+<p>下面的内容默认你具有了一定的基础知识储备，如果看不懂那就先别搞自己用一段时间arch 或者查</p></blockquote><ol class="org-ol">
+<li>准备好你的家目录squashfs文件将你需要放到家目录的文件打包好进squashfs文件里(mksquashfs)
+</li>
+<li>编写.service文件，实现开机自启动自动挂载。举例如下：
+<div class="org-src-container"><pre class="src src-systemd"><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">arch-fast-install挂载OverlayFS服务</span>
+<span class="na">After</span><span class="o">=</span><span class="s">local-fs.target</span>
+<span class="na">RequiresMountsFor</span><span class="o">=</span><span class="s">/usr/share/local-config/lowerdir/</span>
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+<span class="c1"># 这里需要自己编写执行的脚本并且在后面打包软件包时将脚本放到指定的位置</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/share/arch-fast-install/overlayfs-data-ctl start</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/usr/share/arch-fast-install/overlayfs-data-ctl stop</span>
+<span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+<p>编写对应的控制脚本：</p>
+<div class="org-src-container"><pre class="src src-bash"><span class="ch">#!/usr/bin/bash</span>
+
+<span class="c1"># 这里指定squashfs文件的位置</span>
+<span class="nv">SQUASH</span><span class="o">=</span><span class="s2">&quot;/usr/share/arch-fast-install/home.sfs&quot;</span>
+<span class="nv">LOWER_DIR</span><span class="o">=</span><span class="s2">&quot;/usr/share/arch-fast-install/lowerdir/&quot;</span><span class="w">   </span><span class="c1"># 挂载squash文件的目录</span>
+<span class="c1"># AIROOTFS_DIR=&quot;/run/archiso/airootfs/&quot;</span>
+<span class="c1"># COWSPACE_DIR=&quot;/run/archiso/cowspace/persistent_/$(uname -m)/upperdir/&quot;</span>
+<span class="nv">OVERLAY_BASE</span><span class="o">=</span><span class="s2">&quot;/run/arch-fast-install/&quot;</span>
+<span class="c1"># 因为overlayfs要求upperdir和workdir必须处于同一个文件系统</span>
+<span class="c1"># 而$HOME目录本身就是overlayfs的merged目录，不可嵌套</span>
+<span class="c1"># 因而使用临时文件系统(/run/默认一半内存空间)</span>
+
+mount_overlayfs_for_user<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="nv">MOUNT_POINT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w">   </span><span class="c1"># 用户家目录</span>
+<span class="w">	</span><span class="nv">USER_NAME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MOUNT_POINT</span><span class="s2">&quot;</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">&quot;s|.*/||&quot;</span><span class="k">)</span><span class="w"> </span><span class="c1"># 用户名</span>
+<span class="w">        </span><span class="nv">UPPER_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OVERLAY_BASE</span><span class="s2">/upperdir_</span><span class="nv">$USER_NAME</span><span class="s2">&quot;</span>
+<span class="w">	</span><span class="nv">WORK_DIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OVERLAY_BASE</span><span class="s2">/workdir_</span><span class="nv">$USER_NAME</span><span class="s2">/&quot;</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">		</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">&quot;</span>
+<span class="w">	</span><span class="k">fi</span>
+<span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$UPPER_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">		</span><span class="c1"># 创建overlayfs</span>
+<span class="w">		</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$UPPER_DIR</span><span class="s2">&quot;</span>
+<span class="w">		</span>rmdir<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$UPPER_DIR</span><span class="s2">&quot;</span>
+<span class="w">		</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MOUNT_POINT</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$UPPER_DIR</span><span class="s2">&quot;</span>
+<span class="w">	</span><span class="k">fi</span>
+<span class="w">	</span><span class="c1"># 挂载OverlayFS</span>
+<span class="w">	</span>mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span>-o<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="nv">lowerdir</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$LOWER_DIR</span><span class="s2">&quot;</span>,upperdir<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$UPPER_DIR</span><span class="s2">&quot;</span>,workdir<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WORK_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="s2">&quot;</span><span class="nv">$MOUNT_POINT</span><span class="s2">&quot;</span>
+<span class="w">	</span>chown<span class="w"> </span><span class="nv">$USER_NAME</span>:<span class="nv">$USER_NAME</span><span class="w"> </span>-R<span class="w"> </span><span class="nv">$MOUNT_POINT</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;/version&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">	</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The system doesn&#39;t look like archiso (lacking the /version file).&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">	</span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">	</span>start<span class="o">)</span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OVERLAY_BASE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">			</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OVERLAY_BASE</span><span class="s2">&quot;</span>
+<span class="w">		</span><span class="k">fi</span>
+<span class="w">		</span><span class="c1"># 创建tmpfs用于OVERLAY_BASE</span>
+<span class="w">		</span><span class="c1"># mount -t tmpfs tmpfs -o size=1G &quot;$OVERLAY_BASE&quot;</span>
+<span class="w">		</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOWER_DIR</span><span class="s2">&quot;</span>
+<span class="w">		</span>
+<span class="w">		</span><span class="c1"># 挂载squashfs到lower层</span>
+<span class="w">		</span>mount<span class="w"> </span>-t<span class="w"> </span>squashfs<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SQUASH</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOWER_DIR</span><span class="s2">&quot;</span><span class="w"> </span>-o<span class="w"> </span>ro,loop
+<span class="w">		</span>
+<span class="w">		</span><span class="c1"># 挂载OverlayFS</span>
+<span class="w">		</span><span class="nv">USER_HOMES</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>/etc/passwd<span class="p">|</span>sed<span class="w"> </span><span class="s2">&quot;/nologin\|git-shell/d;s/\([^:]*:\)\{5\}\([^:]*\):.*/\2/&quot;</span><span class="k">)</span>
+<span class="w">		</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOMES</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>USER_HOME<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>mountpoint<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span><span class="w"> </span>-q<span class="p">;</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="k">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">				</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;已经挂载: </span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span>
+<span class="w">				</span><span class="k">continue</span>
+<span class="w">			</span><span class="k">fi</span>
+<span class="w">			</span>mount_overlayfs_for_user<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span>
+<span class="w">		</span><span class="k">done</span>
+<span class="w">		</span><span class="p">;;</span>
+<span class="w">	</span>stop<span class="o">)</span>
+<span class="w">		</span><span class="c1"># 卸载用户家目录overlayfs</span>
+<span class="w">		</span><span class="nv">USER_HOMES</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>/etc/passwd<span class="p">|</span>sed<span class="w"> </span><span class="s2">&quot;/nologin\|git-shell/d;s/\([^:]*:\)\{5\}\([^:]*\):.*/\2/&quot;</span><span class="k">)</span>
+<span class="w">		</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOMES</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>USER_HOME<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>mountpoint<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span><span class="w"> </span>-q<span class="p">;</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span><span class="k">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+<span class="w">				</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;非挂载点: </span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span>
+<span class="w">				</span><span class="k">continue</span>
+<span class="w">			</span><span class="k">fi</span>
+<span class="w">			</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;将会强制杀死所有占用家目录的进程&quot;</span>
+<span class="w">			</span>fuser<span class="w"> </span>-ck<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span>
+<span class="w">			</span>umount<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER_HOME</span><span class="s2">&quot;</span>
+<span class="w">		</span><span class="k">done</span>
+<span class="w">		</span><span class="c1"># 卸载squashfs</span>
+<span class="w">		</span>umount<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$LOWER_DIR</span><span class="s2">&quot;</span>
+<span class="w">		</span><span class="c1"># umount &quot;$OVERLAY_BASE&quot;</span>
+<span class="w">		</span><span class="c1"># rm -rf &quot;$OVERLAY_BASE&quot;</span>
+<span class="w">		</span><span class="p">;;</span>
+<span class="w">	</span>,*<span class="o">)</span>
+<span class="w">		</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> {start|stop}&quot;</span>
+<span class="w">		</span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">		</span><span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+<p>上面的脚本就实现了为passwd中列出的可登录用户自动挂载目录的功能</p>
+</li>
+<li>编写PKGBUILD文件将文件打包好成软件包，将文件放在上面脚本指定的位置
+</li>
+<li>建立本地存储库，将软件包添加进去
+</li></ol>
+<p>这套流程是我最近(2025.08)正在折腾的东西，后面应该会放到github上，但是还不知道什么时候才能搞好。到时候再进行更新吧。</p><p>未完待续</p></div></div></div><div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<div class="footdef">
+<sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup>
+<div class="footpara" role="doc-footnote">有一个例外，就是目前我没有找到办法能够让iso没有占满usb的空间时能够将多出来
+<p class="footpara">的空间作为可读写的存储空间，所以在archiso产生的所有的数据都是存在内存里的tmpfs，关机重启就会没，除非自己挂载其他存储设备存进去 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup>
+<div class="footpara" role="doc-footnote">即上面提到过的那个本地文件 
+</div>
+</div><div class="footdef">
+<sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup>
+<div class="footpara" role="doc-footnote">根据README.profile.rst，实际上这个是可选的，可以选择使用squashfs还是
+<p class="footpara">erofs(另外一套只读文件系统)，为了方便同时也是因为我没有涉猎，这里不再提及 </p></div>
+</div><div class="footdef">
+<sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup>
+<div class="footpara" role="doc-footnote">这一套流程似乎是在引导阶段完成的，如果在修改引导时加入了参数
+<p class="footpara"><code>init=usr/bin/sh</code> 就能进initramfs的shell，df一下就可以看见文件系统已经按照上述规则加载好了</p></div>
+</div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: 2022-11-26 22:47</p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 通过archiso自行构建archlinux的安装镜像</p>
+<p class="date">生成于: 2025-08-21 五 14:57:28</p>
+</div>
+</body>
+</html>

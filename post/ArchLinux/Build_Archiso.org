@@ -1,0 +1,448 @@
+#+title: 自定义Archlinux安装镜像
+#+date: 2022-11-26 22:47
+#+description: 通过archiso自行构建archlinux的安装镜像
+
+#+setupfile: ../../setup.setup
+
+* 前言
+像我这种憨批在使用archlinux时就会这样想：archlinux官方的安装镜像实在是太简陋了，
+有没有什么办法能够自定义安装镜像让u盘变成一个能够插上电脑开机F12就能够随地开玩的
+东西呢。答案当然是有的：archiso
+
+#+begin_quote
+作者的闲言碎语：
+
+一开始我尝试直接在系统上安装软件，但是我发现它的文件实际存储在内存上，没有办法存
+储在U盘内，而且烧录好的U盘变成了只读文件系统，没有办法存储文件甚至不能调整分区。
+
+我若尝试在U盘上安装系统时，文件大小轻松超过我的U盘大小，根本没有可能。并且U盘的
+读写速度非常的慢，就算是shell启动都要等很久。
+
+于是我决定要学习使用archiso定制一个属于自己的iso系统镜像。
+#+end_quote
+** Archiso是什么？
+这里引用arch wiki的描述：
+
+#+begin_quote
+[[https://gitlab.archlinux.org/archlinux/archiso][Archiso]] 是一个高度可定制的工具，用于构建 Arch Linux live CD/USB ISO 映像。[[https://archlinux.org/download/][官方映
+像]] 是用 Archiso 构建的。它可以用作救援系统、linux 安装程序或其他系统的基础。
+#+end_quote
+
+综上所述，我们完全可以往安装镜像里面塞一堆奇奇怪怪的东西，包括但不限于预装桌面环
+境，预设中文，更换支持在tty显示中文的linux内核 /linux-lily/ ，内置自己的dotfile
+配置文件，预装游戏例如mc等。总而言之只要最后的空间能够塞进你的u盘，那么你就能够
+把arch安装镜像变成你想要的样子[fn:1]
+* Getting Start
+首先你需要安装archiso或archiso-git包获取基本的制作工具及配置文件。在安装好软件后，
+你的 =/usr/share/archiso/configs= 目录下应该会有两个文件夹，分别为： **releng**
+和 **baseline** 。它们的介绍如下：
+
+#+begin_quote
+- releng用于创建正式的每月安装ISO。它可以作为创建自定义ISO映像的起点。  
+- baseline是一种最低限度的配置，它只包括从介质启动 Live 环境所需的最低限度的软件包。
+#+end_quote
+
+将以上两种配置中的任意一个复制到一个可读写目录下，并自己为其命名。例如：
+
+#+begin_src shell
+# cp -r /usr/share/archiso/configs/releng/ archlive
+#+end_src
+
+#+begin_quote
+注意：本篇文章中的所有演示命令均在root权限下执行，如果是普通用户则需要使用sudo等
+程序提权后操作。如：
+
+#+begin_src shell
+$ sudo cp -r /usr/share/archiso/configs/releng/ archlive
+#+end_src
+
+如无特殊说明，下面所有的 =$archlive= 指代的均是这里拷出来的archlive文件夹，当然
+也可以偷懒直接设置一个同名的变量直接拷代码过去运行
+#+end_quote
+* 自定义(新手级)
+如果需要了解某个文件的作用，可以查看 =/usr/share/doc/archiso/README.profile.rst=
+文件(搜索对应的文件名，看不懂英文自己找翻译)
+** 软件包
+要设置镜像中安装的软件包，需要编辑 =$archlive/packages.x86_64= 文件。每行为一个
+软件包名。需要移除包时删除该行，添加包时添加包名到新的一行即可。
+
+若是需要添加AUR的软件包，可以先下载软件的 *PAGBUILD* 文件到本地并使用 =makepkg=
+工具将其构建成软件包（文件名格式一般为 =packages-name-version-arch.pkg.tar.zst=
+）。将所有要安装的软件包放置在同一个可读文件下，使用 =repo-add= *新建一个本地仓
+库* （Arch Wiki: [[https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Custom_local_repository][en]] | [[https://wiki.archlinux.org/title/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)/Tips_and_tricks_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E8%87%AA%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93][中文]]）并将软件包信息放入。并添加如下信息到
+=$archlive/pacman.conf= 文件中：
+
+#+begin_src conf
+[customrepo]
+SigLevel = Optional TrustAll
+Server = file:///path/to/customrepo
+#+end_src
+
+#+begin_quote
+- 注意：要将示范中的 *customrepo* 替换为你创建的仓库名称（不是文件名），*Server*
+  后面的路径要替换为仓库文件所在的路径（不包括文件名）。
+- 注意：一般情况下要将 *SigLevel* 后的值改为 `Never` 不对仓库进行签名认证，可以省
+  去很多工作。
+- 注意（引自arch wiki）：pacman.conf 中的顺序很重要。要为您的自定义存储库提供最高
+  优先级，请将其置于其他存储库条目之上。
+#+end_quote
+
+#+begin_quote
+=repo-add= 的帮助信息如下：
+
+#+begin_src text
+repo-add (pacman) 6.0.2
+
+用法：repo-add [选项]  <path-to-db> <package> ...
+
+repo-add 会通过读取某个软件包来更新软件包数据库。
+可以在命令行中添加多个指定的软件包。
+
+选项：
+  -n, --new 只增加数据库中没有的包
+  -R, --remove 在更新数据库之后，删除旧的软件包文件
+  -p, --prevent-downgrade  阻止降级，如果数据库中已有一个更高的版本的软件包存在
+  --nocolor 关闭颜色输出
+  -q, --quiet       最小化输出信息
+  -s, --sign        更新后使用 GnuPG 签名数据库
+  -k, --key <密钥>   使用指定的密钥签名该数据库
+  -v, --verify      更新前验证数据库签名
+
+更多可用选项的描述及细节请参见 repo-add(8)。
+
+示例：repo-add /path/to/repo.db.tar.gz pacman-3.0.0-1-i686.pkg.tar.gz
+#+end_src
+
+#+end_quote
+
+** 向镜像内添加文件
+如果需要向镜像内添加文件，则需要在 *$archlive/airootfs/* 目录下添加。其中，该文
+件夹将作为Live系统的 *根目录* （/）的起点，
+
+如果需要为特定的文件、文件夹设置权限或者所有权，请修改 =$archlive/profiledef.sh=
+脚本。
+
+#+begin_quote
+注意（引自arch wiki）：\\
+默认情况下，[[https://wiki.archlinux.org/title/File_permissions_and_attributes][权限]]将是 =644= （对于文件）和 =755= （对于目录）。所有这些都将归根用
+户所有。要为特定文件和/或文件夹设置不同的权限或所有权，请使用 =profiledef.sh= 中
+的 =file_permissions= 关联列表。有关详细信息，请参阅[[https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/docs/README.profile.rst][README.profile.rst]][fn:2]。
+#+end_quote
+
+#+begin_quote
+温馨提示：软件包的文件权限是跟随软件包不变的，这点拓展玩法会提到
+#+end_quote
+** 修改内核
+倘若我们不配置gui界面直接使用终端，那么没有中文的影响是致命的（Linux的tty不支持
+输出中文）。为了使用中文，我们可以使用打过 =cjktty= 补丁的内核。但是出于知识受限，
+我不会自定义内核。好在 =archlinuxcn/linux-lily= 已经将补丁打入内核了（尽管它有时
+会落后好几个版本），我们只需要在 =$archlive/packages.x86_64= 中添加软件包名
+linux-lily，在 =$archlive/pacman.conf= 中添加以下内容开启 =archlinuxcn= 仓库，并
+且修改启动引导即可。
+
+#+begin_src conf
+[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+#+end_src
+** 修改启动引导
+根据README.profile.rst的说法，支持的启动引导类型在 *$archlive/profiledef.sh* 文
+件中通过 /bootmodes/ 变量指定，支持三种起动引导器： /syslinux/ , /grub/ 和
+/systemd-boot/ ，与 $archlive 目录下引导器文件夹对应如下
+| 引导器       | 对应的引导模式 | 对应文件夹 | 对应的字符串                                |
+|--------------+----------------+------------+---------------------------------------------|
+| syslinux     | bios           | syslinux   | bios.syslinux.{mbr,eltorito}                |
+| grub         | uefi           | grub       | uefi-{ia32,x64}.grub.{esp,eltorito}         |
+| systemd-boot | uefi           | efiboot    | uefi-{ia32,x64}.systemd-boot.{esp,eltorito} |
+#+begin_quote
+*对应文件夹* 如果在配置文件中没有选择对应的引导器，则该文件夹是可以删除的，如果
+选择了，那么引导器配置就在对应的文件夹中\\
+*对应的字符串* 那里采用的展示方式是将大括号内以逗号分割的元素排列组合在一起\\
+例如 =a.b.{c,d}= --> =a.b.c= 和 =a.b.d=\\
+其中 *eltorito* 是指从光盘启动的支持\\
+grub和systemd-boot只能二选一，官方镜像默认使用systemd-boot(默认releng配置也是)
+#+end_quote
+
+一般而言，如果需要修改启动引导，可以仿照已有的配置自己修改。以添加linux-lily内核
+为例简单笔记如下
+*** Grub
+更改 *$archlive/grub/grub.cfg* 文件。在文件中找到 =# Menu entries= 一行，并在下
+面添加上：
+
+#+begin_src conf
+menuentry "Arch Linux安装镜像(x86_64, UEFI)(内核linux-lily支持中文)" --class arch --class gnu-linux --class gnu --class os --id 'archlinux-lily' {
+    set gfxpayload=keep
+    search --no-floppy --set=root --label %ARCHISO_LABEL%
+    linux /%INSTALL_DIR%/boot/x86_64/vmlinuz-linux-lily archisobasedir=%INSTALL_DIR% archisolabel=%ARCHISO_LABEL%
+    initrd /%INSTALL_DIR%/boot/intel-ucode.img /%INSTALL_DIR%/boot/amd-ucode.img /%INSTALL_DIR%/boot/x86_64/initramfs-linux-lily.img
+}
+#+end_src
+添加的这段内容和其他的menuentry的顺序就是菜单的顺序了
+*** systemd-boot
+releng默认的配置目录如下
+#+begin_src text
+  $archlive/efiboot/loader/
+  ├── entries
+  │   ├── 01-archiso-x86_64-linux.conf
+  │   ├── 02-archiso-x86_64-speech-linux.conf
+  │   └── 03-archiso-x86_64-memtest86+.conf
+  └── loader.conf
+#+end_src
+在 loader.conf 中的 default 中设定默认选中的选项(即entries/目录下的文件名称)，要
+自己增加选项只需要把entries里的01-xxxxx-linux.conf文件复制一份自己按照类似的格式
+重命名即可（也可以直接修改现有的文件），以启动linux-lily内核的配置为例：
+#+begin_src conf
+  title   Arch Linux (x86_64, UEFI) (Chinese Supported 支持中文)
+  sort-key 01
+  linux   /%INSTALL_DIR%/boot/x86_64/vmlinuz-linux-lily
+  initrd  /%INSTALL_DIR%/boot/x86_64/initramfs-linux-lily.img
+  options archisobasedir=%INSTALL_DIR% archisosearchuuid=%ARCHISO_UUID%
+#+end_src
+*** syslinux
+类似于systemd-boot，在 $archlive/syslinux/syslinux.cfg 中的 LABEL 设置默认启动项
+目，使用 INCLUDE 引入其他文件的设置（照这么说实际上可以all in one的），一个启动
+项目类似如下：
+#+begin_src conf
+  LABEL arch
+  MENU LABEL Arch Linux (x86_64, BIOS)
+  LINUX /%INSTALL_DIR%/boot/%ARCH%/vmlinuz-linux-lily
+  INITRD /%INSTALL_DIR%/boot/%ARCH%/initramfs-linux-lily.img
+  APPEND archisobasedir=%INSTALL_DIR% archisosearchuuid=%ARCHISO_UUID%
+#+end_src
+* 构建ISO映像
+在配置好后就应该开始构建镜像了。你可以通过下列命令开始构建镜像文件：
+
+#+begin_src shell
+  # mkarchiso -v -w $archlive/../work  -o $archlive/../  $archlive/
+#+end_src
+
+这里再引用arch wiki的描述：
+
+#+begin_quote
+=-w= 指定工作目录。如果未指定该选项，则默认为当前目录中的 =work= 。
+
+=-o= 指定将放置构建的 ISO 映像的目录。如果未指定该选项，则默认为当前目录中的
+=out= 。
+
+需要注意的是配置文件 =profiledef.sh= 在运行 mkarchiso 时不能指定，只能指定文件的
+路径。
+#+end_quote
+
+在这里我再作一些补充：
+
+- =-w= 指定的是输出临时文件的目录。在构建的过程中会产生的文件、要安装的软件包都
+  将会放置在此，空间占用也会非常巨大。(据说内存够用的可以尝试挂载一个tmpfs来用或
+  者直接把该目录指定到/tmp/下)
+- =-o= 指定的是生成出的iso文件的保存目录，它会自动为ISO文件命名（但是会覆盖同名文件）。
+- 最后一个选项是配置文件(profiledef.sh)所在的目录
+
+* 进阶设置
+#+begin_quote
+注：该段内容由2025.08.01追加
+#+end_quote
+** 使用PKGBUILD构建包添加文件
+由于自己手动添加文件需要自己手动设置文件权限，比较麻烦，而且很多时候还分不清哪些
+是自己要更新的文件，这时候可以考虑使用Arch官方的软件包构建工具makepkg构建一个软
+件包再构建本地仓库进行安装，可以比较高效地实现用户配置文件的安装（如果要添加系统
+级配置还是需要手动设置，否则pacman会报文件冲突错误）。关于如何构建软件包，这里不
+再赘述，自行有出门右转找[[https://wiki.archlinuxcn.org/wiki/Arch_%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F][Arch Wiki]]解决。
+** 关于archiso的文件系统基础知识
+archlive使用squashfs+overlayfs技术来达到在u盘等移动介质上运行系统的目的，其解释
+如下：
+- squashfs: 类似于压缩包，能够压缩文件系统的大小，并且能够直接挂载成为文件系统，
+  但是是只读的。它是能够将linux系统压缩到U盘可以容纳下的那种程度的原因。若需要创
+  建一个squshfs文件，使用以下命令：
+  #+begin_src shell
+    mksquashfs "<你要打包压缩的文件夹>" "<输出文件>"
+  #+end_src
+  若要使用，将产生的文件挂载到任意文件夹就好了。不过挂载后的挂载点里面是被压缩文
+  件夹里面的内容需要注意。
+- tmpfs: 处于内存的临时文件系统，所有的文件操作存储都在内存中进行。要自己挂载一
+  个tmpfs需要运行以下命令：
+  #+begin_src shell
+    sudo mount -t tmpfs tmpfs -o size=SIZE MOUNTPOINT
+  #+end_src
+  其中，SIZE是临时目录的大小，MOUNTPOINT是挂载点，用该命令挂载的MOUNTPOINT默认自
+  带t属性(允许所有用户读写)
+- overlayfs: 可以理解为一种可以将两个文件夹合并在一起成为一个文件夹的文件系统，
+  要自己挂载一个overlayfs需要运行以下命令：
+  #+begin_src shell
+    sudo mount -t overlay overlay -o lowerdir=LOWERDIR,upperdir=UPPERDIR,workdir=WORKDIR MERGED
+  #+end_src
+  其中 =-t= 指定文件系统类型， =-o= 指定文件系统的选项，其他部分含义如下
+  - MERGED: 最终的合成目录，即LOWERDIR和UPPERDIR的文件树“加”在一起的样子，也是
+    overlayfs允许进行文件操作的部分
+  - UPPERDIR: 高层目录，在MERGED中作出的文件操作都会影响到这里，包括但不限于在
+    MERGED中增加、修改和删除文件，对文件的属性、权限进行变更
+    - 如果只是更改了文件的权限信息，则不会往UPPERDIR中拷贝文件占用空间。
+    - 如果在MERGED中修改了来自LOWERDIR的文件，则会将这个修改后的文件存储在
+      UPPERDIR中。修改包括修改文件的内容，或者使用touch更改文件的时间属性
+    - 如果在MERGED中删除了来自LOWERDIR的文件，则会在upperdir中产生一个同名同路径
+      的 =c= 类型字符设备文件作为顶替。
+  - LOWERDIR: 基层目录，应当只读，存放各种基础数据。在MERGED中作出的文件操作不会
+    影响到这里。如果 /UPPERDIR/ 存在同名同路径的文件则会顶替这里的文件展示在MERGERD
+    中
+  - WORKDIR: 工作目录，要求和UPPERDIR处于同一个文件系统内，用于临时存放数据
+
+在archiso中，整个根目录会被打包成为squashfs文件[fn:3]，放置在最终打包好的iso镜像
+的 /arch/<ARCH>/ 目录（<ARCH>是架构名称），而在启动时会先挂载squashfs，然后将其
+挂载点作为overlayfs的lowerdir，再挂载一个tmpfs将其挂载点作为upperdir，最后将根目
+录作为merged目录完成文件系统的挂载。[fn:4]
+
+由于默认的tmpfs只有苦逼的300M，如果你需要动态调整根目录的大小，你可以尝试使用以
+下命令：
+
+#+begin_src shell
+# mount -o remount,size=2G /run/archiso/cowspace
+#+end_src
+
+上述命令后面的挂载点就是tmpfs/upperdir的路径，使用下面命令可以查看挂载的文件系统
+兼查看他们的类型：
+#+begin_src shell
+  $ df -hT
+#+end_src
+如果要查看upperdir是什么可以用下面的命令：
+#+begin_src shell
+  mount|grep "overlayfs"
+#+end_src
+** 衍生出来的骚操作
+根据上面的知识可以知道：
+1) 使用PKGBUILD能够很方便地往里面添加文件
+2) squashfs能够压缩文件大小
+3) squashfs会保留文件属性
+4) 使用overlayfs能够合并文件视图
+
+那么，我们可以得出一个结论：我们也可以使用squashfs+overlayfs实现一套配置所有用户
+共享，在同步更新配置时只需要一更新squashfs文件就可以了，这可比自己手动添加文件而
+且还要自己防止不完整更新要方便得多了。配置用户家目录配置的具体做法如下：
+
+#+begin_quote
+下面的内容默认你具有了一定的基础知识储备，如果看不懂那就先别搞自己用一段时间arch
+或者查wiki
+#+end_quote
+
+1) 准备好你的家目录squashfs文件
+   将你需要放到家目录的文件打包好进squashfs文件里(mksquashfs)
+   # 1) 检查要安装的包里没有包会往/etc/skel塞文件覆盖了你的squashfs文件
+2) 编写.service文件，实现开机自启动自动挂载。举例如下：
+   #+begin_src systemd
+     [Unit]
+     Description=arch-fast-install挂载OverlayFS服务
+     After=local-fs.target
+     RequiresMountsFor=/usr/share/local-config/lowerdir/
+
+     [Service]
+     Type=oneshot
+     # 这里需要自己编写执行的脚本并且在后面打包软件包时将脚本放到指定的位置
+     ExecStart=/usr/share/arch-fast-install/overlayfs-data-ctl start
+     ExecStop=/usr/share/arch-fast-install/overlayfs-data-ctl stop
+     RemainAfterExit=yes
+
+     [Install]
+     WantedBy=multi-user.target
+   #+end_src
+   编写对应的控制脚本：
+   #+begin_src bash
+     #!/usr/bin/bash
+
+     # 这里指定squashfs文件的位置
+     SQUASH="/usr/share/arch-fast-install/home.sfs"
+     LOWER_DIR="/usr/share/arch-fast-install/lowerdir/"   # 挂载squash文件的目录
+     # AIROOTFS_DIR="/run/archiso/airootfs/"
+     # COWSPACE_DIR="/run/archiso/cowspace/persistent_/$(uname -m)/upperdir/"
+     OVERLAY_BASE="/run/arch-fast-install/"
+     # 因为overlayfs要求upperdir和workdir必须处于同一个文件系统
+     # 而$HOME目录本身就是overlayfs的merged目录，不可嵌套
+     # 因而使用临时文件系统(/run/默认一半内存空间)
+
+     mount_overlayfs_for_user () {
+             MOUNT_POINT="$1"   # 用户家目录
+     	USER_NAME=$(echo "$MOUNT_POINT"|sed "s|.*/||") # 用户名
+             UPPER_DIR="$OVERLAY_BASE/upperdir_$USER_NAME"
+     	WORK_DIR="$OVERLAY_BASE/workdir_$USER_NAME/"
+     	if [[ ! -d "$WORK_DIR" ]];then
+     		mkdir -p "$WORK_DIR"
+     	fi
+     	if [[ ! -d "$UPPER_DIR" ]];then
+     		# 创建overlayfs
+     		mkdir -p "$UPPER_DIR"
+     		rmdir "$UPPER_DIR"
+     		cp -r "$MOUNT_POINT" "$UPPER_DIR"
+     	fi
+     	# 挂载OverlayFS
+     	mount -t overlay overlay -o \
+     		lowerdir="$LOWER_DIR",upperdir="$UPPER_DIR",workdir="$WORK_DIR" \
+     		"$MOUNT_POINT"
+     	chown $USER_NAME:$USER_NAME -R $MOUNT_POINT
+     }
+
+     if [[ ! -f "/version" ]]; then
+     	echo "The system doesn't look like archiso (lacking the /version file)." >&2
+     	exit 1
+     fi
+
+     case "$1" in
+     	start)
+     		if [ ! -d "$OVERLAY_BASE" ];then
+     			mkdir -p "$OVERLAY_BASE"
+     		fi
+     		# 创建tmpfs用于OVERLAY_BASE
+     		# mount -t tmpfs tmpfs -o size=1G "$OVERLAY_BASE"
+     		mkdir -p "$LOWER_DIR"
+     		
+     		# 挂载squashfs到lower层
+     		mount -t squashfs "$SQUASH" "$LOWER_DIR" -o ro,loop
+     		
+     		# 挂载OverlayFS
+     		USER_HOMES=$(cat /etc/passwd|sed "/nologin\|git-shell/d;s/\([^:]*:\)\{5\}\([^:]*\):.*/\2/")
+     		echo "$USER_HOMES" |while read USER_HOME; do
+     			if [[ $(mountpoint "$USER_HOME" -q;echo $?) == 0 ]];then
+     				echo "已经挂载: $USER_HOME"
+     				continue
+     			fi
+     			mount_overlayfs_for_user "$USER_HOME"
+     		done
+     		;;
+     	stop)
+     		# 卸载用户家目录overlayfs
+     		USER_HOMES=$(cat /etc/passwd|sed "/nologin\|git-shell/d;s/\([^:]*:\)\{5\}\([^:]*\):.*/\2/")
+     		echo "$USER_HOMES" |while read USER_HOME; do
+     			if [[ $(mountpoint "$USER_HOME" -q;echo $?) != 0 ]];then
+     				echo "非挂载点: $USER_HOME"
+     				continue
+     			fi
+     			echo "将会强制杀死所有占用家目录的进程"
+     			fuser -ck "$USER_HOME"
+     			umount "$USER_HOME"
+     		done
+     		# 卸载squashfs
+     		umount "$LOWER_DIR"
+     		# umount "$OVERLAY_BASE"
+     		# rm -rf "$OVERLAY_BASE"
+     		;;
+     	,*)
+     		echo "Usage: $0 {start|stop}"
+     		exit 1
+     		;;
+     esac
+   #+end_src
+   上面的脚本就实现了为passwd中列出的可登录用户自动挂载目录的功能
+3) 编写PKGBUILD文件将文件打包好成软件包，将文件放在上面脚本指定的位置
+4) 建立本地存储库，将软件包添加进去
+
+这套流程是我最近(2025.08)正在折腾的东西，后面应该会放到github上，但是还不知道什
+么时候才能搞好。到时候再进行更新吧。
+
+未完待续
+
+* Footnotes
+[fn:4]这一套流程似乎是在引导阶段完成的，如果在修改引导时加入了参数
+=init=usr/bin/sh= 就能进initramfs的shell，df一下就可以看见文件系统已经按照上述规
+则加载好了
+
+[fn:3]根据README.profile.rst，实际上这个是可选的，可以选择使用squashfs还是
+erofs(另外一套只读文件系统)，为了方便同时也是因为我没有涉猎，这里不再提及 
+[fn:2]即上面提到过的那个本地文件 
+
+[fn:1]有一个例外，就是目前我没有找到办法能够让iso没有占满usb的空间时能够将多出来
+的空间作为可读写的存储空间，所以在archiso产生的所有的数据都是存在内存里的tmpfs，
+关机重启就会没，除非自己挂载其他存储设备存进去 

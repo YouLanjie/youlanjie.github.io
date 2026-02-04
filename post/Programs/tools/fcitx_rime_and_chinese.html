@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>fcitx/rime/雾凇拼音/万象语言模型的安装与配置</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">fcitx/rime/雾凇拼音/万象语言模型的安装与配置</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 简介</a></li><li><a href="#org-title-2">2. 安装</a></li><li><a href="#org-title-3">3. 尝鲜</a></li><li><a href="#org-title-4">4. 配置</a><ul><li><a href="#org-title-4-1">4.1. 应用配置</a></li></ul></li></ul></div></div>
+<div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 简介</h2>
+<div class="outline-text-2" id="text-1"><p>fcitx本身有中文输入，但是有点烂。因此，尝试使用fcitx-rime方案改进输入体验。</p><p>按照我的个人理解，在这么一套配置中，fcitx是框架，充当运行时负责ui输入捕获之类的，而rime则是引擎，负责对输入进行逻辑处理变成你所看见的候选字等的工作。</p><p>本博客较为粗略，更详细的内容建议看看
+<a href='https://dvel.me/posts/rime-ice/#%e6%96%b0%e6%89%8b%e6%8c%87%e5%bc%95'>这篇文章</a>。</p></div></div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 安装</h2>
+<div class="outline-text-2" id="text-2"><div class="org-src-container"><pre class="src src-shell"><span class="c1"># fcitx部分</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>fcitx5-im<span class="w"> </span>fcitx5-configtool<span class="w"> </span>fcitx5-rime
+<span class="c1"># rime部分（需要使用archlinuxcn源）</span>
+<span class="c1"># 这里选择直接安装别人搞好的成套配置（雾凇拼音方案rime-ice）</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>rime-ice-pinyin-git
+<span class="c1"># 扩展词库</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>rime-pinyin-moegirl<span class="w"> </span>rime-pinyin-simp<span class="w"> </span>rime-pinyin-zhwiki
+<span class="c1"># 万象语言模型(lts)</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>rime-wanxiang-gram-zh-hans
+</pre></div><p>然后打开fcitx配置添加“中州韵”输入法到活动项配置好快捷键即可完成安装。（tips:“中州韵”是rime的中文名）</p></div></div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 尝鲜</h2>
+<div class="outline-text-2" id="text-3"><p>使用fcitx设置的快捷键切换到中州韵输入法，其logo应该是一个古文字（我也不认得）。使用 <code>Ctrl+`</code> 调出设置选项（即Ctrl加反波浪号，在键盘左侧，Esc下面Tab和大写锁定上面），这里可以选择切换输入方案并且进行类似于简繁体切换的设置。这里选择雾凇拼音即可。</p><p>虽说别人建议把fcitx的输入法能删的删避免冲突，但我目前中英文切换仍旧是使用fcitx设置的快捷键，也懒得管，以后出事了再回来更新。</p></div></div>
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 配置</h2>
+<div class="outline-text-2" id="text-4"><p>此部分比较抽象烧脑，我会尽量理论+可抄实践例子进行说明。</p><p>rime的配置文件位于 <code>/usr/share/rime-data</code> (系统级配置)和 <code>$HOME/.local/share/fcitx5/rime/</code> (仅限使用fcitx框架)，格式是yaml，文件名称解释如下：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
+<col class="org-left" />
+<col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">文件名</th><th scope="col" class="org-left">功能</th><th scope="col" class="org-left">自定义要不要改</th></tr>
+</thead><tbody>
+<tr><td class="org-left">default.yaml</td><td class="org-left">默认配置文件，在别人分享的配置中用常见</td><td class="org-left">不要</td></tr><tr><td class="org-left">default.custom.yaml</td><td class="org-left">更高优先级的默认配置文件，用于给默认配置打补丁（自定义）</td><td class="org-left">要</td></tr>
+</tbody><tbody>
+<tr><td class="org-left">xxx.yaml</td><td class="org-left">xxx为配置方案名称，就好比fcitx下也支撑多个输入法一样</td><td class="org-left">不要</td></tr><tr><td class="org-left">xxx.schema.yaml</td><td class="org-left">不知道，一般不是自定义文件，应该是方案的基本配置文件</td><td class="org-left">不要</td></tr><tr><td class="org-left">xxx.custom.yaml</td><td class="org-left">更高优先级的配置文件，同样是为了方便自定义而不修改源文件而生</td><td class="org-left">要</td></tr><tr><td class="org-left">xxx.dict.yaml</td><td class="org-left">一般为xxx方案的词典文件</td><td class="org-left">可能要</td></tr></table><p>换句话说，default是用户的全局配置文件，其他是对应方案（例如说五笔、拼音、双拼）的配置文件，所有的配置文件的.yaml后缀前加上.custom后缀意思就是该文件的覆盖/补丁文件，可以单纯修改里面的内容覆盖别人提供的默认方案配置进行自定义。</p><p>例如说，在 <b>default.custom.yaml</b> 中添加下列内容进行打补丁自定义配置：</p><div class="org-src-container"><pre class="src src-yaml"><span class="nt">patch</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">key_binder/bindings/+</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># 开启逗号句号翻页</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> when</span><span class="p">:</span><span class="w"> </span><span class="nv">paging</span><span class="p p-Indicator">,</span><span class="nt"> accept</span><span class="p">:</span><span class="w"> </span><span class="nv">comma</span><span class="p p-Indicator">,</span><span class="nt"> send</span><span class="p">:</span><span class="w"> </span><span class="nv">Page_Up</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> when</span><span class="p">:</span><span class="w"> </span><span class="nv">has_menu</span><span class="p p-Indicator">,</span><span class="nt"> accept</span><span class="p">:</span><span class="w"> </span><span class="nv">period</span><span class="p p-Indicator">,</span><span class="nt"> send</span><span class="p">:</span><span class="w"> </span><span class="nv">Page_Down</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="c1"># 设置C-`时可用的方案列表</span>
+<span class="w">  </span><span class="nt">schema_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rime_ice</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">luna_pinyin_simp</span>
+<span class="w">    </span><span class="c1">#- schema: terra_pinyin</span>
+<span class="w">  </span><span class="c1"># 设置每页候选词最大数量</span>
+<span class="w">  </span><span class="nt">menu</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">page_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9</span>
+</pre></div><p>其中的 <b>patch</b> 就是打补丁的意思，更详细的语法参见
+<a href='https://dvel.me/posts/rime-ice/#%e4%bb%a5-patch-%e7%9a%84%e6%96%b9%e5%bc%8f%e6%89%93%e8%a1%a5%e4%b8%81'>这里</a>。</p><p>若需启用万象模型，需要在 <b>rime_ice.custom.yaml</b> 中添加：</p><div class="org-src-container"><pre class="src src-yaml"><span class="nt">patch</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">grammar</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># file: /usr/share/rime-data/wanxiang-lts-zh-hans.gram</span>
+<span class="w">    </span><span class="nt">language</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wanxiang-lts-zh-hans</span>
+<span class="w">    </span><span class="nt">collocation_max_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">collocation_min_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">translator/contextual_suggestions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">translator/max_homophones</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="w">  </span><span class="nt">translator/max_homographs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+</pre></div><p>若需启用额外词典，需要复制 <b>/usr/share/rime-data/rime_ice.dict.yaml</b> 到用户空间变成 <b>rime_ice.dict.yaml</b> 再根据注释提示修改文件。以添加archlinuxcn的词典为例：</p><div class="org-src-container"><pre class="src src-shell"><span class="c1"># 安装词典文件(archlinuxcn)</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>rime-pinyin-moegirl<span class="w"> </span>rime-pinyin-zhwiki
+<span class="c1"># 确认词典文件名</span>
+pacman<span class="w"> </span>-Ql<span class="w"> </span>rime-pinyin-moegirl<span class="w"> </span>rime-pinyin-zhwiki<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dict
+<span class="c1"># 复制rime-ice词典配置文件</span>
+cp<span class="w"> </span>/usr/share/rime-data/rime_ice.dict.yaml<span class="w"> </span>~/.local/share/fcitx5/rime/
+<span class="c1"># 编辑配置文件，根据提示增加`- zhwiki`和`- moegirl`两行，注意缩进</span>
+vim<span class="w"> </span>~/.local/share/fcitx5/rime/rime_ice.dict.yaml
+</pre></div></div><div id="outline-container-4-1" class="outline-3">
+<h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 应用配置</h3>
+<div class="outline-text-3" id="text-4-1"><p>切换到中州韵，在系统托盘，右键fcitx图标，找到“重新部署”点击并等待一会（有通知），如果找不到可以重启fcitx实现相同效果。</p></div></div></div></div>
+<div id="postamble" class="status"><p class="date">时间: <2025-08-19 二 22:37></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 在archlinux下基于fcitx使用rime-ice方案混合万象语言模型实现顺手的中文输入</p>
+<p class="date">生成于: 2025-10-05 日 16:21:37</p>
+</div>
+</body>
+</html>
