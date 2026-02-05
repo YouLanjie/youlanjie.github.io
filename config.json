@@ -1,0 +1,20 @@
+{
+	"article_dir": "post/",
+	"static_sites": [
+		"about.org",
+		"404.org"
+	],
+	"generate_sites": [
+		"index.org",
+		"timeline.org"
+	],
+	"blacklist": ["Novel/"],
+	"whitelist": ["Novel/.*[Ii]ndex.html"],
+	"setupfile": "setup.setup",
+	"settings": {
+		"follow_link": false,
+		"tree_base_toc": 2,
+		"tree_toc": 2,
+		"tree_time": false
+	}
+}

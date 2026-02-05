@@ -36,32 +36,31 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <li><a href="#org-title-3">3. Hexo</a><ul><li><a href="#org-title-3-1">3.1. 开始</a></li><li><a href="#org-title-3-2">3.2. 使用主题</a></li><li><a href="#org-title-3-3">3.3. 一些优劣/我选择它的原因</a></li><li><a href="#org-title-3-4">3.4. 成果展示</a></li></ul></li>
 <li><a href="#org-title-4">4. Hugo</a><ul><li><a href="#org-title-4-1">4.1. 简介</a></li><li><a href="#org-title-4-2">4.2. 安装</a></li><li><a href="#org-title-4-3">4.3. 使用</a></li></ul></li>
 <li><a href="#org-title-5">5. Emacs Org</a><ul><li><a href="#org-title-5-1">5.1. 简介</a></li><li><a href="#org-title-5-2">5.2. 使用</a></li><li><a href="#org-title-5-3">5.3. 本地预览</a></li><li><a href="#org-title-5-4">5.4. 上传到Github</a></li><li><a href="#org-title-5-5">5.5. 自卖自夸</a><ul><li><a href="#org-title-5-5-1">5.5.1. 新DLC之构建脚本</a></li></ul></li></ul></li></ul></div></div>
-<div class="outline-2">
+<div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
 <div class="outline-text-2" id="text-1"><blockquote>
-<p>本文由两篇老文章整理而成(旧的文章已经删除)本文收录了Jekyll.Hexo,Hugo,Emacs Org三种大众主流和一种小众搭建blog的方法，由于三种主流方法已经许久未碰，难免会有错误之处，以官方文档为准</p></blockquote><p>如果需要跳转到对应程序，右上角目录跳转不谢</p><p>目前本blog使用Emacs Org构建</p></div><div class="outline-3">
+<p>本文由两篇老文章整理而成(旧的文章已经删除)本文收录了Jekyll.Hexo,Hugo,Emacs Org三种大众主流和一种小众搭建blog的方法，由于三种主流方法已经许久未碰，难免会有错误之处，以官方文档为准</p></blockquote><p>如果需要跳转到对应程序，右上角目录跳转不谢</p><p>目前本blog使用Emacs Org构建</p></div><div id="outline-container-1-1" class="outline-3">
 <h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 关于github.io</h3>
-<div class="outline-text-3" id="text-1-1"><p>github.io好像有个正式名称叫
-<a href="https://pages.github.com/">Github Pages</a>?那不重要。根据我的理解，Github Pages应该是一个用于托管静态网页的这么一个平台，常用于开源项目的项目主页，可以通过它来托管自己的博客网站达到搭建个人博客的目的</p><p>基础使用方式：在github上创建一个仓库，以 <code>你的账户名称.github.io</code> 格式为名新建一个仓库，这个仓库理论上就是一个会用于部署github pages的仓库</p><blockquote>
-<p>怎么用github自己上网百度，这点信息搜索学习能力还是得有的吧？</p></blockquote><p>github pages部署默认用的jekyll，如果往仓库丢了个jekyll项目则会调用jekyll生产网页，否则直接把仓库的文件挂作网页</p></div></div></div><div class="outline-2">
+<div class="outline-text-3" id="text-1-1"><p>github.io好像有个正式名称叫<a href="https://pages.github.com/">Github Pages</a>?那不重要。根据我的理解，Github Pages应该是一个用于托管静态网页的这么一个平台，常用于开源项目的项目主页，可以通过它来托管自己的博客网站达到搭建个人博客的目的</p><p>基础使用方式：在github上创建一个仓库，以 <code>你的账户名称.github.io</code> 格式为名新建一个仓库，这个仓库理论上就是一个会用于部署github pages的仓库</p><blockquote>
+<p>怎么用github自己上网百度，这点信息搜索学习能力还是得有的吧？</p></blockquote><p>github pages部署默认用的jekyll，如果往仓库丢了个jekyll项目则会调用jekyll生产网页，否则直接把仓库的文件挂作网页</p></div></div></div>
+<div id="outline-container-2" class="outline-2">
 <h2 id="org-title-2"><span class="section-number-2">2.</span> Jekyll</h2>
-<div class="outline-text-2" id="text-2"><p>刚创建好的仓库是空仓库（没有提交）。如果需要使用Jekyll搭建博客就可以在Github Web 端选择设置一个Jekyll主题并产生一个初始提交到仓库，也可以手动用git把仓库clone下来自定义主题或者使用其他的静态blog工具</p><p>我们先说前者</p></div><div class="outline-3">
+<div class="outline-text-2" id="text-2"><p>刚创建好的仓库是空仓库（没有提交）。如果需要使用Jekyll搭建博客就可以在Github Web 端选择设置一个Jekyll主题并产生一个初始提交到仓库，也可以手动用git把仓库clone下来自定义主题或者使用其他的静态blog工具</p><p>我们先说前者</p></div><div id="outline-container-2-1" class="outline-3">
 <h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 使用Github预设的Jekyll主题</h3>
 <div class="outline-text-3" id="text-2-1"><p>在仓库创建后你可以在仓库界面的 <i>菜单 -&gt; Settings -&gt; Pages</i> 界面中点击按钮 <b>Choose a theme</b></p><div class="figure">
 <p><img src="./build_blog/choose-theme.webp" alt="./build_blog/choose-theme.webp" /></p>
-<p><span class="figure-number">Figure 1: </span>界面位置</p></div><p>选择一个Jekyll主题会提交更改(空仓库则顺带把jekyll项目初始化好了)以形成一个初始的界面</p></div></div><div class="outline-3">
+<p><span class="figure-number">Figure 1: </span>界面位置</p></div><p>选择一个Jekyll主题会提交更改(空仓库则顺带把jekyll项目初始化好了)以形成一个初始的界面</p></div></div>
+<div id="outline-container-2-2" class="outline-3">
 <h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 自定义Jekyll主题</h3>
 <div class="outline-text-3" id="text-2-2"><p>先使用git克隆仓库到本地（git的用法自行百度）</p><div class="org-src-container"><pre class="src src-bash">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/你的用户名/你的仓库名
-</pre></div><p>后再自定义主题。我使用的
-<a href="https://github.com/huxpro/huxpro.github.io">主题模板</a>使用方法（参考
-<a href="https://keysaim.github.io/post/blog/2017-08-15-how-to-setup-your-github-io-blog/">这篇文章</a>）</p><p>要先克隆你想要的主题模板仓库到本地,例如:</p><div class="org-src-container"><pre class="src src-bash">git<span class="w"> </span>clone<span class="w"> </span>git@github.com:sighingnow/jekyll-gitbook.git
-</pre></div><p>克隆后将里面的文件及文件夹（除了.git外）替换(复制到)你的仓库里，并作出一些必要的修改（修改 <code>_config.yml</code> 、 <code>index.html</code> 等，具体的文件规范和目录结构可以看
-<a href="http://jekyllcn.com/docs/structure/">官方文档</a>）/（就像是抄作业不抄名字）/ 成为你的博客网站（这可能需要一定的html开发知识）</p><p>其他的主题可以在
-<a href="http://jekyllthemes.org/">这个网站上</a>查找</p></div></div><div class="outline-3">
+</pre></div><p>后再自定义主题。我使用的<a href="https://github.com/huxpro/huxpro.github.io">主题模板</a>使用方法（参考<a href="https://keysaim.github.io/post/blog/2017-08-15-how-to-setup-your-github-io-blog/">这篇文章</a>）</p><p>要先克隆你想要的主题模板仓库到本地,例如:</p><div class="org-src-container"><pre class="src src-bash">git<span class="w"> </span>clone<span class="w"> </span>git@github.com:sighingnow/jekyll-gitbook.git
+</pre></div><p>克隆后将里面的文件及文件夹（除了.git外）替换(复制到)你的仓库里，并作出一些必要的修改（修改 <code>_config.yml</code> 、 <code>index.html</code> 等，具体的文件规范和目录结构可以看<a href="http://jekyllcn.com/docs/structure/">官方文档</a>）/（就像是抄作业不抄名字）/ 成为你的博客网站（这可能需要一定的html开发知识）</p><p>其他的主题可以在<a href="http://jekyllthemes.org/">这个网站上</a>查找</p></div></div>
+<div id="outline-container-2-3" class="outline-3">
 <h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 编写发布博客</h3>
-<div class="outline-4">
+<div class="outline-text-3" id="text-2-3"></div><div id="outline-container-2-3-1" class="outline-4">
 <h4 id="org-title-2-3-1"><span class="section-number-4">2.3.1.</span> 博客命名</h4>
-<div class="outline-text-4" id="text-2-3-1"><p>根据Jekyll官方文档的要求，博客文件应当放置在 <b>仓库根目录/_posts/</b> 文件夹下,以 <code>YEAR-MONTH-DAY-title.MARKUP</code> 的格式对文件进行命名。推荐使用markdown编写blog(可能还能用html?)。</p></div></div><div class="outline-4">
+<div class="outline-text-4" id="text-2-3-1"><p>根据Jekyll官方文档的要求，博客文件应当放置在 <b>仓库根目录/_posts/</b> 文件夹下,以 <code>YEAR-MONTH-DAY-title.MARKUP</code> 的格式对文件进行命名。推荐使用markdown编写blog(可能还能用html?)。</p></div></div>
+<div id="outline-container-2-3-2" class="outline-4">
 <h4 id="org-title-2-3-2"><span class="section-number-4">2.3.2.</span> 格式要求</h4>
 <div class="outline-text-4" id="text-2-3-2"><p>(markdown)博客的头部应该有以下内容：</p><div class="org-src-container"><pre class="src src-yaml"><span class="nn">---</span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">这里填写文章的标题，填了就不用写一级标题了</span>
@@ -76,12 +75,13 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <p><img src="./build_blog/jekyll1.webp" alt="./build_blog/jekyll1.webp" /></p>
 <p><span class="figure-number">Figure 2: </span>无封面</p></div><div class="figure">
 <p><img src="./build_blog/jekyll2.webp" alt="./build_blog/jekyll2.webp" /></p>
-<p><span class="figure-number">Figure 3: </span>有封面</p></div></div></div></div></div><div class="outline-3">
+<p><span class="figure-number">Figure 3: </span>有封面</p></div></div></div></div></div>
+<div id="outline-container-2-4" class="outline-3">
 <h3 id="org-title-2-4"><span class="section-number-3">2.4.</span> 本地安装Jekyll以进行预览</h3>
 <div class="outline-text-3" id="text-2-4"><p>由于博客网站推送到远程再进行构建会有一定的延迟，网络也算不上特别好，谁也不希望自己的git commit乱成一锅粥，因此在本地安装Jekyll是有必要的</p><p>在ArchLinux安装：</p><div class="org-src-container"><pre class="src src-bash">sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>jekyll<span class="w"> </span>ruby-rake<span class="w"> </span>ruby-bundler<span class="w"> </span>ruby-minima
 </pre></div><blockquote>
 <p>快忘了这里还有只安装ruby手动安装jekyll的方法了，不常用</p><div class="org-src-container"><pre class="src src-bash">gem<span class="w"> </span>install<span class="w"> </span>jekyll
-</pre></div></blockquote></div><div class="outline-4">
+</pre></div></blockquote></div><div id="outline-container-2-4-1" class="outline-4">
 <h4 id="org-title-2-4-1"><span class="section-number-4">2.4.1.</span> 安装主题的依赖包  </h4>
 <div class="outline-text-4" id="text-2-4-1"><p>因为不同的主题会使用到不同的包，会有不同的依赖，具体的可以查看项目目录下的 <code>Gemfile</code> ，里面会有一些类似于下面的内容</p><div class="org-src-container"><pre class="src src-gemfile">gem &quot;jekyll&quot;
 gem &#39;jekyll-feed&#39;
@@ -90,31 +90,32 @@ gem &#39;jemoji&#39;
 gem &#39;webrick&#39;
 </pre></div><p>基本上安装文件中的引号中的包（名）就不会报错</p><div class="org-src-container"><pre class="src src-bash">gem<span class="w"> </span>install<span class="w"> </span>xxx<span class="w">          </span><span class="c1">#xxx为包名，需自行替换</span>
 </pre></div><blockquote>
-<p>不知道为什么，我运行jekyll预览时会报错，含有 <code>webrick</code> 等字样查了半天才找到了
-<a href="https://blog.csdn.net/qq_43655096/article/details/120397848">解决办法</a>：</p><div class="org-src-container"><pre class="src src-bash">bundle<span class="w"> </span>add<span class="w"> </span>webrick
-</pre></div></blockquote></div></div><div class="outline-4">
+<p>不知道为什么，我运行jekyll预览时会报错，含有 <code>webrick</code> 等字样查了半天才找到了<a href="https://blog.csdn.net/qq_43655096/article/details/120397848">解决办法</a>：</p><div class="org-src-container"><pre class="src src-bash">bundle<span class="w"> </span>add<span class="w"> </span>webrick
+</pre></div></blockquote></div></div>
+<div id="outline-container-2-4-2" class="outline-4">
 <h4 id="org-title-2-4-2"><span class="section-number-4">2.4.2.</span> 预览博客</h4>
 <div class="outline-text-4" id="text-2-4-2"><p>在终端执行命令：</p><div class="org-src-container"><pre class="src src-bash">jekyll<span class="w"> </span>serve
 </pre></div><blockquote>
 <p>顺带一提，想要在本地创建一个默认的jekyll博客项目，就在终端执行：</p><div class="org-src-container"><pre class="src src-bash">jekyll<span class="w"> </span>new<span class="w"> </span>你的项目名称（文件夹）
-</pre></div><p>不过这样可能会有一些慢</p></blockquote></div></div></div><div class="outline-3">
+</pre></div><p>不过这样可能会有一些慢</p></blockquote></div></div></div>
+<div id="outline-container-2-5" class="outline-3">
 <h3 id="org-title-2-5"><span class="section-number-3">2.5.</span> 推送你的博客文章到Github上</h3>
 <div class="outline-text-3" id="text-2-5"><p>在一篇blog写完后就可以执行</p><div class="org-src-container"><pre class="src src-bash">git<span class="w"> </span>add<span class="w"> </span>--all<span class="w">                                  </span><span class="c1">#添加所有文件</span>
 git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;你想要给这一次提交做的注释&quot;</span><span class="w">     </span><span class="c1">#进行提交</span>
 git<span class="w"> </span>push<span class="w">                                       </span><span class="c1">#推送更新到Github上</span>
-</pre></div><p>将更新推送到github上，等待一会之后你的博客网页（应为你的仓库名，如
-<a href="https://your_user_name.github.io">https://your_user_name.github.io</a>）就应会刷新</p></div></div></div><div class="outline-2">
+</pre></div><p>将更新推送到github上，等待一会之后你的博客网页（应为你的仓库名，如<a href="https://your_user_name.github.io">https://your_user_name.github.io</a>）就应会刷新</p></div></div></div>
+<div id="outline-container-3" class="outline-2">
 <h2 id="org-title-3"><span class="section-number-2">3.</span> Hexo</h2>
-<div class="outline-text-2" id="text-3"><p>根据前面所述，Github Pages还支持部署现成的网页，所以除了Github原生支持的Jekyll外，我们还有其他的解决方案，Hexo便是其一</p></div><div class="outline-3">
+<div class="outline-text-2" id="text-3"><p>根据前面所述，Github Pages还支持部署现成的网页，所以除了Github原生支持的Jekyll外，我们还有其他的解决方案，Hexo便是其一</p></div><div id="outline-container-3-1" class="outline-3">
 <h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 开始</h3>
-<div class="outline-text-3" id="text-3-1"><p>Hexo使用Node.js编写，是一个博客引擎。安装方法参考
-<a href="https://hexo.io/zh-cn/index.html">官网</a>：</p><blockquote>
+<div class="outline-text-3" id="text-3-1"><p>Hexo使用Node.js编写，是一个博客引擎。安装方法参考<a href="https://hexo.io/zh-cn/index.html">官网</a>：</p><blockquote>
 <p>建议在 <code>$HOME/.npmrc</code> 中添加以下内容以使用更快的镜像站下载：</p><div class="org-src-container"><pre class="src src-conf"><span class="na">registry</span><span class="o">=</span><span class="s">https://registry.npmmirror.com/</span>
 </pre></div></blockquote><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>hexo-cli<span class="w"> </span>-g
 </pre></div><p>安装后可以在终端执行命令</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>hexo<span class="w"> </span>init<span class="w"> </span>blog
 </pre></div><p>在名为 <i>blog</i> 的文件夹中创建默认的博客主题网站。现在则可以执行以下命令安装主题需要的nodejs包</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>npm<span class="w"> </span>install
 </pre></div><p>最后使用以下命令开始博客预览</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>hexo<span class="w"> </span>server
-</pre></div></div></div><div class="outline-3">
+</pre></div></div></div>
+<div id="outline-container-3-2" class="outline-3">
 <h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 使用主题</h3>
 <div class="outline-text-3" id="text-3-2"><p>网上有众多主题，到底应该怎么使用呢？</p><p>最基本的，当我们找到一个主题之后应当在它的Github项目页面查看README文件了解这方面的内容，不过大都脱离不开这样的一个流程：</p><ol class="org-ol">
 <li>克隆仓库到本地
@@ -123,7 +124,8 @@ git<span class="w"> </span>push<span class="w">                                 
 </li>
 <li>编辑主题和博客的配置文件。这一步通常较为繁琐，一般要看主题提供了什么功能和什么注释。
 </li></ol>
-</div></div><div class="outline-3">
+</div></div>
+<div id="outline-container-3-3" class="outline-3">
 <h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 一些优劣/我选择它的原因</h3>
 <div class="outline-text-3" id="text-3-3"><ol class="org-ol">
 <li>速度快它使用nodejs构建，解释速度快（相较于Jekyll）
@@ -136,18 +138,22 @@ git<span class="w"> </span>push<span class="w">                                 
 </li>
 <li>原生不支持Org文件写博客这点可以算是打油的，这只是我的个人需求，实际上Markdown的功能也足够丰富了
 </li></ol>
-</div></div><div class="outline-3">
+</div></div>
+<div id="outline-container-3-4" class="outline-3">
 <h3 id="org-title-3-4"><span class="section-number-3">3.4.</span> 成果展示</h3>
 <div class="outline-text-3" id="text-3-4"><div class="figure">
 <p><img src="./build_blog/hexo.webp" alt="./build_blog/hexo.webp" /></p>
-<p><span class="figure-number">Figure 4: </span>我过去使用hexo构建的博客图片</p></div></div></div></div><div class="outline-2">
+<p><span class="figure-number">Figure 4: </span>我过去使用hexo构建的博客图片</p></div></div></div></div>
+<div id="outline-container-4" class="outline-2">
 <h2 id="org-title-4"><span class="section-number-2">4.</span> Hugo</h2>
-<div class="outline-text-2" id="text-4"><p>同Hexo，Hugo也是一个博客引擎，具体的看下面</p></div><div class="outline-3">
+<div class="outline-text-2" id="text-4"><p>同Hexo，Hugo也是一个博客引擎，具体的看下面</p></div><div id="outline-container-4-1" class="outline-3">
 <h3 id="org-title-4-1"><span class="section-number-3">4.1.</span> 简介</h3>
-<div class="outline-text-3" id="text-4-1"><p>Hugo是一个用Go语言编写的静态博客引擎。而相较于Hexo，它所拥有的为数不多的优势是原生支持Org文档解析，但因为前段时间它生成博客出错<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>，才让我抛弃它。它的主题相对会较少，请酌情选择。</p></div></div><div class="outline-3">
+<div class="outline-text-3" id="text-4-1"><p>Hugo是一个用Go语言编写的静态博客引擎。而相较于Hexo，它所拥有的为数不多的优势是原生支持Org文档解析，但因为前段时间它生成博客出错<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>，才让我抛弃它。它的主题相对会较少，请酌情选择。</p></div></div>
+<div id="outline-container-4-2" class="outline-3">
 <h3 id="org-title-4-2"><span class="section-number-3">4.2.</span> 安装</h3>
 <div class="outline-text-3" id="text-4-2"><p>由于我是Arch Linux环境，所以我这里只提Arch的安装办法，其他的请参考官网，理论上各大发行版是拥有hugo软件包的。</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>hugo
-</pre></div></div></div><div class="outline-3">
+</pre></div></div></div>
+<div id="outline-container-4-3" class="outline-3">
 <h3 id="org-title-4-3"><span class="section-number-3">4.3.</span> 使用</h3>
 <div class="outline-text-3" id="text-4-3"><blockquote>
 <p>老教材的只言片语：</p><p>这里参考官网的教程，操作基本没有坑，除了选主题有点麻烦之外，这里便不过多赘述。（实际上是我比较懒，不想写）<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup></p></blockquote><p>如果英语水平好（或者直接抄翻译），完全可以照着 <code>hugo help</code> 输出的帮助搞，他自己的帮助输出也是挺完善的，当然看blog也不差啦</p><p>新建一个blog使用以下命令(其中 <code>path/to/blog</code> 是你想要新建的blog目录途径)：</p><div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>hugo<span class="w"> </span>new<span class="w"> </span>site<span class="w"> </span>&lt;path/to/blog&gt;
@@ -167,14 +173,13 @@ See documentation at https://gohugo.io/.
 </pre></div><p>人工机翻下就是：</p><ol class="org-ol">
 <li>cd到你新建的博客目录下
 </li>
-<li>用命令 <code>hugo new theme &lt;THEMENAME&gt;</code> 新建一个主题或者从
-<a href="https://themes.gohugo.io/">网上</a>下载安装一个主题
+<li>用命令 <code>hugo new theme &lt;THEMENAME&gt;</code> 新建一个主题或者从<a href="https://themes.gohugo.io/">网上</a>下载安装一个主题
 </li>
-<li>编辑 <code>hugo.toml</code> 设置 <code>theme</code> 属性为对应的主题名称(即往文件里添加 <code>theme = "&lt;THEMENAME&gt;"</code>)
+<li>编辑 <code>hugo.toml</code> 设置 <code>theme</code> 属性为对应的主题名称(即往文件里添加 <code>theme = &quot;&lt;THEMENAME&gt;&quot;</code>)
 </li>
 <li>用命令 <code>hugo new content &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;</code> 新建一篇文章
 </li>
-<li>用命令 <code>hugo server --buildDrafts</code> 进行预览
+<li><p>用命令 <code>hugo server --buildDrafts</code> 进行预览</p>
 </li></ol>
 <p>但是呢，坑也是真的坑， <code>hugo new theme ...</code> 只是建立了个骨架，并没有实际的主题。如果从网上下载个主题放到 <code>theme/</code> 目录下，参照主题的README之类的提示配置后，一个 <code>hugo server</code> ，就有种绝望叫做点进去发现显示的是 <b>Page Not Found</b></p><p>我能给出的也就只有一点建议了</p><ol class="org-ol">
 <li>查看所有输出提示信息（一点都不要落）
@@ -183,13 +188,15 @@ See documentation at https://gohugo.io/.
 </li>
 <li>检查文章文件格式是否有问题
 </li>
-<li>5052年了，应该学会用ai了吧？（话说回来这年头都有ai了还有必要查blog么？）
+<li><p>5052年了，应该学会用ai了吧？（话说回来这年头都有ai了还有必要查blog么？）</p>
 </li></ol>
-<p>综上，但愿你看见的是一个能用的网站，而不是错误</p></div></div></div><div class="outline-2">
+<p>综上，但愿你看见的是一个能用的网站，而不是错误</p></div></div></div>
+<div id="outline-container-5" class="outline-2">
 <h2 id="org-title-5"><span class="section-number-2">5.</span> Emacs Org</h2>
-<div class="outline-3">
+<div class="outline-text-2" id="text-5"></div><div id="outline-container-5-1" class="outline-3">
 <h3 id="org-title-5-1"><span class="section-number-3">5.1.</span> 简介</h3>
-<div class="outline-text-3" id="text-5-1"><p>上面的三套，Jekyll和Hexo都不支持emacs-org文件，hugo是支持markdown和org，而我这套方案则是只支持emacs-org格式（用markdown可以划回去看上面三种）</p><p>简单地说就是手动编辑所有的页面保存为org文件，然后用emacs打开并导出成为html文件构建网页，所以说没有博客引擎方便，但纯手动也意味着自己知道整个网站的架构如何以及是如何运行的，还有挺高的自由度（可以整出一点“骚操作”）</p><p>当然，这只是我自己用的一套方案，不一定好用，简单看看图一乐就好（当然，如果真想折腾可以看看学学）</p></div></div><div class="outline-3">
+<div class="outline-text-3" id="text-5-1"><p>上面的三套，Jekyll和Hexo都不支持emacs-org文件，hugo是支持markdown和org，而我这套方案则是只支持emacs-org格式（用markdown可以划回去看上面三种）</p><p>简单地说就是手动编辑所有的页面保存为org文件，然后用emacs打开并导出成为html文件构建网页，所以说没有博客引擎方便，但纯手动也意味着自己知道整个网站的架构如何以及是如何运行的，还有挺高的自由度（可以整出一点“骚操作”）</p><p>当然，这只是我自己用的一套方案，不一定好用，简单看看图一乐就好（当然，如果真想折腾可以看看学学）</p></div></div>
+<div id="outline-container-5-2" class="outline-3">
 <h3 id="org-title-5-2"><span class="section-number-3">5.2.</span> 使用</h3>
 <div class="outline-text-3" id="text-5-2"><p>粗略地说，用emacs+org搭建blog的途径如下：</p><ol class="org-ol">
 <li>首先，你得先学会使用emacs和org-mode
@@ -205,11 +212,9 @@ See documentation at https://gohugo.io/.
 </li>
 <li>其次，你需要学会用git和github
 </li>
-<li>github创建github pages仓库（详见上面
-<a href="#org-title-2">Jekyll部分</a>）
+<li><p>github创建github pages仓库（详见上面<a href="#org-title-2">Jekyll部分</a>）</p>
 </li></ol>
-<p>具体的主题配置大致流程如此：克隆你的github pages仓库，然后从网上下载你想要使用的主题需要的css文件和js文件到博客下的任意一个目录，然后创建一个setup文件引用这些文件，像是该文章所引用的
-<a href="http:/setup.setup">setup file</a>：</p><div class="org-src-container">
+<p>具体的主题配置大致流程如此：克隆你的github pages仓库，然后从网上下载你想要使用的主题需要的css文件和js文件到博客下的任意一个目录，然后创建一个setup文件引用这些文件，像是该文章所引用的<a href="http:/setup.setup">setup file</a>：</p><div class="org-src-container">
 <pre id="setup-file" class="src src-org">
 
 
@@ -237,38 +242,36 @@ fetch('/setup.setup')
 </script>
 <blockquote>
 <p>由于这个setup file采用js动态加载，所以说没有代码高亮（w3m这种终端浏览器甚至可能加载不出来）</p></blockquote><blockquote>
-<p>有些主题会有README文件教你怎么用，甚至直接提供现成的setup file，例如
-<a href="https://github.com/yzs249175311/org-html-theme-dull">我之前用过的主题</a></p></blockquote><p>setup file类似于一个org文件，里面的语句基本都是org文件的内容，在每篇文章里面添加类似于这样一行内容就可以对这个setup file进行引用(文件路径要自己改)：</p><div class="org-src-container"><pre class="src src-org"><span class="nn">#+SETUPFILE:</span> ./path/to/file.setup
-</pre></div><p>值得注意的是，如果是 <code>begin_export: html</code> 里面的链接可以使用“绝对路径”，但是如果是只在org文件正文里面的链接则需要用相对链接。因为在网页中可以使用 <code>/</code> 表示网站的根目录（即只有域名的url）,而org的链接默认是文件，除非加上 <code>http:</code> 的协议头才会识别成网络链接</p></div></div><div class="outline-3">
+<p>有些主题会有README文件教你怎么用，甚至直接提供现成的setup file，例如<a href="https://github.com/yzs249175311/org-html-theme-dull">我之前用过的主题</a></p></blockquote><p>setup file类似于一个org文件，里面的语句基本都是org文件的内容，在每篇文章里面添加类似于这样一行内容就可以对这个setup file进行引用(文件路径要自己改)：</p><div class="org-src-container"><pre class="src src-org"><span class="nn">#+SETUPFILE:</span> ./path/to/file.setup
+</pre></div><p>值得注意的是，如果是 <code>begin_export: html</code> 里面的链接可以使用“绝对路径”，但是如果是只在org文件正文里面的链接则需要用相对链接。因为在网页中可以使用 <code>/</code> 表示网站的根目录（即只有域名的url）,而org的链接默认是文件，除非加上 <code>http:</code> 的协议头才会识别成网络链接</p></div></div>
+<div id="outline-container-5-3" class="outline-3">
 <h3 id="org-title-5-3"><span class="section-number-3">5.3.</span> 本地预览</h3>
 <div class="outline-text-3" id="text-5-3"><p>由于我的blog采用了 <code>/</code> 作为根目录进而引用css和js文件，所以说正常情况下直接打开文件是没有样式的，这时候就需要搭建本地服务器对blog进行预览了。我接触过的软件有三种：</p><ol class="org-ol">
-<li>python http.server<br/> 使用此方法极其简单，请确保你安装了python，然后在项目根目录执行命令：
+<li><p>python http.server<br/>使用此方法极其简单，请确保你安装了python，然后在项目根目录执行命令：</p>
 <div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>http.server
 </pre></div>
 <p>这样就会启动一个http服务器，默认端口是8000，默认打开文件夹下的 <code>index.html</code> 文件，如果没有，则会生成含有当前目录下所有文件和文件夹的html页面用于流览。即使是根目录有404.html也不会重定向过去。优势在于它是python自带的模块，使用方便，但是另一方面这玩意下载文件下一半取消下载还会报错，要不是问ai我还不知道这玩意</p>
 </li>
-<li>http-server <br/> 使用此方法（请确保你安装了nodejs），首先在终端用root权限运行:
+<li><p>http-server <br/>使用此方法（请确保你安装了nodejs），首先在终端用root权限运行:</p>
 <div class="org-src-container"><pre class="src src-shell"><span class="c1"># npm install http-server -g</span>
 </pre></div>
 <p>确认安装成功和就可以在博客根目录下使用命令 <code>http-server</code> 启动一个http服务器，默认端口是8080，终端会有服务的地址显示的。顺带一提，它在访问没有 <code>index.html</code> 的目录时且没有 <code>404.html</code> 文件时会自动生成返回当前目录下的所有文件与文件夹。可以当做局域网的文件单向传输器。（区别于python方法，此http-server在没有发现有 index.html时会尝试打开根目录的404.html，如果也没有再进行索引页生成，更接近正常服务器的逻辑）</p>
 </li>
-<li>nginx <br/> nginx的学习与配置或许可以参考其他的文章或者我未来写一篇nginx的教程。
+<li>nginx <br/>nginx的学习与配置或许可以参考其他的文章或者我未来写一篇nginx的教程。
 </li></ol>
-</div></div><div class="outline-3">
+</div></div>
+<div id="outline-container-5-4" class="outline-3">
 <h3 id="org-title-5-4"><span class="section-number-3">5.4.</span> 上传到Github</h3>
-<div class="outline-text-3" id="text-5-4"><p>在转录好html文件后就可以git commit然后git push到github上了</p><p>这里可以考虑是建立一个独立的目录仅仅把html等网页需要的文件上传，还是直接把org文件和html文件一起打包带走。我个人懒，所以是org和html混合一起的。唯一的缺点就是会重复占用空间。</p></div></div><div class="outline-3">
+<div class="outline-text-3" id="text-5-4"><p>在转录好html文件后就可以git commit然后git push到github上了</p><p>这里可以考虑是建立一个独立的目录仅仅把html等网页需要的文件上传，还是直接把org文件和html文件一起打包带走。我个人懒，所以是org和html混合一起的。唯一的缺点就是会重复占用空间。</p></div></div>
+<div id="outline-container-5-5" class="outline-3">
 <h3 id="org-title-5-5"><span class="section-number-3">5.5.</span> 自卖自夸</h3>
-<div class="outline-text-3" id="text-5-5"><p>但是吧，org这东西自由是自由了，就是有个缺点：emacs它好像有点慢。。。</p><p>比方说，这里有一个
-<a href="https://gitee.com/youlanjie/my-test/blob/fec12dfb11ab94307d280865f34b5ab0c573/shell/org_html_export.sh">脚本</a>（用于生成一系列的org文件并导出），在以共计300个文件夹5489个文件的目录下执行，创建并导出了一共301个org文件（还有一个是索引页），耗时如下(约347s)：</p><div class="org-src-container"><pre class="src src-text">./org_html_export.sh  357.26s user 27.86s system 110% cpu 5:47.10 total
-</pre></div><p>就上面这个速度，差不多是一个文件1秒多，而这是在使用单独启动Emacs的结果，如果在相同的环境下使用服务器(EmacsServer)(需要改换成
-<a href="https://gitee.com/youlanjie/my-test/blob/9980c214395ad85e621bdde2d454485a6165aed3/shell/org_html_export.sh">这个脚本</a>)，则结果如下(共计约18秒)</p><div class="org-src-container"><pre class="src src-text">org_html_export.sh  4.82s user 2.98s system 43% cpu 17.992 total
+<div class="outline-text-3" id="text-5-5"><p>但是吧，org这东西自由是自由了，就是有个缺点：emacs它好像有点慢。。。</p><p>比方说，这里有一个<a href="https://gitee.com/youlanjie/my-test/blob/fec12dfb11ab94307d280865f34b5ab0c573/shell/org_html_export.sh">脚本</a>（用于生成一系列的org文件并导出），在以共计300个文件夹5489个文件的目录下执行，创建并导出了一共301个org文件（还有一个是索引页），耗时如下(约347s)：</p><div class="org-src-container"><pre class="src src-text">./org_html_export.sh  357.26s user 27.86s system 110% cpu 5:47.10 total
+</pre></div><p>就上面这个速度，差不多是一个文件1秒多，而这是在使用单独启动Emacs的结果，如果在相同的环境下使用服务器(EmacsServer)(需要改换成<a href="https://gitee.com/youlanjie/my-test/blob/9980c214395ad85e621bdde2d454485a6165aed3/shell/org_html_export.sh">这个脚本</a>)，则结果如下(共计约18秒)</p><div class="org-src-container"><pre class="src src-text">org_html_export.sh  4.82s user 2.98s system 43% cpu 17.992 total
 org_html_export.sh  4.86s user 2.98s system 42% cpu 18.283 total
-</pre></div><p>看得出来，这样快了不少（直接砍没了94%的时间），但是，还能更快么？这时候就得自卖自夸了。我花了点时间，搓出来了这么个
-<a href="https://gitee.com/youlanjie/my-test/blob/9ea88b4e92b05ca7d283e5a9827bf9b1e7953d4f/python/orgreader2.py">程序</a>，样式基本上仿照Emacs导出的样式搞的，所以说css和js这些文件基本通用，大体上是能够“偷梁换柱”的了。所以说，我们只需要下载py程序，加好权限，并且把脚本的 <code>emacsclient ...</code> 换成 <code>./orgreader2.py -Oi "$1"</code> 测试下执行时间：</p><div class="org-src-container"><pre class="src src-text">./org_html_export.sh  46.54s user 8.09s system 104% cpu 52.217 total
+</pre></div><p>看得出来，这样快了不少（直接砍没了94%的时间），但是，还能更快么？这时候就得自卖自夸了。我花了点时间，搓出来了这么个<a href="https://gitee.com/youlanjie/my-test/blob/9ea88b4e92b05ca7d283e5a9827bf9b1e7953d4f/python/orgreader2.py">程序</a>，样式基本上仿照Emacs导出的样式搞的，所以说css和js这些文件基本通用，大体上是能够“偷梁换柱”的了。所以说，我们只需要下载py程序，加好权限，并且把脚本的 <code>emacsclient ...</code> 换成 <code>./orgreader2.py -Oi &quot;$1&quot;</code> 测试下执行时间：</p><div class="org-src-container"><pre class="src src-text">./org_html_export.sh  46.54s user 8.09s system 104% cpu 52.217 total
 ./org_html_export.sh  46.91s user 8.21s system 104% cpu 52.701 total
 ./org_html_export.py  43.70s user 5.43s system 99% cpu 49.417 total
-</pre></div><p>我也很困惑，不过我想了想这是shell，那就合理了。这里有个问题就是，python和emacs一样也是需要初始化的，也就是说那它来和Emacs Server来比是不公平的，所以说我们应该掏出一个对等的方案来。没错就是
-<a href="https://gitee.com/youlanjie/my-test/blob/9ea88b4e92b05ca7d283e5a9827bf9b1e7953d4f/python/org_html_export.py"><code>org_html_export.py</code></a>。在py脚本内以导入模块的方式可以节省初始化时间，这样一测，结果如下：</p><div class="org-src-container"><pre class="src src-text">org_html_export.py  2.78s user 0.28s system 91% cpu 3.347 total
+</pre></div><p>我也很困惑，不过我想了想这是shell，那就合理了。这里有个问题就是，python和emacs一样也是需要初始化的，也就是说那它来和Emacs Server来比是不公平的，所以说我们应该掏出一个对等的方案来。没错就是<a href="https://gitee.com/youlanjie/my-test/blob/9ea88b4e92b05ca7d283e5a9827bf9b1e7953d4f/python/org_html_export.py"><code>org_html_export.py</code></a>。在py脚本内以导入模块的方式可以节省初始化时间，这样一测，结果如下：</p><div class="org-src-container"><pre class="src src-text">org_html_export.py  2.78s user 0.28s system 91% cpu 3.347 total
 </pre></div><p>至少通过以上内容，我自己写的垃圾玩意速度取胜了。虽然说在同一个进程内python相较于 shell会有速度优势，但是我也测试了将py脚本改成使用subprocess运行情况下的速度（就在上面俩sh一个py的那个py），速度也没好到哪里去</p><blockquote>
 <p>顺带一提上面的那个调用Emacs Server的sh脚本在export_file的命令那儿加上 <code>&amp;</code> 可以进一步缩短时间（因为是多进程了hhh）结果如下：</p><div class="org-src-container"><pre class="src src-text">./org_html_export.sh  5.02s user 3.79s system 61% cpu 14.272 total
 ./org_html_export.sh  4.97s user 3.60s system 60% cpu 14.264 total
@@ -278,25 +281,27 @@ org_html_export.sh  4.86s user 2.98s system 42% cpu 18.283 total
 ./org_html_export.sh  113.32s user 20.01s system 896% cpu 14.864 total
 ./org_html_export.sh  125.24s user 22.41s system 946% cpu 15.596 total
 ./org_html_export.sh  105.44s user 18.80s system 880% cpu 14.106 total
-</pre></div><p>看来还是略逊一筹啊</p></blockquote><p>总而言之，我这blog的网页就是用这玩意撅出来的，当然，和Emacs原生导出的内容基本一样哈(除了大量的部分功能不支持)</p></div><div class="outline-4">
+</pre></div><p>看来还是略逊一筹啊</p></blockquote><p>总而言之，我这blog的网页就是用这玩意撅出来的，当然，和Emacs原生导出的内容基本一样哈(除了大量的部分功能不支持)</p></div><div id="outline-container-5-5-1" class="outline-4">
 <h4 id="org-title-5-5-1"><span class="section-number-4">5.5.1.</span> 新DLC之构建脚本</h4>
-<div class="outline-text-4" id="text-5-5-1"><p>之前还在使用Emacs原生导出的时候，我是使用shell脚本进行一个构建的，现在的话由于构建用的程序用的python，所以也搞了个
-<a href="http:/build.py">python构建脚本</a>（原来的就被删掉了），并顺带实现了主页和时间轴(一般被叫做Archieve页面)的自动生成，终于脱离了手动构建了（虽然说由于引进了个python工具导致根目录乱糟糟的了。。。）</p></div></div></div></div><div id="footnotes">
+<div class="outline-text-4" id="text-5-5-1"><p>之前还在使用Emacs原生导出的时候，我是使用shell脚本进行一个构建的，现在的话由于构建用的程序用的python，所以也搞了个<a href="http:/build.py">python构建脚本</a>（原来的就被删掉了），并顺带实现了主页和时间轴(一般被叫做Archieve页面)的自动生成，终于脱离了手动构建了（虽然说由于引进了个python工具导致根目录乱糟糟的了。。。）</p><blockquote>
+<p>很好，这个“新”的构建脚本也给我丢到my-test仓库里去了，不过也还有<a href="http:/lib/python/org2blogs.py">访问链接</a></p></blockquote></div></div></div></div>
+<div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 <div class="footdef">
 <sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup>
-<div class="footpara" role="doc-footnote"> 这个黑锅需要我背，我目前也搞不明白为什么当时我23年的英语水平都还看不懂报
-<p class="footpara">错警告，我checkout我的blog仓库一看，根据报错提示轻轻松松解决了报错（万恶的版本升级删除某些东西）</p></div>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> 这个黑锅需要我背，我目前也搞不明白为什么当时我23年的英语水平都还看不懂报错警告，我checkout我的blog仓库一看，根据报错提示轻轻松松解决了报错（万恶的版本升级删除某些东西）</p></div>
 </div><div class="footdef">
 <sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup>
-<div class="footpara" role="doc-footnote"> md看到这给我气笑了
-</div>
+<div class="footpara" role="doc-footnote">
+<p class="footpara"> md看到这给我气笑了</p></div>
 </div></div></div></div>
-<div id="postamble" class="status"><p class="date">时间: 2025-07-30 02:45</p>
+<div id="postamble" class="status">
+<p class="date">时间: 2025-07-30 02:45</p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 建立自己的博客网站并使用github.io托管，由2022.08、2023.04的文章重新整理而成</p>
-<p class="date">生成于: 2025-08-21 五 14:49:16</p>
+<p class="date">生成于: 2026-02-05 四 18:14:02</p>
 </div>
 </body>
 </html>

@@ -448,6 +448,10 @@ shell会有速度优势，但是我也测试了将py脚本改成使用subprocess
 建用的程序用的python，所以也搞了个[[http:/build.py][python构建脚本]]（原来的就被删掉了），并顺带实现
 了主页和时间轴(一般被叫做Archieve页面)的自动生成，终于脱离了手动构建了（虽然说由
 于引进了个python工具导致根目录乱糟糟的了。。。）
+
+#+begin_quote
+很好，这个“新”的构建脚本也给我丢到my-test仓库里去了，不过也还有[[http:/lib/python/org2blogs.py][访问链接]]
+#+end_quote
 * Footnotes
 [fn:2] md看到这给我气笑了
 

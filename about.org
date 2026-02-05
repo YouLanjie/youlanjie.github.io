@@ -2,13 +2,16 @@
 #+setupfile: ./setup.setup
 
 * 我想说的
-这是我的个人网站，依靠[[./lib/python/orgreader2.py][自制的python org导出程序]]和[[./build.py][导出构建脚本]]导出的html构建。html
+这是我的个人网站，依靠[[./lib/python/orgreader2.py][自制的python org导出程序]]和[[./lib/python/org2blogs.py][导出构建脚本]]导出的html构建。html
 样式基本仿照Emacs Org-mode导出的HTML文件，故也可换用emacs导出(原本用的就是emacs
 后来嫌慢才改的)。目前两个程序都还在改进中，但已经能凑合凑合用了。
 ** 关于主题
 曾经使用过的其他css主题样式：
 - [[https://github.com/yzs249175311/org-html-theme-dull][org-html-theme-dull]]
 - read-the-docs
+#+begin_quote
+最近恢复了这些主题，在本页面下方有几个链接（按钮）可以实现主题切换（基于js）
+#+end_quote
 
 使用的css样式为由Org官方网页的样式文件修改而来的样式文件。修改部分配色，增加部分
 样式规定(到如今改得越来越多了)。主题的浅色配色部分来自 =org-html-theme-dull= ，
