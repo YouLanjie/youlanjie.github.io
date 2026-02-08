@@ -6,7 +6,7 @@
 <meta name="author" content="不要在意我的头像QwQ" />
 <meta name="description" content="Have a try" />
 <meta name="generator" content="Org Mode (third party program by python)" />
-<title>Bash Note</title>
+<title>Bash语法笔记</title>
 <script type="text/javascript" src="/theme/main.js" defer></script>
 <link rel="stylesheet" type="text/css" href="/theme/main.css"/>
 <link rel="shortcut icon" href="/img/icon.jpg"/>
@@ -25,23 +25,35 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
  <a accesskey="H" href="/"> HOME </a>
 </div>
 <div id="content" class="content">
-<h1 class="title">Bash Note</h1>
+<h1 class="title">Bash语法笔记</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
-<ul><li><a href="#org-title-1">1. base</a></li></ul></div></div>
+<ul><li><a href="#org-title-1">1. 基础语法</a><ul><li><a href="#org-title-1-1">1.1. 符号</a></li></ul></li></ul></div></div>
 <div id="outline-container-1" class="outline-2">
-<h2 id="org-title-1"><span class="section-number-2">1.</span> base</h2>
-<div class="outline-text-2" id="text-1"><div class="org-src-container"><pre class="src src-bash"><span class="nv">a</span><span class="o">=</span><span class="m">1</span>
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 基础语法</h2>
+<div class="outline-text-2" id="text-1"><div class="org-src-container"><pre class="src src-bash"><span class="ch">#!/usr/bash</span>
+<span class="c1"># 字符&#39;#&#39;后面的部分是注释</span>
+<span class="c1"># 第一行是linux的特性(shebang),指定执行的程序</span>
+<span class="c1"># 命令格式：</span>
+<span class="c1"># &gt; 命令名(路径或位于$PATH) 参数(空格分开)</span>
+<span class="c1"># e.g.</span>
+ls<span class="w"> </span>-1
+</pre></div></div><div id="outline-container-1-1" class="outline-3">
+<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 符号</h3>
+<div class="outline-text-3" id="text-1-1"><ul class="org-ul">
+<li><code>|</code> 表示管道
+</li></ul>
+<div class="org-src-container"><pre class="src src-bash"><span class="nv">a</span><span class="o">=</span><span class="m">1</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$a</span>
 <span class="nv">a</span><span class="o">=</span><span class="k">$((</span><span class="nv">a</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$a</span>
-</pre></div></div></div></div>
+</pre></div></div></div></div></div>
 <div id="postamble" class="status">
 <p class="date">时间: <2026-01-24 六 16:07></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: Have a try</p>
-<p class="date">生成于: 2026-01-31 六 11:02:29</p>
+<p class="date">生成于: 2026-02-07 六 20:42:12</p>
 </div>
 </body>
 </html>

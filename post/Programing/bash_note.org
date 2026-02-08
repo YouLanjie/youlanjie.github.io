@@ -1,12 +1,24 @@
-#+TITLE: Bash Note
+#+TITLE: Bash语法笔记
 #+DESCRIPTION: Have a try
 #+DATE: <2026-01-24 六 16:07>
 #+SETUPFILE: ../../setup.setup
 
-* base
+* 基础语法
+#+begin_src bash
+  #!/usr/bash
+  # 字符'#'后面的部分是注释
+  # 第一行是linux的特性(shebang),指定执行的程序
+  # 命令格式：
+  # > 命令名(路径或位于$PATH) 参数(空格分开)
+  # e.g.
+  ls -1
+#+end_src
+** 符号
+- =|= 表示管道
 #+begin_src bash
 a=1
 echo $a
 a=$((a+1))
 echo $a
 #+end_src
+
