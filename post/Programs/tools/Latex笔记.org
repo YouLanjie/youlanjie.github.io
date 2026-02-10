@@ -600,6 +600,93 @@ fgruler宏包生成尺子评估打印效果。
   \newenvironment{新环境名称}[参数个数][参数默认值]{开始部分定义}{结束部分定义}
   \renewenvironment{新环境名称}[参数个数][参数默认值]{开始部分定义}{结束部分定义}
 #+end_src
+** 输出日志控制
+往输出和日志打印的命令：
+- =\message{}= 内部内容不会被展开而原样输出
+- =\typeout{}= 内部内容会被展开
+
+外链：
+- [[https://zhuanlan.zhihu.com/p/19525015854][LaTeX3 系列教程之二十七（1）：消息一 - 知乎]]
+
+#+begin_quote
+本节以下内容来自ai生成
+#+end_quote
+#+begin_src tex
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 基本跟踪命令
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 在导言区或文档中任何地方添加
+  \tracingonline=1      % 在终端显示跟踪信息
+  \tracingall=1         % 启用所有跟踪（最详细，但输出巨大）
+  \tracingnone=0        % 关闭所有跟踪
+
+  % 部分跟踪（推荐使用）
+  \tracingoutput=1      % 跟踪输出例程
+  \tracingpages=1       % 跟踪分页算法
+  \tracingparagraphs=1  % 跟踪断行算法
+  \tracinggroups=1      % 跟踪分组
+  \tracingifs=1         % 跟踪条件语句
+  \tracingscantokens=1  % 跟踪扫描过程
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 盒子（Box）跟踪
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  \showboxbreadth=100   % 显示盒子的水平项目数（默认=5）
+  \showboxdepth=10      % 显示盒子的嵌套深度（默认=3）
+  \tracingboxes=1       % 盒子操作的详细跟踪
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 宏展开跟踪
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 宏展开跟踪
+  \tracingmacros=2      % 跟踪宏展开（2比1更详细）
+  \tracingcommands=2    % 跟踪命令执行
+  \tracingassigns=1     % 跟踪赋值操作
+  \tracingrestores=1    % 跟踪寄存器恢复
+
+  % 特定宏的跟踪
+  \trace{macroname}     % 跟踪特定宏（需要 trace 包）
+  \errorcontextlines=100  % 错误上下文显示行数（默认=5）
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 数学公式调试
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 数学模式跟踪
+  \tracingmath=1        % 跟踪数学公式处理
+  \showhyphens{text}    % 显示断字位置
+  \showlists            % 显示当前垂直/水平列表状态
+
+  % 在公式中添加调试信息
+  \usepackage{trace}
+  \traceon  % 开始跟踪
+  \mathtracingall=1
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 页面布局跟踪
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 分页算法跟踪
+  \tracingpages=1
+  \tracingoutput=1
+  \tracinglostchars=2   % 跟踪丢失字符
+
+  % 显示页面参数
+  \showoutput           % 在日志中显示详细输出信息
+  \showlists            % 显示列表状态
+  \showthe\baselineskip % 显示当前基线距离
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 错误处理增强
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+  % 在文档中设置错误处理
+  \errorstopmode        % 遇到错误停止（默认）
+  \scrollmode           % 滚动模式，遇到错误继续
+  \nonstopmode          % 非停止模式
+
+  % 显示更多错误上下文
+  \errorcontextlines=50  % 增加错误上下文行数
+  \errmessage{自定义错误信息}
+#+end_src
+
 ** 其他杂七杂八的东西
 *** 宏包备忘录
 1) hyperref: 插入超链接 =\usepackage[hidelinks]{hyperref}=

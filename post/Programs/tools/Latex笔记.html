@@ -35,7 +35,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <li><a href="#org-title-3-4">3.4. 特殊字符转义</a></li><li><a href="#org-title-3-5">3.5. 数学公式</a></li><li><a href="#org-title-3-6">3.6. 数学符号</a><ul><li><a href="#org-title-3-6-1">3.6.1. 希腊字母</a></li></ul></li>
 <li><a href="#org-title-3-7">3.7. 页面布局</a><ul><li><a href="#org-title-3-7-1">3.7.1. 纸型&页边距</a></li><li><a href="#org-title-3-7-2">3.7.2. 字体设置</a></li><li><a href="#org-title-3-7-3">3.7.3. 自定义章节样式</a></li><li><a href="#org-title-3-7-4">3.7.4. 页眉页脚设置</a></li><li><a href="#org-title-3-7-5">3.7.5. 分栏</a></li><li><a href="#org-title-3-7-6">3.7.6. 尺子</a></li></ul></li>
 <li><a href="#org-title-3-8">3.8. Latex语法类控制命令</a><ul><li><a href="#org-title-3-8-1">3.8.1. 判断</a></li><li><a href="#org-title-3-8-2">3.8.2. 自定义命令</a></li><li><a href="#org-title-3-8-3">3.8.3. 自定义环境</a></li></ul></li>
-<li><a href="#org-title-3-9">3.9. 其他杂七杂八的东西</a><ul><li><a href="#org-title-3-9-1">3.9.1. 宏包备忘录</a></li></ul></li></ul></li>
+<li><a href="#org-title-3-9">3.9. 输出日志控制</a></li><li><a href="#org-title-3-10">3.10. 其他杂七杂八的东西</a><ul><li><a href="#org-title-3-10-1">3.10.1. 宏包备忘录</a></li></ul></li></ul></li>
 <li><a href="#org-title-4">4. Reference</a></li></ul></div></div>
 <blockquote>
 <p>警告！这只是一篇笔记！一篇笔记！非入门教程！<br/>系统环境：Arch Linux | Android (Termux)<br/>更新时间：2025-12-27</p></blockquote><div id="outline-container-1" class="outline-2">
@@ -530,10 +530,95 @@ public class Example <span class="nb">{</span>
 <span class="k">\renewenvironment</span><span class="nb">{</span>新环境名称<span class="nb">}</span>[参数个数][参数默认值]<span class="nb">{</span>开始部分定义<span class="nb">}{</span>结束部分定义<span class="nb">}</span>
 </pre></div></div></div></div>
 <div id="outline-container-3-9" class="outline-3">
-<h3 id="org-title-3-9"><span class="section-number-3">3.9.</span> 其他杂七杂八的东西</h3>
-<div class="outline-text-3" id="text-3-9"></div><div id="outline-container-3-9-1" class="outline-4">
-<h4 id="org-title-3-9-1"><span class="section-number-4">3.9.1.</span> 宏包备忘录</h4>
-<div class="outline-text-4" id="text-3-9-1"><ol class="org-ol">
+<h3 id="org-title-3-9"><span class="section-number-3">3.9.</span> 输出日志控制</h3>
+<div class="outline-text-3" id="text-3-9"><p>往输出和日志打印的命令：</p><ul class="org-ul">
+<li><code>\message{}</code> 内部内容不会被展开而原样输出
+</li>
+<li><p><code>\typeout{}</code> 内部内容会被展开</p>
+</li></ul>
+<p>外链：</p><ul class="org-ul">
+<li><p><a href="https://zhuanlan.zhihu.com/p/19525015854">LaTeX3 系列教程之二十七（1）：消息一 - 知乎</a></p>
+</li></ul>
+<blockquote>
+<p>本节以下内容来自ai生成</p></blockquote><div class="org-src-container"><pre class="src src-tex"><span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 基本跟踪命令</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 在导言区或文档中任何地方添加</span>
+<span class="k">\tracingonline</span>=1      <span class="c">% 在终端显示跟踪信息</span>
+<span class="k">\tracingall</span>=1         <span class="c">% 启用所有跟踪（最详细，但输出巨大）</span>
+<span class="k">\tracingnone</span>=0        <span class="c">% 关闭所有跟踪</span>
+
+<span class="c">% 部分跟踪（推荐使用）</span>
+<span class="k">\tracingoutput</span>=1      <span class="c">% 跟踪输出例程</span>
+<span class="k">\tracingpages</span>=1       <span class="c">% 跟踪分页算法</span>
+<span class="k">\tracingparagraphs</span>=1  <span class="c">% 跟踪断行算法</span>
+<span class="k">\tracinggroups</span>=1      <span class="c">% 跟踪分组</span>
+<span class="k">\tracingifs</span>=1         <span class="c">% 跟踪条件语句</span>
+<span class="k">\tracingscantokens</span>=1  <span class="c">% 跟踪扫描过程</span>
+
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 盒子（Box）跟踪</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="k">\showboxbreadth</span>=100   <span class="c">% 显示盒子的水平项目数（默认=5）</span>
+<span class="k">\showboxdepth</span>=10      <span class="c">% 显示盒子的嵌套深度（默认=3）</span>
+<span class="k">\tracingboxes</span>=1       <span class="c">% 盒子操作的详细跟踪</span>
+
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 宏展开跟踪</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 宏展开跟踪</span>
+<span class="k">\tracingmacros</span>=2      <span class="c">% 跟踪宏展开（2比1更详细）</span>
+<span class="k">\tracingcommands</span>=2    <span class="c">% 跟踪命令执行</span>
+<span class="k">\tracingassigns</span>=1     <span class="c">% 跟踪赋值操作</span>
+<span class="k">\tracingrestores</span>=1    <span class="c">% 跟踪寄存器恢复</span>
+
+<span class="c">% 特定宏的跟踪</span>
+<span class="k">\trace</span><span class="nb">{</span>macroname<span class="nb">}</span>     <span class="c">% 跟踪特定宏（需要 trace 包）</span>
+<span class="k">\errorcontextlines</span>=100  <span class="c">% 错误上下文显示行数（默认=5）</span>
+
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 数学公式调试</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 数学模式跟踪</span>
+<span class="k">\tracingmath</span>=1        <span class="c">% 跟踪数学公式处理</span>
+<span class="k">\showhyphens</span><span class="nb">{</span>text<span class="nb">}</span>    <span class="c">% 显示断字位置</span>
+<span class="k">\showlists</span>            <span class="c">% 显示当前垂直/水平列表状态</span>
+
+<span class="c">% 在公式中添加调试信息</span>
+<span class="k">\usepackage</span><span class="nb">{</span>trace<span class="nb">}</span>
+<span class="k">\traceon</span>  <span class="c">% 开始跟踪</span>
+<span class="k">\mathtracingall</span>=1
+
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 页面布局跟踪</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 分页算法跟踪</span>
+<span class="k">\tracingpages</span>=1
+<span class="k">\tracingoutput</span>=1
+<span class="k">\tracinglostchars</span>=2   <span class="c">% 跟踪丢失字符</span>
+
+<span class="c">% 显示页面参数</span>
+<span class="k">\showoutput</span>           <span class="c">% 在日志中显示详细输出信息</span>
+<span class="k">\showlists</span>            <span class="c">% 显示列表状态</span>
+<span class="k">\showthe\baselineskip</span> <span class="c">% 显示当前基线距离</span>
+
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 错误处理增强</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55</span>
+<span class="c">% 在文档中设置错误处理</span>
+<span class="k">\errorstopmode</span>        <span class="c">% 遇到错误停止（默认）</span>
+<span class="k">\scrollmode</span>           <span class="c">% 滚动模式，遇到错误继续</span>
+<span class="k">\nonstopmode</span>          <span class="c">% 非停止模式</span>
+
+<span class="c">% 显示更多错误上下文</span>
+<span class="k">\errorcontextlines</span>=50  <span class="c">% 增加错误上下文行数</span>
+<span class="k">\errmessage</span><span class="nb">{</span>自定义错误信息<span class="nb">}</span>
+</pre></div></div></div>
+<div id="outline-container-3-10" class="outline-3">
+<h3 id="org-title-3-10"><span class="section-number-3">3.10.</span> 其他杂七杂八的东西</h3>
+<div class="outline-text-3" id="text-3-10"></div><div id="outline-container-3-10-1" class="outline-4">
+<h4 id="org-title-3-10-1"><span class="section-number-4">3.10.1.</span> 宏包备忘录</h4>
+<div class="outline-text-4" id="text-3-10-1"><ol class="org-ol">
 <li>hyperref: 插入超链接 <code>\usepackage[hidelinks]{hyperref}</code>
 </li>
 <li>footmisc: 作用不明，先放着再说
@@ -571,7 +656,7 @@ public class Example <span class="nb">{</span>
 <p class="date">时间: <2024-10-01 二 02:04></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: Latex使用过程中查阅一些资料做的笔记，防忘</p>
-<p class="date">生成于: 2026-02-05 四 00:40:33</p>
+<p class="date">生成于: 2026-02-10 二 15:07:46</p>
 </div>
 </body>
 </html>
