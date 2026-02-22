@@ -1,0 +1,13 @@
+#+TITLE: ioccc的神奇代码
+#+DESCRIPTION: 有趣且创意和实现值得学习的ioccc作品收藏夹
+#+DATE: <2026-02-21 六 20:13>
+#+SETUPFILE: ../../../setup.setup
+
+被ioccc的强劲代码吓哭了，故作此文
+* ioccc的神奇代码
+** 2024
+- [[https://www.ioccc.org/2024/endoh2/index.html][极简旋转陀螺模拟器（数学-物理-程序思想nb）]]
+  - 主要涉及：三维向量、四元数（一个实数三个虚数类似(w,xi,yi,zi)的有序数对）在描述物理现象的应用。
+    描述旋转现象与相互作用的物理公式。推荐使用ai辅助学习。
+- [[https://www.ioccc.org/2024/ferguson1/index.html][文本的互动游戏（纯英文），说明剧本台词很重要]]
+- [[https://www.ioccc.org/2024/straadt/index.html][音频合成器，非常高级计算和丰富音色，比我自己手搓强上太多了]]

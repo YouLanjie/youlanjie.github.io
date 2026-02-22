@@ -33,91 +33,106 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <li><a href="#org-title-2-3">2.3. 其他有用的序列</a><ul><li><a href="#org-title-2-3-1">2.3.1. 字符集控制 (Character Set Control)</a></li><li><a href="#org-title-2-3-2">2.3.2. 操作系统命令 (OSC) - <code>\e]...\a</code>  或 <code>\e]...\x07</code> </a></li><li><a href="#org-title-2-3-3">2.3.3. 其他</a></li></ul></li>
 <li><a href="#org-title-2-4">2.4. 非标准ANSI序列控制字符</a></li></ul></li>
 <li><a href="#org-title-3">3. Linux Signal信号</a></li><li><a href="#org-title-4">4. RELRO等安全选项</a></li><li><a href="#org-title-5">5. 判断字符是中文还是英文(有局限)</a></li><li><a href="#org-title-6">6. 生成迷宫</a></li></ul></div></div>
-<div class="outline-2">
+<div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 前言</h2>
-<div class="outline-text-2" id="text-1"><p>这玩意还是我自己吃菌子吃多了头脑发热写的东西，不过他应该不会像隔壁“某教程”那样写着写着就弃坑变成了烂尾楼</p><p>当然，真正的理由还是翻自己的收藏夹发现收藏了一堆网页，但一大堆都是CSDN的shit，想着能不能把他们从收藏夹里面“优化”掉，所以就想抄到自己这里来hhh</p><p>以下内容或许可以参考
-<a href="https://gitee.com/YouLanjie/my-test">这个仓库</a>的C语言部分，我有些实例代码是写在里面的</p></div></div><div class="outline-2">
+<div class="outline-text-2" id="text-1"><p>这玩意还是我自己吃菌子吃多了头脑发热写的东西，不过他应该不会像隔壁“某教程”那样写着写着就弃坑变成了烂尾楼</p><p>当然，真正的理由还是翻自己的收藏夹发现收藏了一堆网页，但一大堆都是CSDN的shit，想着能不能把他们从收藏夹里面“优化”掉，所以就想抄到自己这里来hhh</p><p>以下内容或许可以参考<a href="https://gitee.com/YouLanjie/my-test">这个仓库</a>的C语言部分，我有些实例代码是写在里面的</p></div></div>
+<div id="outline-container-2" class="outline-2">
 <h2 id="org-title-2"><span class="section-number-2">2.</span> 使用ANSI转义字符为打印的字符上色</h2>
-<div class="outline-text-2" id="text-2"><p>这里贴一个更详细些的博客链接：
-<a href="https://www.cnblogs.com/unclemac/p/12783387.html">终端中输出的颜色和格式详解</a></p><blockquote>
-<p>ai查资料上大分，下面部分的内容大体上是查ai查出来的（已将原本比较烂的笔记删去）</p></blockquote></div><div class="outline-3">
+<div class="outline-text-2" id="text-2"><p>这里贴一个更详细些的博客链接：<a href="https://www.cnblogs.com/unclemac/p/12783387.html">终端中输出的颜色和格式详解</a></p><blockquote>
+<p>ai查资料上大分，下面部分的内容大体上是查ai查出来的（已将原本比较烂的笔记删去）</p></blockquote></div><div id="outline-container-2-1" class="outline-3">
 <h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 约定说明</h3>
 <div class="outline-text-3" id="text-2-1"><ul class="org-ul">
 <li><code>\e</code> 代表转义字符 (ASCII 27, 0x1B)。在 Bash 的 <code>printf</code> 或 echo 中，可以使用 <code>\e</code> 、 <code>\033</code> （八进制）或 <code>\x1b</code> （十六进制）。
 </li>
-<li><code>CSI</code> 代表 "Control Sequence Introducer"，即 <code>\e[</code> 。这是大多数序列的开头。
+<li><code>CSI</code> 代表 &quot;Control Sequence Introducer&quot;，即 <code>\e[</code> 。这是大多数序列的开头。
 </li>
 <li><code>&lt;n&gt;</code> 代表一个数字参数。多个参数用分号 <code>;</code> 分隔。
 </li>
 <li>括号 <code>[]</code> 内的参数是可选的。
 </li></ul>
-</div></div><div class="outline-3">
+</div></div>
+<div id="outline-container-2-2" class="outline-3">
 <h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> CSI (Control Sequence Introducer) 序列 - <code>\e[...</code></h3>
-<div class="outline-text-3" id="text-2-2"><p>这是最常用的一类序列。</p></div><div class="outline-4">
+<div class="outline-text-3" id="text-2-2"><p>这是最常用的一类序列。</p></div><div id="outline-container-2-2-1" class="outline-4">
 <h4 id="org-title-2-2-1"><span class="section-number-4">2.2.1.</span> 光标移动 (Cursor Movement)</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e[&lt;n&gt;A</code></td><td class="org-left">光标上移 <code>&lt;n&gt;</code> 行 (Cursor Up)</td><td class="org-left"><code>printf "\e[2A"</code> # 上移2行</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;B</code></td><td class="org-left">光标下移 <code>&lt;n&gt;</code> 行 (Cursor Down)</td><td class="org-left"><code>printf "\e[1B"</code> # 下移1行</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;C</code></td><td class="org-left">光标右移 <code>&lt;n&gt;</code> 列 (Cursor Forward)</td><td class="org-left"><code>printf "\e[5C"</code> # 右移5列</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;D</code></td><td class="org-left">光标左移 <code>&lt;n&gt;</code> 列 (Cursor Backward)</td><td class="org-left"><code>printf "\e[3D"</code> # 左移3列</td></tr><tr><td class="org-left"><code>\e[&lt;r&gt;;&lt;c&gt;H</code> , <code>\e[&lt;r&gt;;&lt;c&gt;f</code></td><td class="org-left">将光标移动到第 <code>&lt;r&gt;</code> 行，第 <code>&lt;c&gt;</code> 列</td><td class="org-left"><code>printf "\e[10;1HStart"</code> # 移动到第10行第1列</td></tr><tr><td class="org-left"><code>\e[6n</code></td><td class="org-left">查询光标位置</td><td class="org-left">终端会响应位置,报告格式: <code>\e[&lt;r&gt;;&lt;c&gt;R</code></td></tr></table><blockquote>
-<p>关于保存和恢复光标位置见下文的
-<a href="#org-title-2-3-3">"2.3.3. 其他"</a>部分</p></blockquote></div></div><div class="outline-4">
+<tr><td class="org-left"><code>\e[&lt;n&gt;A</code></td><td class="org-left">光标上移 <code>&lt;n&gt;</code> 行 (Cursor Up)</td><td class="org-left"><code>printf &quot;\e[2A&quot;</code> # 上移2行</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;B</code></td><td class="org-left">光标下移 <code>&lt;n&gt;</code> 行 (Cursor Down)</td><td class="org-left"><code>printf &quot;\e[1B&quot;</code> # 下移1行</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;C</code></td><td class="org-left">光标右移 <code>&lt;n&gt;</code> 列 (Cursor Forward)</td><td class="org-left"><code>printf &quot;\e[5C&quot;</code> # 右移5列</td></tr><tr><td class="org-left"><code>\e[&lt;n&gt;D</code></td><td class="org-left">光标左移 <code>&lt;n&gt;</code> 列 (Cursor Backward)</td><td class="org-left"><code>printf &quot;\e[3D&quot;</code> # 左移3列</td></tr><tr><td class="org-left"><code>\e[&lt;r&gt;;&lt;c&gt;H</code> , <code>\e[&lt;r&gt;;&lt;c&gt;f</code></td><td class="org-left">将光标移动到第 <code>&lt;r&gt;</code> 行，第 <code>&lt;c&gt;</code> 列</td><td class="org-left"><code>printf &quot;\e[10;1HStart&quot;</code> # 移动到第10行第1列</td></tr><tr><td class="org-left"><code>\e[6n</code></td><td class="org-left">查询光标位置</td><td class="org-left">从标准输入读取结果,格式: <code>\e[&lt;r&gt;;&lt;c&gt;R</code></td></tr></table><blockquote>
+<p>关于保存和恢复光标位置见下文的<a href="#org-title-2-3-3">&quot;2.3.3. 其他&quot;</a>部分</p></blockquote></div></div>
+<div id="outline-container-2-2-2" class="outline-4">
 <h4 id="org-title-2-2-2"><span class="section-number-4">2.2.2.</span> 擦除操作 (Erase)</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e[0J</code> , <code>\e[J</code></td><td class="org-left">从光标位置擦除到屏幕末尾</td><td class="org-left"><code>printf "\e[0J"</code></td></tr><tr><td class="org-left"><code>\e[1J</code></td><td class="org-left">从光标位置擦除到屏幕开头</td><td class="org-left"><code>printf "\e[1J"</code></td></tr><tr><td class="org-left"><code>\e[2J</code></td><td class="org-left"><b>清空整个屏幕</b> ，并移动光标到左上角</td><td class="org-left"><code>printf "\e[2J"</code> # 相当于 <code>clear</code> 命令</td></tr><tr><td class="org-left"><code>\e[0K</code> , <code>\e[K</code></td><td class="org-left">从光标位置擦除到行尾</td><td class="org-left"><code>printf "\e[0K"</code></td></tr><tr><td class="org-left"><code>\e[1K</code></td><td class="org-left">从光标位置擦除到行首</td><td class="org-left"><code>printf "\e[1K"</code></td></tr><tr><td class="org-left"><code>\e[2K</code></td><td class="org-left"><b>擦除整行</b> ，光标位置不变</td><td class="org-left"><code>printf "\e[2K"</code></td></tr></table></div></div><div class="outline-4">
+<tr><td class="org-left"><code>\e[0J</code> , <code>\e[J</code></td><td class="org-left">从光标位置擦除到屏幕末尾</td><td class="org-left"><code>printf &quot;\e[0J&quot;</code></td></tr><tr><td class="org-left"><code>\e[1J</code></td><td class="org-left">从光标位置擦除到屏幕开头</td><td class="org-left"><code>printf &quot;\e[1J&quot;</code></td></tr><tr><td class="org-left"><code>\e[2J</code></td><td class="org-left"><b>清空整个屏幕</b> ，并移动光标到左上角</td><td class="org-left"><code>printf &quot;\e[2J&quot;</code> # 相当于 <code>clear</code> 命令</td></tr><tr><td class="org-left"><code>\e[0K</code> , <code>\e[K</code></td><td class="org-left">从光标位置擦除到行尾</td><td class="org-left"><code>printf &quot;\e[0K&quot;</code></td></tr><tr><td class="org-left"><code>\e[1K</code></td><td class="org-left">从光标位置擦除到行首</td><td class="org-left"><code>printf &quot;\e[1K&quot;</code></td></tr><tr><td class="org-left"><code>\e[2K</code></td><td class="org-left"><b>擦除整行</b> ，光标位置不变</td><td class="org-left"><code>printf &quot;\e[2K&quot;</code></td></tr></table></div></div>
+<div id="outline-container-2-2-3" class="outline-4">
 <h4 id="org-title-2-2-3"><span class="section-number-4">2.2.3.</span> 图形模式 (SGR - Select Graphic Rendition) - <code>\e[&lt;n&gt;m</code></h4>
 <div class="outline-text-4" id="text-2-2-3"><p>这是用于设置文本颜色和样式的序列。 <b>多个属性用分号分隔，最终用 <code>m</code> 结尾。</b></p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e[0m</code></td><td class="org-left"><b>重置所有属性</b> (最重要！)</td><td class="org-left"><code>printf "\e[31mRed\e[0m Normal"</code></td></tr><tr><td class="org-left"><code>\e[1m</code></td><td class="org-left">粗体或高亮度 (Bold/Bright)</td><td class="org-left"><code>printf "\e[1mBold"</code></td></tr><tr><td class="org-left"><code>\e[2m</code></td><td class="org-left">模糊 (Faint) (支持度不高)</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\e[3m</code></td><td class="org-left">斜体 (Italic)</td><td class="org-left"><code>printf "\e[3mItalic"</code></td></tr><tr><td class="org-left"><code>\e[4m</code></td><td class="org-left">下划线 (Underline)</td><td class="org-left"><code>printf "\e[4mUnderline"</code></td></tr><tr><td class="org-left"><code>\e[5m</code></td><td class="org-left">慢闪烁 (Blink)</td><td class="org-left"><code>printf "\e[5mBlink"</code></td></tr><tr><td class="org-left"><code>\e[7m</code></td><td class="org-left">反显 (Inverse)，前景背景色互换</td><td class="org-left"><code>printf "\e[7mInverse"</code></td></tr><tr><td class="org-left"><code>\e[8m</code></td><td class="org-left">隐藏 (Conceal)</td><td class="org-left"><code>printf "\e[8mHidden"</code></td></tr><tr><td class="org-left"><code>\e[9m</code></td><td class="org-left">删除线 (Strikethrough)</td><td class="org-left"><code>printf "\e[9mStrike"</code></td></tr></table><p><b>8/16 色前景色 (Foreground)</b></p>
+<tr><td class="org-left"><code>\e[0m</code></td><td class="org-left"><b>重置所有属性</b> (最重要！)</td><td class="org-left"><code>printf &quot;\e[31mRed\e[0m Normal&quot;</code></td></tr><tr><td class="org-left"><code>\e[1m</code></td><td class="org-left">粗体或高亮度 (Bold/Bright)</td><td class="org-left"><code>printf &quot;\e[1mBold&quot;</code></td></tr><tr><td class="org-left"><code>\e[2m</code></td><td class="org-left">模糊 (Faint) (支持度不高)</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\e[3m</code></td><td class="org-left">斜体 (Italic)</td><td class="org-left"><code>printf &quot;\e[3mItalic&quot;</code></td></tr><tr><td class="org-left"><code>\e[4m</code></td><td class="org-left">下划线 (Underline)</td><td class="org-left"><code>printf &quot;\e[4mUnderline&quot;</code></td></tr><tr><td class="org-left"><code>\e[5m</code></td><td class="org-left">慢闪烁 (Blink)</td><td class="org-left"><code>printf &quot;\e[5mBlink&quot;</code></td></tr><tr><td class="org-left"><code>\e[7m</code></td><td class="org-left">反显 (Inverse)，前景背景色互换</td><td class="org-left"><code>printf &quot;\e[7mInverse&quot;</code></td></tr><tr><td class="org-left"><code>\e[8m</code></td><td class="org-left">隐藏 (Conceal)</td><td class="org-left"><code>printf &quot;\e[8mHidden&quot;</code></td></tr><tr><td class="org-left"><code>\e[9m</code></td><td class="org-left">删除线 (Strikethrough)</td><td class="org-left"><code>printf &quot;\e[9mStrike&quot;</code></td></tr></table><p><b>8/16 色前景色 (Foreground)</b></p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e[30m</code> - <code>\e[37m</code></td><td class="org-left">设置标准前景色</td><td class="org-left"><code>printf "\e[31mRed"</code></td></tr><tr><td class="org-left"><code>\e[39m</code></td><td class="org-left">重置为默认前景色</td><td class="org-left"><code>printf "\e[31mRed\e[39m Default"</code></td></tr><tr><td class="org-left"><code>\e[90m</code> - <code>\e[97m</code></td><td class="org-left">设置明亮前景色 (Bright)</td><td class="org-left"><code>printf "\e[91mBright Red"</code></td></tr></table><blockquote>
-<p>颜色分别对应：30黑,31红,32绿,33黄,34蓝,35洋红,36青,37白<br/> 背景则把前面的3改成4</p></blockquote><p><b>8/16 色背景色 (Background)</b></p>
+<tr><td class="org-left"><code>\e[30m</code> - <code>\e[37m</code></td><td class="org-left">设置标准前景色</td><td class="org-left"><code>printf &quot;\e[31mRed&quot;</code></td></tr><tr><td class="org-left"><code>\e[39m</code></td><td class="org-left">重置为默认前景色</td><td class="org-left"><code>printf &quot;\e[31mRed\e[39m Default&quot;</code></td></tr><tr><td class="org-left"><code>\e[90m</code> - <code>\e[97m</code></td><td class="org-left">设置明亮前景色 (Bright)</td><td class="org-left"><code>printf &quot;\e[91mBright Red&quot;</code></td></tr></table><blockquote>
+<p>颜色分别对应：30黑,31红,32绿,33黄,34蓝,35洋红,36青,37白<br/>背景则把前面的3改成4</p></blockquote><p><b>8/16 色背景色 (Background)</b></p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e[40m</code> - <code>\e[47m</code></td><td class="org-left">设置标准背景色</td><td class="org-left"><code>printf "\e[41mRed BG"</code></td></tr><tr><td class="org-left"><code>\e[49m</code></td><td class="org-left">重置为默认背景色</td><td class="org-left"><code>printf "\e[41mRed BG\e[49m"</code></td></tr><tr><td class="org-left"><code>\e[100m</code> - <code>\e[107m</code></td><td class="org-left">设置明亮背景色</td><td class="org-left"><code>printf "\e[101mBright Red BG"</code></td></tr></table><p><b>256 色和 RGB 真彩色 (更现代的支持)</b></p>
+<tr><td class="org-left"><code>\e[40m</code> - <code>\e[47m</code></td><td class="org-left">设置标准背景色</td><td class="org-left"><code>printf &quot;\e[41mRed BG&quot;</code></td></tr><tr><td class="org-left"><code>\e[49m</code></td><td class="org-left">重置为默认背景色</td><td class="org-left"><code>printf &quot;\e[41mRed BG\e[49m&quot;</code></td></tr><tr><td class="org-left"><code>\e[100m</code> - <code>\e[107m</code></td><td class="org-left">设置明亮背景色</td><td class="org-left"><code>printf &quot;\e[101mBright Red BG&quot;</code></td></tr></table><p><b>256 色和 RGB 真彩色 (更现代的支持)</b></p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e[38;5;&lt;n&gt;m</code></td><td class="org-left">设置 256 色前景色 (<code>&lt;n&gt;</code> 从 0-255)</td><td class="org-left"><code>printf "\e[38;5;202mOrange"</code></td></tr><tr><td class="org-left"><code>\e[48;5;&lt;n&gt;m</code></td><td class="org-left">设置 256 色背景色</td><td class="org-left"><code>printf "\e[48;5;202mOrange BG"</code></td></tr><tr><td class="org-left"><code>\e[38;2;&lt;r&gt;;&lt;g&gt;;&lt;b&gt;m</code></td><td class="org-left">设置 RGB 真彩色前景色</td><td class="org-left"><code>printf "\e[38;2;255;100;0mOrange"</code></td></tr><tr><td class="org-left"><code>\e[48;2;&lt;r&gt;;&lt;g&gt;;&lt;b&gt;m</code></td><td class="org-left">设置 RGB 真彩色背景色</td><td class="org-left"><code>printf "\e[48;2;255;100;0mOrange BG"</code></td></tr></table></div></div></div><div class="outline-3">
+<tr><td class="org-left"><code>\e[38;5;&lt;n&gt;m</code></td><td class="org-left">设置 256 色前景色 (<code>&lt;n&gt;</code> 从 0-255)</td><td class="org-left"><code>printf &quot;\e[38;5;202mOrange&quot;</code></td></tr><tr><td class="org-left"><code>\e[48;5;&lt;n&gt;m</code></td><td class="org-left">设置 256 色背景色</td><td class="org-left"><code>printf &quot;\e[48;5;202mOrange BG&quot;</code></td></tr><tr><td class="org-left"><code>\e[38;2;&lt;r&gt;;&lt;g&gt;;&lt;b&gt;m</code></td><td class="org-left">设置 RGB 真彩色前景色</td><td class="org-left"><code>printf &quot;\e[38;2;255;100;0mOrange&quot;</code></td></tr><tr><td class="org-left"><code>\e[48;2;&lt;r&gt;;&lt;g&gt;;&lt;b&gt;m</code></td><td class="org-left">设置 RGB 真彩色背景色</td><td class="org-left"><code>printf &quot;\e[48;2;255;100;0mOrange BG&quot;</code></td></tr></table></div></div></div>
+<div id="outline-container-2-3" class="outline-3">
 <h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 其他有用的序列</h3>
-<div class="outline-4">
+<div class="outline-text-3" id="text-2-3"></div><div id="outline-container-2-3-1" class="outline-4">
 <h4 id="org-title-2-3-1"><span class="section-number-4">2.3.1.</span> 字符集控制 (Character Set Control)</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e(0</code></td><td class="org-left">启用 DEC 特殊字符集（线绘模式）</td><td class="org-left"><code>printf "\e(0lq\e(B"</code> # 输出 <code>┌─</code></td></tr><tr><td class="org-left"><code>\e(B</code></td><td class="org-left">启用 US ASCII 字符集（正常模式）</td><td class="org-left"><code>printf "\e(B"</code> # 撤销 <code>\e(0</code> 的效果</td></tr><tr><td class="org-left"><code>\e)0</code></td><td class="org-left">为 G1 字符集启用 DEC 特殊字符集</td><td class="org-left">&nbsp;</td></tr></table></div></div><div class="outline-4">
+<tr><td class="org-left"><code>\e(0</code></td><td class="org-left">启用 DEC 特殊字符集（线绘模式）</td><td class="org-left"><code>printf &quot;\e(0lq\e(B&quot;</code> # 输出 <code>┌─</code></td></tr><tr><td class="org-left"><code>\e(B</code></td><td class="org-left">启用 US ASCII 字符集（正常模式）</td><td class="org-left"><code>printf &quot;\e(B&quot;</code> # 撤销 <code>\e(0</code> 的效果</td></tr><tr><td class="org-left"><code>\e)0</code></td><td class="org-left">为 G1 字符集启用 DEC 特殊字符集</td><td class="org-left">&nbsp;</td></tr></table></div></div>
+<div id="outline-container-2-3-2" class="outline-4">
 <h4 id="org-title-2-3-2"><span class="section-number-4">2.3.2.</span> 操作系统命令 (OSC) - <code>\e]...\a</code> 或 <code>\e]...\x07</code></h4>
 <div class="outline-text-4" id="text-2-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e]0;&lt;str&gt;\a</code></td><td class="org-left">设置终端窗口的图标名称和标题</td><td class="org-left"><code>printf "\e]0;My Custom Title\a"</code></td></tr><tr><td class="org-left"><code>\e]2;&lt;str&gt;\a</code></td><td class="org-left">仅设置终端窗口的标题</td><td class="org-left"><code>printf "\e]2;Window Title\a"</code></td></tr><tr><td class="org-left"><code>\e]10;&lt;str&gt;\a</code></td><td class="org-left">设置动态文本颜色（支持度低）</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\e]11;&lt;str&gt;\a</code></td><td class="org-left">设置动态背景颜色（支持度低）</td><td class="org-left">&nbsp;</td></tr></table></div></div><div class="outline-4">
+<tr><td class="org-left"><code>\e]0;&lt;str&gt;\a</code></td><td class="org-left">设置终端窗口的图标名称和标题</td><td class="org-left"><code>printf &quot;\e]0;My Custom Title\a&quot;</code></td></tr><tr><td class="org-left"><code>\e]2;&lt;str&gt;\a</code></td><td class="org-left">仅设置终端窗口的标题</td><td class="org-left"><code>printf &quot;\e]2;Window Title\a&quot;</code></td></tr><tr><td class="org-left"><code>\e]10;&lt;str&gt;\a</code></td><td class="org-left">设置动态文本颜色（支持度低）</td><td class="org-left">&nbsp;</td></tr><tr><td class="org-left"><code>\e]11;&lt;str&gt;\a</code></td><td class="org-left">设置动态背景颜色（支持度低）</td><td class="org-left">&nbsp;</td></tr></table></div></div>
+<div id="outline-container-2-3-3" class="outline-4">
 <h4 id="org-title-2-3-3"><span class="section-number-4">2.3.3.</span> 其他</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left" />
 <col class="org-left" />
 <col class="org-left" /></colgroup><thead><tr><th scope="col" class="org-left">序列</th><th scope="col" class="org-left">描述</th><th scope="col" class="org-left">示例 &amp; 效果</th></tr>
 </thead><tbody>
-<tr><td class="org-left"><code>\e#3</code></td><td class="org-left">双倍高度行（顶部）</td><td class="org-left"><code>printf "\e#3D\n"</code> # 'D' 会显示为双倍高度</td></tr><tr><td class="org-left"><code>\e#4</code></td><td class="org-left">双倍高度行（底部）</td><td class="org-left"><code>printf "\e#4D\n"</code></td></tr><tr><td class="org-left"><code>\e#5</code></td><td class="org-left">单倍宽度行</td><td class="org-left"><code>printf "\e#5"</code></td></tr><tr><td class="org-left"><code>\e#6</code></td><td class="org-left">双倍宽度行</td><td class="org-left"><code>printf "\e#6W\n"</code> # 'W' 会显示为双倍宽度</td></tr><tr><td class="org-left"><code>\e7</code>, <code>\e[u</code></td><td class="org-left"><b>保存当前光标位置和属性</b></td><td class="org-left">推荐用前者</td></tr><tr><td class="org-left"><code>\e8</code>, <code>\e[s</code></td><td class="org-left"><b>恢复之前保存的光标位置和属性</b></td><td class="org-left">推荐用前者</td></tr><tr><td class="org-left"><code>\eM</code></td><td class="org-left">反转的索引 (Reverse Index) - 上滚一行</td><td class="org-left"><code>printf "\eM"</code></td></tr></table></div></div></div><div class="outline-3">
+<tr><td class="org-left"><code>\e#3</code></td><td class="org-left">双倍高度行（顶部）</td><td class="org-left"><code>printf &quot;\e#3D\n&quot;</code> # &#x27;D&#x27; 会显示为双倍高度</td></tr><tr><td class="org-left"><code>\e#4</code></td><td class="org-left">双倍高度行（底部）</td><td class="org-left"><code>printf &quot;\e#4D\n&quot;</code></td></tr><tr><td class="org-left"><code>\e#5</code></td><td class="org-left">单倍宽度行</td><td class="org-left"><code>printf &quot;\e#5&quot;</code></td></tr><tr><td class="org-left"><code>\e#6</code></td><td class="org-left">双倍宽度行</td><td class="org-left"><code>printf &quot;\e#6W\n&quot;</code> # &#x27;W&#x27; 会显示为双倍宽度</td></tr><tr><td class="org-left"><code>\e7</code>, <code>\e[s</code></td><td class="org-left"><b>保存当前光标位置和属性</b></td><td class="org-left">推荐用前者</td></tr><tr><td class="org-left"><code>\e8</code>, <code>\e[u</code></td><td class="org-left"><b>恢复之前保存的光标位置和属性</b></td><td class="org-left">推荐用前者</td></tr><tr><td class="org-left"><code>\eM</code></td><td class="org-left">反转的索引 (Reverse Index) - 上滚一行</td><td class="org-left"><code>printf &quot;\eM&quot;</code></td></tr></table></div></div></div>
+<div id="outline-container-2-4" class="outline-3">
 <h3 id="org-title-2-4"><span class="section-number-3">2.4.</span> 非标准ANSI序列控制字符</h3>
-<div class="outline-text-3" id="text-2-4"><p>隐藏光标： <code>\033[?25l</code><br/> 显示光标： <code>\033[?25h</code></p></div></div></div><div class="outline-2">
+<div class="outline-text-3" id="text-2-4"><ul class="org-ul">
+<li>隐藏光标： <code>\033[?25l</code>
+</li>
+<li>显示光标： <code>\033[?25h</code>
+</li>
+<li>切换备用屏幕缓冲区： <code>\033[?47h</code><code>\033[?1049h</code> (你ncurses“保存历史记录”的实现原理)
+</li>
+<li>切回主屏幕缓冲区： <code>\033[?47l</code><code>\033[?1049l</code>
+</li></ul>
+</div></div></div>
+<div id="outline-container-3" class="outline-2">
 <h2 id="org-title-3"><span class="section-number-2">3.</span> Linux Signal信号</h2>
 <div class="outline-text-2" id="text-3"><blockquote>
 <p>实际上这个内容可以直接 <code>man signal</code> 即可查看，不用上网查</p></blockquote><p><a href="https://www.cnblogs.com/frisk/p/11602973.html">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="n">SIGHUP</span><span class="w">       </span><span class="mi">1</span><span class="w">          </span><span class="cm">/* Hangup (POSIX).  */</span><span class="w">                          </span><span class="n">终止进程</span><span class="w">     </span><span class="n">终端线路挂断</span>
@@ -155,9 +170,11 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <span class="n">SIGPWR</span><span class="w">       </span><span class="mi">30</span><span class="w">         </span><span class="cm">/* Power failure restart (System V).  */</span>
 <span class="n">SIGSYS</span><span class="w">       </span><span class="mi">31</span><span class="w">         </span><span class="cm">/* Bad system call.  */</span>
 <span class="n">SIGUNUSED</span><span class="w">    </span><span class="mi">31</span>
-</pre></div></div></div><div class="outline-2">
+</pre></div></div></div>
+<div id="outline-container-4" class="outline-2">
 <h2 id="org-title-4"><span class="section-number-2">4.</span> RELRO等安全选项</h2>
-<div class="outline-text-2" id="text-4"><p><a href="https://blog.csdn.net/tabactivity/article/details/126660974">来源</a> 编译时使用 <code>-z now</code> 选项</p></div></div><div class="outline-2">
+<div class="outline-text-2" id="text-4"><p><a href="https://blog.csdn.net/tabactivity/article/details/126660974">来源</a> 编译时使用 <code>-z now</code> 选项</p></div></div>
+<div id="outline-container-5" class="outline-2">
 <h2 id="org-title-5"><span class="section-number-2">5.</span> 判断字符是中文还是英文(有局限)</h2>
 <div class="outline-text-2" id="text-5"><p><a href="https://blog.csdn.net/shen_chengfeng/article/details/109161829">来源</a></p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
@@ -181,7 +198,8 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <span class="w">	</span><span class="p">}</span>
 <span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div><p>（以上代码可在my-test中找到）</p></div></div><div class="outline-2">
+</pre></div><p>（以上代码可在my-test中找到）</p></div></div>
+<div id="outline-container-6" class="outline-2">
 <h2 id="org-title-6"><span class="section-number-2">6.</span> 生成迷宫</h2>
 <div class="outline-text-2" id="text-6"><p><a href="https://blog.csdn.net/jjwwwww/article/details/82872922">来源</a> - 该程序与下列代码有较大出入</p><div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
@@ -374,10 +392,11 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <span class="w">	</span><span class="k">return</span><span class="p">;</span>
 <span class="p">}</span><span class="w">				</span><span class="cm">/*}}} */</span>
 </pre></div><p>（以上代码可在my-test中找到）</p></div></div></div>
-<div id="postamble" class="status"><p class="date">时间: <2025-04-19 六></p>
+<div id="postamble" class="status">
+<p class="date">时间: <2025-04-19 六></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 抄别人blog的东西，塞一起应该方便自己查吧？</p>
-<p class="date">生成于: 2025-08-28 五 20:30:47</p>
+<p class="date">生成于: 2026-02-20 五 23:07:34</p>
 </div>
 </body>
 </html>
