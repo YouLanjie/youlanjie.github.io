@@ -1,0 +1,306 @@
+#+TITLE: typst笔记
+#+DESCRIPTION: 很遗憾刚努力学了几个月的latex发现有了可替代品，这帮写rust的真的是太狠了
+#+DATE: <2026-02-25 三 14:16>
+#+SETUPFILE: ../../../setup.setup
+
+#+begin_quote
+你最好有点latex基础
+#+end_quote
+
+* 基本安装
+比latex统一（没有历史遗留问题），对于archlinux、Termux，直接运行：
+#+begin_src bash
+  pacman -S typst
+  # 如果还需要nvim的lsp服务需要安装：
+  # pacman -S tinymist
+  # 对应的Coc.nvim配置::coc-settings.json
+  # {
+  #   "languageserver": {
+  #     "tinymist": {
+  #       "command": "tinymist",
+  #       "filetypes": ["typst"],
+  #       "rootPatterns": ["*.typ", ".git/"],
+  #       "settings": {}
+  #     }
+  #   }
+  # }
+#+end_src
+其安装包很小（因为不像texlive那样默认把所有的pkg甚至字体都打包在一起），安装起来
+很快，不过也会因此造成一些非一致性(问题不大)
+
+* 基本语法
+#+begin_quote
+偷懒直接用ai的结果：
+#+end_quote
+
+Typst 是一种现代化的标记语言，旨在替代 LaTeX 和 Markdown，兼具强大的排版能力和简
+洁的语法。它使用命令（以 `#` 开头）和标记混合的方式编写文档，实时预览，并直接输
+出 PDF。下面介绍 Typst 的基本语法。
+
+** 文档结构与基本文本
+Typst 文档由普通文本和命令组成。段落之间用空行分隔。
+#+begin_src typst
+这是第一段。
+这是第二段。
+#+end_src
+页面尺寸、字体等可通过 `#set` 全局设置：
+#+begin_src typst
+#set page(paper: "a4")
+#set text(font: "Times New Roman", size: 11pt)
+#+end_src
+
+** 文本格式化
+| 效果      | 语法                          | 示例输出   |
+|-----------+-------------------------------+------------|
+| *粗体*    | =*星号包裹*=                  | **粗体**   |
+| /斜体/    | =_下划线包裹_=                | *斜体*     |
+| =等宽=    | =`反引号`=                    | `等宽`     |
+| _下划线_  | =#underline[内容]=            | 下划线     |
+| 上标/下标 | =x^2^= 或 =x_2_=              | x² 或 x₂ |
+| 颜色      | =#text(fill: red)[红色文字]=  |            |
+| 字体大小  | =#text(size: 20pt)[大号文字]= |            |
+
+** 标题与章节
+使用 === 表示标题， === 越多层级越深：
+#+begin_src typst
+= 一级标题
+== 二级标题
+=== 三级标题
+#+end_src
+也可带编号（默认自动编号）：
+#+begin_src typst
+= 引言
+== 背景
+#+end_src
+若需手动编号，使用 =#heading= 函数。
+
+** 列表
+*无序列表* ：用 =-= 或 =+= 开头
+#+begin_src typst
+- 苹果
+- 香蕉
+  - 子项
+- 橙子
+#+end_src
+*有序列表* ：用 =+= 或数字加点号
+#+begin_src typst
++ 第一步
++ 第二步
+  1. 子步骤
+  2. 继续
++ 第三步
+#+end_src
+*描述列表* ：用 =/ 术语: 描述=
+#+begin_src typst
+/ 苹果: 一种水果
+/ 香蕉: 另一种水果
+#+end_src
+
+** 链接与引用
+#+begin_src typst
+外部链接：https://typst.app
+带文本链接：#link("https://typst.app")[Typst官网]
+内部引用：@目标标签
+#+end_src
+定义标签：
+#+begin_src typst
+#heading("引言") <intro>
+详见 @intro。
+#+end_src
+
+** 数学公式
+行内公式用 =$...$= ，独立公式用 =$ ... $= （前后空行）：
+#+begin_src typst
+勾股定理：$a^2 + b^2 = c^2$。
+
+$$
+sum_(k=1)^n k = (n(n+1))/2
+$$
+#+end_src
+支持 LaTeX 风格语法，但更简洁（如 =sum_(k=1)^n= 而非 =\sum_{k=1}^{n}= ）。
+
+** 代码块
+用三个反引号（可指定语言）：
+#+begin_src typst
+```python
+def hello():
+    print("Hello")
+```
+#+end_src
+行内代码用 =`...`= 。
+
+** 图片与表格
+*图片* ：
+#+begin_src typst
+#image("photo.jpg", width: 70%)
+#+end_src
+*表格* ：使用 =#table= 函数或 Markdown 风格表格（需引入包）：
+#+begin_src typst
+#table(
+  columns: 2,
+  [姓名], [年龄],
+  [张三], [25],
+  [李四], [30],
+)
+#+end_src
+或使用简易表格语法（需 =#import "@preview/tablex:0.0.1"= 等包）。
+
+** 变量与函数
+Typst 支持脚本化编程，类似 LaTeX 的宏但更强大：
+#+begin_src typst
+#let name = "Typst"
+欢迎使用 #name。
+
+#let greet(name) = [#Hello #name]
+#greet("World")
+#+end_src
+
+** 注释
+单行注释 =//= ，多行注释 =/* */= ：
+#+begin_src typst
+// 这是单行注释
+这是正文。
+/*
+多行注释
+可以跨行
+*/
+#+end_src
+
+** 常用内置函数
+- =#align(center)[居中文字]=  
+- =#box[带边框的内容]=  
+- =#enum= 自定义列表  
+- =#figure= 为图表添加标题和编号  
+- =#bibliography("refs.bib")= 引用文献
+
+** 总结
+Typst 的语法混合了 Markdown 的简洁和 LaTeX 的强大，通过 =#= 调用函数，无需繁琐的
+反斜杠和括号。更多细节可查阅 [[https://typst.app/docs/][官方文档]]。掌握以上基本语法，即可开始编写专业文档。
+
+** 转移符号
+在 Typst 中，转义字符主要通过 反斜杠 =\= 实现。当你需要输入原本具有特殊含义的符
+号（如 =#=、=$=、=_=、=*= 等）时，可以在其前面加上反斜杠，从而将其作为普通文本输
+出。
+
+*** 常见转义示例
+
+| 特殊字符 | 转义写法 | 说明                     |
+|----------+----------+--------------------------|
+| =#=      | =\#=     | 命令标记                 |
+| =$=      | =\$=     | 数学公式分隔符           |
+| =_=      | =\_=     | 斜体标记（也可用于下标） |
+| =*=      | =\*=     | 粗体标记                 |
+| =[=      | =\[=     | 内容块起始               |
+| =]=      | =\]=     | 内容块结束               |
+| ={=      | =\{=     | 代码块或字典起始         |
+| =}=      | =\}=     | 代码块或字典结束         |
+| ===      | =\==     | 标题标记                 |
+| =+=      | =\+=     | 有序列表标记             |
+| =-=      | =\-=     | 无序列表标记             |
+| =/=      | =\/=     | 描述列表标记             |
+| ===      | =\==     | 行内代码标记             |
+| ="=      | =\"=     | 字符串引号（必要时）     |
+| =~=      | =\~=     | 非换行空格               |
+| =\=      | =\\=     | 反斜杠本身               |
+
+*** 示例代码
+
+#+begin_src typst
+= 转义示例
+
+在文档中需要显示 # 符号，可以写：\#标签。
+
+数学公式中的 $ 符号：\$x^2\$。
+
+星号 \* 和下划线 \_ 可以直接显示。
+
+如果需要输入反斜杠本身：\\。
+
+注意：在代码块（```）或原始文本函数 #raw 中，通常不需要转义，所有字符都会原样输出。
+#+end_src
+
+*** 上下文注意事项
+- 在 *数学模式* （ =$...$= ）中，大多数特殊字符的含义与文本模式不同，但 =#= 依然需
+  要转义（例如 =$\#$= 显示 #）。
+- 在 *代码块* （三个反引号包裹）或 =#raw= 块中，所有字符按原样输出，无需转义。
+- 在 *字符串* 中（例如函数参数）， ="= 需转义为 =\"=，而 =#= 一般无需转义（除非
+  后面紧跟命令）。
+
+*** 其他方式
+除了反斜杠转义，还可以使用 =#text= 函数的 =fill= 参数来输出特殊符号，但转义
+是最直接的方法。
+
+更多细节可参考 [[https://typst.app/docs/reference/syntax/#escapes][Typst 官方文档]]。
+
+* 像ctex一样工作
+
+** 默认字体问题
+typst本身支持cjk，不过需要配置好字体，如果使用的是termux可能会遇到无法检测字体安
+装目录的字体的情况，可以使用环境变量进行配置：
+#+begin_src bash
+  export TYPST_FONT_PATHS="$HOME/.local/share/fonts"
+  # 使用以下命令查看typst检测到的字体：
+  typst fonts
+  # 注意，这里列出的字体名称不一定和fc-list的输出对得上
+#+end_src
+
+我这里实测，typst正文默认优先使用楷体字。若需要设置文档字体，请使用：
+#+begin_src typst
+#set text(font: "DengXian")
+// or:
+#set text(font: ("DengXian",), weight: "light")
+// 注：现在(2026.02.25)typst仍不支持变体字体
+#+end_src
+
+但是实际上这么设置后就会发现它不能设置其他样式的特殊字体。要像ctex包那样工作，可
+以这么设置：
+#+begin_src typst
+#set text(lang: "zh", font: ("Noto Serif CJK SC",))
+#show heading: text.with(font: "FZXiaoBiaoSong-B05")
+#show emph: text.with(font: ("Noto Serif","KaiTi_GB2312"))
+#+end_src
+
+** 段落缩进问题
+typst不知道为啥默认是不缩进的。。。像网页文本排版一样嘛，段间距拉大。不过好在能
+改，使用以下代码：
+#+begin_src typst
+#set par(
+  first-line-indent: (
+    amount: 2em,  // 光这样还不够
+    all: true     // 还需要设置all防止heading后首段不缩进。。
+  )
+)
+#+end_src
+
+** 标题(heading)与目录
+typst的标题默认是没有编号的，需要使用：
+#+begin_src typst
+#set heading(numbering: "1.")
+#+end_src
+进行设置。如果需要在pdf中插入目录，则可以使用：
+#+begin_src typst
+#outline()
+// latex模板用多了差点以为tex是自带目录的。。。
+#+end_src
+
+** 引用缩进
+默认的 =quote()= 函数功能是给你加个引号，使用 =block:true= 后则可独立成块（该参
+数可被设置）（若还想加引号可以设置回来）
+
+如果需要使用段首缩进，请使用：
+#+begin_src typst
+#show quote: set pad(x: 2em)
+#+end_src
+注意：仅一段时好像不会段首缩进，但有了两个自然段时就会了。
+
+* 其他功能
+** 假文
+使用：
+#+begin_src typst
+#lorem(n)
+#+end_src
+其中n为单词数量
+
+* Reference
+- [[https://typst.app/docs/tutorial/writing-in-typst/][Typst官网教程（英文）]]
+- [[https://zhuanlan.zhihu.com/p/650600203][更适合中国宝宝体质的 Typst 设置细节/问题解决]]
