@@ -301,6 +301,259 @@ typst的标题默认是没有编号的，需要使用：
 #+end_src
 其中n为单词数量
 
+* 吐槽
+整点typst笑话：
+
+在编写、编译一个用pandoc从tex转过来的也就36M的纯文本文档时，你的tinymist的运行情
+况belike：
+#+begin_src text
+  2月 26 14:44:41 ArchUSB kernel: tinymist invoked oom-killer: gfp_mask=0xcc0(GFP_KERNEL), order=0, oom_score_adj=0
+  2月 26 14:44:42 ArchUSB kernel: CPU: 5 UID: 1000 PID: 533888 Comm: tinymist Tainted: G S      W           6.18.9-arch1-2 #1 PREEMPT(full)  acc0345693780c55f83aaf9a0c9efd10d8da358f
+  2月 26 14:44:42 ArchUSB kernel: Tainted: [S]=CPU_OUT_OF_SPEC, [W]=WARN
+  2月 26 14:44:42 ArchUSB kernel: Hardware name: HUAWEI MCLG-XX/MCLG-XX-PCB, BIOS 1.20 10/11/2025
+  2月 26 14:44:42 ArchUSB kernel: Call Trace:
+  2月 26 14:44:42 ArchUSB kernel:  <TASK>
+  2月 26 14:44:42 ArchUSB kernel:  dump_stack_lvl+0x5d/0x80
+  2月 26 14:44:42 ArchUSB kernel:  dump_header+0x43/0x1aa
+  2月 26 14:44:42 ArchUSB kernel:  oom_kill_process.cold+0x8/0x90
+  2月 26 14:44:42 ArchUSB kernel:  out_of_memory+0x210/0x500
+  2月 26 14:44:42 ArchUSB kernel:  mem_cgroup_out_of_memory+0xc2/0xd0
+  2月 26 14:44:42 ArchUSB kernel:  try_charge_memcg+0x442/0x660
+  2月 26 14:44:42 ArchUSB kernel:  charge_memcg+0x2f/0x70
+  2月 26 14:44:42 ArchUSB kernel:  __mem_cgroup_charge+0x30/0x90
+  2月 26 14:44:42 ArchUSB kernel:  do_anonymous_page+0x324/0x890
+  2月 26 14:44:42 ArchUSB kernel:  ? ___pte_offset_map+0x1b/0x160
+  2月 26 14:44:42 ArchUSB kernel:  __handle_mm_fault+0xa60/0xf10
+  2月 26 14:44:42 ArchUSB kernel:  ? sched_balance_trigger+0x72/0x370
+  2月 26 14:44:42 ArchUSB kernel:  ? perf_event_task_tick+0x4f/0xb0
+  2月 26 14:44:42 ArchUSB kernel:  handle_mm_fault+0xe7/0x2d0
+  2月 26 14:44:42 ArchUSB kernel:  do_user_addr_fault+0x21a/0x690
+  2月 26 14:44:42 ArchUSB kernel:  exc_page_fault+0x7e/0x1a0
+  2月 26 14:44:42 ArchUSB kernel:  asm_exc_page_fault+0x26/0x30
+  2月 26 14:44:42 ArchUSB kernel: RIP: 0033:0x55e5d5d43b17
+  2月 26 14:44:42 ArchUSB kernel: Code: 48 8b 47 10 4c 8b 68 20 49 83 e5 f8 4c 89 e9 48 2b 08 0f 82 1a 04 00 00 48 83 f9 40 0f 82 10 04 00 00 49 83 c5 c0 4c 89 68 20 <49> 89 5d 00 66 0f 28 85 40 ff ff ff 66 41 0f 11 45 08 48 8b 85 50
+  2月 26 14:44:42 ArchUSB kernel: RSP: 002b:00007f28cfdfc1f0 EFLAGS: 00010207
+  2月 26 14:44:42 ArchUSB kernel: RAX: 00007f2571000000 RBX: 0000000000000001 RCX: 0000000000fe6ff0
+  2月 26 14:44:42 ArchUSB kernel: RDX: 00007f28cfdfcb10 RSI: 00007f256e53f180 RDI: 00007f28cfdfc478
+  2月 26 14:44:42 ArchUSB kernel: RBP: 00007f28cfdfc310 R08: 0000000000000001 R09: 0000000000000003
+  2月 26 14:44:42 ArchUSB kernel: R10: 000055e5d4d6ef60 R11: 8080808080808080 R12: 0000000000000002
+  2月 26 14:44:42 ArchUSB kernel: R13: 00007f2570fe6ff0 R14: 0000000000000000 R15: 0000000000000001
+  2月 26 14:44:42 ArchUSB kernel:  </TASK>
+  2月 26 14:44:42 ArchUSB kernel: memory: usage 10485760kB, limit 10485760kB, failcnt 1441
+  2月 26 14:44:42 ArchUSB kernel: swap: usage 0kB, limit 9007199254740988kB, failcnt 0
+  2月 26 14:44:42 ArchUSB kernel: Memory cgroup stats for /linitmem:
+  2月 26 14:44:42 ArchUSB kernel: anon 10710810624
+  2月 26 14:44:42 ArchUSB kernel: file 40960
+  2月 26 14:44:42 ArchUSB kernel: kernel 26566656
+  2月 26 14:44:42 ArchUSB kernel: kernel_stack 704512
+  2月 26 14:44:42 ArchUSB kernel: pagetables 0
+  2月 26 14:44:42 ArchUSB kernel: sec_pagetables 0
+  2月 26 14:44:42 ArchUSB kernel: percpu 1344
+  2月 26 14:44:42 ArchUSB kernel: sock 0
+  2月 26 14:44:42 ArchUSB kernel: vmalloc 0
+  2月 26 14:44:42 ArchUSB kernel: shmem 40960
+  2月 26 14:44:42 ArchUSB kernel: zswap 0
+  2月 26 14:44:42 ArchUSB kernel: zswapped 0
+  2月 26 14:44:42 ArchUSB kernel: file_mapped 172032
+  2月 26 14:44:42 ArchUSB kernel: file_dirty 0
+  2月 26 14:44:42 ArchUSB kernel: file_writeback 0
+  2月 26 14:44:42 ArchUSB kernel: swapcached 0
+  2月 26 14:44:42 ArchUSB kernel: anon_thp 843055104
+  2月 26 14:44:42 ArchUSB kernel: file_thp 0
+  2月 26 14:44:42 ArchUSB kernel: shmem_thp 0
+  2月 26 14:44:42 ArchUSB kernel: inactive_anon 294502400
+  2月 26 14:44:42 ArchUSB kernel: active_anon 10416345088
+  2月 26 14:44:42 ArchUSB kernel: inactive_file 0
+  2月 26 14:44:42 ArchUSB kernel: active_file 0
+  2月 26 14:44:42 ArchUSB kernel: unevictable 0
+  2月 26 14:44:42 ArchUSB kernel: slab_reclaimable 252680
+  2月 26 14:44:42 ArchUSB kernel: slab_unreclaimable 836064
+  2月 26 14:44:42 ArchUSB kernel: slab 1088744
+  2月 26 14:44:42 ArchUSB kernel: hugetlb 0
+  2月 26 14:44:42 ArchUSB kernel: workingset_refault_anon 0
+  2月 26 14:44:42 ArchUSB kernel: workingset_refault_file 11442
+  2月 26 14:44:42 ArchUSB kernel: workingset_activate_anon 0
+  2月 26 14:44:42 ArchUSB kernel: workingset_activate_file 0
+  2月 26 14:44:42 ArchUSB kernel: workingset_restore_anon 0
+  2月 26 14:44:42 ArchUSB kernel: workingset_restore_file 0
+  2月 26 14:44:42 ArchUSB kernel: workingset_nodereclaim 0
+  2月 26 14:44:42 ArchUSB kernel: pgdemote_kswapd 0
+  2月 26 14:44:42 ArchUSB kernel: pgdemote_direct 0
+  2月 26 14:44:42 ArchUSB kernel: pgdemote_khugepaged 0
+  2月 26 14:44:42 ArchUSB kernel: pgdemote_proactive 0
+  2月 26 14:44:42 ArchUSB kernel: pgpromote_success 0
+  2月 26 14:44:42 ArchUSB kernel: pgscan 35142
+  2月 26 14:44:42 ArchUSB kernel: pgsteal 35082
+  2月 26 14:44:42 ArchUSB kernel: pswpin 0
+  2月 26 14:44:42 ArchUSB kernel: pswpout 0
+  2月 26 14:44:42 ArchUSB kernel: pgscan_kswapd 5539
+  2月 26 14:44:42 ArchUSB kernel: pgscan_direct 29603
+  2月 26 14:44:42 ArchUSB kernel: pgscan_khugepaged 0
+  2月 26 14:44:42 ArchUSB kernel: pgscan_proactive 0
+  2月 26 14:44:42 ArchUSB kernel: pgsteal_kswapd 5539
+  2月 26 14:44:42 ArchUSB kernel: pgsteal_direct 29543
+  2月 26 14:44:42 ArchUSB kernel: pgsteal_khugepaged 0
+  2月 26 14:44:42 ArchUSB kernel: pgsteal_proactive 0
+  2月 26 14:44:42 ArchUSB kernel: pgfault 15879598
+  2月 26 14:44:42 ArchUSB kernel: pgmajfault 73
+  2月 26 14:44:42 ArchUSB kernel: pgrefill 5852
+  2月 26 14:44:42 ArchUSB kernel: pgactivate 37
+  2月 26 14:44:42 ArchUSB kernel: pgdeactivate 0
+  2月 26 14:44:42 ArchUSB kernel: pglazyfree 0
+  2月 26 14:44:42 ArchUSB kernel: pglazyfreed 0
+  2月 26 14:44:42 ArchUSB kernel: swpin_zero 0
+  2月 26 14:44:42 ArchUSB kernel: swpout_zero 0
+  2月 26 14:44:42 ArchUSB kernel: zswpin 0
+  2月 26 14:44:42 ArchUSB kernel: zswpout 0
+  2月 26 14:44:42 ArchUSB kernel: zswpwb 0
+  2月 26 14:44:42 ArchUSB kernel: thp_fault_alloc 7897
+  2月 26 14:44:42 ArchUSB kernel: thp_collapse_alloc 0
+  2月 26 14:44:42 ArchUSB kernel: thp_swpout 0
+  2月 26 14:44:42 ArchUSB kernel: thp_swpout_fallback 0
+  2月 26 14:44:42 ArchUSB kernel: numa_pages_migrated 0
+  2月 26 14:44:42 ArchUSB kernel: numa_pte_updates 0
+  2月 26 14:44:42 ArchUSB kernel: numa_hint_faults 0
+  2月 26 14:44:42 ArchUSB kernel: Tasks state (memory values in pages):
+  2月 26 14:44:42 ArchUSB kernel: [  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name
+  2月 26 14:44:42 ArchUSB kernel: [   3685]  1000  3685     4713     3695     1531     2164         0    65536        0             0 zsh
+  2月 26 14:44:42 ArchUSB kernel: [ 519059]  1000 519059     4591     2028      320     1708         0    69632        0             0 nvim
+  2月 26 14:44:42 ArchUSB kernel: [ 519061]  1000 519061     6923     4388     2464     1924         0    90112        0             0 nvim
+  2月 26 14:44:42 ArchUSB kernel: [ 519068]  1000 519068  4614974    35816    10827    24989         0  1159168        0             0 node-MainThread
+  2月 26 14:44:42 ArchUSB kernel: [ 519153]  1000 519153    10029     6694     3302     3392         0   110592        0             0 pynvim-python
+  2月 26 14:44:42 ArchUSB kernel: [ 519194]  1000 519194    10758     7034     3485     3549         0   114688        0             0 python
+  2月 26 14:44:42 ArchUSB kernel: [ 533885]  1000 533885  3372405  2594433  2593421     1012         0 23040000        0             0 tinymist
+  2月 26 14:44:42 ArchUSB kernel: oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=/,mems_allowed=0,oom_memcg=/linitmem,task_memcg=/linitmem,task=tinymist,pid=533885,uid=1000
+  2月 26 14:44:42 ArchUSB kernel: Memory cgroup out of memory: Killed process 533885 (tinymist) total-vm:13489620kB, anon-rss:10373684kB, file-rss:4048kB, shmem-rss:0kB, UID:1000 pgtables:22500kB oom_score_adj:0
+#+end_src
+
+直接把cgroup设定的10G内存都吃干抹净了。。。。。
+
+而在编译时typst的情况belike：
+#+begin_src text
+  2月 26 14:52:37 ArchUSB kernel: typst invoked oom-killer: gfp_mask=0x100cca(GFP_HIGHUSER_MOVABLE), order=0, oom_score_adj=0
+  2月 26 14:52:37 ArchUSB kernel: CPU: 0 UID: 1000 PID: 626830 Comm: typst Tainted: G S      W           6.18.9-arch1-2 #1 PREEMPT(full)  acc0345693780c55f83aaf9a0c9efd10d8da358f
+  2月 26 14:52:37 ArchUSB kernel: Tainted: [S]=CPU_OUT_OF_SPEC, [W]=WARN
+  2月 26 14:52:37 ArchUSB kernel: Hardware name: HUAWEI MCLG-XX/MCLG-XX-PCB, BIOS 1.20 10/11/2025
+  2月 26 14:52:37 ArchUSB kernel: Call Trace:
+  2月 26 14:52:37 ArchUSB kernel:  <TASK>
+  2月 26 14:52:37 ArchUSB kernel:  dump_stack_lvl+0x5d/0x80
+  2月 26 14:52:37 ArchUSB kernel:  dump_header+0x43/0x1aa
+  2月 26 14:52:37 ArchUSB kernel:  oom_kill_process.cold+0x8/0x90
+  2月 26 14:52:37 ArchUSB kernel:  out_of_memory+0x210/0x500
+  2月 26 14:52:37 ArchUSB kernel:  mem_cgroup_out_of_memory+0xc2/0xd0
+  2月 26 14:52:37 ArchUSB kernel:  try_charge_memcg+0x442/0x660
+  2月 26 14:52:37 ArchUSB kernel:  charge_memcg+0x2f/0x70
+  2月 26 14:52:37 ArchUSB kernel:  __mem_cgroup_charge+0x30/0x90
+  2月 26 14:52:37 ArchUSB kernel:  filemap_add_folio+0x5e/0x220
+  2月 26 14:52:37 ArchUSB kernel:  ? alloc_pages_mpol+0x86/0x170
+  2月 26 14:52:37 ArchUSB kernel:  __filemap_get_folio+0x1c6/0x570
+  2月 26 14:52:37 ArchUSB kernel:  ? page_cache_ra_unbounded+0x1ac/0x270
+  2月 26 14:52:37 ArchUSB kernel:  filemap_fault+0x112/0x1630
+  2月 26 14:52:37 ArchUSB kernel:  __do_fault+0x34/0x1d0
+  2月 26 14:52:37 ArchUSB kernel:  do_fault+0x38d/0x600
+  2月 26 14:52:37 ArchUSB kernel:  __handle_mm_fault+0x8d0/0xf10
+  2月 26 14:52:37 ArchUSB kernel:  ? sched_balance_trigger+0x144/0x370
+  2月 26 14:52:37 ArchUSB kernel:  ? __smp_call_single_queue+0xd2/0x150
+  2月 26 14:52:37 ArchUSB kernel:  handle_mm_fault+0xe7/0x2d0
+  2月 26 14:52:37 ArchUSB kernel:  do_user_addr_fault+0x21a/0x690
+  2月 26 14:52:37 ArchUSB kernel:  exc_page_fault+0x7e/0x1a0
+  2月 26 14:52:37 ArchUSB kernel:  asm_exc_page_fault+0x26/0x30
+  2月 26 14:52:37 ArchUSB kernel: RIP: 0033:0x5646a0d5b815
+  2月 26 14:52:37 ArchUSB kernel: Code: Unable to access opcode bytes at 0x5646a0d5b7eb.
+  2月 26 14:52:37 ArchUSB kernel: RSP: 002b:00007ffc35fcf970 EFLAGS: 00010202
+  2月 26 14:52:37 ArchUSB kernel: RAX: 00007ffc35fcffb0 RBX: 00007ffc35fcff50 RCX: 00007ffc35fd0220
+  2月 26 14:52:37 ArchUSB kernel: RDX: 00007ffc35fcfe30 RSI: 00007ffc35fcff50 RDI: 00007ffc35fcffb0
+  2月 26 14:52:37 ArchUSB kernel: RBP: 00007ffc35fcf980 R08: 0000000000000040 R09: 9572431bd62f2de6
+  2月 26 14:52:37 ArchUSB kernel: R10: 0000000000000041 R11: 00007f7436ed8ac8 R12: 0000000000000000
+  2月 26 14:52:37 ArchUSB kernel: R13: 00007ffc35fcff50 R14: 00007ffc35fcfa58 R15: 0000000000345d19
+  2月 26 14:52:37 ArchUSB kernel:  </TASK>
+  2月 26 14:52:37 ArchUSB kernel: memory: usage 8388608kB, limit 8388608kB, failcnt 15894
+  2月 26 14:52:37 ArchUSB kernel: swap: usage 0kB, limit 9007199254740988kB, failcnt 0
+  2月 26 14:52:37 ArchUSB kernel: Memory cgroup stats for /linitmem:
+  2月 26 14:52:37 ArchUSB kernel: anon 8569540608
+  2月 26 14:52:37 ArchUSB kernel: file 540672
+  2月 26 14:52:37 ArchUSB kernel: kernel 19853312
+  2月 26 14:52:37 ArchUSB kernel: kernel_stack 212992
+  2月 26 14:52:37 ArchUSB kernel: pagetables 0
+  2月 26 14:52:37 ArchUSB kernel: sec_pagetables 0
+  2月 26 14:52:37 ArchUSB kernel: percpu 224
+  2月 26 14:52:37 ArchUSB kernel: sock 0
+  2月 26 14:52:37 ArchUSB kernel: vmalloc 0
+  2月 26 14:52:37 ArchUSB kernel: shmem 40960
+  2月 26 14:52:37 ArchUSB kernel: zswap 0
+  2月 26 14:52:37 ArchUSB kernel: zswapped 0
+  2月 26 14:52:37 ArchUSB kernel: file_mapped 0
+  2月 26 14:52:37 ArchUSB kernel: file_dirty 0
+  2月 26 14:52:37 ArchUSB kernel: file_writeback 0
+  2月 26 14:52:37 ArchUSB kernel: swapcached 0
+  2月 26 14:52:37 ArchUSB kernel: anon_thp 981467136
+  2月 26 14:52:37 ArchUSB kernel: file_thp 0
+  2月 26 14:52:37 ArchUSB kernel: shmem_thp 0
+  2月 26 14:52:37 ArchUSB kernel: inactive_anon 8201560064
+  2月 26 14:52:37 ArchUSB kernel: active_anon 368021504
+  2月 26 14:52:37 ArchUSB kernel: inactive_file 499712
+  2月 26 14:52:37 ArchUSB kernel: active_file 0
+  2月 26 14:52:37 ArchUSB kernel: unevictable 0
+  2月 26 14:52:37 ArchUSB kernel: slab_reclaimable 1307864
+  2月 26 14:52:37 ArchUSB kernel: slab_unreclaimable 206472
+  2月 26 14:52:37 ArchUSB kernel: slab 1514336
+  2月 26 14:52:37 ArchUSB kernel: hugetlb 0
+  2月 26 14:52:37 ArchUSB kernel: workingset_refault_anon 0
+  2月 26 14:52:37 ArchUSB kernel: workingset_refault_file 618881
+  2月 26 14:52:37 ArchUSB kernel: workingset_activate_anon 0
+  2月 26 14:52:37 ArchUSB kernel: workingset_activate_file 39095
+  2月 26 14:52:37 ArchUSB kernel: workingset_restore_anon 0
+  2月 26 14:52:37 ArchUSB kernel: workingset_restore_file 6
+  2月 26 14:52:37 ArchUSB kernel: workingset_nodereclaim 0
+  2月 26 14:52:37 ArchUSB kernel: pgdemote_kswapd 0
+  2月 26 14:52:37 ArchUSB kernel: pgdemote_direct 0
+  2月 26 14:52:37 ArchUSB kernel: pgdemote_khugepaged 0
+  2月 26 14:52:37 ArchUSB kernel: pgdemote_proactive 0
+  2月 26 14:52:37 ArchUSB kernel: pgpromote_success 0
+  2月 26 14:52:37 ArchUSB kernel: pgscan 822476
+  2月 26 14:52:37 ArchUSB kernel: pgsteal 757476
+  2月 26 14:52:37 ArchUSB kernel: pswpin 0
+  2月 26 14:52:37 ArchUSB kernel: pswpout 0
+  2月 26 14:52:37 ArchUSB kernel: pgscan_kswapd 5539
+  2月 26 14:52:37 ArchUSB kernel: pgscan_direct 816937
+  2月 26 14:52:37 ArchUSB kernel: pgscan_khugepaged 0
+  2月 26 14:52:37 ArchUSB kernel: pgscan_proactive 0
+  2月 26 14:52:37 ArchUSB kernel: pgsteal_kswapd 5539
+  2月 26 14:52:37 ArchUSB kernel: pgsteal_direct 751937
+  2月 26 14:52:37 ArchUSB kernel: pgsteal_khugepaged 0
+  2月 26 14:52:37 ArchUSB kernel: pgsteal_proactive 0
+  2月 26 14:52:37 ArchUSB kernel: pgfault 23443852
+  2月 26 14:52:37 ArchUSB kernel: pgmajfault 5393
+  2月 26 14:52:37 ArchUSB kernel: pgrefill 14160
+  2月 26 14:52:37 ArchUSB kernel: pgactivate 1557
+  2月 26 14:52:37 ArchUSB kernel: pgdeactivate 0
+  2月 26 14:52:37 ArchUSB kernel: pglazyfree 0
+  2月 26 14:52:37 ArchUSB kernel: pglazyfreed 0
+  2月 26 14:52:37 ArchUSB kernel: swpin_zero 0
+  2月 26 14:52:37 ArchUSB kernel: swpout_zero 0
+  2月 26 14:52:37 ArchUSB kernel: zswpin 0
+  2月 26 14:52:37 ArchUSB kernel: zswpout 0
+  2月 26 14:52:37 ArchUSB kernel: zswpwb 0
+  2月 26 14:52:37 ArchUSB kernel: thp_fault_alloc 11141
+  2月 26 14:52:37 ArchUSB kernel: thp_collapse_alloc 0
+  2月 26 14:52:37 ArchUSB kernel: thp_swpout 0
+  2月 26 14:52:37 ArchUSB kernel: thp_swpout_fallback 0
+  2月 26 14:52:37 ArchUSB kernel: numa_pages_migrated 0
+  2月 26 14:52:37 ArchUSB kernel: numa_pte_updates 0
+  2月 26 14:52:37 ArchUSB kernel: numa_hint_faults 0
+  2月 26 14:52:37 ArchUSB kernel: Tasks state (memory values in pages):
+  2月 26 14:52:37 ArchUSB kernel: [  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name
+  2月 26 14:52:37 ArchUSB kernel: [   3685]  1000  3685     4713     3669     1505     2164         0    65536        0             0 zsh
+  2月 26 14:52:37 ArchUSB kernel: [ 626830]  1000 626830  2510856  2092249  2091505      744         0 18173952        0             0 typst
+  2月 26 14:52:37 ArchUSB kernel: oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=/,mems_allowed=0,oom_memcg=/linitmem,task_memcg=/linitmem,task=typst,pid=626830,uid=1000
+  2月 26 14:52:37 ArchUSB kernel: Memory cgroup out of memory: Killed process 626830 (typst) total-vm:10043424kB, anon-rss:8366020kB, file-rss:2976kB, shmem-rss:0kB, UID:1000 pgtables:17748kB oom_score_adj:0
+#+end_src
+
+8个G的内存照吃不误。。。。
+
+总之内存不足者请勿如此（如果没有加上额外设置的cgroup内存设定那么OOM的就是物理内
+存了）。相比之下，xelatex在最后峰值内存700M时完成了编译，运行时长2到3分钟。
+
 * Reference
 - [[https://typst.app/docs/tutorial/writing-in-typst/][Typst官网教程（英文）]]
 - [[https://zhuanlan.zhihu.com/p/650600203][更适合中国宝宝体质的 Typst 设置细节/问题解决]]
