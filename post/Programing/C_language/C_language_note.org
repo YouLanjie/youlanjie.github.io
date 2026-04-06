@@ -220,6 +220,126 @@ int n = (int)f;        内存（小端，4 字节）：
 
 个人经验而言，国内Windows电脑使用gbk编码较多，其他设备多是使用utf8编码。utf8能编码的字符比gbk多
 
+* C语言语法相关
+
+** 操作顺序
+- 对于表达式 =(a,b,c)= ，a,b,c会顺次执行，最后返回c的值
+- 自增自减的 =a++= 与 =++a= 两种形式的区别在于将它们传参时是返回操作前或操作后的值
+- 对于表达式 =(a && b)= ，b会在a非0时执行，最后返回bool值而非a或b的计算值（别python病犯了）
+
+** 复杂类型定义与理解
+对于复杂类型（函数指针、指针、数组复合结构），优先找括号，其次向右看，最后向左
+- E.g. =char *ptr[10]= 是指针数组（先是长度为10的数组，再是内部元素类型为指针）
+  (sizeof(ptr)=80, sizeof(*ptr)=8)
+- E.g. =int (*ptr)[10]= 是数组指针（先是指针，再是其指向内容为长度10的int型数组）
+  (sizeof(ptr)=8, sizeof(*ptr)=10)
+- E.g. =int (*ptr[10])(char*,char*)= 是函数指针数组（基本等同于第一个例子只不过内部元素为函数指针）
+  使用类似 =ptr[num]("...", "...");= 进行函数调用
+#+begin_quote
+观察下来汉语里从左到右顺序对应的类型顺序大概是从里到外（从访问角度来看的里外），
+优先级从低到高
+#+end_quote
+
+问ai：带有参数且返回 (=函数指针= 数组)指针的 =函数指针= 该怎么定义？
+
+方法一：使用typedef逐步定义类型
+#+begin_src c
+  // 步骤1：定义基础函数指针类型（指向返回 int，接受两个 int 的函数）
+  typedef int (*FuncPtr)(int, int);
+
+  // 步骤2：定义指向“包含5个 FuncPtr 的数组”的指针类型
+  typedef FuncPtr (*ArrayPtr)[5];
+
+  // 步骤3：定义指向函数的指针，该函数接受 (float, char)，返回 ArrayPtr
+  typedef ArrayPtr (*MyFuncPtr)(float, char);
+
+  // 使用类型别名定义变量
+  MyFuncPtr fp;
+
+#+end_src
+方法二：直接声明（复杂，但展示语法规则）
+#+begin_src c
+  int (*(*(*fp)(float, char))[5])(int, int); /* 说明：
+  int (*                        )(int, int); -> 函数指针
+                             [5]  -> 数组
+        (*                  )     -> 指针(下面的函数指针的返回值)
+          (*  )(float, char)      -> 函数指针(用fp(0.1,'6')调用)
+            fp
+  自下而上为从外到内 */
+#+end_src
+
+测试样例：
+#+begin_src c
+#include <stdio.h>
+
+#define p(x) { \
+	printf("%3d: %20s => %-3ld\n", __LINE__, "sizeof("#x")", sizeof(x)); \
+	if(0) printf("%u", (x)); \
+}
+
+int main(void)
+{
+	int (*(*(*fp)(float, char))[3])(int, int) = NULL;
+	p(fp);
+	p(fp(0,0));
+	p(*fp(0,0));
+	p((*fp(0,0))[0]);
+	p((*fp(0,0))[0](0, 0));
+}
+#+end_src
+终端结果：
+#+begin_src bash
+> gcc a.c
+a.c:17:2: warning: format specifies type 'unsigned int' but
+      the argument has type 'int (*(*(*)(float, char))[3])(int, int)' [-Wformat]
+   17 |         p(fp);
+      |         ^~~~~
+a.c:11:21: note: expanded from macro 'p'
+   11 |         if(0) printf("%u", (x)); \
+      |                       ~~   ^~~
+a.c:18:2: warning: format specifies type 'unsigned int' but
+      the argument has type 'int (*(*)[3])(int, int)' [-Wformat]
+   18 |         p(fp(0,0));
+      |         ^~~~~~~~~~
+a.c:11:21: note: expanded from macro 'p'
+   11 |         if(0) printf("%u", (x)); \
+      |                       ~~   ^~~
+a.c:19:2: warning: format specifies type 'unsigned int' but
+      the argument has type 'int (**)(int, int)' [-Wformat]
+   19 |         p(*fp(0,0));
+      |         ^~~~~~~~~~~
+a.c:11:21: note: expanded from macro 'p'
+   11 |         if(0) printf("%u", (x)); \
+      |                       ~~   ^~~
+a.c:20:2: warning: format specifies type 'unsigned int' but
+      the argument has type 'int (*)(int, int)' [-Wformat]
+   20 |         p((*fp(0,0))[0]);
+      |         ^~~~~~~~~~~~~~~~
+a.c:11:21: note: expanded from macro 'p'
+   11 |         if(0) printf("%u", (x)); \
+      |                       ~~   ^~~
+4 warnings generated.
+> ./a.out
+ 17:           sizeof(fp) => 8
+ 18:      sizeof(fp(0,0)) => 8
+ 19:     sizeof(*fp(0,0)) => 24
+ 20: sizeof((*fp(0,0))[0]) => 8
+ 21: sizeof((*fp(0,0))[0](0, 0)) => 4
+#+end_src
+** 宏定义
+特殊宏：
+- =__LINE__= 代码当前行数（应用参照上面的一个示例）
+- =__FILE__= 编译时的代码文件名
+- =__FUNCTION__= 编译时的代码所在的函数名
+特殊字符：
+- =#= 能将宏传入的参数转换成字面量字符串(用引号括起来并对内部的特殊字符转义)
+  #+begin_src
+  #define marco(x) printf("%s = %d\n", #x, (x))
+  void main(){ int yee=2; marco(++yee); }
+  #+end_src
+  打印出来的结果应该是 =yee++ = 2=
+- =##= 衔接符号（两不同符号合并在一起变成第三个符号）
+
 * ELF相关
 ** 反编译
 对于ELF文件，可以使用objdump工具执行反编译操作（只能反编译为汇编）：
@@ -259,6 +379,13 @@ int n = (int)f;        内存（小端，4 字节）：
 - pcre2: 正则表达式
 
 * 参考
-推荐的一些内容博主：
-- [[http://github.com/tsoding/][Tsoding]]: Emacs用户，油管上发直播回放视频，会提到一些有意思的编程知识，B站有人搬运他的视频
-- [[http://bilibili.com/video/BV1m55Az6EPF][Core Dumped]]: 使用动画介绍计算机底层逻辑（对于学习c语言这种贴近硬件的语言有帮助）
+推荐的一些内容博主（B站上的都是搬运视频）：
+- =Tsoding= Emacs用户，油管上发直播回放视频，会提到一些有意思的编程知识，B站有人搬运他的视频
+  - [[http://github.com/tsoding/][(Github)个人主页]],
+  - [[http://bilibili.com/video/BV16kAjzzEck][(B站)c语言手搓StringView(合集内)]]
+- =Core Dumped= 使用动画介绍计算机底层逻辑（对于学习c语言这种贴近硬件的语言有帮助）
+  - [[http://bilibili.com/video/BV1m55Az6EPF][(B站)生肉合集]],
+  - [[http://bilibili.com/video/BV1aXbXzfEsM][(B站)(cc字幕)一个项目，多种语言(合集内)]]
+- =Nir Lichtman= Linux相关知识偏多，但也接近底层（如程序是如何被linux内核启动的）
+  - [[http://bilibili.com/video/BV1gtfbYWEui][(B站)(熟肉)制作最小Linux发行版]],
+  - [[http://bilibili.com/video/BV1pVrwB2EkF][(B站)(熟肉)制作能放音乐的Linux发行版]]

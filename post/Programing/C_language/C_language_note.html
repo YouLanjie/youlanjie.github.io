@@ -30,8 +30,9 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul><li><a href="#org-title-1">1. 内存与数据存储相关</a><ul><li><a href="#org-title-1-1">1.1. 各类型的大小</a></li><li><a href="#org-title-1-2">1.2. 内存模型</a></li><li><a href="#org-title-1-3">1.3. 文本编码</a></li></ul></li>
-<li><a href="#org-title-2">2. ELF相关</a><ul><li><a href="#org-title-2-1">2.1. 反编译</a></li><li><a href="#org-title-2-2">2.2. 动态链接</a></li></ul></li>
-<li><a href="#org-title-3">3. 第三方库相关</a></li><li><a href="#org-title-4">4. 参考</a></li></ul></div></div>
+<li><a href="#org-title-2">2. C语言语法相关</a><ul><li><a href="#org-title-2-1">2.1. 操作顺序</a></li><li><a href="#org-title-2-2">2.2. 复杂类型定义与理解</a></li><li><a href="#org-title-2-3">2.3. 宏定义</a></li></ul></li>
+<li><a href="#org-title-3">3. ELF相关</a><ul><li><a href="#org-title-3-1">3.1. 反编译</a></li><li><a href="#org-title-3-2">3.2. 动态链接</a></li></ul></li>
+<li><a href="#org-title-4">4. 第三方库相关</a></li><li><a href="#org-title-5">5. 参考</a></li></ul></div></div>
 <div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 内存与数据存储相关</h2>
 <div class="outline-text-2" id="text-1">
@@ -247,12 +248,140 @@ int n = (int)f;        内存（小端，4 字节）：
 </div>
 </div>
 <div id="outline-container-2" class="outline-2">
-<h2 id="org-title-2"><span class="section-number-2">2.</span> ELF相关</h2>
+<h2 id="org-title-2"><span class="section-number-2">2.</span> C语言语法相关</h2>
 <div class="outline-text-2" id="text-2">
 </div>
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 反编译</h3>
+<h3 id="org-title-2-1"><span class="section-number-3">2.1.</span> 操作顺序</h3>
 <div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>对于表达式 <code>(a,b,c)</code> ，a,b,c会顺次执行，最后返回c的值</li>
+<li>自增自减的 <code>a++</code> 与 <code>++a</code> 两种形式的区别在于将它们传参时是返回操作前或操作后的值</li>
+<li><p>对于表达式 <code>(a &amp;&amp; b)</code> ，b会在a非0时执行，最后返回bool值而非a或b的计算值（别python病犯了）</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 复杂类型定义与理解</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>对于复杂类型（函数指针、指针、数组复合结构），优先找括号，其次向右看，最后向左</p>
+<ul class="org-ul">
+<li>E.g. <code>char *ptr[10]</code> 是指针数组（先是长度为10的数组，再是内部元素类型为指针） (sizeof(ptr)=80, sizeof(*ptr)=8)</li>
+<li>E.g. <code>int (*ptr)[10]</code> 是数组指针（先是指针，再是其指向内容为长度10的int型数组） (sizeof(ptr)=8, sizeof(*ptr)=10)</li>
+<li>E.g. <code>int (*ptr[10])(char*,char*)</code> 是函数指针数组（基本等同于第一个例子只不过内部元素为函数指针）使用类似 <code>ptr[num](&quot;...&quot;, &quot;...&quot;);</code> 进行函数调用</li>
+</ul>
+<blockquote>
+<p>观察下来汉语里从左到右顺序对应的类型顺序大概是从里到外（从访问角度来看的里外），优先级从低到高</p>
+</blockquote>
+<p>问ai：带有参数且返回 (<code>函数指针</code> 数组)指针的 <code>函数指针</code> 该怎么定义？</p>
+<p>方法一：使用typedef逐步定义类型</p>
+<div class="org-src-container"><pre class="src src-c"><span class="c1">// 步骤1：定义基础函数指针类型（指向返回 int，接受两个 int 的函数）</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">FuncPtr</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span>
+
+<span class="c1">// 步骤2：定义指向“包含5个 FuncPtr 的数组”的指针类型</span>
+<span class="k">typedef</span><span class="w"> </span><span class="n">FuncPtr</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ArrayPtr</span><span class="p">)[</span><span class="mi">5</span><span class="p">];</span>
+
+<span class="c1">// 步骤3：定义指向函数的指针，该函数接受 (float, char)，返回 ArrayPtr</span>
+<span class="k">typedef</span><span class="w"> </span><span class="n">ArrayPtr</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">MyFuncPtr</span><span class="p">)(</span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span>
+
+<span class="c1">// 使用类型别名定义变量</span>
+<span class="n">MyFuncPtr</span><span class="w"> </span><span class="n">fp</span><span class="p">;</span>
+</pre></div>
+<p>方法二：直接声明（复杂，但展示语法规则）</p>
+<div class="org-src-container"><pre class="src src-c"><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">))[</span><span class="mi">5</span><span class="p">])(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="cm">/* 说明：</span>
+<span class="cm">int (*                        )(int, int); -&gt; 函数指针</span>
+<span class="cm">                           [5]  -&gt; 数组</span>
+<span class="cm">      (*                  )     -&gt; 指针(下面的函数指针的返回值)</span>
+<span class="cm">        (*  )(float, char)      -&gt; 函数指针(用fp(0.1,&#39;6&#39;)调用)</span>
+<span class="cm">          fp</span>
+<span class="cm">自下而上为从外到内 */</span>
+</pre></div>
+<p>测试样例：</p>
+<div class="org-src-container"><pre class="src src-c"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define p(x) { \</span>
+<span class="cp">	printf(&quot;%3d: %20s =&gt; %-3ld\n&quot;, __LINE__, &quot;sizeof(&quot;#x&quot;)&quot;, sizeof(x)); \</span>
+<span class="cp">	if(0) printf(&quot;%u&quot;, (x)); \</span>
+<span class="cp">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">	</span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">))[</span><span class="mi">3</span><span class="p">])(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">	</span><span class="n">p</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+<span class="w">	</span><span class="n">p</span><span class="p">(</span><span class="n">fp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">	</span><span class="n">p</span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">	</span><span class="n">p</span><span class="p">((</span><span class="o">*</span><span class="n">fp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">	</span><span class="n">p</span><span class="p">((</span><span class="o">*</span><span class="n">fp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))[</span><span class="mi">0</span><span class="p">](</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+<p>终端结果：</p>
+<div class="org-src-container"><pre class="src src-bash">&gt;<span class="w"> </span>gcc<span class="w"> </span>a.c
+a.c:17:2:<span class="w"> </span>warning:<span class="w"> </span>format<span class="w"> </span>specifies<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;unsigned int&#39;</span><span class="w"> </span>but
+<span class="w">      </span>the<span class="w"> </span>argument<span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int (*(*(*)(float, char))[3])(int, int)&#39;</span><span class="w"> </span><span class="o">[</span>-Wformat<span class="o">]</span>
+<span class="w">   </span><span class="m">17</span><span class="w"> </span><span class="p">|</span><span class="w">         </span>p<span class="o">(</span>fp<span class="o">)</span><span class="p">;</span>
+<span class="w">      </span><span class="p">|</span><span class="w">         </span>^~~~~
+a.c:11:21:<span class="w"> </span>note:<span class="w"> </span>expanded<span class="w"> </span>from<span class="w"> </span>macro<span class="w"> </span><span class="s1">&#39;p&#39;</span>
+<span class="w">   </span><span class="m">11</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="k">if</span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span>printf<span class="o">(</span><span class="s2">&quot;%u&quot;</span>,<span class="w"> </span><span class="o">(</span>x<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w">                       </span>~~<span class="w">   </span>^~~
+a.c:18:2:<span class="w"> </span>warning:<span class="w"> </span>format<span class="w"> </span>specifies<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;unsigned int&#39;</span><span class="w"> </span>but
+<span class="w">      </span>the<span class="w"> </span>argument<span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int (*(*)[3])(int, int)&#39;</span><span class="w"> </span><span class="o">[</span>-Wformat<span class="o">]</span>
+<span class="w">   </span><span class="m">18</span><span class="w"> </span><span class="p">|</span><span class="w">         </span>p<span class="o">(</span>fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))</span><span class="p">;</span>
+<span class="w">      </span><span class="p">|</span><span class="w">         </span>^~~~~~~~~~
+a.c:11:21:<span class="w"> </span>note:<span class="w"> </span>expanded<span class="w"> </span>from<span class="w"> </span>macro<span class="w"> </span><span class="s1">&#39;p&#39;</span>
+<span class="w">   </span><span class="m">11</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="k">if</span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span>printf<span class="o">(</span><span class="s2">&quot;%u&quot;</span>,<span class="w"> </span><span class="o">(</span>x<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w">                       </span>~~<span class="w">   </span>^~~
+a.c:19:2:<span class="w"> </span>warning:<span class="w"> </span>format<span class="w"> </span>specifies<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;unsigned int&#39;</span><span class="w"> </span>but
+<span class="w">      </span>the<span class="w"> </span>argument<span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int (**)(int, int)&#39;</span><span class="w"> </span><span class="o">[</span>-Wformat<span class="o">]</span>
+<span class="w">   </span><span class="m">19</span><span class="w"> </span><span class="p">|</span><span class="w">         </span>p<span class="o">(</span>*fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))</span><span class="p">;</span>
+<span class="w">      </span><span class="p">|</span><span class="w">         </span>^~~~~~~~~~~
+a.c:11:21:<span class="w"> </span>note:<span class="w"> </span>expanded<span class="w"> </span>from<span class="w"> </span>macro<span class="w"> </span><span class="s1">&#39;p&#39;</span>
+<span class="w">   </span><span class="m">11</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="k">if</span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span>printf<span class="o">(</span><span class="s2">&quot;%u&quot;</span>,<span class="w"> </span><span class="o">(</span>x<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w">                       </span>~~<span class="w">   </span>^~~
+a.c:20:2:<span class="w"> </span>warning:<span class="w"> </span>format<span class="w"> </span>specifies<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;unsigned int&#39;</span><span class="w"> </span>but
+<span class="w">      </span>the<span class="w"> </span>argument<span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="s1">&#39;int (*)(int, int)&#39;</span><span class="w"> </span><span class="o">[</span>-Wformat<span class="o">]</span>
+<span class="w">   </span><span class="m">20</span><span class="w"> </span><span class="p">|</span><span class="w">         </span>p<span class="o">((</span>*fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))[</span><span class="m">0</span><span class="o">])</span><span class="p">;</span>
+<span class="w">      </span><span class="p">|</span><span class="w">         </span>^~~~~~~~~~~~~~~~
+a.c:11:21:<span class="w"> </span>note:<span class="w"> </span>expanded<span class="w"> </span>from<span class="w"> </span>macro<span class="w"> </span><span class="s1">&#39;p&#39;</span>
+<span class="w">   </span><span class="m">11</span><span class="w"> </span><span class="p">|</span><span class="w">         </span><span class="k">if</span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span>printf<span class="o">(</span><span class="s2">&quot;%u&quot;</span>,<span class="w"> </span><span class="o">(</span>x<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w">                       </span>~~<span class="w">   </span>^~~
+<span class="m">4</span><span class="w"> </span>warnings<span class="w"> </span>generated.
+&gt;<span class="w"> </span>./a.out
+<span class="w"> </span><span class="m">17</span>:<span class="w">           </span>sizeof<span class="o">(</span>fp<span class="o">)</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="m">8</span>
+<span class="w"> </span><span class="m">18</span>:<span class="w">      </span>sizeof<span class="o">(</span>fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="m">8</span>
+<span class="w"> </span><span class="m">19</span>:<span class="w">     </span>sizeof<span class="o">(</span>*fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="m">24</span>
+<span class="w"> </span><span class="m">20</span>:<span class="w"> </span>sizeof<span class="o">((</span>*fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))[</span><span class="m">0</span><span class="o">])</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="m">8</span>
+<span class="w"> </span><span class="m">21</span>:<span class="w"> </span>sizeof<span class="o">((</span>*fp<span class="o">(</span><span class="m">0</span>,0<span class="o">))[</span><span class="m">0</span><span class="o">](</span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span><span class="o">))</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="m">4</span>
+</pre></div>
+</div>
+</div>
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="org-title-2-3"><span class="section-number-3">2.3.</span> 宏定义</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>特殊宏：</p>
+<ul class="org-ul">
+<li><code>__LINE__</code> 代码当前行数（应用参照上面的一个示例）</li>
+<li><code>__FILE__</code> 编译时的代码文件名</li>
+<li><code>__FUNCTION__</code> 编译时的代码所在的函数名</li>
+</ul>
+<p>特殊字符：</p>
+<ul class="org-ul">
+<li><p><code>#</code> 能将宏传入的参数转换成字面量字符串(用引号括起来并对内部的特殊字符转义)</p>
+<div class="org-src-container"><pre class="src src-nil">#define marco(x) printf(&quot;%s = %d\n&quot;, #x, (x))
+void main(){ int yee=2; marco(++yee); }
+</pre></div>
+<p>打印出来的结果应该是 <code>yee++ = 2</code></p></li>
+<li><p><code>##</code> 衔接符号（两不同符号合并在一起变成第三个符号）</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> ELF相关</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 反编译</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>对于ELF文件，可以使用objdump工具执行反编译操作（只能反编译为汇编）：</p>
 <div class="org-src-container"><pre class="src src-shell">$<span class="w"> </span>objdump<span class="w"> </span>-dS<span class="w"> </span>path_to_elf
 </pre></div>
@@ -263,9 +392,9 @@ int n = (int)f;        内存（小端，4 字节）：
 <p>若使用gdb，可以使用disassemble反编译指定的函数字段</p>
 </div>
 </div>
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="org-title-2-2"><span class="section-number-3">2.2.</span> 动态链接</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 动态链接</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>有待学习，这里暂时给出几个关键词用于搜索：</p>
 <ul class="org-ul">
 <li>dlopen() <i>(man3)</i></li>
@@ -274,9 +403,9 @@ int n = (int)f;        内存（小端，4 字节）：
 </div>
 </div>
 </div>
-<div id="outline-container-3" class="outline-2">
-<h2 id="org-title-3"><span class="section-number-2">3.</span> 第三方库相关</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 第三方库相关</h2>
+<div class="outline-text-2" id="text-4">
 <p>根据脚本爬出来的Archlinux热门（高被依赖）包，有这些库：</p>
 <ul class="org-ul">
 <li>glib2: c语言底层库(区别于glibc)，GNOME/GTK的底层依赖</li>
@@ -299,13 +428,26 @@ int n = (int)f;        内存（小端，4 字节）：
 </ul>
 </div>
 </div>
-<div id="outline-container-4" class="outline-2">
-<h2 id="org-title-4"><span class="section-number-2">4.</span> 参考</h2>
-<div class="outline-text-2" id="text-4">
-<p>推荐的一些内容博主：</p>
+<div id="outline-container-5" class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 参考</h2>
+<div class="outline-text-2" id="text-5">
+<p>推荐的一些内容博主（B站上的都是搬运视频）：</p>
 <ul class="org-ul">
-<li><a href="http://github.com/tsoding/">Tsoding</a>: Emacs用户，油管上发直播回放视频，会提到一些有意思的编程知识，B站有人搬运他的视频</li>
-<li><a href="http://bilibili.com/video/BV1m55Az6EPF">Core Dumped</a>: 使用动画介绍计算机底层逻辑（对于学习c语言这种贴近硬件的语言有帮助）</li>
+<li><code>Tsoding</code> Emacs用户，油管上发直播回放视频，会提到一些有意思的编程知识，B站有人搬运他的视频
+<ul class="org-ul">
+<li><a href="http://github.com/tsoding/">(Github)个人主页</a>,</li>
+<li><a href="http://bilibili.com/video/BV16kAjzzEck">(B站)c语言手搓StringView(合集内)</a></li>
+</ul></li>
+<li><code>Core Dumped</code> 使用动画介绍计算机底层逻辑（对于学习c语言这种贴近硬件的语言有帮助）
+<ul class="org-ul">
+<li><a href="http://bilibili.com/video/BV1m55Az6EPF">(B站)生肉合集</a>,</li>
+<li><a href="http://bilibili.com/video/BV1aXbXzfEsM">(B站)(cc字幕)一个项目，多种语言(合集内)</a></li>
+</ul></li>
+<li><code>Nir Lichtman</code> Linux相关知识偏多，但也接近底层（如程序是如何被linux内核启动的）
+<ul class="org-ul">
+<li><a href="http://bilibili.com/video/BV1gtfbYWEui">(B站)(熟肉)制作最小Linux发行版</a>,</li>
+<li><a href="http://bilibili.com/video/BV1pVrwB2EkF">(B站)(熟肉)制作能放音乐的Linux发行版</a></li>
+</ul></li>
 </ul>
 </div>
 </div></div>
@@ -313,7 +455,7 @@ int n = (int)f;        内存（小端，4 字节）：
 <p class="date">时间: <2026-04-04 六 10:56></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 杂杂的c语言内容笔记(侧重底层)</p>
-<p class="date">生成于: 2026-04-04 六 19:15:30</p>
+<p class="date">生成于: 2026-04-06 一 02:24:58</p>
 </div>
 </body>
 </html>
