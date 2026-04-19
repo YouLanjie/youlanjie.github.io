@@ -20,4 +20,5 @@ Github资源文件前缀：
 - =http://raw.githubusercontent.com/youlanjie/youlanjie.github.io/refs/heads/main/=
 
 神秘文件：
+- [[./../../lib/python/auto_run.py]]
 - [[./actionslist.txt]]
