@@ -1,0 +1,23 @@
+#+TITLE: 待办清单（速查链接列表）
+#+DESCRIPTION: 存点有用的链接
+#+DATE: <2026-04-19 日 14:43>
+#+SETUPFILE: ../../setup.setup
+
+* 链接列表
+- [[https://github.com/imengyu/JiYuTrainer/releases/download/1.7.6/JiYuTrainer.exe][反极域程序(EXE)]]
+- [[https://chrome.zzzmh.cn/info/dhdgffkkebhmkfjojejmpbldmpobfkfo][油猴插件crx下载页面（非直接下载地址）]]
+- [[https://github.com/vruses/beefreely][b站免登录看评论(Github页面)]]
+- [[https://github.com/vruses/beefreely/releases/latest/download/beefreely.min.user.js][b站免登录看评论js脚本（直接链接）]]
+
+较为次要的：
+- [[https://github.com/gorhill/uBlock/releases][uBlock的github release页面]]
+- [[https://github.com/gorhill/uBlock/releases/download/1.70.1b4/uBlock0_1.70.1b4.chromium.zip][uBlock插件（不一定能装上）]]
+- [[https://sourceforge.net/projects/nircmd/][nircmd (sourceforge)]]
+- [[https://github.com/mpv-player/mpv/releases/download/v0.41.0/mpv-v0.41.0-x86_64-pc-windows-msvc.zip][mpv (github release文件)]]
+
+Github资源文件前缀：
+- =http://raw.githubusercontent.com/youlanjie/my-test/refs/heads/main/=
+- =http://raw.githubusercontent.com/youlanjie/youlanjie.github.io/refs/heads/main/=
+
+神秘文件：
+- [[./actionslist.txt]]
