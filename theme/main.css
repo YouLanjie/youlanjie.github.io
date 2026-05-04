@@ -542,6 +542,7 @@
 	pre.src:hover:before { display: inline;}
 	/* Languages per Org manual */
 	pre.src-text:before { content: 'Text'; }
+	pre.src-mono-text:before { content: '等宽字符画'; }
 	pre.src-asymptote:before { content: 'Asymptote'; }
 	pre.src-awk:before { content: 'Awk'; }
 	pre.src-authinfo::before { content: 'Authinfo'; }

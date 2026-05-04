@@ -29,10 +29,10 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
-<ul><li><a href="#org-title-1">1. 内存与数据存储相关</a><ul><li><a href="#org-title-1-1">1.1. 各类型的大小</a></li><li><a href="#org-title-1-2">1.2. 内存模型</a></li><li><a href="#org-title-1-3">1.3. 文本编码</a></li></ul></li>
+<ul><li><a href="#org-title-1">1. 内存与数据存储相关</a><ul><li><a href="#org-title-1-1">1.1. 各类型的大小</a></li><li><a href="#org-title-1-2">1.2. 内存模型</a></li><li><a href="#org-title-1-3">1.3. 类型转换</a></li><li><a href="#org-title-1-4">1.4. 文本编码</a></li></ul></li>
 <li><a href="#org-title-2">2. C语言语法相关</a><ul><li><a href="#org-title-2-1">2.1. 操作顺序</a></li><li><a href="#org-title-2-2">2.2. 复杂类型定义与理解</a></li><li><a href="#org-title-2-3">2.3. 宏定义</a></li></ul></li>
 <li><a href="#org-title-3">3. ELF相关</a><ul><li><a href="#org-title-3-1">3.1. 反编译</a></li><li><a href="#org-title-3-2">3.2. 动态链接</a></li></ul></li>
-<li><a href="#org-title-4">4. 第三方库相关</a></li><li><a href="#org-title-5">5. 参考</a></li></ul></div></div>
+<li><a href="#org-title-4">4. 系统调用相关</a></li><li><a href="#org-title-5">5. 第三方库相关</a></li><li><a href="#org-title-6">6. 参考</a></li></ul></div></div>
 <div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 内存与数据存储相关</h2>
 <div class="outline-text-2" id="text-1">
@@ -48,7 +48,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <div id="outline-container-1-1" class="outline-3">
 <h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 各类型的大小</h3>
 <div class="outline-text-3" id="text-1-1">
-<p>根据不同平台具体大小可能会有差异，可以下载编译<a href="./../../../lib/src_c/sizeof.c">这个程序</a>查看结果，参考如下：</p>
+<p>根据不同平台具体大小可能会有差异，可以下载编译<a href="./../../../lib/c/src/tests/sizeof.c">这个程序</a>查看结果，参考如下：</p>
 <div class="org-src-container"><pre class="src src-text">|    sizeof(TYPE) | SIZE(bytes) |
 |-----------------|-------------|
 |            char | 1           |
@@ -80,9 +80,15 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 </pre></div>
 <p>其中int8_t等类型应当是长度固定/明确的，其中的数字为类型的大小（以比特位单位）</p>
 <blockquote>
-<p>注：多数情况下sizeof是一个编译时展开的运算符（类似于宏）而它对数组和指针的处理不同：对于数组int32_t arr[10]，sizeof(arr)的结果是40（即整个数组占用的空间），而对于指针int32_t *ptr=arr，sizeof(ptr)的结果是8（指针本身占用的大小）。但若是变长数组int arr[size]则会在运行时进行求值。</p>
+<p>注：多数情况下sizeof是一个编译时展开的运算符（类似于宏）而它对数组和指针的处理不同：</p>
+<ul class="org-ul">
+<li>对于数组int32_t arr[10]，sizeof(arr)的结果是40（即整个数组占用的空间），而</li>
+<li>对于指针int32_t *ptr=arr，sizeof(ptr)的结果是8（指针本身占用的大小）。</li>
+</ul>
+<p>但若是变长数组int arr[size]则会在运行时进行求值（展开为计算sizeof(arr[0])*size）。</p>
 </blockquote>
 <p>对于各变量大小，其能存储的最大数据量为2的n次方（n为数据的比特数，即字节数的8倍）。具体地说，1字节最多存储2^(1*8)=256个不同的数据（两个十六进制数），即从0x00到0xFF</p>
+<p>特别的，结构体内部处于性能原因会出现填充（在变量间插入未使用的空间更改地址位置提高执行效率）现象，导致结构体总大小比各成员的大小总和大</p>
 </div>
 </div>
 <div id="outline-container-1-2" class="outline-3">
@@ -90,10 +96,9 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <div class="outline-text-3" id="text-1-2">
 <blockquote>
 <p>由于这段内容比较枯燥故借助ai生成内容讲解</p>
-<p>双击字符画切换字体以对齐</p>
 </blockquote>
 <p>内存整体布局：</p>
-<div class="org-src-container"><pre class="src src-text">+----------------------------------+  高地址
+<div class="org-src-container"><pre class="src src-mono-text">+----------------------------------+  高地址
 |           栈 (Stack)             |
 |   向下增长 (地址递减)            |
 |  (函数调用、局部变量、返回地址)  |
@@ -114,65 +119,79 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 |   只读，存放机器指令             |
 +----------------------------------+  低地址
 </pre></div>
-<p>对于大小端模式，对于 <code>(int)0x12345678</code> ，其数据存储分别如下：</p>
+<p>对于大小端模式，对于 <code>(int)0x87654321</code> ，其数据存储分别如下：</p>
 <ul class="org-ul">
 <li><p>大端模式（人类易读）：</p>
-<div class="org-src-container"><pre class="src src-text">   0x100     0x101     0x102     0x103    地址
+<div class="org-src-container"><pre class="src src-mono-text">  0x100    0x101    0x102    0x103        地址
 +--------+--------+--------+--------+
-|  0x12  |  0x34  |  0x56  |  0x78  |     数据
+|  0x87  |  0x65  |  0x43  |  0x21  |     数据
 +--------+--------+--------+--------+
-   ↑高字节                        ↑低字节
-（低地址）                      （高地址）
+  ↑高字节                    ↑低字节
+（低地址）                  （高地址）
 </pre></div></li>
 <li><p>小端模式（x86,ARM等）（机器易读写）：</p>
-<div class="org-src-container"><pre class="src src-text"> 0x100     0x101     0x102     0x103     地址
+<div class="org-src-container"><pre class="src src-mono-text">  0x100    0x101    0x102    0x103       地址
 +--------+--------+--------+--------+
-|  0x78  |  0x56  |  0x34  |  0x12  |    数据
+|  0x21  |  0x43  |  0x65  |  0x87  |    数据
 +--------+--------+--------+--------+
-   ↑低字节                        ↑高字节
-（低地址）                      （高地址）
+  ↑低字节                    ↑高字节
+（低地址）                  （高地址）
 </pre></div></li>
-<li><p>区别：一多字节变量类型内部的数据排布方向与地址变化方向是否相同<br/>类别：机器看字是顺着地址123456一路看下去的，将较小的数（较常出现）写在低地址提高读写速度</p></li>
+<li><p>区别：一多字节变量类型内部的数据排布方向与地址变化方向是否相同<br/>大小端各有优点，对于小端来说强制类型转换时不需要调整内存数据位置（例如u32(0x87654321)转u16(0x4321)直接把高地址砍掉即可）</p></li>
 </ul>
-<p>对于类型转换，</p>
+</div>
+</div>
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="org-title-1-3"><span class="section-number-3">1.3.</span> 类型转换</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>符号拓展：</p>
-<div class="org-src-container"><pre class="src src-nil">char c = -1;      内存（小端，1 字节）：
+<div class="org-src-container"><pre class="src src-mono-text">int8_t c = -1;    内存（小端，1 字节）：
                 +--------+
                 |  0xFF  |
                 +--------+
-
                       ↓ 符号扩展（高位填充符号位）
-
-int i = c;        内存（小端，4 字节）：
+int32_t i = c;    内存（小端，4 字节）：
                 +--------+--------+--------+--------+
                 |  0xFF  |  0xFF  |  0xFF  |  0xFF  |
                 +--------+--------+--------+--------+
                  低地址                          高地址
-
 二进制解释：11111111 11111111 11111111 11111111 → 补码 -1
-</pre></div>
-<blockquote>
-<p>若c为unsigned char，则i会变为255(0x000000FF)</p>
-</blockquote>
-<p>截断：</p>
-<div class="org-src-container"><pre class="src src-nil">int x = 0x12345678;    内存（小端，4 字节）：
-                      +--------+--------+--------+--------+
-                      |  0x78  |  0x56  |  0x34  |  0x12  |
-                      +--------+--------+--------+--------+
-                       低地址                          高地址
+// 无论i是int32_t还是uint32_t,扩充时都会补符号位
+// 即(int32_t)(-1) == UINT32_MAX
+// (存在隐式类型转换，均转为uint32_t再比较)
 
-                            ↓ 截断：只保留低 2 字节（0x5678）
+
+若c为uint8_t或char，则i会变为255(0x000000FF):
+uint8_t c = -1;   内存（小端，1 字节）：
+                +--------+
+                |  0xFF  |
+                +--------+
+                      ↓ 无符号扩展（高位填充符0）
+int32_t i = c;    内存（小端，4 字节）：
+                +--------+--------+--------+--------+
+                |  0xFF  |  0x00  |  0x00  |  0x00  |
+                +--------+--------+--------+--------+
+                 低地址                          高地址
+</pre></div>
+<p>截断：</p>
+<div class="org-src-container"><pre class="src src-mono-text">int x = 0x87654321;    内存（小端，4 字节）：
+                      +--------+--------+--------+--------+
+                      |  0x21  |  0x43  |  0x65  |  0x87  |
+                      +--------+--------+--------+--------+
+                       低地址                      高地址
+
+                        ↓ 截断：只保留低 2 字节（0x4321）
 
 short y = (short)x;    内存（小端，2 字节）：
                       +--------+--------+
-                      |  0x78  |  0x56  |
+                      |  0x21  |  0x43  |
                       +--------+--------+
                        低地址  高地址
 
 值 = 0x5678（十进制 22136），若 short 为有符号则为正数。
 </pre></div>
 <p>有无符号转变：</p>
-<div class="org-src-container"><pre class="src src-nil">int s = -1;           内存（小端，4 字节）：
+<div class="org-src-container"><pre class="src src-mono-text">int s = -1;           内存（小端，4 字节）：
                      +--------+--------+--------+--------+
                      |  0xFF  |  0xFF  |  0xFF  |  0xFF  |
                      +--------+--------+--------+--------+
@@ -197,7 +216,7 @@ unsigned int u = (unsigned int)s;
 </ul>
 </blockquote>
 <p>整数转小数（需要额外运算）（为方便观看这里高低地址示意方向反过来了）：</p>
-<div class="org-src-container"><pre class="src src-nil">int n = 123;          内存（小端，4 字节）：
+<div class="org-src-container"><pre class="src src-mono-text">int n = 123;          内存（小端，4 字节）：
                      +--------+--------+--------+--------+
                      |  0x00  |  0x00  |  0x00  |  0x7B  |
                      +--------+--------+--------+--------+
@@ -212,11 +231,12 @@ float f = (float)n;   内存（小端，4 字节）：
                      +--------+--------+--------+--------+
                       高地址                          低地址
 二进制（IEEE 754）：01000010 11110110 00000000 00000000
-                    ↑符号(0) ↑指数(133-127=6)  ↑尾数(1.921875)
+                    ↑符号(0)      ↑指数(133-127=6)  ↑尾数(1.921875)
 实际值 = 1.921875 × 2^6 = 123.0
+// 对于符号、指数、尾数的标识可能存在问题
 </pre></div>
 <p>小数转整数：</p>
-<div class="org-src-container"><pre class="src src-nil">float f = 123.456f;    内存（小端，4 字节）：
+<div class="org-src-container"><pre class="src src-mono-text">float f = 123.456f;    内存（小端，4 字节）：
                       +--------+--------+--------+--------+
                       |  0x42  |  0xF6  |  0x7A  |  0xE9  |
                       +--------+--------+--------+--------+
@@ -232,11 +252,18 @@ int n = (int)f;        内存（小端，4 字节）：
 
 值 = 123（小数部分丢失）
 </pre></div>
+<blockquote>
+<p>如果想小数整数仅重新解释（不改变内存编码值）：</p>
+<ol class="org-ol">
+<li>使用指针强行访问</li>
+<li>使用union联合体重新解读</li>
+</ol>
+</blockquote>
 </div>
 </div>
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="org-title-1-3"><span class="section-number-3">1.3.</span> 文本编码</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="org-title-1-4"><span class="section-number-3">1.4.</span> 文本编码</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>常用编码：</p>
 <ul class="org-ul">
 <li>ASCII: 数字、英文字母、英文标点等的编码，每个字符占1字节（8比特）</li>
@@ -244,6 +271,7 @@ int n = (int)f;        内存（小端，4 字节）：
 <li><p>UTF-8: 使用较为广泛的编码，兼容ASCII，与GBK等冲突，汉字一般使用三字节表示</p></li>
 </ul>
 <p>个人经验而言，国内Windows电脑使用gbk编码较多，其他设备多是使用utf8编码。utf8能编码的字符比gbk多</p>
+<p>相关库：iconv(编码转换)</p>
 </div>
 </div>
 </div>
@@ -404,8 +432,22 @@ void main(){ int yee=2; marco(++yee); }
 </div>
 </div>
 <div id="outline-container-4" class="outline-2">
-<h2 id="org-title-4"><span class="section-number-2">4.</span> 第三方库相关</h2>
+<h2 id="org-title-4"><span class="section-number-2">4.</span> 系统调用相关</h2>
 <div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li><p>执行程序（直接替换进程）</p>
+<ul class="org-ul">
+<li>execv: 继承环境变量</li>
+<li>execve: 需要指定环境变量字符串数组</li>
+<li>execvp: 自动搜索PATH</li>
+</ul>
+<p>一般而言，execv的argv[0]需要指定为程序名（路径名），可作为多调用程序使用（ln -s a.out ls，执行./ls时程序获取的argv[0]名称为ls，作为busybox这类工具集执行不同程序的判断基础）所以可以出现 <code>execvp(&quot;ls&quot;, (char*[]){&quot;cat&quot;, __FILE__, NULL})</code> 执行的是cat而非ls的问题</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-5" class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 第三方库相关</h2>
+<div class="outline-text-2" id="text-5">
 <p>根据脚本爬出来的Archlinux热门（高被依赖）包，有这些库：</p>
 <ul class="org-ul">
 <li>glib2: c语言底层库(区别于glibc)，GNOME/GTK的底层依赖</li>
@@ -428,9 +470,9 @@ void main(){ int yee=2; marco(++yee); }
 </ul>
 </div>
 </div>
-<div id="outline-container-5" class="outline-2">
-<h2 id="org-title-5"><span class="section-number-2">5.</span> 参考</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-6" class="outline-2">
+<h2 id="org-title-6"><span class="section-number-2">6.</span> 参考</h2>
+<div class="outline-text-2" id="text-6">
 <p>推荐的一些内容博主（B站上的都是搬运视频）：</p>
 <ul class="org-ul">
 <li><code>Tsoding</code> Emacs用户，油管上发直播回放视频，会提到一些有意思的编程知识，B站有人搬运他的视频
@@ -447,6 +489,7 @@ void main(){ int yee=2; marco(++yee); }
 <ul class="org-ul">
 <li><a href="http://bilibili.com/video/BV1gtfbYWEui">(B站)(熟肉)制作最小Linux发行版</a>,</li>
 <li><a href="http://bilibili.com/video/BV1pVrwB2EkF">(B站)(熟肉)制作能放音乐的Linux发行版</a></li>
+<li><a href="http://www.bilibili.com/video/BV1b6rGYbExP">(B站)(熟肉)Linux 内核如何运行可执行文件？|  execve 系统调用处理流程实例追踪  GDB细节信息查看</a></li>
 </ul></li>
 </ul>
 </div>
@@ -455,7 +498,7 @@ void main(){ int yee=2; marco(++yee); }
 <p class="date">时间: <2026-04-04 六 10:56></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 杂杂的c语言内容笔记(侧重底层)</p>
-<p class="date">生成于: 2026-04-06 一 02:24:58</p>
+<p class="date">生成于: 2026-05-01 五 11:38:07</p>
 </div>
 </body>
 </html>

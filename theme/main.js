@@ -49,18 +49,30 @@
 	}
 })();
 // 为pre增加双击切换严格等宽字体功能
+function togglePreFont(node) {
+	if (node.classList.contains('monofont')) {
+		node.classList.remove("monofont")
+	} else {
+		node.classList.add("monofont")
+	}
+}
 (function() {
+	addEventListener("load", function() {
+		let pres = document.getElementsByClassName("src-mono-text")
+		if ( pres.length == 0 ) {
+			return;
+		}
+		for (let i = 0; i < pres.length; i++) {
+			togglePreFont(pres[i])
+		}
+	});
 	let pres = document.getElementsByClassName("src")
 	if ( pres.length == 0 ) {
 		return;
 	}
 	for (let i = 0; i < pres.length; i++) {
 		pres[i].addEventListener("dblclick", function(event) {
-			if (event.currentTarget.classList.contains('monofont')) {
-				event.currentTarget.classList.remove("monofont")
-			} else {
-				event.currentTarget.classList.add("monofont")
-			}
+			togglePreFont(event.currentTarget)
 		})
 	}
 })();
@@ -100,9 +112,9 @@
 	document.getElementsByTagName("head")[0].appendChild(link)
 	document.getElementsByTagName("head")[0].appendChild(script)
 
-	window.onload = function() {
+	addEventListener("load", function() {
 		Fancybox.bind('[data-fancybox]', {})
-	}
+	});
 
 	let imgs = document.getElementsByTagName("img")
 	if ( imgs.length == 0 ) {
