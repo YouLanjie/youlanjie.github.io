@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="author" content="不要在意我的头像QwQ" />
-<meta name="description" content="Have a try" />
+<meta name="description" content="不是教程，确信" />
 <meta name="generator" content="Org Mode (third party program by python)" />
 <title>Bash语法笔记</title>
 <script type="text/javascript" src="/theme/main.js" defer></script>
@@ -29,31 +29,160 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
-<ul><li><a href="#org-title-1">1. 基础语法</a><ul><li><a href="#org-title-1-1">1.1. 符号</a></li></ul></li></ul></div></div>
+<ul><li><a href="#org-title-1">1. 变量</a></li><li><a href="#org-title-2">2. 语句嵌套</a></li><li><a href="#org-title-3">3. 条件表达式</a><ul><li><a href="#org-title-3-1">3.1. 语法</a></li><li><a href="#org-title-3-2">3.2. 条件</a></li></ul></li></ul></div></div>
 <div id="outline-container-1" class="outline-2">
-<h2 id="org-title-1"><span class="section-number-2">1.</span> 基础语法</h2>
-<div class="outline-text-2" id="text-1"><div class="org-src-container"><pre class="src src-bash"><span class="ch">#!/usr/bash</span>
-<span class="c1"># 字符&#39;#&#39;后面的部分是注释</span>
-<span class="c1"># 第一行是linux的特性(shebang),指定执行的程序</span>
-<span class="c1"># 命令格式：</span>
-<span class="c1"># &gt; 命令名(路径或位于$PATH) 参数(空格分开)</span>
-<span class="c1"># e.g.</span>
-ls<span class="w"> </span>-1
-</pre></div></div><div id="outline-container-1-1" class="outline-3">
-<h3 id="org-title-1-1"><span class="section-number-3">1.1.</span> 符号</h3>
-<div class="outline-text-3" id="text-1-1"><ul class="org-ul">
-<li><code>|</code> 表示管道
-</li></ul>
-<div class="org-src-container"><pre class="src src-bash"><span class="nv">a</span><span class="o">=</span><span class="m">1</span>
-<span class="nb">echo</span><span class="w"> </span><span class="nv">$a</span>
-<span class="nv">a</span><span class="o">=</span><span class="k">$((</span><span class="nv">a</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
-<span class="nb">echo</span><span class="w"> </span><span class="nv">$a</span>
-</pre></div></div></div></div></div>
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 变量</h2>
+<div class="outline-text-2" id="text-1">
+<p>bash的变量是弱类型的还请注意</p>
+<ul class="org-ul">
+<li>定义： <code>name=&quot;var&quot;</code></li>
+<li><p>类型：字符串(一切的基础)、整数(从字符串转换来)、数组</p>
+<div class="org-src-container"><pre class="src src-bash"><span class="nv">string</span><span class="o">=</span><span class="s2">&quot;这是字符串&quot;</span>
+<span class="nv">arrary</span><span class="o">=(</span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">5</span><span class="o">)</span><span class="w">  </span><span class="c1"># 数组,内部可为字符串或数字</span>
+</pre></div></li>
+<li><p>引用： <code>$name</code> 或者 <code>${name}</code></p>
+<div class="org-src-container"><pre class="src src-nil">echo $string
+echo ${string}
+echo &quot;${string}&quot;  # 引号能够保留变量内的&#39;\n&#39;换行符，否则可能内容都会挤成一行
+</pre></div>
+<p>下面是其他特殊引用</p>
+<ul class="org-ul">
+<li>数组全部内容（空格拼接）： <code>${name[@]}</code> ，将 <code>@</code> 换成数字就是下标</li>
+<li>变量长度： <code>${#name}</code> ，返回字符串长度，获取数组长度需要使用 <code>${#name[@]}</code></li>
+<li><p>匹配裁切： 其中 <code>pat</code> 支持通配符</p>
+<ul class="org-ul">
+<li><code>${name#pat}</code> 移除以pat开头的部分（最小匹配），将 <code>#</code> 换成 <code>##</code> 可变成贪婪匹配</li>
+<li><code>${name%pat}</code> 移除以pat结束的部分（最小匹配），将 <code>%</code> 换成 <code>%%</code> 可变成贪婪匹配</li>
+</ul>
+<p>若对数组进行这种操作(<code>${name[@]...}</code>)就会对每个元素都作处理</p></li>
+<li>匹配替换：
+<ul class="org-ul">
+<li><code>${name/pat/rep}</code> 将第一个pat替换为rep</li>
+<li><code>${name//pat/rep}</code> 将所有pat替换为rep(不与下面#或%兼容)</li>
+<li><code>${name/#pat/rep}</code> 仅匹配以pat开头的</li>
+<li><code>${name/%pat/rep}</code> 仅匹配以pat结尾的</li>
+</ul></li>
+<li>中间变量： <code>${!name}</code> 会返回以 <code>$name</code> 的值为名的变量的值</li>
+<li>数组索引或键名： <code>${!name[@]}</code></li>
+<li>大小写转换：
+<ul class="org-ul">
+<li><code>${name^}</code> 首字母转大写， <code>${name^^}</code> 全部转大写</li>
+<li><code>${name,}</code> 首字母转小写， <code>${name,,}</code> 全部转小写</li>
+</ul></li>
+<li>字符串切片： <code>${name:start:end}</code> ，其中start和end都是数字，start或end可以留空。<br/>不是对数组的操作，使用 <code>${name[@]:1:2}</code> 只会对拼接结束后的字符串进行切片操作</li>
+<li>变量默认值：
+<ul class="org-ul">
+<li><code>${var:-word}</code> 在var不存在或为空时返回word</li>
+<li>使用 <code>${var:=word}</code> 能在var为空时自动为var赋值word</li>
+<li><code>${var:+word}</code> 在var不存在或为空时返回空否则返回word(走与 <code>-</code> 相反的逻辑)</li>
+<li><code>${var:?word}</code> 在var不存在或为空时打印word并退出(原语句不执行)</li>
+<li><code>${var-word}</code> 类似 <code>:-</code> 但仅在var未设置时返回word，其他同理以此类推</li>
+</ul></li>
+<li>转义字符串： <code>$&#x27;&#x27;</code> 能以c语言风格转义存储字符串</li>
+</ul></li>
+<li>特殊变量：
+<ul class="org-ul">
+<li>位置参数： <code>$0</code><code>$1</code><code>$2</code> ...</li>
+<li>所有参数： <code>$*</code><code>$@</code></li>
+<li>参数数量： <code>$#</code></li>
+<li>上条命令的退出状态： <code>$?</code></li>
+<li>当前进程PID： <code>$$</code></li>
+<li>最后的后台进程PID： <code>$!</code></li>
+</ul></li>
+<li>操作
+<ul class="org-ul">
+<li><p>数字相加：使用 <code>$((a+b))</code> ，其中变量前可不加 <code>$</code></p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 语句嵌套</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>获得stdout内容：使用 <code>`...`</code> 或者 <code>$(...)</code> 获得命令的终端输出结果</li>
+<li><code>()</code> 将命令放在子shell执行（cd等不影响主shell）</li>
+<li><p>进程替换：将被包裹的命令的stdin或stdout包装成文件(非POSIX标准功能)</p>
+<ul class="org-ul">
+<li><code>xxx &gt; &gt;(yyy)</code> 将xxx的结果作为yyy的stdin</li>
+<li><code>xxx &lt; &lt;(yyy)</code> 将yyy的结果作为xxx的stdin</li>
+<li><code>cat &lt;(xyz)</code> 将xyz的输出作为文件让cat打开查看</li>
+</ul>
+<p>实际上使用 <code>echo &lt;(ls)</code> 可以发现传入的文件名是 <code>/proc/../fd/..</code></p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 条件表达式</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="org-title-3-1"><span class="section-number-3">3.1.</span> 语法</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>判断：在 <code>[ ... ]</code> 或 <code>[[ ... ]]</code> 内使用 <code>var1 =</code> var= ，例如</p>
+<div class="org-src-container"><pre class="src src-bash"><span class="c1"># 判断方法1 直接查看命令返回状态</span>
+<span class="o">[[</span><span class="w"> </span><span class="nv">114</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">114</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$?</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># 结果为0即为true, 1为false</span>
+<span class="c1"># 判断方法2 使用 &amp;&amp; 和 || 逻辑操作符</span>
+<span class="o">[[</span><span class="w"> </span><span class="m">514</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">514</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;false&quot;</span>
+<span class="c1"># 判断方法3 使用 if语句</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">114</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1145</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;true&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;fi&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+<p>以下为实际终端输出：</p>
+<div class="org-src-container"><pre class="src src-mono-text">~ $ if [ &quot;114&quot; == 514 ];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+false
+~ $ if [ &quot;114&quot; != 514 ];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+true
+~ $ if [[ &quot;114&quot; == 514 ]];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+false
+~ $ if [[ &quot;114&quot; != 514 ]];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+true
+~ $ if [ &quot;114&quot; &gt; 514 ];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+true
+~ $ if [ 114 &gt; 514 ];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+true
+~ $ if [[ &quot;114&quot; &gt; 514 ]];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+false
+~ $ if [[ &quot;114&quot; &lt; 514 ]];then echo &quot;true&quot;;else echo &quot;false&quot;;fi
+true
+~ $
+</pre></div>
+<div class="org-src-container"><pre class="src src-mono-text"># 特别指出，对于：
+# `[[ a == b ]]` 或 `[ a == b ]`
+#    ^ ^  ^ ^         ^ ^  ^ ^
+# 使用`^`标记出的空格均不能移除，否则可能会导致问题
+# 不是很推荐使用 `[]` 支持的表达式比较少，
+# 另外也是因为 `[  ]` 是命令而非关键字
+</pre></div>
+</div>
+</div>
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 条件</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>在 <code>[ ... ]</code> 或 <code>[[ ... ]]</code> 内，应使用以下运算符替代 <code>&gt;</code><code>&lt;</code> 等字符串比较运算符</p>
+<ul class="org-ul">
+<li><code>-eq</code> 等于</li>
+<li><code>-ne</code> 不等于</li>
+<li><code>-lt</code> 小于， <code>-le</code> 小等于</li>
+<li><code>-gt</code> 大于， <code>-ge</code> 大等于</li>
+</ul>
+<p>其他操作条件：</p>
+<ul class="org-ul">
+<li><code>-f</code> 文件是否存在</li>
+<li><code>-d</code> 是否是文件夹</li>
+<li><code>=~</code> 正则匹配</li>
+</ul>
+</div>
+</div>
+</div></div>
 <div id="postamble" class="status">
 <p class="date">时间: <2026-01-24 六 16:07></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
-<p class="description">描述: Have a try</p>
-<p class="date">生成于: 2026-02-07 六 20:42:12</p>
+<p class="description">描述: 不是教程，确信</p>
+<p class="date">生成于: 2026-05-23 六 21:10:50</p>
 </div>
 </body>
 </html>
