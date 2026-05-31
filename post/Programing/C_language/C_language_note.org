@@ -347,6 +347,26 @@ a.c:11:21: note: expanded from macro 'p'
  20: sizeof((*fp(0,0))[0]) => 8
  21: sizeof((*fp(0,0))[0](0, 0)) => 4
 #+end_src
+
+** 常量的定义与使用
+
+#+begin_src c
+/* 二者等价 */
+const int value1 = 1;
+int const value2 = 1;
+
+/* 针对指针 */
+const void *ptr1;    /* 指针所指向内容不可变，指针可以指向别处 */
+void const *ptr2;    /* 与ptr1等价 */
+void *const ptr3;    /* 指针本身是常量不可指向别处，但指向的内容可变 */
+const void *const ptr4;    /* 双管齐下 */
+
+/* 对于指针指针 */
+const void **ptr5;    /* (*ptr5)是const void*类型 */
+void *const *ptr6;    /* (*ptr6)是void* const类型 */
+/* 其余以此类推，总之从右向左看就对了 */
+#+end_src
+
 ** 宏定义
 特殊宏：
 - =__LINE__= 代码当前行数（应用参照上面的一个示例）
