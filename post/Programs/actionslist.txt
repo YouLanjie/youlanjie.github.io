@@ -1,5 +1,4 @@
-2026-06-01 18:30:00::start http://www.bilibili.com/video/BV1K3Gz6pEoo
-2026-06-02 18:30:00::start http://www.bilibili.com/video/BV17ZzKBLEmy
-2026-06-03 18:30:00::start http://www.bilibili.com/video/BV1RE4m1R7Pm
-2026-06-04 18:30:00::start http://www.bilibili.com/video/BV13d9eBHEJM
-2026-06-05 18:30:00::start http://www.bilibili.com/video/BV1XxSPBRErv
+2026-06-10 18:30:00::start http://www.bilibili.com/video/BV1nVEM63E2n
+2026-06-11 13:30:00::start https://www.bilibili.com/opus/1211508238682423318
+2026-06-11 18:30:00::start http://www.bilibili.com/video/BV13d9eBHEJM
+2026-06-12 18:30:00::start http://www.bilibili.com/video/BV1VrVSz1Eme
