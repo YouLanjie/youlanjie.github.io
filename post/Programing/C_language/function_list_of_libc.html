@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="不要在意我的头像QwQ" />
+<meta name="description" content="自己搓排序？人家有qsort。想找首末字符串？人家也有strchr。libc是宝藏，只是不知道，不会用罢了" />
+<meta name="generator" content="Org Mode (third party program by python)" />
+<title>C语言标准库函数列表</title>
+<script type="text/javascript" src="/theme/main.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/theme/main.css"/>
+<link rel="shortcut icon" href="/img/icon.jpg"/>
+<script>
+window.MathJax = { tex: { ams: { multlineWidth: '85%' }, tags: 'ams', tagSide: 'right', tagIndent: '.8em' },
+chtml: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+svg: { scale: 1.0, displayAlign: 'center', displayIndent: '0em' },
+output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
+</script>
+<script id="MathJax-script" async src="/theme/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="#"> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div>
+<div id="content" class="content">
+<h1 class="title">C语言标准库函数列表</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul><li><a href="#org-title-1">1. 文件操作</a></li><li><a href="#org-title-2">2. 字符串操作</a></li><li><a href="#org-title-3">3. 算法</a></li><li><a href="#org-title-4">4. math.h</a></li><li><a href="#org-title-5">5. 时间日期</a></li><li><a href="#org-title-6">6. 其他ISO标准必备</a></li></ul></div></div>
+<blockquote>
+<p>ai总结好用思密达</p>
+</blockquote>
+<div id="outline-container-1" class="outline-2">
+<h2 id="org-title-1"><span class="section-number-2">1.</span> 文件操作</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><code>fopen</code><code>fclose</code><code>freopen</code></li>
+<li>(输出缓冲区控制) <code>fflush</code><code>setbuf</code><code>setvbuf</code></li>
+<li><p>文件指针： <code>fseek</code><code>ftell</code><code>rewind</code><code>feof</code><code>ferror</code></p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-2" class="outline-2">
+<h2 id="org-title-2"><span class="section-number-2">2.</span> 字符串操作</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>长度/复制： <code>strlen</code><code>strcpy</code> (<code>strncpy</code>) <code>strcat</code> (<code>strncat</code>)</li>
+<li>查找：
+<ul class="org-ul">
+<li><code>strchr</code> 找到&#x27;\0&#x27;前第一个指定字符出现的位置</li>
+<li><code>strrchr</code> 找到&#x27;\0&#x27;前最后一个指定字符出现的位置</li>
+<li><code>strstr</code> 找到&#x27;\0&#x27;前第一个匹配字符串出现的位置</li>
+<li><code>strspn</code> 类似于正则 <code>^[str]*</code> 返回匹配长度</li>
+<li><code>strcspn</code> 类似于正则 <code>^[^str]*</code> 返回匹配长度</li>
+<li><code>strpbrk</code> 类似于正则 <code>[str]</code> 返回首个匹配位置</li>
+<li><code>strtok</code> 根据 <code>[str]</code> 分割字符串（直接在原地址操作，线程不安全）</li>
+<li><code>strdup</code> 复制字符串（自动计算字符串长度自动malloc）</li>
+<li><code>memchr</code> 找到指定长度前第一个指定字符出现的位置</li>
+<li><code>memrchr</code> 找到指定长度前最后一个指定字符出现的位置</li>
+<li><code>memmem</code> 找到指定长度前第一个相同连续字节数据出现的位置</li>
+</ul></li>
+<li>内存操作： <code>memcpy</code><code>memmove</code> （防重叠） <code>memset</code><code>memcmp</code></li>
+<li>字符串转数值：atoi, atol, strtol, strtod</li>
+<li>字符处理 &lt;ctype.h&gt;
+<ul class="org-ul">
+<li>判断：isalpha, isdigit, isalnum, isspace, isupper, islower</li>
+<li><p>转换：toupper, tolower</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-3" class="outline-2">
+<h2 id="org-title-3"><span class="section-number-2">3.</span> 算法</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li><p>算法：qsort（快排）, bsearch（二分查找）</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-4" class="outline-2">
+<h2 id="org-title-4"><span class="section-number-2">4.</span> math.h</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>基础：sin, cos, tan, asin, acos, atan</li>
+<li>指数/对数：exp, log, log10, pow, sqrt</li>
+<li><p>取整：ceil, floor, fmod, fabs</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-5" class="outline-2">
+<h2 id="org-title-5"><span class="section-number-2">5.</span> 时间日期</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>获取：time（时间戳）, clock（CPU时间）</li>
+<li><p>转换：gmtime, localtime, asctime, strftime（格式化）, difftime（差值）</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-6" class="outline-2">
+<h2 id="org-title-6"><span class="section-number-2">6.</span> 其他ISO标准必备</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>断言：&lt;assert.h&gt; 的 assert</li>
+<li>可变参数：&lt;stdarg.h&gt; 的 va_start, va_arg, va_end</li>
+<li>非局部跳转：&lt;setjmp.h&gt; 的 setjmp, longjmp（异常处理雏形）</li>
+<li>信号：&lt;signal.h&gt; 的 signal, raise</li>
+</ul>
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">时间: <2026-06-18 四 22:54></p>
+<p class="author">作者: 不要在意我的头像QwQ</p>
+<p class="description">描述: 自己搓排序？人家有qsort。想找首末字符串？人家也有strchr。libc是宝藏，只是不知道，不会用罢了</p>
+<p class="date">生成于: 2026-06-19 五 11:02:21</p>
+</div>
+</body>
+</html>

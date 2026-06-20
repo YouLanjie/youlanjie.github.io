@@ -1,0 +1,51 @@
+#+TITLE: C语言标准库函数列表
+#+DESCRIPTION: 自己搓排序？人家有qsort。想找首末字符串？人家也有strchr。libc是宝藏，只是不知道，不会用罢了
+#+DATE: <2026-06-18 四 22:54>
+#+SETUPFILE: ../../../setup.setup
+
+#+begin_quote
+ai总结好用思密达
+#+end_quote
+
+* 文件操作
+- =fopen= =fclose= =freopen=
+- (输出缓冲区控制) =fflush= =setbuf= =setvbuf=
+- 文件指针： =fseek= =ftell= =rewind= =feof= =ferror=
+
+* 字符串操作
+- 长度/复制： =strlen= =strcpy= (=strncpy=) =strcat= (=strncat=)
+- 查找：
+  - =strchr= 找到'\0'前第一个指定字符出现的位置
+  - =strrchr= 找到'\0'前最后一个指定字符出现的位置
+  - =strstr= 找到'\0'前第一个匹配字符串出现的位置
+  - =strspn= 类似于正则 =^[str]*= 返回匹配长度
+  - =strcspn= 类似于正则 =^[^str]*= 返回匹配长度
+  - =strpbrk= 类似于正则 =[str]= 返回首个匹配位置
+  - =strtok= 根据 =[str]= 分割字符串（直接在原地址操作，线程不安全）
+  - =strdup= 复制字符串（自动计算字符串长度自动malloc）
+  - =memchr= 找到指定长度前第一个指定字符出现的位置
+  - =memrchr= 找到指定长度前最后一个指定字符出现的位置
+  - =memmem= 找到指定长度前第一个相同连续字节数据出现的位置
+- 内存操作： =memcpy= =memmove= （防重叠） =memset= =memcmp=
+- 字符串转数值：atoi, atol, strtol, strtod
+- 字符处理 <ctype.h>
+  - 判断：isalpha, isdigit, isalnum, isspace, isupper, islower
+  - 转换：toupper, tolower
+
+* 算法
+- 算法：qsort（快排）, bsearch（二分查找）
+
+* math.h
+- 基础：sin, cos, tan, asin, acos, atan
+- 指数/对数：exp, log, log10, pow, sqrt
+- 取整：ceil, floor, fmod, fabs
+
+* 时间日期
+- 获取：time（时间戳）, clock（CPU时间）
+- 转换：gmtime, localtime, asctime, strftime（格式化）, difftime（差值）
+
+* 其他ISO标准必备
+- 断言：<assert.h> 的 assert
+- 可变参数：<stdarg.h> 的 va_start, va_arg, va_end
+- 非局部跳转：<setjmp.h> 的 setjmp, longjmp（异常处理雏形）
+- 信号：<signal.h> 的 signal, raise
