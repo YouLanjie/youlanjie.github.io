@@ -1,18 +1,10 @@
-2026-06-15 09:11:00::D:\yee\nircmdc.exe monitor off
-2026-06-15 09:12:00::D:\yeee\nircmdc.exe monitor off
-2026-06-15 09:13:00::D:\yeeee\nircmdc.exe monitor off
-2026-06-15 09:14:00::D:\res\nircmdc.exe monitor off
-2026-06-15 09:15:00::D:\cargo\nircmdc.exe monitor off
-2026-06-15 16:45:00::D:\cargo\nircmdc.exe monitor off
-2026-06-15 18:25:00::start http://www.bilibili.com/video/BV1DZ7Z68EeE?p=2
-2026-06-15 18:45:00::taskkill /f /im msedge.exe
-2026-06-15 16:45:00::D:\cargo\nircmdc.exe monitor off
-2026-06-16 18:25:00::start http://www.bilibili.com/video/BV1FfEk6BEpF?p=2
-2026-06-16 18:45:00::taskkill /f /im msedge.exe
-2026-06-15 17:35:00::D:\cargo\nircmdc.exe monitor off
-2026-06-17 18:30:00::start http://www.bilibili.com/video/BV1VrVSz1Eme
-2026-06-17 18:45:00::taskkill /f /im msedge.exe
-2026-06-15 17:35:00::D:\cargo\nircmdc.exe monitor off
-2026-06-18 12:15:00::start http://www.bilibili.com/video/BV1GJ411x7h7
-2026-06-18 12:15:30::taskkill /f /im msedge.exe
+2026-06-22 18:25:00::start http://www.bilibili.com/video/BV1cyS3BdECH
+2026-06-22 18:45:00::taskkill /f /im msedge.exe
+2026-06-23 18:25:00::start http://www.bilibili.com/video/BV1jzjw6GEWY
+2026-06-24 18:30:00::start http://www.bilibili.com/video/BV1dMjJ64Emt
+2026-06-24 18:45:00::taskkill /f /im msedge.exe
+2026-06-25 18:25:00::start http://www.bilibili.com/video/BV1hJEo6hEo6
+2026-06-25 18:45:30::taskkill /f /im msedge.exe
+2026-06-26 18:25:00::start http://www.bilibili.com/video/BV1NFZyB5EE5
+2026-06-26 18:45:30::taskkill /f /im msedge.exe
 
