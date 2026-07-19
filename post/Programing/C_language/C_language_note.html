@@ -31,7 +31,7 @@ output: { font: 'mathjax-modern', displayOverflow: 'overflow' } };
 <div id="text-table-of-contents" role="doc-toc">
 <ul><li><a href="#org-title-1">1. 内存与数据存储相关</a><ul><li><a href="#org-title-1-1">1.1. 各类型的大小</a></li><li><a href="#org-title-1-2">1.2. 内存模型</a></li><li><a href="#org-title-1-3">1.3. 类型转换</a></li><li><a href="#org-title-1-4">1.4. 文本编码</a></li></ul></li>
 <li><a href="#org-title-2">2. C语言语法相关</a><ul><li><a href="#org-title-2-1">2.1. 操作顺序</a></li><li><a href="#org-title-2-2">2.2. 复杂类型定义与理解</a></li><li><a href="#org-title-2-3">2.3. 常量的定义与使用</a></li><li><a href="#org-title-2-4">2.4. 宏定义</a></li><li><a href="#org-title-2-5">2.5. for循环第三块的执行情况</a></li></ul></li>
-<li><a href="#org-title-3">3. ELF相关</a><ul><li><a href="#org-title-3-1">3.1. 反编译</a></li><li><a href="#org-title-3-2">3.2. 动态链接</a></li></ul></li>
+<li><a href="#org-title-3">3. ELF相关</a><ul><li><a href="#org-title-3-1">3.1. 反编译</a></li><li><a href="#org-title-3-2">3.2. 架构</a></li><li><a href="#org-title-3-3">3.3. 动态链接</a></li></ul></li>
 <li><a href="#org-title-4">4. 系统调用相关</a></li><li><a href="#org-title-5">5. 第三方库相关</a></li><li><a href="#org-title-6">6. 参考</a></li></ul></div></div>
 <div id="outline-container-1" class="outline-2">
 <h2 id="org-title-1"><span class="section-number-2">1.</span> 内存与数据存储相关</h2>
@@ -450,8 +450,101 @@ void main(){ int yee=2; marco(++yee); }
 </div>
 </div>
 <div id="outline-container-3-2" class="outline-3">
-<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 动态链接</h3>
+<h3 id="org-title-3-2"><span class="section-number-3">3.2.</span> 架构</h3>
 <div class="outline-text-3" id="text-3-2">
+<p>了解架构对下载ELF时超有用的好吧</p>
+<p>指令集分类：</p>
+<ul class="org-ul">
+<li><code>CISC</code> 复杂指令集（代表x86）</li>
+<li><p><code>RISC</code> 精简指令集（代表ARM）</p></li>
+</ul>
+<p>架构速查：</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="org-left" />
+<col class="org-left" />
+<col class="org-left" />
+<col class="org-left" />
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">名称</th>
+<th scope="col" class="org-left">俗记</th>
+<th scope="col" class="org-left">类型</th>
+<th scope="col" class="org-left">位数</th>
+<th scope="col" class="org-left">详细介绍</th>
+</tr>
+</thead><tbody>
+<tr>
+<td class="org-left">x86</td>
+<td class="org-left">老电脑</td>
+<td class="org-left">CISC</td>
+<td class="org-left">32</td>
+<td class="org-left">英特尔老资历</td>
+</tr>
+<tr>
+<td class="org-left">AMD64/x86-64</td>
+<td class="org-left">新电脑</td>
+<td class="org-left">CISC</td>
+<td class="org-left">64</td>
+<td class="org-left">AMD后浪推前浪</td>
+</tr>
+</tbody><tbody>
+<tr>
+<td class="org-left">arm/ARM-v7</td>
+<td class="org-left">诺基亚</td>
+<td class="org-left">RISC</td>
+<td class="org-left">32</td>
+<td class="org-left">过老的东西</td>
+</tr>
+<tr>
+<td class="org-left">arm/ARM-v8</td>
+<td class="org-left">老手机</td>
+<td class="org-left">RISC</td>
+<td class="org-left">32/64</td>
+<td class="org-left">移动设备用</td>
+</tr>
+<tr>
+<td class="org-left">arm/AArch64</td>
+<td class="org-left">新手机</td>
+<td class="org-left">RISC</td>
+<td class="org-left">64</td>
+<td class="org-left">btw,Mac也是</td>
+</tr>
+</tbody><tbody>
+<tr>
+<td class="org-left">MIPS</td>
+<td class="org-left">老登</td>
+<td class="org-left">RISC</td>
+<td class="org-left">32/64</td>
+<td class="org-left">已经没落</td>
+</tr>
+<tr>
+<td class="org-left">PowerPC</td>
+<td class="org-left">老登</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">32/64</td>
+<td class="org-left">已经没落</td>
+</tr>
+<tr>
+<td class="org-left">RISC-V</td>
+<td class="org-left">开源圣</td>
+<td class="org-left">RISC</td>
+<td class="org-left">&nbsp;</td>
+<td class="org-left">小将未经考验</td>
+</tr>
+</table>
+<p>辨析：</p>
+<ul class="org-ul">
+<li><code>AMD</code> 芯片设计生产公司名，在CPU与 <i>Intel英特尔</i> 并列，在GPU与 <i>NVIDIA英伟达</i> 并列。也可指代AMD64架构（由AMD推出）</li>
+<li><code>ARM</code> 架构设计公司名，也可指代架构名称</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="org-title-3-3"><span class="section-number-3">3.3.</span> 动态链接</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>有待学习，这里暂时给出几个关键词用于搜索：</p>
 <ul class="org-ul">
 <li>dlopen() <i>(man3)</i></li>
@@ -527,7 +620,7 @@ void main(){ int yee=2; marco(++yee); }
 <p class="date">时间: <2026-04-04 六 10:56></p>
 <p class="author">作者: 不要在意我的头像QwQ</p>
 <p class="description">描述: 杂杂的c语言内容笔记(侧重底层)</p>
-<p class="date">生成于: 2026-06-19 五 20:13:41</p>
+<p class="date">生成于: 2026-07-17 五 12:28:06</p>
 </div>
 </body>
 </html>
