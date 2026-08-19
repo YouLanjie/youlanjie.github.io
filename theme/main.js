@@ -127,6 +127,41 @@ function togglePreFont(node) {
 		imgs[i].setAttribute("data-fancybox", "gallery")
 	}
 })();
+// 自动隐藏悬浮目录、导航（ai生成）
+(function() {
+	const element1 = document.getElementById('table-of-contents');
+	const element2 = document.getElementById('org-div-home-and-up');
+	let lastScrollY = window.scrollY; // 上次滚动位置
+	let ticking = false;							// 防抖锁
+
+	// 核心判断函数
+	function handleScroll() {
+		const currentScrollY = window.scrollY;
+		// 关键：对比当前与上次的位置，判断方向
+		if (currentScrollY > lastScrollY) {
+			// 滚动值变大 = 手指上划（页面下移） => 隐藏
+			element1.classList.add('hidden');
+			element2.classList.add('hidden');
+		} else if (currentScrollY < lastScrollY) {
+			// 滚动值变小 = 手指下划（页面上移） => 显示
+			element1.classList.remove('hidden');
+			element2.classList.remove('hidden');
+		}
+		// 更新记录值（注意避免负值）
+		lastScrollY = Math.max(0, currentScrollY);
+	}
+
+	// 绑定滚动事件 + requestAnimationFrame 优化性能
+	window.addEventListener('scroll', () => {
+		if (!ticking) {
+			window.requestAnimationFrame(() => {
+				handleScroll();
+				ticking = false;
+			});
+			ticking = true;
+		}
+	});
+})();
 
 function setTheme(theme_name) {
 	if (!theme_name in ["main", "ohtd", "rtd"]) {

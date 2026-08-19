@@ -164,7 +164,6 @@
 		font-size: 70%;
 		white-space: nowrap;
 	}
-
 	/* TOC inspired by http://jashkenas.github.com/coffee-script */
 	#table-of-contents {
 		font-size: 10pt;
@@ -182,6 +181,7 @@
 		/* ensure doesn't flow off the screen when expanded */
 		max-height: 80%;
 		overflow: auto;
+		transform: translateY(0); 
 	}
 	#table-of-contents h2 {
 		font-size: 13pt;
@@ -1318,6 +1318,15 @@
 		max-height: 40px;
 		max-width: 25%;
 		margin-left: 50px;
+
+		/* 关键：过渡动画 */
+		transition: transform 0.3s ease, opacity 0.3s ease;
+		/* 初始状态：显示 */
+	}
+	#table-of-contents.hidden {
+		transform: translateY(-100%); /* 完全滑出视口 */
+		opacity: 0;
+		pointer-events: none; /* 隐藏时禁止点击 */
 	}
 	#table-of-contents h2 {
 		margin: 4px;
@@ -1383,6 +1392,15 @@
 	}
 	#org-div-home-and-up{
 		top: 3.3em;
+
+		transition: transform 0.3s ease, opacity 0.3s ease;
+		/* 初始状态：显示 */
+		transform: translateY(0); 
+	}
+	#org-div-home-and-up.hidden {
+		transform: translateY(-100%); /* 完全滑出视口 */
+		opacity: 0;
+		pointer-events: none; /* 隐藏时禁止点击 */
 	}
 	.tables {
 		font-size: 9pt;
