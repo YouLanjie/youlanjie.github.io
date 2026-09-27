@@ -4,6 +4,10 @@
 #+SETUPFILE: ../../setup.setup
 
 * 链接列表
+** 应急车道
+- [[https://ghfast.top/github.com/imengyu/JiYuTrainer/releases/download/1.7.6/JiYuTrainer.exe][反极域程序(EXE)（挂了代理）]]
+- [[https://github.com/vruses/beefreely/releases/latest/download/beefreely.min.user.js][b站免登录看评论js脚本（直接链接）]]
+** 普通车道
 - [[https://github.com/imengyu/JiYuTrainer/releases/download/1.7.6/JiYuTrainer.exe][反极域程序(EXE)]]
 - [[https://chrome.zzzmh.cn/info/dhdgffkkebhmkfjojejmpbldmpobfkfo][油猴插件crx下载页面（非直接下载地址）]]
 - [[https://github.com/vruses/beefreely][b站免登录看评论(Github页面)]]
